@@ -1,20 +1,21 @@
 
  * #JOOKS24
 	
-    * ##Liikmed:
+    * ###Liikmed:
 	Karl Markus Wahlberg, Katariina Linde
 	
-    * ##eesmärk: 
+    * ###Eesmärk: 
 	Aidata jooksuhuvilistel registreerida jooksudele. 
 	
-    * Sihtrühmaks on spordihuvilised. Eripära on see, et lisaks registreerimisele on see ka sotsiaalse suunitlusega. Jooksjad saavad enda tulemusi kirja panna ning kogemusi kirjeldada.
+    * ###Sihtrühm, eripära:
+	Spordihuvilised. Eripära on see, et lisaks registreerimisele on see ka sotsiaalse suunitlusega. Jooksjad saavad enda tulemusi kirja panna ning kogemusi kirjeldada.
 	Selleks tuleb kasutaja luua, sisse logida, valida jooks ja broneerida.
 	Edasi on vajalik kinnitus ning kui on joostud, saab sisestada ka tulemuse ja anda tagasisidet jooksuürituse kohta ning enda vormi kohta.
-	##Sarnased: 
+	###Sarnased: 
 		* marathon100.com
 		* jooks.ee
 	
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
+    * ###Funktsionaalsuse loetelu prioriteedi järjekorras, nt
         * v0.1 Saab teha kasutaja ja sisselogida
         * v0.2 Saab registreerida jooksule
         * v0.3 Saab kinnitada jooksu
