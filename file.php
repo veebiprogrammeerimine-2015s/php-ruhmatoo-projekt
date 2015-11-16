@@ -1,1 +1,0 @@
-alustame projektiga
