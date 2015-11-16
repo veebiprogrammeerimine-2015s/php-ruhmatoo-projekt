@@ -22,4 +22,6 @@
     //git merge katariinal
     //git push
     
+    //git pull origin master - kui tahad viimaseid asju saada 
+    
 ?>
