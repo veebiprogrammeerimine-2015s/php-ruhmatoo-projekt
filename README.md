@@ -2,13 +2,13 @@ Hinda minu professorit
 
 
 
-Rühma liikmete nimed: 
-Karl
-Rauno
-Raiko
+R�hma liikmete nimed: 
+Karl Grossberg
+Rauno Kosula
+Raiko Lepik
 
 
-Eesmärgid:
+Eesm�rgid:
 Anda tagasisidet õppejõududele
 Saada tagasisidet õpilastelt (Õppejõud)
 Õpilane teab, kas võtta seda ainet
