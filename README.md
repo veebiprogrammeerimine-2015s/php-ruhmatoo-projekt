@@ -35,7 +35,12 @@
 * **Stiilijuhend:** [Coding Style Guide](http://www.php-fig.org/psr/psr-2/)
 * **GIT õpetus:** [Become a git guru.](https://www.atlassian.com/git/tutorials/)
 * **Abimaterjale:** [Veebirakenduste loomine PHP ja MySQLi abil](http://minitorn.tlu.ee/~jaagup/kool/java/loeng/veebipr/veebipr1.pdf), [PHP with MySQL Essential Training] (http://www.lynda.com/MySQL-tutorials/PHP-MySQL-Essential-Training/119003-2.html)
+<<<<<<< HEAD
 
 // loojad
 Jaan-Martin Kuusmann
 Joosep Jõeleht
+=======
+Jaan on kala
+// fuk yoo swjkfjhjkshdfhewiuuifhlksjflk
+>>>>>>> refs/remotes/origin/Joosep
