@@ -20,7 +20,10 @@
 	* v0.1 Admin saab teha kasutaja ja sisse logida
 	* v0.2 Admin saab lisada ning muuta kasside infot
 	* v0.3 Admin saab lisada kassidele pilte
-	* v0.4
+	* v0.4 Töötajad saavad lisada kassidele lisainfot a la "Miku on haige, teda mitte külastada"
+	* v0.5 Kasutajad saavad veebilehele lisada kaotatud kasse 
+	* v0.6 Kasutajad saavad teha annetusi 
+	* v0.7 
 	
 
 5. Andmebaasi skeem loetava pildina + tabelite loomise SQL laused
