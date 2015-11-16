@@ -1,6 +1,0 @@
-<?php
-
-	//minu nimeline fail.
-
-
-?>
