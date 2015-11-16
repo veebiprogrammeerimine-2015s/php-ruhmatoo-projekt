@@ -1,36 +1,40 @@
-# PHP rühmatöö projekt
+### PHP rühmatöö projekt
 **Rühmatööde demo päev** on valitud eksamipäev jaanuaris, kuhu tuleks tullakse terve rühmaga koos!
 
-KASSIDE HOIUKODU VEEBILEHESTIK
-Annika Antsman, Ole Loigu, Kristian Talviste
+
+# **KASSIDE HOIUKODU VEEBILEHESTIK**
+
+1. Rühma liikmed
+	* Annika Antsman
+	* Ole Loigu
+	* Kristian Talviste
+
+2. Projekti eesmärk (3-4 lauset, mis probleemi üritate lahendada)
+	*
+	
+3. Projekti kirjeldus (sihtrühm, eripära võrreldes teiste samalaadsete rakendustega - kirjeldada vähemalt 2-3 sarnast rakendust mida eeskujuks võtta)
+	* Eeskujuks lehekülg pets.ee
+	* Sihtrühmaks inimesed kes soovivad endale kasse võtta, inimesed kes soovivad oma kadunud kassi leida (võimalik sirvida nii kodu leidnud kasse kui ka kasse kes on parajasti hoiukodus) ning inimesed kes soovivad kasse külastada/aidata (annetused jms). 
+	
+4. Funktsionaalsuste loetelu
+	* v0.1 Admin saab teha kasutaja ja sisse logida
+	* v0.2 Admin saab lisada ning muuta kasside infot
+	* v0.3 Admin saab lisada kassidele pilte
+	* v0.4
+	
+
+5. Andmebaasi skeem loetava pildina + tabelite loomise SQL laused
 
 
-
-### Nõuded
-
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * rühma liikmete nimed;
-    * eesmärki (3-4 lauset, mis probleemi üritate lahendada);
-    * kirjeldus (sihtrühm, eripära võrreldes teiste samalaadsete rakendustega - kirjeldada vähemalt 2-3 sarnast rakendust mida eeskujuks võtta);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada huviala
-        * ...
-    * andmebaasi skeem loetava pildina + tabelite loomise SQL laused;
-    * **kokkuvõte:** mida õppisid juurde? mis ebaõnnestus? mis oli keeruline? (kirjutab iga tiimi liige).
+6. Kokkuvõte:
+	* mida õppisid juurde? 
+	* mis ebaõnnestus? 
+	* mis oli keeruline? (kirjutab iga tiimi liige).
 
 
-2. **Veebirakenduse nõuded:**
+( **Veebirakenduse nõuded:**
     * kasutusel on vähemalt 6 tabelit;
     * kood on jaotatud klassidesse;
     * muutujad/tabelid on inglise keeles;
     * rakendus on piisava funktsionaalsusega ja turvaline;
-    * kõik tiimi liikmed on panustanud rakenduse arendusprotsessi.
-
-## Abiks
-* **Testserver:** greeny.cs.tlu.ee, [tunneli loomise juhend](http://minitorn.tlu.ee/~jaagup/kool/java/kursused/09/veebipr/naited/greenytunnel/greenytunnel.pdf)
-* **Abiks tunninäited (rühmade lõikes):** [I rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-I-ruhm), [II rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-II-ruhm), [III rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-III-ruhm)
-* **Stiilijuhend:** [Coding Style Guide](http://www.php-fig.org/psr/psr-2/)
-* **GIT õpetus:** [Become a git guru.](https://www.atlassian.com/git/tutorials/)
-* **Abimaterjale:** [Veebirakenduste loomine PHP ja MySQLi abil](http://minitorn.tlu.ee/~jaagup/kool/java/loeng/veebipr/veebipr1.pdf), [PHP with MySQL Essential Training] (http://www.lynda.com/MySQL-tutorials/PHP-MySQL-Essential-Training/119003-2.html)
+    * kõik tiimi liikmed on panustanud rakenduse arendusprotsessi. )
