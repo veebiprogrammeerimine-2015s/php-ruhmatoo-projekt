@@ -12,5 +12,8 @@ ning anda jooksu kohta tagasisidet.
     * Kõik kasutaja kinnitatud jooksuvõistlused asuvad ühes kohas, et oleks hea meeles pidada neid 
     * Kasutajal on võimalik anda jooksu kohta tagasisidet
     * Kasutajatel on võimalik näha kuhu on kasutajad registreerinud end 
+3. Sarnased lehed
+    * www.marathon100.com
+    * www.jooks.ee
 
 
