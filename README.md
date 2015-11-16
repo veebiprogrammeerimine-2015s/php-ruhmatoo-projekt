@@ -1,5 +1,16 @@
-# PHP rühmatöö projekt
-**Rühmatööde demo päev** on valitud eksamipäev jaanuaris, kuhu tuleks tullakse terve rühmaga koos!
+# TelliMindTööandja (vabakutseliste ajakirjanike andmebaas)
+Merit Paist, Martti Naaber
+11.01.2015
+
+## Eesmärk
+- Eestis pole vabakutseliste ajakirjanike andmebaasi.
+- Viia omavahel kokku vabakutselised ajakirjanikud ja potentsiaalsed tööandjad üksikute projektide raames.
+- Tööandja sisestab projekti (nt uudislugu, pressiteade) ja ajakirjanikud saavad valida projekte, millele pakkumisi teha.
+- Tööandjal on võimalik valida pakkumiste hulgast.
+
+## Kirjeldus
+- Sihtgrupiks ettevõtted, kes vajavad kirjutamisteenust, ja vabakutselised ajakirjanikud
+- http://www.designcrowd.com/
 
 ## Tööjuhend
 1. Üks rühma liikmetest fork'ib endale käesoleva repositooriumi ning annab teistele kirjutamisõiguse/ligipääsu
