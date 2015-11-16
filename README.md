@@ -13,7 +13,7 @@
 	Edasi on vajalik kinnitus ning kui on joostud, saab sisestada ka tulemuse ja anda tagasisidet jooksuürituse kohta ning enda vormi kohta.
 	###Sarnased: 
 		* <a href="http://www.marathon100.com">marathon100</a>
-		* <a href="www.jooks.ee">jooks.ee</a>
+		* <a href="http://www.jooks.ee">jooks.ee</a>
 	
     * ###Funktsionaalsuse loetelu prioriteedi järjekorras:
         * v0.1 Saab teha kasutaja ja sisselogida
