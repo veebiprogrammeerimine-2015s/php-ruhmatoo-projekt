@@ -1,26 +1,24 @@
-# PHP rühmatöö projekt
-**Rühmatööde demo päev** on valitud eksamipäev jaanuaris, kuhu tuleks tullakse terve rühmaga koos!
 
-## Tööjuhend
-1. Üks rühma liikmetest fork'ib endale käesoleva repositooriumi ning annab teistele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi README.md faili vastavalt nõutele
-1. Tee valmis korralik veebirakendus
-
-### Nõuded
-
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * rühma liikmete nimed;
-    * eesmärki (3-4 lauset, mis probleemi üritate lahendada);
-    * kirjeldus (sihtrühm, eripära võrreldes teiste samalaadsete rakendustega - kirjeldada vähemalt 2-3 sarnast rakendust mida eeskujuks võtta);
+ * JOOKS24
+	
+    * Karl Markus Wahlberg, Katariina Linde
+	
+    * eesmärk: Aidata jooksuhuvilistel registreerida jooksudele. 
+	
+    * Sihtrühmaks on spordihuvilised. Eripära on see, et lisaks registreerimisele on see ka sotsiaalse suunitlusega. Jooksjad saavad enda tulemusi kirja panna ning kogemusi kirjeldada.
+	Selleks tuleb kasutaja luua, sisse logida, valida jooks ja broneerida.
+	Edasi on vajalik kinnitus ning kui on joostud, saab sisestada ka tulemuse ja anda tagasisidet jooksuürituse kohta ning enda vormi kohta.
+	Sarnased: marathon100.com ja jooks.ee
+	
     * funktsionaalsuse loetelu prioriteedi järjekorras, nt
         * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada huviala
-        * ...
+        * v0.2 Saab registreerida jooksule
+        * v0.3 Saab kinnitada jooksu
+		* v0.4 Tabel, kus on tulemused
+		* v0.5 Jooksu tagasiside tabel
+		
     * andmebaasi skeem loetava pildina + tabelite loomise SQL laused;
     * **kokkuvõte:** mida õppisid juurde? mis ebaõnnestus? mis oli keeruline? (kirjutab iga tiimi liige).
-
 
 2. **Veebirakenduse nõuded:**
     * kasutusel on vähemalt 6 tabelit;
