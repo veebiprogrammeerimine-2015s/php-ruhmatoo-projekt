@@ -35,7 +35,7 @@ if($_SESSION['logged_in_user_group'] == 3):
 ?>
 <ul class="nav navbar-nav navbar-right">
 	<li class="dropdown">
-	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
 	  <ul class="dropdown-menu">
 			<?php if($page_file != "data.php") { ?>
 			<li><a href="data.php">Uus töökoht</a></li>
@@ -48,6 +48,39 @@ if($_SESSION['logged_in_user_group'] == 3):
 			<?php } else { ?>
 			<li class="active"><a href="insert.php">Asukoha andmed</a></li>
 			<?php } ?>
+			
+			<?php if($page_file != "users.php") { ?>
+			<li><a href="users.php">Kasutajad</a></li>
+			<?php } else { ?>
+			<li class="active"><a href="users.php">Kasutajad</a></li>
+			<?php } ?>
+	  </ul>
+	</li>
+</ul>
+<?php 
+endif;
+endif;
+?>
+<?php
+if(isset($_SESSION['logged_in_user_id'])):
+if($_SESSION['logged_in_user_group'] == 2):
+?>
+<ul class="nav navbar-nav navbar-right">
+	<li class="dropdown">
+	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tööpakkuja<span class="caret"></span></a>
+	  <ul class="dropdown-menu">
+			<?php if($page_file != "data.php") { ?>
+			<li><a href="data.php">Uus töökoht</a></li>
+			<?php } else { ?>
+			<li class="active"><a href="data.php">Uus töökoht</a></li>
+			<?php } ?>
+			
+			<?php if($page_file != "editjob.php") { ?>
+			<li><a href="editjob.php">Minu tööpakkumised</a></li>
+			<?php } else { ?>
+			<li class="active"><a href="editjob.php">Minu tööpakkumised</a></li>
+			<?php } ?>
+
 	  </ul>
 	</li>
 </ul>

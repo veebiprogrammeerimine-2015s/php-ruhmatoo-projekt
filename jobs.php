@@ -111,8 +111,11 @@
 				echo '<div class="well">';
 				echo '<h4 style="margin-bottom: 5px;">Kirjeldus:</h4>';
 				echo '<p class="list-group-item-text">'.$job_array[$i]->description.'</p><br>';
+				echo '<h4 style="margin-bottom: 5px;">Kontakt:</h4>';
+				echo '<p class="list-group-item-text">'.$job_array[$i]->email.'</p>';
+				echo '<p class="list-group-item-text">'.$job_array[$i]->number.'</p>';
 				echo '<p class="list-group-item-text">'.$job_array[$i]->county.', '.$job_array[$i]->parish.', '.$job_array[$i]->location.', '.$job_array[$i]->address.'</p><br>';
-				echo '<p class="list-group-item-text">'.$job_array[$i]->inserted.'</p>';
+				echo '<p class="list-group-item-text">Sisestatud: '.$job_array[$i]->inserted.'</p>';
 				echo '</div>';
 				echo '</div>';
 			}

@@ -12,7 +12,7 @@ class Profile {
 	/*Tööotsija lõpp*/
 	
 	/*Tööpakkuja*/
-	function createCompany($create_company, $create_email){
+	function createCompany($create_company, $create_email, $create_number){
 		$response = new StdClass();
 	
 		$stmt = $this->connection->prepare("SELECT name FROM job_company WHERE name=?");
@@ -30,8 +30,8 @@ class Profile {
 			return $response;
 		}
 
-        $stmt = $this->connection->prepare("INSERT INTO job_company (user_id, email, name) VALUES (?,?,?)");
-        $stmt->bind_param("iss", $_SESSION['logged_in_user_id'], $create_email, $create_company);
+        $stmt = $this->connection->prepare("INSERT INTO job_company (user_id, email, number, name) VALUES (?,?,?,?)");
+        $stmt->bind_param("isss", $_SESSION['logged_in_user_id'], $create_email, $create_number, $create_company);
         if($stmt->execute()) {
 			$success = new StdClass();
 			$success->message = "Ettevõte sisestatud!";
@@ -51,18 +51,20 @@ class Profile {
     }
 	
 	function companyCheck($user) {
-		$stmt = $this->connection->prepare("SELECT user_id, email, name FROM job_company WHERE user_id = ?");
+		$stmt = $this->connection->prepare("SELECT user_id, email, number, name FROM job_company WHERE user_id = ?");
 		$stmt->bind_param("i", $user);
-		$stmt->bind_result($userid, $email, $name);
+		$stmt->bind_result($userid, $email, $number, $name);
 		$stmt->execute();
 		$job = new StdClass();
 		if($stmt->fetch()) {
 			$job->userid = $userid;
 			$job->email = $email;
+			$job->number = $number;
 			$job->name = $name;
 		} else {
 			$job->userid = $userid;
 			$job->email = "";
+			$job->number = "";
 			$job->name = "";
 		}
 		return ($job);

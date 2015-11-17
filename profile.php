@@ -15,8 +15,8 @@
 ?>
 
 <?php
-	$create_company = $create_email ="";
-	$create_company_error = $create_email_error = "";
+	$create_company = $create_email = $create_number = "";
+	$create_company_error = $create_email_error = $create_number_error = "";
 	$response = "";
 	$company_check = $Profile->companyCheck($_SESSION['logged_in_user_id']);
 
@@ -32,8 +32,13 @@
 			}else{
 				$create_email = cleanInput($_POST["create_email"]);
 			}
-			if($create_company_error == "" && $create_email_error == ""){
-				$response = $Profile->createCompany($create_company, $create_email);
+			if (empty($_POST["create_number"]) ) {
+				$create_number_error = "See väli on kohustuslik";
+			}else{
+				$create_number = cleanInput($_POST["create_number"]);
+			}
+			if($create_company_error == "" && $create_email_error == "" && $create_number_error == ""){
+				$response = $Profile->createCompany($create_company, $create_email, $create_number);
 			}
 		}
 	}
@@ -68,7 +73,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 	</pre>
 </div>
 <div class="form-horizontal col-xs-12 col-sm-8">
-	<?php if($company_check->name == ""): ?>
+	<?php if($company_check->name == "" OR $company_check->email == "" OR $company_check->number == ""): ?>
 	<div class="form-group">
 		<h2>Profiil</h2>
 	</div>
@@ -78,8 +83,12 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 			<input class="form-control input-sm" name="create_company" type="text" placeholder="Ettevõtte nimi" value="<?php echo $create_company; ?>"> <?php echo $create_company_error; ?>
 		</div>
 		<div class="form-group">
-			<label for="create_email"> Ettevõtte email </label>
-			<input class="form-control input-sm" name="create_email" type="email" placeholder="Ettevõtte email" value="<?php echo $create_email; ?>"> <?php echo $create_email_error; ?>
+			<label for="create_email"> Kontakt email </label>
+			<input class="form-control input-sm" name="create_email" type="email" placeholder="Kontakt email" value="<?php echo $create_email; ?>"> <?php echo $create_email_error; ?>
+		</div>
+		<div class="form-group">
+			<label for="create_number"> Kontakt number </label>
+			<input class="form-control input-sm" name="create_number" type="text" placeholder="Kontakt number" value="<?php echo $create_number; ?>"> <?php echo $create_number_error; ?>
 		</div>
 		<div class="form-group">
 			<input class="btn btn-success btn-sm btn-block" type="submit" name="add_company" value="Sisesta">
@@ -92,8 +101,10 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 	</div>
 	<label for="job_company"> Ettevõtte nimi </label>
 	<input name="job_company" class="form-control" type="text" value="<?=$company_check->name;?>" readonly><br>
-	<label for="job_email"> Ettevõtte email </label>
-	<input name="job_email" class="form-control" type="text" value="<?=$company_check->email;?>" readonly>
+	<label for="job_email"> Kontakt </label>
+	<input name="job_email" class="form-control" type="text" value="<?=$company_check->email;?>" readonly><br>
+	<label for="job_number"> Kontakt email </label>
+	<input name="job_number" class="form-control" type="text" value="<?=$company_check->number;?>" readonly>
 	<?php endif; ?>
 </div>
 </div>
