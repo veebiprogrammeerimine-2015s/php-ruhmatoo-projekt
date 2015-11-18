@@ -1,13 +1,11 @@
-# PHP rühmatöö projekt
-**Rühmatööde demo päev** on valitud eksamipäev jaanuaris, kuhu tuleks tullakse terve rühmaga koos!
+Projekt: Foorum
+Rühma liikmed: Martin, Siim
+Eesmärk: -Luua korralikult töötav kasutaja loomine
+         -Kasutajal on võimalik lisada enda profiili enda kohta andmeid
+		 -Kasutajaid on võimalik bännida
+		 -Kasutajatel on võimalik teha uusi teemasi ja uusi postitusi
 
-## Tööjuhend
-1. Üks rühma liikmetest fork'ib endale käesoleva repositooriumi ning annab teistele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi README.md faili vastavalt nõutele
-1. Tee valmis korralik veebirakendus
-
-### Nõuded
+			
 
 1. **README.md sisaldab:**
     * suurelt projekti nime;
