@@ -1,3 +1,7 @@
+Projekti nimi - Loomakliinik
+Rühma liikmed - Helen Puhu, Aivar Russki, Jorma Kõpp.
+
+
 
 # PHP rühmatöö projekt
 **Rühmatööde demo päev** on valitud eksamipäev jaanuaris, kuhu tuleks tullakse terve rühmaga koos!
