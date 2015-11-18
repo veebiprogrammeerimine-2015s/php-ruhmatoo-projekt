@@ -1,6 +1,11 @@
 Projekti nimi - Loomakliinik
 Rühma liikmed - Helen Puhu, Aivar Russki, Jorma Kõpp.
+eesmärk - üritame lahendada probleemi, mis seisneb loomakliinukusse looma registreerimises ning loomale operatsiooniaja ja muude taoliste asjade lisamist.
 
+
+funktsionaalsuse loetelu:
+1. Saab andmebaasi lisada looma, omaniku, vastuvõtuaja, looma kirjelduse 
+2. Arst saab lisada protseduuri/operatsiooni
 
 
 # PHP rühmatöö projekt
