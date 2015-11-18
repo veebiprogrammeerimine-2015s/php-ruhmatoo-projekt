@@ -1,6 +1,6 @@
 Projekti nimi - Loomakliinik
 
-Rühma liikmed - Helen Puhu, Aivar Russki, Jorma Kõpp.
+Rühma liikmed - [Helen Puhu](https://github.com/helenpuhu) , [Aivar Russki](https://github.com/aivarus) , [Jorma Kõpp](https://github.com/jormkop)
 
 Eesmärk - üritame lahendada probleemi, mis seisneb loomakliinukusse looma registreerimises ning loomale operatsiooniaja ja muude taoliste asjade lisamist.
 
