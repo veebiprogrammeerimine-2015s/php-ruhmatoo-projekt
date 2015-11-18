@@ -38,14 +38,14 @@
 
 
 
-*Romil on äge *
+Romil on äge
 
-*projekti kirjeldus: Siia tuleb teatud aja pärast projekti kirjeldus *
+projekti kirjeldus: Siia tuleb teatud aja pärast projekti kirjeldus
 
-*##Projekti nimi: *
+Projekti nimi: -
 
-*Rühma liikmed: Robin Ginter, Toomas Lõõnik
+Rühma liikmed: Robin Ginter, Toomas Lõõnik
 
-*Eesmärk: *
+Eesmärk: -
 
-*Pull testimiseks jama
+Pull testimiseks jama
