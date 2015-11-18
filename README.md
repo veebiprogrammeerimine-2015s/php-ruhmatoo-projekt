@@ -38,12 +38,12 @@
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-Rühm team_alpha rühmaliikmed on: Janek Kossinski, Ruslan Jegorov ja Ea Rist
+Rühm team_alpha rühmaliikmed on: [Janek Kossinski](https://github.com/janekos) , [Ruslan Jegorov] (https://github.com/RuziGg) ja [Ea Rist] (https://github.com/earist)
 - Projekti nimi: Eesti Post
 - Projekti eesmärk: võimaldada tavakasutajatel ilma sisselogimata jälgida oma saadetiste teekonda ja (sisseloginud) postitöötajatel 
 vaadata viimatisi saadetisi, lisada uusi saadetisi ja otsida saadetisi erinevate kriteeriumite järgi. Veebileht on põhiliselt
 mõeldud postitöötajate töö hõlbustamiseks. 
-- Kirjeldus: sihtrühmaks on peamiselt postitöötajad ja lisaks ka kõik inimesed, kes soovivad oma saadetist jälgida
+- Kirjeldus: sihtrühmaks on peamiselt postitöötajad ja lisaks ka kõik inimesed, kes soovivad oma saadetist jälgida (vanusepiiranguid pole)
 - Rakendused eeskujuks: Omniva https://www.omniva.ee/index.php, DHL http://www.dhl.ee/et.html ja UPS https://www.ups.com 
 - Funktsionaalsuse loetelu:
 	* v0.1 Postitöötajale kasutaja loomine ja töö alustamiseks sisselogimine
