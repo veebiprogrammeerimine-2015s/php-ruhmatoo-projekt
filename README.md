@@ -15,9 +15,10 @@ Sihtrühmaks on igas vanuses inimesed kes vaatavad seriaale. Eripärasks on see 
 	* v0.1 Saab teha kasutaja ja sisselogida
     * v0.2 Saab lisada seriaali/filmi
 			v0.2.1 kasutaja lisab kommentaari nähtud hooaja kohta
-	* v0.3 Kasutaja saab teha listi sobivas teemas
+	* v0.3 Kasutaja saab teha listi sobivas teemas (watched, want to watch, dropped, etc.)
 			 v0.3.1 Kasutaja saab listi lisada sobivad seriaalid/filmid
+			 v0.3.2 Kasutaja, kes tegi listi saab oma listi muuta
 	* v0.4 Kasutaja saab hinnata seriaali/filmi
-			v0.4.1 iga seriaali kohta tekib sellele antud hinnete põhjal keskmine hinne
+			v0.4.1 iga seriaali/filmi kohta tekib sellele antud hinnete põhjal keskmine hinne
 	
 
