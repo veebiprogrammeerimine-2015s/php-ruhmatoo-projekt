@@ -38,8 +38,9 @@
 
 
 
-Romil on äge
-projekti kirjeldus: Siia tuleb teatud aja pärast projekti kirjeldus
+*Romil on äge *
+
+*projekti kirjeldus: Siia tuleb teatud aja pärast projekti kirjeldus *
 
 *##Projekti nimi: *
 
