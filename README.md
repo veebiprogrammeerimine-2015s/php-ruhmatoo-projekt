@@ -1,4 +1,4 @@
-# 
+# PHOTTLE
 
 # RÜHMA LIIKMED:
 	* Reio Raudheiding
@@ -9,7 +9,7 @@
 	saavad kasutajad muuta enda äranägemise järgi. Kõige leidlikumad tööd postitakse esilehele. Kasutajad saavad hinnata igat pilti.
 
 # KIRJELDUS
-	SIHTRÜHM: kõikidele, kellele pakub pilditöötlus.
+	SIHTRÜHM: kõikidele, kellele pakub pilditöötlus. Alates 13. aastast, nii poisid kui tüdrukud.
 	ERIPÄRA: see on eestikeeles (eeskujuks reddit.com/photoshopbattles; 9GAG)
 
 # FUNKTSIONAALSUS
