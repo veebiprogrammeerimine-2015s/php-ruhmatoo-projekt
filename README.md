@@ -11,7 +11,6 @@
 
 1. **README.md sisaldab:**
     * suurelt projekti nime;
-	
     * rühma liikmete nimed;
     * eesmärki (3-4 lauset, mis probleemi üritate lahendada);
     * kirjeldus (sihtrühm, eripära võrreldes teiste samalaadsete rakendustega - kirjeldada vähemalt 2-3 sarnast rakendust mida eeskujuks võtta);
@@ -41,3 +40,11 @@
 
 Romil on äge
 projekti kirjeldus: Siia tuleb teatud aja pärast projekti kirjeldus
+
+*##Projekti nimi: *
+
+*Rühma liikmed: Robin Ginter, Toomas Lõõnik
+
+*Eesmärk: *
+
+*Pull testimiseks jama
