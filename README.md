@@ -1,8 +1,13 @@
-Projektinimi 
-Liikmed Arkadi Listov, Raoul Kirsima, Mikk Mäe
-Eesmärk ...
-Kirjeldus ...
+Projekti nimi: FOOTBALL FORUM
+Liikmed: Arkadi Listov, Raoul Kirsima, Mikk Mäe
+Eesmärk: 
+Luua jalgpallisõpradele eraldi foorum, kus käsitletakse erinevaid parasjagu populaarseid teemasid.
 
+Kirjeldus:
+Kasutaja saab luua profiili, sisestada enda kohta andmeid.
+Kasutajal on võimalik postitada foorumisse teemasid ning ka teiste lisatud teemasid kommenteerida.
+
+NB! Projekti idee võib veel muutuda!
 
 
 
