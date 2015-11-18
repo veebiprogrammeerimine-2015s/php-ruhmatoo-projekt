@@ -1,6 +1,6 @@
 1. **Projekt: Foorum**
 	* Rühma liikmed: [Martin](https://github.com/MartinViidik), [Siim](https://github.com/jalalaba);
-2. **Eesmärk: **
+	*Eesmärk: *
 		* Luua korralikult töötav kasutaja loomine;
          * Kasutajal on võimalik lisada enda profiili enda kohta andmeid;
 		 * Kasutajaid on võimalik bännida;
