@@ -1,11 +1,13 @@
 Projekti nimi: FOOTBALL FORUM
-Liikmed: Arkadi Listov, Raoul Kirsima, Mikk Mäe
+Liikmed: Arkadi Listov[arkawa7](https://github.com/arkawa7), Raoul Kirsima[raoulkirsima](https://github.com/raoulkirsima), Mikk Mäe[mikkmae](https://github.com/mikkmae)
 Eesmärk: 
 Luua jalgpallisõpradele eraldi foorum, kus käsitletakse erinevaid parasjagu populaarseid teemasid.
 
 Kirjeldus:
+Sihtgrupiks on igast vanusest ning soost jalgpalli huvilised inimesed.
 Kasutaja saab luua profiili, sisestada enda kohta andmeid.
 Kasutajal on võimalik postitada foorumisse teemasid ning ka teiste lisatud teemasid kommenteerida.
+Eripära võrreldes teiste samalaadsete rakendustega: Kasutajatel on võimalik teha oma "Dreamteam".
 
 NB! Projekti idee võib veel muutuda!
 
