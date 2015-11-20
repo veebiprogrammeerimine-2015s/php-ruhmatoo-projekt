@@ -23,3 +23,10 @@
 	* https://www.arst.ee/et/Andmebaasid/Meditsiinitootajad/view_doctor/id=170/galina-litter
 	* Rakendus laseb arstile sõnumi saata ja vabu aegu küsida. Arsti aja  broneerimisel ei näita vabu aegu.
 	* http://www.e-tervis.ee
+	
+5. **Funktsionaalsuse loetelu**
+	* v0.1 Kasutaja saab registreeruda ja sisse logida
+	* v0.2 Kasutaja näeb erinevaid arste
+	* v0.3 Kasutaja näeb arste valitud piirkonna ja haiguse alusel
+	* v0.4 Kasutaja näeb vabu aegu ja saab broneerida aja arstile
+	
