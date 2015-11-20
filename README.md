@@ -1,9 +1,9 @@
 # Estonian Muscle
 
 ## Rühma liikmed
-	* Kert Kulp
-	* Jan-Erik Ilves
-	* Arthur-David Reinlo
+	* [Kert Kulp](https://github.com/kertkulp) 
+	* [Jan-Erik Ilves](https://github.com/janilv)
+	* [Arthur-David Reinlo](https://github.com/ArthurDavid)
 
 ## Eesmärk
 	
