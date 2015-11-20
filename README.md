@@ -1,3 +1,10 @@
+PHP RÜHMATÖÖ PROJEKT - "IDEE"
+Liikmed: Kaur Kaljuma, Tauno Lainevool, Koit Korela
+Eesmärk: 
+Kirjeldus:
+
+
+
 # PHP rühmatöö projekt
 **Rühmatööde demo päev** on valitud eksamipäev jaanuaris, kuhu tuleks tullakse terve rühmaga koos!
 
