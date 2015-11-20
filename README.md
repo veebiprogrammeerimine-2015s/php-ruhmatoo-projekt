@@ -1,4 +1,4 @@
-#Projekti nimi: Projekti
+#Projekti nimi: Projekt
 #Rühma liikmed: Jarmo Habakuk, Rasmus Kivipõld, Koidu Kannela
 #Eesmärk:
 #Kirjeldus:
