@@ -1,3 +1,16 @@
+#Projekti nimi: Projekt
+#Rühma liikmed: Jarmo Habakuk, Rasmus Kivipõld, Koidu Kannela
+#Eesmärk:
+#Kirjeldus:
+#Funktsionaalsuse loetelu:
+#Andmebaasi skeem loetava pildina + tabelite loomise SQL laused
+#Kokkuvõte:
+	#Jarmo - 
+	#Rasmus -
+	#Koidu - 
+
+
+
 # PHP rühmatöö projekt
 **Rühmatööde demo päev** on valitud eksamipäev jaanuaris, kuhu tuleks tullakse terve rühmaga koos!
 
