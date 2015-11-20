@@ -5,7 +5,7 @@
 ###Eesmärk 
 	
 1. **Eesmärk**
-	* arsti juurde aega broneerida
+	* arsti juurde aja broneerimine
 
 
 2. **Sihtgrupiks**
