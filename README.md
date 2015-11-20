@@ -4,24 +4,20 @@
 **Andre Luts**
 ###Eesmärk 
 	
-1. ** Eesmärk **
-
+1. **Eesmärk**
 	* arsti juurde aega broneerida
 
-	
-2. ** Sihtgrupiks **
 
+2. **Sihtgrupiks**
 	* inimesed kellel on tervisehädad ja vajavad arstiabi
 	
 	
-3. **Erinevus teistest **
-
+3. **Erinevus teistest**
 	* mugavam kasutada
 	* kasutajasõbralikum
 
 	
 4. **Sarnased rakendused**
-
 	* https://digireg.keskhaigla.ee/Veebiregistratuur/faces/Index.jspx
 	* Laseb otsida erinevaid arste ja tema aegu, aga see rakendus oli halvasti tehtud, sest vabade aegade otsimine võttis kaua aega.Rakendus ei näe hea välja.
 	* https://www.arst.ee/et/Andmebaasid/Meditsiinitootajad/view_doctor/id=170/galina-litter
