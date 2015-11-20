@@ -1,5 +1,5 @@
 #Projekti nimi: Projekt
-#Rühma liikmed: [Jarmo Habakuk](https://github.com/jarmhab/), Rasmus Kivipõld, Koidu Kannela
+#Rühma liikmed: [Jarmo Habakuk](https://github.com/jarmhab/), [Rasmus Kivipõld](https://github.com/sizenn/), Koidu Kannela
 #Eesmärk:
 #Kirjeldus:
 #Funktsionaalsuse loetelu:
