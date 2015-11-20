@@ -1,37 +1,10 @@
-# PHP rühmatöö projekt
-**Rühmatööde demo päev** on valitud eksamipäev jaanuaris, kuhu tuleks tullakse terve rühmaga koos!
+# Üli-Kool
+Rühma liikmed: [Ken Aonurm](https://github.com/Ken299), [Jaagup Siil](https://github.com/JSiil), [Kaarel Türkson](https://github.com/KaarelTurkson)
 
-## Tööjuhend
-1. Üks rühma liikmetest fork'ib endale käesoleva repositooriumi ning annab teistele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi README.md faili vastavalt nõutele
-1. Tee valmis korralik veebirakendus
+*Eesmärk oleks luua e-kooli sarnane lehekülg kus kasutaja saab lisada enda kodused tööd ühte kohta. Lisaks saavad kasutajad luua ühise jututoa/foorumi kus rääkida kindlast kodusest tööst. 
 
-### Nõuded
+*Sihtrühmaks on õpilased, kes tahaksid, et nende kodused tööd oleksid lihtsalt kättesaadavad ja päevikut ei taha ega viitsi kasutada.
 
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * rühma liikmete nimed;
-    * eesmärki (3-4 lauset, mis probleemi üritate lahendada);
-    * kirjeldus (sihtrühm, eripära võrreldes teiste samalaadsete rakendustega - kirjeldada vähemalt 2-3 sarnast rakendust mida eeskujuks võtta);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada huviala
-        * ...
-    * andmebaasi skeem loetava pildina + tabelite loomise SQL laused;
-    * **kokkuvõte:** mida õppisid juurde? mis ebaõnnestus? mis oli keeruline? (kirjutab iga tiimi liige).
+*Erinevalt teistest samalaadsetest saaksid iga kooli õpilased kasutada e-päevikut, mitte ainult kindlate koolide õpilased.
 
-
-2. **Veebirakenduse nõuded:**
-    * kasutusel on vähemalt 6 tabelit;
-    * kood on jaotatud klassidesse;
-    * muutujad/tabelid on inglise keeles;
-    * rakendus on piisava funktsionaalsusega ja turvaline;
-    * kõik tiimi liikmed on panustanud rakenduse arendusprotsessi.
-
-## Abiks
-* **Testserver:** greeny.cs.tlu.ee, [tunneli loomise juhend](http://minitorn.tlu.ee/~jaagup/kool/java/kursused/09/veebipr/naited/greenytunnel/greenytunnel.pdf)
-* **Abiks tunninäited (rühmade lõikes):** [I rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-I-ruhm), [II rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-II-ruhm), [III rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-III-ruhm)
-* **Stiilijuhend:** [Coding Style Guide](http://www.php-fig.org/psr/psr-2/)
-* **GIT õpetus:** [Become a git guru.](https://www.atlassian.com/git/tutorials/)
-* **Abimaterjale:** [Veebirakenduste loomine PHP ja MySQLi abil](http://minitorn.tlu.ee/~jaagup/kool/java/loeng/veebipr/veebipr1.pdf), [PHP with MySQL Essential Training] (http://www.lynda.com/MySQL-tutorials/PHP-MySQL-Essential-Training/119003-2.html)
+*Eeskujuks on E-kool, mida Tallinna Ülikool ei kasuta.
