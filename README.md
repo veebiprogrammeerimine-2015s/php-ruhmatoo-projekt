@@ -1,11 +1,11 @@
-#Arsti broneerimine
+#Arstiaja broneerimine
 **Ardo Birk**
 **Rimo Esko**
 **Andre Luts**
 ###Eesmärk 
 	
 1. **Eesmärk**
-	* arsti juurde aja broneerimine
+	* Inimene kes on haige ja vajab arsti saab valida haiguse mis tal on ja piirkonna kus ta elab. Kui need on valitud, siis näeb ta sobivaid arste ja saab tema juurde aja broneerida.
 
 
 2. **Sihtgrupiks**
