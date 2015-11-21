@@ -5,7 +5,7 @@
 ?> 
 <!--main code start here --> 
    
-<p> siia tuleb kood</p>
+<p> siia logini kood</p>
 
 
 
