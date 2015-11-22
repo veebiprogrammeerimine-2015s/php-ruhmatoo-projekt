@@ -8,7 +8,7 @@ CREATE TABLE looma_omanikud(
 CREATE TABLE loomad(
 	lid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	looma_nimi VARCHAR(50),
-	omaniku_nimi INT,
+	omaniku_nimi VARCHAR(50),
 	looma_liik VARCHAR(50),
 	Looma_kirjeldus VARCHAR(255)
 );
@@ -27,7 +27,7 @@ CREATE TABLE protseduurid(
 
 CREATE TABLE vastuv6tuajad(
 	aeg TIMESTAMP,
-	vlooma_id INT
+	vlooma_nimi VARCHAR(50)
 );
 
 CREATE TABLE operatsioonid(
