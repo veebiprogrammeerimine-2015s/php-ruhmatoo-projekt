@@ -1,0 +1,73 @@
+
+CREATE TABLE looma_omanikud(
+	oid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	nimi VARCHAR(50),
+	o_looma_id INT
+);
+
+CREATE TABLE loomad(
+	lid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	looma_nimi VARCHAR(50),
+	omaniku_id INT,
+	looma_liik VARCHAR(50),
+	Looma_kirjeldus VARCHAR(255)
+);
+
+CREATE TABLE loomaarstid(
+	aid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	arsti_nimi VARCHAR(50),
+	alooma_id INT
+);
+
+CREATE TABLE protseduurid(
+	protseduuri_nimi VARCHAR(50),
+	arsti_id INT,
+	plooma_id INT
+);
+
+CREATE TABLE vastuv6tuajad(
+	aeg TIMESTAMP,
+	vlooma_id INT
+);
+
+CREATE TABLE operatsioonid(
+	operatsiooni_nimi VARCHAR(50),
+	raskustase VARCHAR(50),
+	arsti_id INT,
+	olooma_id INT,
+	kuup2ev TIMESTAMP
+);
+
+
+
+
+INSERT INTO looma_omanikud (oid, nimi, o_looma_id) VALUES (1, 'Jüri', 1);
+INSERT INTO looma_omanikud (oid, nimi, o_looma_id) VALUES (2, 'Mari', 2);
+INSERT INTO looma_omanikud (oid, nimi, o_looma_id) VALUES (3, 'Kati', 3);
+INSERT INTO looma_omanikud (oid, nimi, o_looma_id) VALUES (4, 'Mati', 4);
+
+
+INSERT INTO loomad (lid, looma_nimi, omaniku_id, looma_liik, looma_kirjeldus) VALUES (1, 'Kiti', 1, 'kass', 'käpp valutab');
+INSERT INTO loomad (lid, looma_nimi, omaniku_id, looma_liik, looma_kirjeldus) VALUES (2, 'Muri', 2, 'koer', 'köhib');
+INSERT INTO loomad (lid, looma_nimi, omaniku_id, looma_liik, looma_kirjeldus) VALUES (3, 'Tibu', 3, 'papakoi', 'küünte lõikus');
+INSERT INTO loomad (lid, looma_nimi, omaniku_id, looma_liik, looma_kirjeldus) VALUES (4, 'Miisu', 4, 'kass', 'vaktsiin');
+
+INSERT INTO loomaarstid (aid,  arsti_nimi, alooma_id) VALUES (1, 'Dr Tamm', 1);
+INSERT INTO loomaarstid (aid,  arsti_nimi, alooma_id) VALUES (2, 'Dr Pärn', 2);
+INSERT INTO loomaarstid (aid,  arsti_nimi, alooma_id) VALUES (3, 'Dr Kask', 3);
+INSERT INTO loomaarstid (aid,  arsti_nimi, alooma_id) VALUES (4, 'Dr Vaher', 4);
+
+INSERT INTO protseduurid (protseduuri_nimi, arsti_id, plooma_id) VALUES ('Käparavi', 2, 1);
+INSERT INTO protseduurid (protseduuri_nimi, arsti_id, plooma_id) VALUES ('Köharohi', 2, 2);
+INSERT INTO protseduurid (protseduuri_nimi, arsti_id, plooma_id) VALUES ('Küünte lõikus', 2, 3);
+INSERT INTO protseduurid (protseduuri_nimi, arsti_id, plooma_id) VALUES ('Vaktsiini tegemine', 2, 4);
+
+INSERT INTO vastuv6tuajad (aeg, vlooma_id) VALUES (NOW(), 1);
+INSERT INTO vastuv6tuajad (aeg, vlooma_id) VALUES (NOW(), 2);
+INSERT INTO vastuv6tuajad (aeg, vlooma_id) VALUES (NOW(), 3);
+INSERT INTO vastuv6tuajad (aeg, vlooma_id) VALUES (NOW(), 4);
+
+INSERT INTO operatsioonid (operatsiooni_nimi, raskustase, arsti_id, olooma_id, kuup2ev) VALUES ('amputeerimine', 'raske', 1, 2, NOW());
+INSERT INTO operatsioonid (operatsiooni_nimi, raskustase, arsti_id, olooma_id, kuup2ev) VALUES ('pimesoolelõikus', 'väga raske', 3, 1, NOW());
+INSERT INTO operatsioonid (operatsiooni_nimi, raskustase, arsti_id, olooma_id, kuup2ev) VALUES ('kastreerimine', 'lihtne', 4, 3, NOW());
+INSERT INTO operatsioonid (operatsiooni_nimi, raskustase, arsti_id, olooma_id, kuup2ev) VALUES ('steriliseerimine', 'keskmine', 1, 4, NOW());
