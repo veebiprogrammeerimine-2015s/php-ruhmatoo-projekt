@@ -1,29 +1,29 @@
-Hinda minu professorit
+**Hinda minu professorit**
 
 
 
-Rühma liikmete nimed: 
-Karl
-Rauno
-Raiko
+**Rühma liikmete nimed:** 
+Karl Grossberg
+Rauno Kosula
+Raiko Lepik
 
 
-Eesmärgid:
-Anda tagasisidet õppejõududele
-Saada tagasisidet õpilastelt (Õppejõud)
+**Eesmärgid:**
+Anda tagasisidet Õppejõududele
+Saada tagasisidet Õpilastelt (Õppejõµud)
 Õpilane teab, kas võtta seda ainet
 
-Kirjeldus:
+**Kirjeldus:**
 Põhineb ratemyproffessori põhjal
 Rate my teacher
-Sihtrühm : Eesti üliõpilased
+Sihtrühm : Eesti Üliõpilased
 
 
 
-Funktsionaalsus:
-Eraldi kasutajad õppejõule ja üliõpilastele
-õpilane saab lisada õppejõu, keda hinnata
+**Funktsionaalsus:**
+Eraldi kasutajad Õppejõule ja Üliõpilastele
+Õpilane saab lisada Õppejõu, keda hinnata
 
 
-Andmebaas:
+**Andmebaas:**
 
