@@ -27,6 +27,7 @@
         $contest_array = getAllData();
     }
 ?>
+<a href="data.php">Tagasi registreerimislehele!</a><br>
 
 <h1>Tabel</h1>
 <form action="table.php" method="get">
@@ -42,6 +43,7 @@
     <th>Kustuta</th>
     <th>Muuda</th>
 </tr>
+
 <?php
     //osalejad ükshaaval läbi käia
     for($i = 0; $i < count($contest_array); $i++){
@@ -77,4 +79,5 @@
     }
     
 ?>
+
 </table>
