@@ -14,7 +14,7 @@ Me teeme kokandus foorumi "Retseptid" nimega, kus on võimalik registreerida ja 
 	On väga palju sarnaseid rakendust, näiteks http://toidutare.ee/foorum, http://www.perefoorum.ee/viewforum.php?f=52 ja nii edasi
 
 Funktsionaalsuse loetelu prioriteedi järjekorras
-	Saab teha uut kasutajat 
+	* Saab teha uut kasutajat 
 	Saab sisse logida
 	Saab kirjeldada oma proofili
 	Saab teha uued teemad ja kommentaare lisada
