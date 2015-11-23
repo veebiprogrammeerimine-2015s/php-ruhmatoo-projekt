@@ -111,7 +111,7 @@
 <?php
     require_once("../header.php");
 ?>
-		<p>Tegemist on lehega, kus on võimalik eelregistreerida erinevatele jooksuvõistlustele</p>
+		<p>Tegemist on lehega, kus on võimalik eelregistreerida erinevatele spordisündmustele</p>
         <h2>Login</h2>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <input name="email" type="email" placeholder="E-post" value="<?php echo $email; ?>">* <?php echo $email_error;?> <br><br>
