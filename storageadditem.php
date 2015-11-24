@@ -3,7 +3,7 @@
 	$page_title = "Storage Add item";
 	$page_file_name = "storageadditem.php";
 ?>
-$merchandiseprice, $merchandiseweight, $merchandisename, $merch_length, $merch_height, $merch_width)
+
 <?php
 	require_once("functions.php");
 	$merchandisename_error = "";

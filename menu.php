@@ -40,6 +40,10 @@
 		if($_SESSION['logged_in_user_privileges']=='admin'){
 			echo '<li class=""><a href="userpageadmin.php">admin</a></li>';
 		}
+		?><?php
+		if($_SESSION['logged_in_user_privileges']=='admin'){
+			echo '<li class=""><a href="storageadditem.php">Add item</a></li>';
+		}
 		?>
 		<?php
 		if(isset($_SESSION['logged_in_user_id'])){
