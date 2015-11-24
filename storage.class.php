@@ -52,7 +52,8 @@ class storageCreate {
     }
 		
 }
-class itemCreate{    private $connection;
+class itemCreate{    
+	private $connection;
 	
 	function __construct($connection){
         $this->connection = $connection;
