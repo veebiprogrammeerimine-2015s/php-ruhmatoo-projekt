@@ -54,7 +54,7 @@
 		}
 	}
 	if ($_SERVER["REQUEST_METHOD"] == "POST"){
-		if ($merch_height_error == "" and $merch_length_error == "" and $merch_width_error = "" and $merchandisename_error =="" and $merchandiseprice_error == "" and $merchandiseweight_error == ""){
+		if ($merch_height_error == ""/* and $merch_length_error == "" and $merch_width_error = "" and $merchandisename_error =="" and $merchandiseprice_error == "" and $merchandiseweight_error == "" */){
 			$response = $itemCreate->createItem($merchandiseprice, $merchandiseweight, $merchandisename, $merch_length, $merch_height, $merch_width);
 			print ("smth smth");
 		}else{

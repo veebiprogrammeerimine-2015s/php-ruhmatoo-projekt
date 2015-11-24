@@ -79,8 +79,24 @@ class itemCreate{
 			
 		}
 		$stmt->close();
-        $stmt = $this->connection->prepare("INSERT INTO merchandise (price_added, item_weight, item_name, item_length, item_height, item_width,) VALUES (?,?,?,?,?,?)");
+      /*  $stmt = $this->connection->prepare("INSERT INTO merchandise (price_added, item_weight, item_name, item_length, item_height, item_width,) VALUES (?,?,?,?,?,?)");
         $stmt->bind_param("ssssss", $merchandiseprice, $merchandiseweight, $merchandisename, $merch_length, $merch_height, $merch_width);
+		
+		*/
+		$sql = "INSERT INTO merchandise (price_added, item_weight, item_name, item_length, item_height, item_width,) VALUES ($merchandiseprice,$merchandiseweight,$merchandisename,$merch_length,$merch_height,$merch_width)";
+if($query = $connection->prepare($sql)) { // assuming $mysqli is the connection
+    $query->bind_param("ssssss", $merchandiseprice, $merchandiseweight, $merchandisename, $merch_length, $merch_height, $merch_width);
+    $query->execute();
+    // any additional code you need would go here.
+} else {
+    $error = $connection->errno . ' ' . $mysqli->error;
+    echo $error; // 1054 Unknown column 'foo' in 'field list'
+}
+		
+		
+		
+		
+		
 		
         if($stmt->execute()){
 			
