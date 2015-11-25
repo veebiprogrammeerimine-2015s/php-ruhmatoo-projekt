@@ -84,7 +84,7 @@
 	
 <p>
 	Tere, <?=$_SESSION["logged_in_user_id"];?>
-	<a href="?logout=1">Logi välja<a>
+	<a href="?logout=1">Logi välja</a>
 </p>
 
 
@@ -96,8 +96,6 @@
   	<input name="media" type="text"  value="<?php echo $media; ?>"> <?php echo $media_error; ?><br><br>
 	<label for="intro" >Tutvustus</label><br>
   	<input name="intro" type="text"  value="<?php echo $intro; ?>"> <?php echo $intro_error; ?><br><br>
-	<label for="comment" >Arvamus</label><br>
-  	<input name="comment" type="text"  value="<?php echo $comment; ?>"> <?php echo $comment_error; ?><br><br>
   	<input type="submit" name="postMedia" value="Salvesta">
   </form>
   
