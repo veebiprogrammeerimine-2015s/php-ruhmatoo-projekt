@@ -28,6 +28,7 @@
     * muutujad/tabelid on inglise keeles;
     * rakendus on piisava funktsionaalsusega ja turvaline;
     * kõik tiimi liikmed on panustanud rakenduse arendusprotsessi.
+    * yooo :D
 
 ## Abiks
 * **Testserver:** greeny.cs.tlu.ee, [tunneli loomise juhend](http://minitorn.tlu.ee/~jaagup/kool/java/kursused/09/veebipr/naited/greenytunnel/greenytunnel.pdf)
