@@ -1,13 +1,13 @@
-rühmatöö - team triforce
+rühmatöö - team alpha triforce
  • 
 • •
 
 1. Login - (töötaja, lihtsurelik)
-2. Tabel - (mysqli)
+2. Tabel - (mysqli, login tabel)
 File list:
-	-tiitelleht.html
-	-login.php
-	-tootaja.php
-	-edit.php
-	-class.php
-	-klient.php
+	-tiitelleht.html - ruslan
+	-login.php - ruslan
+	-tootaja.php- janek
+	-edit.php - ea
+	-class.php - janek
+	-klient.php - ea
