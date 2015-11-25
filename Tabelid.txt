@@ -1,0 +1,41 @@
+
+CREATE TABLE owners(
+	oid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(50),
+	o_animal_name VARCHAR(50)
+);
+
+CREATE TABLE animals(
+	lid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	animal_name VARCHAR(50),
+	owner_name VARCHAR(50),
+	species VARCHAR(50),
+	description VARCHAR(255)
+);
+
+CREATE TABLE vets(
+	aid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	dr_name VARCHAR(50),
+	a_animal_id INT
+);
+
+CREATE TABLE procedures(
+	procedure_name VARCHAR(50),
+	dr_id INT,
+	dr_animal_id INT
+);
+
+CREATE TABLE times(
+	time TIMESTAMP,
+	time_animal_name VARCHAR(50)
+);
+
+CREATE TABLE operations(
+	operation_name VARCHAR(50),
+	difficulty VARCHAR(50),
+	dr_id INT,
+	o_animal_id INT,
+	date TIMESTAMP
+);
+
+
