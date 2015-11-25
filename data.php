@@ -20,8 +20,8 @@
 		header("Location: login.php");
 	}
 	
-	$title = $media = $intro = $comment = "";
-	$title_error = $media_error = $intro_error = $comment_error = "";
+	$title = $media = $intro = $photo = "";
+	$title_error = $media_error = $intro_error = $photo_error = "";
 	
 	
 	if(isset($_POST["postMedia"])){
@@ -46,19 +46,19 @@
 				$intro = cleanInput($_POST["intro"]);
 				
 			}
-			if ( empty($_POST["comment"]) ) {
-				$comment_error = "See väli on kohustuslik";
+			if ( empty($_POST["photo"]) ) {
+				$photo_error = "See väli on kohustuslik";
 			} else {
 				
-				$intro = cleanInput($_POST["comment"]);
+				$intro = cleanInput($_POST["photo"]);
 				
 			}
-		if(	$title_error == "" && $media_error == "" && $intro_error == "" && $comment_error == ""){
+		if(	$title_error == "" && $media_error == "" && $intro_error == "" && $photo_error == ""){
 			
 			echo "Sisestatud!";
 				
 				
-				postMedia($title, $media, $intro, $comment);
+				postMedia($title, $media, $intro, $photo);
 			
 		}
 	}
@@ -95,7 +95,9 @@
 	<label for="media" >Hooaeg</label><br>
   	<input name="media" type="text"  value="<?php echo $media; ?>"> <?php echo $media_error; ?><br><br>
 	<label for="intro" >Tutvustus</label><br>
-  	<input name="intro" type="text"  value="<?php echo $intro; ?>"> <?php echo $intro_error; ?><br><br>
+  	<textarea name="intro" rows="10" cols="100"><?php echo $intro; ?></textarea> <?php echo $intro_error; ?><br><br>
+	<label for="photo" >Lisa seriaali pilt</label><br>
+  	<input name="photo" type="text"  value="<?php echo $photo; ?>"> <?php echo $photo_error; ?><br><br>	
   	<input type="submit" name="postMedia" value="Salvesta">
   </form>
   
