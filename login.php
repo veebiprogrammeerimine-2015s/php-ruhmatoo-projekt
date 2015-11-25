@@ -27,7 +27,52 @@
   </div><!-- /.container-fluid -->
 </nav>
 	
-<br><br><br><br><br><br>
+<!--Variables -->
+<?
+$email_error = "";
+$password_error = "";	
+
+$username = ""; $email = ""; $password = ""; $username_or_email = "";
+$reg_username = ""; $reg_email = ""; $reg_password = "";
+?>
+
+<!--Log-in function -->
+<?// Controlling whether someone inputed login button
+	if($_SERVER["REQUEST_METHOD"] == "POST") {
+		
+		if(isset($_POST["login"])){
+				
+			if (empty($_POST["username_or_email"]) ) {
+                $username_error = "This field is required";
+
+            }else{
+
+                $username_or_email = cleanInput($_POST["username_or_email"]);
+
+                }
+				
+			if (empty($_POST["password"]) ) {
+				$password_error = "This field is required";
+			}else{
+			
+				$password = cleanInput($_POST["password"]);
+				
+			}
+			// Checking for errors
+			if($email_error == "" && $password_error ==""){
+				
+			$hash = hash("sha512", $password);
+			
+			// Creating user file
+				loginUser($username_or_email, $hash);
+				
+		
+			}
+		}
+?>
+
+<br><br>
+
 <!-- ######################## -->
 <!-- ####### Content ######## -->
 <!-- ######################## -->	
@@ -36,22 +81,23 @@
 
 	<div class="row">
 		
-		<div class="col-md-6 col-sm-5 col-sm-offset-1">
-
-			<form>
+		<div class="col-md-5 col-sm-5 col-sm-offset-1">
+			
+			<form action="login.php" method="post" >
+			  <h1>Log-in</h1>
 			  <div class="form-group">
-				<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+				<input type="email" class="form-control" id="email placeholder="E-mail" > <?php echo $email_error; ?>
 			  </div>
 			  
 				<div class="row">
 					<div class="col-md-8">
 						<div class="form-group">
-						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+						<input type="password" class="form-control" id="password" placeholder="Password"> <?php echo $password_error; ?>
 						</div>
 					</div>
 					<div class="col-md-4">
-					<button type="submit" class="btn btn-info hidden-xs ">Login 1 </button>
-					<button type="submit" class="btn btn-info btn-block visible-xs">Login 2 </button>
+					<button type="submit" class="btn btn-info hidden-xs ">Login</button>
+					<button type="submit" class="btn btn-info btn-block visible-xs">Login</button>
 					</div>
 					
 				
