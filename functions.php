@@ -1,6 +1,6 @@
 <?php 
 	
-	require_once("../config.php");
+	require_once("../config_global.php");
 	$database = "if15_hendrik7";
 	
 	session_start();
