@@ -20,8 +20,8 @@
 		header("Location: login.php");
 	}
 	
-	$title = $media = "";
-	$title_error = $media_error = "";
+	$title = $media = $intro = $comment = "";
+	$title_error = $media_error = $intro_error = $comment_error = "";
 	
 	
 	if(isset($_POST["postMedia"])){
@@ -39,12 +39,26 @@
 				$media = cleanInput($_POST["media"]);
 				
 			}
-		if(	$title_error == "" && $media_error == ""){
+			if ( empty($_POST["intro"]) ) {
+				$intro_error = "See väli on kohustuslik";
+			} else {
+				
+				$intro = cleanInput($_POST["intro"]);
+				
+			}
+			if ( empty($_POST["comment"]) ) {
+				$comment_error = "See väli on kohustuslik";
+			} else {
+				
+				$intro = cleanInput($_POST["comment"]);
+				
+			}
+		if(	$title_error == "" && $media_error == "" && $intro_error == "" && $comment_error == ""){
 			
 			echo "Sisestatud!";
 				
 				
-				postMedia($title, $media);
+				postMedia($title, $media, $intro, $comment);
 			
 		}
 	}
@@ -74,12 +88,16 @@
 </p>
 
 
-<h2>Lisa postitus</h2>
+<h2>Lisa uus seriaal</h2>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-	<label for="title" >Tiitel</label><br>
+	<label for="title" >Nimi</label><br>
   	<input name="title" id="title" type="text"  value="<?php echo $title; ?>"> <?php echo $title_error; ?><br><br>
-	<label for="media" >Meedia</label><br>
+	<label for="media" >Hooaeg</label><br>
   	<input name="media" type="text"  value="<?php echo $media; ?>"> <?php echo $media_error; ?><br><br>
+	<label for="intro" >Tutvustus</label><br>
+  	<input name="intro" type="text"  value="<?php echo $intro; ?>"> <?php echo $intro_error; ?><br><br>
+	<label for="comment" >Arvamus</label><br>
+  	<input name="comment" type="text"  value="<?php echo $comment; ?>"> <?php echo $comment_error; ?><br><br>
   	<input type="submit" name="postMedia" value="Salvesta">
   </form>
   
