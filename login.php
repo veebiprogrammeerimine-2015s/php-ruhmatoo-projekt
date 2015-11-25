@@ -65,11 +65,11 @@
 				$password_hash = hash("sha512", $password);
 				
 				// käivitan funktsiooni
-				$login_response = $User->loginUser($personalcode, $password_hash, $gender, $insurance, $name, $age, $username);
+				$login_response = $User->loginUser($username, $password_hash);
 				if(isset($login_response->success)){
 					//läks edukalt, peab sessiooni salvestama
 					$_SESSION["id_from_db"] = $login_response->success->user->id;
-					$_SESSION["pc_from_db"] = $login_response->success->user->personalcode;
+					$_SESSION["un_from_db"] = $login_response->success->user->username;
 					//***********************************//
 					//**suunamine peale sisse logimist?**//
 					//***********************************//
@@ -110,10 +110,10 @@
 				$create_name = cleanInput($_POST["create_name"]);
 			}
 			//vanus
-			if(empty($_POST["create_age"])){
+			if(empty($_POST["year"]) || empty($_POST["month"]) || empty($_POST["day"])){
 				$create_age_error = "See väli on kohustuslik";
 			}else{
-				$create_age = cleanInput($_POST["create_age"]);
+				$create_age =  $_POST['year'].'-'.$_POST['month'].'-'.$_POST['day'];
 			}
 			//sugu
 			if(empty($_POST["create_gender"])){
@@ -178,30 +178,15 @@
   <?php endif;?>
   
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-	<input name="create_username" type="text" placeholder="Kasutajanimi" value="<?php echo $create_username; ?>"> <?php echo $create_username_error; ?><br><br>
-  	<input name="create_personalcode" type="number" placeholder="Isikukood" value="<?php echo $create_personalcode; ?>"> <?php echo $create_personalcode_error; ?><br><br>
-  	<input name="create_password" type="password" placeholder="Parool"> <?php echo $create_password_error; ?> <br><br>
-	<h4>Sugu</h4>
+	<input name="create_username" type="text" placeholder="Kasutajanimi" value="<?php echo $create_username; ?>"> <font style="color:red">*<?php echo $create_username_error; ?></font><br><br>
+  	<input name="create_personalcode" type="number" placeholder="Isikukood" value="<?php echo $create_personalcode; ?>"> <font style="color:red">*<?php echo $create_personalcode_error; ?></font><br><br>
+  	<input name="create_password" type="password" placeholder="Parool"> <font style="color:red">*<?php echo $create_password_error; ?></font> <br><br>
+	<h4>Sugu</h4><font style="color:red">*<?php echo $create_gender_error; ?></font><br>
 	<input name="gender" type="radio" value="Mees">Mees<br>
 	<input name="gender" type="radio" value="Naine">Naine<br><br>
-	<h4>Sünnikuupäev</h4>
-	<select id="form_dob_month" name="dob_month">
-		<option value="-">-</option>
-		<option value="1">Jaanuar</option>
-		<option value="2">Veebruar</option>
-		<option value="3">Märts</option>
-		<option value="4">Aprill</option>
-		<option value="5">Mai</option>
-		<option value="6">Juuni</option>
-		<option value="7">Juuli</option>
-		<option value="8">August</option>
-		<option value="9">September</option>
-		<option value="10">Oktoober</option>
-		<option value="11">November</option>
-		<option value="12">Detsember</option>
-	</select>
-	<select id="form_dob_day" name="dob_day">
-		<option value="-">-</option>
+	<h4>Sünnikuupäev</h4><font style="color:red">*<?php echo $create_age_error; ?></font><br>
+	<select name="day">
+		<option value="">Päev</option>
 		<option value="1">1</option>
 		<option value="2">2</option>
 		<option value="3">3</option>
@@ -234,8 +219,23 @@
 		<option value="30">30</option>
 		<option value="31">31</option>
 	</select>
-	 <select id="form_dob_year" name="dob_year">
-		<option value="-">-</option>
+	<select name="month">
+		<option value="">Kuu</option>
+		<option value="1">Jaanuar</option>
+		<option value="2">Veebruar</option>
+		<option value="3">Märts</option>
+		<option value="4">Aprill</option>
+		<option value="5">Mai</option>
+		<option value="6">Juuni</option>
+		<option value="7">Juuli</option>
+		<option value="8">August</option>
+		<option value="9">September</option>
+		<option value="10">Oktoober</option>
+		<option value="11">November</option>
+		<option value="12">Detsember</option>
+	</select>
+	 <select name="year">
+		<option value="">Aasta</option>
 		<option value="2015">2015</option>
 		<option value="2014">2014</option>
 		<option value="2013">2013</option>
@@ -333,7 +333,7 @@
 		<option value="1921">1921</option>
 		<option value="1920">1920</option>
 	</select><br><br>
-	<h4>Kas ravikindlustus on olemas?</h4>
+	<h4>Kas ravikindlustus on olemas?</h4><font style="color:red">*<?php echo $create_insurance_error; ?></font><br>
 	<input name="insurance" type="radio" value="jah">jah<br>
 	<input name="insurance" type="radio" value="ei">ei<br><br><br>
   	<input type="submit" name="create" value="Loo kasutaja">
