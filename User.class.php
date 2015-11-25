@@ -7,11 +7,11 @@ class User{
 		//selle klassi muutuja
 		$this->connection = $mysqli;
 	}
-	function createUser($create_username, $password_hash, $create_personalcode, $create_name, $create_age, $create_gender, $create_insurance){
+	function createUser($create_personalcode, $password_hash, $create_username, $create_name, $create_age, $create_gender, $create_insurance){
 		//objekt et saata tagasi kas errori(id,message) või success(message)
 		$response = new StdClass();
 		
-		$stmt = $this->connection->prepare("SELECT username FROM np3799_abprojekt WHERE username = ?");
+		$stmt = $this->connection->prepare("SELECT kasutajanimi FROM np3799_abprojekt WHERE kasutajanimi = ?");
 		$stmt->bind_param("s", $create_username);
 		$stmt->execute();
 		if($stmt->fetch()){
@@ -38,9 +38,8 @@ class User{
 			return $response;
 		}
 		$stmt->close();
-		
-		$stmt = $this->connection->prepare("INSERT INTO np3799_abprojekt (kasutajanimi, parool, isikukood, nimi, vanus, sugu, ravikindlustus) VALUES (?, ?, ?, ?, ?, ?, ?)");
-		$stmt->bind_param("ssisisi", $create_username, $password_hash, $create_personalcode, $create_name, $create_age, $greate_gender, $create_insurance);
+		$stmt = $this->connection->prepare("INSERT INTO np3799_abprojekt (isikukood, parool, kasutajanimi, nimi, vanus, sugu, ravikindlustus) VALUES (?, ?, ?, ?, ?, ?, ?)");
+		$stmt->bind_param("isssssi", $create_personalcode, $password_hash, $create_username, $create_name, $create_age, $create_gender, $create_insurance);
 		if($stmt->execute()){
 			//salvestas edukalt
 			$success = new StdClass();
@@ -57,7 +56,7 @@ class User{
 		$stmt->close();
 		return $response;
 	}
-	function loginUser($password_hash, $username){
+	function loginUser($username, $password_hash){
 		$response = new StdClass();
 		$stmt = $this->connection->prepare("SELECT id, kasutajanimi FROM np3799_abprojekt WHERE kasutajanimi=?");
 		$stmt->bind_param("s", $username);

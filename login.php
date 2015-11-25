@@ -6,11 +6,11 @@
 	//***Kuhu suunata?***//
 	//*******************//
 	//kontrollin, kas kasutaja on sisseloginud
-	if(isset($_SESSION["id_from_db"])){
+	/*if(isset($_SESSION["id_from_db"])){
 		// kui on,suunan data lehele
 		header("Location: data.php");
 		exit();
-	}
+	}*/
 	
 	// muuutujad errorite jaoks
 	$personalcode_error = $password_error = $gender_error = $insurance_error = $name_error = $age_error = $username_error = "";
@@ -21,11 +21,11 @@
 		// Sisse logimine
 		if(isset($_POST["login"])){
 			//isikukood
-			if(empty($_POST["personalcode"])){
-				$personalcode_error = "See väli on kohustuslik";
+			if(empty($_POST["username"])){
+				$username_error = "See väli on kohustuslik";
 			}else{
 				// puhastame muutuja võimalikest üleliigsetest sümbolitest
-				$personalcode = cleanInput($_POST["personalcode"]);
+				$username = cleanInput($_POST["username"]);
 			}
 			//parool
 			if(empty($_POST["password"])){
@@ -33,37 +33,11 @@
 			}else{
 				$password = cleanInput($_POST["password"]);
 			}
-			//sugu
-			if(empty($_POST["gender"])){
-				$gender_error = "See väli on kohustuslik";
-			}
-			//kasutajanimi
-			if(empty($_POST["username"])){
-				$username_error = "See väli on kohustuslik";
-			}else{
-				$username = cleanInput($_POST["username"]);
-			}
-			//kindlustus
-			if(empty($_POST["insurance"])){
-				$insurance_error = "See väli on kohustuslik";
-			}
-			//nimi
-			if(empty($_POST["name"])){
-				$name_error = "See väli on kohustuslik";
-			}else{
-				$name = cleanInput($_POST["name"]);
-			}
-			//vanus
-			if(empty($_POST["age"])){
-				$age_error = "See väli on kohustuslik";
-			}else{
-				$age = cleanInput($_POST["age"]);
-			}
+			
 			// Kui oleme siia jõudnud, võime kasutaja sisse logida
-			if($password_error == "" && $personalcode_error == "" && $gender_error == "" && $insurance_error == "" && $name_error == "" && $age_error == ""){
+			if($password_error == "" && $username_error == ""){
 
 				$password_hash = hash("sha512", $password);
-				
 				// käivitan funktsiooni
 				$login_response = $User->loginUser($username, $password_hash);
 				if(isset($login_response->success)){
@@ -73,9 +47,9 @@
 					//***********************************//
 					//**suunamine peale sisse logimist?**//
 					//***********************************//
-					header("Location:data.php");
+					/*header("Location:data.php");
 					//lõpetame php laadimise
-					exit();
+					exit();*/
 				}
 			}
 		}
@@ -110,8 +84,8 @@
   <?php endif;?>
   
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  	<input name="username" type="text" placeholder="Kasutajanimi" value="<?php echo $username; ?>"> <?php echo $username_error; ?><br><br>
-  	<input name="password" type="password" placeholder="Parool" value="<?php echo $password; ?>"> <?php echo $password_error; ?><br><br>
+  	<input name="username" type="text" placeholder="Kasutajanimi" value="<?php echo $username; ?>"> <font style="color:red"><?php echo $username_error; ?></font><br><br>
+  	<input name="password" type="password" placeholder="Parool" value="<?php echo $password; ?>"> <font style="color:red"><?php echo $password_error; ?></font><br><br>
   	<input type="submit" name="login" value="Logi sisse">
   </form>
 
