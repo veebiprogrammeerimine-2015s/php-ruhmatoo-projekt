@@ -6,6 +6,7 @@
 1. Tee kohe Pull request
 1. Muuda repositooriumi README.md faili vastavalt nõutele
 1. Tee valmis korralik veebirakendus
+2.hello
 
 ### Nõuded
 
