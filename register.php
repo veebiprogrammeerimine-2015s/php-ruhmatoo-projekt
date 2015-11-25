@@ -258,8 +258,8 @@
 			<option value="1920">1920</option>
 		</select><br><br>
 		<h4>Kas ravikindlustus on olemas?</h4><font style="color:red">*<?php echo $create_insurance_error; ?></font><br>
-		<input name="insurance" type="radio" value="jah">jah<br>
-		<input name="insurance" type="radio" value="ei">ei<br><br><br>
+		<input name="insurance" type="radio" value="1">jah<br>
+		<input name="insurance" type="radio" value="0">ei<br><br><br>
 		<input type="submit" name="create" value="Loo kasutaja">
 	</form>
 </body>
