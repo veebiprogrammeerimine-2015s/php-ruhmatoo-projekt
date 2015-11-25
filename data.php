@@ -1,3 +1,5 @@
+<?php require_once("header.php"); ?>
+
 <?php
 	require_once("functions.php");
 	//data
@@ -82,3 +84,5 @@
   </form>
   
   <a href="table.php">Vaata/Muuda postitusi</a>
+  
+  <?php require_once("footer.php"); ?>
