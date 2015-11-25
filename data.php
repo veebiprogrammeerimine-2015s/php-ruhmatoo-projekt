@@ -20,11 +20,11 @@
 		header("Location: login.php");
 	}
 	
-	$title = $media = $intro = $photo = "";
-	$title_error = $media_error = $intro_error = $photo_error = "";
+	$title = $season = $intro = $photo = "";
+	$title_error = $season_error = $intro_error = $photo_error = "";
 	
 	
-	if(isset($_POST["postMedia"])){
+	if(isset($_POST["postseason"])){
 		echo "vajutati nuppu";
 		if ( empty($_POST["title"]) ) {
 				$title_error = "See väli on kohustuslik";
@@ -32,11 +32,11 @@
 				$title = cleanInput($_POST["title"]);
 			}
 
-			if ( empty($_POST["media"]) ) {
-				$media_error = "See väli on kohustuslik";
+			if ( empty($_POST["season"]) ) {
+				$season_error = "See väli on kohustuslik";
 			} else {
 				
-				$media = cleanInput($_POST["media"]);
+				$season = cleanInput($_POST["season"]);
 				
 			}
 			if ( empty($_POST["intro"]) ) {
@@ -53,12 +53,12 @@
 				$intro = cleanInput($_POST["photo"]);
 				
 			}
-		if(	$title_error == "" && $media_error == "" && $intro_error == "" && $photo_error == ""){
+		if(	$title_error == "" && $season_error == "" && $intro_error == "" && $photo_error == ""){
 			
 			echo "Sisestatud!";
 				
 				
-				postMedia($title, $media, $intro, $photo);
+				postseason($title, $season, $intro, $photo);
 			
 		}
 	}
@@ -92,13 +92,13 @@
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 	<label for="title" >Nimi</label><br>
   	<input name="title" id="title" type="text"  value="<?php echo $title; ?>"> <?php echo $title_error; ?><br><br>
-	<label for="media" >Hooaeg</label><br>
-  	<input name="media" type="text"  value="<?php echo $media; ?>"> <?php echo $media_error; ?><br><br>
+	<label for="season" >Hooaeg</label><br>
+  	<input name="season" type="text"  value="<?php echo $season; ?>"> <?php echo $season_error; ?><br><br>
 	<label for="intro" >Tutvustus</label><br>
   	<textarea name="intro" rows="10" cols="100"><?php echo $intro; ?></textarea> <?php echo $intro_error; ?><br><br>
 	<label for="photo" >Lisa seriaali pilt</label><br>
   	<input name="photo" type="text"  value="<?php echo $photo; ?>"> <?php echo $photo_error; ?><br><br>	
-  	<input type="submit" name="postMedia" value="Salvesta">
+  	<input type="submit" name="postseason" value="Salvesta">
   </form>
   
   <a href="table.php">Vaata/Muuda postitusi</a>
