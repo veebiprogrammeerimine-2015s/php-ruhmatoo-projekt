@@ -54,7 +54,8 @@
 				$problem = cleanInput($_POST["problem"]);
 			}
 			
-		if($problem_error && $date_error && $animal_kind_error && $owner_name_error && $animal_name_error == ""){
+			
+		if($problem_error  == "" && $date_error  == "" && $animal_kind_error  == "" && $owner_name_error  == "" && $animal_name_error == ""){
 
 				$message = registerAnimal($owner_name, $animal_name, $animal_kind, $date, $problem);
 				

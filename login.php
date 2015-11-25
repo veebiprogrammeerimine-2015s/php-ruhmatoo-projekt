@@ -96,13 +96,6 @@
 				}
 		} // create if end
 	}
-  // funktsioon, mis eemaldab kõikvõimaliku üleliigse tekstist
-  function cleanInput($data) {
-  	$data = trim($data);
-  	$data = stripslashes($data);
-  	$data = htmlspecialchars($data);
-  	return $data;
-  }
 	
 	
 	

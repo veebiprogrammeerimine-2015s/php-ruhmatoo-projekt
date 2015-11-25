@@ -1,41 +1,41 @@
 
-CREATE TABLE looma_omanikud(
+CREATE TABLE owners(
 	oid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	nimi VARCHAR(50),
-	o_looma_nimi VARCHAR(50)
+	name VARCHAR(50),
+	o_animal_name VARCHAR(50)
 );
 
-CREATE TABLE loomad(
+CREATE TABLE animals(
 	lid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	looma_nimi VARCHAR(50),
-	omaniku_nimi VARCHAR(50),
-	looma_liik VARCHAR(50),
-	Looma_kirjeldus VARCHAR(255)
+	animal_name VARCHAR(50),
+	owner_name VARCHAR(50),
+	species VARCHAR(50),
+	description VARCHAR(255)
 );
 
-CREATE TABLE loomaarstid(
+CREATE TABLE vets(
 	aid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	arsti_nimi VARCHAR(50),
-	alooma_id INT
+	dr_name VARCHAR(50),
+	a_animal_id INT
 );
 
-CREATE TABLE protseduurid(
-	protseduuri_nimi VARCHAR(50),
-	arsti_id INT,
-	plooma_id INT
+CREATE TABLE procedures(
+	procedure_name VARCHAR(50),
+	dr_id INT,
+	dr_animal_id INT
 );
 
-CREATE TABLE vastuv6tuajad(
-	aeg TIMESTAMP,
-	vlooma_nimi VARCHAR(50)
+CREATE TABLE times(
+	time TIMESTAMP,
+	time_animal_name VARCHAR(50)
 );
 
-CREATE TABLE operatsioonid(
-	operatsiooni_nimi VARCHAR(50),
-	raskustase VARCHAR(50),
-	arsti_id INT,
-	olooma_id INT,
-	kuup2ev TIMESTAMP
+CREATE TABLE operations(
+	operation_name VARCHAR(50),
+	difficulty VARCHAR(50),
+	dr_id INT,
+	o_animal_id INT,
+	date TIMESTAMP
 );
 
 
