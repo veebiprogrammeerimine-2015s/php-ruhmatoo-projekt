@@ -12,45 +12,34 @@
 	$userfirstname_error = "";
 	$userlastname_error = "";
 	$useraddress_error = "";
-
+	$_POST["userusername"] = $_SESSION["logged_in_user_id"];
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if (empty($_POST["userfirstname"])) {
 		$userfirstname_error = "FirstName is required";
 		} else {
 		$userfirstname = test_input($_POST["userfirstname"]);
 		}
-	}
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
 		if (empty($_POST["userlastname"])) {
 		$userlastname_error = "LastName is required";
 		} else {
 		$userlastname = test_input($_POST["userlastname"]);
 		}
-	}
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
 		if (empty($_POST["useraddress"])) {
 		$useraddress_error = "Address required";
 		} else {
 		$useraddress = test_input($_POST["useraddress"]);
 		}
-	}
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
 		$userusername = $_SESSION['logged_in_user_id'];
+	
+		if ($userfirstname_error == "" and $userlastname_error == "" and $useraddress_error==""){
+			$response = $userEdit->editUser($userfirstname, $userlastname, $useraddress);
+		
+		}
 	}
 	
-
-
-
-	if ($_SERVER["REQUEST_METHOD"] == "POST"){
-		if ($userfirstname_error == "" and $userlastname_error == "" and $useraddress_error=""){
-			$response = $userEdit->editUser($userfirstname, $userlastname, $useraddress, $userusername);
-			print "saaaaa";
-		}else{
-		print "smthsmth";
-	}
-	}else{
-		print "jkdshfkjshak";
-	}
 
 ?>
 
@@ -77,10 +66,7 @@
 		<input name="edit" type="submit" value="User Editing">
 		<br><br>
 	</form>	
-<p><? var_dump($_SESSION); ?></p>
-<p><? var_dump($_POST); ?></p>
-<p><? echo $userusername; ?>
-<p><?echo $saadudusername;?>
+
 
 
 <?php require_once("footer.php"); ?>

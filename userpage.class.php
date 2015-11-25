@@ -7,16 +7,14 @@ class userEdit {
 	function __construct($connection){
         $this->connection = $connection;
 		}
-	
 
-	
-	function editUser($userfirstname, $userlastname, $useraddress, $userusername){
-        
+	function editUser($userfirstname, $userlastname, $useraddress){
+		
 		$response = new StdClass();
 		
-		$stmt = $this->connection->prepare("UPDATE users SET first_name='?', last_name='?', address='?' WHERE ID='?'" );
+		$stmt = $this->connection->prepare("UPDATE users SET first_name=?, last_name=?, address=? WHERE ID=?" );
 		#echo($this->connection->error);
-		$stmt->bind_param("ssss", $userfirstname, $userlastname, $useraddress, $userusername);
+		$stmt->bind_param("sssi", $userfirstname, $userlastname, $useraddress, $_SESSION['logged_in_user_id']);
 		$stmt->execute();
 		 if($stmt->execute()){
 			
@@ -30,7 +28,7 @@ class userEdit {
 			#echo($stmt->error);
 			$error = new StdClass();
 			$error->id = 0;
-			$error->message = "Hiireke läks katki";
+			$error->message = "Hiireke lÃ¤ks katki";
 			$response->error = $error;
 			
 		}
