@@ -2,12 +2,14 @@ rühmatöö - team alpha triforce
  • 
 • •
 
+databaas: if15_teamalpha_3
+
 1. Login - (töötaja, lihtsurelik)
 2. Tabel - (mysqli, login tabel)
 File list:
-	-tiitelleht.html - ruslan
+	-tiitelleht.php - ruslan
 	-login.php - ruslan
-	-tootaja.php- janek
+	-dataWorker.php- janek
 	-edit.php - ea
 	-class.php - janek
 	-klient.php - ea
