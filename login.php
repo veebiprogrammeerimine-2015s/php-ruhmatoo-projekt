@@ -18,16 +18,16 @@
 			if (empty($_POST["email"]) ) {
 				$email_error = "See väli on kohustuslik";
 			}else{
-				$email = cleanInput($_POST["email"]);
+				$email = $user->cleanInput($_POST["email"]);
 			}
 			if (empty($_POST["pw"])) {
 				$pw_error = "See väli on kohustuslik";
 			}else{
-				$pw = cleanInput($_POST["pw"]);
+				$pw = $user->cleanInput($_POST["pw"]);
 			}
 			if($pw_error == "" && $email_error == ""){
 				$hash = hash("sha512", $pw);
-				loginUser($email, $hash);
+				$user->loginUser($email, $hash);
 				
 				
 			}
@@ -39,7 +39,7 @@
 				if (empty($_POST["email_reg"])) {
 					$email_reg_error = "See väli on kohustuslik";
 				}else{
-					$email_reg = cleanInput($_POST["email_reg"]);
+					$email_reg = $user->cleanInput($_POST["email_reg"]);
 				}
 				if (empty($_POST["pw_reg"])) {
 					$pw_reg_error = "See väli on kohustuslik";
@@ -47,12 +47,12 @@
 					if(strlen($_POST["pw_reg"]) < 8) {
 						$pw_reg_error = "Peab olema vähemalt 8 tähemärki pikk!";
 					}else{
-						$pw_reg = cleanInput($_POST["pw_reg"]);
+						$pw_reg = $user->cleanInput($_POST["pw_reg"]);
 					}
 				}
 				if($email_reg_error == "" && $pw_reg_error == ""){
 					$hash = hash("sha512", $pw_reg);
-					createUser($email_reg, $hash);
+					$user->createUser($email_reg, $hash);
 
 					
 				}

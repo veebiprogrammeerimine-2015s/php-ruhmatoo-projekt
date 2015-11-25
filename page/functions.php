@@ -1,37 +1,17 @@
-<?php
-  require_once("../config_global.php");
-  session_start();
-  $database = "if15_robing_3";
-  function cleanInput($data) {
-  	$data = trim($data);
-  	$data = stripslashes($data);
-  	$data = htmlspecialchars($data);
-  	return $data;
-  }
-  function loginUser($email, $hash){
-    $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-    $stmt = $mysqli->prepare("SELECT id, email FROM VL_Login WHERE email=? AND hash=?");
-    $stmt->bind_param("ss", $email, $hash);
-    $stmt->bind_result($id_from_db, $email_from_db);
-    $stmt->execute();
-    if($stmt->fetch()){
-      $_SESSION["logged_in_user_id"] = $id_from_db;
-      $_SESSION["logged_in_user_email"] = $email_from_db;
-      header("Location: main.php");
-    }
-    else{
-      echo "Valed andmed";
-    }
-  }
-  function createUser($email_reg, $hash){
-	//echo $email_reg;
-	//echo $hash;
-    $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-    $stmt = $mysqli->prepare("INSERT INTO VL_Login (email, hash) VALUES (?,?)");
-    $stmt->bind_param("ss", $email_reg, $hash);
-    $stmt->execute();
-    $stmt->close();
-
-  }
-
+<?php 
+	
+	require_once("../config_global.php");
+	require_once("user.class.php");
+	
+	$database = "if15_robing_3";
+	
+	session_start();
+	
+	$mysqli = new mysqli($servername, $server_username, $server_password, $database);
+	
+	//saadan ühenduse classi ja loon uue classi
+	$user = new user($mysqli);
+	
+	//var_dump($User->connection);
+	
 ?>
