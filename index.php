@@ -1,7 +1,6 @@
 <?php
 	//load header
 	require_once("header.php");
-	
 ?> 
 <!--main code start here --> 
    
@@ -14,7 +13,6 @@
 
 <?php
 	//load footer
-	require_once("footer.php");
-	
+	require_once("footer.php");	
 ?> 
     
