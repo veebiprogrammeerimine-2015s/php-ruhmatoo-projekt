@@ -11,7 +11,7 @@ class User{
 		//objekt et saata tagasi kas errori(id,message) või success(message)
 		$response = new StdClass();
 		
-		$stmt = $this->connection->prepare("SELECT kasutajanimi FROM np3799_abprojekt WHERE kasutajanimi = ?");
+		$stmt = $this->connection->prepare("SELECT kasutajanimi FROM af_persons WHERE email = ?");
 		$stmt->bind_param("s", $create_username);
 		$stmt->execute();
 		if($stmt->fetch()){
@@ -27,7 +27,7 @@ class User{
 		//elmine käsk kinni
 		$stmt->close();
 		
-		$stmt = $this->connection->prepare("SELECT isikukood FROM np3799_abprojekt WHERE isikukood = ?");
+		$stmt = $this->connection->prepare("SELECT isikukood FROM af_persons WHERE social_sec_nr = ?");
 		$stmt->bind_param("i", $create_personalcode);
 		$stmt->execute();
 		if($stmt->fetch()){
@@ -38,7 +38,7 @@ class User{
 			return $response;
 		}
 		$stmt->close();
-		$stmt = $this->connection->prepare("INSERT INTO np3799_abprojekt (isikukood, parool, kasutajanimi, nimi, vanus, sugu, ravikindlustus) VALUES (?, ?, ?, ?, ?, ?, ?)");
+		$stmt = $this->connection->prepare("INSERT INTO af_persons (social_sec_nr, password, email, person_name	, age, sex, health_insurance) VALUES (?, ?, ?, ?, ?, ?, ?)");
 		$stmt->bind_param("isssssi", $create_personalcode, $password_hash, $create_username, $create_name, $create_age, $create_gender, $create_insurance);
 		if($stmt->execute()){
 			//salvestas edukalt
@@ -58,7 +58,7 @@ class User{
 	}
 	function loginUser($username, $password_hash){
 		$response = new StdClass();
-		$stmt = $this->connection->prepare("SELECT id, kasutajanimi FROM np3799_abprojekt WHERE kasutajanimi=?");
+		$stmt = $this->connection->prepare("SELECT id, email FROM af_persons WHERE email=?");
 		$stmt->bind_param("s", $username);
 		$stmt->execute();
 		if(!$stmt->fetch()){
@@ -73,7 +73,7 @@ class User{
 			return $response;
 		}
 		$stmt->close();
-		$stmt = $this->connection->prepare("SELECT id, kasutajanimi FROM np3799_abprojekt WHERE kasutajanimi=? AND parool=?");
+		$stmt = $this->connection->prepare("SELECT id, email FROM af_persons WHERE email=? AND password=?");
 		$stmt->bind_param("ss", $username, $password_hash);
 		$stmt->bind_result($id_from_db, $un_from_db);
 		$stmt->execute();
