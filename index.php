@@ -4,9 +4,15 @@
 ?> 
 <!--main code start here --> 
    
-<p> siia tuleb kood</p>
-
-
+<?php
+	require_once("functions.php");
+	require_once("AvailableTimes.class.php");
+	
+	// teeme uue instantsi class AvailableTimes
+	$AvailableTimes = new AvailableTimes($mysqli);
+?>
+	
+	<p> <?php echo $AvailableTimes->getAllFreeTimes();?></p>
 
 
 <!--main code end here -->  
