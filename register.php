@@ -105,14 +105,18 @@
 	<?php endif;?>
   
 	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-		<input name="create_username" type="text" placeholder="Kasutajanimi" value="<?php echo $create_username; ?>"> <font style="color:red">*<?php echo $create_username_error; ?></font><br><br>
-		<input name="create_personalcode" type="number" placeholder="Isikukood" value="<?php echo $create_personalcode; ?>"> <font style="color:red">*<?php echo $create_personalcode_error; ?></font><br><br>
-		<input name="create_password" type="password" placeholder="Parool"> <font style="color:red">*<?php echo $create_password_error; ?></font> <br><br>
-		<input name="create_name" type="text" placeholder="Ees- ja perekonnanimi"> <font style="color:red">*<?php echo $create_name_error; ?></font><br><br>
-		<h4>Sugu</h4><font style="color:red">*<?php echo $create_gender_error; ?></font><br>
-		<input name="create_gender" type="radio" value="Mees">Mees<br>
-		<input name="create_gender" type="radio" value="Naine">Naine<br><br>
-		<h4>Sünnikuupäev</h4><font style="color:red">*<?php echo $create_age_error; ?></font><br>
+		<div class="col-md-4">
+			<input name="create_username" type="text" placeholder="Kasutajanimi" value="<?php echo $create_username; ?>"> <font style="color:red">*<?php echo $create_username_error; ?></font><br><br>
+			<input name="create_personalcode" type="number" placeholder="Isikukood" value="<?php echo $create_personalcode; ?>"> <font style="color:red">*<?php echo $create_personalcode_error; ?></font><br><br>
+			<input name="create_password" type="password" placeholder="Parool"> <font style="color:red">*<?php echo $create_password_error; ?></font> <br><br>
+			<input name="create_name" type="text" placeholder="Ees- ja perekonnanimi"> <font style="color:red">*<?php echo $create_name_error; ?></font><br><br>
+		</div>
+		
+		<div class="col-md-8">
+		<h4>Sugu *</h4><font style="color:red"><?php echo $create_gender_error; ?></font>
+		<input name="create_gender" type="radio" value="m">Mees
+		<input name="create_gender" type="radio" value="f">Naine<br>
+		<h4>Sünnikuupäev *</h4><font style="color:red"><?php echo $create_age_error; ?></font>
 			<select name="day">
 			<option value="">Päev</option>
 			<option value="1">1</option>
@@ -260,10 +264,11 @@
 			<option value="1922">1922</option>
 			<option value="1921">1921</option>
 			<option value="1920">1920</option>
-		</select><br><br>
-		<h4>Kas ravikindlustus on olemas?</h4><font style="color:red">*<?php echo $create_insurance_error; ?></font><br>
-		<input name="create_insurance" type="radio" value="1">jah<br>
+		</select>
+		<h4>Kas ravikindlustus on olemas? * </h4><font style="color:red"><?php echo $create_insurance_error; ?></font>
+		<input name="create_insurance" type="radio" value="1">jah
 		<input name="create_insurance" type="radio" value="0">ei<br><br><br>
+		</div>
 		<input type="submit" name="create" value="Loo kasutaja">
 	</form>
 </body>

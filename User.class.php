@@ -11,7 +11,7 @@ class User{
 		//objekt et saata tagasi kas errori(id,message) või success(message)
 		$response = new StdClass();
 		
-		$stmt = $this->connection->prepare("SELECT kasutajanimi FROM af_persons WHERE email = ?");
+		$stmt = $this->connection->prepare("SELECT email FROM af_persons WHERE email = ?");
 		$stmt->bind_param("s", $create_username);
 		$stmt->execute();
 		if($stmt->fetch()){
@@ -27,7 +27,7 @@ class User{
 		//elmine käsk kinni
 		$stmt->close();
 		
-		$stmt = $this->connection->prepare("SELECT isikukood FROM af_persons WHERE social_sec_nr = ?");
+		$stmt = $this->connection->prepare("SELECT social_sec_nr FROM af_persons WHERE social_sec_nr = ?");
 		$stmt->bind_param("i", $create_personalcode);
 		$stmt->execute();
 		if($stmt->fetch()){
