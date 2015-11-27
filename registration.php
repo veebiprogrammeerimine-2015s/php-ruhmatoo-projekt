@@ -11,18 +11,15 @@
 	$create_email_error = "";
 	$create_name_error = "";
 	$create_secondname_error = "";
-	$create_age_error = "";
-	$create_eriala_error = "";
 	$create_login_error = "";
+	$create_mobile_error = "";
 
 	$create_email = "";
 	$create_password = "";
 	$create_name = "";
 	$create_secondname = "";
-	$create_age = "";
-	$create_eriala = "";
 	$create_login = "";
-
+	$create_mobile = "";
 	if(isset($_POST["create"])){
 		
 			if ( empty($_POST["create_email"]) ) {
@@ -59,16 +56,10 @@
 				$create_secondname = cleanInput($_POST["create_secondname"]);
 			}
 			
-			if ( empty($_POST["create_age"]) ) {
+			if ( empty($_POST["create_mobile"]) ) {
 				$create_age_error = "See väli on kohustuslik";
 			}else{
-				$create_age = cleanInput($_POST["create_age"]);
-			}
-			
-			if ( empty($_POST["create_eriala"]) ) {
-				$create_eriala_error = "See väli on kohustuslik";
-			}else{
-				$create_eriala = cleanInput($_POST["create_eriala"]);
+				$create_age = cleanInput($_POST["create_mobile"]);
 			}
    
 			if(	$create_email_error == "" && $create_password_error == ""){
@@ -106,8 +97,7 @@
 			<input name="create_password" type="password" placeholder="Parool"> <?php echo $create_password_error; ?> <br><br>
 			<input name="create_name" type="text" placeholder="Nimi" value="<?php echo $create_name; ?>"> <?php echo $create_name_error; ?><br><br>
 			<input name="create_secondname" type="text" placeholder="Perekonnanimi" value="<?php echo $create_secondname; ?>"> <?php echo $create_secondname_error; ?><br><br>
-			<input name="create_age" type="text" placeholder="Age" value="<?php echo $create_age; ?>"> <?php echo $create_age_error; ?><br><br>
-			<input name="create_eriala" type="text" placeholder="Eriala" value="<?php echo $create_eriala; ?>"> <?php echo $create_eriala_error; ?><br><br>
+			<input name="create_mobile" type="text" placeholder="Mobile Phone" value="<?php echo $create_mobile; ?>"> <?php echo $create_mobile_error; ?><br><br>
 			<input name="create" type="submit" value="create user" > <br><br>
 			
 		</form>
