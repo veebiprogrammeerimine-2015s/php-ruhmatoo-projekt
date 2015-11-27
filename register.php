@@ -120,8 +120,16 @@
 		
 		<div class="col-md-8">
 		<h4>Sugu *</h4><font style="color:red"><?php echo $create_gender_error; ?></font>
+		<?php if($create_gender == "m"): ?>
+		<input name="create_gender" type="radio" checked value="m">Mees
+		<input name="create_gender" type="radio" value="f">Naine<br>
+		<?php elseif($create_gender == "f"): ?>
+		<input name="create_gender" type="radio" value="m">Mees
+		<input name="create_gender" type="radio" checked value="f">Naine<br>
+		<?php else: ?>
 		<input name="create_gender" type="radio" value="m">Mees
 		<input name="create_gender" type="radio" value="f">Naine<br>
+		<?php endif; ?><br>
 		<h4>Sünnikuupäev *</h4><font style="color:red"><?php echo $create_age_error; ?></font>
 			<select name="day">
 			<option value="">Päev</option>
@@ -281,9 +289,11 @@
 		<?php else: ?>
 		<input name="create_insurance" type="radio" value="yes">jah
 		<input name="create_insurance" type="radio" value="no">ei
-		<?php endif; ?><br>
-		</div>
+		<?php endif; ?>
+		<br><br>
 		<input type="submit" name="create" value="Loo kasutaja">
 	</form>
 </body>
 </html>
+
+<!--main code end here -->  
