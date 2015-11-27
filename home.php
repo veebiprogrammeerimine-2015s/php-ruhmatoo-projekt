@@ -9,6 +9,8 @@
 	require_once ("functions.php");
 ?>
 
+
+
 <div class="row">
 	<div class="col-xs-12 col-sm-4">
 		<h3 id="statbar">Viimati lisatud tööd</h3>

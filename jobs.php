@@ -99,9 +99,6 @@
 	
 		<div class="list-group">
 		<?php
-
-#Hetkel kuvab ametit, firmat, maakonda, valda
-#All kuvab kirjeldus, asulat, aadressi, emaili, kontaktnr
 			for($i = 0; $i < count($job_array); $i++) {
 				echo '<a class="list-group-item" role="button" data-toggle="collapse" href="#'.$job_array[$i]->id.'" aria-expanded="false" aria-controls="'.$job_array[$i]->id.'">';
 				echo '<h4 class="list-group-item-heading">'.$job_array[$i]->name.'</h4>';

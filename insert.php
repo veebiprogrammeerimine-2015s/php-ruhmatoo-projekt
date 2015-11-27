@@ -90,10 +90,48 @@
 			
 		}
 	}
-	
-	
-	
+	#$droparray = $Job->parishDrop2();
 ?>
+<!--
+<script>
+function populate(cdrop, pdrop) {
+	var cdrop = document.getElementById(cdrop);
+	var pdrop = document.getElementById(pdrop);
+	pdrop.innerHTML = "";
+	console.log(array);
+	
+	for(i = 0; i < ; i++) {
+		if(cdrop.value == array[i]) {
+			
+			var optionArray = ["esimene|Esimene", "teine|Teine"]
+	}
+		
+	}
+	
+
+	for(var option in optionArray) {
+		var pair = optionArray[option].split("|");
+		var newOption = document.createElement("option");
+		newOption.value = pair[0];
+		newOption.innerHTML = pair[1];
+		pdrop.options.add(newOption);
+	}
+}
+</script>
+
+<?php #var_dump ($droparray); ?>
+<select id="countydrop" name="countydrop" onchange="populate(this.id,'parishdrop')">
+<option selected value="">Vali maakond</option>
+<?#=$Job->countyDropdown2();?>
+</select>
+
+
+<select id="parishdrop">
+  <option>Vali vald</option>
+</select>-->
+
+
+
 <div class="col-xs-12">
 <?php if(isset($response->success)): ?>
 	<div class="alert alert-success alert-dismissible fade in" role="alert">
@@ -188,7 +226,15 @@
 		</div>	
 	</div>
 </form>
+<script>
 
+    var countyvalue = document.getElementById("#countyid").value;
+    if (countyvalue == <?php $county ?>) {
+		console.log ("Tere");
+	}
+	
+
+</script>
 
 <?php
 	require_once("footer.php");

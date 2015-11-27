@@ -37,6 +37,10 @@ if($_SESSION['logged_in_user_group'] == 3):
 	<li class="dropdown">
 	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
 	  <ul class="dropdown-menu">
+	   <li role="separator" class="divider"></li>
+	   <li class="dropdown-header">Töökohad</li>
+	   <li role="separator" class="divider"></li>
+	   
 			<?php if($page_file != "data.php") { ?>
 			<li><a href="data.php">Uus töökoht</a></li>
 			<?php } else { ?>
@@ -49,6 +53,14 @@ if($_SESSION['logged_in_user_group'] == 3):
 			<li class="active"><a href="insert.php">Asukoha andmed</a></li>
 			<?php } ?>
 			
+			<?php if($page_file != "editjobs.php") { ?>
+			<li><a href="editjobs.php">Muuda töökohti</a></li>
+			<?php } else { ?>
+			<li class="active"><a href="editjobs.php">Muuda töökohti</a></li>
+			<?php } ?>
+		<li role="separator" class="divider"></li>
+		<li class="dropdown-header">Kasutajad</li>
+		<li role="separator" class="divider"></li>
 			<?php if($page_file != "users.php") { ?>
 			<li><a href="users.php">Kasutajad</a></li>
 			<?php } else { ?>

@@ -1,6 +1,7 @@
 <?php
 class Job {
 	private $connection;
+	
     
     function __construct($mysqli){
         $this->connection = ($mysqli);
@@ -158,7 +159,7 @@ class Job {
 	function countyDropdown() {
 		
 		$html = '';
-		$html .= '<select name="job_county" class="form-control"">';
+		$html .= '<select id="countyid" name="job_county" class="form-control">';
 
 		$stmt = $this->connection->prepare("SELECT county FROM job_county");
 		$stmt->bind_result($county);
@@ -173,14 +174,70 @@ class Job {
 		return $html;
 		
 	}
+	################
+	###TEST ALGUS###
+	################
+	
+	function countyDropdown2() {
+		$html = '';
+		$stmt = $this->connection->prepare("SELECT county FROM job_county");
+		$stmt->bind_result($county);
+		$stmt->execute();
+		
+		while($stmt->fetch()) {
+			$html .= '<option value="'.$county.'">'.$county.'</option>';
+		}
+		
+		$stmt->close();
+		return $html;
+	}
+	
+	function parishDrop() {
+		$stmt = $this->connection->prepare("SELECT county, parish FROM job_parish");
+		$stmt->bind_result($county, $parish);
+		$stmt->execute();
+		
+		if($stmt->fetch()) {
+			echo $county;
+		}
+		
+		$stmt->close();
+	}
+	
+			
+	function parishDrop2() {
+		$stmt = $this->connection->prepare("SELECT county, parish FROM job_parish");
+		$stmt->bind_result($county, $parish);
+		$stmt->execute();
+		
+		$array = array();
+		//Iga rea kohta teeme midagi
+			while($stmt->fetch()) {
+				$dropdown = new StdClass();
+				$dropdown->county = $county;
+				$dropdown->parish = $parish;
+				array_push($array, $dropdown);
+		}
+			return $array;
+		
+		$stmt->close();
+	}		
+			
+	
+	
+	
+	#################
+	####TEST LOPP####
+	#################
+	
 	
 	function parishDropdown() {
 		
 		$html = '';
 		$html .= '<select name="job_parish" class="form-control">';
 
-		$stmt = $this->connection->prepare("SELECT parish FROM job_parish");
-		$stmt->bind_result($parish);
+		$stmt = $this->connection->prepare("SELECT county, parish FROM job_parish");
+		$stmt->bind_result($county, $parish);
 		$stmt->execute();
 		while($stmt->fetch()) {
 			$html .= '<option value="'.$parish.'">'.$parish.'</option>';
@@ -197,8 +254,8 @@ class Job {
 		$html = '';
 		$html .= '<select name="job_location" class="form-control">';
 
-		$stmt = $this->connection->prepare("SELECT location FROM job_location");
-		$stmt->bind_result($location);
+		$stmt = $this->connection->prepare("SELECT parish, location FROM job_location");
+		$stmt->bind_result($parish, $location);
 		$stmt->execute();
 		while($stmt->fetch()) {
 			$html .= '<option value="'.$location.'">'.$location.'</option>';
