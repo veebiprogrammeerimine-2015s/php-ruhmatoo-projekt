@@ -17,8 +17,7 @@ ooooooooooooooooooooIIIIIIIIIIooooooIIIIIIIIIoooIIIIIIIIIIoooooooooooooooooooooo
 
 
 
-<?php
-	//ukazyvaju header.php "../" ////////////////////////////////////////////////
-	require_once("header.php");
-?>
+<br><br><br>
+<?php require_once("sisselogimine.php");?>
+
 <?php require_once("foother.php");?>

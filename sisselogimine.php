@@ -21,13 +21,13 @@
 			if ( empty($_POST["email"]) ) {
 				$email_error = "E-mail on kohustuslik";
 			}else{
-				$email = test_input($_POST["email"]);
+				$email = cleanInput($_POST["email"]);
 			}
 			
 			if ( empty($_POST["password"]) ) {
 				$password_error = "Parool on kohustuslik";
 			}else{
-				$password = test_input($_POST["password"]);
+				$password = cleanInput($_POST["password"]);
 			}
       // Kui oleme siia joudnud, voime kasutaja sisse logida
 			if($password_error == "" && $email_error == ""){
@@ -36,6 +36,13 @@
 		
 		}
 		}
+		
+	function test_input($data) {
+  	$data = trim($data);
+  	$data = stripslashes($data);
+  	$data = htmlspecialchars($data);
+  	return $data;
+  }
 		
 ?>
 
@@ -59,6 +66,10 @@
   
   <?php endif; ?>
   
+  
+  
+  
+  
 </head>
 <body>
 
@@ -69,7 +80,22 @@
   	<input type="submit" name="login" value="Log in">
   </form>
   
+
   <?php
 	require_once("header.php");
 ?>
 <?php require_once("foother.php");?>
+
+  
+  <?php 
+		
+		if($file_name == "register.php"){ 
+		
+			echo "<li>Registreerimine</li>";
+		
+		}else{
+	
+			echo '<li><a href="registration.php">Registreerimine</a></li>';
+		}
+		
+?>

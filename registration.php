@@ -93,12 +93,15 @@
 
 		<h2>Create user</h2>
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-			<input name="create_login" type="login" placeholder="Login" value="<?php echo $create_login; ?>"> <?php echo $create_login_error; ?><br><br>
-			<input name="create_email" type="email" placeholder="E-post" value="<?php echo $create_email; ?>"> <?php echo $create_email_error; ?><br><br>
-			<input name="create_password" type="password" placeholder="Parool"> <?php echo $create_password_error; ?> <br><br>
-			<input name="create_name" type="text" placeholder="Nimi" value="<?php echo $create_name; ?>"> <?php echo $create_name_error; ?><br><br>
-			<input name="create_secondname" type="text" placeholder="Perekonnanimi" value="<?php echo $create_secondname; ?>"> <?php echo $create_secondname_error; ?><br><br>
-			<input name="create_mobile" type="text" placeholder="Mobile Phone" value="<?php echo $create_mobile; ?>"> <?php echo $create_mobile_error; ?><br><br>
+
+			<label>Login:</label> <input name="create_login" type="login" placeholder="Login" value="<?php echo $create_login; ?>"> <?php echo $create_login_error; ?><br><br>
+			<label>E-mail:</label> <input name="create_email" type="email" placeholder="E-post" value="<?php echo $create_email; ?>"> <?php echo $create_email_error; ?><br><br>
+			<label>Parool:</label> <input name="create_password" type="password" placeholder="Parool"> <?php echo $create_password_error; ?> <br><br>
+			<label>Nimi:</label> <input name="create_name" type="text" placeholder="Nimi" value="<?php echo $create_name; ?>"> <?php echo $create_name_error; ?><br><br>
+			<label>Perekonnanimi:</label> <input name="create_secondname" type="text" placeholder="Perekonnanimi" value="<?php echo $create_secondname; ?>"> <?php echo $create_secondname_error; ?><br><br>
+			<label>Vanus:</label> <input name="create_age" type="text" placeholder="Age" value="<?php echo $create_age; ?>"> <?php echo $create_age_error; ?><br><br>
+			<input name="create_eriala" type="text" placeholder="Eriala" value="<?php echo $create_eriala; ?>"> <?php echo $create_eriala_error; ?><br><br>
+
 			<input name="create" type="submit" value="create user" > <br><br>
 			
 		</form>

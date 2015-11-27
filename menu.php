@@ -11,18 +11,6 @@
 	
 	<?php } ?>
 	
-	<?php 
-		
-		if($file_name == "sisselogimine.php"){ 
-		
-			echo "<li>Logi sisse</li>";
-		
-		}else{
-	
-			echo '<li><a href="sisselogimine.php">Logi sisse</a></li>';
-		}
-		
-	?>
 	
 	
 	<?php 
