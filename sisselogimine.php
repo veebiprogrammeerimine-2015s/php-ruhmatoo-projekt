@@ -68,3 +68,8 @@
   	Parool: <input name="password" type="password" placeholder="Parool" value="<?php echo $password; ?>"> <?php echo $password_error; ?><br><br>
   	<input type="submit" name="login" value="Log in">
   </form>
+  
+  <?php
+	require_once("header.php");
+?>
+<?php require_once("foother.php");?>
