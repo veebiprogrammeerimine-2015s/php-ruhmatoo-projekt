@@ -24,6 +24,7 @@
 		
 	?>
 	
+	
 	<?php 
 		
 		if($file_name == "register.php"){ 
@@ -48,7 +49,5 @@
 		}
 		
 	?>
-	
-	
-	
+
 </ul> 
