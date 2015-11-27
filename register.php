@@ -267,7 +267,8 @@
 		</select>
 		<h4>Kas ravikindlustus on olemas? * </h4><font style="color:red"><?php echo $create_insurance_error; ?></font>
 		<input name="create_insurance" type="radio" value="1">jah
-		<input name="create_insurance" type="radio" value="0">ei<br><br><br>
+		<input name="create_insurance" type="radio" value="0">ei
+		<br><br><br>
 		</div>
 		<input type="submit" name="create" value="Loo kasutaja">
 	</form>
