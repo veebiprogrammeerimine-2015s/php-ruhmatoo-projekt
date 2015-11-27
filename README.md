@@ -17,7 +17,7 @@ Pärast tellija saab töö toimetamist veebilehtedel jälgima.
 	
 
 Funktsionaalsuse loetelu prioriteedi järjekorras
-	Saab teha uut kasutajat 
+	* Saab teha uut kasutajat 
 	Saab sisse logida
 	Saab kirjeldada oma proofili
 	Saab teha uued tellimused ja tellida tööd, kohalt võtmist ja kohaletoimetamist

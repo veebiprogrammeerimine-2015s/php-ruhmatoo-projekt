@@ -33,8 +33,13 @@
 			if($password_error == "" && $email_error == ""){
 				echo "Saab sisse logida! Kasutajanimi on ".$email." ja parool on ".$password;
 			}
+		
 		}
-?>		
+		}
+		
+?>
+
+	
 
 
 <html>
