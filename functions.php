@@ -7,12 +7,13 @@
 	session_start();
 	
 	// lisame kasutaja ab'i
-	function createUser($create_name, $create_secondname, $create_login, $password_hash $create_email , $create_age, $create_eriala,  $create_mobile){
+	function createUser($create_name, $create_secondname, $create_login, $password_hash, $create_email , $create_mobile){
 		// globals on muutuja kõigist php failidest mis on ühendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO user_register1 (email, password, name, secondname, age, eriala) VALUES (?, ?, ?, ?, ?, ?)");
-		$stmt->bind_param("ssssis", $create_email, $password_hash, $create_name, $create_secondname, $create_age, $create_eriala);
+		$stmt = $mysqli->prepare("INSERT INTO user_tech (name, lastname, login, psssword, email, mobile) VALUES (?, ?, ?, ?, ?, ?)");
+		echo $mysqli->error;
+		$stmt->bind_param("ssssss", $create_name, $create_secondname, $create_login, $password_hash, $create_email , $create_mobile);
 		$stmt->execute();
 		$stmt->close();
 		
@@ -27,7 +28,7 @@
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("SELECT id, email FROM user_register1 WHERE email=? AND password=?");
+		$stmt = $mysqli->prepare("SELECT id, email FROM user_tech WHERE email=? AND password=?");
 		$stmt->bind_param("ss", $email, $password_hash);
 		$stmt->bind_result($id_from_db, $email_from_db);
 		$stmt->execute();

@@ -1,5 +1,5 @@
 <?php
-	
+	require_once("functions.php");
 	//kontrollin, kas kasutaja on sisseligunud
 	
 	//kontrollin, kas kasutaja on registreerinud
@@ -20,6 +20,7 @@
 	$create_secondname = "";
 	$create_login = "";
 	$create_mobile = "";
+	
 	if(isset($_POST["create"])){
 		
 			if ( empty($_POST["create_email"]) ) {
@@ -69,7 +70,7 @@
 				echo "<br>";
 				echo $password_hash;
 				
-				createUser($create_email, $password_hash, $create_name, $create_secondname, $create_age, $create_eriala);
+				createUser($create_name, $create_secondname, $create_login, $password_hash, $create_email , $create_mobile);
 				
 			}
 		
