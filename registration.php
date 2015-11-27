@@ -87,7 +87,7 @@
   
  
 }
-
+//sdfffffffffffffffffffffffffffffffff
 //funktsioon, mis eemaldab kõikvõimaliku üleliigse tekstist
 		function cleanInput($data) {
 		$data = trim($data);
