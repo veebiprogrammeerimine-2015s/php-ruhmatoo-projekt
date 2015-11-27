@@ -4,4 +4,6 @@
 </head>
 
 <body>
+<br><br><br>
 <?php require_once("menu.php"); ?>
+<br><br><br>

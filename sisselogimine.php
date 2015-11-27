@@ -37,6 +37,13 @@
 		}
 		}
 		
+	function test_input($data) {
+  	$data = trim($data);
+  	$data = stripslashes($data);
+  	$data = htmlspecialchars($data);
+  	return $data;
+  }
+		
 ?>
 
 	
@@ -59,6 +66,10 @@
   
   <?php endif; ?>
   
+  
+  
+  
+  
 </head>
 <body>
 
@@ -68,3 +79,17 @@
   	Parool: <input name="password" type="password" placeholder="Parool" value="<?php echo $password; ?>"> <?php echo $password_error; ?><br><br>
   	<input type="submit" name="login" value="Log in">
   </form>
+  
+  
+  <?php 
+		
+		if($file_name == "register.php"){ 
+		
+			echo "<li>Registreerimine</li>";
+		
+		}else{
+	
+			echo '<li><a href="registration.php">Registreerimine</a></li>';
+		}
+		
+?>
