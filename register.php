@@ -70,6 +70,12 @@
 			if(	$create_personalcode_error == "" && $create_password_error == "" && $create_username_error == "" && $create_name_error == "" && $create_age_error == "" && $create_gender_error == "" && $create_insurance_error == ""){
 				$password_hash = hash("sha512", $create_password);
 				
+				if($create_insurance == "yes"){
+					$create_insurance = 1;
+				}else{
+					$create_insurance = 0;
+				}
+				
 				//käivitame funktsiooni
 				$create_response = $User->createUser($create_personalcode, $password_hash, $create_username, $create_name, $create_age, $create_gender, $create_insurance);
 			}
@@ -266,9 +272,16 @@
 			<option value="1920">1920</option>
 		</select>
 		<h4>Kas ravikindlustus on olemas? * </h4><font style="color:red"><?php echo $create_insurance_error; ?></font>
-		<input name="create_insurance" type="radio" value="1">jah
-		<input name="create_insurance" type="radio" value="0">ei
-		<br><br><br>
+		<?php if($create_insurance == "yes"): ?>
+		<input name="create_insurance" type="radio" checked value="yes">jah
+		<input name="create_insurance" type="radio" value="no">ei
+		<?php elseif($create_insurance == "no"): ?>
+		<input name="create_insurance" type="radio" value="yes">jah
+		<input name="create_insurance" type="radio" checked value="no">ei
+		<?php else: ?>
+		<input name="create_insurance" type="radio" value="yes">jah
+		<input name="create_insurance" type="radio" value="no">ei
+		<?php endif; ?><br>
 		</div>
 		<input type="submit" name="create" value="Loo kasutaja">
 	</form>
