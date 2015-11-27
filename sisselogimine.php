@@ -21,13 +21,13 @@
 			if ( empty($_POST["email"]) ) {
 				$email_error = "E-mail on kohustuslik";
 			}else{
-				$email = test_input($_POST["email"]);
+				$email = cleanInput($_POST["email"]);
 			}
 			
 			if ( empty($_POST["password"]) ) {
 				$password_error = "Parool on kohustuslik";
 			}else{
-				$password = test_input($_POST["password"]);
+				$password = cleanInput($_POST["password"]);
 			}
       // Kui oleme siia joudnud, voime kasutaja sisse logida
 			if($password_error == "" && $email_error == ""){
