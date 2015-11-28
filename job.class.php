@@ -129,32 +129,6 @@ class Job {
 		$stmt->close();
 		
 	}
-	 
-	function deleteJobData($job_id) {
-
-		$stmt = $this->connection->prepare("UPDATE job_offers SET deleted=NOW() WHERE id=? ");
-		$stmt->bind_param("i", $job_id);
-		$stmt->execute();
-		//Tühjendame aadressirea
-		header("Location: jobs.php");
-		
-		$stmt->close();
-
-	}
-	
-	
-	function updateJobData($job_id, $job_name, $job_desc, $job_company, $job_county, $job_parish, $job_location, $job_address) {
-
-		$stmt = $this->connection->prepare("UPDATE job_offers SET name=?, description=?, company=?, county=?, parish=?, location=?, address=? WHERE id=?");
-		$stmt->bind_param("sssssssi", $job_name, $job_desc, $job_company, $job_county, $job_parish, $job_location, $job_address, $job_id);
-		
-		$stmt->execute();
-		//Tühjendame aadressirea
-		header("Location: jobs.php");
-		
-		$stmt->close();
-
-	}
 	
 	function countyDropdown() {
 		
@@ -174,6 +148,158 @@ class Job {
 		return $html;
 		
 	}
+	
+	function parishDropdown() {
+		
+		$html = '';
+		$html .= '<select name="job_parish" class="form-control">';
+
+		$stmt = $this->connection->prepare("SELECT county, parish FROM job_parish");
+		$stmt->bind_result($county, $parish);
+		$stmt->execute();
+		while($stmt->fetch()) {
+			$html .= '<option value="'.$parish.'">'.$parish.'</option>';
+		}
+		
+		$stmt->close();
+		$html .= '</select>';
+		
+		return $html;
+		
+	}
+	
+	function locationDropdown() {
+		$html = '';
+		$html .= '<select name="job_location" class="form-control">';
+
+		$stmt = $this->connection->prepare("SELECT parish, location FROM job_location");
+		$stmt->bind_result($parish, $location);
+		$stmt->execute();
+		while($stmt->fetch()) {
+			$html .= '<option value="'.$location.'">'.$location.'</option>';
+		}
+		
+		$stmt->close();
+		$html .= '</select>';
+		
+		return $html;
+		
+	}
+	
+	
+	function companyReadOnly($user) {
+		$html = '';
+		$stmt = $this->connection->prepare("SELECT name FROM job_company WHERE user_id = ?");
+		$stmt->bind_param("i", $user);
+		$stmt->bind_result($name);
+		$stmt->execute();
+		while($stmt->fetch()) {
+			$html .= '<input name="job_company" class="form-control" type="text" value="'.$name.'" readonly>';
+		}
+		
+		$stmt->close();
+		
+		return $html;
+		
+	}
+	###############
+	####EDITJOBS###
+	###############
+	
+	function deleteJobData($job_id) {
+
+		$stmt = $this->connection->prepare("UPDATE job_offers SET deleted=NOW() WHERE id=? ");
+		$stmt->bind_param("i", $job_id);
+		$stmt->execute();
+		//Tühjendame aadressirea
+		header("Location: jobs.php");
+		
+		$stmt->close();
+
+	}
+	
+	
+	function updateJobData($job_id, $job_name, $job_company, $job_desc, $job_county, $job_parish, $job_location, $job_address) {
+
+		$stmt = $this->connection->prepare("UPDATE job_offers SET name=?, description=?, company=?, county=?, parish=?, location=?, address=? WHERE id=?");
+		$stmt->bind_param("sssssssi", $job_name, $job_desc, $job_company, $job_county, $job_parish, $job_location, $job_address, $job_id);
+		
+		$stmt->execute();
+		//Tühjendame aadressirea
+		header("Location: editjobs.php");
+		
+		$stmt->close();
+
+	}	
+	
+	function editCompanyDropdown($id) {
+		$html = '';
+		$html .= '<select name="job_company" class="form-control">';
+		$stmt = $this->connection->prepare("(SELECT company FROM job_offers WHERE id=?) UNION (SELECT name FROM job_company)");
+		$stmt->bind_param("i", $id);
+		$stmt->bind_result($company);
+		$stmt->execute();
+		while($stmt->fetch()) {
+			$html .= '<option value="'.$company.'">'.$company.'</option>';
+		}
+		
+		$stmt->close();
+		$html .= '</select>';
+		
+		return $html;
+	}
+	
+	function editCountyDropdown($id) {
+		$html = '';
+		$html .= '<select name="job_county" class="form-control">';
+		$stmt = $this->connection->prepare("(SELECT county FROM job_offers WHERE id=?) UNION (SELECT county FROM job_county)");
+		$stmt->bind_param("i", $id);
+		$stmt->bind_result($county);
+		$stmt->execute();
+		while($stmt->fetch()) {
+			$html .= '<option value="'.$county.'">'.$county.'</option>';
+		}
+		
+		$stmt->close();
+		$html .= '</select>';
+		
+		return $html;
+	}
+	
+	function editParishDropdown($id) {
+		$html = '';
+		$html .= '<select name="job_parish" class="form-control">';
+		$stmt = $this->connection->prepare("(SELECT parish FROM job_offers WHERE id=?) UNION (SELECT parish FROM job_parish)");
+		$stmt->bind_param("i", $id);
+		$stmt->bind_result($parish);
+		$stmt->execute();
+		while($stmt->fetch()) {
+			$html .= '<option value="'.$parish.'">'.$parish.'</option>';
+		}
+		
+		$stmt->close();
+		$html .= '</select>';
+		
+		return $html;
+	}
+	
+	function editLocationDropdown($id) {
+		$html = '';
+		$html .= '<select name="job_location" class="form-control">';
+		$stmt = $this->connection->prepare("(SELECT location FROM job_offers WHERE id=?) UNION (SELECT location FROM job_location)");
+		$stmt->bind_param("i", $id);
+		$stmt->bind_result($location);
+		$stmt->execute();
+		while($stmt->fetch()) {
+			$html .= '<option value="'.$location.'">'.$location.'</option>';
+		}
+		
+		$stmt->close();
+		$html .= '</select>';
+		
+		return $html;
+	}
+	
 	################
 	###TEST ALGUS###
 	################
@@ -229,60 +355,5 @@ class Job {
 	#################
 	####TEST LOPP####
 	#################
-	
-	
-	function parishDropdown() {
-		
-		$html = '';
-		$html .= '<select name="job_parish" class="form-control">';
-
-		$stmt = $this->connection->prepare("SELECT county, parish FROM job_parish");
-		$stmt->bind_result($county, $parish);
-		$stmt->execute();
-		while($stmt->fetch()) {
-			$html .= '<option value="'.$parish.'">'.$parish.'</option>';
-		}
-		
-		$stmt->close();
-		$html .= '</select>';
-		
-		return $html;
-		
-	}
-	
-	function locationDropdown() {
-		$html = '';
-		$html .= '<select name="job_location" class="form-control">';
-
-		$stmt = $this->connection->prepare("SELECT parish, location FROM job_location");
-		$stmt->bind_result($parish, $location);
-		$stmt->execute();
-		while($stmt->fetch()) {
-			$html .= '<option value="'.$location.'">'.$location.'</option>';
-		}
-		
-		$stmt->close();
-		$html .= '</select>';
-		
-		return $html;
-		
-	}
-	
-	function companyReadOnly($user) {
-		$html = '';
-		$stmt = $this->connection->prepare("SELECT name FROM job_company WHERE user_id = ?");
-		$stmt->bind_param("i", $user);
-		$stmt->bind_result($name);
-		$stmt->execute();
-		while($stmt->fetch()) {
-			$html .= '<input name="job_company" class="form-control" type="text" value="'.$name.'" readonly>';
-		}
-		
-		$stmt->close();
-		
-		return $html;
-		
-	}
-	
 }
 ?>
