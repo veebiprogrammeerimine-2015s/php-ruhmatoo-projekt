@@ -52,7 +52,7 @@ class Job {
 			$search = "%".$keyword."%";
 		}
 
-			$stmt = $this->connection->prepare("SELECT id, job_offers.name, description, company, county, parish, location, address, inserted, job_company.email, job_company.number FROM job_offers INNER JOIN job_company ON job_company.name = job_offers.company WHERE deleted IS NULL AND (job_offers.name LIKE ? OR description LIKE ? OR company LIKE ? OR county LIKE ? OR parish LIKE ? OR location LIKE ? OR address LIKE ? OR job_company.email LIKE ?)");
+			$stmt = $this->connection->prepare("SELECT id, job_offers.name, description, company, county, parish, location, address, inserted, job_company.email, job_company.number FROM job_offers INNER JOIN job_company ON job_company.name = job_offers.company WHERE deleted IS NULL AND (job_offers.name LIKE ? OR description LIKE ? OR company LIKE ? OR county LIKE ? OR parish LIKE ? OR location LIKE ? OR address LIKE ? OR job_company.email LIKE ?) ORDER BY id");
 			#echo $this->connection->error;
 			$stmt->bind_param("ssssssss", $search, $search, $search, $search, $search, $search, $search, $search);
 			$stmt->bind_result($id_from_db, $name_from_db, $desc_from_db, $company_from_db, $county_from_db, $parish_from_db, $location_from_db, $address_from_db, $inserted_from_db, $email_from_db, $number_from_db);
@@ -212,12 +212,11 @@ class Job {
 		$stmt->bind_param("i", $job_id);
 		$stmt->execute();
 		//Tühjendame aadressirea
-		header("Location: jobs.php");
+		header("Location: editjobs.php");
 		
 		$stmt->close();
 
 	}
-	
 	
 	function updateJobData($job_id, $job_name, $job_company, $job_desc, $job_county, $job_parish, $job_location, $job_address) {
 
