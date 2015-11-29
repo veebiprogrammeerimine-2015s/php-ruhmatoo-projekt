@@ -7,16 +7,30 @@
 <?php
 	require_once("header.php"); 
 	require_once ("functions.php");
+	
+	if(!isset($_SESSION['logged_in_user_id'])) {
+		header("Location: register.php");
+		exit ();
+	}
+	
+	if($_SESSION['logged_in_user_group'] != 3) {
+		header("Location: noaccess.php");
+		exit ();
+	}
 ?>
 <?php
 	$job_array = $Job->getAllData();
 	
-	if(isset($_GET["delete"])) {
-		$Job->deleteJobData($_GET["delete"]);
-	}
-	
-	if(isset($_GET["update"])) {
-		$Job->updateJobData($_GET["job_id"], $_GET["job_name"], $_GET["job_company"], $_GET["job_desc"], $_GET["job_county"], $_GET["job_parish"], $_GET["job_location"], $_GET["job_address"]);
+	if(isset($_SESSION['logged_in_user_id'])) {
+		if($_SESSION['logged_in_user_group'] == 3) {
+			if(isset($_GET["delete"])) {
+				$Job->deleteJobData($_GET["delete"]);
+			}
+			
+			if(isset($_GET["update"])) {
+				$Job->updateJobData($_GET["job_id"], $_GET["job_name"], $_GET["job_company"], $_GET["job_desc"], $_GET["job_county"], $_GET["job_parish"], $_GET["job_location"], $_GET["job_address"]);
+			}
+		}
 	}
 
 ?>

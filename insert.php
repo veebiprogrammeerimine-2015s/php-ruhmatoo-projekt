@@ -3,6 +3,7 @@
 	$page_title = "Sisesta";
 	//Faili nimi
 	$page_file = "insert.php";
+	
 	require_once("header.php");
 	require_once("functions.php");
 	
@@ -10,7 +11,7 @@
 	header("Location: register.php");
 	exit ();
 	}
-	if($_SESSION['logged_in_user_group'] == 1 || $_SESSION['logged_in_user_group'] == 2) {
+	if($_SESSION['logged_in_user_group'] != 3) {
 	header("Location: noaccess.php");
 	exit ();
 	}

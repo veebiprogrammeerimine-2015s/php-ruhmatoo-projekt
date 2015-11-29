@@ -41,10 +41,10 @@ if($_SESSION['logged_in_user_group'] == 3):
 	   <li class="dropdown-header">Töökohad</li>
 	   <li role="separator" class="divider"></li>
 	   
-			<?php if($page_file != "data.php") { ?>
-			<li><a href="data.php">Uus töökoht</a></li>
+			<?php if($page_file != "newjob.php") { ?>
+			<li><a href="newjob.php">Uus töökoht</a></li>
 			<?php } else { ?>
-			<li class="active"><a href="data.php">Uus töökoht</a></li>
+			<li class="active"><a href="newjob.php">Uus töökoht</a></li>
 			<?php } ?>
 
 			<?php if($page_file != "insert.php") { ?>
@@ -81,10 +81,10 @@ if($_SESSION['logged_in_user_group'] == 2):
 	<li class="dropdown">
 	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tööpakkuja<span class="caret"></span></a>
 	  <ul class="dropdown-menu">
-			<?php if($page_file != "data.php") { ?>
-			<li><a href="data.php">Uus töökoht</a></li>
+			<?php if($page_file != "newjob.php") { ?>
+			<li><a href="newjob.php">Uus töökoht</a></li>
 			<?php } else { ?>
-			<li class="active"><a href="data.php">Uus töökoht</a></li>
+			<li class="active"><a href="newjob.php">Uus töökoht</a></li>
 			<?php } ?>
 			
 			<?php if($page_file != "editjob.php") { ?>
