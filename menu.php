@@ -87,10 +87,10 @@ if($_SESSION['logged_in_user_group'] == 2):
 			<li class="active"><a href="newjob.php">Uus töökoht</a></li>
 			<?php } ?>
 			
-			<?php if($page_file != "editjob.php") { ?>
-			<li><a href="editjob.php">Minu tööpakkumised</a></li>
+			<?php if($page_file != "myjobs.php") { ?>
+			<li><a href="myjobs.php">Minu tööpakkumised</a></li>
 			<?php } else { ?>
-			<li class="active"><a href="editjob.php">Minu tööpakkumised</a></li>
+			<li class="active"><a href="myjobs.php">Minu tööpakkumised</a></li>
 			<?php } ?>
 
 	  </ul>

@@ -21,7 +21,7 @@
 			function filterParish() {
 				$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 				
-				$stmt = $mysqli->prepare("SELECT parish, COUNT(parish) FROM job_offers WHERE deleted IS NULL GROUP BY parish");
+				$stmt = $mysqli->prepare("SELECT parish, COUNT(parish) FROM job_offers WHERE active IS NOT NULL AND deleted IS NULL GROUP BY parish");
 				$stmt->bind_result($parish_from_db, $parish_count_db);
 				$stmt->execute();
         
@@ -45,7 +45,7 @@
 			function filterLocation() {
 				$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 				
-				$stmt = $mysqli->prepare("SELECT location, COUNT(location) FROM job_offers WHERE deleted IS NULL GROUP BY location");
+				$stmt = $mysqli->prepare("SELECT location, COUNT(location) FROM job_offers WHERE active IS NOT NULL AND deleted IS NULL GROUP BY location");
 				$stmt->bind_result($location_from_db, $location_count_db);
 				$stmt->execute();
         

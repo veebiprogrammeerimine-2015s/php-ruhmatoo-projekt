@@ -2,7 +2,7 @@
 	//Lehe nimi
 	$page_title = "Muuda töökohti";
 	//Faili nimi
-	$page_file = "editjobs.php";
+	$page_file = "myjobs.php";
 ?>
 <?php
 	require_once("header.php"); 
@@ -13,30 +13,30 @@
 		exit ();
 	}
 	
-	if($_SESSION['logged_in_user_group'] != 3) {
+	if($_SESSION['logged_in_user_group'] == 1) {
 		header("Location: noaccess.php");
 		exit ();
 	}
 ?>
 <?php
-	$job_array = $Job->getAdminData();
+	$job_array = $Job->getMyData($_SESSION['logged_in_user_id']);
 	
 	if(isset($_SESSION['logged_in_user_id'])) {
-		if($_SESSION['logged_in_user_group'] == 3) {
+		if($_SESSION['logged_in_user_group'] != 1) {
 			if(isset($_GET["delete"])) {
-				$Job->deleteJobData($_GET["delete"]);
+				$Job->deleteMyData($_GET["delete"], $_SESSION['logged_in_user_id']);
 			}
 			
 			if(isset($_GET["update"])) {
-				$Job->updateJobData($_GET["job_id"], $_GET["job_name"], $_GET["job_company"], $_GET["job_desc"], $_GET["job_county"], $_GET["job_parish"], $_GET["job_location"], $_GET["job_address"]);
+				$Job->updateMyData($_GET["job_id"], $_GET["job_name"], $_GET["job_company"], $_GET["job_desc"], $_GET["job_county"], $_GET["job_parish"], $_GET["job_location"], $_GET["job_address"], $_SESSION['logged_in_user_id']);
 			}
 			
 			if(isset($_GET["activate"])) {
-				$Job->activateData($_GET["activate"]);
+				$Job->activateMyData($_GET["activate"], $_SESSION['logged_in_user_id']);
 			}
 			
 			if(isset($_GET["deactivate"])) {
-				$Job->deactivateData($_GET["deactivate"]);
+				$Job->deactivateMyData($_GET["deactivate"], $_SESSION['logged_in_user_id']);
 			}
 		}
 	}
@@ -52,21 +52,20 @@
 			echo '<h4 class="panel-title">';
 			if(isset($_GET["edit"]) && $_GET["edit"] == $job_array[$i]->id) {
 				
-				$currentcompany = $Job->editCompanyDropdown($job_array[$i]->id);
 				$currentcounty = $Job->editCountyDropdown($job_array[$i]->id);
 				$currentparish = $Job->editParishDropdown($job_array[$i]->id);
 				$currentlocation = $Job->editLocationDropdown($job_array[$i]->id);
 				
 				echo '<a class role="button" data-toggle="collapse" data-parent="#accordion" href="#'.$job_array[$i]->id.'content" aria-expanded="true" aria-controls="'.$job_array[$i]->id.'content">';
-				echo $job_array[$i]->id.' '.$job_array[$i]->name.' '.$job_array[$i]->company;
+				echo $job_array[$i]->name;
 				echo '</a>';
 			} else {
 				echo '<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#'.$job_array[$i]->id.'content" aria-expanded="false" aria-controls="'.$job_array[$i]->id.'content">';
-				echo $job_array[$i]->id.' '.$job_array[$i]->name.' '.$job_array[$i]->company;
+				echo $job_array[$i]->name;
 				echo '</a>';
 			}
 			echo '<div class="pull-right btn-group btn-group-xs" role="group">';
-			echo '<a href="?edit='.$job_array[$i]->id.'" class="btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>';
+			echo '<a title="Muuda tööd" href="?edit='.$job_array[$i]->id.'" class="btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>';
 			
 			if($job_array[$i]->active != NULL) {
 				echo '<a title="Muuda töö ebaaktiivseks" href="?deactivate='.$job_array[$i]->id.'" class="btn btn-default"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span></a>';
@@ -74,12 +73,12 @@
 				echo '<a title="Muuda töö aktiivseks" href="?activate='.$job_array[$i]->id.'" class="btn btn-default"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>';
 			}
 			
-			echo '<a href="?delete='.$job_array[$i]->id.'" class="btn btn-default"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>';
+			echo '<a title="Kustuta töö" href="?delete='.$job_array[$i]->id.'" class="btn btn-default"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>';
 			echo '</div>';
 			echo '</h4>';
 			echo '</div>';
 			if(isset($_GET["edit"]) && $_GET["edit"] == $job_array[$i]->id) {
-				echo '<form action="editjobs.php" method="get">';
+				echo '<form action="myjobs.php" method="get">';
 				echo '<div id="'.$job_array[$i]->id.'content" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="'.$job_array[$i]->id.'heading">';
 				echo '<input type="hidden" name="job_id" value="'.$job_array[$i]->id.'">';
 				echo '<div class="panel-body">';
@@ -93,7 +92,7 @@
 				echo '<div class="col-sm-6">';
 				echo '<div class="form-group">';
 				echo '<label> Ettevõte </label>';
-				echo $currentcompany;
+				echo $Job->companyReadOnly($_SESSION['logged_in_user_id']);
 				echo '</div>';
 				echo '</div>';
 				
@@ -132,7 +131,7 @@
 				echo '</div>';
 				echo '<div class="pull-right btn-group" role="group">';
 				echo '<button name="update" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>';
-				echo '<a href="editjobs.php" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>';
+				echo '<a href="myjobs.php" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>';
 				echo '</div>';
 				echo '</div>';
 				echo '</div>';
