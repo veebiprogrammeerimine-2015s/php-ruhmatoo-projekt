@@ -168,6 +168,25 @@ class Job {
 		
 	}
 	
+	function companyDropdown() {
+		
+		$html = '';
+		$html .= '<select name="job_company" class="form-control">';
+
+		$stmt = $this->connection->prepare("SELECT name FROM job_company");
+		$stmt->bind_result($company);
+		$stmt->execute();
+		while($stmt->fetch()) {
+			$html .= '<option value="'.$company.'">'.$company.'</option>';
+		}
+		
+		$stmt->close();
+		$html .= '</select>';
+		
+		return $html;
+		
+	}
+	
 	function locationDropdown() {
 		$html = '';
 		$html .= '<select name="job_location" class="form-control">';
