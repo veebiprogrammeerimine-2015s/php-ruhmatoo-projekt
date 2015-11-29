@@ -1,8 +1,8 @@
 <ul class="nav navbar-nav">
-<?php if($page_file != "home.php") { ?>
-<li><a href="home.php">Avaleht</a></li>
+<?php if($page_file != "index.php") { ?>
+<li><a href="index.php">Avaleht</a></li>
 <?php } else { ?>
-<li class="active"><a href="home.php">Avaleht</a></li>
+<li class="active"><a href="index.php">Avaleht</a></li>
 <?php } ?>
 
 <?php if($page_file != "jobs.php") { ?>

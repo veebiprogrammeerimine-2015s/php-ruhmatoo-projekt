@@ -70,7 +70,7 @@ if(!isset($_SESSION['logged_in_user_id'])):
 	if(isset($_GET["logout"])) {
 	//kustutame sessiooni muutujad
 	session_destroy();
-	header("Location: home.php");
+	header("Location: index.php");
 	exit();
 	}
 ?>

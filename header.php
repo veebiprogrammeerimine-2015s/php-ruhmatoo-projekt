@@ -33,7 +33,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<div class="col-xs-8 col-md-3">
-					<a class="navbar-brand"><div class="logoback"><a href="home.php"><img src="images/logo.png" alt="logo"></a></div></a>
+					<a class="navbar-brand"><div class="logoback"><a href="index.php"><img src="images/logo.png" alt="logo"></a></div></a>
 				</div>
 			</div>
 

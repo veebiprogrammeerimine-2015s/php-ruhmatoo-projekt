@@ -1,6 +1,6 @@
 <?php
     //loome AB ühenduse
-    require_once("../config_global.php");
+	require_once("../config_global.php");
 	require_once("user.class.php");
 	require_once("job.class.php");
 	require_once("insert.class.php");

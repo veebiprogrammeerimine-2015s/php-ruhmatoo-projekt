@@ -2,7 +2,7 @@
 	//Lehe nimi
 	$page_title = "Avaleht";
 	//Faili nimi
-	$page_file = "home.php";
+	$page_file = "index.php";
 ?>
 <?php
 	require_once("header.php"); 
