@@ -1,0 +1,41 @@
+<?php
+	class AvailableTimes{
+		
+		function __construct($mysqli){
+		
+			// selle klassi muutuja andmete saamiseks
+			$this->connection = $mysqli;
+			
+		
+		}
+		
+		
+		function getAllFreeTimes(){
+			
+			
+			
+			$html = '';
+			$stmt = $this->connection->prepare("
+			SELECT id, date_appoitmnt, time_start, time_end, desease, field, hospidal_name, city, area FROM `af_doctor_available` 
+	JOIN af_doctors ON af_doctor_available.af_doctors_id = af_doctors.id
+    JOIN af_doctors_deseaes ON af_doctors_deseaes.af_doctors_id = af_doctors.id
+    JOIN af_deseases ON af_deseases.id = af_doctors_deseaes.af_deseases_id
+    Join af_doctors_field ON af_doctors_field.id = af_doctors.doctors_field
+    JOIN af_hospidals ON af_hospidals.id = af_doctors.af_hospidals_id
+    WHERE af_booking_statuses_id = 1 GROUP By date_appoitmnt, time_start 	
+			");
+			$stmt->bind_result($date_appoitmnt, $time_start, $time_end);
+			$stmt->execute();
+		
+			while($stmt->fetch()){
+				$html .= $date_appoitmnt." ".$time_start." ".$time_end;
+			}
+			
+			$stmt->close();
+		
+			return $html;
+		}
+	
+
+}
+?>

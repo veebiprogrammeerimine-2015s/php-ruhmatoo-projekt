@@ -12,8 +12,19 @@
 	$AvailableTimes = new AvailableTimes($mysqli);
 ?>
 	
-	<p> <?php echo $AvailableTimes->getAllFreeTimes();?></p>
-
+	
+<?php
+	// Tõmmame kõik vabad ajad
+	$getAllTimes = $AvailableTimes->getAllFreeTimes("Tallinn","Kesklinn", "Suguhaigused");
+	echo $AvailableTimes->createDropdownCity($getAllTimes);
+	
+	echo $AvailableTimes->createDropdownArea();
+	echo $AvailableTimes->createDropdownDesease();
+	
+	echo $AvailableTimes->build_table($getAllTimes);
+	
+	
+?>
 
 <!--main code end here -->  
 

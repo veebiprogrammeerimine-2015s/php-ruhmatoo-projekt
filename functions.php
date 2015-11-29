@@ -2,7 +2,7 @@
 	require_once("../configglobal.php");
 	require_once("User.class.php");
 	
-	$database = "if15_rimo";
+	
 	
 	session_start();
 	
