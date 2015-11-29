@@ -1,37 +1,87 @@
-# PHP rühmatöö projekt
-**Rühmatööde demo päev** on valitud eksamipäev jaanuaris, kuhu tuleks tullakse terve rühmaga koos!
+# Noorte Tööbörs
+* Liikmed: Rauno Kosula
 
-## Tööjuhend
-1. Üks rühma liikmetest fork'ib endale käesoleva repositooriumi ning annab teistele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi README.md faili vastavalt nõutele
-1. Tee valmis korralik veebirakendus
+### Eesmärk
+1. Leida esmase töökogemuse võimalus noortele
+1. Anda oma panus, noorte tööpuuduse vähendamiseks
+1. Kogemuse omandamine uutes valdkondades
 
-### Nõuded
+### Kirjeldus
+* Nüüdseks luua uuendatud lehekülg, kus noored saavad otsida hooajaks või pikemaks perspektiiviks endale tööd.
+* Eeskuju:
+	* www.ntb.ee
+	* www.cv.ee
+	* www.cvkeskus.ee
 
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * rühma liikmete nimed;
-    * eesmärki (3-4 lauset, mis probleemi üritate lahendada);
-    * kirjeldus (sihtrühm, eripära võrreldes teiste samalaadsete rakendustega - kirjeldada vähemalt 2-3 sarnast rakendust mida eeskujuks võtta);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada huviala
-        * ...
-    * andmebaasi skeem loetava pildina + tabelite loomise SQL laused;
-    * **kokkuvõte:** mida õppisid juurde? mis ebaõnnestus? mis oli keeruline? (kirjutab iga tiimi liige).
+### Changelog
+* Ei hakanud uuesti kirjutama, tegin copy-paste
+0.7 [TEGEMATA]
+Otsija profiil (TAB: CV, parool)
+Tööandjale meili saatmise funktsioon
+Võimalus muuta CV avalikuks, genereerib random hashi vastavalt kasutajaID ja kella järgi ning loob uue lehekülje
+Leheküljed eraldi kausta -> .../content/"...".php
+
+0.6 [WIP]
+[DONE]
+Admin dropdown menüü
+Võimalus lisada asukoha spetsiifilist teavet
+Töökohtade muutmine/kustutamine, eraldi faili kuvama ja valmisolevad funktsioonid välja kutsuda
+Admin - suvalise ettevõtte töö lisamine 1 data.php
+Tööandjal enda tööde muutmine, kustutamine, ebaaktiivseks muutmine
+
+[TO-DO]
+Javascript dünaamiline dropdown ja viia kõik üle sellele !!! OLULINE JA TEGEMATA !!!
+Kasutajate muutmised
+Logimisel sessiooni mäletamine
+Parooli taastamine random->hash
+Tööandja andmete muutmine (ka. admin)
+
+0.5
+Töökohtade lisamine as mingile grupile spetsiifiline
+Võimalus registreerida tööandjaks
+Logides automaatne suunamine profiili
+Esialgne tööandja profiil, ettevõtte nimi ja kontakt
+Tööandja ettevõtte andmete kuvamine jobs.phps
+Kontroll töö lisamisel, kas ettevõtte nimi ja kontakt on määratud
+Kood -> OOP
+Tööandjal võimalus valida sisestatud maakondade/valdade/asulate vahel, ise juurde luua ei saa
 
 
-2. **Veebirakenduse nõuded:**
-    * kasutusel on vähemalt 6 tabelit;
-    * kood on jaotatud klassidesse;
-    * muutujad/tabelid on inglise keeles;
-    * rakendus on piisava funktsionaalsusega ja turvaline;
-    * kõik tiimi liikmed on panustanud rakenduse arendusprotsessi.
+0.4
+Tabelid jaotatud mitmeks eriosadeks
+Täpitähtedega töö lisamine parandatud
+Tööde kuvamises andmebaasi päringut täiustatud
+Tööde otsimine jobs failist
+Algne filter funktsioon - ümber kirjutada PHPd või hiljem javascriptile ümber
+Statistika kuvamine avalehel, hetkel kuvab ainult tööde arvu
 
-## Abiks
-* **Testserver:** greeny.cs.tlu.ee, [tunneli loomise juhend](http://minitorn.tlu.ee/~jaagup/kool/java/kursused/09/veebipr/naited/greenytunnel/greenytunnel.pdf)
-* **Abiks tunninäited (rühmade lõikes):** [I rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-I-ruhm), [II rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-II-ruhm), [III rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-III-ruhm)
-* **Stiilijuhend:** [Coding Style Guide](http://www.php-fig.org/psr/psr-2/)
-* **GIT õpetus:** [Become a git guru.](https://www.atlassian.com/git/tutorials/)
-* **Abimaterjale:** [Veebirakenduste loomine PHP ja MySQLi abil](http://minitorn.tlu.ee/~jaagup/kool/java/loeng/veebipr/veebipr1.pdf), [PHP with MySQL Essential Training] (http://www.lynda.com/MySQL-tutorials/PHP-MySQL-Essential-Training/119003-2.html)
+0.3
+Töökohtade lisamine
+Töökohtade väljakuvamine tabeli kujul
+Töö muutmise ja kustutamise funktsioonid
+Avalehele viimased 5 tööpakkumist, puudub interaktiivsus hetkel
+
+
+0.2
+Algne disain
+Registreerimine otsijana
+Sisselogimine sessioonina
+Menüü -> PHP kujul
+Dünaamiline lehekülje pealkiri
+Login lehekülje kaotamine, viidud otse headerisse
+Sisselogitud kontroll, vastavalt sellele headeris ka kasutaja form
+
+
+0.1
+Avaleht
+Header
+Menüü
+Footer
+MySQL kasutajad
+MySQL tööpakkumised
+
+* Skeem
+http://i.imgur.com/RB7Sw3Z.png
+
+* Kokkuvõte
+	* Mida õppisid juurde? mis ebaõnnestus? mis oli keeruline? (kirjutab iga tiimi liige).
