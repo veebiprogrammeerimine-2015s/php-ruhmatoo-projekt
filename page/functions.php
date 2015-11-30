@@ -33,6 +33,7 @@
 
 
         $stmt->close();
+		
         
         $mysqli->close();
         //saadan sõnumi tagasi 

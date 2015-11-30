@@ -1,4 +1,5 @@
 <?php
+
     require_once("../../config_global.php");
     $database = "if15_klinde";
     

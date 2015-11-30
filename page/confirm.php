@@ -1,6 +1,12 @@
 <?php
 	require_once("../classes/Table.class.php");
 
+	if(isset($_GET["confirm"])) {
+			
+			
+		
+	}
+	
 	
 
 ?>

@@ -35,6 +35,7 @@
     }
 ?>
 <a href="data.php">Tagasi registreerimislehele!</a><br>
+<a href="confirm.php">Kinnituslehele!</a><br>
 
 <h1>Tabel</h1>
 <form action="table.php" method="get">
@@ -80,7 +81,7 @@
             echo "<td>".$contest_array[$i]->name."</td>";
             echo "<td><a href='?delete=".$contest_array[$i]->id."'>X</a></td>";
             echo "<td><a href='?edit=".$contest_array[$i]->id."'>Muuda</a></td>";
-            echo "<td><a href='?confirm=".$contest_array[$i]->id."'>Kinnita</a></td>";
+            echo "<td><a href='confirm.php?confirm=".$contest_array[$i]->id."&user_id=".$contest_array[$i]->user_id."'>Kinnita</a></td>";
             echo "</tr>";
             
         }
