@@ -1,4 +1,4 @@
-# NO PLAGIARISM ()
+# NO PLAGIARISM
 Merit Paist, Martti Naaber
 
 ## Eesmärk
