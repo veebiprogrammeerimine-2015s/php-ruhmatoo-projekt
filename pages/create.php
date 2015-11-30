@@ -1,6 +1,8 @@
 <?php
-	require_once("functions.php");
-	require_once("user.class.php");
+	require_once(__DIR__.'/../functions/functions.php');
+	require_once(__DIR__.'/../classes/user.class.php');
+	$userCreate = new userCreate($connection);
+	$userLogin = new userLogin($connection);
 $pw_error = "";
 $username_error = "";
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -38,12 +40,13 @@ if(isset($response->success->user->id)){
 	$page_title = "Register";
 	$page_file_name = "create.php";
 	if(isset($_SESSION['logged_in_user_id'])){
-		header("Location: index.php");
+		header("Location: ../index.php");
+		exit();
 		
 	}
 ?>
 
-<?php require_once("header.php"); ?>
+<?php require_once(__DIR__.'/../header.php'); ?>
 
 <div class="text">Create User</div>
 	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
@@ -66,4 +69,4 @@ if(isset($response->success->user->id)){
 		<input name="create" type="submit" value="Create User">
 		<br><br>
 	</form>	
-<?php require_once("footer.php"); ?>
+<?php require_once(__DIR__.'/../footer.php'); ?>

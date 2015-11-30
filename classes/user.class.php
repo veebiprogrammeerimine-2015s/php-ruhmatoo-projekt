@@ -1,5 +1,5 @@
 <?php 
-require_once("../config_global.php");
+require_once(__DIR__.'/../functions/functions.php');
 	
 class userCreate {
     private $connection;
@@ -83,8 +83,7 @@ class userLogin {
 		echo($this->connection->error);
         $stmt->bind_param("ss", $username_to_db, $password_to_db);
 		$stmt->bind_result($id_from_db, $username_from_db, $privileges_from_db);
-        $stmt->execute();
-		
+		$stmt->execute();
 		if($stmt->fetch()){
 			
 			$success = new StdClass();

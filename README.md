@@ -41,6 +41,5 @@
 Jaan-Martin Kuusmann
 Joosep Jõeleht
 =======
-Jaan on kala
-// fuk yoo swjkfjhjkshdfhewiuuifhlksjflk
+
 >>>>>>> refs/remotes/origin/Joosep

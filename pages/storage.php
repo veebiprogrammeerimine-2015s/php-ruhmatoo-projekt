@@ -1,10 +1,11 @@
 <?php
-	require_once("functions.php");
+	require_once(__DIR__."/../functions/functions.php");
+	require_once(__DIR__."/../classes/storage.class.php");
 	$page_title = "Storage";
 	$page_file_name = "storage.php";
+	$storageCreate = new storageCreate($connection);
 ?>
 <?php
-	require_once("functions.php");
 	$storage_name_error = "";
 	$storage_address_error = "";
 
@@ -28,7 +29,7 @@
 		}
 	}
 ?>
-<?php require_once("header.php"); ?>
+<?php require_once(__DIR__."/../header.php"); ?>
 <div class="text">Create Storage</div>
 	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	<?php if(isset($response->success)):	 ?>
@@ -51,4 +52,4 @@
 		<br><br>
 	</form>	
 	<p>
-<?php require_once("footer.php"); ?>
+<?php require_once(__DIR__."/../footer.php"); ?>

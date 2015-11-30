@@ -1,3 +1,3 @@
-		<p> Made by Joosep, Jaan-Martin </p>
+		<h3 id="footer"> Made by Joosep, Jaan </h3>
 	</body>
 </html>

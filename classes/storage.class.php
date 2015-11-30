@@ -1,5 +1,5 @@
 <?php 
-require_once("../config_global.php");
+require_once(__DIR__.'/../functions/functions.php');
 	
 class storageCreate {
     private $connection;
@@ -103,5 +103,60 @@ class itemCreate{
 		return $response;
     }
 		
+}
+function getAllItems($keyword=""){
+	
+	if($keyword == ""){
+		//ei otsi
+		$search = "%%";
+	}else{
+		//otsime
+		$search = "%".$keyword."%";
+	}
+	$stmt = $this->connection->prepare("SELECT price_added, item_weight, item_name, item_length, item_height, item_width, id from merchandise WHERE deleted IS NULL AND (item_name LIKE ?)");
+	$stmt->bind_param("s", $search);
+	$stmt->bind_result($price_added_from_db, $item_weight_from_db, $item_name_from_db, $item_length_from_db, $item_height_from_db, $item_width_from_db, $id_from_db);
+	$stmt->execute();
+	$array = array();
+	while($stmt->fetch()){
+		
+		$table = new StdClass();
+		$table->id = $id_from_db;
+		$table->item_name = $item_name_from_db;
+		$table->price_added = $price_added_from_db;
+		$table->item_length = $item_length_from_db;
+		$table->item_width = $item_width_from_db;
+		$table->item_height = $item_height_from_db;
+		$table->item_weight = $item_weight_from_db;
+		array_push($array, $table);
+		
+		}
+		
+	return $array;
+}
+function deleteItems($item_id){
+	
+	// uuendan välja deleted, lisan praeguse date'i
+	$stmt = $this->connection->prepare("UPDATE merchandise SET deleted=NOW() WHERE id=?");
+	$stmt->bind_param("i", $item_id);
+	$stmt->execute();
+	
+	// tühjendame aadressirea
+	header("Location:".__DIR__."/storageitems.php");
+	
+	$stmt->close();
+}
+
+function updateItems($price_added_to_db, $item_weight_to_db, $item_name_to_db, $item_length_to_db, $item_height_to_db, $item_weight_to_db, $id_to_db){
+
+    $stmt = $this->connection->prepare("UPDATE merchandise SET price_added=?, item_weight=?, item_name=?, item_length=?, item_height=?, item_width=? WHERE id=?");
+    //$stmt->bind_param("iisiiii",$qwert, $qwert_id, $user_id);
+    $stmt->execute();
+    
+    // tühjendame aadressirea
+    header("Location:".__DIR__."/storageitems.php");
+    
+    $stmt->close();
+
 }	
 ?>

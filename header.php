@@ -10,8 +10,12 @@
 	</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="http://tlu.multirootor.eu/css/bootstrap.css" rel="stylesheet">
+	<link href="http://tlu.multirootor.eu/css/css.css" rel="stylesheet">
+	<link href="http://tlu.multirootor.eu/css/user.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://tlu.multirootor.eu/js/bootstrap.js"></script>
   </head>
   <body>
 <?php
