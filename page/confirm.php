@@ -1,9 +1,11 @@
 <?php
-	require_once("../classes/Table.class.php");
-
+	require_once("../classes/Confirm.class.php");
+	
+	$Confirm = new Confirm($mysqli);
+	
 	if(isset($_GET["confirm"])) {
 			
-			
+		$Confirm->saveNewEntry($_GET["confirm"],$_GET["user_id"]);
 		
 	}
 	
