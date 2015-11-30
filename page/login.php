@@ -56,7 +56,7 @@ require_once("../header.php");
                     $_SESSION["user_id"] = $login_response->success->user->id;
                     $_SESSION["user_email"] = $login_response->success->user->email;
                     
-                    header("Location: data.php");
+                    header("Location: profile.php");
                 }
             
             }
