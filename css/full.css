@@ -4,7 +4,14 @@ body {
 }
 
 #feg{
-	background-color:rgba (0,0,0,0.003);
+	background-color:rgba (0,0,0,0.8);
+	padding: 15px;
+	width: 100%; 
+	margin: 0px;
+}
+
+h1{
+	color: white;
 }
 
 .full {
@@ -14,3 +21,4 @@ body {
     background-size: cover;
     -o-background-size: cover;
 }
+
