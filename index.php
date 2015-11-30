@@ -39,7 +39,12 @@
 	
 	<div class="col-xs-12 col-sm-4">
 		<h3 id="statbar">Stastistika</h3>
-		<p>Hetkel töid kokku: <?php echo count($job_array);?></p>
+		<p>Hetkel on aktiivseid töid: <?php echo count($job_array);?></p>
+		<p>Kokku on olnud töid: </p>
+		<p>Kasutajaid on kokku: </p>
+		<p>Uudiseid kokku: </p>
+		<p>Täidetud CV: </p>
+		<p>Esitatud CV: </p>
 	</div>
 </div>
 <?php require_once("footer.php"); ?>

@@ -208,7 +208,7 @@ class Job {
 		}
 		$stmt->close();
         
-        $stmt = $this->connection->prepare("INSERT INTO job_offers (user_id, company, name, description, county, parish, location, address, inserted) VALUES (?,?,?,?,?,?,?,?,NOW())");
+        $stmt = $this->connection->prepare("INSERT INTO job_offers (user_id, company, name, description, county, parish, location, address, inserted, active) VALUES (?,?,?,?,?,?,?,?,NOW(),NOW())");
         $stmt->bind_param("isssssss", $_SESSION['logged_in_user_id'], $job_company, $job_name, $job_desc, $job_county, $job_parish, $job_location, $job_address);
         
 		if($stmt->execute()) {
@@ -474,18 +474,24 @@ class Job {
 	###TEST START###
 	################
 	
+	
+	
 	function countyDropdown2() {
+		
 		$html = '';
+		$html .= '<select id="countyid2" name="job_county" class="form-control">';
+		
 		$stmt = $this->connection->prepare("SELECT county FROM job_county");
 		$stmt->bind_result($county);
 		$stmt->execute();
-		
 		while($stmt->fetch()) {
 			$html .= '<option value="'.$county.'">'.$county.'</option>';
 		}
-		
 		$stmt->close();
+		$html .= '</select>';
+		
 		return $html;
+		
 	}
 	
 	function parishDrop() {
@@ -506,17 +512,83 @@ class Job {
 		$stmt->bind_result($county, $parish);
 		$stmt->execute();
 		
+		$return_array = array();
+		
 		$array = array();
 		//Iga rea kohta teeme midagi
-			while($stmt->fetch()) {
-				$dropdown = new StdClass();
-				$dropdown->county = $county;
-				$dropdown->parish = $parish;
-				array_push($array, $dropdown);
+		while($stmt->fetch()) {
+				
+				//if(count($array))
+					
+				$county_exists = false;
+					
+				for($i = 0; $i < count($array); $i++){
+					
+					if($array[$i]->county == $county){
+						
+						array_push($array[$i]->parish, $parish);
+						$county_exists = true;
+						
+						//end;
+					}
+					
+				}
+				
+				if($county_exists == false){
+					$dropdown = new StdClass();
+					$dropdown->county = $county;
+					$dropdown->parish = [];
+					array_push($dropdown->parish, $parish);
+					array_push($array, $dropdown);
+				}
+			
+				
 		}
-			return $array;
+		
+		$return_array[0] = $array;
+			//return 
 		
 		$stmt->close();
+		
+		$stmt = $this->connection->prepare("SELECT county, parish, location FROM job_location");
+		$stmt->bind_result($county, $parish, $location);
+		$stmt->execute();
+		
+		$array_loc = array();
+		//Iga rea kohta teeme midagi
+		while($stmt->fetch()) {
+				
+				//if(count($array))
+					
+				$location_exists = false;
+					
+				for($i = 0; $i < count($array_loc); $i++){
+					
+					if($array_loc[$i]->parish == $parish){
+						
+						array_push($array_loc[$i]->location, $location);
+						$location_exists = true;
+						
+						//end;
+					}
+					
+				}
+				
+				if($location_exists == false){
+					$dropdown = new StdClass();
+					$dropdown->parish = $parish;
+					$dropdown->location = [];
+					array_push($dropdown->location, $location);
+					array_push($array_loc, $dropdown);
+				}
+			
+				
+		}
+		
+		$return_array[1] = $array_loc;
+		
+		return $return_array ;
+		
 	}		
 			
 	

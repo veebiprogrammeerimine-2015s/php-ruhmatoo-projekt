@@ -91,47 +91,64 @@
 			
 		}
 	}
-	#$droparray = $Job->parishDrop2();
-?>
-<!--
-<script>
-function populate(cdrop, pdrop) {
-	var cdrop = document.getElementById(cdrop);
-	var pdrop = document.getElementById(pdrop);
-	pdrop.innerHTML = "";
-	console.log(array);
+	$droparray = $Job->parishDrop2();
+	$jsarray = json_encode($droparray[0]);
 	
-	for(i = 0; i < ; i++) {
-		if(cdrop.value == array[i]) {
+?>
+<script>
+	window.onload = function(){
+		
+		var jsarray = JSON.parse('<?=$jsarray;?>');
+		console.log(jsarray);
+		
+		var county_select = document.getElementById('countyid2');
+		var parish_select = document.getElementById('parishdrop');
+		
+		var list_of_countys = createListOfCountys(jsarray);
+		
+		console.log(list_of_countys);
+		
+		createDropDown(list_of_countys, county_select);
+		
+		county_select.addEventListener('change', function(){
+			console.log('valik muuutus '+ county_select.value);
 			
-			var optionArray = ["esimene|Esimene", "teine|Teine"]
+			for(var i = 0; i < jsarray.length; i++){
+				if(jsarray[i].county == county_select.value){
+					createDropDown(jsarray[i].parish, parish_select);
+				}
+			}
+			
+		});
 	}
+	
+	function createListOfCountys(jsarray){
+		
+		var temp_array = [];
+		for(var i = 0; i < jsarray.length; i++){
+			temp_array.push(jsarray[i].county);
+		}
+		return temp_array;
+	}
+	
+	function createDropDown(array, element){
+		
+		var html = '';
+		
+		for(var i = 0; i < array.length; i++){
+			
+			html+= '<option value="'+array[i]+'">'+ 
+						
+						array[i]+
+			
+					'</option>';
+			
+		}
+		
+		element.innerHTML = html;
 		
 	}
-	
-
-	for(var option in optionArray) {
-		var pair = optionArray[option].split("|");
-		var newOption = document.createElement("option");
-		newOption.value = pair[0];
-		newOption.innerHTML = pair[1];
-		pdrop.options.add(newOption);
-	}
-}
 </script>
-
-<?php #var_dump ($droparray); ?>
-<select id="countydrop" name="countydrop" onchange="populate(this.id,'parishdrop')">
-<option selected value="">Vali maakond</option>
-<?#=$Job->countyDropdown2();?>
-</select>
-
-
-<select id="parishdrop">
-  <option>Vali vald</option>
-</select>-->
-
-
 
 <div class="col-xs-12">
 <?php if(isset($response->success)): ?>
@@ -206,13 +223,15 @@ function populate(cdrop, pdrop) {
 	<h3>Uus asula</h3>
 		<div class="form-group">
 			<label for="job_county"> Maakond </label>
-			<?=$Job->countyDropdown();?>
+			<?=$Job->countyDropdown2();?>
 		</div>
 	</div>
 	<div class="col-sm-6 col-md-12">
 		<div class="form-group">
-			<label for="job_parish"> Vald </label>
-			<?=$Job->parishDropdown();?>
+			<label for="parishdrop"> Vald </label>
+			<select name="job_parish" id="parishdrop" class="form-control">
+			  <option>Vali maakond</option>
+			</select>
 		</div>
 	</div>
 	<div class="col-sm-6 col-md-12">
@@ -227,15 +246,6 @@ function populate(cdrop, pdrop) {
 		</div>	
 	</div>
 </form>
-<script>
-
-    var countyvalue = document.getElementById("#countyid").value;
-    if (countyvalue == <?php $county ?>) {
-		console.log ("Tere");
-	}
-	
-
-</script>
 
 <?php
 	require_once("footer.php");

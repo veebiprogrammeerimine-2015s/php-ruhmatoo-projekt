@@ -95,17 +95,93 @@
 
 	//Küsime tabeli kujul andmed
 	$Job->getAllData();
-	
+	$droparray = $Job->parishDrop2();
+	$jsarray = json_encode($droparray[0]);
+	$jsarray_loc = json_encode($droparray[1]);
 ?>
-
 <?php
 	//Lehe nimi
 	$page_title = "Uus töökoht";
 	//Faili nimi
 	$page_file = "newjob.php";
 ?>
-
 <?php require_once("header.php"); ?>
+
+<script>
+	window.onload = function(){
+		
+		var jsarray = JSON.parse('<?=$jsarray;?>');
+		var jsarray_loc = JSON.parse('<?=$jsarray_loc;?>');
+		console.log(jsarray_loc);
+		
+		var county_select = document.getElementById('countyid');
+		var parish_select = document.getElementById('parishdrop');
+		var loc_select = document.getElementById('locdrop');
+		
+		var list_of_countys = createListOfCountys(jsarray);
+		
+		console.log(list_of_countys);
+		
+		createDropDown(list_of_countys, county_select);
+		
+		county_select.addEventListener('change', function(){
+			console.log('valik muuutus '+ county_select.value);
+			
+			for(var i = 0; i < jsarray.length; i++){
+				if(jsarray[i].county == county_select.value){
+					createDropDown(jsarray[i].parish, parish_select);
+				}
+			}
+			
+			//loc_select.innerHTML = '<option>Vali asula</option>';
+			for(var i = 0; i < jsarray_loc.length; i++){
+				if(jsarray_loc[i].parish == parish_select.value){
+					createDropDown(jsarray_loc[i].location, loc_select);
+				}
+			}
+			
+		});
+		
+		parish_select.addEventListener('change', function(){
+			console.log('valik muuutus '+ parish_select.value);
+			
+			for(var i = 0; i < jsarray_loc.length; i++){
+				if(jsarray_loc[i].parish == parish_select.value){
+					createDropDown(jsarray_loc[i].location, loc_select);
+				}
+			}
+			
+		});
+	}
+	
+	function createListOfCountys(jsarray){
+		
+		var temp_array = [];
+		for(var i = 0; i < jsarray.length; i++){
+			temp_array.push(jsarray[i].county);
+		}
+		return temp_array;
+	}
+	
+	function createDropDown(array, element){
+		
+		var html = '';
+		
+		for(var i = 0; i < array.length; i++){
+			
+			html+= '<option value="'+array[i]+'">'+ 
+						
+						array[i]+
+			
+					'</option>';
+			
+		}
+		
+		element.innerHTML = html;
+		
+	}
+</script>
+
 
 <div class="row">
 	<div class="col-xs-12 col-md-4">
@@ -176,14 +252,18 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 			
 			<div class="form-group">
 				<label for="job_parish"> Vald </label>
-				<?=$Job->parishDropdown();?>
+				<select name="job_parish" id="parishdrop" class="form-control">
+				  <option>Vali maakond</option>
+				</select>
 			</div>
 			</div>
 			
 			<div class="col-sm-6 col-md-6">
 			<div class="form-group">
 				<label for="job_location"> Asula </label>
-				<?=$Job->locationDropdown();?>
+				<select name="job_location" id="locdrop" class="form-control">
+				  <option>Vali asula</option>
+				</select>
 			</div>
 			<div class="form-group">
 				<label for="job_address"> Aadress </label>

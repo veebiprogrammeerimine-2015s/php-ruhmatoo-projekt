@@ -74,9 +74,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 </div>
 <div class="form-horizontal col-xs-12 col-sm-8">
 	<?php if($company_check->name == "" OR $company_check->email == "" OR $company_check->number == ""): ?>
-	<div class="form-group">
-		<h2>Profiil</h2>
-	</div>
+	<h2>Profiil</h2>
 	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 		<div class="form-group">
 			<label for="create_company"> Ettevõtte nimi </label>
@@ -96,15 +94,17 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 	</form>
 	
 	<?php else: ?>
-	<div class="form-group">
-		<h2>Profiil</h2>
-	</div>
+	<h2>Profiil</h2>
 	<label for="job_company"> Ettevõtte nimi </label>
 	<input name="job_company" class="form-control" type="text" value="<?=$company_check->name;?>" readonly><br>
 	<label for="job_email"> Kontakt </label>
 	<input name="job_email" class="form-control" type="text" value="<?=$company_check->email;?>" readonly><br>
 	<label for="job_number"> Kontakt email </label>
 	<input name="job_number" class="form-control" type="text" value="<?=$company_check->number;?>" readonly>
+	<br>
+	<button type="button" class="pull-right btn btn-info">
+		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Muuda
+	</button>
 	<?php endif; ?>
 </div>
 </div>

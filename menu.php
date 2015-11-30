@@ -58,13 +58,21 @@ if($_SESSION['logged_in_user_group'] == 3):
 			<?php } else { ?>
 			<li class="active"><a href="editjobs.php">Muuda töökohti</a></li>
 			<?php } ?>
+			
 		<li role="separator" class="divider"></li>
 		<li class="dropdown-header">Kasutajad</li>
 		<li role="separator" class="divider"></li>
+		
 			<?php if($page_file != "users.php") { ?>
 			<li><a href="users.php">Kasutajad</a></li>
 			<?php } else { ?>
 			<li class="active"><a href="users.php">Kasutajad</a></li>
+			<?php } ?>
+			
+			<?php if($page_file != "companies.php") { ?>
+			<li><a href="companies.php">Ettevõtted</a></li>
+			<?php } else { ?>
+			<li class="active"><a href="companies.php">Ettevõtted</a></li>
 			<?php } ?>
 	  </ul>
 	</li>
