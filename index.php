@@ -14,17 +14,38 @@
 	
 	
 <?php
-	// Tõmmame kõik vabad ajad
-	$getAllTimes = $AvailableTimes->getAllFreeTimes("Tallinn","Kesklinn", "Suguhaigused");
-	echo $AvailableTimes->createDropdownCity($getAllTimes);
+	// otsingu jaoks tühjad muutujad
+	$city = "";
+	$area = "";
+	$desease = "";
+	if(isset($_GET["selectcity"])){
+        $city = $_GET["selectcity"];
+    }
 	
-	echo $AvailableTimes->createDropdownArea();
-	echo $AvailableTimes->createDropdownDesease();
-	
-	echo $AvailableTimes->build_table($getAllTimes);
-	
-	
+	if(isset($_GET["selectarea"])){
+        $area = $_GET["selectarea"];
+    }
+    if(isset($_GET["selectdesease"])){
+        $desease = $_GET["selectdesease"];
+    }
+    
+	// Tõmmame kõik vabad ajad linn, area , haigus
+	$getAllTimes = $AvailableTimes->getAllFreeTimes($city, $area, $desease);
 ?>
+
+<form> 
+	<?php
+	echo $AvailableTimes->createDropdownCity($getAllTimes, $city );
+	
+	echo $AvailableTimes->createDropdownArea($getAllTimes, $area);
+	echo $AvailableTimes->createDropdownDesease($getAllTimes, $desease);
+	
+	
+	?>
+   <input value="otsi" type="submit">
+</form>
+
+	<?php echo $AvailableTimes->build_table($getAllTimes);?>
 
 <!--main code end here -->  
 

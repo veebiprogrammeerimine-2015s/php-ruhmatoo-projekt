@@ -10,8 +10,11 @@
 		}
 		
 		
-		function getAllFreeTimes($city="", $area="", $desease=""){
+		function getAllFreeTimes($city_in="", $area_in="", $desease_in=""){
 			
+			$city = "%".$city_in."%";
+			$area = "%".$area_in."%";
+			$desease = "%".$desease_in."%";
 			
 			$table_data = array();
 			$html = '';
@@ -24,10 +27,11 @@
   			JOIN af_hospidals ON af_hospidals.id = af_doctors.af_hospidals_id
   			JOIN af_persons ON af_persons.id = af_doctors.af_persons_id
 			WHERE af_booking_statuses_id = 1  
-			AND (city LIKE '%$city%' OR area LIKE '%$area%' OR desease LIKE '%$desease%')
+			AND (city LIKE ? AND area LIKE ? AND desease LIKE ?)
 			ORDER BY date_appoitmnt, time_start
 			");
-			$stmt->bind_result($id, $date_appoitmnt, $time_start, $time_end, $hospidal_name, $city, $area, $desease);
+			$stmt->bind_param("sss", $city, $area, $desease);
+			$stmt->bind_result($id, $date_appoitmnt, $time_start, $time_end, $hospidal_name, $city_fdb, $area_fdb, $desease_fdb);
 			$stmt->execute();
 			
 			while($stmt->fetch()){
@@ -37,9 +41,9 @@
 				$table_row->date_appoitmnt = $date_appoitmnt;
 				$table_row->time_start = $time_start;
 				$table_row->hospidal_name = $hospidal_name;
-				$table_row->city = $city;
-				$table_row->area = $area;
-				$table_row->desease = $desease;
+				$table_row->city = $city_fdb;
+				$table_row->area = $area_fdb;
+				$table_row->desease = $desease_fdb;
 				$table_row->book = "<a href=book-now.php?=booking_id=".$id.">Broneeri</a>";
 				array_push($table_data, $table_row);
 				
@@ -77,7 +81,7 @@
     	return $html;
 		}
 		
-		function createDropdownCity($data_in){
+		function createDropdownCity($data_in, $selected_in = ""){
 			$items = array();
 			foreach($data_in as $option){
 				$item= $option->city;
@@ -88,18 +92,29 @@
 		
 			$html .= '<select name="selectcity">';
 			foreach($data_in as $option){
-			$html .= '<option value="'.$option.'">'.$option.'</option>';
+				if ($selected_in == $option){
+					$html .= '<option value="'.$option.'"selected>'.$option.'</option>';
+				}
+				else{
+				$html .= '<option value="'.$option.'">'.$option.'</option>';
+				}
 			}
 		
 		
-		
-			$html .= '<option value="0" selected>Vali linn</option>';
+			if ($selected_in == ""){
+			
+			$html .= '<option value="" selected>Vali linn</option>';
+			}
+			else{
+				$html .= '<option value="">Vali linn</option>';
+			}
 			$html .= '</select>';
 		
 			return $html;
 		
 		}
 		//EI OLE KASUTUSEL
+		
 		function createDropdownCity212121(){
 		
 		$html = '';
@@ -116,57 +131,75 @@
 		
 		$stmt->close();
 		
-		$html .= '<option value="0" selected>Vali linn</option>';
+		$html .= '<option value="" selected>Vali linn</option>';
 		$html .= '</select>';
 		
 		return $html;
 		
 		}
 		
-		function createDropdownArea(){
+		function createDropdownArea($data_in, $selected_in = ""){
+			$items = array();
+			foreach($data_in as $option){
+				$item= $option->area;
+				array_push($items, $item);
+			}
+			$data_in = array_unique($items);
+			$html = '';
 		
-		$html = '';
-		// ''
-		$html .= '<select name="selecarea">';
-		$stmt = $this->connection->prepare("SELECT DISTINCT id, area FROM af_hospidals");
-		$stmt->bind_result($id, $area);
-		$stmt->execute();
+			$html .= '<select name="selectarea">';
+			foreach($data_in as $option){
+				if ($selected_in == $option){
+					$html .= '<option value="'.$option.'"selected>'.$option.'</option>';
+				}
+				else{
+				$html .= '<option value="'.$option.'">'.$option.'</option>';
+				}
+			}
 		
-		//iga rea kohta teen midagi
-		while($stmt->fetch()){
-			$html .= '<option value="'.$id.'">'.$area.'</option>';
+		
+			if ($selected_in == ""){
+			
+			$html .= '<option value="" selected>Vali piirkond</option>';
+			}
+			else{
+				$html .= '<option value="">Vali piirkond</option>';
+			}
+			$html .= '</select>';
+			
+			return $html;
 		}
 		
-		$stmt->close();
+		function createDropdownDesease($data_in, $selected_in = ""){
+			$items = array();
+			foreach($data_in as $option){
+				$item= $option->desease;
+				array_push($items, $item);
+			}
+			$data_in = array_unique($items);
+			$html = '';
 		
-		$html .= '<option value="0" selected>Vali piirkond</option>';
-		$html .= '</select>';
+			$html .= '<select name="selectdesease">';
+			foreach($data_in as $option){
+				if ($selected_in == $option){
+					$html .= '<option value="'.$option.'"selected>'.$option.'</option>';
+				}
+				else{
+				$html .= '<option value="'.$option.'">'.$option.'</option>';
+				}
+			}
 		
-		return $html;
 		
-		}
+			if ($selected_in == ""){
+			
+			$html .= '<option value="" selected>Vali haigus</option>';
+			}
+			else{
+				$html .= '<option value="">Vali haigus</option>';
+			}
+			$html .= '</select>';
 		
-		function createDropdownDesease(){
-		
-		$html = '';
-		// ''
-		$html .= '<select name="selectdesease">';
-		$stmt = $this->connection->prepare("SELECT DISTINCT id, desease FROM af_deseases");
-		$stmt->bind_result($id, $desease);
-		$stmt->execute();
-		
-		//iga rea kohta teen midagi
-		while($stmt->fetch()){
-			$html .= '<option value="'.$id.'">'.$desease.'</option>';
-		}
-		
-		$stmt->close();
-		
-		$html .= '<option value="0" selected>Vali piirkond</option>';
-		$html .= '</select>';
-		
-		return $html;
-		
+			return $html;
 		}
 }
 ?>
