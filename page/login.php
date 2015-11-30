@@ -1,7 +1,11 @@
 <?php
     //loome AB ühenduse
     require_once("functions.php");
-    //kontrollin, kas sessiooni muutuja on olemas 
+    require_once("../classes/User.class.php");
+ 
+	$User = new User($mysqli);
+
+ //kontrollin, kas sessiooni muutuja on olemas 
     if(isset($_SESSION['logged_in_user_id'])){
         header("Location: data.php");
     }
@@ -44,7 +48,7 @@
             if($password_error == "" && $email_error == ""){
 
                 $hash = hash("sha512", $password);
-                logInUser($email, $hash);
+                $User->logInUser($email, $hash);
                                              
                 }
             }
@@ -84,7 +88,7 @@
                 
                 $hash = hash ("sha512", $create_password);
                 
-                createUser($create_email, $hash);  
+                $User->createUser($create_email, $hash);  
             }
         } //create if end 
     }
