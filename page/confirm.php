@@ -1,4 +1,5 @@
 <?php
+	require_once("functions.php");
 	require_once("../classes/Confirm.class.php");
 	
 	$Confirm = new Confirm($mysqli);
@@ -8,6 +9,8 @@
 		$Confirm->saveNewEntry($_GET["confirm"],$_GET["user_id"]);
 		
 	}
+	
+	$Confirm->getAllData($_GET["confirm"],$_GET["user_id"]);
 	
 	
 
