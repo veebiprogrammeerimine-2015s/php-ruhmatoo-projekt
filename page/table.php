@@ -1,6 +1,9 @@
 <?php 
-    require_once("table_functions.php");
+
     require_once("functions.php");
+    require_once("../classes/Table.class.php");
+    
+    $Table = new Table($mysqli);
     
     if(!isset($_SESSION['logged_in_user_id'])){
         header("Location: login.php");
@@ -13,7 +16,7 @@
     
     //kasutaja muudab andmeid
     if(isset($_GET["update"])){
-        updateContestData($_GET["contest_id"], $_GET["contest_name"], $_GET["name"]);
+        $Table->updateContestData($_GET["contest_id"], $_GET["contest_name"], $_GET["name"]);
     }
     $contest_array = getAllData();
     
@@ -42,6 +45,7 @@
     <th>Osaleja nimi/klubi</th>
     <th>Kustuta</th>
     <th>Muuda</th>
+    <th>Kinnita osalus</th>
 </tr>
 
 <?php
@@ -71,6 +75,7 @@
             echo "<td>".$contest_array[$i]->name."</td>";
             echo "<td><a href='?delete=".$contest_array[$i]->id."'>X</a></td>";
             echo "<td><a href='?edit=".$contest_array[$i]->id."'>Muuda</a></td>";
+            echo "<td><a href='?delete=".$contest_array[$i]->id."'>Kinnita</a></td>";
             echo "</tr>";
             
         }
