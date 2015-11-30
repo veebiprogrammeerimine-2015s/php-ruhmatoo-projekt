@@ -10,7 +10,7 @@
     }
     //kuulan, kas kasutaja tahab kustutada
     if(isset($_GET["delete"])){
-        deleteContestData($_GET["delete"]);
+        $Table->deleteContestData($_GET["delete"]);
     }
 
     

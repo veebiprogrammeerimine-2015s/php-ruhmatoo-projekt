@@ -9,6 +9,42 @@ class Table{
 	}
 		
 
+    function getAllData(){
+        
+        //deleted IS NULL ehk kustutab ära 
+        $stmt = $mysqli->prepare("SELECT id, user_id, contest_name, name FROM contests WHERE deleted IS NULL");
+        $stmt->bind_result($id_from_db, $contest_name_from_db, $name_from_db);
+        $stmt->execute();
+  
+        // iga rea kohta mis on ab'is teeme midagi
+        
+
+        $array = array(); 
+        
+        while($stmt->fetch()){
+            //suvaline muutuja, kus hoida auto andmeid, hetkeni kuni lisame massiivi
+            
+            //tühi objekt, kus hoiame väärtuseid
+            $contest_array = new StdClass();
+            $contest_array->id = $id_from_db;
+            $contest_array->contest = $contest_name_from_db;
+            $contest_array->name = $name_from_db;
+
+            
+            //lisan massiivi - auto lisan massiivi
+            array_push($array, $all_contest);
+            //echo "<pre>";
+            //var_dump($array); 
+            //echo "</pre>";
+            
+        }
+        //saadan tagasi
+        return $array;
+        
+        $stmt->close();
+
+    }    
+        
 	function deleteContestData($all_contest_id){
        
         //uuendan välja deleted, lisan praeguse date'i
