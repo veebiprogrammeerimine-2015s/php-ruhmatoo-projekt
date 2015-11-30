@@ -10,7 +10,7 @@
     }
     //kuulan, kas kasutaja tahab kustutada
     if(isset($_GET["delete"])){
-        deleteContestData($_GET["delete"]);
+        $Table->deleteContestData($_GET["delete"]);
     }
 
     
@@ -61,7 +61,7 @@
             echo "<td>".$contest_array[$i]->id."</td>";
             echo "<td>".$contest_array[$i]->user_id."</td>";
             echo "<td><input name='contest_name' value='".$contest_array[$i]->contest_name."'></td>";
-            echo "<td><input name='name' value='".$contest_array[$i]->name."'></td>";            
+            echo "<td><input name='name' value='".$contest_array[$i]->name."'></td>";       
             echo "<td><a href='?table.php=".$contest_array[$i]->id."'>Katkesta</a></td>";
             echo "<td><input name='update' type='submit'></td>";
             echo "</form>";
@@ -69,13 +69,14 @@
         }else{
             //lihtne vaade
             echo "<tr>";
+			
             echo "<td>".$contest_array[$i]->id."</td>";
             echo "<td>".$contest_array[$i]->user_id."</td>";
             echo "<td>".$contest_array[$i]->contest_name."</td>";
             echo "<td>".$contest_array[$i]->name."</td>";
             echo "<td><a href='?delete=".$contest_array[$i]->id."'>X</a></td>";
             echo "<td><a href='?edit=".$contest_array[$i]->id."'>Muuda</a></td>";
-            echo "<td><a href='?delete=".$contest_array[$i]->id."'>Kinnita</a></td>";
+            echo "<td><a href='?confirm=".$contest_array[$i]->id."'>Kinnita</a></td>";
             echo "</tr>";
             
         }
