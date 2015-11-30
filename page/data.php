@@ -120,4 +120,4 @@ Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-d
 	<p style="color:green;"><?=$m;?></p>
 </form>
 
-<a href="table.php">Tellimuste tabel</a>
+<a href="requests.php">Tellimuste tabel</a>

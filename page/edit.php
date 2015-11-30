@@ -20,7 +20,7 @@
 	if(isset($_GET["edit_id"])){
 		$order = $OfferManager->getSingleOrderData($_GET["edit_id"]);
 	}else{
-		header("Location: table.php");
+		header("Location: requests.php");
 	}
 	
 	function cleanInput($data){
@@ -53,6 +53,6 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 	<input name="output" type="text" value="<?=$order->output;?>"><br><br>
 	<input name="update" type="submit" value="Muuda tellimus">
 </form>
-<a href="table.php" style="text-decoration:none">
+<a href="requests.php" style="text-decoration:none">
 	<input type="button" value="Tühista"/>
 </a>

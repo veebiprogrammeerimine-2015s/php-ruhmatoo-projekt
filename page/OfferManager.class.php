@@ -85,7 +85,7 @@ class OfferManager {
 			$order->deadline = $deadline_from_db;
 			$order->output = $output_from_db;
 		}else{
-			header("Location: table.php");
+			header("Location: requests.php");
 		}
 		
 		$stmt->close();
@@ -99,7 +99,7 @@ class OfferManager {
 		$stmt->bind_param("sssssissii", $text_type, $subject, $target_group, $description, $source, $length, $deadline, $output, $orders_id, $_SESSION["logged_in_user_id"]);
 		$stmt->execute();
 		
-		header("Location:table.php");
+		header("Location:requests.php");
 		
 		$stmt->close();
 	}
@@ -110,7 +110,7 @@ class OfferManager {
 		$stmt->bind_param("ii", $orders_id, $_SESSION["logged_in_user_id"]);
 		$stmt->execute();
 		
-		header("Location:table.php");
+		header("Location:requests.php");
 		
 		$stmt->close();
 	}
