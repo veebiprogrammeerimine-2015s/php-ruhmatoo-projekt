@@ -19,25 +19,25 @@
 	if(isset($_GET["update"])){
 		
 		//
-		updateCatKodus($_GET["cat_id"]);
+		updateCatHome($_GET["cat_id"]);
 	}
 	
 	
 	
 	//kõik objektide kujul massiivis
-	$cat_array=getAllKodus();
+	$cat_array=getAllHome();
 	
 	$keyword="";
 	if(isset($_GET["keyword"])){
 		$keyword=$_GET["keyword"];
 		
 		//otsime
-		$cat_array=getAllKodus($keyword);
+		$cat_array=getAllHome($keyword);
 		
 	}else{
 		//näitame kõiki tulemusi
 		//kõik objektide kujul massiivis
-		$cat_array=getAllKodus();
+		$cat_array=getAllHome();
 	}
 	
 ?>

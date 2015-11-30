@@ -21,8 +21,8 @@
 	
 	// muutujad väärtustega
 	$m = "";
-	$home = "";
-	$home_error = "";
+	$home_status = "";
+	$home_status_error = "";
 	$name = "";
 	$name_error = "";
 	$gender = "";
@@ -38,10 +38,10 @@
 		
 		if(isset($_POST["add_cat"])){
 		
-			if (empty($_POST["home"]))  {
-				$home_error = "Kassi elukoha määramine on kohustuslik";
+			if (empty($_POST["home_status"]))  {
+				$home_status_error = "Kassi elukoha määramine on kohustuslik";
 			}else{
-				$home = cleanInput($_POST["home"]);
+				$home_status = cleanInput($_POST["home_status"]);
 			}
 			
 			if (empty($_POST["description"]))  {
@@ -69,9 +69,9 @@
 			}
 			
 			
-			if($home_error == "" && $description_error == ""){
+			if($home_status_error == "" && $description_error == ""){
 				echo "siin";
-				$m=createCat($name, $age, $gender, $description, $home);
+				$m=createCat($name, $age, $gender, $description, $home_status);
 				
 				
 			}
@@ -104,7 +104,7 @@
 		
 		if(isset($_SESSION['logged_in_user_id'])){
 			
-		updateCatData($_GET["cat_id"], $_GET["age"], $_GET["home"], $_GET["description"]);
+		updateCatData($_GET["cat_id"], $_GET["age"], $_GET["home_status"], $_GET["description"]);
 		
 		}
 		
@@ -149,7 +149,7 @@ Tere, <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1">Logi välja</a
 	<th>age</th>
 	<th>gender</th>
 	<th>description</th>
-	<th>home</th>
+	<th>home_status</th>
 	<th>Edit</th>
 	<th>Delete</th>
 
@@ -171,7 +171,7 @@ Tere, <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1">Logi välja</a
 			echo "<td><input name='age' value=".$cat_array[$i]->age."></td>";
 			echo "<td>".$cat_array[$i]->gender."</td>";
 			echo "<td><input name='description' type='text' value='".$cat_array[$i]->description."'></td>";
-			echo "<td><input name='home' value=".$cat_array[$i]->home."></td>";
+			echo "<td><input name='home_status' value=".$cat_array[$i]->home_status."></td>";
 			echo "<td><input name='update' type='submit'></td>";
 			echo "<td><a href='data.php'>Katkesta</a></td>";
 			echo "</form>";
@@ -185,7 +185,7 @@ Tere, <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1">Logi välja</a
 			echo "<td>".$cat_array[$i]->age."</td>";
 			echo "<td>".$cat_array[$i]->gender."</td>";
 			echo "<td>".$cat_array[$i]->description."</td>";
-			echo "<td>".$cat_array[$i]->home."</td>";
+			echo "<td>".$cat_array[$i]->home_status."</td>";
 			echo "<td><a href='?edit=".$cat_array[$i]->id."'>Edit</a></td>";
 			echo "<td><a href='?delete=".$cat_array[$i]->id."'>X</a></td>";
 			echo "</tr>";
@@ -212,8 +212,8 @@ Tere, <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1">Logi välja</a
 	<label for="description"> description </label>
   	<input id="description" name="description" type="text" value="<?=$description; ?>"> <?=$description_error; ?><br><br>
 	
-	<label for="home"> home? </label>
-  	<input id="home" name="home" type="text" value="<?=$home; ?>"> <?=$home_error; ?><br><br>
+	<label for="home_status"> home_status? </label>
+  	<input id="home_status" name="home_status" type="text" value="<?=$home_status; ?>"> <?=$home_status_error; ?><br><br>
 	
 	
   	<input type="submit" name="add_cat" value="Lisa">

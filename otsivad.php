@@ -19,7 +19,7 @@
 	if(isset($_GET["update"])){
 		
 		//
-		updateCatKodus($_GET["cat_id"]);
+		updateCatHome($_GET["cat_id"]);
 	}
 	
 	

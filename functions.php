@@ -1,7 +1,7 @@
 <?php
 
     require_once("../config_global.php");
-    $database = "if15_anniant";
+    $database = "if15_mikupea";
     
     //paneme sessiooni serveris tööle, saaame kasutada SESSION[]
     session_start();
@@ -48,11 +48,11 @@
         
     }
 	
-	function createCat($name, $age, $gender, $description, $home){
+	function createCat($name, $age, $gender, $description, $home_status){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("INSERT INTO kassid (name, age, gender, description, home) VALUES (?,?,?,?,?)");
-		$stmt->bind_param("sisss", $name, $age, $gender, $description, $home);
+		$stmt = $mysqli->prepare("INSERT INTO cats (name, age, gender, description, home_status) VALUES (?,?,?,?,?)");
+		$stmt->bind_param("sisss", $name, $age, $gender, $description, $home_status);
 		
 		$message="";
 		
@@ -85,9 +85,9 @@
 		
         $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
 		
-        $stmt = $mysqli->prepare("SELECT id, name, age, gender, description, home FROM kassid WHERE home='ei' AND(name LIKE ? OR gender LIKE ?)");
+        $stmt = $mysqli->prepare("SELECT id, name, age, gender, description, home_status FROM cats WHERE home_status='0' AND(name LIKE ? OR gender LIKE ?)");
 		$stmt->bind_param("ss", $search, $search);
-        $stmt->bind_result($id_from_db, $name_from_db, $age_from_db, $gender_from_db, $description_from_db, $home_from_db);
+        $stmt->bind_result($id_from_db, $name_from_db, $age_from_db, $gender_from_db, $description_from_db, $home_status_from_db);
         $stmt->execute();
         
 		//massiiv kus hoiame autosid
@@ -105,7 +105,7 @@
 			$cat->age=$age_from_db;
 			$cat->gender=$gender_from_db;
 			$cat->description=$description_from_db;
-			$cat->home=$home_from_db;
+			$cat->home_status=$home_status_from_db;
 			
 			//lisan massiivi
 			array_push($array, $cat);
@@ -123,7 +123,7 @@
     }
 	
 	    //vaikeväärtus sulgusdes, et vältida errorit, mis tekiks real 31 table.phps
-    function getAllKodus($keyword=""){
+    function getAllHome($keyword=""){
 		
 		$search="";
 		
@@ -138,9 +138,9 @@
 		
         $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
 		
-        $stmt = $mysqli->prepare("SELECT id, name, age, gender, description, home FROM kassid WHERE home='jah' AND(name LIKE ? OR gender LIKE ?)");
+        $stmt = $mysqli->prepare("SELECT id, name, age, gender, description, home_status FROM cats WHERE home_status='1' AND(name LIKE ? OR gender LIKE ?)");
 		$stmt->bind_param("ss", $search, $search);
-        $stmt->bind_result($id_from_db, $name_from_db, $age_from_db, $gender_from_db, $description_from_db, $home_from_db);
+        $stmt->bind_result($id_from_db, $name_from_db, $age_from_db, $gender_from_db, $description_from_db, $home_status_from_db);
         $stmt->execute();
         
 		//massiiv kus hoiame autosid
@@ -158,7 +158,7 @@
 			$cat->age=$age_from_db;
 			$cat->gender=$gender_from_db;
 			$cat->description=$description_from_db;
-			$cat->home=$home_from_db;
+			$cat->home_status=$home_status_from_db;
 			
 			//lisan massiivi
 			array_push($array, $cat);
@@ -191,9 +191,9 @@
 		
         $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
 		
-        $stmt = $mysqli->prepare("SELECT id, name, age, gender, description, home FROM kassid WHERE deleted IS NULL AND (name LIKE ? OR gender LIKE ?)");
+        $stmt = $mysqli->prepare("SELECT id, name, age, gender, description, home_status FROM cats WHERE deleted IS NULL AND (name LIKE ? OR gender LIKE ?)");
 		$stmt->bind_param("ss", $search, $search);
-        $stmt->bind_result($id_from_db, $name_from_db, $age_from_db, $gender_from_db, $description_from_db, $home_from_db);
+        $stmt->bind_result($id_from_db, $name_from_db, $age_from_db, $gender_from_db, $description_from_db, $home_status_from_db);
         $stmt->execute();
         
 		//massiiv kus hoiame autosid
@@ -211,7 +211,7 @@
 			$cat->age=$age_from_db;
 			$cat->gender=$gender_from_db;
 			$cat->description=$description_from_db;
-			$cat->home=$home_from_db;
+			$cat->home_status=$home_status_from_db;
 			
 			//lisan massiivi
 			array_push($array, $cat);
@@ -232,7 +232,7 @@
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
 		
 		//uuendan välja deleted, lisan date now
-        $stmt = $mysqli->prepare("UPDATE kassid SET deleted=NOW() WHERE id=?");
+        $stmt = $mysqli->prepare("UPDATE cats SET deleted=NOW() WHERE id=?");
         $stmt->bind_param("i", $cat_id);
         $stmt->execute();
 		
@@ -244,12 +244,12 @@
 		
 	}
 	
-	function updateCatData($cat_id, $cat_age, $cat_home, $cat_description){
+	function updateCatData($cat_id, $cat_age, $cat_home_status, $cat_description){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
 		
 		
-        $stmt = $mysqli->prepare("UPDATE kassid SET age= ?, home=?, description=?  WHERE id=?");
-        $stmt->bind_param("issi", $cat_age, $cat_home, $cat_description, $cat_id);
+        $stmt = $mysqli->prepare("UPDATE cats SET age= ?, home_status=?, description=?  WHERE id=?");
+        $stmt->bind_param("issi", $cat_age, $cat_home_status, $cat_description, $cat_id);
         $stmt->execute();
 		
 		//tühjendame aadressirea
