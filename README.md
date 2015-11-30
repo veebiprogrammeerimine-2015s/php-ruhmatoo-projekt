@@ -29,11 +29,13 @@
 		* v0.6.1 Veebilehel on võimalik näha, kui palju on annetustega kogutud
 	* v0.7 
 	
+5. Puu
 
-5. Andmebaasi skeem loetava pildina + tabelite loomise SQL laused
+
+6. Andmebaasi skeem loetava pildina + tabelite loomise SQL laused
 
 
-6. Kokkuvõte:
+7. Kokkuvõte:
 	* mida õppisid juurde? 
 	* mis ebaõnnestus? 
 	* mis oli keeruline? (kirjutab iga tiimi liige).

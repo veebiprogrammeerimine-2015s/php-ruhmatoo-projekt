@@ -1,44 +1,10 @@
 <?php 	require_once("header.php"); ?>
-
-<!-- navigation -->
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Mikupea</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">Meist</a>
-                    </li>
-                    <li>
-                        <a href="#">Kassid</a>
-                    </li>
-                    <li>
-                        <a href="#">Kodu leidnud kassid</a>
-                    </li>
-					<li>
-                        <a href="#">Annetamine</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
     
     <br><br>
 
 	<!-- Sisu -->
     <div class="container-fluid">
-        <div class="row"  id="feg">
+        <div class="row"  id="body">
             <div class="col-sm-offset-1 col-sm-6">
                 <h1>Tere tulemast Mikupea kodulehele!</h1>
             </div>
