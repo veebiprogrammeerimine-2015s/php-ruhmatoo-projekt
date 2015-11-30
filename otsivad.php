@@ -24,7 +24,7 @@
 	
 	
 	
-	//kıik objektide kujul massiivis
+	//k√µik objektide kujul massiivis
 	$cat_array=getAllHomeless();
 	
 	$keyword="";
@@ -35,8 +35,8 @@
 		$cat_array=getAllHomeless($keyword);
 		
 	}else{
-		//n‰itame kıiki tulemusi
-		//kıik objektide kujul massiivis
+		//n√§itame k√µiki tulemusi
+		//k√µik objektide kujul massiivis
 		$cat_array=getAllHomeless();
 	}
 	
@@ -68,7 +68,7 @@
 
 <?php 
 	
-	//¸kshaaval l‰bi k‰ia
+	//√ºkshaaval l√§bi k√§ia
 	for($i=0; $i<count($cat_array); $i++){
 		
 			//lihtne vaade

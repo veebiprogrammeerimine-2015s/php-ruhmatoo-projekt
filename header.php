@@ -40,7 +40,7 @@
                         <a href="leidnud.php">Kodu leidnud kassid</a>
                     </li>
 					<li>
-                        <a href="#">Annetamine</a>
+                        <a href="donations.php">Annetamine</a>
                     </li>
                 </ul>
             </div>
