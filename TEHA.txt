@@ -1,0 +1,12 @@
+tabelid:
+
+kasutajad
+jooksude tabel
+huvide tabel
+kasutajate huvid
+jooksu kinnitamine, tulemuse sisestamine, kommentaar vm
+
+
+
+Teha:
+Sisselog kasutaja saab vaid enda andmeid muuta.
