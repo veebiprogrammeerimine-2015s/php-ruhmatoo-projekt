@@ -34,11 +34,11 @@
         </div>
     </nav>
     
-    <br><br><br><br>
+    <br><br>
 
 	<!-- Sisu -->
-    <div class="container-fluid" id="feg">
-        <div class="row">
+    <div class="container-fluid">
+        <div class="row"  id="feg">
             <div class="col-sm-offset-1 col-sm-6">
                 <h1>Tere tulemast Mikupea kodulehele!</h1>
             </div>
