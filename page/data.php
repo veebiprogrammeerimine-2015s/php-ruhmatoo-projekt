@@ -97,7 +97,7 @@
 	
 ?>
 
-Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
+Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
 
 <h2>Tellimuse esitamine</h2>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
