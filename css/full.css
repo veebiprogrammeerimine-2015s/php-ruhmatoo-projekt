@@ -1,1 +1,22 @@
-css
+body {
+    margin-top: 50px; 
+}
+
+#feg{
+	background-color: rgba(0,0,0,0.8);
+	padding: 15px;
+	width:100%;
+	margin: 0px;
+}
+
+h1{
+	color: white;
+}
+
+.full {
+    background: url('../amaze.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
