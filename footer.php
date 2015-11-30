@@ -1,8 +1,6 @@
 
-
 <div class="page-footer">
 	
-  
   <div class="row">
 	  <div class="col-xs-6 col-md-3 col-md-offset-1">Something interesting</div>
 	  <div class="col-xs-6 col-md-3">Telefoni nr</div>
@@ -24,3 +22,5 @@
   </div>
 </div>
 
+</div>
+</body>
