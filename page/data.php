@@ -1,5 +1,8 @@
 <?php
 	require_once("functions.php");
+	require_once("OfferManager.class.php");
+	
+	$OfferManager = new OfferManager($mysqli, $_SESSION["logged_in_user_id"]);
 	
 	if(!isSet($_SESSION["logged_in_user_id"])){
 		header("Location: login.php");
@@ -70,7 +73,7 @@
 			}
 			
 			if ($text_type_error == "" && $subject_error == "" && $target_group_error == "" && $description_error == "" && $source_error == "" && $length_error == "" && $deadline_error_1 == "" && $deadline_error_2 == "" && $output_error == ""){
-				$m = createNewOrder($text_type, $subject, $target_group, $description, $source, $length, $deadline, $output);
+				$m = $OfferManager->createNewOrder($text_type, $subject, $target_group, $description, $source, $length, $deadline, $output);
 				if($m != ""){
 					$text_type = "";
 					$subject = "";

@@ -1,5 +1,8 @@
 <?php
 	require_once("functions.php");
+	require_once("OfferManager.class.php");
+	
+	$OfferManager = new OfferManager($mysqli, $_SESSION["logged_in_user_id"]);
 	
 	if(!isSet($_SESSION["logged_in_user_id"])){
 		header("Location: login.php");
@@ -11,11 +14,11 @@
 	}
 	
 	if(isset($_GET["update"])){
-		updateOrdersData(cleanInput($_GET["orders_id"]), cleanInput($_GET["text_type"]), cleanInput($_GET["subject"]), cleanInput($_GET["target_group"]), cleanInput($_GET["description"]), cleanInput($_GET["source"]), cleanInput($_GET["length"]), cleanInput($_GET["deadline"]), cleanInput($_GET["output"]));
+		$OfferManager->updateOrdersData(cleanInput($_GET["orders_id"]), cleanInput($_GET["text_type"]), cleanInput($_GET["subject"]), cleanInput($_GET["target_group"]), cleanInput($_GET["description"]), cleanInput($_GET["source"]), cleanInput($_GET["length"]), cleanInput($_GET["deadline"]), cleanInput($_GET["output"]));
 	}
 	
 	if(isset($_GET["edit_id"])){
-		$order = getSingleOrderData($_GET["edit_id"]);
+		$order = $OfferManager->getSingleOrderData($_GET["edit_id"]);
 	}else{
 		header("Location: table.php");
 	}

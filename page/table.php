@@ -1,5 +1,8 @@
 <?php
 	require_once("functions.php");
+	require_once("OfferManager.class.php");
+	
+	$OfferManager = new OfferManager($mysqli, $_SESSION["logged_in_user_id"]);
 	
 	if(!isSet($_SESSION["logged_in_user_id"])){
 		header("Location: login.php");
@@ -14,17 +17,17 @@
 	
 	if(isset($_GET["keyword"])){
 		$keyword = $_GET["keyword"];
-		$orders_array = getAllData($keyword);
+		$orders_array = $OfferManager->getAllData($keyword);
 	}else{
-		$orders_array = getAllData();
+		$orders_array = $OfferManager->getAllData();
 	}
 	
 	if(isset($_GET["update"])){
-		updateOrdersData(cleanInput($_GET["orders_id"]), cleanInput($_GET["text_type"]), cleanInput($_GET["subject"]), cleanInput($_GET["target_group"]), cleanInput($_GET["description"]), cleanInput($_GET["source"]), cleanInput($_GET["length"]), cleanInput($_GET["deadline"]), cleanInput($_GET["output"]));
+		$OfferManager->updateOrdersData(cleanInput($_GET["orders_id"]), cleanInput($_GET["text_type"]), cleanInput($_GET["subject"]), cleanInput($_GET["target_group"]), cleanInput($_GET["description"]), cleanInput($_GET["source"]), cleanInput($_GET["length"]), cleanInput($_GET["deadline"]), cleanInput($_GET["output"]));
 	}
 	
 	if(isset($_GET["delete"])){
-		deleteOrdersData($_GET["delete"]);
+		$OfferManager->deleteOrdersData($_GET["delete"]);
 	}
 	
 	function cleanInput($data){
