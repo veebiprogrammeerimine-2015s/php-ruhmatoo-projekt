@@ -49,11 +49,11 @@ class Table{
        
         //uuendan välja deleted, lisan praeguse date'i
         $stmt = $this->connection->prepare("UPDATE contests SET deleted=NOW() WHERE id=? AND user_id=?");
-        $stmt->bind_param("i", $all_contest_id);
+        $stmt->bind_param("ii", $all_contest_id, $_SESSION['logged_in_user_id']);
         $stmt->execute();
         
         //tühjendame aadressirea
-        header("Location: table.php");
+        //header("Location: table.php");
         
         $stmt->close();
   
@@ -63,7 +63,7 @@ class Table{
        
         
         $stmt = $this->connection->prepare("UPDATE contests SET contest_name=?, name=? WHERE id=?");
-        $stmt->bind_param("ssi", $contest_name, $name, $all_contest_id);
+        $stmt->bind_param("ssi", $contest_name, $name, $all_contest_id, $_SESSION['logged_in_user_id']);
         $stmt->execute();
         header("Location: table.php");
         
@@ -71,5 +71,7 @@ class Table{
         $stmt->close();
 
     }
+	
+	
 }
 ?>

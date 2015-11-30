@@ -29,6 +29,10 @@
         //näitame kõik tulemused
         $contest_array = getAllData();
     }
+	
+	if(isset($_GET["confirm"])){
+        header("Location: confirm.php");
+    }
 ?>
 <a href="data.php">Tagasi registreerimislehele!</a><br>
 
