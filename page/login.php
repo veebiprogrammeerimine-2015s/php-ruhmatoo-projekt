@@ -1,7 +1,7 @@
 <?php
 
 	require_once("functions.php");
-    
+
     if(isset($_SESSION['logged_in_user_id'])){
         header("Location: data.php");
     }
@@ -32,8 +32,16 @@
 				
 				$hash = hash("sha512", $password);
 				
-				loginUser($email, $hash);
+				$login_response = $User->loginUser($email, $hash);
 				
+				if(isset($login_response->success)){
+					$_SESSION["logged_in_user_id"] = $login_response->success->user->id;
+					$_SESSION["user_email"] = $login_response->success->user->email;
+					
+					header("Location: data.php");
+					
+					exit();
+				}
             }
         } 
     }
@@ -54,6 +62,13 @@
 ?>
 <?php require_once("../header.php"); ?>
 		<h2>Login</h2>
+		
+		<?php if(isset($login_response->error)): ?>
+		<p style="color:red;">
+			<?=$login_response->error->message;?>
+		</p>
+		<?php endif; ?>
+		
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 			<input name="email" type="email" placeholder="E-post" value ="<?php echo $email; ?>">* <?php echo $email_error; ?> <br><br>
 			<input name="password" type="password" placeholder="Parool">* <?php echo $password_error; ?> <br><br>

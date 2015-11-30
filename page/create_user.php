@@ -57,7 +57,7 @@
 				
 				$hash = hash("sha512", $create_user_password);
 				
-				createUser($create_user_email, $hash);
+				$create_response = $User->createUser($create_user_email, $hash);
 				
 			}
 		}
@@ -79,6 +79,17 @@
 ?>
 <?php require_once("../header.php"); ?>
 		<h2>Create user</h2>
+		
+		<?php if(isset($create_response->error)):?>
+			<p style="color:red;">
+				<?=$create_response->error->message;?>
+			</p>
+		<?php elseif(isset($create_response->success)): ?>
+			<p style="color:green;">
+				<?=$create_response->success->message;?>
+			</p>
+		<?php endif; ?>
+		
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 			<input name="first_name" type="text" placeholder="Eesnimi" value="<?php echo $first_name; ?>">* <?php echo $first_name_error; ?> <br><br>
 			<input name="last_name" type="text" placeholder="Perekonnanimi" value="<?php echo $last_name; ?>">* <?php echo $last_name_error; ?> <br><br>
