@@ -1,0 +1,18 @@
+nav
+{
+	background-color:rgb(255,255,255);
+	/*uusasi*/
+	/*box-sizing: border-box*//*content-box, border-box*/
+	width: 250px;
+	height: 150px;
+	padding: 20px;
+	margin: 50px;
+	/*margin-left: 50px;*/
+	/*margin: 10px 50px;*//*ulemine/alumine, vasak/parem*/
+	/*margin: 5px 50px 10px;*//*ulemine, vasak/parem, alumine*/
+	/*margin: 5px 0px 10px 50px;*//*ulemine.....alumine*/
+	position: fixed;/*static, relative, absolute, fixed*/
+	top: 0px;
+	right: 0px;
+	/*left: 200px;*/
+}
