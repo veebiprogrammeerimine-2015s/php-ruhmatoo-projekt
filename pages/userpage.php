@@ -1,42 +1,42 @@
 <?php
-		
-		$page_title = "User edit";
-		$page_file_name = "userpage.php";
-		require_once($_SERVER['DOCUMENT_ROOT']."/functions/functions.php");
-		require_once("../classes/userpage.class.php");
-		if(isset($_GET["logout"])){
-			session_destroy();
-			header("Location:/../index.php");
-		}	
-		$userEdit = new userEdit($connection);
 	
-		$userfirstname_error = "";
-		$userlastname_error = "";
-		$useraddress_error = "";
-		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			if (empty($_POST["userfirstname"])) {
-			$userfirstname_error = "FirstName is required";
-			} else {
-			$userfirstname = test_input($_POST["userfirstname"]);
-			}
+	$page_title = "User edit";
+	$page_file_name = "userpage.php";
+	require_once($_SERVER['DOCUMENT_ROOT']."/functions/functions.php");
+	require_once("../classes/userpage.class.php");
+	if(isset($_GET["logout"])){
+		session_destroy();
+		header("Location:/../index.php");
+	}	
+	$userEdit = new userEdit($connection);
 	
-			if (empty($_POST["userlastname"])) {
-			$userlastname_error = "LastName is required";
-			} else {
-			$userlastname = test_input($_POST["userlastname"]);
-			}
-	
-			if (empty($_POST["useraddress"])) {
-			$useraddress_error = "Address required";
-			} else {
-			$useraddress = test_input($_POST["useraddress"]);
-			}
-		
-			if ($userfirstname_error == "" and $userlastname_error == "" and $useraddress_error==""){
-				$response = $userEdit->editUser($userfirstname, $userlastname, $useraddress);
-			
-			}
+	$userfirstname_error = "";
+	$userlastname_error = "";
+	$useraddress_error = "";
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+		if (empty($_POST["userfirstname"])) {
+		$userfirstname_error = "FirstName is required";
+		} else {
+		$userfirstname = test_input($_POST["userfirstname"]);
 		}
+	
+		if (empty($_POST["userlastname"])) {
+		$userlastname_error = "LastName is required";
+		} else {
+		$userlastname = test_input($_POST["userlastname"]);
+		}
+	
+		if (empty($_POST["useraddress"])) {
+		$useraddress_error = "Address required";
+		} else {
+		$useraddress = test_input($_POST["useraddress"]);
+		}
+	
+		if ($userfirstname_error == "" and $userlastname_error == "" and $useraddress_error==""){
+			$response = $userEdit->editUser($userfirstname, $userlastname, $useraddress);
+		
+		}
+	}
 	require_once(__DIR__."/../header.php"); ?>
 	<div class="container-fluid">
 		<div class="row">

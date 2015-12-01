@@ -41,8 +41,6 @@
 		header("Location: /../index.php");
 
 	}
-var_dump(dirname(dirname(dirname(__FILE__))));
-var_dump(__DIR__);
 ?>
 <?php require_once($_SERVER['DOCUMENT_ROOT']."/header.php"); ?>
 

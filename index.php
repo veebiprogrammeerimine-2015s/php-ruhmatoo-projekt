@@ -32,12 +32,12 @@
 						<div class="row">
 							<div class="col-xs-12 col-sm-6">
 							<p>Täname, et olete tulnud meie imelisele leheküljele kas soovite äkki sisse ka logida?</p>
-							<p><a class="btn btn-success pull-left" href="login.php" role="button">Logi sisse</a></p>
+							<p><a class="btn btn-success pull-left" href="/pages/login.php" role="button">Logi sisse</a></p>
 							</div>
 						
 							<div class="col-xs-12 col-sm-6">
 							<p>Või soovite te luua endale kasutaja</p>
-							<p><a class="btn btn-success" href="create.php" role="button">Loo kasutaja</a></p>
+							<p><a class="btn btn-success" href="/pages/create.php" role="button">Loo kasutaja</a></p>
 							</div>
 						</div>
 					</div>

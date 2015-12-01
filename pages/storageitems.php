@@ -4,24 +4,27 @@
 	$page_title = "Storage Add item";
 	$page_file_name = "storageadditem.php";
 	$itemCreate = new itemCreate($connection);
-?>
+	$getAllItems = new getAllItems($connection);
+	$deleteItems = new deleteItems($connection);
+	$updateItems = new updateItems($connection);
+	$getStorage = new getStorage($connection);
 
-<?php
-	$table_array = getAllItems();
+	$table_array = $getAllItems->getAllItems();
+	$storage_array = $getStorage->getStorage();
 	if(isset($_GET["delete"])) {
-			deleteItems($_GET["delete"]);
+		$response = $deleteItems->deleteItems($_GET["delete"]);
 	}
 
 	if(isset($_GET["update"])){
-			updateItems($_GET["item_price"], $_GET["item_weight"], $_GET["item_name"]$_GET["item_lenght"], $_GET["item_height"], $_GET["item_weight"], $_GET["item_id"]);
+		$response = $updateItems->updateItems($_GET['item_price'], $_GET['item_weight'], $_GET['item_name'], $_GET['item_length'], $_GET['item_height'], $_GET['item_weight'], $_GET['item_id']);
 	}
 		
 	$keyword = "";
 	if(isset($_GET["keyword"])){
 		$keyword = $_GET["keyword"];
-		$table_array = getAllItems($keyword);
+		$table_array = $getAllItems->getAllItems($keyword);
 	}else{
-		$table_array = getAllItems();
+		$table_array = $getAllItems->getAllItems();
 	}
 	
 	$merchandisename_error = "";
@@ -90,24 +93,26 @@
 				<span class="input-group-addon">€</span>
 				<input class="form-control" name="merchandiseprice" type="number" placeholder="Price"">
 				<span class="input-group-addon">.00</span>
-			</div><?php echo $merchandiseprice;?> <?php echo $merchandiseprice_error;?>
+			</div><?php echo $merchandiseprice_error;?>
 			<br>
 			<input class="form-control" name="merchandiseweight" type="number" placeholder="Weight" > <?php echo $merchandiseweight_error;?><br>
 			<input class="form-control" name="merch_height" type="number" placeholder="Height" > <?php echo $merch_height_error;?><br>
 			<input class="form-control" name="merch_length" type="number" placeholder="Length" > <?php echo $merch_length_error;?><br>
 			<input class="form-control" name="merch_width" type="number" placeholder="Width" > <?php echo $merch_width_error;?>
-			<br><br>
+			<br>
+			<?php
+			echo '<select class="btn btn-default" name="ladu">';
+				for($i = 0; $i < count($storage_array); $i++){
+					echo '<option value="'.$storage_array[$i]->name.'">'.$storage_array[$i]->name.'</option>';
+				}
+			echo '</select>';
+			?>
+			<br>
+			<br>
 			<input name="create" type="submit" value="Create Item"class="btn btn-info btn-block">
-			<br><br>
 			</form>
 		</div>
-		<div class="col-sm-5">
-			<label class="text"> Qweedid </label>
-			<form action="storageitems.php" method="get">
-				<input class="form-control" name="keyword" type="search" value="<?=$keyword?>" >
-				<input type="submit" value="otsi" class="btn btn-info btn-block">
-			<form>
-			<br><br>
+		<div class="col-sm-9">
 			<table class="table table-hover">
 			<tr>
 				<th>Kauba ID</th>
@@ -122,30 +127,45 @@
 			</tr>
 			<?php 
 			for($i = 0; $i < count($table_array); $i++){
-			if(isset($_GET["edit"]) && $_GET["edit"] == $table_array[$i]->id) {
-				echo "<tr>";
-				echo "<form action='storageitems.php' method='get'>";
-				echo "<input type='hidden' name='item_id' value='".$table_array[$i]->id."'>";
-				echo "<td>".$tex_array[$i]->id."</td> ";
-				echo "<td><input name='item_name' value='".$tex_array[$i]->item_name."'></td>";
-				echo "<td><input name='item_price' value='".$tex_array[$i]->price_added."'></td>";
-				echo "<td><input name='item_lenght' value='".$tex_array[$i]->item_lenght."'></td>";
-				echo "<td><input name='item_width' value='".$tex_array[$i]->item_width."'></td>";
-				echo "<td><input name='item_height' value='".$tex_array[$i]->item_height."'></td>";
-				echo "<td><input name='item_weight' value='".$tex_array[$i]->item_weight."'></td>";
-				echo "<td><input name='update' type='submit'></td>";
-				echo "<td><a href='storageitems.php'>cancel</a></td>";
-			} else {
-				echo "<tr> <td>".$tex_array[$i]->id."</td> ";
-				echo "<td>".$tex_array[$i]->item_name."</td> ";
-				echo "<td>".$tex_array[$i]->qwert."</td>"; 
-				echo "<td><a href='?delete=".$tex_array[$i]->id."&?user=".$_SESSION['logged_in_user_id']."'>X</a></td>";
-				echo "<td><a href='?edit=".$tex_array[$i]->id."'>Edit</a></td></tr>";
-			
+				if(isset($_GET["edit"]) && $_GET["edit"] == $table_array[$i]->id) {
+					echo "<tr>";
+					echo '<form action="/pages/storageitems.php" method="get">';
+					echo "<input type='hidden' name='item_id' value='".$table_array[$i]->id."'>";
+					echo "<td>".$table_array[$i]->id."</td> ";
+					echo "<td><input class='form-control' name='item_name' value='".$table_array[$i]->item_name."'></td>";
+					echo "<td><input class='form-control' name='item_price' value='".$table_array[$i]->price_added."'></td>";
+					echo "<td><input class='form-control' name='item_length' value='".$table_array[$i]->item_length."'></td>";
+					echo "<td><input class='form-control' name='item_width' value='".$table_array[$i]->item_width."'></td>";
+					echo "<td><input class='form-control' name='item_height' value='".$table_array[$i]->item_height."'></td>";
+					echo "<td><input class='form-control' name='item_weight' value='".$table_array[$i]->item_weight."'></td>";
+					echo "<td><input class='btn btn-defaultx btn-block' name='update' type='submit' value='Uuenda'></td>";
+					echo "<td><a class='btn btn-default btn-block' href='/pages/storageitems.php'>Katkesta</a></td>";
+					echo "</form>";
+					echo "</tr>";
+				} else {
+					echo "<tr> <td>".$table_array[$i]->id."</td> ";
+					echo "<td>".$table_array[$i]->item_name."</td> ";
+					echo "<td>".$table_array[$i]->price_added."</td>"; 
+					echo "<td>".$table_array[$i]->item_length."</td>"; 
+					echo "<td>".$table_array[$i]->item_width."</td>"; 
+					echo "<td>".$table_array[$i]->item_height."</td>"; 
+					echo "<td>".$table_array[$i]->item_weight."</td>"; 
+					echo '<td><a class="btn btn-info btn-block" href="/pages/storageitems.php?edit='.$table_array[$i]->id.'">Muuda</a></td>';
+					echo '<td><a class="btn btn-info btn-block" href="/pages/storageitems.php?delete='.$table_array[$i]->id.'">Kustuta</a></td></tr>';
+					
+				}
 			}
-			
 			?>
 			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div div class="col-sm-3">
+			<label class="text"> Kaup </label>
+				<form action="/pages/storageitems.php" method="get">
+					<input class="form-control" name="keyword" type="search" value="<?=$keyword?>" ><br>
+					<input type="submit" value="otsi" class="btn btn-info btn-block">
+				</form>
 		</div>
 	</div>
 </div>

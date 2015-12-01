@@ -7,115 +7,84 @@
         session_destroy();
         header("Location:".__DIR__."/../index.php");
     }
-	$userEditAdmin = new userEditAdmin($connection);
+	$getAllUsers = new getAllUsers($connection);
+	$deleteUsers = new deleteUsers($connection);
+	$updateUsers = new updateUsers($connection);
 
-?>
-
-<?php
-	$userfirstname_error = "";
-	$userlastname_error = "";
-	$useraddress_error = "";
-	if (isset($_POST["change_user"])) {
-		unset($_SESSION['selectusername']);
-	}
-	if (isset($_POST["userfirstname"])) {
-		if (empty($_POST["userfirstname"])) {
-			$userfirstname_error = "First name is required";
-		} else {
-			$userfirstname = test_input($_POST["userfirstname"]);
-		}
-	}
-	if (isset($_POST["userlastname"])) {
-		if (empty($_POST["userlastname"])) {
-			$userlastname_error = "Last name is required";
-		} else {
-			$userlastname = test_input($_POST["userlastname"]);
-		}
-	}
-	if (isset($_POST["useraddress"])) {
-		if (empty($_POST["useraddress"])) {
-			$useraddress_error = "Address required";
-		} else {
-			$useraddress = test_input($_POST["useraddress"]);
-		}
-	}
-	if(isset($_POST["selectusername"])){
-		if (empty($_POST["selectusername"])) {
-			$selectusername_error = 'Username is required';
-		} else {
-			$_SESSION['selectusername'] = test_input($_POST["selectusername"]);
-			$selectusername = test_input($_POST["selectusername"]);
-		}
-	}
-	if(isset($_POST["selectusername"])){
-			$response = $userEditAdmin->readUserAdmin($selectusername);
-			
-			
-			$userfirstname = $response->user->userfirstname;
-			$userlastname = $response->user->userlastname;
-			$useraddress = $response->user->useraddress;
-			$creationdate = $response->user->creationdate;
-			$privileges = $response->user->privileges;
-			$userusername = $response->user->username;
-			
-			
-			
-		}
-	if(isset($_POST["change"])){
-		if ($userfirstname_error == "" and $userlastname_error == "" and $useraddress_error==""){
-			$response = $userEditAdmin->editUserAdmin($userfirstname, $userlastname, $useraddress, $creationdate, $privileges, $selectusername);
-			
-		}
+	$users_array = $getAllUsers->getAllUsers();
+	if(isset($_GET["delete"])) {
+		$response = $deleteUsers->deleteUsers($_GET["delete"]);
 	}
 
-
-
-
+	if(isset($_GET["update"])){
+		$response = $updateUsers->updateUsers($_GET['first_name'], $_GET['last_name'], $_GET['address'], $_GET['creation_date'], $_GET['privileges'], $_GET['user_id']);
+	}
+		
+	$keyword = "";
+	if(isset($_GET["keyword"])){
+		$keyword = $_GET["keyword"];
+		$users_array = $getAllUsers->getAllUsers($keyword);
+	}else{
+		$users_array = $getAllUsers->getAllUsers();
+	}
 ?>
 
 <?php require_once(__DIR__."/../header.php"); ?>
 <div class="container-fluid">
-<div class="row">
-<div class="col-sm-3">
-<h2 class="text">Kasutaja muutmine</h2>
-	<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-	<?php if(isset($response->success)):	 ?>
-  
-  <p><?=$response->success->message;?></p>
-
-  <?php	elseif(isset($response->error)): ?>
-
-  <p><?=$response->error->message;?></p>
-  
-  <?php	endif; ?>
-		
-		
-		<?php 
-		if(isset($userusername)){
-			echo "<label>Kasutaja on: ".$_SESSION['selectusername']."</label> <br>";
-			echo '<button type="submit" name="change_user" class="btn btn-info btn-block ">Muuda kasutajat</button>';
-
-			echo '<label>Eesnimi</label>';
-			echo '<input class="form-control" name="userfirstname" type="text" placeholder="First name" value="'.$userfirstname.'"  > '; echo $userfirstname_error;
-			echo '<br><label>Perekonnanimi</label><br>';
-			echo '<input class="form-control" name="userlastname" type="text" placeholder="Last name" value="'.$userlastname.'" > '; echo $userlastname_error;
-			echo '<br><label>Address</label><br>';
-			echo '<input class="form-control" name="useraddress" type="text" placeholder="Address" value="'.$useraddress.'">'; echo $useraddress_error;
-			echo '<br><button type="submit" name="change" class="btn btn-info btn-block">Sisesta</button>';
-		}else{
-			echo '<input class="form-control" name="selectusername" type="text" placeholder="Kasutajanimi"  >* '; echo $selectusername_error;
-			echo '<button type="submit" name="select" class="btn btn-info btn-block ">Vali</button>';
-		}
-		
-		?>
-		
-		
-		
-		
-		
-	</form>	
-
-</div>
-</div>
+	<div class="row">
+		<div class="col-sm-9">
+			<table class="table table-hover">
+				<tr>
+					<th>Kasutaja ID</th>
+					<th>Kasutajanimi</th>
+					<th>Eesnimi</th>
+					<th>Perekonnanimi</th>
+					<th>Aadress</th>
+					<th>Kasutaja loomise kuupäev</th>
+					<th>Õigused</th>
+					<th>Muuda</th>
+					<th>Kustuta</th>
+				</tr>
+				<?php 
+				for($i = 0; $i < count($users_array); $i++){
+					if(isset($_GET["edit"]) && $_GET["edit"] == $users_array[$i]->id) {
+						echo "<tr>";
+						echo '<form action="/pages/userpageadmin.php" method="get">';
+						echo "<input type='hidden' name='user_id' value='".$users_array[$i]->id."'>";
+						echo "<td>".$users_array[$i]->id."</td> ";
+						echo "<td><input class='form-control' name='username' value='".$users_array[$i]->username."'></td>";
+						echo "<td><input class='form-control' name='first_name' value='".$users_array[$i]->first_name."'></td>";
+						echo "<td><input class='form-control' name='last_name' value='".$users_array[$i]->last_name."'></td>";
+						echo "<td><input class='form-control' name='address' value='".$users_array[$i]->address."'></td>";
+						echo "<td><input class='form-control' name='creation_date' value='".$users_array[$i]->creation_date."'></td>";
+						echo "<td><input class='form-control' name='privileges' value='".$users_array[$i]->privileges."'></td>";
+						echo "<td><input class='btn btn-default btn-block' name='update' type='submit' value='Uuenda'></td>";
+						echo "<td><a class='btn btn-default btn-block' href='/pages/userpageadmin.php'>Katkesta</a></td>";
+						echo "</tr>";
+						echo "</form>";
+					} else {
+						echo "<tr> <td>".$users_array[$i]->id."</td> ";
+						echo "<td>".$users_array[$i]->username."</td>"; 
+						echo "<td>".$users_array[$i]->first_name."</td>"; 
+						echo "<td>".$users_array[$i]->last_name."</td>"; 
+						echo "<td>".$users_array[$i]->address."</td> ";
+						echo "<td>".$users_array[$i]->creation_date."</td>"; 
+						echo "<td>".$users_array[$i]->privileges."</td>"; 
+						echo '<td><a class="btn btn-info btn-block" href="/pages/userpageadmin.php?edit='.$users_array[$i]->id.'">Muuda</a></td>';
+						echo '<td><a class="btn btn-info btn-block" href="/pages/userpageadmin.php?delete='.$users_array[$i]->id.'">Kustuta</a></td></tr>';
+						
+					}
+				}
+				?>
+			</table>
+		</div>	
+		<div class="col-sm-2">
+			<label class="text"> Otsi kasutajat </label>
+				<form action="/pages/userpageadmin.php" method="get">
+				<input class="form-control" name="keyword" type="search" value="<?=$keyword?>" ><br>
+				<input type="submit" value="otsi" class="btn btn-info btn-block">
+			</form>
+		</div>	
+	</div>
 </div>
 <?php require_once(__DIR__."/../footer.php"); ?>
