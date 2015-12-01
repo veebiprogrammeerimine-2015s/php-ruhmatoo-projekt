@@ -1,5 +1,5 @@
 <?php
-	class AvailableTimes{
+	class AvailableTimeDetails{
 		
 		function __construct($mysqli){
 		
@@ -10,28 +10,20 @@
 		}
 		
 		
-		function getAllFreeTimes($city_in="", $area_in="", $desease_in=""){
+		function getFreeTimesDetails($date_time_id){
 			
-			$city = "%".$city_in."%";
-			$area = "%".$area_in."%";
-			$desease = "%".$desease_in."%";
+			
 			
 			$table_data = array();
 			$html = '';
 			$stmt = $this->connection->prepare("
-			SELECT  af_doctor_available.id, date_appoitmnt, time_start, time_end, hospidal_name, city, area, desease FROM `af_doctor_available` 
+			SELECT af_doctor_available.id, date_appoitmnt, time_start, time_end, hospidal_name, city, area FROM af_doctor_available
 			JOIN af_doctors ON af_doctor_available.af_doctors_id = af_doctors.id
-   		    JOIN af_doctors_deseaes ON af_doctors_deseaes.af_doctors_id = af_doctors.id
-    		JOIN af_deseases ON af_deseases.id = af_doctors_deseaes.af_deseases_id
-    		Join af_doctors_field ON af_doctors_field.id = af_doctors.doctors_field
-  			JOIN af_hospidals ON af_hospidals.id = af_doctors.af_hospidals_id
-  			JOIN af_persons ON af_persons.id = af_doctors.af_persons_id
-			WHERE af_booking_statuses_id = 1  
-			AND (city LIKE ? AND area LIKE ? AND desease LIKE ?)
-			ORDER BY date_appoitmnt, time_start
+			JOIN af_hospidals ON af_hospidals.id = af_doctors.af_hospidals_id
+			WHERE af_doctor_available.id = ?
 			");
-			$stmt->bind_param("sss", $city, $area, $desease);
-			$stmt->bind_result($id, $date_appoitmnt, $time_start, $time_end, $hospidal_name, $city_fdb, $area_fdb, $desease_fdb);
+			$stmt->bind_param("i", $date_time_id);
+			$stmt->bind_result($id, $date_appoitmnt, $time_start, $time_end, $hospidal_name, $city_fdb, $area_fdb);
 			$stmt->execute();
 			
 			while($stmt->fetch()){
@@ -40,11 +32,74 @@
 				//$table_row->id = $id;
 				$table_row->date_appoitmnt = $date_appoitmnt;
 				$table_row->time_start = $time_start;
+				$table_row->time_end = $time_end;
 				$table_row->hospidal_name = $hospidal_name;
 				$table_row->city = $city_fdb;
 				$table_row->area = $area_fdb;
-				$table_row->desease = $desease_fdb;
-				$table_row->book = "<a href=book-now.php?timeavailableid=".$id.">Broneeri</a>";
+				array_push($table_data, $table_row);
+				
+				
+			}
+			
+			$stmt->close();
+			return $table_data;
+		}
+		
+		function getDoctorDeseases($date_time_id){
+			
+			
+			
+			$table_data = array();
+			$html = '';
+			$stmt = $this->connection->prepare("
+			SELECT af_deseases.id, af_deseases.desease FROM af_doctor_available
+			JOIN af_doctors ON af_doctor_available.af_doctors_id = af_doctors.id
+			JOIN af_doctors_deseaes ON af_doctors_deseaes.af_doctors_id = af_doctor_available.af_doctors_id
+			JOIN af_deseases ON af_deseases.id = af_doctors_deseaes.af_deseases_id
+			WHERE af_doctor_available.id = ?
+			");
+			$stmt->bind_param("i", $date_time_id);
+			$stmt->bind_result($id, $desease_fdb);
+			$stmt->execute();
+			
+			while($stmt->fetch()){
+				
+				$table_row = new StdClass();
+				$table_row->id = $id;
+				$table_row->desease_fdb = $desease_fdb;
+	
+				array_push($table_data, $table_row);
+				
+				
+			}
+			
+			$stmt->close();
+			return $table_data;
+		}
+		
+			function getDoctorDayTimes($date_time_id){
+			
+			
+			
+			$table_data = array();
+			$html = '';
+			$stmt = $this->connection->prepare("
+			SELECT af_doctor_available.id, date_appoitmnt, time_start, time_end, af_booking_statuses_id FROM af_doctor_available 
+			WHERE date_appoitmnt = (SELECT  date_appoitmnt FROM af_doctor_available WHERE ID = ?)
+			");
+			$stmt->bind_param("i", $date_time_id);
+			$stmt->bind_result($id, $date_appoitmnt, $time_start, $time_end, $af_booking_statuses_id);
+			$stmt->execute();
+			
+			while($stmt->fetch()){
+				
+				$table_row = new StdClass();
+				$table_row->id = $id;
+				$table_row->date_appoitmnt = $date_appoitmnt;
+				$table_row->time_start = $time_start;
+				$table_row->time_end = $time_end;
+				$table_row->af_booking_statuses_id = $af_booking_statuses_id;
+	
 				array_push($table_data, $table_row);
 				
 				
