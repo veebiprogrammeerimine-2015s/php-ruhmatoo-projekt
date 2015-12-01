@@ -67,7 +67,7 @@ Merit Paist, Martti Naaber
 ```
 
 ## Andmebaas
-
+http://i.imgur.com/nGbm2su.png
 
 ## Kokkuvõte
 - Mida õppisid juurde?
