@@ -58,7 +58,7 @@
 		// kood laenatud http://stackoverflow.com/questions/4746079/how-to-create-a-html-table-from-a-php-array
 		function build_table($array){
 			// start table
-   			 $html = '<table>';
+   			 $html = '<table class="table table-bordered">';
     		// header row
     		$html .= '<tr>';
     		foreach($array[0] as $key=>$value){

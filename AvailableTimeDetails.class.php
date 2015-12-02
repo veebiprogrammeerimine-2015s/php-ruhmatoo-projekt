@@ -92,13 +92,16 @@
 			$stmt->execute();
 			
 			while($stmt->fetch()){
-				
+				//kontrollime, milline radiobutton on selectitud, kas sissetuleva id ühtib andmebaasi rea id-ga
+				$is_radio_selected = 0;
+				if ($date_time_id == $id){
+					$is_radio_selected = 1;
+				}
 				$table_row = new StdClass();
-				$table_row->id = $id;
-				$table_row->date_appoitmnt = $date_appoitmnt;
-				$table_row->time_start = $time_start;
-				$table_row->time_end = $time_end;
-				$table_row->af_booking_statuses_id = $af_booking_statuses_id;
+				//$table_row->id = $id;
+				//$table_row->date = $date_appoitmnt;
+				$table_row->time = $time_start."-".$time_end;
+				$table_row->choose = $this->createDayTimeRadioBtnOpt($af_booking_statuses_id, $is_radio_selected, $id);
 	
 				array_push($table_data, $table_row);
 				
@@ -113,7 +116,7 @@
 		// kood laenatud http://stackoverflow.com/questions/4746079/how-to-create-a-html-table-from-a-php-array
 		function build_table($array){
 			// start table
-   			 $html = '<table>';
+   			 $html = '<table class="table table-bordered">';
     		// header row
     		$html .= '<tr>';
     		foreach($array[0] as $key=>$value){
@@ -168,30 +171,7 @@
 			return $html;
 		
 		}
-		//EI OLE KASUTUSEL
 		
-		function createDropdownCity212121(){
-		
-		$html = '';
-		// ''
-		$html .= '<select name="selectcity">';
-		$stmt = $this->connection->prepare("SELECT DISTINCT id, city FROM af_hospidals");
-		$stmt->bind_result($id, $city);
-		$stmt->execute();
-		
-		//iga rea kohta teen midagi
-		while($stmt->fetch()){
-			$html .= '<option value="'.$id.'">'.$city.'</option>';
-		}
-		
-		$stmt->close();
-		
-		$html .= '<option value="" selected>Vali linn</option>';
-		$html .= '</select>';
-		
-		return $html;
-		
-		}
 		
 		function createDropdownArea($data_in, $selected_in = ""){
 			$items = array();
@@ -225,36 +205,36 @@
 			return $html;
 		}
 		
-		function createDropdownDesease($data_in, $selected_in = ""){
-			$items = array();
-			foreach($data_in as $option){
-				$item= $option->desease;
-				array_push($items, $item);
-			}
-			$data_in = array_unique($items);
+		// funktsioon ajatabelis staatuste kuvamiseks
+		
+		function createDayTimeRadioBtnOpt($status_id_in,$id_selcetd_in=0, $available_time_id){
+		
+			$statuses = array();
 			$html = '';
-		
-			$html .= '<select name="selectdesease">';
-			foreach($data_in as $option){
-				if ($selected_in == $option){
-					$html .= '<option value="'.$option.'"selected>'.$option.'</option>';
-				}
-				else{
-				$html .= '<option value="'.$option.'">'.$option.'</option>';
-				}
-			}
-		
-		
-			if ($selected_in == ""){
 			
-			$html .= '<option value="" selected>Vali haigus</option>';
-			}
-			else{
-				$html .= '<option value="">Vali haigus</option>';
-			}
-			$html .= '</select>';
+			$html = '';
+			if ($status_id_in == 1){
+				if ($status_id_in == $id_selcetd_in){
+					
+					$html .= '<div class="radio">';
+  					$html .= '<label><input type="radio" name="selectedavailabletime" value="'.$available_time_id.'" checked="checked"></label>';
+  					$html .= '</div>';
+  				}
+				else{
+				$html .= '<div class="radio">';
+  				$html .= '<label><input type="radio" name="selectedavailabletime" value="'.$available_time_id.'"></label>';
+  				$html .= '</div>';
+  				}
+  			}
+  			else{
 		
-			return $html;
+				
+  				$html .= '<label>Broneeritud</label>';
+  				
+  			}
+  			
+  			return $html;
 		}
+		
 }
 ?>
