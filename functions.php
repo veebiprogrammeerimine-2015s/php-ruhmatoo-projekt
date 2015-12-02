@@ -1,6 +1,5 @@
 <?php
 	require_once("../config_global.php");
-	require_once("class.php");
 	
 	$database = "if15_teamalpha_3";
 	

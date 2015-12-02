@@ -1,0 +1,14 @@
+.
+|-- class.php
+|-- dataWorker.php
+|-- functions.php
+|-- minupuu.txt
+|-- puud.txt
+|-- README.md
+|-- tabeliskeem.jpg
+`-- \303\274lesanded.txt
+
+0 directories, 8 files
+
+
+tree --charset=ASCII > minupuu.txt  --- teeb puu asjadest mis on kaustas kus parasjagu oled

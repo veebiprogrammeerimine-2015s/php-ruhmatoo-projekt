@@ -13,3 +13,6 @@ File list:
 	-edit.php - ea
 	-class.php - janek
 	-klient.php - ea
+
+cmd-s tree help
+putty info tree
