@@ -8,14 +8,14 @@
 	function __construct($mysqli) {
 		
 		
-		//this tähendab selle klassi muutujat
+		//this tÃ¤hendab selle klassi muutujat
 		$this->connection = $mysqli;
 		
 	}
 	function createUser($create_email, $hash, $username, $fullname){
 	
 		//teen objekti
-		//seal on error,  ->id ja ->message või success ja selle on ->message
+		//seal on error,  ->id ja ->message vÃµi success ja selle on ->message
 		$response = new StdClass();
 		
 		//kas selline email on juba olemas
@@ -39,9 +39,9 @@
 		
 		$stmt->close();
 		
-		$stmt = $this->connection->prepare("INSERT INTO users VALUES (email, password, username, fullname) VALUES (?, ?, ?, ?)");
-				
-		// asendame ? märgid, ss - s on string email, s on string password
+		$stmt = $this->connection->prepare("INSERT INTO users (email, password, username, fullname) VALUES (?, ?, ?, ?)");
+				echo $this->connection->error;
+		// asendame ? mÃ¤rgid, ss - s on string email, s on string password
 		$stmt->bind_param("ssss", $create_email, $hash, $username, $fullname);
 		if($stmt->execute()) {
 			
@@ -52,10 +52,10 @@
 			
 		}else {
 			
-			//midagi läks katki
+			//midagi lÃ¤ks katki
 			$error = new StdClass();
 			$error->id = 1;
-			$error->message = "Midagi läks katki!";
+			$error->message = "Midagi lÃ¤ks katki!";
 			
 			$response->error = $error;
 			
