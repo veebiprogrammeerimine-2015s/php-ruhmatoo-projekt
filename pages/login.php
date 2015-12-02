@@ -3,7 +3,7 @@
 	// LOGIN.PHP
 	
 	// loon andmebaasi ühenduse
-	require_once("../functions.php");
+	require_once("../functions.php"); 
 	require_once("../classes/User.class.php");
 	
 	if(isset($_SESSION["logged_in_user_id"])){
