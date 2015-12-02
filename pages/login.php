@@ -56,7 +56,7 @@
 				$hash = hash("sha512", $password);
 				
 				$login_response = $User->loginUser($email, $hash);
-				var_dump($login_response);
+				//var_dump($login_response);
 				//kasutaja logis edukalt sisse
 				if(isset($login_response->success)){
 					
@@ -172,6 +172,18 @@
 				<h2>Logi sisse</h2>
 				
 				<form action="login.php" method="post">
+				
+				
+					<?php if(isset($login_response->error)):?>
+  
+						<div class="alert alert-danger" role="alert"><?=$login_response->error->message;?></div>
+						
+					  <?php elseif(isset($login_response->success)):?>
+					  
+						<div class="alert alert-success" role="alert"><?=$login_response->success->message;?></div>
+					  
+					  <?php endif; ?>
+				
 					<div class="form-group">
 					
 						<input name="email" class="form-control" type="email" placeholder="E-post" value="<?php echo $email; ?>"> <?php echo $email_error; ?> 
