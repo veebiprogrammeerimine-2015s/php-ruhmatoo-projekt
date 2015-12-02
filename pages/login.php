@@ -1,16 +1,16 @@
-
-
 <?php
 	
 	// LOGIN.PHP
 	
 	// loon andmebaasi ühenduse
-	require_once("functions.php");
+	require_once("../functions.php");
+	require_once("../classes/User.class.php");
 	
 	if(isset($_SESSION["logged_in_user_id"])){
 		header("Location: data.php");
 	}
 	
+	$User = new User($mysqli);
 	
 	// muutujad errorite jaoks
 	$name_error = "";
@@ -55,7 +55,21 @@
 				
 				$hash = hash("sha512", $password);
 				
-				loginUser($email, $hash);
+				$login_response = $User->loginUser($email, $hash);
+				var_dump($login_response);
+				//kasutaja logis edukalt sisse
+				if(isset($login_response->success)){
+					
+					$_SESSION["logged_in_user_id"] = $login_response->user->id;
+					$_SESSION["logged_in_user_email"] = $login_response->user->email;
+					
+					//saadan sõnumi teise faili kasutades SESSIOONI
+					$_SESSION["login_success_message"] = $login_response->success->message;
+					
+					header("Location: data.php");
+					
+				}
+				
 				
 			}
 			
@@ -119,7 +133,7 @@
 				
 				$hash = hash("sha512", $create_password);
 				echo "Kasutaja on loodud! Registreeritud e-mail on ".$create_email.", kasutajanimi on ".$username." ja parool on ".$create_password."ja räsi on ".$hash;
-				createUser($create_email, $hash, $username, $fullname);
+				$User->createUser($create_email, $hash, $username, $fullname);
 				
 			}
 			
@@ -145,7 +159,7 @@
 	$page_file_name = "login.php"
 ?>	
 
-<?php require_once("header.php"); ?>
+<?php require_once("../header.php"); ?>
 <html>
 <head>
 	<title>Kasutaja leht</title>
@@ -176,4 +190,4 @@
 </body>
 
 </html>
-<?php require_once("footer.php"); ?>
+<?php require_once("../footer.php"); ?>

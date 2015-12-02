@@ -74,7 +74,7 @@
 		
 		$response = new StdClass();
 		
-		$stmt = $this->connection->prepare("SELECT id FROM user_sample WHERE email=?");
+		$stmt = $this->connection->prepare("SELECT id FROM users WHERE email=?");
 		$stmt->bind_param("s", $email);
 		$stmt->bind_result($id);
 		$stmt->execute();
@@ -95,7 +95,7 @@
 		$stmt->close();
 		
 		
-		$stmt = $this->connection->prepare("SELECT id, email FROM user_sample WHERE email=? AND password=?");
+		$stmt = $this->connection->prepare("SELECT id, email FROM users WHERE email=? AND password=?");
 		$stmt->bind_param("ss", $email, $hash);
 				
 		//muutujad tulemustele

@@ -1,7 +1,7 @@
-<?php require_once("header.php"); ?>
+<?php require_once("../header.php"); ?>
 
 <?php
-	require_once("functions.php");
+	require_once("../functions.php");
 	//data
 	//siia pääseb ligi sisseloginud kasutaja
 	//kui kasutaja on sisse loginud
@@ -103,4 +103,4 @@
   
   <a href="table.php">Vaata/Muuda postitusi</a>
   
-  <?php require_once("footer.php"); ?>
+  <?php require_once("../footer.php"); ?>
