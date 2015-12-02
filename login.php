@@ -4,13 +4,7 @@
 	// kõik funktsioonid, kus tegeleme AB'iga
 
 	require_once("functions.php");
-	
-	//kui kasutaja on sisseloginud,
-	//siis suuunan data.php lehele
-	if(isset($_SESSION["logged_in_user_id"])){
-		header("Location: data.php");
-	}
-	
+
 	
 	
   // muuutujad errorite jaoks
@@ -54,13 +48,29 @@
 				if(isset($login_response->success)){
 					
 					//id, email
+					
+					if($login_response->user->role == "doctor"){
+						$_SESSION["logged_in_user_id"] = $login_response->user->id;
+						$_SESSION["logged_in_user_email"] = $login_response->user->email;
+						
+						$_SESSION["login_success_message"] = $login_response->success->message;
+						
+						$_SESSION["doctor"] = true;
+						//if(isset($_SESSION["arst"])){}
+						
+						header("Location: doctor.php");
+						
+					}else{
+						$_SESSION["logged_in_user_id"] = $login_response->user->id;
+						$_SESSION["logged_in_user_email"] = $login_response->user->email;
+						
+						$_SESSION["login_success_message"] = $login_response->success->message;
+						
+						header("Location: owner.php");
+						
+					}
 
-					$_SESSION["logged_in_user_id"] = $login_response->user->id;
-					$_SESSION["logged_in_user_email"] = $login_response->user->email;
 					
-					$_SESSION["login_success_message"] = $login_response->success->message;
-					
-					header("Location: data.php");
 					
 				}
 				
