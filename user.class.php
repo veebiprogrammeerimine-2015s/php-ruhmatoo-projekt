@@ -21,9 +21,11 @@ class User {
 		$stmt->bind_param("ss", $email, $hash);
 		$stmt->bind_result($id_from_db, $email_from_db);
 		$stmt->execute();
-		if($stmt->fetch()){
+		if($stmt->fetch()){		  
 		  $_SESSION["logged_in_user_id"] = $id_from_db;
 		  $_SESSION["logged_in_user_email"] = $email_from_db;
+		  $user = new StdClass();
+		  $user->email = $email_from_db;		  
 		  header("Location: main.php");
 		}
 		else{

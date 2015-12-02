@@ -1,11 +1,12 @@
 <?php require_once("page/header.php"); ?>
+<?php require_once("user.class.php");	?>
 
+<?php echo "Kurat noh"; ?>
 <br><br>
 
 <div class="container">
 
 	<div class="row">
-	
 		<div class="col-sm-6 col-sm-pull-3">
 			<div class="jumbotron">
 				<div class="container">

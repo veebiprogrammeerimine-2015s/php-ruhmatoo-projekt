@@ -1,5 +1,6 @@
 <?php
 	//Login
+
 	require_once("page/functions.php");		
 	$email_error = "";
 	$pw_error = "";
@@ -28,7 +29,7 @@
 			if($pw_error == "" && $email_error == ""){
 				$hash = hash("sha512", $pw);
 				$user->loginUser($email, $hash);
-				
+				echo $user->email;
 				
 			}
 		} // login if end
