@@ -123,7 +123,7 @@
 	
    
  ?> 
- <a href="poststable.php">Posituste vaatamine</a>
+ 
  <p>Tere, <?=$_SESSION["logged_in_user_email OR logged_in_user_username"];?>
 	<a href="?logout=1"> Logi välja <a>
 </p>
@@ -135,4 +135,37 @@
 	
   	<input type="submit" name="add_post" value="Salvesta">
   </form>
+	<h2>Pildi lisamine</h2>
+
+<?php if (file_exists($target_file)): ?>
+
+<div style="
+	width: 200px;
+	height: 200px;
+	background-image: url(<?=$target_file;?>);
+	background-position: center center;
+	background-size: cover;"></div>
+
+	<a href="?delete=1">Kustuta pilt</a>
 	
+<?php else: ?>	
+	
+	
+<form action="data.php" method="post" enctype="multipart/form-data">
+    Lae üles pilt (1MB ja png, jpg, gif)
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
+</form>
+
+<?php endif; ?>
+
+<?php
+
+	$file_array=scandir($target_dir);
+	var_dump($file_array);
+	for($i= 0; $i < count($file_array); $i++){
+		
+		echo "<a href=''".$target_dir.$file_array[$i]."'>".$file_array[$i]."</a><br>";
+		
+	}
+?>
