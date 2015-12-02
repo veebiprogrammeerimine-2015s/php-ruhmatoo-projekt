@@ -24,11 +24,11 @@
 	function loginUser($email, $hash){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("SELECT id, email FROM users WHERE email=? AND password=?");
+		$stmt = $mysqli->prepare("SELECT id, email, fullname FROM users WHERE email=? AND password=?");
 		$stmt->bind_param("ss", $email, $hash);
 				
 		//muutujad tulemustele
-		$stmt->bind_result($id_from_db, $email_from_db);
+		$stmt->bind_result($id_from_db, $email_from_db, $fullname);
 		$stmt->execute();
 				
 			//kontrollin kas tulemusi leiti
@@ -39,6 +39,7 @@
 					//tekitan sessiooni muutujad
 					$_SESSION["logged_in_user_id"] = $id_from_db;
 					$_SESSION["logged_in_user_email"] = $email_from_db;
+					$_SESSION["name"] = $fullname;
 					
 					//suunan data.php lehele
 					header("Location: data.php");
