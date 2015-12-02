@@ -144,35 +144,73 @@
 	$page_title = "Kasutaja leht";
 	$page_file_name = "login.php"
 ?>	
-
 <?php require_once("header.php"); ?>
-<html>
-<head>
-	<title>Kasutaja leht</title>
-</head>
-<body>
-	<FONT FACE="arial">
-	
-	<h2>Logi sisse</h2>
-	
-	<form action="login.php" method="post">
-		<input name="email" type="email" placeholder="E-post" value="<?php echo $email; ?>"> <?php echo $email_error; ?> <br><br>
-		<input name="password" type="password" placeholder="Parool"> <?php echo $password_error; ?> <br><br>
-		<input type="submit" name="login" value="Logi sisse">
-	</form>	
+
+	<div class="container">
+		<div class="row">
+			
+			<div class="col-md-3 col-md-push-9">
 		
-	<h2>Loo kasutaja</h2>
-	
-	<form action="login.php" method="post">
-		<input name="fullname" type="text" placeholder="Täisnimi" value="<?php echo $fullname; ?>"> <?php echo $name_error; ?> <br><br>
-		<input name="username" type="name" placeholder="Kasutajanimi" value="<?php echo $username; ?>"> <?php echo $name_error; ?> <br><br>
-		<input name="create_email" type="email" placeholder="E-post" value="<?php echo $create_email; ?>"> <?php echo $create_email_error; ?> <br><br>
-		<input name="create_password" type="password" placeholder="Parool"> <?php echo $create_password_error; ?> <br><br>
-		<input name="create" type="submit" value="Sisesta">
-	</form>	
-	
-	</FONT>
-	
+
+				<FONT FACE="arial">
+				
+				<h2>Logi sisse</h2>
+				
+				<form action="login.php" method="post">
+					<div class="form-group">
+					
+						<input name="email" class="form-control" type="email" placeholder="E-post" value="<?php echo $email; ?>"> <?php echo $email_error; ?> 
+					</div>
+					<div class="form-group">
+						<input name="password" class="form-control" type="password" placeholder="Parool"> <?php echo $password_error; ?> 
+					</div>
+					<div class="form-group">
+						<input type="submit" name="login" value="Logi sisse"  class="btn btn-success">
+					</div>
+				</form>	
+					
+				<h2>Loo kasutaja</h2>
+				
+				<form action="login.php" method="post">
+					<div class="form-group">
+						<input name="fullname" class="form-control" type="text" placeholder="Täisnimi" value="<?php echo $fullname; ?>"> <?php echo $name_error; ?> 
+					</div>
+					<div class="form-group">
+						<input name="username" class="form-control" type="name" placeholder="Kasutajanimi" value="<?php echo $username; ?>"> <?php echo $name_error; ?>
+					</div>
+					<div class="form-group">
+						<input name="create_email" class="form-control" type="email" placeholder="E-post" value="<?php echo $create_email; ?>"> <?php echo $create_email_error; ?> 
+					</div>
+					<div class="form-group">
+						<input name="create_password" class="form-control" type="password" placeholder="Parool"> <?php echo $create_password_error; ?> 
+					</div>
+					<input name="create" type="submit" value="Sisesta" class="btn btn-success">
+				</form>	
+				
+				
+				
+				</FONT>
+				
+				
+				
+			</div>
+			
+			
+			<div class="col-md-9 col-md-pull-3">
+				
+				<div class="jumbotron">
+					<div class="container">
+					  <h1>Welcome to ListIt</h1>
+					  <p>Connect with your friends — and other fascinating people. Get in-the-moment updates on the things that interest you. And watch events unfold, in real time, from every angle.</p>
+					  
+					</div>
+				</div>
+			
+			</div>
+			
+			
+		</div>
+	</div>
 </body>
 
 </html>
