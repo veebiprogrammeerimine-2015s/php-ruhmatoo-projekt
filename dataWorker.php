@@ -40,6 +40,8 @@
 			<th>Väljumisaeg</th>
 			<th>Lähteriik</th>
 			<th>Märkus</th>
+			<th>Järgnev kontor</th>
+			<th>Kustuta</th>
 			<th>Edit</th>
 		</tr>
 
@@ -57,6 +59,8 @@
 				echo "<td><input name='departure' value='".$packet_array[$i]->departure."'></td>";
 				echo "<td><input name='fromc' value='".$packet_array[$i]->fromc."'></td>";
 				echo "<td><input name='comment' value='".$packet_array[$i]->comment."'></td>";
+				echo "<input type='hidden' name='office_id' value='".$packet_array[$i]->office_id."'>";
+				echo "<td>".$packet_array[$i]->office_id."</td>";
 				echo "<td><a href='dataWorker.php'>cancel</a></td>";
 				echo "<td><input type='submit' name='save' value='save'></td>";
 				echo "</form>";
@@ -70,6 +74,7 @@
 				echo "<td>".$packet_array[$i]->departure."</td>";
 				echo "<td>".$packet_array[$i]->fromc."</td>";
 				echo "<td>".$packet_array[$i]->comment."</td>";
+				echo "<td>".$packet_array[$i]->office_id."</td>";
 				echo "<td><a href='?delete=".$packet_array[$i]->id."'>X</a></td>";
 				echo "<td><a href='?edit=".$packet_array[$i]->id."'>edit</a></td>";
 				echo "<td><a href='edit.php?edit_id=".$packet_array[$i]->id."'>edit</a></td>";
