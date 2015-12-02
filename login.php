@@ -199,7 +199,8 @@
 			<div class="col-md-9 col-md-pull-3">
 				
 				<div class="jumbotron">
-					<div class="container">
+					<div class="container ">
+
 					  <h1>Welcome to ListIt</h1>
 					  <p>Connect with your friends — and other fascinating people. Get in-the-moment updates on the things that interest you. And watch events unfold, in real time, from every angle.</p>
 					  
