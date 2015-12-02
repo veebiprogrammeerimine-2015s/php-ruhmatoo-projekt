@@ -1,4 +1,7 @@
 <html lang="en">
+<?php 
+$movie_category = "";
+?>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,21 +46,21 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Videod <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Komöödia</a></li>
-            <li><a href="#">Seiklus</a></li>
-            <li><a href="#">Draama</a></li>
-            <li><a href="#">Animatsioon</a></li>
-            <li><a href="#">Dokumentaal</a></li>
-			<li><a href="#">Krimi</a></li>
-			<li><a href="#">Fantaasia</a></li>
-			<li><a href="#">Ajalugu</a></li>
-			<li><a href="#">Thriller</a></li>
-			<li><a href="#">Ulme</a></li>
-			<li><a href="#">Sport</a></li>
-			<li><a href="#">Sõda</a></li>
-			<li><a href="#">Muusikal</a></li>
-			<li><a href="#">Õudukad</a></li>
+            <li><a href="movies.php?=Cat_Action">Action</a></li>
+            <li><a href="movies.php?=Cat_Komöödia">Komöödia</a></li>
+            <li><a href="movies.php?=Cat_Seiklus">Seiklus</a></li>
+            <li><a href="movies.php?=Cat_Draama">Draama</a></li>
+            <li><a href="movies.php?=Cat_Animatsioon">Animatsioon</a></li>
+            <li><a href="movies.php?=Cat_Biograafia">Biograafia</a></li>
+			<li><a href="movies.php?=Cat_Krimi">Krimi</a></li>
+			<li><a href="movies.php?=Cat_Fantaasia">Fantaasia</a></li>
+			<li><a href="movies.php?=Cat_Ajalugu">Ajalugu</a></li>
+			<li><a href="movies.php?=Cat_Thriller">Thriller</a></li>
+			<li><a href="movies.php?=Cat_Ulme">Ulme</a></li>
+			<li><a href="movies.php?=Cat_Sport">Sport</a></li>
+			<li><a href="movies.php?=Cat_Sõda">Sõda</a></li>
+			<li><a href="movies.php?=Cat_Muusikal">Muusikal</a></li>
+			<li><a href="movies.php?=Cat_Õudukad">Õudukad</a></li>
           </ul>
         </li>
       </ul>
