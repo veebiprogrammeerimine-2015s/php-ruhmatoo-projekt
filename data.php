@@ -88,7 +88,7 @@
 	<input id="animal_kind" name="animal_kind" type="text" value="<?php echo $animal_kind; ?>"> <?php echo $animal_kind_error; ?><br><br>
 	<label for="date" >Kuupäev</label><br>
 	<input id="date" name="date" type="date" value="<?php echo $date; ?>"> <?php echo $date_error; ?><br><br>
-	<label for="problem" >problemi kirjeldus</label><br>
-	<input id="problem" name="problem" type="text" value="<?php echo $problem; ?>"> <?php echo $problem_error; ?><br><br>
+	<label for="problem" >Probleemi kirjeldus</label><br>
+	<textarea id="problem" name="problem" col=40 rows=8 placeholder="Mis probleem on?" value="<?php echo $problem; ?>"> <?php echo $problem_error; ?> </textarea><br><br>
 	<input type="submit" name="register" value="Salvesta">
 </form>
