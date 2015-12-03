@@ -10,7 +10,7 @@
 	require_once("UserBookingManager.class.php");
 	
 	// tuhjad muudujad
-	
+	$problem_description ='';
 	
 	
 	// teeme uue instantsi class AvailableTimeDetails
@@ -60,12 +60,20 @@
 						
 					}
 					
-					else{
-					$selected_time = ($_POST["selectedavailabletime"]);
-					$problem_description = ($_POST["problemdescrpt"]);
-					echo $selected_time;
-					echo $problem_description;
+					//kontrollime soovitava aja broneeringu staatust teeme ingegeriks
+					$selected_available_time = (intval($_POST["selectedavailabletime"]));
+					
+					
+					$time_status = $UserBookingManager->checkTimeStatus($selected_available_time);
+					
+					if (isset($time_status->error)){
+						
+						 $main_error = $time_status->error->message;
+						
 					}
+					
+					$problem_description = ($_POST["problemdescrpt"]);
+					
 		}
 		
 	
