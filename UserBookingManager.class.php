@@ -27,20 +27,16 @@
 		
 		function buildMainError($message){
 			
-   			 $html = '<table class="table table-bordered">';
+   			
     		
-    		$html .= '<div class="alert alert-warning">';
+    		$html = '<div class="alert alert-warning">';
     		$html .= '<strong>Warning!</strong>'.$message;
     		$html .= '</div>';
     		
     		return $html;
     	}
 
-    	// finish table and return it
-
-    	$html .= '</table>';
-    	return $html;
-		}
+    	
 		
 }
 ?>

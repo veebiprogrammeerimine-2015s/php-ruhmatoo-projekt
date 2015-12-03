@@ -12,7 +12,7 @@
 	//Uus instants klassist User
 	$User = new User($mysqli);
 	
-	//var_dump($User->connection);
 	
+	//alert input: 
 	
 ?>

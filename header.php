@@ -18,6 +18,17 @@
     <![endif]-->
   </head>
   <body>
+  
+  <?php 
+  // logout reguest all the time
+  if(isset($_GET["logout"])){
+		
+		if ($_GET["logout"] == 1){
+		session_destroy();
+		header("Location: login.php");
+		}
+	}
+	?>
 	<!-- main container start -->
 	 <!-- header start -->
     <div class="container">  
@@ -41,7 +52,7 @@
               <li class="active"><a href="login.php">Log in <span class="sr-only">(current)</span></a></li>
               <li><a href="#">minu broneeringud</a></li>
               <li><a href="#">doctor</a></li>
-              <li><a href="#">Logout</a></li>
+              <li><a href="?logout=1">Logout</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

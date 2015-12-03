@@ -7,46 +7,87 @@
 <?php
 	require_once("functions.php");
 	require_once("AvailableTimeDetails.class.php");
+	require_once("UserBookingManager.class.php");
+	
+	// tuhjad muudujad
+	
+	
 	
 	// teeme uue instantsi class AvailableTimeDetails
 	$AvailableTimeDetails = new AvailableTimeDetails($mysqli);
+	$UserBookingManager = new UserBookingManager($mysqli);
+	
+	// tommame 
 	if(isset($_GET["timeavailableid"])){
         $timeavailableid = $_GET["timeavailableid"];
     }
+    
+    
+    //tommame kogu info
 	$getTimeInfo = $AvailableTimeDetails->getFreeTimesDetails($timeavailableid);
-	//var_dump($getTimeInfo);
-	$hospidal_name = $getTimeInfo[0]->hospidal_name;
-	$dr_name = $getTimeInfo[0]->dr_name;
-	$area = $getTimeInfo[0]->area;
-	$city = $getTimeInfo[0]->city;
-	$address = $getTimeInfo[0]->address;
-	$date_appoitmnt = $getTimeInfo[0]->date_appoitmnt;
 	
-	$getDrAllDeseases = $AvailableTimeDetails->getDoctorDeseases($timeavailableid);
-	//var_dump($getDrAllDeseases);
-	$getDrDayTimes = $AvailableTimeDetails->getDoctorDayTimes($timeavailableid);
-	//var_dump($getDrDayTimes);
+	//kontrollime, kas ei tule null rida parameetri vastu
+	if (isset($getTimeInfo->error)){
+		// kui on,suunan error lehele
+		header("Location: error.php");
+		exit();
+	
+	}
+		$hospidal_name = $getTimeInfo[0]->hospidal_name;
+		$dr_name = $getTimeInfo[0]->dr_name;
+		$area = $getTimeInfo[0]->area;
+		$city = $getTimeInfo[0]->city;
+		$address = $getTimeInfo[0]->address;
+		$date_appoitmnt = $getTimeInfo[0]->date_appoitmnt;
+	
+		$getDrAllDeseases = $AvailableTimeDetails->getDoctorDeseases($timeavailableid);
+		//var_dump($getDrAllDeseases);
+		$getDrDayTimes = $AvailableTimeDetails->getDoctorDayTimes($timeavailableid);
+		//var_dump($getDrDayTimes);
 	
 	
 	
+	// keegi chekkis radiobuttoni ja hakkab broneerima
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		if(isset($_POST["book-now"])){
+					
+					// kontrollime, kas kasutaja sisse loginud
+					$log_in_info = $UserBookingManager->checkUserLogedIn();
+					
+					if (isset($log_in_info->error)){
+						
+						 $main_error = $log_in_info->error->message;
+						
+					}
+					
+					else{
 					$selected_time = ($_POST["selectedavailabletime"]);
 					$problem_description = ($_POST["problemdescrpt"]);
 					echo $selected_time;
 					echo $problem_description;
+					}
 		}
 		
 	
 	}
 	
+	echo ($_SESSION["id_from_db"]."session id");
 ?>
 
 <?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>
 <?php echo htmlspecialchars($_SERVER["QUERY_STRING"]);?>
 
+
+
+
 <div class="container">
+<?php if(isset($main_error)): ?>
+		<?= $UserBookingManager->buildMainError($main_error) ;?>
+	<?php endif; ?>
 	<div class="row">
+	
+	
+	
 	<H1> Broneeringu detailandmed </h1>
   		<div class="col-md-3">
   			<h2>Kelle juurde </h2>

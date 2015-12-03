@@ -12,7 +12,7 @@
 		
 		function getFreeTimesDetails($date_time_id){
 			
-			
+			$response = new StdClass();
 			
 			$table_data = array();
 			$html = '';
@@ -42,6 +42,18 @@
 				
 				
 			}
+			$results_count = count($table_data);
+			// kui array on 0 siis anname hoopis errori kaasa
+			if($results_count == 0){
+				$error = new StdClass();
+				$error->id =1;
+				$error->message = "Midagi läks katki!";
+				$response->error = $error;
+				$stmt->close();
+				return $response;
+				
+			}
+			
 			
 			$stmt->close();
 			return $table_data;

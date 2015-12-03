@@ -1,4 +1,10 @@
 <?php
+	//load header
+	require_once("header.php");
+?> 
+<!--main code start here --> 
+
+<?php
 //laeme funktsiooni failis
 	require_once("functions.php");
 	
@@ -63,17 +69,9 @@
   }
 ?>
 
-<?php
-	//load header
-	require_once("header.php");
-?> 
-<!--main code start here --> 
 
-<html>
-<head>
-  <title>Logi sisse</title>
-</head>
-<body>
+
+
 
 	
 	<div class="container-fluid">
