@@ -17,13 +17,13 @@
 			$table_data = array();
 			$html = '';
 			$stmt = $this->connection->prepare("
-			SELECT af_doctor_available.id, date_appoitmnt, time_start, time_end, hospidal_name, city, area FROM af_doctor_available
+			SELECT af_doctor_available.id, date_appoitmnt, time_start, time_end, hospidal_name, dr_name, city, address, area FROM af_doctor_available
 			JOIN af_doctors ON af_doctor_available.af_doctors_id = af_doctors.id
 			JOIN af_hospidals ON af_hospidals.id = af_doctors.af_hospidals_id
 			WHERE af_doctor_available.id = ?
 			");
 			$stmt->bind_param("i", $date_time_id);
-			$stmt->bind_result($id, $date_appoitmnt, $time_start, $time_end, $hospidal_name, $city_fdb, $area_fdb);
+			$stmt->bind_result($id, $date_appoitmnt, $time_start, $time_end, $hospidal_name, $dr_name_fdb, $city_fdb, $address_fdb, $area_fdb);
 			$stmt->execute();
 			
 			while($stmt->fetch()){
@@ -34,8 +34,10 @@
 				$table_row->time_start = $time_start;
 				$table_row->time_end = $time_end;
 				$table_row->hospidal_name = $hospidal_name;
+				$table_row->dr_name = $dr_name_fdb;
 				$table_row->city = $city_fdb;
 				$table_row->area = $area_fdb;
+				$table_row->address = $address_fdb;
 				array_push($table_data, $table_row);
 				
 				
