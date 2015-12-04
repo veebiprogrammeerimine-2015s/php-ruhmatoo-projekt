@@ -1,3 +1,14 @@
+  <?php 
+  // logout reguest all the time
+  if(isset($_GET["logout"])){
+		
+		if ($_GET["logout"] == 1){
+		session_destroy();
+		header("Location: login.php");
+		}
+	}
+	?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,16 +30,7 @@
   </head>
   <body>
   
-  <?php 
-  // logout reguest all the time
-  if(isset($_GET["logout"])){
-		
-		if ($_GET["logout"] == 1){
-		session_destroy();
-		header("Location: login.php");
-		}
-	}
-	?>
+
 	<!-- main container start -->
 	 <!-- header start -->
     <div class="container">  
