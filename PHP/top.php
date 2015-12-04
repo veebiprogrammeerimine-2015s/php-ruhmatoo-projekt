@@ -34,21 +34,45 @@ navbar-fixed-top">
 <br>
 <br>
 
-KRIITIKU LEHT
-<div class=" col-md-offset-1 col-md-3 col-sm-4">
-<form>
-		<h2>Logi sisse</h2>
-			  <div class="form-group">
-				<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-			  </div>
-			  <div class="form-group">
-				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-			  </div>
-			 
-			  <button type="submit" class="btn btn-success pull-right hidden-xs">Logi sisse!</button>
-			  <button type="submit" class="btn btn-success btn-block visible-xs">Logi sisse!</button>
-			</form>
+<html>
+<head>
+<title>TOP</title>
+<meta charset="UTF-8">
 
-</div>
+<link rel="stylesheet" type="text/css" href="king.css">
+</head>
+<body>
+
+<table border="1">
+	<caption>Pingerida</caption>
+	<thead>
+	<tr>
+		<th scope="col">Koht</th>
+		<th scope="col">Baar</th>
+		<th scope="col">Punktid</th>
+		</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>1</td>
+		<td>Manna La Roosa</td>
+		<td>91</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>Butterfly</td>
+		<td>87</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>Horisont</td>
+		<td>80</td>
+	</tr>	
+	</tbody>
+	</table>
+
+</body>
+</html>
+
 
 

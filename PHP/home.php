@@ -2,6 +2,10 @@
 	$page_title = "avaleht";
 	$file_name = "home.php";
 ?>
+
+<!--####################-->
+<!--# DATABASE ÜHENDUS #-->
+<!--####################-->
 <?php
 // ühenduse loomiseks kasuta
 	require_once("../../../../configglobal.php");
@@ -111,7 +115,9 @@ require_once("header.php");
 	
 </ul>
 
-
+<!--####################-->
+<!--###### MENÜÜ #######-->
+<!--####################-->
 <nav class="navbar navbar-inverse
 navbar-fixed-top">
   <div class="container-fluid">
@@ -129,7 +135,7 @@ navbar-fixed-top">
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="top10.php">Top 10 baarid</a></li>
+        <li><a href="top.php">Top baarid</a></li>
         <li><a href="critic.php">Kriitikule</a></li>
         <li class="dropdown">
           
@@ -144,7 +150,7 @@ navbar-fixed-top">
 <br>
 <br>
 <!--####################-->
-<!--#######Sisu#########-->
+<!--###### SISU ########-->
 <!--####################-->
 <div class="container-fluid"> 
 <h1>Tere tulemast!</h1>
@@ -161,18 +167,11 @@ navbar-fixed-top">
 		</div>
 		<div class=" col-md-offset-1 col-md-3 col-sm-4">
 		<!-- SIIA MINGIT INFI -->
-		<p>Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. 
-		</p>
+			<p>
+			Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. Mingi äge info on siin ka veel. 
+			</p>
 		</div>
 	</div>
 </div>
 
 <?php require_once("footer.php") ?>
-
-
-
-
-
-<?php
-require_once("footer.php");
-?>
