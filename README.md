@@ -1,16 +1,17 @@
 #KINGS OF COCKTAILS
 
 ##Liikmed
-*Kaur Kaljuma, Tauno Lainevool, Koit Korela
+* Kaur Kaljuma, Tauno Lainevool, Koit Korela
 
-##Eesmärk: 
-*Mis probleemi lahendame: Kus saada tõeliselt erilist kokteilielamust?
-*Kuidas seda lahendame: Kriitikud koostavad edetabeli parimatest kokteilibaaridest
-*Pakutav lisaväärtus: Ettevõtted on pildis (hilisem teenimise võimalus)
+##Eesmärk 
+* Mis probleemi lahendame: Kus saada tõeliselt erilist kokteilielamust?
+* Kuidas seda lahendame: Kriitikud koostavad edetabeli parimatest kokteilibaaridest
+* Pakutav lisaväärtus: Ettevõtted on pildis (hilisem teenimise võimalus)
 
-##Kirjeldus: Veebileht, millel on koostatud edetabel parimatest Eesti kokteilibaaridest. Kriitikud käivad söögi- ja meelelahutusasutustes hindamas just kokteilielamust ning koostavad pingerea, et selgitada välja parimaid kokteile pakkuvad asutused.
-*Sihtrühm: Inimesed, kes ei taha end lihtsalt täis juua, vaid otsivad kokteili nautimisest uut elamust. 28+ aastased keskmise või kõrgema sissetulekuga inimesed.
-*Konkurendid: Hindamine ja pingerea koostamine toimub sarnaselt "Eesti Maitsed - Eesti parimad restoranid", kuid keskendutud on ainult kokteilelamusele. Seetõttu saavad kategoorias osaleda ka kohad, kus ei pakuta sööki või on köögipool nõrk.
+##Kirjeldus 
+* Idee kirjeldus: Veebileht, millel on koostatud edetabel parimatest Eesti kokteilibaaridest. Kriitikud käivad söögi- ja meelelahutusasutustes hindamas just kokteilielamust ning koostavad pingerea, et selgitada välja parimaid kokteile pakkuvad asutused.
+* Sihtrühm: Inimesed, kes ei taha end lihtsalt täis juua, vaid otsivad kokteili nautimisest uut elamust. 28+ aastased keskmise või kõrgema sissetulekuga inimesed.
+* Konkurendid: Hindamine ja pingerea koostamine toimub sarnaselt "Eesti Maitsed - Eesti parimad restoranid", kuid keskendutud on ainult kokteilelamusele. Seetõttu saavad kategoorias osaleda ka kohad, kus ei pakuta sööki või on köögipool nõrk.
 
 
 
