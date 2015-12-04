@@ -7,13 +7,13 @@
 <?php
 //laeme funktsiooni failis
 	require_once("functions.php");
-	
+	var_dump($_SESSION["id_from_db"]);
 	//*******************//
 	//***Kuhu suunata?***//
 	//*******************//
 	//kontrollin, kas kasutaja on sisseloginud
 	/*if(isset($_SESSION["id_from_db"])){
-		// kui on,suunan data lehele
+		// suunan data lehele
 		header("Location: data.php");
 		exit();
 	}*/

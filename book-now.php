@@ -8,6 +8,12 @@
 	require_once("functions.php");
 	require_once("AvailableTimeDetails.class.php");
 	require_once("UserBookingManager.class.php");
+	var_dump($_SESSION["id_from_db"]);
+	/*if(isset($_SESSION["id_from_db"])){
+		// suunan data lehele
+		header("Location: home.php");
+		exit();
+	}*/
 	
 	// tuhjad muudujad
 	$problem_description ='';

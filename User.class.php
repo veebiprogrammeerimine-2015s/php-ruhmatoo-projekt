@@ -7,7 +7,7 @@ class User{
 		//selle klassi muutuja
 		$this->connection = $mysqli;
 	}
-	function createUser($create_personalcode, $password_hash, $create_username, $create_name, $create_age, $create_gender, $create_insurance){
+	function createUser($create_personalcode, $password_hash, $create_email, $create_name, $create_age, $create_gender, $create_insurance){
 		//objekt et saata tagasi kas errori(id,message) või success(message)
 		$response = new StdClass();
 		
@@ -39,7 +39,7 @@ class User{
 		}
 		$stmt->close();
 		$stmt = $this->connection->prepare("INSERT INTO af_persons (social_sec_nr, password, email, person_name	, age, sex, health_insurance) VALUES (?, ?, ?, ?, ?, ?, ?)");
-		$stmt->bind_param("isssssi", $create_personalcode, $password_hash, $create_username, $create_name, $create_age, $create_gender, $create_insurance);
+		$stmt->bind_param("isssssi", $create_personalcode, $password_hash, $create_email, $create_name, $create_age, $create_gender, $create_insurance);
 		if($stmt->execute()){
 			//salvestas edukalt
 			$success = new StdClass();
@@ -49,17 +49,17 @@ class User{
 			//kui ei läinud edukalt saadan errori
 			$error = new StdClass();
 			$error->id = 2;
-			$error->message = "Midagi läks katki";
+			$error->message = "Midagi läks katki :".$stmt->error;
 			//error responsele külge
 			$response->error = $error;
 		}
 		$stmt->close();
 		return $response;
 	}
-	function loginUser($username, $password_hash){
+	function loginUser($email, $password_hash){
 		$response = new StdClass();
 		$stmt = $this->connection->prepare("SELECT id, email FROM af_persons WHERE email=?");
-		$stmt->bind_param("s", $username);
+		$stmt->bind_param("s", $email);
 		$stmt->execute();
 		if(!$stmt->fetch()){
 			// saadan tagasi errori
@@ -74,7 +74,7 @@ class User{
 		}
 		$stmt->close();
 		$stmt = $this->connection->prepare("SELECT id, email FROM af_persons WHERE email=? AND password=?");
-		$stmt->bind_param("ss", $username, $password_hash);
+		$stmt->bind_param("ss", $email, $password_hash);
 		$stmt->bind_result($id_from_db, $un_from_db);
 		$stmt->execute();
 		if($stmt->fetch()){
@@ -82,7 +82,7 @@ class User{
 			$success->message = "Sisselogimine õnnestus";
 			$user = new StdClass();
 			$user->id = $id_from_db;
-			$user->username = $un_from_db;
+			$user->email = $un_from_db;
 			$success->user = $user;
 			$response->success = $success;
 		}else{
