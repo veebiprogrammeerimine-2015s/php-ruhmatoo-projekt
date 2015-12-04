@@ -9,7 +9,11 @@
 	require_once("AvailableTimeDetails.class.php");
 	require_once("UserBookingManager.class.php");
 	echo "session id: ";
+	
 	print_r($_SESSION["id_from_db"]);
+	print_r( $_SESSION["return_url"]);
+	
+	
 	/*if(isset($_SESSION["id_from_db"])){
 		// suunan data lehele
 		header("Location: home.php");
@@ -52,10 +56,7 @@
 		$getDrDayTimes = $AvailableTimeDetails->getDoctorDayTimes($timeavailableid);
 		//var_dump($getDrDayTimes);
 		
-		//kontrollime soovitava aja broneeringu staatust teeme integeriks
-					
-					
-					
+		//kontrollime soovitava aja broneeringu staatust teeme integeri			
 		$time_status = $UserBookingManager->checkTimeStatus(intval($timeavailableid));
 		if (isset($time_status->error)){
 			$main_error = $time_status->error->message;
@@ -66,6 +67,11 @@
 	// keegi chekkis radiobuttoni ja hakkab broneerima
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		if(isset($_POST["book-now"])){
+					// votame vormidelt vaartused
+					$selected_available_time = (intval($_POST["selectedavailabletime"]));
+					$problem_description = ($_POST["problemdescrpt"]);
+					$_SESSION["selected_available_time"] = $selected_available_time ;
+					$_SESSION["problem_description"] = $problem_description;
 					
 					// kontrollime, kas kasutaja sisse loginud
 					$log_in_info = $UserBookingManager->checkUserLogedIn();
@@ -75,11 +81,27 @@
 						 $main_error = $log_in_info->error->message;
 						
 					}
+					//kontrollime soovitava aja broneeringu staatust teeme integeri			
+					$time_status = $UserBookingManager->checkTimeStatus(intval($_SESSION["selected_available_time"]));
+					if (isset($time_status->error)){
+						$main_error = $time_status->error->message;	
+						header("Location: login.php?book-now.php=".$_SESSION["selected_available_time"]);
+					}
 					
-					$selected_available_time = (intval($_POST["selectedavailabletime"]));
+					/*if(empty($_POST["problemdescrpt"])){
+						$main_error = "Sisest palun oma mure";
+						header("Location: login.php?book-now.php=".$_SESSION["selected_available_time"]);
+					}*/
 					
-					$problem_description = ($_POST["problemdescrpt"]);
+					//jõudsime siia, suuname kasuataj kinnituslehele ja salvestame return aadressi
 					
+					$return_url =  htmlspecialchars($_SERVER["PHP_SELF"]);
+					$return_url .="/";
+					$return_url .= htmlspecialchars($_SERVER["QUERY_STRING"]);
+					
+					$_SESSION["return_url"] = $return_url;
+					
+					header("Location:book-confirmation.php?timeavailableid=".$_SESSION["selected_available_time"]);
 		}
 		
 	
@@ -87,8 +109,8 @@
 	
 ?>
 
-<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>
-<?php echo htmlspecialchars($_SERVER["QUERY_STRING"]);?>
+<?php// echo htmlspecialchars($_SERVER["PHP_SELF"]);?>
+<?php //echo htmlspecialchars($_SERVER["QUERY_STRING"]);?>
 
 
 
