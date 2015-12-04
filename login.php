@@ -7,7 +7,7 @@
 <?php
 //laeme funktsiooni failis
 	require_once("functions.php");
-	var_dump($_SESSION["id_from_db"]);
+	var_dump($_SESSION["id_from_db"]."sessonind");
 	//*******************//
 	//***Kuhu suunata?***//
 	//*******************//
