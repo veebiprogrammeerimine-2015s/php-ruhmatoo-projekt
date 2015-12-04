@@ -8,7 +8,8 @@
 	require_once("functions.php");
 	require_once("AvailableTimeDetails.class.php");
 	require_once("UserBookingManager.class.php");
-	var_dump($_SESSION["id_from_db"]);
+	echo "session id: ";
+	print_r($_SESSION["id_from_db"]);
 	/*if(isset($_SESSION["id_from_db"])){
 		// suunan data lehele
 		header("Location: home.php");
@@ -23,7 +24,7 @@
 	$AvailableTimeDetails = new AvailableTimeDetails($mysqli);
 	$UserBookingManager = new UserBookingManager($mysqli);
 	
-	// tommame 
+	// tommame urlist id
 	if(isset($_GET["timeavailableid"])){
         $timeavailableid = $_GET["timeavailableid"];
     }
@@ -50,7 +51,16 @@
 		//var_dump($getDrAllDeseases);
 		$getDrDayTimes = $AvailableTimeDetails->getDoctorDayTimes($timeavailableid);
 		//var_dump($getDrDayTimes);
-	
+		
+		//kontrollime soovitava aja broneeringu staatust teeme integeriks
+					
+					
+					
+		$time_status = $UserBookingManager->checkTimeStatus(intval($timeavailableid));
+		if (isset($time_status->error)){
+			$main_error = $time_status->error->message;
+						
+		}
 	
 	
 	// keegi chekkis radiobuttoni ja hakkab broneerima
@@ -66,17 +76,7 @@
 						
 					}
 					
-					//kontrollime soovitava aja broneeringu staatust teeme ingegeriks
 					$selected_available_time = (intval($_POST["selectedavailabletime"]));
-					
-					
-					$time_status = $UserBookingManager->checkTimeStatus($selected_available_time);
-					
-					if (isset($time_status->error)){
-						
-						 $main_error = $time_status->error->message;
-						
-					}
 					
 					$problem_description = ($_POST["problemdescrpt"]);
 					
@@ -85,7 +85,6 @@
 	
 	}
 	
-	echo ($_SESSION["id_from_db"]."session id");
 ?>
 
 <?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>
