@@ -19,19 +19,19 @@
 	}*/
 	
 	// muuutujad errorite jaoks
-	$personalcode_error = $password_error = $gender_error = $insurance_error = $name_error = $age_error = $username_error = "";
+	$personalcode_error = $password_error = $gender_error = $insurance_error = $name_error = $age_error = $email_error = "";
 	// muutujad väärtuste jaoks
-	$personalcode = $password = $gender = $insurance = $name = $age = $username = "";
+	$personalcode = $password = $gender = $insurance = $name = $age = $email = "";
 	
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		// Sisse logimine
 		if(isset($_POST["login"])){
 			//isikukood
-			if(empty($_POST["username"])){
-				$username_error = "See väli on kohustuslik";
+			if(empty($_POST["email"])){
+				$email_error = "See väli on kohustuslik";
 			}else{
 				// puhastame muutuja võimalikest üleliigsetest sümbolitest
-				$username = cleanInput($_POST["username"]);
+				$email = cleanInput($_POST["email"]);
 			}
 			//parool
 			if(empty($_POST["password"])){
@@ -41,15 +41,15 @@
 			}
 			
 			// Kui oleme siia jõudnud, võime kasutaja sisse logida
-			if($password_error == "" && $username_error == ""){
+			if($password_error == "" && $email_error == ""){
 
 				$password_hash = hash("sha512", $password);
 				// käivitan funktsiooni
-				$login_response = $User->loginUser($username, $password_hash);
+				$login_response = $User->loginUser($email, $password_hash);
 				if(isset($login_response->success)){
 					//läks edukalt, peab sessiooni salvestama
 					$_SESSION["id_from_db"] = $login_response->success->user->id;
-					$_SESSION["un_from_db"] = $login_response->success->user->username;
+					$_SESSION["un_from_db"] = $login_response->success->user->email;
 					//***********************************//
 					//**suunamine peale sisse logimist?**//
 					//***********************************//
@@ -86,7 +86,7 @@
   
 				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 					<div class="form-group">
-						<input name="username" type="text" placeholder="Kasutajanimi" value="<?php echo $username; ?>"> <font style="color:red"><?php echo $username_error; ?></font><br><br>
+						<input name="email" type="text" placeholder="Kasutajanimi" value="<?php echo $email; ?>"> <font style="color:red"><?php echo $email_error; ?></font><br><br>
 					<input name="password" type="password" placeholder="Parool" value="<?php echo $password; ?>"> <font style="color:red"><?php echo $password_error; ?></font><br><br>
 					<input type="submit" name="login" value="Logi sisse">
 				</form>
