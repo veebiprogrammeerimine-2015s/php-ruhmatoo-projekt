@@ -1,7 +1,8 @@
-PHP RÜHMATÖÖ PROJEKT - "IDEE"
+PHP RÜHMATÖÖ PROJEKT - "Kings of cocktails"
 Liikmed: Kaur Kaljuma, Tauno Lainevool, Koit Korela
-Eesmärk: 
-Kirjeldus:
+Eesmärk: Luua veebileht "Kings of cocktails" (TOP edetabel parimatest kokteilibaaridest)
+Kirjeldus: Veebileht, millel on koostatud edetabel parimatest Eesti kokteilibaaridest. Kriitikud käivad söögi- ja meelelahutusasutustes hindamas kokteilielamust ning koostavad pingerea, et selgitada välja parimaid kokteile pakkuvad asutused.
+
 
 
 
