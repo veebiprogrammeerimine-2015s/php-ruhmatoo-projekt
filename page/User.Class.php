@@ -52,7 +52,7 @@ class User {
 		$response = new StdClass();
 				
 		$stmt = $this->connection->prepare("INSERT INTO users (user_group, first_name, last_name, e_mail, password, company_name, company_description) VALUES (?,?,?,?,?,?,?)");
-		$stmt->bind_param ("issss", $user_group, $first_name, $last_name, $create_user_email, $hash, $company_name, $company_description);
+		$stmt->bind_param ("issssss", $user_group, $first_name, $last_name, $create_user_email, $hash, $company_name, $company_description);
 		
 		if($stmt->execute()){
 			$success = new StdClass();	
