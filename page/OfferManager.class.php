@@ -14,8 +14,8 @@ class OfferManager {
 	
 	function createNewOrder($text_type, $subject, $target_group, $description, $source, $length, $deadline, $output){
 		
-		$stmt = $this->connection->prepare("INSERT INTO requests(user_id, text_type, subject, target_group, description, source, length, deadline, output) VALUES(?,?,?,?,?,?,?,?,?)");
-		$stmt->bind_param("isssssiss", $_SESSION['logged_in_user_id'], $text_type, $subject, $target_group, $description, $source, $length, $deadline, $output);
+		$stmt = $this->connection->prepare("INSERT INTO requests(company_ID, text_type, subject, description, target_group, source, length, deadline, output, created) VALUES(?,?,?,?,?,?,?,?,?, NOW())");
+		$stmt->bind_param("isssssiss", $_SESSION['logged_in_user_id'], $text_type, $subject, $description, $target_group, $source, $length, $deadline, $output);
 		
 		$message = "";
 		
@@ -36,9 +36,9 @@ class OfferManager {
 			$search = "%".$keyword."%";
 		}
 		
-		$stmt = $this->connection->prepare("SELECT id, user_id, text_type, subject, target_group, description, source, length, deadline, output FROM orders_naaber WHERE user_id=? AND deleted IS NULL AND (text_type LIKE ? OR subject LIKE ? OR target_group LIKE ? OR description LIKE ? OR source LIKE ? OR length LIKE ? OR deadline LIKE ? OR output LIKE ?)");
-		$stmt->bind_param("issssssss", $_SESSION["logged_in_user_id"], $search, $search, $search, $search, $search, $search, $search, $search);
-		$stmt->bind_result($id_from_db, $user_id_from_db, $text_type_from_db, $subject_from_db, $target_group_from_db, $description_from_db, $source_from_db, $length_from_db, $deadline_from_db, $output_from_db);
+		$stmt = $this->connection->prepare("SELECT company_ID, request_ID, text_type, subject, description, target_group, source, length, deadline, output, status, created FROM requests WHERE company_ID=? AND deleted IS NULL AND (request_ID LIKE ? OR text_type LIKE ? OR subject LIKE ? OR description LIKE ? OR target_group LIKE ? OR source LIKE ? OR length LIKE ? OR deadline LIKE ? OR output LIKE ? OR status LIKE ? OR created LIKE ?)");
+		$stmt->bind_param("iissssssssss", $_SESSION["logged_in_user_id"], $id_from_db, $search, $search, $search, $search, $search, $search, $search, $search, $search, $search);
+		$stmt->bind_result($user_id_from_db, $id_from_db, $text_type_from_db, $subject_from_db, $description_from_db, $target_group_from_db, $source_from_db, $length_from_db, $deadline_from_db, $output_from_db, $status_from_db, $created_from_db);
 		$stmt->execute();
 		
 		$array = array();
@@ -47,8 +47,8 @@ class OfferManager {
 			
 			$order = new Stdclass();
 			
-			$order->id = $id_from_db;
-			$order->user_id = $user_id_from_db;
+			$order->request_ID = $id_from_db;
+			$order->company_id = $user_id_from_db;
 			$order->text_type = $text_type_from_db;
 			$order->subject = $subject_from_db;
 			$order->target_group = $target_group_from_db;
@@ -57,6 +57,8 @@ class OfferManager {
 			$order->length = $length_from_db;
 			$order->deadline = $deadline_from_db;
 			$order->output = $output_from_db;
+			$order->status = $status_from_db;
+			$order->created = $created_from_db;
 			
 			array_push($array, $order);
 		}
@@ -68,9 +70,9 @@ class OfferManager {
 	
 	function getSingleOrderData($id){
 		
-		$stmt = $this->connection->prepare("SELECT text_type, subject, target_group, description, source, length, deadline, output FROM orders_naaber WHERE id=? AND user_id=? AND deleted IS NULL");
+		$stmt = $this->connection->prepare("SELECT text_type, subject, description, target_group, source, length, deadline, output FROM requests WHERE request_ID=? AND company_ID=? AND deleted IS NULL");
 		$stmt->bind_param("ii", $id, $_SESSION["logged_in_user_id"]);
-		$stmt->bind_result($text_type_from_db, $subject_from_db, $target_group_from_db, $description_from_db, $source_from_db, $length_from_db, $deadline_from_db, $output_from_db);
+		$stmt->bind_result($text_type_from_db, $subject_from_db, $description_from_db, $target_group_from_db, $source_from_db, $length_from_db, $deadline_from_db, $output_from_db);
 		$stmt->execute();
 		
 		$order = new Stdclass();
@@ -93,10 +95,10 @@ class OfferManager {
         return $order;
 	}
 	
-	function updateOrdersData($orders_id, $text_type, $subject, $target_group, $description, $source, $length, $deadline, $output){
+	function updateOrdersData($orders_id, $text_type, $subject, $description, $target_group, $source, $length, $deadline, $output){
 		
-		$stmt = $this->connection->prepare("UPDATE orders_naaber SET text_type=?, subject=?, target_group=?, description=?, source=?, length=?, deadline=?, output=?, modified=NOW() WHERE id=? AND user_id=?");
-		$stmt->bind_param("sssssissii", $text_type, $subject, $target_group, $description, $source, $length, $deadline, $output, $orders_id, $_SESSION["logged_in_user_id"]);
+		$stmt = $this->connection->prepare("UPDATE requests SET text_type=?, subject=?, target_group=?, description=?, source=?, length=?, deadline=?, output=?, modified=NOW() WHERE request_ID=? AND company_ID=?");
+		$stmt->bind_param("sssssissii", $text_type, $subject, $description, $target_group, $source, $length, $deadline, $output, $orders_id, $_SESSION["logged_in_user_id"]);
 		$stmt->execute();
 		
 		header("Location:requests.php");
@@ -106,7 +108,7 @@ class OfferManager {
 	
 	function deleteOrdersData($orders_id){
 		
-		$stmt = $this->connection->prepare("UPDATE orders_naaber SET deleted=NOW() WHERE id=? AND user_id=?");
+		$stmt = $this->connection->prepare("UPDATE requests SET deleted=NOW() WHERE id=? AND company_ID=?");
 		$stmt->bind_param("ii", $orders_id, $_SESSION["logged_in_user_id"]);
 		$stmt->execute();
 		
@@ -117,8 +119,8 @@ class OfferManager {
 	
 	function addNewOffer($request_id, $journalist_id, $price, $comment){
 		
-		$stmt = $this->connection->prepare("INSERT INTO offers(request_ID, journalist_ID, date, price, comment) VALUES(?,?,?,?,?)");
-		$stmt->bind_param("iisis", $request_id, $journalist_id, NOW(), $price, $comment);
+		$stmt = $this->connection->prepare("INSERT INTO offers(request_ID, journalist_ID, date, price, comment) VALUES(?,?,NOW(),?,?)");
+		$stmt->bind_param("iiis", $request_id, $journalist_id, $price, $comment);
 		
 		$message = "";
 		
@@ -134,7 +136,7 @@ class OfferManager {
 	
 	function getOffersData() {
 		
-		$stmt = $this->connection->prepare("SELECT offer_ID, request_ID, journalist_ID, date, price, comment, accepted FROM orders_naaber WHERE journalist_ID=?");
+		$stmt = $this->connection->prepare("SELECT offer_ID, request_ID, journalist_ID, date, price, comment, accepted FROM offers WHERE journalist_ID=?");
 		$stmt->bind_param("i", $_SESSION["logged_in_user_id"]);
 		$stmt->bind_result($offer_ID_from_db, $request_ID_from_db, $journalist_ID_from_db, $offer_date_from_db, $price_from_db, $comment_from_db, $accepted_from_db);
 		$stmt->execute();

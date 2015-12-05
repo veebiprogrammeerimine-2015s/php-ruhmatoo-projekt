@@ -77,8 +77,8 @@
 				if($m != ""){
 					$text_type = "";
 					$subject = "";
-					$target_group = "";
 					$description = "";
+					$target_group = "";
 					$source = ""; 
 					$length = "";
 					$deadline = "";
@@ -110,11 +110,11 @@ Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-d
 		<option value="uudiskiri"<?=$text_type == "uudiskiri" ? "selected='selected'" : ""?>>Uudiskiri</option>
 	</select>* <?=$text_type_error;?><br><br>
 	<input id="subject" name="subject" type="text" placeholder="Teema" value="<?=$subject;?>">* <?=$subject_error;?><br><br>
-	<input id="target_group" name="target_group" type="text" placeholder="Sihtgrupp" value="<?=$target_group;?>">* <?=$target_group_error;?><br><br>
 	<textarea style="resize:none" id="description" name="description" rows="10" cols="28" placeholder="Kirjeldus"><?=$description;?></textarea>* <?=$description_error;?><br><br>
+	<input id="target_group" name="target_group" type="text" placeholder="Sihtgrupp" value="<?=$target_group;?>">* <?=$target_group_error;?><br><br>
 	<input id="source" name="source" type="text" placeholder="Allikas" value="<?=$source;?>">* <?=$source_error;?><br><br>
 	<input id="length" name="length" type="number" placeholder="Maht (tähemärgid)" value="<?=$length;?>">* <?=$length_error;?><br><br>
-	<input id="deadline" name="deadline" type="datetime-local" value="<?=$deadline;?>">* <?=$deadline_error_1;?><?=$deadline_error_2;?><br><br>
+	<input id="deadline" name="deadline" type="datetime" value="<?=$deadline;?>">* <?=$deadline_error_1;?><?=$deadline_error_2;?><br><br>
 	<input id="output" name="output" type="text" placeholder="Ilmumiskoht" value="<?=$output;?>">* <?=$output_error;?><br><br>
 	<input name="add_new_order" type="submit" value="Lisa uus tellimus">
 	<p style="color:green;"><?=$m;?></p>

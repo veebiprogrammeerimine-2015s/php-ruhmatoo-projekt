@@ -23,7 +23,7 @@
 	}
 	
 	if(isset($_GET["update"])){
-		$OfferManager->updateOrdersData(cleanInput($_GET["orders_id"]), cleanInput($_GET["text_type"]), cleanInput($_GET["subject"]), cleanInput($_GET["target_group"]), cleanInput($_GET["description"]), cleanInput($_GET["source"]), cleanInput($_GET["length"]), cleanInput($_GET["deadline"]), cleanInput($_GET["output"]));
+		$OfferManager->updateOrdersData(cleanInput($_GET["orders_id"]), cleanInput($_GET["text_type"]), cleanInput($_GET["subject"]), cleanInput($_GET["description"]), cleanInput($_GET["target_group"]), cleanInput($_GET["source"]), cleanInput($_GET["length"]), cleanInput($_GET["deadline"]), cleanInput($_GET["output"]));
 	}
 	
 	if(isset($_GET["delete"])){
@@ -52,8 +52,8 @@ Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-d
 <tr>
     <th>teksti tüüp</th>
     <th>teema</th>
+	<th>kirjeldus</th>
 	<th>sihtgrupp</th>
-    <th>kirjeldus</th>
     <th>allikad</th>
     <th>maht</th>
     <th>tähtaeg</th>
@@ -68,15 +68,15 @@ Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-d
 		echo "<tr>";
 		echo "<td>".$orders_array[$i]->text_type."</td>";
 		echo "<td>".$orders_array[$i]->subject."</td>";
-		echo "<td>".$orders_array[$i]->target_group."</td>";
 		echo "<td>".$orders_array[$i]->description."</td>";
+		echo "<td>".$orders_array[$i]->target_group."</td>";
 		echo "<td>".$orders_array[$i]->source."</td>";
 		echo "<td>".$orders_array[$i]->length."</td>";
 		echo "<td>".$orders_array[$i]->deadline."</td>";
 		echo "<td>".$orders_array[$i]->output."</td>";
-		echo "<td><a href='?delete=".$orders_array[$i]->id."'>kustuta</a></td>";
-		echo "<td><a href='edit.php?edit_id=".$orders_array[$i]->id."'>muuda</a></td>";
-		echo "<td><a href='offer_data.php?offer_data_id=".$orders_array[$i]->id."'>tee pakkumine</a></td>";
+		echo "<td><a href='?delete=".$orders_array[$i]->request_ID."'>kustuta</a></td>";
+		echo "<td><a href='edit.php?edit_id=".$orders_array[$i]->request_ID."'>muuda</a></td>";
+		echo "<td><a href='offers_data.php?offers_data_id=".$orders_array[$i]->request_ID."'>tee pakkumine</a></td>";
 		echo "<tr>";
 	}
 ?>

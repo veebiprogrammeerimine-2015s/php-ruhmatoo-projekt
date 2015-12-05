@@ -31,7 +31,7 @@
 	}
 ?>
 
-Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
+Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
 
 <h2>Tellimuse muutmine</h2>
 
