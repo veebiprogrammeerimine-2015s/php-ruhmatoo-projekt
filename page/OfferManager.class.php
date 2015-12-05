@@ -131,7 +131,7 @@ class OfferManager {
 			$offer->id = $offer_ID_from_db;
 			$offer->request_id = $request_ID_from_db;
 			$offer->journalist_id = $journalist_ID_from_db;
-			$offer->odder_date = $offer_date_from_db;
+			$offer->offer_date = $offer_date_from_db;
 			$offer->price = $price_from_db;
 			$offer->comment = $comment_from_db;
 			$offer->accepted = $accepted_from_db;
