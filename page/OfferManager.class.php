@@ -14,7 +14,7 @@ class OfferManager {
 	
 	function createNewOrder($text_type, $subject, $target_group, $description, $source, $length, $deadline, $output){
 		
-		$stmt = $this->connection->prepare("INSERT INTO orders_naaber(user_id, text_type, subject, target_group, description, source, length, deadline, output) VALUES(?,?,?,?,?,?,?,?,?)");
+		$stmt = $this->connection->prepare("INSERT INTO offers(user_id, text_type, subject, target_group, description, source, length, deadline, output) VALUES(?,?,?,?,?,?,?,?,?)");
 		$stmt->bind_param("isssssiss", $_SESSION['logged_in_user_id'], $text_type, $subject, $target_group, $description, $source, $length, $deadline, $output);
 		
 		$message = "";
