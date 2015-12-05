@@ -115,6 +115,23 @@ class OfferManager {
 		$stmt->close();
 	}
 	
+	function addNewOffer($request_id, $journalist_id, $price, $comment){
+		
+		$stmt = $this->connection->prepare("INSERT INTO offers(request_ID, journalist_ID, date, price, comment) VALUES(?,?,?,?,?)");
+		$stmt->bind_param("iisis", $request_id, $_SESSION['logged_in_user_id'], NOW(), $price, $comment);
+		
+		$message = "";
+		
+		if($stmt->execute()){
+            $message = "Edukalt andmebaasi salvestatud!";
+		}
+		
+		$stmt->close();
+		
+		return $message;
+		
+	}
+	
 	function getOffersData() {
 		
 		$stmt = $this->connection->prepare("SELECT offer_ID, request_ID, journalist_ID, date, price, comment, accepted FROM orders_naaber WHERE journalist_ID=?");
