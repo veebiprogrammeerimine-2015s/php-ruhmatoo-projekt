@@ -1,6 +1,6 @@
 <?php
 	require_once("../../config_global.php");
-    require_once("User.class.php");
+    require_once("User.Class.php");
 	$database = "if15_no_plagiarism";
 	
 	session_start();

@@ -13,7 +13,7 @@ class User {
 		
 		$response = new StdClass();
 		
-		$stmt = $this->connection->prepare("SELECT id, email FROM users_naaber WHERE email=? AND password=?");
+		$stmt = $this->connection->prepare("SELECT user_id, e_mail FROM users WHERE e_mail=? AND password=?");
 		$stmt->bind_param("ss", $email, $hash);
 		$stmt->bind_result($id_from_db, $email_from_db);
 		$stmt->execute();
@@ -36,7 +36,7 @@ class User {
 		}else{
 			
 			$error = new StdClass();
-			$error->id =1;
+			$error->id = 1;
 			$error->message = "Vale parool!";
 			
 			$response->error = $error;
@@ -51,8 +51,8 @@ class User {
 		
 		$response = new StdClass();
 				
-		$stmt = $this->connection->prepare("INSERT INTO users_naaber (first_name, last_name, organisation, email, password) VALUES (?,?,?,?,?)");
-		$stmt->bind_param ("sssss", $first_name, $last_name, $organisation, $create_user_email, $hash);
+		$stmt = $this->connection->prepare("INSERT INTO users (user_group, first_name, last_name, e_mail, password, company_name, company_description) VALUES (?,?,?,?,?,?,?)");
+		$stmt->bind_param ("issss", $user_group, $first_name, $last_name, $create_user_email, $hash, $company_name, $company_description);
 		
 		if($stmt->execute()){
 			$success = new StdClass();	
