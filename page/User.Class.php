@@ -47,11 +47,14 @@ class User {
         return $response;
 	}
 	
-	function createUser($create_user_email, $hash){
+	function createUser($user_group, $first_name, $last_name, $create_user_email, $hash, $company_name, $company_description){
 		
 		$response = new StdClass();
-				
-		$stmt = $this->connection->prepare("INSERT INTO users (user_group, first_name, last_name, e_mail, password, company_name, company_description) VALUES (?,?,?,?,?,?,?)");
+		
+		/* Alumise koodireaga on selline probleem, et kui kasutajaks on "ajakirjanik", siis programm sistestab andmetabelis
+		väljadele "company name" ja "company_description" tühjad väljad */		
+		
+		$stmt = $this->connection->prepare("INSERT INTO users (user_group_ID, first_name, last_name, e_mail, password, company_name, company_description, created) VALUES (?,?,?,?,?,?,?, NOW())");
 		$stmt->bind_param ("issssss", $user_group, $first_name, $last_name, $create_user_email, $hash, $company_name, $company_description);
 		
 		if($stmt->execute()){
@@ -61,7 +64,7 @@ class User {
 		}else{
 			$error = new StdClass();
 			$error->id = 1;
-			$error->message = "Midagi l?ks katki!";
+			$error->message = "Midagi läks katki!";
 			$response->error = $error;
 		};
 		

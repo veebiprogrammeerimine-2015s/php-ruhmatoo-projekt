@@ -10,7 +10,7 @@
 	$company_name_error = "";
 	$company_description_error = "";
 	
-	$user_group = ""
+	$user_group = "";
 	$first_name = "";
 	$last_name = "";
 	$create_user_email = "";
@@ -31,6 +31,8 @@
 			} else {
 				$user_group = cleanInput($_POST["user_group"]);
 			}
+			
+			/* Hetkel ei kontrollita, kas sisestad email on süsteemis olemas */
 			
 			if(empty($_POST["create_user_email"])) {
 				$create_user_email_error = "Ei saa olla tühi";
@@ -58,7 +60,7 @@
 				$last_name = cleanInput($_POST["last_name"]);
 			}
 			
-			if($_POST["user_group"] == "ettev6te") {
+			if($_POST["user_group"] == "3") {
 				
 				if(empty($_POST["company_name"])) {
 					$company_name_error = "Ei saa olla tühi";
@@ -74,13 +76,13 @@
 				
 			}
 			
-			if($user_group_error = "" && $create_user_email_error == "" && $create_user_password_error == "" && $first_name_error == "" && $last_name_error == ""){
+			if($user_group_error == "" && $create_user_email_error == "" && $create_user_password_error == "" && $first_name_error == "" && $last_name_error == ""){
 				echo hash("sha512", $create_user_password);
 				echo $first_name." ".$last_name." võib kasutaja luua! Kasutajanimi on ".$create_user_email." ja parool on ".$create_user_password;
 				
 				$hash = hash("sha512", $create_user_password);
 				
-				$create_response = $User->createUser($create_user_email, $hash);
+				$create_response = $User->createUser($user_group, $first_name, $last_name, $create_user_email, $hash, $company_name, $company_description);
 				
 			}
 		}
@@ -116,9 +118,9 @@
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 			<select id="user_group" name="user_group">
 				<option value="">[ Kasutaja ]</option>
-				<option value="ajakirjanik"<?=$user_group == "ajakirjanik" ? "selected='selected'" : ""?>>Ajakirjanik</option>
-				<option value="ettev6te"<?=$user_group == "ettev6te" ? "selected='selected'" : ""?>>Ettevõte</option>
-			</select>* <?=echo $user_group_error;?><br><br>
+				<option value="2"<?=$user_group == "2" ? "selected='selected'" : ""?>>Ajakirjanik</option>
+				<option value="3"<?=$user_group == "3" ? "selected='selected'" : ""?>>Ettevõte</option>
+			</select>* <?php echo $user_group_error;?><br><br>
 			<input name="create_user_email" type="email" placeholder="E-post" value="<?php echo $create_user_email; ?>">* <?php echo $create_user_email_error; ?> <br><br>
 			<input name="create_user_password" type="password" placeholder="Parool">* <?php echo $create_user_password_error; ?> <br><br>	
 			<input name="first_name" type="text" placeholder="Eesnimi" value="<?php echo $first_name; ?>">* <?php echo $first_name_error; ?> <br><br>
