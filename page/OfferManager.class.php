@@ -114,6 +114,35 @@ class OfferManager {
 		
 		$stmt->close();
 	}
+	
+	function getOffersData() {
+		
+		$stmt = $this->connection->prepare("SELECT offer_ID, request_ID, journalist_ID, date, price, comment, accepted FROM orders_naaber WHERE journalist_ID=?");
+		$stmt->bind_param("i", $_SESSION["logged_in_user_id"]);
+		$stmt->bind_result($offer_ID_from_db, $request_ID_from_db, $journalist_ID_from_db, $offer_date_from_db, $price_from_db, $comment_from_db, $accepted_from_db);
+		$stmt->execute();
+		
+		$array = array();
+		
+		while($stmt->fetch()){
+			
+			$offer = new Stdclass();
+			
+			$offer->id = $offer_ID_from_db;
+			$offer->request_id = $request_ID_from_db;
+			$offer->journalist_id = $journalist_ID_from_db;
+			$offer->odder_date = $offer_date_from_db;
+			$offer->price = $price_from_db;
+			$offer->comment = $comment_from_db;
+			$offer->accepted = $accepted_from_db;
+			
+			array_push($array, $offer);
+		}
+		
+		return $array;
+		
+		$stmt->close();
+	}
 }
 
 ?>
