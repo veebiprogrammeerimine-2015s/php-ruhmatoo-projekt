@@ -95,10 +95,10 @@ class OfferManager {
         return $order;
 	}
 	
-	function updateOrdersData($orders_id, $text_type, $subject, $description, $target_group, $source, $length, $deadline, $output){
+	function updateOrdersData($request_id, $text_type, $subject, $description, $target_group, $source, $length, $deadline, $output){
 		
 		$stmt = $this->connection->prepare("UPDATE requests SET text_type=?, subject=?, target_group=?, description=?, source=?, length=?, deadline=?, output=?, modified=NOW() WHERE request_ID=? AND company_ID=?");
-		$stmt->bind_param("sssssissii", $text_type, $subject, $description, $target_group, $source, $length, $deadline, $output, $orders_id, $_SESSION["logged_in_user_id"]);
+		$stmt->bind_param("sssssissii", $text_type, $subject, $description, $target_group, $source, $length, $deadline, $output, $request_id, $_SESSION["logged_in_user_id"]);
 		$stmt->execute();
 		
 		header("Location:requests.php");
@@ -106,10 +106,10 @@ class OfferManager {
 		$stmt->close();
 	}
 	
-	function deleteOrdersData($orders_id){
+	function deleteOrdersData($request_id){
 		
-		$stmt = $this->connection->prepare("UPDATE requests SET deleted=NOW() WHERE id=? AND company_ID=?");
-		$stmt->bind_param("ii", $orders_id, $_SESSION["logged_in_user_id"]);
+		$stmt = $this->connection->prepare("UPDATE requests SET deleted=NOW() WHERE request_ID=? AND company_ID=?");
+		$stmt->bind_param("ii", $request_id, $_SESSION["logged_in_user_id"]);
 		$stmt->execute();
 		
 		header("Location:requests.php");
@@ -134,7 +134,7 @@ class OfferManager {
 		
 	}
 	
-	function getOffersData() {
+	function getOffersData(){
 		
 		$stmt = $this->connection->prepare("SELECT offer_ID, request_ID, journalist_ID, date, price, comment, accepted FROM offers WHERE journalist_ID=?");
 		$stmt->bind_param("i", $_SESSION["logged_in_user_id"]);
