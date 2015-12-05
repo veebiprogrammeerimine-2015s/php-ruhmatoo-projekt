@@ -14,7 +14,7 @@ class OfferManager {
 	
 	function createNewOrder($text_type, $subject, $target_group, $description, $source, $length, $deadline, $output){
 		
-		$stmt = $this->connection->prepare("INSERT INTO offers(user_id, text_type, subject, target_group, description, source, length, deadline, output) VALUES(?,?,?,?,?,?,?,?,?)");
+		$stmt = $this->connection->prepare("INSERT INTO requests(user_id, text_type, subject, target_group, description, source, length, deadline, output) VALUES(?,?,?,?,?,?,?,?,?)");
 		$stmt->bind_param("isssssiss", $_SESSION['logged_in_user_id'], $text_type, $subject, $target_group, $description, $source, $length, $deadline, $output);
 		
 		$message = "";
@@ -118,7 +118,7 @@ class OfferManager {
 	function addNewOffer($request_id, $journalist_id, $price, $comment){
 		
 		$stmt = $this->connection->prepare("INSERT INTO offers(request_ID, journalist_ID, date, price, comment) VALUES(?,?,?,?,?)");
-		$stmt->bind_param("iisis", $request_id, $_SESSION['logged_in_user_id'], NOW(), $price, $comment);
+		$stmt->bind_param("iisis", $request_id, $journalist_id, NOW(), $price, $comment);
 		
 		$message = "";
 		
