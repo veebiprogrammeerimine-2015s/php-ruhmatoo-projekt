@@ -60,7 +60,7 @@
 					//saadan sõnumi teise faili kasutades SESSIOONI
 					$_SESSION["login_success_message"] = $login_response->success->message;
 					
-					header("Location: data.php");
+					header("Location: profile.php");
 					
 				}
 				
