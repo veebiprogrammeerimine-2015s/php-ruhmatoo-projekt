@@ -113,7 +113,9 @@
   			</br>
   			<input type="submit" name="book-now" value="Kinnita broneering">
   			</form>	
-  			
+  			<?php if(isset($_SESSION["return_url"])): ?>
+  				<?= createBackButton($_SESSION["return_url"]); //kutsume välja tagasi nupu  ?>
+  			<?php endif; ?>
   			
 		
 		

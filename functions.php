@@ -14,6 +14,11 @@
 	$User = new User($mysqli);
 	
 	
-	//alert input: 
+	//näita backu button
+	function createBackButton($href_to_back){
+			
+		echo '<a href="'.$href_to_back.'" class="btn btn-info" role="button">Tagasi</a>';
+		
+	}
 	
 ?>

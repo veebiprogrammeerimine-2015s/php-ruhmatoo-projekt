@@ -96,7 +96,7 @@
 					//jõudsime siia, suuname kasuataj kinnituslehele ja salvestame return aadressi
 					
 					$return_url =  htmlspecialchars($_SERVER["PHP_SELF"]);
-					$return_url .="/";
+					$return_url .="?";
 					$return_url .= htmlspecialchars($_SERVER["QUERY_STRING"]);
 					
 					$_SESSION["return_url"] = $return_url;
