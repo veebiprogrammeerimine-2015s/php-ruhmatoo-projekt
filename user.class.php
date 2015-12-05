@@ -13,9 +13,7 @@ class User {
 	
 	function createUser($create_username, $create_email, $hash){
 		
-		// teen objekti 
-		// seal on error, ->id ja ->message
-		// või success ja sellel on ->message
+
 		$response = new StdClass();
 		
 		//kas selline email on juba olemas
@@ -24,26 +22,23 @@ class User {
 		$stmt->bind_result($id);
 		$stmt->execute();
 		
-		// kas sain rea andmeid
 		if($stmt->fetch()){
 			
-			// annan errori, et selline email olemas
 			$error = new StdClass();
 			$error->id = 0;
 			$error->message = "Sellise e-postiga kasutaja on juba olemas!";
 			
 			$response->error = $error;
 			
-			// kõik mis on pärast returni enam ei käivitata
 			return $response;
 			
 		}
 		
-		// panen eelmise päringu kinni
 		$stmt->close();
 		
-		$stmt = $this->connection->prepare("INSERT INTO user_creation (Username, Email, Password) VALUES (?,?,?)");
+		$stmt = $this->connection->prepare("INSERT INTO user_creation (User, Email, Password, Created) VALUES (?,?,?,NOW())");
 		$stmt->bind_param("sss", $create_username, $create_email, $hash);
+		
 		
 		// sai edukalt salvestatud
 		if($stmt->execute()){
@@ -69,13 +64,13 @@ class User {
 		return $response;
 	}
 	
-	function loginUser($email, $hash){
+	function loginUser($user, $hash){
 		
 		$response = new StdClass();
 		
 		//kas selline email on juba olemas
-		$stmt = $this->connection->prepare("SELECT id FROM user_creation WHERE Email=?");
-		$stmt->bind_param("s", $email);
+		$stmt = $this->connection->prepare("SELECT id FROM user_creation WHERE User=?");
+		$stmt->bind_param("s", $user);
 		$stmt->bind_result($id);
 		$stmt->execute();
 		
@@ -95,8 +90,8 @@ class User {
 		//*********************
 		$stmt->close();
 		
-		$stmt = $this->connection->prepare("SELECT id, Username, Email FROM user_creation WHERE Username=? AND Email=? AND Password=?");
-		$stmt->bind_param("sss",$username, $email, $hash);
+		$stmt = $this->connection->prepare("SELECT id, User, Email FROM user_creation WHERE User=? AND Password=?");
+		$stmt->bind_param("ss",$user, $hash);
 		$stmt->bind_result($id_from_db, $username_from_db, $email_from_db);
 		$stmt->execute();
 		if($stmt->fetch()){
