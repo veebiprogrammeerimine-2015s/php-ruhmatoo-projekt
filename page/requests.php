@@ -60,6 +60,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-d
 	<th>ilmumiskoht</th>
     <th></th>
 	<th></th>
+	<th></th>
 </tr>
 
 <?php
@@ -75,6 +76,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-d
 		echo "<td>".$orders_array[$i]->output."</td>";
 		echo "<td><a href='?delete=".$orders_array[$i]->id."'>kustuta</a></td>";
 		echo "<td><a href='edit.php?edit_id=".$orders_array[$i]->id."'>muuda</a></td>";
+		echo "<td><a href='offers_data.php?offers_data_id=".$orders_array[$i]->id."'>tee pakkumine</a></td>";
 		echo "<tr>";
 	}
 ?>
