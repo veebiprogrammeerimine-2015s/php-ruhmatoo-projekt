@@ -8,10 +8,11 @@
 	require_once("functions.php");
 	require_once("AvailableTimeDetails.class.php");
 	require_once("UserBookingManager.class.php");
+	
+	
 	echo "session id: ";
 	
 	print_r($_SESSION["id_from_db"]);
-	print_r( $_SESSION["selected_available_time"]);	 
 	/*if(isset($_SESSION["id_from_db"])){
 		// suunan data lehele
 		header("Location: home.php");
@@ -24,8 +25,10 @@
 	
 	
 	// teeme uue instantsi class AvailableTimeDetails
+
 	$AvailableTimeDetails = new AvailableTimeDetails($mysqli);
 	$UserBookingManager = new UserBookingManager($mysqli);
+	
 	
 	// tommame urlist id
 	if(isset($_GET["timeavailableid"])){
@@ -35,6 +38,8 @@
     
     //tommame kogu info
 	$getTimeInfo = $AvailableTimeDetails->getFreeTimesDetails($timeavailableid);
+	// tõmmame arsti haigused, millega tegeleb
+	$getDrDeseaes = $AvailableTimeDetails->getDoctorDeseases($timeavailableid);
 	
 	//kontrollime, kas ei tule null rida parameetri vastu
 	if (isset($getTimeInfo->error)){
@@ -63,10 +68,11 @@
 		if(isset($_POST["book-now"])){
 					// votame vormidelt vaartused
 					$selected_available_time = (intval($_POST["selectedavailabletime"]));
+					$selected_desease_id = (intval($_POST["selectdesease"]));
 					$problem_description = ($_POST["problemdescrpt"]);
 					$_SESSION["selected_available_time"] = $selected_available_time ;
 					$_SESSION["problem_description"] = $problem_description;
-					
+					$_SESSION["selected_desease"] = $selected_desease_id;
 					// kontrollime, kas kasutaja sisse loginud 
 					$log_in_info = $UserBookingManager->checkUserLogedIn();
 					if (isset($log_in_info->error)){
@@ -82,10 +88,10 @@
 						
 					}
 					
-					/*if(empty($_POST["problemdescrpt"])){
+					if(empty($_POST["problemdescrpt"])){
 						$main_error = "Sisest palun oma mure";
-						header("Location: login.php?book-now.php=".$_SESSION["selected_available_time"]);
-					}*/
+					}
+					
 					
 					//jõudsime siia, suuname kasuataja kinnituslehele ja salvestame return aadressi
 					
@@ -134,6 +140,9 @@
   			<label for="comment">Arsti nimi:</label>  <?php echo $dr_name ?>
   			<div class="form-group">
   		<form action="<?php // echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+  				<label for="comment">Sisesta haiguse valdkond:</label>
+  				<?php echo $AvailableTimeDetails->createDropdownDesease($getDrDeseaes); ?>
+  				
   				<label for="comment">Sisesta oma mure siia:</label>
   			<textarea class="form-control" rows="5" name="problemdescrpt" id="problem-descrition"  ><?php echo $_SESSION["problem_description"] ?></textarea>
 			</div> 

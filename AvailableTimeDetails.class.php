@@ -153,71 +153,10 @@
     	return $html;
 		}
 		
-		function createDropdownCity($data_in, $selected_in = ""){
-			$items = array();
-			foreach($data_in as $option){
-				$item= $option->city;
-				array_push($items, $item);
-			}
-			$data_in = array_unique($items);
-			$html = '';
-		
-			$html .= '<select name="selectcity">';
-			foreach($data_in as $option){
-				if ($selected_in == $option){
-					$html .= '<option value="'.$option.'"selected>'.$option.'</option>';
-				}
-				else{
-				$html .= '<option value="'.$option.'">'.$option.'</option>';
-				}
-			}
 		
 		
-			if ($selected_in == ""){
-			
-			$html .= '<option value="" selected>Vali linn</option>';
-			}
-			else{
-				$html .= '<option value="">Vali linn</option>';
-			}
-			$html .= '</select>';
-		
-			return $html;
-		
-		}
 		
 		
-		function createDropdownArea($data_in, $selected_in = ""){
-			$items = array();
-			foreach($data_in as $option){
-				$item= $option->area;
-				array_push($items, $item);
-			}
-			$data_in = array_unique($items);
-			$html = '';
-		
-			$html .= '<select name="selectarea">';
-			foreach($data_in as $option){
-				if ($selected_in == $option){
-					$html .= '<option value="'.$option.'"selected>'.$option.'</option>';
-				}
-				else{
-				$html .= '<option value="'.$option.'">'.$option.'</option>';
-				}
-			}
-		
-		
-			if ($selected_in == ""){
-			
-			$html .= '<option value="" selected>Vali piirkond</option>';
-			}
-			else{
-				$html .= '<option value="">Vali piirkond</option>';
-			}
-			$html .= '</select>';
-			
-			return $html;
-		}
 		
 		// funktsioon ajatabelis staatuste kuvamiseks
 		
@@ -250,5 +189,33 @@
   			return $html;
 		}
 		
-}
+		function createDropdownDesease($data_in, $selected_in = ""){
+			
+			
+			$html = '';
+		
+			$html .= '<select name="selectdesease">';
+			foreach($data_in as $option){
+				if ($selected_in == $option){
+					$html .= '<option value="'.$option->id.'"selected>'.$option->desease_fdb.'</option>';
+				}
+				else{
+				$html .= '<option value="'.$option->id.'">'.$option->desease_fdb.'</option>';
+				}
+			}
+		
+		
+			if ($selected_in == ""){
+			
+			$html .= '<option value="" selected>Vali haigus</option>';
+			}
+			else{
+				$html .= '<option value="">Vali haigus</option>';
+			}
+			$html .= '</select>';
+		
+			return $html;
+		}
+		
+}	
 ?>
