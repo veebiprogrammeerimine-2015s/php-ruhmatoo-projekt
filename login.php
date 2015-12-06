@@ -7,7 +7,6 @@
 <?php
 //laeme funktsiooni failis
 	require_once("functions.php");
-	var_dump($_SESSION["id_from_db"]."sessonind");
 	//*******************//
 	//***Kuhu suunata?***//
 	//*******************//
@@ -68,58 +67,58 @@
   	return $data;
   }
 ?>
+<!-- main code start here -->  
 
-
-
-
-
+<html>
+<head>
 	
-	<div class="container-fluid">
-  		<div class ="row">
-  			<div class="col-md-3 col-md-offset-1">
-  				<h2>Logi sisse</h2>
-				<?php if(isset($login_response->error)):?>
-				<p style="color:red;"><?=$login_response->error->message;?></p>
-				<?php elseif(isset($login_response->success)):?>
-				<p style="color:green;"><?=$login_response->success->message;?></p>
-				<?php endif;?>
-  
-				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-					<div class="form-group">
-						<input name="email" type="text" placeholder="Kasutajanimi" value="<?php echo $email; ?>"> <font style="color:red"><?php echo $email_error; ?></font><br><br>
-					<input name="password" type="password" placeholder="Parool" value="<?php echo $password; ?>"> <font style="color:red"><?php echo $password_error; ?></font><br><br>
-					<input type="submit" name="login" value="Logi sisse">
-				</form>
-			
-				<form>
-				  <div class="form-group">
-					<label for="exampleInputEmail1">Email address</label>
-					<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-				  </div>
-				  <div class="form-group">
-					<label for="exampleInputPassword1">Password</label>
-					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-				  </div>
-				  <div class="form-group">
-					<label for="exampleInputFile">File input</label>
-					<input type="file" id="exampleInputFile">
-					<p class="help-block">Example block-level help text here.</p>
-				  </div>
-				  <div class="checkbox">
-					<label>
-					  <input type="checkbox"> Check me out
-					</label>
-				  </div>
-				  <button type="submit" class="btn btn-default">Submit</button>
-				</form>
-			</div>
-	  		
-		</div>
-	</div>
+</head>
+<body>
+
+<?php if(isset($login_response->error)):?>
+<p style="color:red;"><?=$login_response->error->message;?></p>
+<?php elseif(isset($login_response->success)):?>
+<p style="color:green;"><?=$login_response->success->message;?></p>
+<?php endif;?>
+	
+<div class="container">
+<div class="row">
+<div class="page-header">
+<h1>Logi sisse</h1>
+</div>
+<form class="form-horizontal" role="form" method="post" action="#">
+ 
+<div class="form-group">
+<font style="color:red"><?php echo $email_error; ?></font>
+<label for="email" class="col-sm-2 control-label">Email:</label>
+<div class="col-sm-6">
+<input type="email" name="email" class="form-control" id="email" placeholder="Email" value="<?php if(isset($_POST["email"])){echo $email;} ?>">
+</div>
+</div>
+
+<div class="form-group">
+<font style="color:red"><?php echo $password_error; ?></font>
+<label for="passwd" class="col-sm-2 control-label">Parool:</label>
+<div class="col-sm-6">
+<input type="password" name="password" class="form-control" id="passwd" placeholder="Parool">
+</div>
+</div>
+
+
+<div class="form-group">
+<div class="col-sm-offset-2 col-sm-10">
+<button type="submit" class="btn btn-primary" name="login" id="login">Logi sisse</button>
+</div>
+</div>
+</form>
+
+</div><!-- end for class "row" -->
+</div><!-- end for class "container" -->
 </body>
+<!-- bootstrap -->
 </html>
 
-<!--main code end here -->  
+<!-- main code end here ---->  
 <?php
 	//load footer
 	require_once("footer.php");	
