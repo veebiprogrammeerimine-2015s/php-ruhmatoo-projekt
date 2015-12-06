@@ -46,7 +46,7 @@
 </form>
 
 	<?php echo $AvailableTimes->build_table($getAllTimes);?>
-
+	
 <!--main code end here -->  
 
 <?php
