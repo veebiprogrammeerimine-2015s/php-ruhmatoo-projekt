@@ -116,7 +116,8 @@
 <font style="color:red"><?php echo $create_personalcode_error; ?></font>
 <label for="create_personalcode" class="col-sm-2 control-label">Isikukood:</label>
 <div class="col-sm-6">
-<input type="number" name="create_personalcode" class="form-control" id="create_personalcode" placeholder="Isikukood">
+<input type="number" name="create_personalcode" class="form-control" id="create_personalcode" placeholder="Isikukood" value="<?php if(isset($_POST["create_personalcode"])){echo $create_personalcode;} ?>">
+
 </div>
 </div>
 
@@ -124,7 +125,7 @@
 <font style="color:red"><?php echo $create_email_error; ?></font>
 <label for="create_email" class="col-sm-2 control-label">Email:</label>
 <div class="col-sm-6">
-<input type="email" name="create_email" class="form-control" id="create_email" placeholder="Email">
+<input type="email" name="create_email" class="form-control" id="create_email" placeholder="Email" value="<?php if(isset($_POST["create_email"])){echo $create_email;} ?>">
 </div>
 </div>
  
@@ -132,7 +133,7 @@
 <font style="color:red"><?php echo $create_name_error; ?></font>
 <label for="create_name" class="col-sm-2 control-label">Ees- ja perekonnanimi:</label>
 <div class="col-sm-6">
-<input type="text" name="create_name" class="form-control" id="create_name" placeholder="Ees- ja perekonnanimi">
+<input type="text" name="create_name" class="form-control" id="create_name" placeholder="Ees- ja perekonnanimi" value="<?php if(isset($_POST["create_name"])){echo $create_name;} ?>">
 </div>
 </div>
 
@@ -149,10 +150,10 @@
 <label for="" class="col-sm-2 control-label">Sugu:</label>
 <div class="col-sm-6">
 <label class="radio-inline">
-<input type="radio" name="create_gender" id="gender1" value="m">Mees
+<input type="radio" name="create_gender" id="gender1" value="m"<?php if($_POST["create_gender"] == "m"){checked;}?>>Mees
 </label>
 <label class="radio-inline">
-<input type="radio" name="create_gender" id="gender2" value="f">Naine
+<input type="radio" name="create_gender" id="gender2" value="f"<?php if($_POST["create_gender"] == "f"){checked;}?>>Naine
 </label>
  
 </div>
@@ -162,7 +163,7 @@
 <font style="color:red"><?php echo $create_age_error; ?></font>
 <label for="datepicker" class="col-sm-2 control-label">Sünnikuupäev:</label>
 <div class="col-sm-6">
-<input type="text" name="dob" class="form-control datepicker" id="datepicker" placeholder="Sünnikuupäev">
+<input type="text" name="dob" class="form-control datepicker" id="datepicker" placeholder="Sünnikuupäev" value="<?php if(isset($_POST["dob"])){echo $create_age;} ?>">
 </div>
 </div>
 
@@ -171,10 +172,10 @@
 <label for="" class="col-sm-2 control-label">Kas ravikindlustus on olemas?:</label>
 <div class="col-sm-6">
 <label class="radio-inline">
-<input type="radio" name="create_insurance" id="insurance1" value="yes">Jah
+<input type="radio" name="create_insurance" id="insurance1" value="yes" <?php if($_POST["create_insurance"] == "yes"){checked;}?>>Jah
 </label>
 <label class="radio-inline">
-<input type="radio" name="create_insurance" id="insurance2" value="no">Ei
+<input type="radio" name="create_insurance" id="insurance2" value="no"<?php if($_POST["create_insurance"] == "no"){checked;}?>>Ei
 </label>
 
 </div>
