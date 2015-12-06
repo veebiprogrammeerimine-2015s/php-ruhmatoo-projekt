@@ -1,4 +1,9 @@
-
+  <?php
+  require_once("../../../config.php");
+    if(!isset($_SESSION["logged_in_user_id"])){
+    header("Location: index.php");
+  }
+  ?>
 <html lang="en">
 <head>
     <meta charset="utf-8">
