@@ -11,9 +11,7 @@
 	echo "session id: ";
 	
 	print_r($_SESSION["id_from_db"]);
-	print_r( $_SESSION["return_url"]);
-	
-	
+	print_r( $_SESSION["return_url"]);	 
 	/*if(isset($_SESSION["id_from_db"])){
 		// suunan data lehele
 		header("Location: home.php");
@@ -73,19 +71,19 @@
 					$_SESSION["selected_available_time"] = $selected_available_time ;
 					$_SESSION["problem_description"] = $problem_description;
 					
-					// kontrollime, kas kasutaja sisse loginud
+					// kontrollime, kas kasutaja sisse loginud 
 					$log_in_info = $UserBookingManager->checkUserLogedIn();
-					
 					if (isset($log_in_info->error)){
 						
 						 $main_error = $log_in_info->error->message;
 						
-					}
+						}
+					
 					//kontrollime soovitava aja broneeringu staatust teeme integeri			
 					$time_status = $UserBookingManager->checkTimeStatus(intval($_SESSION["selected_available_time"]));
 					if (isset($time_status->error)){
 						$main_error = $time_status->error->message;	
-						header("Location: login.php?book-now.php=".$_SESSION["selected_available_time"]);
+						
 					}
 					
 					/*if(empty($_POST["problemdescrpt"])){
@@ -93,15 +91,20 @@
 						header("Location: login.php?book-now.php=".$_SESSION["selected_available_time"]);
 					}*/
 					
-					//jõudsime siia, suuname kasuataj kinnituslehele ja salvestame return aadressi
+					//jõudsime siia, suuname kasuataja kinnituslehele ja salvestame return aadressi
 					
-					$return_url =  htmlspecialchars($_SERVER["PHP_SELF"]);
-					$return_url .="?";
-					$return_url .= htmlspecialchars($_SERVER["QUERY_STRING"]);
+					if($main_error == ""){
 					
-					$_SESSION["return_url"] = $return_url;
+						
 					
-					header("Location:book-confirmation.php?timeavailableid=".$_SESSION["selected_available_time"]);
+						$return_url =  htmlspecialchars($_SERVER["PHP_SELF"]);
+						$return_url .="?";
+						$return_url .= htmlspecialchars($_SERVER["QUERY_STRING"]);
+					
+						$_SESSION["return_url"] = $return_url;
+					
+						header("Location:book-confirmation.php?timeavailableid=".$_SESSION["selected_available_time"]);
+					}
 		}
 		
 	
@@ -118,6 +121,7 @@
 <div class="container">
 <?php if(isset($main_error)): ?>
 		<?= $UserBookingManager->buildMainError($main_error) ;?>
+		
 	<?php endif; ?>
 	<div class="row">
 	
@@ -130,7 +134,7 @@
   			<div class="form-group">
   		<form action="<?php // echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
   				<label for="comment">Sisesta oma mure siia:</label>
-  			<textarea class="form-control" rows="5" name="problemdescrpt" id="problem-descrition"></textarea>
+  			<textarea class="form-control" rows="5" name="problemdescrpt" id="problem-descrition"  > <?php echo $_SESSION["problem_description"] ?> </textarea>
 			</div> 
 		</div>
 		<div class="col-md-3 ">
