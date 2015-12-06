@@ -11,7 +11,7 @@
 	echo "session id: ";
 	
 	print_r($_SESSION["id_from_db"]);
-	print_r( $_SESSION["return_url"]);	 
+	print_r( $_SESSION["selected_available_time"]);	 
 	/*if(isset($_SESSION["id_from_db"])){
 		// suunan data lehele
 		header("Location: home.php");
@@ -20,6 +20,7 @@
 	
 	// tuhjad muudujad
 	$problem_description ='';
+	
 	
 	
 	// teeme uue instantsi class AvailableTimeDetails
@@ -54,12 +55,7 @@
 		$getDrDayTimes = $AvailableTimeDetails->getDoctorDayTimes($timeavailableid);
 		//var_dump($getDrDayTimes);
 		
-		//kontrollime soovitava aja broneeringu staatust teeme integeri			
-		$time_status = $UserBookingManager->checkTimeStatus(intval($timeavailableid));
-		if (isset($time_status->error)){
-			$main_error = $time_status->error->message;
-						
-		}
+		
 	
 	
 	// keegi chekkis radiobuttoni ja hakkab broneerima
@@ -99,7 +95,7 @@
 					
 						$return_url =  htmlspecialchars($_SERVER["PHP_SELF"]);
 						$return_url .="?";
-						$return_url .= htmlspecialchars($_SERVER["QUERY_STRING"]);
+						$return_url .= 'timeavailableid='.($_SESSION["selected_available_time"]);
 					
 						$_SESSION["return_url"] = $return_url;
 					
@@ -109,7 +105,12 @@
 		
 	
 	}
-	
+	//kontrollime soovitava aja broneeringu staatust teeme integeri			
+		$time_status = $UserBookingManager->checkTimeStatus(intval($timeavailableid));
+		if (isset($time_status->error)){
+			$main_error = $time_status->error->message;
+						
+		}
 ?>
 
 <?php// echo htmlspecialchars($_SERVER["PHP_SELF"]);?>
@@ -134,7 +135,7 @@
   			<div class="form-group">
   		<form action="<?php // echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
   				<label for="comment">Sisesta oma mure siia:</label>
-  			<textarea class="form-control" rows="5" name="problemdescrpt" id="problem-descrition"  > <?php echo $_SESSION["problem_description"] ?> </textarea>
+  			<textarea class="form-control" rows="5" name="problemdescrpt" id="problem-descrition"  ><?php echo $_SESSION["problem_description"] ?></textarea>
 			</div> 
 		</div>
 		<div class="col-md-3 ">

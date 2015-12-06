@@ -16,6 +16,8 @@
 	}
 	
 	print_r( $_SESSION["return_url"]);
+	echo "valitud aja id ";
+	print_r ($_SESSION["selected_available_time"]);
 	// omistame probleemi
 	$problem_description = $_SESSION["problem_description"];
 	var_dump($problem_description);
