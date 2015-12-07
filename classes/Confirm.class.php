@@ -36,9 +36,9 @@ Class Confirm{
 	function getAllData($contest_id,$user_id){
         
         //deleted IS NULL ehk kustutab ära 
-        $stmt = $this->connection->prepare("SELECT confirm.id, user_sample.email, contests.contest_name FROM confirm, contests, user_sample WHERE confirm.user_id = user_sample.id AND confirm.contest_id = contests.id AND contests.deleted IS NULL AND confirm.contest_id = ? AND confirm.user_id = ?");
+        $stmt = $mysqli->prepare("SELECT confirm.id, user_sample.email, contests.contest_name FROM confirm, contests, user_sample WHERE confirm.user_id = user_sample.id AND confirm.contest_id = contests.id AND contests.deleted IS NULL AND confirm.contest_id = ? AND confirm.user_id = ?");
         $stmt->bind_param("ii", $contest_id, $_SESSION['logged_in_user_id']);
-		$stmt->bind_result($id_from_db, $contest_name_from_db, $name_from_db); 
+		// SEDA RIDA MUUTA $stmt->bind_result($id_from_db, $contest_name_from_db, $name_from_db);
         $stmt->execute();
   
         // iga rea kohta mis on ab'is teeme midagi
@@ -47,7 +47,7 @@ Class Confirm{
         $array = array(); 
         
         while($stmt->fetch()){
-            //suvaline muutuja, kus hoida auto andmeid, hetkeni kuni lisame massiivi
+
             
             //tühi objekt, kus hoiame väärtuseid
             $contest_array = new StdClass();
@@ -56,11 +56,9 @@ Class Confirm{
             $contest_array->name = $name_from_db;
 
             
-            //lisan massiivi - auto lisan massiivi
+
             array_push($array, $all_contest);
-            //echo "<pre>";
-            //var_dump($array); 
-            //echo "</pre>";
+
             
         }
         //saadan tagasi

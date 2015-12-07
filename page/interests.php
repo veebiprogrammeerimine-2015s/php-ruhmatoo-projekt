@@ -3,24 +3,15 @@
     require_once("functions.php");
     require_once("../classes/InterestManager.class.php");
     
-    //kui kasutaja ei ole sisse logitud, suuna teisele lehele
-    //kontrollin kas sessiooni muutuja olemas
-    if(!isset($_SESSION['user_id'])){
-        header("Location: login.php");
-        //ära enne suunamist midagi tee 
-        exit();
-    }
     
-    // aadressireale tekkis ?logout=1
-    if(isset($_GET["logout"])){
-        //kustutame sessiooni muutujad
-        session_destroy();
+    if(!isset($_SESSION['logged_in_user_id'])){
         header("Location: login.php");
     }
  
     //****************
     //****HALDUS******
     //****************
+
     
     $InterestManager = new InterestManager($mysqli, $_SESSION['user_id']);
     
