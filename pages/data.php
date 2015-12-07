@@ -22,7 +22,7 @@
 	$title_error = $season_error = $intro_error = $photo_error = "";
 	
 	
-	if(isset($_POST["postseason"])){
+	if(isset($_POST["addSeries"])){
 		echo "vajutati nuppu";
 		if ( empty($_POST["title"]) ) {
 				$title_error = "See väli on kohustuslik";

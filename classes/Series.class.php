@@ -11,7 +11,7 @@ class Series {
 		$this->connection = $mysqli;
 		$this->user_id = $user_id_from_session;
 		
-		echo "Huvialade haldus käivitatud, kasutaja=".$this->user_id;
+		// echo "Seriaalide haldus käivitatud, kasutaja=".$this->user_id;
 		
 	}
 	
@@ -20,8 +20,8 @@ class Series {
 		$response = new StdClass();
 		
 		
-		$stmt = $this->connection->prepare("SELECT id FROM series WHERE name=?");
-		$stmt->bind_param("s", $add_interest);
+		$stmt = $this->connection->prepare("SELECT id FROM series WHERE title=?");
+		$stmt->bind_param("s", $add_series);
 		$stmt->bind_result($id);
 		$stmt->execute();
 		
@@ -30,7 +30,7 @@ class Series {
 			
 			$error = new StdClass();
 			$error->id = 0;
-			$error->message = "Seriaal <strong>".$add_interest."</strong> on juba olemas!";
+			$error->message = "Seriaal <strong>".$add_series."</strong> on juba olemas!";
 			
 			$response->error = $error;
 			
@@ -40,10 +40,10 @@ class Series {
 		
 		$stmt->close();
 		
-		$stmt = $this->connection->prepare("INSERT INTO series (name, season, description, picture) VALUES (?, ?, ?, ?)");
+		$stmt = $this->connection->prepare("INSERT INTO series (title, season, description, picture) VALUES (?, ?, ?, ?)");
 				
 		
-		$stmt->bind_param("ssss", $name, $season, $description, $picture);
+		$stmt->bind_param("ssss", $title, $season, $description, $picture);
 		if($stmt->execute()) {
 			
 			$success = new StdClass();
@@ -72,13 +72,14 @@ class Series {
 	}
 	
 	
-	function addUserList($add_list){
+	
+	function addSeriesToList($new_series_id){
 		
 		$response = new StdClass();
 		
 		//kas sellel kasutajal on see list
 		$stmt = $this->connection->prepare("SELECT id FROM user_list WHERE user_id=? AND name=?");
-		$stmt->bind_param("is", $this->user_id, $add_list);
+		$stmt->bind_param("is", $this->user_id, $new_series_id);
 		$stmt->bind_result($id);
 		$stmt->execute();
 		
@@ -87,7 +88,7 @@ class Series {
 			
 			$error = new StdClass();
 			$error->id = 0;
-			$error->message = "Sellise nimega list on sinul juba olemas!";
+			$error->message = "Sellise nimega seriaal on sinul selles listis juba olemas!";
 			
 			$response->error = $error;
 			
@@ -104,7 +105,7 @@ class Series {
 		if($stmt->execute()) {
 			
 			$success = new StdClass();
-			$success->message = "Huviala edukalt sisestatud!";
+			$success->message = "Seriaal edukalt sisestatud!";
 			$response->success = $success;
 			
 			
@@ -127,5 +128,10 @@ class Series {
 		
 		
 	}
+	
+	
+	
+	
+?>
 	
 } ?>
