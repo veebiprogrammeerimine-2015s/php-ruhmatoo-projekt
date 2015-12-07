@@ -22,6 +22,7 @@
         * v0.3 Saab kinnitada jooksu
 		* v0.4 Tabel, kus on tulemused
 		* v0.5 Jooksu tagasiside tabel
+		* v0.6 Huvialade tabel, kasutajate ühised huvid
 		
     * andmebaasi skeem loetava pildina + tabelite loomise SQL laused;
     * **kokkuvõte:** mida õppisid juurde? mis ebaõnnestus? mis oli keeruline? (kirjutab iga tiimi liige).

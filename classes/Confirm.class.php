@@ -36,9 +36,9 @@ Class Confirm{
 	function getAllData($contest_id,$user_id){
         
         //deleted IS NULL ehk kustutab ära 
-        $stmt = $mysqli->prepare("SELECT confirm.id, user_sample.email, contests.contest_name FROM confirm, contests, user_sample WHERE confirm.user_id = user_sample.id AND confirm.contest_id = contests.id AND contests.deleted IS NULL AND confirm.contest_id = ? AND confirm.user_id = ?");
+        $stmt = $this->connection->prepare("SELECT confirm.id, user_sample.email, contests.contest_name FROM confirm, contests, user_sample WHERE confirm.user_id = user_sample.id AND confirm.contest_id = contests.id AND contests.deleted IS NULL AND confirm.contest_id = ? AND confirm.user_id = ?");
         $stmt->bind_param("ii", $contest_id, $_SESSION['logged_in_user_id']);
-		// SEDA RIDA MUUTA $stmt->bind_result($id_from_db, $contest_name_from_db, $name_from_db);
+		$stmt->bind_result($id_from_db, $contest_name_from_db, $name_from_db); 
         $stmt->execute();
   
         // iga rea kohta mis on ab'is teeme midagi
