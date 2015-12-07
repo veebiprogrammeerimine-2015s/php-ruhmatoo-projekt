@@ -57,7 +57,7 @@ Class Confirm{
 
             
             //lisan massiivi - auto lisan massiivi
-            array_push($array, $all_contest);
+            array_push($array, $contest_array);
             //echo "<pre>";
             //var_dump($array); 
             //echo "</pre>";
