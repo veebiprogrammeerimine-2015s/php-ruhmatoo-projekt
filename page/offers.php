@@ -24,6 +24,8 @@ Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-d
 <table border=1>
 <tr>
     <th>tellimus</th>
+	<th>tellimus_nimi</th>
+	<th>tellimus_ettevõte</th>
     <th>kuupäev</th>
 	<th>hind</th>
     <th>kommentaar</th>
@@ -34,6 +36,8 @@ Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-d
 	for($i = 0; $i < count($offers_array); $i++){
 		echo "<tr>";
 		echo "<td>".$offers_array[$i]->request_id."</td>";
+		echo "<td>".$offers_array[$i]->subject."</td>";
+		echo "<td>".$offers_array[$i]->company_name."</td>";
 		echo "<td>".$offers_array[$i]->offer_date."</td>";
 		echo "<td>".$offers_array[$i]->price."</td>";
 		echo "<td>".$offers_array[$i]->comment."</td>";

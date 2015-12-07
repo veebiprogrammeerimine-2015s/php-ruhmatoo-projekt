@@ -23,7 +23,7 @@
 	}
 	
 	if(isset($_GET["update"])){
-		$OfferManager->updateOrdersData(cleanInput($_GET["request_id"]), cleanInput($_GET["text_type"]), cleanInput($_GET["subject"]), cleanInput($_GET["description"]), cleanInput($_GET["target_group"]), cleanInput($_GET["source"]), cleanInput($_GET["length"]), cleanInput($_GET["deadline"]), cleanInput($_GET["output"]));
+		$OfferManager->updateOrdersData(cleanInput($_GET["request_id"]), cleanInput($_GET["text_type"]), cleanInput($_GET["subject"]), cleanInput($_GET["description"]), cleanInput($_GET["target_group"]), cleanInput($_GET["source"]), cleanInput($_GET["length"]), cleanInput($_GET["offer_deadline"]), cleanInput($_GET["work_deadline"]), cleanInput($_GET["output"]));
 	}
 	
 	if(isset($_GET["delete"])){
@@ -57,6 +57,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-d
     <th>allikad</th>
     <th>maht</th>
     <th>tähtaeg</th>
+	<th>tähtaeg</th>
 	<th>ilmumiskoht</th>
     <th></th>
 	<th></th>
@@ -72,7 +73,8 @@ Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-d
 		echo "<td>".$orders_array[$i]->target_group."</td>";
 		echo "<td>".$orders_array[$i]->source."</td>";
 		echo "<td>".$orders_array[$i]->length."</td>";
-		echo "<td>".$orders_array[$i]->deadline."</td>";
+		echo "<td>".$orders_array[$i]->offer_deadline."</td>";
+		echo "<td>".$orders_array[$i]->work_deadline."</td>";
 		echo "<td>".$orders_array[$i]->output."</td>";
 		echo "<td><a href='?delete=".$orders_array[$i]->request_ID."'>kustuta</a></td>";
 		echo "<td><a href='edit.php?edit_id=".$orders_array[$i]->request_ID."'>muuda</a></td>";

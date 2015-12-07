@@ -14,7 +14,7 @@
 	}
 	
 	if(isset($_GET["update"])){
-		$OfferManager->updateOrdersData(cleanInput($_GET["orders_id"]), cleanInput($_GET["text_type"]), cleanInput($_GET["subject"]), cleanInput($_GET["target_group"]), cleanInput($_GET["description"]), cleanInput($_GET["source"]), cleanInput($_GET["length"]), cleanInput($_GET["deadline"]), cleanInput($_GET["output"]));
+		$OfferManager->updateOrdersData(cleanInput($_GET["orders_id"]), cleanInput($_GET["text_type"]), cleanInput($_GET["subject"]), cleanInput($_GET["target_group"]), cleanInput($_GET["description"]), cleanInput($_GET["source"]), cleanInput($_GET["length"]), cleanInput($_GET["offer_deadline"]), cleanInput($_GET["work_deadline"]), cleanInput($_GET["output"]));
 	}
 	
 	if(isset($_GET["edit_id"])){
@@ -49,7 +49,8 @@ Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-d
 	<textarea style="resize:none" name="description" rows="10" cols="28"><?=$order->description;?></textarea><br><br>
 	<input name="source" type="text" value="<?=$order->source;?>"><br><br>
 	<input name="length" type="number" value="<?=$order->length;?>"><br><br>
-	<input name="deadline" type="datetime" value="<?=$order->deadline;?>"><br><br>
+	<input name="offer_deadline" type="datetime" value="<?=$order->offer_deadline;?>"><br><br>
+	<input name="work_deadline" type="datetime" value="<?=$order->work_deadline;?>"><br><br>
 	<input name="output" type="text" value="<?=$order->output;?>"><br><br>
 	<input name="update" type="submit" value="Muuda tellimus">
 </form>

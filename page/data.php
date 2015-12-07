@@ -13,8 +13,8 @@
 		header("Location: login.php");
 	}
 	
-	$text_type = $subject = $target_group = $description = $source = $length = $deadline = $output = $m = "";
-	$text_type_error = $subject_error = $target_group_error = $description_error = $source_error = $length_error = $deadline_error_1 = $deadline_error_2 = $output_error = "";
+	$text_type = $subject = $target_group = $description = $source = $length = $work_deadline = $work_deadline = $output = $m = "";
+	$text_type_error = $subject_error = $target_group_error = $description_error = $source_error = $length_error = $offer_deadline_error_1 = $offer_deadline_error_2 = $work_deadline_error_2 = $work_deadline_error_2 = $output_error = "";
 	
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		
@@ -56,13 +56,23 @@
 				$length = cleanInput($_POST["length"]);
 			}
 			
-			if(empty($_POST["deadline"])){
-				$deadline_error_1 = "Tähtaeg on kohustuslik";
+			if(empty($_POST["offer_deadline"])){
+				$offer_deadline_error_1 = "Tähtaeg on kohustuslik";
 			}else{
-				if($_POST["deadline"] < date("Y-m-d H:i:s")){
-					$deadline_error_2 = "Kuupäev peab olema tulevikus";
+				if($_POST["offer_deadline"] < date("Y-m-d H:i:s")){
+					$offer_deadline_error_2 = "Kuupäev peab olema tulevikus";
 				}else{
-					$deadline = cleanInput($_POST["deadline"]);
+					$offer_deadline = cleanInput($_POST["offer_deadline"]);
+				}
+			}
+			
+			if(empty($_POST["work_deadline"])){
+				$work_deadline_error_1 = "Tähtaeg on kohustuslik";
+			}else{
+				if($_POST["work_deadline"] < date("Y-m-d H:i:s")){
+					$work_deadline_error_2 = "Kuupäev peab olema tulevikus";
+				}else{
+					$work_deadline = cleanInput($_POST["work_deadline"]);
 				}
 			}
 			
@@ -114,7 +124,8 @@ Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-d
 	<input id="target_group" name="target_group" type="text" placeholder="Sihtgrupp" value="<?=$target_group;?>">* <?=$target_group_error;?><br><br>
 	<input id="source" name="source" type="text" placeholder="Allikas" value="<?=$source;?>">* <?=$source_error;?><br><br>
 	<input id="length" name="length" type="number" placeholder="Maht (tähemärgid)" value="<?=$length;?>">* <?=$length_error;?><br><br>
-	<input id="deadline" name="deadline" type="datetime" value="<?=$deadline;?>">* <?=$deadline_error_1;?><?=$deadline_error_2;?><br><br>
+	<input id="offer_deadline" name="offer_deadline" type="datetime" value="<?=$offer_deadline;?>">* <?=$offer_deadline_error_1;?><?=$offer_deadline_error_2;?><br><br>
+	<input id="work_deadline" name="work_deadline" type="datetime" value="<?=$work_deadline;?>">* <?=$work_deadline_error_1;?><?=$work_deadline_error_2;?><br><br>
 	<input id="output" name="output" type="text" placeholder="Ilmumiskoht" value="<?=$output;?>">* <?=$output_error;?><br><br>
 	<input name="add_new_order" type="submit" value="Lisa uus tellimus">
 	<p style="color:green;"><?=$m;?></p>
