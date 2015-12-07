@@ -73,7 +73,7 @@ class Series {
 	
 	
 	
-	function addSeriesToList($new_series_id){
+	function createList($new_list){
 		
 		$response = new StdClass();
 		
@@ -88,7 +88,7 @@ class Series {
 			
 			$error = new StdClass();
 			$error->id = 0;
-			$error->message = "Sellise nimega seriaal on sinul selles listis juba olemas!";
+			$error->message = "Sellise nimega list on juba olemas!";
 			
 			$response->error = $error;
 			
@@ -101,11 +101,68 @@ class Series {
 		$stmt = $this->connection->prepare("INSERT INTO user_list (user_id, name) VALUES (?,?)");
 				
 		
-		$stmt->bind_param("is", $this->user_id, $new_interest_id);
+		$stmt->bind_param("is", $this->user_id, $new_list);
 		if($stmt->execute()) {
 			
 			$success = new StdClass();
-			$success->message = "Seriaal edukalt sisestatud!";
+			$success->message = "List edukalt loodud!";
+			$response->success = $success;
+			
+			
+		}else {
+			
+			//midagi läks katki
+			$error = new StdClass();
+			$error->id = 1;
+			$error->message = "Midagi läks katki!";
+			
+			$response->error = $error;
+			
+			
+		}
+		
+		
+		$stmt->close();
+		
+		return $response;
+		
+		
+	}
+	
+	
+	function addToList($new_series_id){
+		
+		$response = new StdClass();
+		
+		//kas sellel kasutajal on see list
+		$stmt = $this->connection->prepare("SELECT id FROM series_list WHERE episode_id=? AND list_id=?");
+		$stmt->bind_param("is", $this->user_id, $new_series_id);
+		$stmt->bind_result($id);
+		$stmt->execute();
+		
+		if($stmt->fetch()){
+			
+			
+			$error = new StdClass();
+			$error->id = 0;
+			$error->message = "Sellise nimega list on juba olemas!";
+			
+			$response->error = $error;
+			
+			return $response;
+			
+		}
+		
+		$stmt->close();
+		
+		$stmt = $this->connection->prepare("INSERT INTO series_list (episode_id, list_id) VALUES (?,?)");
+				
+		
+		$stmt->bind_param("is", $this->user_id, $new_series_id);
+		if($stmt->execute()) {
+			
+			$success = new StdClass();
+			$success->message = "Seriaal edukalt lisatud!";
 			$response->success = $success;
 			
 			
