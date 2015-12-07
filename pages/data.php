@@ -100,7 +100,7 @@
 				<label for="picture" >Lisa seriaali pilt</label><br>
 				<input name="picture" type="text"  value="<?php echo $picture; ?>"> <?php echo $picture_error; ?><br><br>	
 			</div>
-			<input type="submit" name="postseason" value="Salvesta" class="btn btn-success">
+			<input type="submit" name="addSeries" value="Salvesta" class="btn btn-success">
 		  </form>
 		  
 		  <a href="table.php">Vaata/Muuda postitusi</a>
