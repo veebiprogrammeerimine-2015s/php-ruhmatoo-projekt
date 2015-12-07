@@ -42,7 +42,8 @@
 		exit();
 	
 	}
-		var_dump($getTimeInfo);
+			
+			
 		$hospidal_name = $getTimeInfo[0]->hospidal_name;
 		$dr_name = $getTimeInfo[0]->dr_name;
 		$area = $getTimeInfo[0]->area;
@@ -72,7 +73,7 @@
 	
 	// keegi chekkis radiobuttoni ja hakkab broneerima
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
-		if(isset($_POST["book-now"])){
+		if(isset($_POST["confirm-now"])){
 					
 					// kontrollime, kas kasutaja sisse loginud
 					$log_in_info = $UserBookingManager->checkUserLogedIn();
@@ -84,8 +85,11 @@
 					}
 					
 					$selected_available_time = (intval($_POST["selectedavailabletime"]));
-					
 					$problem_description = ($_POST["problemdescrpt"]);
+					
+					/// kävitame insert funktsiooni
+					$result = $UserBookingManager->insertBooking(intval($selected_available_time), intval($user_id), intval($selected_desease_id), $problem_description);
+					var_dump($result);
 					
 		}
 		
@@ -117,7 +121,7 @@
   			<label for="comment">Algusaeg:</label> <?php echo $session_start; ?> <br>
   			<label for="comment">Lõpp:</label> <?php echo $session_end; ?> <br>
   			</br>
-  			<input type="submit" name="book-now" value="Kinnita broneering">
+  			<input type="submit" name="confirm-now" value="Kinnita broneering">
   			</form>	
   			<?php if(isset($_SESSION["return_url"])): ?>
   				<?= createBackButton($_SESSION["return_url"]); //kutsume välja tagasi nupu  ?>

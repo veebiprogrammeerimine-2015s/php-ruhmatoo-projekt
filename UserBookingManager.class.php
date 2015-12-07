@@ -58,6 +58,57 @@
     		
     		return $html;
     	}
+    	
+    	function insertBooking($avialable_time_id, $person_id_in, $desease_id_in, $problem_in = "----"){
+    	
+    		$created = $updated = date('Y-m-d H:i:s');
+    		echo $created;
+			$response = new StdClass();
+			
+			//kas selline selline broneering juba olemas äkki s?
+			$stmt = $this->connection->prepare("
+			SELECT id FROM `af_bookings` WHERE af_doctor_available_id = ? AND (af_booking_statuses_id = 2 OR af_booking_statuses_id = 4)
+			");
+			$stmt->bind_param("i", $avialable_time_id);
+			$stmt->execute();
+			if($stmt->fetch()){
+				$error = new StdClass();
+				$error->id = 0;
+				$error->message = "Selline broneering juba olemas";
+				$response->error = $error;
+				return $response;
+			}
+			$stmt->close();
+			
+			
+			
+			
+			
+			$stmt = $this->connection->prepare("
+			INSERT INTO `af_bookings` 
+			(`id`, `af_persons_id`, `af_doctor_available_id`, `af_doctors_deseaes_id`, `af_booking_statuses_id`, `problem_descr`, `created`, `updated`) 
+			VALUES (NULL,'?', '?', '?', '2', '?', '?', ?)
+			");
+			$stmt->bind_param("iiisss", $person_id_in, $avialable_time_id, $desease_id_in, $problem_in,$created,  $created, $updated);
+			var_dump($stmt->bind_param);
+			if($stmt->execute()){
+				$success = new StdClass();
+				$success->message = "Broneering edukalt salvestatud";
+				$response->success = $success;
+			}else{
+				$error = new StdClass();
+				$error->id =1;
+				$error->message = "Midagi läks katki!";
+				$response->error = $error;
+			}
+			var_dump($stmt->error);
+			$stmt->close();
+		
+			return $response;
+    	
+    	
+    	
+    	}
 
     	
 		
