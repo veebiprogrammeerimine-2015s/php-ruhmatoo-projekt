@@ -91,6 +91,11 @@ Tere, <?=$_SESSION['logged_in_user_email'];?> <br><a href="?logout=1">Logi välj
             echo '<li><a href="table.php">Registreeritud osalejad</a></li>';
         } else{ 
             echo '<li>Tabel</li>';
+        }
+        if($page_file_name != "interests.php"){ 
+        echo '<li><a href="interests.php">Kasutajate huvid</a></li>';
+        } else{ 
+            echo '<li>Huvid</li>';
         } 
     ?>
     

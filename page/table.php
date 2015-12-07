@@ -37,6 +37,7 @@
 <a href="data.php">Tagasi registreerimislehele!</a><br>
 <a href="confirm.php">Kinnituslehele!</a><br>
 
+
 <h1>Tabel</h1>
 <form action="table.php" method="get">
     <input name="keyword" type="search" value="<?=$keyword?>">
