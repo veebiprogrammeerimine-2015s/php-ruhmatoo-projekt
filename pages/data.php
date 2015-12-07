@@ -1,5 +1,6 @@
 <?php
 	require_once("../functions.php");
+	require_once("../classes/Series.class.php");
 	//data
 	//siia pääseb ligi sisseloginud kasutaja
 	//kui kasutaja on sisse loginud
@@ -18,11 +19,11 @@
 		header("Location: login.php");
 	}
 	
-	$title = $season = $intro = $photo = "";
-	$title_error = $season_error = $intro_error = $photo_error = "";
+	$title = $season = $description = $picture = "";
+	$title_error = $season_error = $description_error = $picture_error = "";
 	
 	
-	if(isset($_POST["postseason"])){
+	if(isset($_POST["addSeries"])){
 		echo "vajutati nuppu";
 		if ( empty($_POST["title"]) ) {
 				$title_error = "See väli on kohustuslik";
@@ -37,26 +38,26 @@
 				$season = cleanInput($_POST["season"]);
 				
 			}
-			if ( empty($_POST["intro"]) ) {
-				$intro_error = "See väli on kohustuslik";
+			if ( empty($_POST["description"]) ) {
+				$description_error = "See väli on kohustuslik";
 			} else {
 				
-				$intro = cleanInput($_POST["intro"]);
+				$description = cleanInput($_POST["description"]);
 				
 			}
-			if ( empty($_POST["photo"]) ) {
-				$photo_error = "See väli on kohustuslik";
+			if ( empty($_POST["picture"]) ) {
+				$picture_error = "See väli on kohustuslik";
 			} else {
 				
-				$intro = cleanInput($_POST["photo"]);
+				$description = cleanInput($_POST["picture"]);
 				
 			}
-		if(	$title_error == "" && $season_error == "" && $intro_error == "" && $photo_error == ""){
+		if(	$title_error == "" && $season_error == "" && $description_error == "" && $picture_error == ""){
 			
 			echo "Sisestatud!";
 				
 				
-				postseason($title, $season, $intro, $photo);
+				addSeries($title, $season, $description, $picture);
 			
 		}
 	}
@@ -92,12 +93,12 @@
 				<input name="season" type="text"  value="<?php echo $season; ?>"> <?php echo $season_error; ?><br><br>
 			</div>
 			<div class="form-group">
-				<label for="intro" >Tutvustus</label><br>
-				<textarea name="intro" rows="10" cols="100"><?php echo $intro; ?></textarea> <?php echo $intro_error; ?><br><br>
+				<label for="description" >Tutvustus</label><br>
+				<textarea name="description" rows="10" cols="100"><?php echo $description; ?></textarea> <?php echo $description_error; ?><br><br>
 			</div>
 			<div class="form-group">
-				<label for="photo" >Lisa seriaali pilt</label><br>
-				<input name="photo" type="text"  value="<?php echo $photo; ?>"> <?php echo $photo_error; ?><br><br>	
+				<label for="picture" >Lisa seriaali pilt</label><br>
+				<input name="picture" type="text"  value="<?php echo $picture; ?>"> <?php echo $picture_error; ?><br><br>	
 			</div>
 			<input type="submit" name="postseason" value="Salvesta" class="btn btn-success">
 		  </form>
