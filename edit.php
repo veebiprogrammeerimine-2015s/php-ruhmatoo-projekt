@@ -3,6 +3,9 @@
 	$database = "if15_teamalpha_3";
 	
 	require_once("edit_function.php");
+	if(!isset($_SESSION["logged_in_user_id"])){
+		header("Location: login.php");
+	}
 	
 	if(isset($_POST["update_packet"])){
 		//vajuta Salvesta nuppu
@@ -13,24 +16,7 @@
 	
 	//edit.php
 	//aadressireal on=edit_id siis trükin välja selle väärtuse
-	if(isset($_GET["edit_id"])){
-		echo $_GET["edit_id"];
-		
-		//id oli aadressireal
-		//tahaks ühte rida kõige uuemaid andmeid, kus id on $_GET["edit_id"]
-		
-		$packet_array = getPacketData($_GET["edit_id"]);
-		var_dump($packet_array);		//var_dump annab kas stringi pikkuse või muutuja tüübi
-		
-	}else{
-		//ei olnud aadressireal
-		echo "VIGA";
-		//die- edasi lehte ei laeta (siit järgnevat ei loeta)
-		//die();
-		//suuname kasutaja table.php lehele
-		header("Location:dataWorker.php");
-		
-	}
+
 	
 		for($i = 0; $i < count($packet_array); $i=$i+1){
 			
