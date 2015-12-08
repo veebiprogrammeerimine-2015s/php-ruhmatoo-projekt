@@ -33,50 +33,68 @@
 		<input type="search" name="keyword" value="<?php echo $keyword;?>">
 		<input type="submit">
 	</form>
+	<p><a href="?peakontor">Peakontor<a>  <a href="?kopli">Kopli<a>  <a href="?kristiine">Kristiine<a>  <a href="?lasna">Lasnamäe<a>  <a href="?mustamae">Mustamäe<a>  <a href="?nomme">Nõmme<a>  <a href="?oismae">Õismäe<a>  <a href="?pirita">Pirita<a></p>
 	<table border="1">
-		<tr>
+	<!--	<tr>
 			<th>Saadetise id</th>
 			<th>Saabumisaeg</th>
-			<th>Väljumisaeg</th>
 			<th>Lähteriik</th>
 			<th>Märkus</th>
 			<th>Järgnev kontor</th>
 			<th>Kustuta</th>
 			<th>Edit</th>
-		</tr>
+		</tr>*/-->
 
 	<?php
 	
-		for($i = 0; $i < count($packet_array); $i=$i+1){
-			
-			if(isset($_GET["edit"]) && $packet_array[$i]->id == $_GET["edit"]){
+		if(isset($_GET["peakontor"])){
 				
 				echo "<tr>";
-				echo "<form action='dataWorker.php' method='post'>";
-				echo "<input type='hidden' name='id' value='".$packet_array[$i]->id."'>";
+				echo "<th>Saadetise id</th>";
+				echo "<th>Saabumisaeg</th>";
+				echo "<th>Lähteriik</th>";
+				echo "<th>Märkus</th>";
+				echo "<th>Järgnev kontor</th>";
+				echo "<th>Kustuta</th>";
+				echo "<th>Edit</th>";
+				echo "</tr>";
+				echo "<tr>";
+		}
+		
+		if(isset($_GET["kopli"]) OR isset($_GET["kristiine"]) OR isset($_GET["lasna"]) OR isset($_GET["mustamae"]) OR isset($_GET["nomme"]) OR isset($_GET["oismae"]) OR isset($_GET["pirita"])){
+				
+			echo "<tr>";
+			echo "<th>Saadetise id</th>";
+			echo "<th>Saabumisaeg</th>";
+			echo "<th>Lahkumisaeg</th>";
+			echo "<th>Märkus</th>";
+			echo "<th>Kustuta</th>";
+			echo "<th>Edit</th>";
+			echo "</tr>";
+			echo "<tr>";
+		}
+		
+		for($i = 0; $i < count($packet_array); $i=$i+1){
+			
+			if(isset($_GET["peakontor"])){
+				
 				echo "<td>".$packet_array[$i]->id."</td>";
-				echo "<td><input name='arrival' value='".$packet_array[$i]->arrival."'></td>";
-				echo "<td><input name='departure' value='".$packet_array[$i]->departure."'></td>";
-				echo "<td><input name='fromc' value='".$packet_array[$i]->fromc."'></td>";
-				echo "<td><input name='comment' value='".$packet_array[$i]->comment."'></td>";
-				echo "<input type='hidden' name='office_id' value='".$packet_array[$i]->office_id."'>";
+				echo "<td>".$packet_array[$i]->arrival."</td>";
+				echo "<td>".$packet_array[$i]->fromc."</td>";
+				echo "<td>".$packet_array[$i]->comment."</td>";
 				echo "<td>".$packet_array[$i]->office_id."</td>";
-				echo "<td><a href='dataWorker.php'>cancel</a></td>";
-				echo "<td><input type='submit' name='save' value='save'></td>";
-				echo "</form>";
+				echo "<td><a href='?delete=".$packet_array[$i]->id."'>X</a></td>";
+				echo "<td><a href='edit.php?edit_id=".$packet_array[$i]->id."'>edit</a></td>";
 				echo "</tr>";
 				
-			}else{
+			}elseif(isset($_GET["kopli"]) OR isset($_GET["kristiine"]) OR isset($_GET["lasna"]) OR isset($_GET["mustamae"]) OR isset($_GET["nomme"]) OR isset($_GET["oismae"]) OR isset($_GET["pirita"])){
 				
 				echo "<tr>";
 				echo "<td>".$packet_array[$i]->id."</td>";
 				echo "<td>".$packet_array[$i]->arrival."</td>";
 				echo "<td>".$packet_array[$i]->departure."</td>";
-				echo "<td>".$packet_array[$i]->fromc."</td>";
 				echo "<td>".$packet_array[$i]->comment."</td>";
-				echo "<td>".$packet_array[$i]->office_id."</td>";
 				echo "<td><a href='?delete=".$packet_array[$i]->id."'>X</a></td>";
-				echo "<td><a href='?edit=".$packet_array[$i]->id."'>edit</a></td>";
 				echo "<td><a href='edit.php?edit_id=".$packet_array[$i]->id."'>edit</a></td>";
 				echo "</tr>";
 				
