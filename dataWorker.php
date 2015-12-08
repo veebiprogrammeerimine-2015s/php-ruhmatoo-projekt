@@ -1,16 +1,17 @@
 <?php
-
+	
+	/*/dataWorker.php?peakontor&keyword=pakend_lekib*/
 	require_once("worker.class.php");
 	
 	$Worker = new Worker($mysqli);
+	$getvar = key($_GET);
 	
-	if(isset($_GET["delete"])){
-		echo "kustutame id ".$_GET["delete"];
-		deletePacket($_GET["delete"]);
+	if(empty($_GET)){
+		Header("Location: ?peakontor");
 	}
 	
-	if(isset($_POST["save"])){
-		updatePacket($_POST["id"], $_POST["arrival"], $_POST["departure"], $_POST["fromc"], $_POST["comment"]);
+	if(isset($_GET["delete"])){
+		deletePacket($_GET["delete"]);
 	}
 	
 	$keyword="";
@@ -30,35 +31,67 @@
 	<br><br>
 	
 	<form action="dataWorker.php" method="get">
+		<?php
+		if(isset($_GET["peakontor"])){
+			
+			echo "<input type='hidden' name='peakontor'>";
+			
+		}elseif(isset($_GET["kopli"])){
+			
+			echo "<input type='hidden' name='kopli'>";
+			
+		}elseif(isset($_GET["kopli"])){
+			
+			echo "<input type='hidden' name='kopli'>";
+			
+		}elseif(isset($_GET["kristiine"])){
+			
+			echo "<input type='hidden' name='kristiine'>";
+			
+		}elseif(isset($_GET["lasna"])){
+			
+			echo "<input type='hidden' name='lasna'>";
+			
+		}elseif(isset($_GET["mustamae"])){
+			
+			echo "<input type='hidden' name='mustamae'>";
+			
+		}elseif(isset($_GET["nomme"])){
+			
+			echo "<input type='hidden' name='nomme'>";
+			
+		}elseif(isset($_GET["oismae"])){
+			
+			echo "<input type='hidden' name='oismae'>";
+			
+		}elseif(isset($_GET["pirita"])){
+			
+			echo "<input type='hidden' name='pirita'>";
+			
+		}
+		?>
 		<input type="search" name="keyword" value="<?php echo $keyword;?>">
 		<input type="submit">
 	</form>
 	<p><a href="?peakontor">Peakontor<a>  <a href="?kopli">Kopli<a>  <a href="?kristiine">Kristiine<a>  <a href="?lasna">Lasnamäe<a>  <a href="?mustamae">Mustamäe<a>  <a href="?nomme">Nõmme<a>  <a href="?oismae">Õismäe<a>  <a href="?pirita">Pirita<a></p>
 	<table border="1">
-	<!--	<tr>
-			<th>Saadetise id</th>
-			<th>Saabumisaeg</th>
-			<th>Lähteriik</th>
-			<th>Märkus</th>
-			<th>Järgnev kontor</th>
-			<th>Kustuta</th>
-			<th>Edit</th>
-		</tr>*/-->
+	
+	
 
 	<?php
-	
+		
 		if(isset($_GET["peakontor"])){
 				
-				echo "<tr>";
-				echo "<th>Saadetise id</th>";
-				echo "<th>Saabumisaeg</th>";
-				echo "<th>Lähteriik</th>";
-				echo "<th>Märkus</th>";
-				echo "<th>Järgnev kontor</th>";
-				echo "<th>Kustuta</th>";
-				echo "<th>Edit</th>";
-				echo "</tr>";
-				echo "<tr>";
+			echo "<tr>";
+			echo "<th>Saadetise id</th>";
+			echo "<th>Saabumisaeg</th>";
+			echo "<th>Lähteriik</th>";
+			echo "<th>Märkus</th>";
+			echo "<th>Järgnev kontor</th>";
+			echo "<th>Kustuta</th>";
+			echo "<th>Edit</th>";
+			echo "</tr>";
+			echo "<tr>";
 		}
 		
 		if(isset($_GET["kopli"]) OR isset($_GET["kristiine"]) OR isset($_GET["lasna"]) OR isset($_GET["mustamae"]) OR isset($_GET["nomme"]) OR isset($_GET["oismae"]) OR isset($_GET["pirita"])){
@@ -83,7 +116,7 @@
 				echo "<td>".$packet_array[$i]->fromc."</td>";
 				echo "<td>".$packet_array[$i]->comment."</td>";
 				echo "<td>".$packet_array[$i]->office_id."</td>";
-				echo "<td><a href='?delete=".$packet_array[$i]->id."'>X</a></td>";
+				echo "<td><a href='dataWorker.php?".$getvar."&delete=".$packet_array[$i]->id."'>X</a></td>";
 				echo "<td><a href='edit.php?edit_id=".$packet_array[$i]->id."'>edit</a></td>";
 				echo "</tr>";
 				

@@ -22,7 +22,7 @@ class Worker {
 		
 		if(isset($_GET["peakontor"])){
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-			$stmt = $mysqli->prepare("SELECT packet_id, arrival, fromc, comment, offices.office FROM post_import join offices on post_import.office_id=offices.office_id WHERE deleted IS NULL AND departure='00000000000000' AND (packet_id LIKE ? OR arrival LIKE ? OR fromc LIKE ? OR comment LIKE ? OR offices.office LIKE ?)");
+			$stmt = $mysqli->prepare("SELECT packet_id, arrival, fromc, comment, offices.office FROM post_import join offices on post_import.office_id=offices.office_id WHERE deleted IS NULL AND (packet_id LIKE ? OR arrival LIKE ? OR fromc LIKE ? OR comment LIKE ? OR offices.office LIKE ?)");
 			echo $mysqli->error;
 			$stmt->bind_param("isssi", $search, $search, $search, $search, $search);
 			$stmt->bind_result($id, $arrival, $fromc, $comment, $office_id);
@@ -38,9 +38,11 @@ class Worker {
 				array_push($packet_array, $packet);
 				
 			}
-			/*$stmt->close();*/
+			$stmt->close();
 			return $packet_array;
+			
 		}elseif(isset($_GET["kopli"])){
+			
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 			$stmt = $mysqli->prepare("SELECT packet_id, arrival, departure, comment FROM kopli WHERE (packet_id LIKE ? OR arrival LIKE ? OR departure LIKE ? OR comment LIKE ?)");
 			echo $mysqli->error;
