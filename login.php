@@ -27,52 +27,7 @@
   </div><!-- /.container-fluid -->
 </nav>
 	
-<!--Variables -->
-<?
-$email_error = "";
-$password_error = "";	
-
-$username = ""; $email = ""; $password = ""; $username_or_email = "";
-$reg_username = ""; $reg_email = ""; $reg_password = "";
-?>
-
-<!--Log-in function -->
-<?// Controlling whether someone inputed login button
-	if($_SERVER["REQUEST_METHOD"] == "POST") {
-		
-		if(isset($_POST["login"])){
-				
-			if (empty($_POST["username_or_email"]) ) {
-                $username_error = "This field is required";
-
-            }else{
-
-                $username_or_email = cleanInput($_POST["username_or_email"]);
-
-                }
-				
-			if (empty($_POST["password"]) ) {
-				$password_error = "This field is required";
-			}else{
-			
-				$password = cleanInput($_POST["password"]);
-				
-			}
-			// Checking for errors
-			if($email_error == "" && $password_error ==""){
-				
-			$hash = hash("sha512", $password);
-			
-			// Creating user file
-				loginUser($username_or_email, $hash);
-				
-		
-			}
-		}
-?>
-
-<br><br>
-
+<br><br><br><br><br><br>
 <!-- ######################## -->
 <!-- ####### Content ######## -->
 <!-- ######################## -->	
@@ -81,23 +36,22 @@ $reg_username = ""; $reg_email = ""; $reg_password = "";
 
 	<div class="row">
 		
-		<div class="col-md-5 col-sm-5 col-sm-offset-1">
-			
-			<form action="login.php" method="post" >
-			  <h1>Log-in</h1>
+		<div class="col-md-6 col-sm-5 col-sm-offset-1">
+
+			<form>
 			  <div class="form-group">
-				<input type="email" class="form-control" id="email placeholder="E-mail" > <?php echo $email_error; ?>
+				<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
 			  </div>
 			  
 				<div class="row">
 					<div class="col-md-8">
 						<div class="form-group">
-						<input type="password" class="form-control" id="password" placeholder="Password"> <?php echo $password_error; ?>
+						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
 						</div>
 					</div>
 					<div class="col-md-4">
-					<button type="submit" class="btn btn-info hidden-xs ">Login</button>
-					<button type="submit" class="btn btn-info btn-block visible-xs">Login</button>
+					<button type="submit" class="btn btn-info hidden-xs ">Login 1 </button>
+					<button type="submit" class="btn btn-info btn-block visible-xs">Login 2 </button>
 					</div>
 					
 				
@@ -110,7 +64,7 @@ $reg_username = ""; $reg_email = ""; $reg_password = "";
 		
 	</div>
 		
-		<div class="col-md-3 col-sm-4 col-sm-offset-1">
+		<div class="col-md-6 col-sm-5 col-sm-offset-1">
 		<form>
   <div class="form-group">
     <label for="exampleInputEmail1">Username</label>
@@ -120,15 +74,18 @@ $reg_username = ""; $reg_email = ""; $reg_password = "";
     <label for="exampleInputPassword1">Email</label>
     <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Password">
   </div>
-  <div class="form-group">
+  <div class="row">
+	<div class="col-md-8">
+		<div class="form-group">
     <label for="exampleInputPassword1">Password</label>
     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-  </div class="col-md-4">
-  
- 
-  
+  </div >
+  </div >
+  <div class="col-md-4">
   <button type="submit" class="btn btn-success hidden-xs">Submit</button>
   <button type="submit" class="btn btn-success btn-block visible-xs">Submit</button>
+  </div >
+  </div >
 </form>
 
 </div>
