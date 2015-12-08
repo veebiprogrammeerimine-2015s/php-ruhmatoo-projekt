@@ -212,17 +212,46 @@
 			
 			
 			<div class="col-md-9 col-md-pull-3">
-				
 				<div class="jumbotron">
 					<div class="container ">
-
 					  <h1>Welcome to ListIt</h1>
-					  <p>Connect with your friends — and other fascinating people. Get in-the-moment updates on the things that interest you. And watch events unfold, in real time, from every angle.</p>
-					  
+					  <div class="row">
+						  <div class="col-sm-6 col-md-4">
+							<div class="thumbnail">
+							  <img src="http://www.clowns4kids.com/images/popcorn-film-party.png" alt="popcorn">
+							  <div class="caption">
+								<h3>Make your own lists of series</h3>
+								<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+							  </div>
+							</div>
+						  </div>
+						</div>
+						<div class="row">
+						  <div class="col-sm-6 col-md-4">
+							<div class="thumbnail">
+							  <img src="http://freefeast.info/wp-content/uploads//2014/09/Comments-in-C.jpg" alt="comment">
+							  <div class="caption">
+								<h3>Comment series you have seen</h3>
+								<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+							  </div>
+							</div>
+						  </div>
+						</div>
+						<div class="row">
+						  <div class="col-sm-6 col-md-4">
+							<div class="thumbnail">
+							  <img src="http://pngimg.com/upload/star_PNG1597.png" alt="star">
+							  <div class="caption">
+								<h3>Rate series you have seen</h3>
+								<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+							  </div>
+							</div>
+						  </div>
+						</div>
 					</div>
 				</div>
-			
 			</div>
+			
 			
 			
 		</div>
