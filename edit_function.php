@@ -32,8 +32,20 @@
 		$stmt = $mysqli->prepare("UPDATE post_import SET arrival=?, departure=?, fromc=?, comment=?, ofice_id=?");
 		$stmt->bind_param("isssss", $packet_id, $arrival, $departure, $fromc, $comment, $office_id);
 		if($stmt->execute()){
+			
+		}
+		$stmt->close();
+		$mysqli->close();
+		
+	}
+	function deletePacket($id){
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("UPDATE post_import SET deleted=NOW() WHERE id=?");
+		$stmt->bind_param("i", $id);
+		if($stmt->execute()){
 			//sai kustutatud, kustutame aadressirea tühjaks
-			//header("Location: table.php");
+			header("Location: dataWorker.php");
 			
 		}
 		$stmt->close();
