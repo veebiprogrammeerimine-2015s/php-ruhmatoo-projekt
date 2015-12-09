@@ -8,18 +8,32 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand">Logo</a>
-	  <a class="navbar-brand navbar-right">Logo</a>
+      <a class="navbar-brand"><img src="http://www.clipartbest.com/cliparts/dTr/Apk/dTrApkaT9.jpeg" alt="Logo" style="width:70px;height:70px;"></img></a>
+	  <a class="navbar-brand navbar-right"><img src="http://www.clipartbest.com/cliparts/dTr/Apk/dTrApkaT9.jpeg" alt="Logo" style="width:70px;height:70px;"></img></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<div class="row">
-			<div class="col-sm-6 col-sm-push-2">
+			<div class="col-sm-4 col-sm-push-1">
 				<ul class="nav navbar-nav">
 					<li><p>Loojad</p></li><br>
 					<li><p>Toomas Lõõnik</p></li><br>
 					<li><p>Robin Ginter</p></li>
+				</ul>
+			</div>
+			<div class="col-sm-4 col-sm-pull-2">
+				<ul class="nav navbar-nav">
+					<li><p>Kontakt</p></li><br>
+					<li><p>Narva Mnt 25, Tallinn</p></li><br>
+					<li><p>404 (555) - 0166</p></li>
+				</ul>
+			</div>
+			<div class="col-sm-2 col-sm-pull-0">
+				<ul class="nav navbar-nav">
+					<li><p>Teoorias läheks siia reklaam</p></li><br>
+					<li><p>mille eest raha saab teenida</p></li><br>
+					<li><p>No AdBlock pls</p></li>
 				</ul>
 			</div>
 		</div>
