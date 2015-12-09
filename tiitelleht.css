@@ -12,7 +12,12 @@ nav
 	/*margin: 5px 50px 10px;*//*ulemine, vasak/parem, alumine*/
 	/*margin: 5px 0px 10px 50px;*//*ulemine.....alumine*/
 	position: fixed;/*static, relative, absolute, fixed*/
-	top: 0px;
-	right: 0px;
+	top: 100px;
+	right: 500px;
 	/*left: 200px;*/
+}
+
+body
+{
+	background-image:url("pildid/post.jpg");
 }
