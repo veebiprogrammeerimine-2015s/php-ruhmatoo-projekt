@@ -1,6 +1,12 @@
 <html lang="en">
 <?php 
 $movie_category = "";
+if(isset($_GET["logout"])){		
+		
+	//session_destroy();
+		
+	header("Location: login.php");
+}
 ?>
   <head>
     <meta charset="utf-8">
@@ -71,7 +77,7 @@ $movie_category = "";
             <li><a href="#">Seadmed</a></li>
             <li><a href="#">Veel midagi</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Logi välja</a></li>
+            <li><a href="?logout=1">Logi välja</a></li>
           </ul>
         </li>
       </ul>
