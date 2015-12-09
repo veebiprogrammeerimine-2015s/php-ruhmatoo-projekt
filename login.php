@@ -10,7 +10,6 @@
 	}
 	
 	
-	
   // muuutujad errorite jaoks
 	$username_error = "";
 	$email_error = "";
