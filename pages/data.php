@@ -82,28 +82,26 @@
 		</p>
 
 
-		<h2>Lisa uus seriaal</h2>
+		<h2>Add new series</h2>
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-			<label for="title" >Nimi</label><br>
+			<label for="title" >Name</label><br>
 			<div class="form-group">
 				<input name="title" id="title" type="text"  value="<?php echo $title; ?>"> <?php echo $title_error; ?><br><br>
 			</div>
 			<div class="form-group">
-				<label for="season" >Hooaeg</label><br>
+				<label for="season" >Season</label><br>
 				<input name="season" type="text"  value="<?php echo $season; ?>"> <?php echo $season_error; ?><br><br>
 			</div>
 			<div class="form-group">
-				<label for="description" >Tutvustus</label><br>
+				<label for="description" >Description</label><br>
 				<textarea name="description" rows="10" cols="100"><?php echo $description; ?></textarea> <?php echo $description_error; ?><br><br>
 			</div>
 			<div class="form-group">
-				<label for="picture" >Lisa seriaali pilt</label><br>
-				<input name="picture" type="text"  value="<?php echo $picture; ?>"> <?php echo $picture_error; ?><br><br>	
+				<label for="picture" >Add series cover</label><br>
+				<input name="picture" type="text" placeholder="Photo URL"  value="<?php echo $picture; ?>"> <?php echo $picture_error; ?><br><br>	
 			</div>
-			<input type="submit" name="addSeries" value="Salvesta" class="btn btn-success">
+			<input type="submit" name="addSeries" value="Submit" class="btn btn-success">
 		  </form>
-		  
-		  <a href="table.php">Vaata/Muuda postitusi</a>
 	</div>
 </div>
   <?php require_once("../footer.php"); ?>

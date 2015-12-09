@@ -35,7 +35,7 @@
 			
 			//kontrollin, et e-post ei ole tühi
 			if (empty($_POST["email"])) {
-				$email_error = "See väli on kohustuslik";
+				$email_error = "This field is mandatory";
 				
 			}else{
 				$email = test_input($_POST["email"]);
@@ -43,7 +43,7 @@
 				
 			//kontrollin, et parool ei ole tühi
 			if (empty($_POST["password"])) {
-				$password_error = "See väli on kohustuslik";
+				$password_error = "This field is mandatory";
 			} else {
 				$password = test_input($_POST["password"]);				
 			}
@@ -51,7 +51,7 @@
 			// võib sisse logida
 			
 			if($password_error == "" && $email_error == ""){
-				echo "Võib sisse logida! Kasutajanimi on ".$email." ja parool on ".$password;
+				
 				
 				$hash = hash("sha512", $password);
 				
@@ -83,7 +83,7 @@
 			
 			
 			if (empty($_POST["username"])) {
-				$name_error = "See väli on kohustuslik";	
+				$name_error = "This field is mandatory";	
 			} else {
 				$username = test_input($_POST["username"]);
 			}
@@ -92,7 +92,7 @@
 			
 			
 			if (empty($_POST["fullname"])) {
-				$name_error = "See väli on kohustuslik";	
+				$name_error = "This field is mandatory";	
 			} else {
 				$fullname = test_input($_POST["fullname"]);
 			}
@@ -102,7 +102,7 @@
 			
 			
 			if (empty($_POST["create_email"])) {
-				$create_email_error = "See väli on kohustuslik";
+				$create_email_error = "This field is mandatory";
 				
 			}else{
 				
@@ -112,13 +112,13 @@
 			
 			
 			if (empty($_POST["create_password"])) {
-				$create_password_error = "See väli on kohustuslik";
+				$create_password_error = "This field is mandatory";
 			
 				
 			}else{
 				if(strlen($_POST["create_password"]) <8) {
 					
-					$create_password_error = "Peab olema vähemalt 8 tähemärki pikk";
+					$create_password_error = "Password needs to be at least 8 characters long ";
 				
 				}else{
 					$create_password = test_input($_POST["create_password"]);
@@ -127,13 +127,13 @@
 			}
 			
 			if ($name_error == ""){
-				echo "salvestasin andmebaasi ".$username;
+				echo "saved to database ".$username;
 			}
 			
 			if(	$create_email_error == "" && $create_password_error == "" && $name_error == ""){
 				
 				$hash = hash("sha512", $create_password);
-				echo "Kasutaja on loodud! Registreeritud e-mail on ".$create_email.", kasutajanimi on ".$username." ja parool on ".$create_password."ja räsi on ".$hash;
+				echo "User has been created! Registrated e-mail is ".$create_email.", username is ".$username." and password is ".$create_password."and hash is ".$hash;
 				$User->createUser($create_email, $hash, $username, $fullname);
 				
 			}
@@ -169,7 +169,7 @@
 
 				<FONT FACE="arial">
 				
-				<h2>Logi sisse</h2>
+				<h2>Login</h2>
 				
 				<form action="login.php" method="post">
 					<div class="form-group">
@@ -184,7 +184,7 @@
 					</div>
 				</form>	
 					
-				<h2>Loo kasutaja</h2>
+				<h2>Creat user</h2>
 				
 				<form action="login.php" method="post">
 					<div class="form-group">

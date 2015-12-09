@@ -30,7 +30,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="home.php">Home <span class="sr-only">(current)</span></a></li>
-        <li><a href="data.php">My Lists</a></li>
+        <li><a href="lists.php">My Lists</a></li>
+		<li><a href="data.php">Add Series</a></li>
 		
       </ul>
 	   <form class="navbar-form navbar-left" role="search">
