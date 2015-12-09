@@ -47,23 +47,10 @@
 				return $response;
 		}
 		
-		
-		function buildMainError($message){
-			
-   			
-    		
-    		$html = '<div class="alert alert-warning">';
-    		$html .= '<strong>Warning!</strong>'.$message;
-    		$html .= '</div>';
-    		
-    		return $html;
-    	}
     	
     	function insertBooking($avialable_time_id, $person_id_in, $desease_id_in, $problem_in = "----"){
-    		var_dump($avialable_time_id, $person_id_in, $desease_id_in, $problem_in);
     	
     		$created = $updated = date('Y-m-d H:i:s');
-    		
 			$response = new StdClass();
 			
 			//kas selline selline broneering juba olemas äkki s?

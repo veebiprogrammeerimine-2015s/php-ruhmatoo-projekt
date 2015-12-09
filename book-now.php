@@ -131,7 +131,7 @@
 
 <div class="container">
 <?php if(isset($main_error)): ?>
-		<?= $UserBookingManager->buildMainError($main_error) ;?>
+		<?= buildMainError($main_error) ;?>
 		
 	<?php endif; ?>
 	<div class="row">

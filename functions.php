@@ -21,4 +21,16 @@
 		
 	}
 	
+	// Error teadete loomise funktsioon
+	
+	function buildMainError($message){
+    		
+    		$html = '<div class="alert alert-warning">';
+    		$html .= '<strong>Warning!</strong>'.$message;
+    		$html .= '</div>';
+    		
+    		return $html;
+    	}
+    	
+    	
 ?>
