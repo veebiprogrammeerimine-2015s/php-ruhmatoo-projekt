@@ -60,9 +60,10 @@
     	}
     	
     	function insertBooking($avialable_time_id, $person_id_in, $desease_id_in, $problem_in = "----"){
+    		var_dump($avialable_time_id, $person_id_in, $desease_id_in, $problem_in);
     	
     		$created = $updated = date('Y-m-d H:i:s');
-    		echo $created;
+    		
 			$response = new StdClass();
 			
 			//kas selline selline broneering juba olemas äkki s?
@@ -74,7 +75,7 @@
 			if($stmt->fetch()){
 				$error = new StdClass();
 				$error->id = 0;
-				$error->message = "Selline broneering juba olemas";
+				$error->message = "Sellele ajale on tehtud vahepeal broneering";
 				$response->error = $error;
 				return $response;
 			}
@@ -86,11 +87,11 @@
 			
 			$stmt = $this->connection->prepare("
 			INSERT INTO `af_bookings` 
-			(`id`, `af_persons_id`, `af_doctor_available_id`, `af_doctors_deseaes_id`, `af_booking_statuses_id`, `problem_descr`, `created`, `updated`) 
-			VALUES (NULL,'?', '?', '?', '2', '?', '?', ?)
+			( `af_persons_id`, `af_doctor_available_id`, `af_doctors_deseaes_id`, `af_booking_statuses_id`, `problem_descr`, `created`, `updated`) 
+			VALUES (? , ? ,  ?, 2, ?, ?, ?)
 			");
-			$stmt->bind_param("iiisss", $person_id_in, $avialable_time_id, $desease_id_in, $problem_in,$created,  $created, $updated);
-			var_dump($stmt->bind_param);
+			$stmt->bind_param("iiisss", $person_id_in, $avialable_time_id, $desease_id_in, $problem_in, $created, $updated);
+			
 			if($stmt->execute()){
 				$success = new StdClass();
 				$success->message = "Broneering edukalt salvestatud";
@@ -98,12 +99,40 @@
 			}else{
 				$error = new StdClass();
 				$error->id =1;
-				$error->message = "Midagi läks katki!";
+				$error->message = "Midagi broneeringu lisamisel katki!";
 				$response->error = $error;
 			}
-			var_dump($stmt->error);
+			
 			$stmt->close();
-		
+			
+			//märgime availabe time staatuse broneerituks staatus tuleb 2
+			if($response->success){
+				
+				$stmt = $this->connection->prepare("
+				UPDATE `af_doctor_available` SET `af_booking_statuses_id` = '2' WHERE `af_doctor_available`.`id` = ?
+				");
+				$stmt->bind_param("i",  $avialable_time_id);
+			
+				if($stmt->execute()){
+					$success = new StdClass();
+					$success->message2 = "aja staatus edukalt broneeritud";
+					$response->success2 = $success;
+					$stmt->close();
+				}
+				else{
+					$error = new StdClass();
+					$error->id =2;
+					$error->message = "Aja staatust ei uuendatud";
+					$response->error2 = $error;
+					$stmt->close();
+						
+				}
+				
+
+			
+			}
+			
+			
 			return $response;
     	
     	

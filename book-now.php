@@ -92,6 +92,10 @@
 						$main_error = "Sisest palun oma mure";
 					}
 					
+					if(empty($_POST["selectdesease"])){
+						$main_error = "vali palun haigus";
+					}
+					
 					
 					//jõudsime siia, suuname kasuataja kinnituslehele ja salvestame return aadressi
 					

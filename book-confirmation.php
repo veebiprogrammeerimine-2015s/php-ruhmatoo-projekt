@@ -84,12 +84,17 @@
 						
 					}
 					
-					$selected_available_time = (intval($_POST["selectedavailabletime"]));
-					$problem_description = ($_POST["problemdescrpt"]);
+					
 					
 					/// kävitame insert funktsiooni
-					$result = $UserBookingManager->insertBooking(intval($selected_available_time), intval($user_id), intval($selected_desease_id), $problem_description);
-					var_dump($result);
+					$result = $UserBookingManager->insertBooking(intval($timeavailableid), intval($user_id), intval($selected_desease_id), $problem_description);
+					
+					
+					if (isset($result->error)){
+						
+						 $main_error = $result->error->message;
+						
+					}
 					
 		}
 		
