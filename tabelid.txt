@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 Kas töötas?!
 
+=======
+>>>>>>> 17a97093ed08b5cfca0de66cffe2124326af9923
 CREATE table VL_Login(
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	email VARCHAR(45),

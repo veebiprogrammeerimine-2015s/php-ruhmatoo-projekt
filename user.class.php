@@ -48,8 +48,12 @@ class User {
 				echo "action";
 			}
 		}
+<<<<<<< HEAD
 		else
 		
 		}
+=======
+
+>>>>>>> 17a97093ed08b5cfca0de66cffe2124326af9923
 }
 ?>
