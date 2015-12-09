@@ -1,7 +1,7 @@
 <?php require_once("page/header.php"); ?>
 <?php require_once("user.class.php");	?>
 
-<?php echo "Kurat noh"; ?>
+
 <br><br>
 
 <div class="container">

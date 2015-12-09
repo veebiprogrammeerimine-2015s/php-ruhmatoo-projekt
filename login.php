@@ -45,7 +45,7 @@
 				if (empty($_POST["pw_reg"])) {
 					$pw_reg_error = "See väli on kohustuslik";
 				} else {
-					if(strlen($_POST["pw_reg"]) < 8) {
+					if(strlen($_POST["pw_reg"]) < 5) {
 						$pw_reg_error = "Peab olema vähemalt 8 tähemärki pikk!";
 					}else{
 						$pw_reg = $user->cleanInput($_POST["pw_reg"]);
