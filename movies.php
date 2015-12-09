@@ -1,11 +1,11 @@
-<?php require_once("page/header.php"); ?>
-
+<?php 
+	require_once("page/header.php"); 
+	require_once("page/functions.php");	
+?>
 <?php
 
 	$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-	if (strpos($url,'Cat_') !== false) {
-		echo 'töötab';
-	}
+	$user->getCategory($url);
 	
 	
 ?>
