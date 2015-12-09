@@ -1,3 +1,5 @@
+Kas töötas?!
+
 CREATE table VL_Login(
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	email VARCHAR(45),
