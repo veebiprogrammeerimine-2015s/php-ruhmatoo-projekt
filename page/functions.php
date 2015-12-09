@@ -5,7 +5,7 @@
 	
 	$database = "if15_robing_3";
 	
-	session_start();
+	//session_start();
 	
 	$mysqli = new mysqli($servername, $server_username, $server_password, $database);
 	

@@ -41,5 +41,15 @@ class User {
 		$stmt->execute();
 		$stmt->close();
 
-  }
-} ?>
+		}
+		function getCategory($url){
+			if (strpos($url,'Action') == true) {
+				$category = "action";
+				echo "action";
+			}
+		}
+		else
+		
+		}
+}
+?>
