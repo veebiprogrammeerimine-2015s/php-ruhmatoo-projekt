@@ -15,13 +15,13 @@ class Series {
 		
 	}
 	
-	function addSeries($add_series){
+	function addSeries($title, $season, $description, $picture){
 		
 		$response = new StdClass();
 		
 		
 		$stmt = $this->connection->prepare("SELECT id FROM series WHERE title=?");
-		$stmt->bind_param("s", $add_series);
+		$stmt->bind_param("s", $title);
 		$stmt->bind_result($id);
 		$stmt->execute();
 		
@@ -30,7 +30,7 @@ class Series {
 			
 			$error = new StdClass();
 			$error->id = 0;
-			$error->message = "Seriaal <strong>".$add_series."</strong> on juba olemas!";
+			$error->message = "Seriaal <strong>".$title."</strong> on juba olemas!";
 			
 			$response->error = $error;
 			
@@ -47,7 +47,7 @@ class Series {
 		if($stmt->execute()) {
 			
 			$success = new StdClass();
-			$success->message = "Seriaal edukalt sisestatud!";
+			$success->message = "Successfully added new series!";
 			$response->success = $success;
 			
 			
@@ -56,7 +56,7 @@ class Series {
 			//midagi läks katki
 			$error = new StdClass();
 			$error->id = 1;
-			$error->message = "Midagi läks katki!";
+			$error->message = "Something went wrong!".$stmt->error;
 			
 			$response->error = $error;
 			
@@ -73,13 +73,13 @@ class Series {
 	
 	
 	
-	function createList($new_list){
+	function createList($name){
 		
 		$response = new StdClass();
 		
 		//kas sellel kasutajal on see list
 		$stmt = $this->connection->prepare("SELECT id FROM user_list WHERE user_id=? AND name=?");
-		$stmt->bind_param("is", $this->user_id, $new_series_id);
+		$stmt->bind_param("is", $this->user_id, $name);
 		$stmt->bind_result($id);
 		$stmt->execute();
 		
@@ -101,11 +101,11 @@ class Series {
 		$stmt = $this->connection->prepare("INSERT INTO user_list (user_id, name) VALUES (?,?)");
 				
 		
-		$stmt->bind_param("is", $this->user_id, $new_list);
+		$stmt->bind_param("is", $this->user_id, $name);
 		if($stmt->execute()) {
 			
 			$success = new StdClass();
-			$success->message = "List edukalt loodud!";
+			$success->message = "Successfully added list!";
 			$response->success = $success;
 			
 			
@@ -114,7 +114,7 @@ class Series {
 			//midagi läks katki
 			$error = new StdClass();
 			$error->id = 1;
-			$error->message = "Midagi läks katki!";
+			$error->message = "Something went wrong!".$stmt->error;
 			
 			$response->error = $error;
 			
@@ -130,12 +130,12 @@ class Series {
 	}
 	
 	
-	function addToList($new_series_id){
+	function addToList($episode_id, $list_id){
 		
 		$response = new StdClass();
 		
 		//kas sellel kasutajal on see list
-		$stmt = $this->connection->prepare("SELECT id FROM series_list WHERE episode_id=? AND list_id=?");
+		$stmt = $this->connection->prepare("SELECT user_list.id, series_list.id FROM user_list, series_list WHERE user_list.id = series_list.list_id AND series_list.episode_id=? AND user_list.id=? AND user_list.user_id=?");
 		$stmt->bind_param("is", $this->user_id, $new_series_id);
 		$stmt->bind_result($id);
 		$stmt->execute();
@@ -145,7 +145,7 @@ class Series {
 			
 			$error = new StdClass();
 			$error->id = 0;
-			$error->message = "Sellise nimega list on juba olemas!";
+			$error->message = "This series is already on the list!";
 			
 			$response->error = $error;
 			
@@ -162,7 +162,7 @@ class Series {
 		if($stmt->execute()) {
 			
 			$success = new StdClass();
-			$success->message = "Seriaal edukalt lisatud!";
+			$success->message = "Series added to list!";
 			$response->success = $success;
 			
 			
@@ -171,7 +171,7 @@ class Series {
 			//midagi läks katki
 			$error = new StdClass();
 			$error->id = 1;
-			$error->message = "Midagi läks katki!";
+			$error->message = "Something went wrong!";
 			
 			$response->error = $error;
 			
@@ -185,6 +185,10 @@ class Series {
 		
 		
 	}
+	
+	
+	
+	
 	
 	
 	
