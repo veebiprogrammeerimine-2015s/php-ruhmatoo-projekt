@@ -8,7 +8,6 @@
 	}
 	
 	
-	
   // muuutujad errorite jaoks
 	$username_error = "";
 	$email_error = "";
@@ -22,6 +21,7 @@
 	$create_email = "";
 	$create_password = "";
 	$create_username = "";
+
 	
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
 		// *********************
