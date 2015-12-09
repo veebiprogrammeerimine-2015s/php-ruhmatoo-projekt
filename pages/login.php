@@ -225,8 +225,6 @@
 							  </div>
 							</div>
 						  </div>
-						</div>
-						<div class="row">
 						  <div class="col-sm-6 col-md-4">
 							<div class="thumbnail">
 							  <img src="http://freefeast.info/wp-content/uploads//2014/09/Comments-in-C.jpg" alt="comment">
@@ -236,8 +234,6 @@
 							  </div>
 							</div>
 						  </div>
-						</div>
-						<div class="row">
 						  <div class="col-sm-6 col-md-4">
 							<div class="thumbnail">
 							  <img src="http://pngimg.com/upload/star_PNG1597.png" alt="star">
