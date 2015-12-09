@@ -53,7 +53,7 @@
     		$created = $updated = date('Y-m-d H:i:s');
 			$response = new StdClass();
 			
-			//kas selline selline broneering juba olemas äkki s?
+			//kas selline selline broneering juba olemas äkki ?
 			$stmt = $this->connection->prepare("
 			SELECT id FROM `af_bookings` WHERE af_doctor_available_id = ? AND (af_booking_statuses_id = 2 OR af_booking_statuses_id = 4)
 			");
@@ -64,9 +64,25 @@
 				$error->id = 0;
 				$error->message = "Sellele ajale on tehtud vahepeal broneering";
 				$response->error = $error;
+				$stmt->close();
+				
+				
+				$stmt2 = $this->connection->prepare("
+				UPDATE `af_doctor_available` SET `af_booking_statuses_id` = '2' WHERE `af_doctor_available`.`id` = ?
+				");
+				$stmt2->bind_param("i",  $avialable_time_id);
+			
+				if($stmt2->execute()){
+					$success = new StdClass();
+					$success->message2 = "Ajatabelis ka staatus muudetd";
+					$response->success2 = $success;
+					$stmt2->close();
+				}
+				
 				return $response;
+				
 			}
-			$stmt->close();
+			
 			
 			
 			
