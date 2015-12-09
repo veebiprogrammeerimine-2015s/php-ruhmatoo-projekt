@@ -60,10 +60,9 @@
 			}
 			
 		} 
-		//kontrollime soovitava aja broneeringu staatust teeme integeriks
+		//kontrollime soovitava aja broneeringu staatust broneeringutabelis,  teeme integeriks
 					
-					
-					
+
 		$time_status = $UserBookingManager->checkTimeStatus(intval($timeavailableid));
 		if (isset($time_status->error)){
 			$main_error = $time_status->error->message;
@@ -77,23 +76,20 @@
 					
 					// kontrollime, kas kasutaja sisse loginud
 					$log_in_info = $UserBookingManager->checkUserLogedIn();
-					
 					if (isset($log_in_info->error)){
 						
 						 $main_error = $log_in_info->error->message;
-						
 					}
 					
-					
-					
-					/// kävitame insert funktsiooni
+					// kävitame broneerimis funktsiooni
 					$result = $UserBookingManager->insertBooking(intval($timeavailableid), intval($user_id), intval($selected_desease_id), $problem_description);
-					
-					
 					if (isset($result->error)){
 						
 						 $main_error = $result->error->message;
 						
+					}
+					else{
+						$main_success = $result->success->message;
 					}
 					
 		}
@@ -106,6 +102,10 @@
 <div class="container">
 <?php if(isset($main_error)): ?>
 		<?= buildMainError($main_error) ;?>
+	<?php endif; ?>
+	
+<?php if(isset($main_success)): ?>
+		<?= buildMainSuccess($main_success) ;?>
 	<?php endif; ?>
 	<div class="row">
 	

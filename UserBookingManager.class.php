@@ -141,8 +141,24 @@
     	
     	
     	}
-
-    	
+		
+		// kinnita vormile luuakse kinnita nupp
+		
+		function buildConfirmButton(){
+			
+			$html = '<input type="submit" name="confirm-now" value="Kinnita broneering">';
+			return $html;
+			
+		}    	
+		
+		// tyhista nupu loomine
+		function buildCancelButton(){
+			
+			$html = '<input type="submit" name="cancel-booking" value="Kinnita broneering">';
+			return $html;
+			
+		}    
+		
 		
 }
 ?>
