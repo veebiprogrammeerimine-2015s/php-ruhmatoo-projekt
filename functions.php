@@ -1,6 +1,6 @@
 <?php
 
-	require_once("../../config_global.php");
+	require_once("../config_global.php");
 	$database= "if15_mats_3a";
 	
 	session_start();
@@ -25,9 +25,9 @@
 		$stmt->execute ();
 		if($stmt->fetch()){
 			echo " Email ja parool õiged, kasutaja id=".$id_from_db.".";
-		$_SESSION["logged_in_user_username"]=$username_from_db;
-		$_SESSION["logged_in_user_email"]=$email_from_db;
-		header("Location: data.php")
+			$_SESSION["logged_in_user_username"]=$username_from_db;
+			$_SESSION["logged_in_user_email"]=$email_from_db;
+			header("Location: data.php");
 		}else{
 			echo  "Wrong credentials";
 		}
