@@ -19,13 +19,13 @@
    function loginUser ($email, $hash){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 	
-		$stmt = $mysqli->prepare ("SELECT User FROM User WHERE User=? email=? AND password=?");
-		$stmt->bind_param("sss", $username, $email, $hash);
+		$stmt = $mysqli->prepare ("SELECT User, Email FROM User WHERE  Email=? AND Password=?");
+		$stmt->bind_param("ss", $email, $hash);
 		$stmt->bind_result($username_from_db, $email_from_db);
 		$stmt->execute ();
 		if($stmt->fetch()){
-			echo " Email ja parool õiged, kasutaja id=".$id_from_db.".";
-			$_SESSION["logged_in_user_username"]=$username_from_db;
+			
+			$_SESSION["logged_in_user_id"]=$username_from_db;
 			$_SESSION["logged_in_user_email"]=$email_from_db;
 			header("Location: data.php");
 		}else{
@@ -40,7 +40,7 @@
     $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
         $stmt = $mysqli->prepare("INSERT INTO UserPosts (PostId, Post) VALUES (?,?)");
         
-        $stmt->bind_param("is", $_SESSION['logged_in_user_username'], $post);
+        $stmt->bind_param("is", $_SESSION['logged_in_user_id'], $post);
         
 		//sõnum
         $message = "";

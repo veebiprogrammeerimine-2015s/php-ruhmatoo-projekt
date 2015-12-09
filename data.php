@@ -1,7 +1,7 @@
 <?php
    require_once("functions.php");
-   if(!isset($_SESSION["logged_in_user_username"])){
-		header("Location: login.php");
+   if(!isset($_SESSION["logged_in_user_id"])){
+		header("Location: main.php");
 		
 	}
 	//kasutaja tahab välja logida
@@ -9,7 +9,7 @@
 		//addressireal on olemas muutuja logout
 		//kustutame kõik sessioonimuutujad
 		session_destroy();
-		header("Location: login.php");
+		header("Location: main.php");
 	}
    $post="";
    $post_error= "";
@@ -124,7 +124,7 @@
    
  ?> 
  
- <p>Tere, <?=$_SESSION["logged_in_user_email OR logged_in_user_username"];?>
+ <p>Tere, <?=$_SESSION["logged_in_user_id"];?>
 	<a href="?logout=1"> Logi välja <a>
 </p>
 

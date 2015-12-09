@@ -1,6 +1,11 @@
 <?php
 	require_once("header.php"); 
 	require_once("login.php");
+		if(isset($_SESSION["logged_in_user_id"])){
+		header("Location:data.php");
+		
+	}
+
 ?>
     
 	<!-- ###################### -->
@@ -44,21 +49,21 @@
 		<div class="col-sm-6">
 			<div class="jumbotron">
 				<div class="container">
-			<form>
+			<form method="post" >
 				<h3>Logige sisse</h3>
 				<div class="form-group">
-				<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+				<input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
 				</div>
 			  
 				<div class="row">
 					<div class="col-xs-8">
 						<div class="form-group">
-						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+						<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
 						</div>
 					</div>
 					<div class="col-xs-4">
-					<button type="submit" class="btn btn-info hidden-xs " value="<?php echo $email; ?>"> <?php echo $email_error; ?>Login 1 </button>
-					<button type="submit" class="btn btn-info btn-block visible-xs">Login 2 </button>
+					<input type="submit" name="login" class="btn btn-info hidden-xs "> 
+					<input type="submit" name="login" class="btn btn-info btn-block visible-xs"> 
 					</div>
 			  </div>
 			  
@@ -71,7 +76,7 @@
 				<div class="container">
 					<form>
 						<h4>Ei ole veel liitunud? Registreerige siin:</h4>
-						<button type="submit" class="btn btn-info"><a href="forums.php"> Sign Up</a></button>
+						<button type="submit" class="btn btn-info"><a href="signup.php"> Sign Up</a></button>
 						<b>
 					</form>
 				</div>

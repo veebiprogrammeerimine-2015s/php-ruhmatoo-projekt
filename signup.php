@@ -64,7 +64,7 @@
 			
 				if($email_error== "" && $password_error == "") {
 				
-	
+				
 				
 				$hash= hash("sha512", $password);
 				loginUser($email, $hash);
@@ -121,7 +121,7 @@
 						
 						$hash= hash("sha512", $create_password);
 						
-					
+						
 						
 						createUser($username, $create_email, $hash);
 						
@@ -140,3 +140,42 @@
 	}
 	
 ?>
+<?php
+	$page_title = "Sisselogimise leht";
+	$page_file_name="signup.php";
+
+?>
+<?php require_once("header.php"); ?>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">PHOTTLE</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#">Front Page <span class="sr-only">(current)</span></a></li>
+        <li><a href="about.php">About</a></li>
+		<li><a href="forums.php">Foorum</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+	<h2>Loo kasutaja</h2>
+		<form action="signup.php" method="post"> 
+			<input name="username" type="text" placeholder="Kasutaja"><?php echo $username_error; ?><br></br>  
+			<input name="create_email" type="email" placeholder="E-post"><?php echo $create_email_error;?> <br></br>
+			<input name="create_password" type="password" placeholder="Parool"><?php echo $create_password_error;?> <br></br>
+			<input name="create" type="submit" value="Loo kasutaja">
+		</form>
+<?php require_once("footer.php"); ?>	
