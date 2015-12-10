@@ -32,7 +32,7 @@
 			$_SESSION["user_email"] = $email_from_db;
 			
 			
-		header("Location: pages/main.php");
+		header("Location: main.php");
 			
 			
 		}else{

@@ -72,11 +72,12 @@
 				}
 				
 				if(	$create_name_error == "" && $create_email_error == "" && $create_password_error == ""){
-					echo "Tere, ".$create_name." Kasutaja on loodud! Kasutajanimi on ".$create_email." ja parool on ".$create_password;
+					echo "<br></br>
+					<br></br> Tere, ".$create_name." Sinu kasutaja on edukalt loodud! Sinu kasutajanimi on ".$create_email;
 					
 					$password_hash = hash("sha512", $create_password);
 					echo "<br>";
-					echo $password_hash;
+					
 					
 					
 					createUser($create_name, $create_email, $password_hash);

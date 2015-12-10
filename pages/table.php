@@ -1,6 +1,12 @@
 <?php
 	require_once("../functions.php");
 	
+	if(isset($_GET["main"])){
+			
+		header("Location: main.php");
+		
+	}
+	
 	$add_name_error = "";
 	$add_basket_error = "";
 	
@@ -114,3 +120,8 @@
 	
 ?>
 </table>	
+
+<p>
+	<a href="?main=1">MINE AVALEHELE</a>
+	
+</p>
