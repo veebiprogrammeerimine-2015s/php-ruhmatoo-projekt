@@ -6,7 +6,7 @@
 
 	//funktsioonid
 	require_once("functions.php");
-	require_once("timemanager.class.php");
+	require_once("diseasemanager.class.php");
 
 	//kontrollin, kas kasutaja ei ole sisseloginud
 	if(!isset($_SESSION["id_from_db"])){
@@ -16,7 +16,7 @@
 	}
 	
 	$DiseaseManager=new DiseaseManager($mysqli);
-	if(isset($_GET["new_Disease"])){
+	if(isset($_GET["new_Disease"])&&!empty($_GET["new_Disease"])){
 		$Disease_response = $DiseaseManager->addDisease($_GET["new_Disease"]);
 	}
 	if(isset($_GET["dropdownselect"])){
