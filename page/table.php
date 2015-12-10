@@ -40,7 +40,11 @@
 	
 	$park_list = getParkData();
 	
-	
+//pargi kustutamiseks	
+	if(isset($_GET["delete"])){
+		
+		deletePark($_GET["delete"]);
+	}
 	
 	
 
