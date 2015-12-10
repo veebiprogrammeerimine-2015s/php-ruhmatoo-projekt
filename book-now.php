@@ -9,10 +9,6 @@
 	require_once("AvailableTimeDetails.class.php");
 	require_once("UserBookingManager.class.php");
 	
-	
-	echo "session id: ";
-	
-	print_r($_SESSION["id_from_db"]);
 	/*if(isset($_SESSION["id_from_db"])){
 		// suunan data lehele
 		header("Location: home.php");
@@ -21,6 +17,7 @@
 	
 	// tuhjad muudujad
 	$problem_description ='';
+	$selected_available_time = 0;
 	
 	
 	
@@ -60,7 +57,13 @@
 		$getDrDayTimes = $AvailableTimeDetails->getDoctorDayTimes($timeavailableid);
 		//var_dump($getDrDayTimes);
 		
+		//kontrollime soovitava aja broneeringu staatust teeme integeri			
+		$time_status = $UserBookingManager->checkTimeStatus(intval($timeavailableid));
 		
+		if (isset($time_status->error)){
+			$main_error = $time_status->error->message;
+						
+		}
 	
 	
 	// keegi chekkis radiobuttoni ja hakkab broneerima
@@ -90,10 +93,16 @@
 					
 					if(empty($_POST["problemdescrpt"])){
 						$main_error = "Sisest palun oma mure";
+						//ehitame ajatabeli uuesti üles valitud radiobuttoniga
+						$getDrDayTimes = $AvailableTimeDetails->getDoctorDayTimes($selected_available_time);
+						
 					}
 					
 					if(empty($_POST["selectdesease"])){
 						$main_error = "vali palun haigus";
+						//ehitame ajatabeli uuesti üles valitud radiobuttoniga
+						$getDrDayTimes = $AvailableTimeDetails->getDoctorDayTimes($selected_available_time);
+						
 					}
 					
 					
@@ -115,12 +124,7 @@
 		
 	
 	}
-	//kontrollime soovitava aja broneeringu staatust teeme integeri			
-		$time_status = $UserBookingManager->checkTimeStatus(intval($timeavailableid));
-		if (isset($time_status->error)){
-			$main_error = $time_status->error->message;
-						
-		}
+	echo $selected_available_time."slected";	
 ?>
 
 <?php// echo htmlspecialchars($_SERVER["PHP_SELF"]);?>
@@ -131,7 +135,7 @@
 
 <div class="container">
 <?php if(isset($main_error)): ?>
-		<?= $UserBookingManager->buildMainError($main_error) ;?>
+		<?= buildMainError($main_error) ;?>
 		
 	<?php endif; ?>
 	<div class="row">
