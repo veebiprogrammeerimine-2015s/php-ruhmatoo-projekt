@@ -6,7 +6,6 @@
    
 <?php
 	require_once("functions.php");
-	require_once("AvailableTimeDetails.class.php");
 	require_once("UserBookingManager.class.php");
 	
 	if(!isset($_SESSION["id_from_db"])){
@@ -16,50 +15,34 @@
 	}
 	
 	// omistame probleemi
-	$problem_description = $_SESSION["problem_description"];
-	$user_id = ($_SESSION["id_from_db"]);
-	$selected_desease_id = $_SESSION["selected_desease"];
-
 	
-	// teeme uue instantsi class AvailableTimeDetails
-	$AvailableTimeDetails = new AvailableTimeDetails($mysqli);
+	$user_id = ($_SESSION["id_from_db"]);
+		
+	// teeme uue instantsi class
 	$UserBookingManager = new UserBookingManager($mysqli);
 	
 	// tommame urlist id
-	if(isset($_GET["timeavailableid"])){
-        $timeavailableid = $_GET["timeavailableid"];
+	if(isset($_GET["bookingid"])){
+        $booking_id = $_GET["bookingid"];
     }
     
     
     //tommame kogu info
-	$getTimeInfo = $AvailableTimeDetails->getFreeTimesDetails($timeavailableid);
-	$getDrDeseaes = $AvailableTimeDetails->getDoctorDeseases($timeavailableid);
-	
-	//kontrollime, kas ei tule null rida parameetri vastu
-	if (isset($getTimeInfo->error)){
-		// kui on,suunan error lehele
-		header("Location: error.php");
-		exit();
-	
-	}
+	$getBookingDetail = $UserBookingManager->getBookingDetails($booking_id, $user_id);
 			
 			
-		$hospidal_name = $getTimeInfo[0]->hospidal_name;
-		$dr_name = $getTimeInfo[0]->dr_name;
-		$area = $getTimeInfo[0]->area;
-		$city = $getTimeInfo[0]->city;
-		$address = $getTimeInfo[0]->address;
-		$date_appoitmnt = $getTimeInfo[0]->date_appoitmnt;
-		$session_start = $getTimeInfo[0]->time_start;
-		$session_end = $getTimeInfo[0]->time_end;
-		$desease = '';
-		// kontrollime kas baasis on vaste valitud desease idle
-		foreach ($getDrDeseaes as $sel_item){
-			if ($sel_item->id == $selected_desease_id){
-				$desease = $sel_item->desease_fdb;
-			}
+		$hospidal_name = $getBookingDetail[0]->hospidal_name;
+		$dr_name = $getBookingDetail[0]->dr_name;
+		$area = $getBookingDetail[0]->area;
+		$city = $getBookingDetail[0]->city;
+		$address = $getBookingDetail[0]->address;
+		$date_appoitmnt = $getBookingDetail[0]->date_appoitmnt;
+		$session_start = $getBookingDetail[0]->time_start;
+		$session_end = $getBookingDetail[0]->time_end;
+		$desease = $getBookingDetail[0]->desease;
+		$problem_description = $getBookingDetail[0]->problem_descr;
 			
-		} 
+		
 		//kontrollime soovitava aja broneeringu staatust juba broneeritud kellegi poolt, või minu
 		// oma (success) broneeringutabelis,teeme integeriks
 					
@@ -85,7 +68,7 @@
 	// keegi tühistas bookingu otse lehelt
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		if(isset($_POST["cancel-booking"])){
-			$UserBookingManager->cancelBooking(62);
+			$UserBookingManager->cancelBooking($booking_id);
 			
 		}
 		
@@ -134,7 +117,7 @@
 	
 	
 	
-	<H1> Broneeringu kinnitamine </h1>
+	<H1> Minu broneeringu detailandmed </h1>
   			<label for="comment">Arsti nimi:</label>  <?php echo $dr_name ?>
   			<div class="form-group">
   			<form action="<?php // echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
@@ -154,7 +137,7 @@
 			<?php endif; ?>
 			
 			<?php if(!isset($main_error) & !isset($main_success)): ?>
-				<?= $UserBookingManager->buildConfirmButton() ;?>
+				<?= $UserBookingManager->buildCancelButton() ;?>
 			<?php endif; ?>
   			</form>	
   			<?php if(isset($_SESSION["return_url"])): ?>
