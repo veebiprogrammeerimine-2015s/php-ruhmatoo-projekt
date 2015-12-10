@@ -73,9 +73,9 @@ class User{
 			return $response;
 		}
 		$stmt->close();
-		$stmt = $this->connection->prepare("SELECT id, email FROM af_persons WHERE email=? AND password=?");
+		$stmt = $this->connection->prepare("SELECT id, email, role FROM af_persons WHERE email=? AND password=?");
 		$stmt->bind_param("ss", $email, $password_hash);
-		$stmt->bind_result($id_from_db, $un_from_db);
+		$stmt->bind_result($id_from_db, $un_from_db, $role_from_db);
 		$stmt->execute();
 		if($stmt->fetch()){
 			$success = new StdClass();
@@ -83,6 +83,7 @@ class User{
 			$user = new StdClass();
 			$user->id = $id_from_db;
 			$user->email = $un_from_db;
+			$user->role = $role_from_db;
 			$success->user = $user;
 			$response->success = $success;
 		}else{

@@ -14,6 +14,11 @@
 		header("Location: home.php");
 		exit();
 	}
+	//kontroll, kas kasutaja on doctor, kui ei suunan ära
+	if($_SESSION["role_from_db"] != 2){
+		header("Location: home.php");
+		exit();
+	}
 	
 	$DiseaseManager=new DiseaseManager($mysqli);
 	if(isset($_GET["new_Disease"])&&!empty($_GET["new_Disease"])){
@@ -47,6 +52,8 @@
 			</form>
 		</div>
 		<div class="col-md-8">
+		<?php echo $_SESSION["id_from_db"]; ?>
+		<?php var_dump($allDiseases);?>
 		<?php echo $DiseaseManager->build_table($allDiseases);?>
 		</div>
 	</div>

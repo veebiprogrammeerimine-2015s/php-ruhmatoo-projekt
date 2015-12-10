@@ -49,6 +49,7 @@
 					//läks edukalt, peab sessiooni salvestama
 					$_SESSION["id_from_db"] = $login_response->success->user->id;
 					$_SESSION["un_from_db"] = $login_response->success->user->email;
+					$_SESSION["role_from_db"] = $login_response->success->user->role;
 					//***********************************//
 					//**suunamine peale sisse logimist?**//
 					//***********************************//
