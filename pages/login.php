@@ -1,4 +1,100 @@
-<?php require_once("../header.php"); ?>
+
+<?php 
+		require_once("../header.php"); 
+		require_once("../functions.php"); 
+
+		if(isset($_SESSION["id_from_db"])){
+			header("Location: main.php");
+		}
+
+		$email_error = "";
+		$password_error = "";
+		$create_name_error = "";
+		$create_email_error = "";
+		$create_password_error = "";
+
+		$email = "";
+		$password = "";
+		$create_name = "";
+		$create_email = "";
+		$create_password = "";
+
+		if($_SERVER["REQUEST_METHOD"] == "POST") {
+			
+			
+			
+			if(isset($_POST["login"])){
+				if (empty($_POST["email"]) ) {
+					$email_error = "See väli on kohustuslik";
+				}else{
+			
+					$email = cleanInput($_POST["email"]);
+				}
+				
+				if ( empty($_POST["password"]) ) {
+					$password_error = "See väli on kohustuslik";
+				}else{
+					$password = cleanInput($_POST["password"]);
+				}
+		  
+				if($password_error == "" && $email_error == ""){
+					echo "Võib sisse logida! Kasutajanimi on ".$email." ja parool on ".$password;
+					
+					$password_hash = hash("sha512", $password);
+					
+			
+					loginUser($email, $password_hash);
+				}
+			} 
+		
+			 if(isset($_POST["create"])){
+				
+				if ( empty($_POST["create_name"]) ) {
+					$create_name_error = "See väli on kohustuslik";
+				}else{
+					$create_name = cleanInput($_POST["create_name"]);
+				}				
+				
+				if ( empty($_POST["create_email"]) ) {
+					$create_email_error = "See väli on kohustuslik";
+				}else{
+					$create_email = cleanInput($_POST["create_email"]);
+				}
+				
+				if ( empty($_POST["create_password"]) ) {
+					$create_password_error = "See väli on kohustuslik";
+				} else {
+					if(strlen($_POST["create_password"]) < 8) {
+						$create_password_error = "Peab olema vähemalt 8 tähemärki pikk!";
+					}else{
+						$create_password = cleanInput($_POST["create_password"]);
+					}
+				}
+				
+				if(	$create_name_error == "" && $create_email_error == "" && $create_password_error == ""){
+					echo "Tere, ".$create_name." Kasutaja on loodud! Kasutajanimi on ".$create_email." ja parool on ".$create_password;
+					
+					$password_hash = hash("sha512", $create_password);
+					echo "<br>";
+					echo $password_hash;
+					
+					
+					createUser($create_name, $create_email, $password_hash);
+					
+				}
+			} 
+		}
+		
+		
+		function cleanInput($data) {
+			$data = trim($data);
+			$data = stripslashes($data);
+			$data = htmlspecialchars($data);
+			return $data;
+		}
+		
+		
+?>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">  <!-- default - hall; navbar fixed top hoiab seda üleval kinni -->
   <div class="container-fluid">
@@ -39,20 +135,18 @@
 <!-- SISSE LOGIMINE -->		
 		<div class="col-md-3 col-md-offset-1 col-sm-4">
 			<h3>Log in</h3>
-			<form>
-			  <div class="form-group">
-				
-				<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+			<form action="login.php" method="post" >
+			  <div class="form-group">				
+				<input name="email" type="email" class="form-control" id="email" placeholder="Email" value="<?php echo $email; ?>"> <?php echo $email_error; ?>
 			  </div>
 			  <div class="form-group">
-				
-				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+				<input name="password" type="password" class="form-control" id="password" placeholder="Password" value="<?php echo $password; ?>"> <?php echo $password_error; ?>
 			  </div>
 			  <div class="form-group">
 				
 			  </div>
-			  <button type="submit" class="btn btn-success pull-right hidden-xs">Log in</button>
-			  <button type="submit" class="btn btn-success btn-block visible-xs">Log in</button>
+			  <button name ="login" type="submit" value="Log in" class="btn btn-success pull-right hidden-xs">Log in</button>
+			  <button name ="login" type="submit" value="Log in" class="btn btn-success btn-block visible-xs">Log in</button>
 			</form>
 			
 			<br></br>
@@ -63,26 +157,26 @@
 	<!-- UUS KASUTAJA -->				
 			<div class="col-md-3 col-md-offset-1 col-sm-4">
 			<h3>Sign up</h3>
-			<form>
+			<form action="login.php" method="post">
 			  <div class="form-group">
 				
-				<input type="newname" class="form-control" id="exampleInputName2" placeholder="Full Name">
+				<input name="create_name" type="name" class="form-control" id="create_name" placeholder="Full Name" value="<?php echo $create_name; ?>"> <?php echo $create_name_error; ?>
 			  </div>
 			
 			
 			  <div class="form-group">
 				
-				<input type="newemail" class="form-control" id="exampleInputEmail2" placeholder="Email">
+				<input name="create_email" type="email" class="form-control" id="create_email" placeholder="Email" value="<?php echo $create_email; ?>"> <?php echo $create_email_error; ?>
 			  </div>
 			  <div class="form-group">
 				
-				<input type="newpassword" class="form-control" id="exampleInputPassword2" placeholder="Password">
+				<input name="create_password" type="password" class="form-control" id="create_password" placeholder="Password" <?php echo $create_password_error; ?>"> <?php echo $create_password_error ?>
 			  </div>
 			  <div class="form-group">
 				
 			  </div>
-			  <button type="submit" class="btn btn-success pull-right hidden-xs">Sign up</button>
-			  <button type="submit" class="btn btn-success btn-block visible-xs">Sign up</button>
+			  <button name="create" type="submit" value="Sign up" class="btn btn-success pull-right hidden-xs">Sign up</button>
+			  <button name="create" type="submit" value="Sign up" class="btn btn-success btn-block visible-xs">Sign up</button>
 			</form>
 					
 		</div>
