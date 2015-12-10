@@ -51,8 +51,15 @@
 		
 		deletePark($_GET["delete"]);
 	}
-	
-	
+//PARide sisestamiseks
+	if(isset($_POST["pars"])){
+		$park_id = $_GET["id"];
+		$nr_of_baskets = $_GET["nr"];
+		
+		insertPars ($park_id, $nr_of_baskets);
+		
+		header("Location: insert_pars.php");
+	}
 
 	
 ?>
@@ -81,7 +88,7 @@
 						echo "<td>".$park_list[$i]->id."</td>";
 						echo "<td><input name='park name' value='".$park_list[$i]->park_name."'></td>";
 						echo "<td><input name='number of baskets' value='".$park_list[$i]->basket_number."'></td>";
-						echo "<td><input type='submit' name='PARs' value='PARs'></td>";
+						echo "<td><input type='submit' name='pars' value='PARs'></td>";
 						echo "<td><a href='table.php'>cancel</a></td>";
 						echo "<td><input type='submit' name='update' value='muuda' ></td>";
 						echo "<td></td>";
@@ -97,7 +104,7 @@
 				echo "<td>".$park_list[$i]->id."</td>";
 				echo "<td>".$park_list[$i]->park_name."</td>";
 				echo "<td>".$park_list[$i]->basket_number."</td>";
-				echo "<td><a href='?id=".$park_list[$i]->id."&nr=".$park_list[$i]->basket_number."'><input type='submit' name'pars' value='PARs'></td>";
+				echo "<td><a href='?id=".$park_list[$i]->id."&nr=".$park_list[$i]->basket_number."'><input type='submit' name='pars' value='PARs'></td>";
 				echo "<td><a href='?delete=".$park_list[$i]->id."'><input type='submit' name='delete' value='X'></td>";
 				echo "<td><a href='?edit=".$park_list[$i]->id."'><input type='submit' name='edit' value='edit'</td>";
 				echo "<td><a href='?play=".$park_list[$i]->id."'><input type='submit' name='play' value='Mine mängima!'></td>";

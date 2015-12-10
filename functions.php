@@ -86,6 +86,16 @@
 	
 			return $message;	
 	}
+//PARide lisamiseks
+		function insertPars($park_id, $nr_of_baskets){
+			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+			
+			$stmt = $mysqli->prepare("INSERT INTO pars (park_id) VALUES (?)");
+			$stmt->bind_param("i",$park_id);
+		$stmt->execute();
+		$stmt->close();
+		$mysqli->close();
+		}
 	
 
 
