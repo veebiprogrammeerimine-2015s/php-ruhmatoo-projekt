@@ -7,7 +7,8 @@
       </div>
     </footer>
 
-    </div>  <!-- /main container end -->
+    
+	</div>  <!-- /main container end -->
 
 
     <!-- Bootstrap core JavaScript
