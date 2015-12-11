@@ -50,6 +50,7 @@
 					$_SESSION["id_from_db"] = $login_response->success->user->id;
 					$_SESSION["un_from_db"] = $login_response->success->user->email;
 					$_SESSION["role_from_db"] = $login_response->success->user->role;
+					
 
 					header("Location:index.php");
 					//lõpetame php laadimise

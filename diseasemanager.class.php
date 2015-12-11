@@ -75,18 +75,19 @@ class DiseaseManager{
 	}
 	function getUserDiseases($user_id){
 		$table_data = array();
-		$stmt=$this->connection->prepare("SELECT af_doctors_deseaes.id, desease FROM af_doctors_deseaes
-	JOIN af_deseases ON af_deseases.id = af_doctors_deseaes.af_deseases_id WHERE af_doctors_deseaes.af_doctors_id = ?;");
+		$stmt=$this->connection->prepare("SELECT af_doctors_deseaes.id, desease FROM af_doctors_deseaes JOIN af_deseases ON af_deseases.id = af_doctors_deseaes.af_deseases_id JOIN af_doctors ON af_doctors.id = af_doctors_deseaes.af_doctors_id WHERE af_doctors.af_persons_id = ?");
 		$stmt->bind_param("i", $user_id);
 		$stmt->bind_result($id_to_delete, $desease_name);
 		$stmt->execute();
 		while($stmt->fetch()){
-			
+				echo "<pre>";
 				$table_row = new StdClass();
-				//$table_row->id = $id;
+				$table_row->id = $id;
 				$table_row->Haigus = $desease_name;
 				$table_row->Eemalda = "<a href='?delete=".$id_to_delete.">Eemalda</a>";
 				array_push($table_data, $table_row);
+				var_dump($table_data);
+				echo "</pre>";
 		}
 		$stmt->close();
 		return $table_data;
@@ -94,23 +95,28 @@ class DiseaseManager{
 	// üks funktsioon tabeli printimiseks
 	// kood laenatud http://stackoverflow.com/questions/4746079/how-to-create-a-html-table-from-a-php-array
 	function build_table($array){
-		// start table
-		 $html = '<table class="table table-bordered">';
-		// header row
-		$html .= '<tr>';
-		foreach($array[0] as $key=>$value){
-			$html .= '<th>' . $key . '</th>';
-		}
-		$html .= '</tr>';
+			// start table
+   			 $html = '<table class="table table-bordered">';
+    		// header row
+    		$html .= '<tr>';
+    		foreach($array[0] as $key=>$value){
+            	$html .= '<th>' . $key . '</th>';
+        	}
+    		$html .= '</tr>';
 
-		// data rows
-		foreach( $array as $key=>$value){
-		$html .= '<tr>';
-		foreach($value as $key2=>$value2){
-			$html .= '<td>' . $value2 . '</td>';
-		}
-		$html .= '</tr>';
-		}
+    		// data rows
+    		foreach( $array as $key=>$value){
+        	$html .= '<tr>';
+        	foreach($value as $key2=>$value2){
+            	$html .= '<td>' . $value2 . '</td>';
+        	}
+        	$html .= '</tr>';
+    	}
+
+    	// finish table and return it
+
+    	$html .= '</table>';
+    	return $html;
 	}
 	function deleteDisease($id_to_be_deleted){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);

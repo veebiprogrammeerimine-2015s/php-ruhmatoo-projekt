@@ -52,10 +52,8 @@
 			</form>
 		</div>
 		<div class="col-md-8">
-		<?php echo $_SESSION["id_from_db"]; ?>
-		<?php var_dump($allDiseases);?>
 		<?php echo $DiseaseManager->build_table($allDiseases);?>
-		</div>
+		</div>	
 	</div>
 	<div class="row">
 		<div class="col-md-3">
