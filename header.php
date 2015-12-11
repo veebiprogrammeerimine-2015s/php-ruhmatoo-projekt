@@ -42,7 +42,7 @@
              
               <li class="active"><a href="login.php">Log in <span class="sr-only">(current)</span></a></li>
               <li><a href="my-bookings.php">minu broneeringud</a></li>
-              <li><a href="#">doctor</a></li>
+              <li><a href="drtimemanager.php">doctor</a></li>
               <li><a href="logout.php">Logout</a></li>
             </ul>
           </div><!--/.nav-collapse -->
