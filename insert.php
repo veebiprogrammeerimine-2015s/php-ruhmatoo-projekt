@@ -134,7 +134,6 @@
 	function createDropDown(array, element){
 		
 		var html = '';
-		
 		for(var i = 0; i < array.length; i++){
 			
 			html+= '<option value="'+array[i]+'">'+ 

@@ -124,6 +124,20 @@
 		
 		createDropDown(list_of_countys, county_select);
 		
+		//automaatselt valib esimesel laadimisel
+		for(var i = 0; i < jsarray.length; i++){
+			if(jsarray[i].county == county_select.value){
+				createDropDown(jsarray[i].parish, parish_select);
+			}
+		}
+		
+		//loc_select.innerHTML = '<option>Vali asula</option>';
+		for(var i = 0; i < jsarray_loc.length; i++){
+			if(jsarray_loc[i].parish == parish_select.value){
+				createDropDown(jsarray_loc[i].location, loc_select);
+			}
+		}
+		
 		county_select.addEventListener('change', function(){
 			console.log('valik muuutus '+ county_select.value);
 			

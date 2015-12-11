@@ -416,7 +416,7 @@ class Job {
 	
 	function editCountyDropdown($id) {
 		$html = '';
-		$html .= '<select name="job_county" class="form-control">';
+		$html .= '<select id="countyid" name="job_county" class="form-control">';
 		$stmt = $this->connection->prepare("(SELECT county FROM job_offers WHERE id=?) UNION (SELECT county FROM job_county)");
 		$stmt->bind_param("i", $id);
 		$stmt->bind_result($county);
@@ -592,7 +592,30 @@ class Job {
 	}		
 			
 	
+	function jobLocation($id) {
+		$stmt = $this->connection->prepare("SELECT county, parish, location FROM job_offers WHERE id = ?");
+		$stmt->bind_param("i", $id);
+		$stmt->bind_result($county, $parish, $location);
+		$stmt->execute();
+		
+
+		
+		$array = array();
+		//Iga rea kohta teeme midagi
+		while($stmt->fetch()) {
+				
+				$dropdown = new StdClass();
+				$dropdown->county = $county;
+				$dropdown->parish = $parish;
+				$dropdown->location = $location;
+				array_push($array, $dropdown);
 	
+		}
+		
+
+		
+		return $array ;
+	}
 	
 	#################
 	####TEST END####

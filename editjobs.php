@@ -38,10 +38,178 @@
 			if(isset($_GET["deactivate"])) {
 				$Job->deactivateData($_GET["deactivate"]);
 			}
+			
 		}
 	}
 
+	$droparray = $Job->parishDrop2();
+	$jsarray = json_encode($droparray[0]);
+	$jsarray_loc = json_encode($droparray[1]);
+	
+	if(isset($_GET["edit"])) {
+		// leian valitud rea maakonna jm
+		for($i = 0; $i < count($job_array); $i++){
+			
+			if($job_array[$i]->id == $_GET["edit"]){
+				$selected_county = $job_array[$i]->county;
+				$selected_parish = $job_array[$i]->parish;
+				$selected_loc = $job_array[$i]->location;
+				#echo('siin');
+				#var_dump($job_array[$i]);
+			}
+		}
+		
+	}
 ?>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+<?php 
+	
+	if(isset($_GET['edit'])):
+
+?>	
+	
+<script>
+	window.onload = function(){
+		
+		
+		var jsarray = JSON.parse('<?=$jsarray;?>');
+		var jsarray_loc = JSON.parse('<?=$jsarray_loc;?>');
+		
+		var selected_county = '<?=$selected_county;?>';
+		var selected_parish = '<?=$selected_parish;?>';
+		var selected_loc = '<?=$selected_loc;?>';
+		console.log(selected_county,selected_parish,selected_loc);
+		
+		console.log(jsarray_loc);
+		
+		var county_select = document.getElementById('job_county');
+		var parish_select = document.getElementById('job_parish');
+		var loc_select = document.getElementById('job_location');
+		
+		var list_of_countys = createListOfCountys(jsarray);
+		
+		console.log(list_of_countys);
+		
+		createDropDown(list_of_countys, county_select, selected_county);
+		selected_county = null;
+		for(var i = 0; i < jsarray.length; i++){
+			if(jsarray[i].county == county_select.value){
+				createDropDown(jsarray[i].parish, parish_select, selected_parish);
+				selected_parish = null;
+			}
+		}
+		
+		//loc_select.innerHTML = '<option>Vali asula</option>';
+		for(var i = 0; i < jsarray_loc.length; i++){
+			if(jsarray_loc[i].parish == parish_select.value){
+				createDropDown(jsarray_loc[i].location, loc_select, selected_loc);
+				selected_loc = null;
+			}
+		}
+		
+		county_select.addEventListener('change', function(){
+			console.log('valik muuutus '+ county_select.value);
+			
+			for(var i = 0; i < jsarray.length; i++){
+				if(jsarray[i].county == county_select.value){
+					createDropDown(jsarray[i].parish, parish_select, null);
+				}
+			}
+			
+			//loc_select.innerHTML = '<option>Vali asula</option>';
+			for(var i = 0; i < jsarray_loc.length; i++){
+				if(jsarray_loc[i].parish == parish_select.value){
+					createDropDown(jsarray_loc[i].location, loc_select, null);
+				}
+			}
+			
+		});
+		
+		parish_select.addEventListener('change', function(){
+			console.log('valik muuutus '+ parish_select.value);
+			
+			for(var i = 0; i < jsarray_loc.length; i++){
+				if(jsarray_loc[i].parish == parish_select.value){
+					createDropDown(jsarray_loc[i].location, loc_select, null);
+				}
+			}
+			
+		});
+	}
+	
+	function createListOfCountys(jsarray){
+		
+		var temp_array = [];
+		for(var i = 0; i < jsarray.length; i++){
+			temp_array.push(jsarray[i].county);
+		}
+		return temp_array;
+	}
+	
+	function createDropDown(array, element, selected){
+		
+		var html = '';
+		
+		for(var i = 0; i < array.length; i++){
+			console.log(selected);
+			if(selected && selected == array[i]){
+				
+				html+= '<option selected value="'+array[i]+'">'+ 
+						
+						array[i]+
+			
+					'</option>';
+			
+			}else{
+				
+				html+= '<option value="'+array[i]+'">'+ 
+						
+						array[i]+
+			
+					'</option>';
+			
+			}
+			
+		}
+		
+		element.innerHTML = html;
+		
+	}
+</script>
+
+
+<?php 
+
+	endif;
+
+?>	
+	
+
+
+
+
+
+
+
+
+
+
 
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 	<?php
@@ -51,11 +219,11 @@
 			echo '<div class="panel-heading" role="tab" id="'.$job_array[$i]->id.'heading">';
 			echo '<h4 class="panel-title">';
 			if(isset($_GET["edit"]) && $_GET["edit"] == $job_array[$i]->id) {
-				
+
 				$currentcompany = $Job->editCompanyDropdown($job_array[$i]->id);
-				$currentcounty = $Job->editCountyDropdown($job_array[$i]->id);
-				$currentparish = $Job->editParishDropdown($job_array[$i]->id);
-				$currentlocation = $Job->editLocationDropdown($job_array[$i]->id);
+				//$currentcounty = $Job->editCountyDropdown($job_array[$i]->id);
+				//$currentparish = $Job->editParishDropdown($job_array[$i]->id);
+				//$currentlocation = $Job->editLocationDropdown($job_array[$i]->id);
 				
 				echo '<a class role="button" data-toggle="collapse" data-parent="#accordion" href="#'.$job_array[$i]->id.'content" aria-expanded="true" aria-controls="'.$job_array[$i]->id.'content">';
 				echo $job_array[$i]->id.' '.$job_array[$i]->name.' '.$job_array[$i]->company;
@@ -93,7 +261,7 @@
 				echo '<div class="col-sm-6">';
 				echo '<div class="form-group">';
 				echo '<label> Ettevõte </label>';
-				echo $currentcompany;
+				echo $currentcompany; 
 				echo '</div>';
 				echo '</div>';
 				
@@ -108,12 +276,18 @@
 				
 				echo '<div class="form-group">';
 				echo '<label> Maakond </label>';
-				echo $currentcounty;
+				//echo $currentcounty;
+				echo '<select name="job_county" id="job_county" class="form-control">';
+				echo '<option>Vali vald</option>';
+				echo '</select>';
 				echo '</div>';
 				
 				echo '<div class="form-group">';
 				echo '<label> Vald </label>';
-				echo $currentparish;
+				//echo $currentparish; //Muutmine
+				echo '<select name="job_parish" id="job_parish" class="form-control">';
+				echo '<option>Vali vald</option>';
+				echo '</select>';
 				echo '</div>';
 				
 				echo '</div>';
@@ -123,7 +297,10 @@
 				
 				echo '<div class="form-group">';
 				echo '<label> Asula </label>';
-				echo $currentlocation;
+				echo '<select name="job_location" id="job_location" class="form-control">';
+				echo '<option>Vali asula</option>';
+				echo '</select>';
+				//echo $currentlocation;
 				echo '</div>';
 				
 				echo '<div class="form-group">';
