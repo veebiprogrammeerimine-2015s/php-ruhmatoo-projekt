@@ -1,13 +1,14 @@
 
       <!-- Footer start -->
       
-    <footer class="footer"> <!-- /footer -->
-      <div class="container">
-        <p class="text-muted">Copyright c 2015</p>
+    <footer "class="navbar"> <!-- /footer -->
+      <div class="navbar navbar-fixed-bottom text-center">
+        <p class="text-muted">Copyright &copy; 2015</p>
       </div>
     </footer>
 
-    </div>  <!-- /main container end -->
+    
+	</div>  <!-- /main container end -->
 
 
     <!-- Bootstrap core JavaScript
