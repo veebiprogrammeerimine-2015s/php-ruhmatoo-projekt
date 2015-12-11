@@ -82,7 +82,7 @@ class DiseaseManager{
 		while($stmt->fetch()){
 				echo "<pre>";
 				$table_row = new StdClass();
-				$table_row->id = $id;
+				$table_row->id = $id_to_delete;
 				$table_row->Haigus = $desease_name;
 				$table_row->Eemalda = "<a href='?delete=".$id_to_delete.">Eemalda</a>";
 				array_push($table_data, $table_row);

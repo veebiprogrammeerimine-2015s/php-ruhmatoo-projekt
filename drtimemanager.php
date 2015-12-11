@@ -53,7 +53,7 @@
 		</div>
 		<div class="col-md-8">
 		<?php echo $DiseaseManager->build_table($allDiseases);?>
-		</div>	
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-3">
