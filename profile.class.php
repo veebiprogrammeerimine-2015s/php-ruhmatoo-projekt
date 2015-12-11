@@ -14,7 +14,7 @@ class Profile {
 	/*Tööpakkuja*/
 	function createCompany($create_company, $create_email, $create_number){
 		$response = new StdClass();
-	
+		##VÕIMALIK, ET KUSTUTAMISELE
 		$stmt = $this->connection->prepare("SELECT name FROM job_company WHERE name=?");
 		$stmt->bind_param("s", $create_company);
 		$stmt->bind_result($name);
@@ -49,6 +49,31 @@ class Profile {
 		return $response;
         
     }
+	
+	function editCompany($name, $email, $number, $user) {
+		$stmt = $this->connection->prepare("SET foreign_key_checks = 0");
+		$stmt->execute();
+		
+		$stmt = $this->connection->prepare("UPDATE job_company SET name=?, email=?, number=? WHERE name=?");
+		$stmt->bind_param("ssis", $name, $email, $number, $user);
+		$stmt->execute();
+		
+		$stmt = $this->connection->prepare("UPDATE job_offers SET job_offers.company=? WHERE job_offers.company = ?");
+		$stmt->bind_param("ss", $name, $user);
+		$stmt->execute();
+		
+		$stmt = $this->connection->prepare("SET foreign_key_checks = 1");
+		$stmt->execute();
+		
+		#$stmt = $this->connection->prepare("SET foreign_key_checks = 0;
+		#									UPDATE job_company JOIN job_offers ON job_offers.company = job_company.name SET job_offers.company='$name', job_company.name='$name', job_company.email='$email', job_company.number=$number WHERE job_company.user_id = $user AND job_offers.user_id = $user;
+		#									SET foreign_key_checks = 1;");
+		#$stmt->bind_param("sssiii", $name, $name, $email, $number, $user, $user);
+		#var_dump($stmt->bind_param);
+		#$stmt->execute();
+		$stmt->close();
+		header ("Location: profile.php");
+	}
 	
 	function companyCheck($user) {
 		$stmt = $this->connection->prepare("SELECT user_id, email, number, name FROM job_company WHERE user_id = ?");

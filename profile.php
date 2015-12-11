@@ -17,6 +17,10 @@
 <?php
 	$create_company = $create_email = $create_number = "";
 	$create_company_error = $create_email_error = $create_number_error = "";
+	$job_company_error = $job_email_error = $job_number_error = "";
+	$job_company = $job_email = $job_number = "";
+	$job_company_error1 = $job_email_error1 = $job_number_error1 = "";
+	$job_company1 = $job_email1 = $job_number1 = "";
 	$response = "";
 	$company_check = $Profile->companyCheck($_SESSION['logged_in_user_id']);
 
@@ -42,12 +46,49 @@
 			}
 		}
 	}
+	$old_name = $company_check->name;
+	if( $_SERVER["REQUEST_METHOD"] == "POST") {
+			if(isset($_POST["edit_employer"])) {
+			if (empty($_POST["job_company1"])) {
+				$job_company_error1 = "See väli on kohustuslik!";
+			} else {
+				$job_company1 = cleaninput($_POST["job_company1"]);
+			}
+			
+			if (empty($_POST["job_email1"])) {
+				$job_email_error1 = "See väli on kohustuslik!";
+			} else {
+				$job_email1 = cleaninput($_POST["job_email1"]);
+			}
+			
+			if (empty($_POST["job_number1"])) {
+				$job_number_error1 = "See väli on kohustuslik!";
+			} else {
+				$job_number1 = cleaninput($_POST["job_number1"]);
+			}
+			
+			if ($job_company_error1 == "" && $job_email_error1 == "" && $job_number_error1 == "") {
+				$response = $Profile->editCompany($job_company1, $job_email1, $job_number1, $old_name);
+			}
+			
+		}
+	}
 ?>
-
+<!-- 
+########################
+### SEARCHER PROFIIL ###
+########################
+-->
 <?php if($_SESSION['logged_in_user_group'] == 1):?>
 Otsija profiil
 
+<!--
+########################
+### EMPLOYER PROFILE ###
+########################
+-->
 <?php elseif($_SESSION['logged_in_user_group'] == 2): ?>
+
 <div class="row">
 <?php if(isset($response->success)): ?>
 
@@ -92,27 +133,50 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 			<input class="btn btn-success btn-sm btn-block" type="submit" name="add_company" value="Sisesta">
 		</div>
 	</form>
-	
-	<?php else: ?>
+	<?php elseif(isset($_GET["employeredit"])): ?>
+	<h2>Profiil</h2>
+	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+	<label for="job_company1"> Ettevõtte nimi </label>
+	<input name="job_company1" class="form-control" type="text" value="<?=$company_check->name;?>">
+	<label for="job_email1"> Kontakt </label>
+	<input name="job_email1" class="form-control" type="text" value="<?=$company_check->email;?>">
+	<label for="job_number1"> Kontakt email </label>
+	<input name="job_number1" class="form-control" type="text" value="<?=$company_check->number;?>">
+	<br>
+		<div class="form-group">
+			<input class="btn btn-success btn-sm btn-block" type="submit" name="edit_employer" value="Salvesta">
+		</div>
+
+	</form>
+	<?php elseif(!isset($_GET["employeredit"])): ?>
 	<h2>Profiil</h2>
 	<label for="job_company"> Ettevõtte nimi </label>
-	<input name="job_company" class="form-control" type="text" value="<?=$company_check->name;?>" readonly><br>
+	<input name="job_company" class="form-control" type="text" value="<?=$company_check->name;?>" readonly>
 	<label for="job_email"> Kontakt </label>
-	<input name="job_email" class="form-control" type="text" value="<?=$company_check->email;?>" readonly><br>
+	<input name="job_email" class="form-control" type="text" value="<?=$company_check->email;?>" readonly>
 	<label for="job_number"> Kontakt email </label>
 	<input name="job_number" class="form-control" type="text" value="<?=$company_check->number;?>" readonly>
 	<br>
+	<a href="?employeredit">
 	<button type="button" class="pull-right btn btn-info">
 		<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Muuda
 	</button>
+	</a>
 	<?php endif; ?>
 </div>
 </div>
+<!--
+#####################
+### ADMIN PROFILE ###
+#####################
+-->
 <?php elseif($_SESSION['logged_in_user_group'] == 3): ?>
 Admin profiil
 
 <?php endif; ?>
-
+<!--
+PROFILE END
+-->
 <?php
 	require_once("footer.php");
 ?>
