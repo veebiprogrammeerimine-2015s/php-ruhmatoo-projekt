@@ -10,6 +10,6 @@
     	session_unset();
     	session_destroy();
 	}
-	header("Location: login.php");
+	header("Location: home.php");
 	var_dump($_SESSION["id_from_db"]);
 ?>

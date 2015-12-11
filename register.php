@@ -2,15 +2,13 @@
 //laeme funktsiooni failis
 	require_once("functions.php");
 	
-	//*******************//
-	//***Kuhu suunata?***//
-	//*******************//
+
 	//kontrollin, kas kasutaja on sisseloginud
-	/*if(isset($_SESSION["id_from_db"])){
+	if(isset($_SESSION["id_from_db"])){
 		// kui on,suunan data lehele
-		header("Location: data.php");
+		header("Location: index.php");
 		exit();
-	}*/
+	}
 	//muutujad väärtuste jaoks
 	$create_email_error = $create_age_error = $create_name_error = $create_insurance_error = $create_gender_error = $create_personalcode_error = $create_password_error = "";
 	//muutujad errorite joks
@@ -76,8 +74,12 @@
 					$create_insurance = 0;
 				}
 				
+			
 				//käivitame funktsiooni
 				$create_response = $User->createUser($create_personalcode, $password_hash, $create_email, $create_name, $create_age, $create_gender, $create_insurance);
+				header("Location:login.php");
+				//lõpetame php laadimise
+				exit();
 			}
 		}
 	}

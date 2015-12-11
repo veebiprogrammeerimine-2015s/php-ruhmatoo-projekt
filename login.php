@@ -11,11 +11,11 @@
 	//***Kuhu suunata?***//
 	//*******************//
 	//kontrollin, kas kasutaja on sisseloginud
-	/*if(isset($_SESSION["id_from_db"])){
+	if(isset($_SESSION["id_from_db"])){
 		// suunan data lehele
-		header("Location: data.php");
+		header("Location: index.php");
 		exit();
-	}*/
+	}
 	
 	// muuutujad errorite jaoks
 	$personalcode_error = $password_error = $gender_error = $insurance_error = $name_error = $age_error = $email_error = "";
@@ -50,12 +50,10 @@
 					$_SESSION["id_from_db"] = $login_response->success->user->id;
 					$_SESSION["un_from_db"] = $login_response->success->user->email;
 					$_SESSION["role_from_db"] = $login_response->success->user->role;
-					//***********************************//
-					//**suunamine peale sisse logimist?**//
-					//***********************************//
-					/*header("Location:data.php");
+
+					header("Location:index.php");
 					//lõpetame php laadimise
-					exit();*/
+					exit();
 				}
 			}
 		}
