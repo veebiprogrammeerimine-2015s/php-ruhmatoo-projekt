@@ -46,8 +46,8 @@ if(!isset($_SESSION['logged_in_user_id'])):
 		<input class="form-control input-sm" name="password" type="password" placeholder="Parool" value="<?php echo $password; ?>">
 	</div>
 	<input type="submit" name="login" value="Logi sisse" class="btn btn-default btn-sm">
-	<a href="register.php"><input type="button" name="register" value="Registreeru" class="btn btn-default btn-sm"></a>
-	
+	<a href="register.php"><input type="button" name="register" value="Registreeru" class="btn btn-default btn-sm"></a><br>
+	<a href="forgot.php">Unustasid parooli?</a>
 	<?php if(isset($login_response->error)): ?>
 
 	<p style="color:red;">
