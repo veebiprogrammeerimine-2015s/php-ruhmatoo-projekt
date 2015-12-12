@@ -19,6 +19,17 @@
 	$Profile = new Profile($mysqli);
 	$Admin = new Admin($mysqli);
 	
+	function randStrGen($len){
+		$result = "";
+		$chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+		$charArray = str_split($chars);
+		for($i = 0; $i < $len; $i++){
+			$randItem = array_rand($charArray);
+			$result .= "".$charArray[$randItem];
+		}
+		return $result;
+	}
+	
 //Ümber tegemisele
 			function filterParish() {
 				$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);

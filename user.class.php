@@ -7,7 +7,10 @@ class User {
         $this->connection = $mysqli;
     }
 
-	//Login Funktsioon
+	###############
+	#####LOGIN#####
+	###############
+	
 	function logInUser($email, $hash){   
 		//Emaili ja parooli kontroll
 		$response = new StdClass();
@@ -49,9 +52,11 @@ class User {
         $mysqli->close();
         
     }
-    //Sisse logimine kinni
+   
+	##################
+	#####REGISTER#####
+	##################
 	
-	//Konto loomine	
     function createUser($create_email, $hash){
 		//Emaili kontroll
 		$response = new StdClass();
@@ -90,7 +95,7 @@ class User {
 		return $response;
         
     }
-	//Konto loomine kinni
+	
 	
 	function createEmployer($create_email, $hash){
 		//Emaili kontroll
@@ -130,6 +135,49 @@ class User {
 		return $response;
         
     }
+	
+	
+	##########################
+	#####RECOVER PASSWORD#####
+	##########################
+	
+	function forgotPassword($email, $link) {
+		$response = new StdClass();
+		
+		$stmt = $this->connection->prepare("SELECT id FROM recover_password WHERE email = ?");
+		$stmt->bind_param("s", $email);
+		$stmt->bind_result($id);
+		$stmt->execute();
+		
+		if($stmt->fetch()) {
+			
+			$error = new StdClass();
+			$error->id = 0;
+			$error->message = "Olete juba palunud uut parooli!";
+			$response->error = $error;
+			
+			return $response;
+		}
+		
+		$stmt = $this->connection->prepare("INSERT INTO recover_password (email, link, used, date, end) VALUES (?, ?, 0, NOW(), NOW() + INTERVAL 7 DAY)");
+		$stmt->bind_param("ss", $email, $link);
+		if($stmt->execute()) {
+			$success = new StdClass();
+			$success->message = "Email saadetud!";
+			$response->success = $success;
+		} else {
+			$error = new StdClass();
+			$error->id = 1;
+			$error->message = "Oh ei! Paistab, et UFO lõhkus midagi ära!";
+			$response->error = $error;
+		}
+        $stmt->close();
+        
+		return $response;
+        
+		
+	}
+	
 }
 
 
