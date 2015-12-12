@@ -141,7 +141,32 @@ class User {
 	#####RECOVER PASSWORD#####
 	##########################
 	
-	function forgotPassword($email, $link) {
+	function checkEmail($email) {
+		$checkresponse = new StdClass();
+		
+		$stmt = $this->connection->prepare("SELECT id FROM ntb_users WHERE email = ?");
+		$stmt->bind_param("s", $email);
+		$stmt->bind_result($id);
+		$stmt->execute();
+		if(!$stmt->fetch()) {
+			$error = new StdClass();
+			$error->message = "Sellist emaili meil ei eksisteeri!";
+			$checkresponse->error = $error;
+			return $checkresponse;
+		} else {
+			$success = new StdClass();
+			$success->message = "Email saadetud!";
+			$checkresponse->success = $success;
+			
+		}
+		$stmt->close();
+        return $checkresponse;
+
+		
+	}
+	
+	
+	function forgotPassword($email, $link, $hash) {
 		$response = new StdClass();
 		
 		$stmt = $this->connection->prepare("SELECT id FROM recover_password WHERE email = ?");
@@ -159,8 +184,8 @@ class User {
 			return $response;
 		}
 		
-		$stmt = $this->connection->prepare("INSERT INTO recover_password (email, link, used, date, end) VALUES (?, ?, 0, NOW(), NOW() + INTERVAL 7 DAY)");
-		$stmt->bind_param("ss", $email, $link);
+		$stmt = $this->connection->prepare("INSERT INTO recover_password (email, newpw, link, used, date, end) VALUES (?, ?, ?, 0, NOW(), NOW() + INTERVAL 7 DAY)");
+		$stmt->bind_param("sss", $email, $hash, $link);
 		if($stmt->execute()) {
 			$success = new StdClass();
 			$success->message = "Email saadetud!";
@@ -178,6 +203,59 @@ class User {
 		
 	}
 	
+	function checkKey($email, $key) {
+		$response = new StdClass();
+		$stmt = $this->connection->prepare("SELECT id FROM recover_password WHERE email = ? AND link = ?");
+		$stmt->bind_param("ss", $email, $key);
+		$stmt->bind_result($id);
+		$stmt->execute();
+		if ($stmt->fetch()) {
+			$success = new StdClass();
+			$success->message = "Parool taastatud!";
+			$response->success = $success;
+			
+			return $response;
+			
+		} else {
+			$error = new StdClass();
+			$error->message = "Miskit läks valesti!";
+			$response->error = $error;
+		}
+		return $response;
+		$stmt->close();
+	}
+	
+	function getPass($email, $key) {
+		$stmt = $this->connection->prepare("SELECT newpw FROM recover_password WHERE email = ? AND link = ?");
+		$stmt->bind_param("ss", $email, $key);
+		$stmt->bind_result($newpass);
+		$stmt->execute();
+		if($stmt->fetch()) {
+			$pass = new Stdclass();
+			$pass->newpass = $newpass;
+		}
+		$stmt->close();
+		
+		$stmt = $this->connection->prepare("UPDATE ntb_users SET password = ? WHERE email = ?");
+		$stmt->bind_param("ss", $pass->newpass, $email);
+		
+		if($stmt->execute()) {
+			$success = new StdClass();
+			$success->message = "Parool taastatud!";
+			$response->success = $success;
+			
+			return $response;
+		} else {
+			$error = new StdClass();
+			$error->message = "Miskit läks valesti!";
+			$response->error = $error;
+		}
+		return $response;
+		
+
+
+		$stmt->close();
+	}
 }
 
 
