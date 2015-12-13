@@ -21,16 +21,19 @@
 	$link = time();
 	$newpass = randStrGen(10);
 	
-
-	$key = cleanInput($_GET["key"]);
-	$emailcheck = cleanInput($_GET["email"]);
-	
-	if ($key != "" && $emailcheck != "") {
-		$keyresponse = $User->checkKey($emailcheck, $key);
-		if(isset($keyresponse->success)) {
-			$getpw = $User->getPass($emailcheck, $key);
+	#if (isset($_GET["key"]) && isset($_GET["email"])){
+		$key = cleanInput($_GET["key"]);
+		$emailcheck = cleanInput($_GET["email"]);
+		
+		if ($key != "" && $emailcheck != "") {
+			$keyresponse = $User->checkKey($emailcheck, $key);
+			
+			if(isset($keyresponse->success)) {
+				$usedIP = $_SERVER['REMOTE_ADDR'];
+				$getpw = $User->getPass($emailcheck, $key, $usedIP);
+			}
 		}
-	}
+	#}
 	
 	
 	if( $_SERVER["REQUEST_METHOD"] == "POST") {
@@ -46,9 +49,9 @@
 				$httplink = "http://ntb.devweb.eu/forgot.php?key=".$hash."&email=".$email;
 				$checkresponse = $User->checkEmail($email);
 				if(isset($checkresponse->success)) {
-					
+					$clientIP = $_SERVER['REMOTE_ADDR'];
 					$pwhash = hash("sha512", $newpass);
-					$response = $User->forgotPassword($email, $hash, $pwhash);
+					$response = $User->forgotPassword($email, $hash, $pwhash, $clientIP);
 
 					if(isset($response->success)) {
 					//Message
