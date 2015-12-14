@@ -1,8 +1,8 @@
 <?php
 class User {
-    
+
     private $connection;
-    
+
     function __construct($mysqli){
         $this->connection = $mysqli;
     }
@@ -10,23 +10,66 @@ class User {
 	###############
 	#####LOGIN#####
 	###############
-	
-	function logInUser($email, $hash){   
+
+		function logInCookie($email, $hash){
 		//Emaili ja parooli kontroll
 		$response = new StdClass();
-	
+
 		$stmt = $this->connection->prepare("SELECT id FROM ntb_users WHERE email=? AND password=?");
 		$stmt->bind_param("ss", $email, $hash);
 		$stmt->bind_result($id);
 		$stmt->execute();
-		
+
 		if(!$stmt->fetch()) {
-			
+
 			$error = new StdClass();
 			$error->id = 0;
 			$error->message = "Vale email/parool!";
 			$response->error = $error;
-			
+
+			return $response;
+		}
+		$stmt->close();
+		//Kontroll kinni
+		//Kasutaja sisse logimine
+        $stmt = $this->connection->prepare("SELECT id, email, usergroup FROM ntb_users WHERE email=? AND password=?");
+        $stmt->bind_param("ss", $email, $hash);
+        $stmt->bind_result($id_from_db, $email_from_db, $usergroup_from_db);
+        $stmt->execute();
+        if($stmt->fetch()){
+
+			// sessioon salvestatakse serveris
+			setcookie(ID_my_site, $id_from_db);
+			setcookie(Key_my_site, $email_from_db);
+			setcookie(Group_my_site, $usergroup_from_db);
+
+			header("Location: profile.php");
+			exit();
+
+        }
+        $stmt->close();
+
+        $mysqli->close();
+
+    }
+
+
+	function logInUser($email, $hash){
+		//Emaili ja parooli kontroll
+		$response = new StdClass();
+
+		$stmt = $this->connection->prepare("SELECT id FROM ntb_users WHERE email=? AND password=?");
+		$stmt->bind_param("ss", $email, $hash);
+		$stmt->bind_result($id);
+		$stmt->execute();
+
+		if(!$stmt->fetch()) {
+
+			$error = new StdClass();
+			$error->id = 0;
+			$error->message = "Vale email/parool!";
+			$response->error = $error;
+
 			return $response;
 		}
 		$stmt->close();
@@ -45,38 +88,38 @@ class User {
 			//Suuname kasutaja teisele lehele
 			header("Location: profile.php");
 			exit();
-			
+
         }
         $stmt->close();
-        
+
         $mysqli->close();
-        
+
     }
-   
+
 	##################
 	#####REGISTER#####
 	##################
-	
+
     function createUser($create_email, $hash){
 		//Emaili kontroll
 		$response = new StdClass();
-	
+
 		$stmt = $this->connection->prepare("SELECT id FROM ntb_users WHERE email=?");
 		$stmt->bind_param("s", $create_email);
 		$stmt->bind_result($id);
 		$stmt->execute();
-		
+
 		if($stmt->fetch()) {
-			
+
 			$error = new StdClass();
 			$error->id = 0;
 			$error->message = "Selline email on juba kasutusel!";
 			$response->error = $error;
-			
+
 			return $response;
 		}
         //Emaili kontroll kinni
-		
+
 		//Konto loomine
         $stmt = $this->connection->prepare("INSERT INTO ntb_users (email, password, usergroup, created) VALUES (?,?,1,NOW())");
         $stmt->bind_param("ss", $create_email, $hash);
@@ -91,32 +134,32 @@ class User {
 			$response->error = $error;
 		}
         $stmt->close();
-        
+
 		return $response;
-        
+
     }
-	
-	
+
+
 	function createEmployer($create_email, $hash){
 		//Emaili kontroll
 		$response = new StdClass();
-	
+
 		$stmt = $this->connection->prepare("SELECT id FROM ntb_users WHERE email=?");
 		$stmt->bind_param("s", $create_email);
 		$stmt->bind_result($id);
 		$stmt->execute();
-		
+
 		if($stmt->fetch()) {
-			
+
 			$error = new StdClass();
 			$error->id = 0;
 			$error->message = "Selline email on juba kasutusel!";
 			$response->error = $error;
-			
+
 			return $response;
 		}
         //Emaili kontroll kinni
-		
+
 		//Konto loomine
         $stmt = $this->connection->prepare("INSERT INTO ntb_users (email, password, usergroup, created) VALUES (?,?,2,NOW())");
         $stmt->bind_param("ss", $create_email, $hash);
@@ -131,19 +174,19 @@ class User {
 			$response->error = $error;
 		}
         $stmt->close();
-        
+
 		return $response;
-        
+
     }
-	
-	
+
+
 	##########################
 	#####RECOVER PASSWORD#####
 	##########################
-	
+
 	function checkEmail($email) {
 		$checkresponse = new StdClass();
-		
+
 		$stmt = $this->connection->prepare("SELECT id FROM ntb_users WHERE email = ?");
 		$stmt->bind_param("s", $email);
 		$stmt->bind_result($id);
@@ -157,33 +200,33 @@ class User {
 			$success = new StdClass();
 			$success->message = "Email saadetud!";
 			$checkresponse->success = $success;
-			
+
 		}
 		$stmt->close();
         return $checkresponse;
 
-		
+
 	}
-	
-	
+
+
 	function forgotPassword($email, $link, $hash, $ip) {
 		$response = new StdClass();
-		
+
 		$stmt = $this->connection->prepare("SELECT id FROM recover_password WHERE email = ? AND (used IS NULL OR used = '0000-00-00 00:00:00') AND end > NOW()");
 		$stmt->bind_param("s", $email);
 		$stmt->bind_result($id);
 		$stmt->execute();
-		
+
 		if($stmt->fetch()) {
-			
+
 			$error = new StdClass();
 			$error->id = 0;
 			$error->message = "Olete juba palunud uut parooli!";
 			$response->error = $error;
-			
+
 			return $response;
 		}
-		
+
 		$stmt = $this->connection->prepare("INSERT INTO recover_password (sendIP, email, newpw, link, used, date, end) VALUES (?, ?, ?, ?, 0, NOW(), NOW() + INTERVAL 7 DAY)");
 		$stmt->bind_param("ssss", $ip, $email, $hash, $link);
 		if($stmt->execute()) {
@@ -197,12 +240,12 @@ class User {
 			$response->error = $error;
 		}
         $stmt->close();
-        
+
 		return $response;
-        
-		
+
+
 	}
-	
+
 	function checkKey($email, $key) {
 		$response = new StdClass();
 		$stmt = $this->connection->prepare("SELECT id FROM recover_password WHERE email = ? AND link = ?");
@@ -214,9 +257,9 @@ class User {
 			$error->id = 0;
 			$error->message = "Miskit läks valesti!";
 			$response->error = $error;
-			
+
 			return $response;
-			
+
 		} else {
 			$stmt->close();
 			$stmt = $this->connection->prepare("SELECT id FROM recover_password WHERE email = ? AND link = ? AND end > NOW()");
@@ -228,9 +271,9 @@ class User {
 				$error->id = 1;
 				$error->message = "Link on aegunud!";
 				$response->error = $error;
-				
+
 				return $response;
-				
+
 			} else {
 				$stmt->close();
 				$stmt = $this->connection->prepare("SELECT id FROM recover_password WHERE email = ? AND link = ? AND used IS NULL OR used = '0000-00-00 00:00:00'");
@@ -240,24 +283,24 @@ class User {
 				if ($stmt->fetch()) {
 					$success = new StdClass();
 					$response->success = $success;
-					
+
 					return $response;
-					
+
 				} else {
 					$error = new StdClass();
 					$error->id = 2;
 					$error->message = "Olete juba parooli taastanud!";
 					$response->error = $error;
-					
+
 					return $response;
-					
+
 				}
 			}
 		}
 		#return $response;
 		$stmt->close();
 	}
-	
+
 	function getPass($email, $key, $ip) {
 		$stmt = $this->connection->prepare("SELECT newpw FROM recover_password WHERE email = ? AND link = ?");
 		$stmt->bind_param("ss", $email, $key);
@@ -268,19 +311,19 @@ class User {
 			$pass->newpass = $newpass;
 		}
 		$stmt->close();
-		
+
 		$stmt = $this->connection->prepare("UPDATE recover_password SET userIP = ?, used = NOW() WHERE email = ?");
 		$stmt->bind_param("ss", $ip, $email);
 		$stmt->execute();
-		
+
 		$stmt = $this->connection->prepare("UPDATE ntb_users SET password = ? WHERE email = ?");
 		$stmt->bind_param("ss", $pass->newpass, $email);
-		
+
 		if($stmt->execute()) {
 			$success = new StdClass();
 			$success->message = "Parool taastatud!";
 			$response->success = $success;
-			
+
 			return $response;
 		} else {
 			$error = new StdClass();
@@ -288,11 +331,12 @@ class User {
 			$response->error = $error;
 		}
 		return $response;
-		
+
 
 
 		$stmt->close();
 	}
+
 }
 
 
