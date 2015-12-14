@@ -1,0 +1,1 @@
+<? echo ('smth smth');?>
