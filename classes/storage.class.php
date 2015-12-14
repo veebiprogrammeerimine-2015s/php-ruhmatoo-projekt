@@ -119,9 +119,9 @@ class getAllItems{
 			//otsime
 			$search = "%".$keyword."%";
 		}
-		$stmt = $this->connection->prepare("SELECT price_added, item_weight, item_name, item_length, item_height, item_width, id from merchandise WHERE deleted IS NULL AND (item_name LIKE ?)");
+		$stmt = $this->connection->prepare("SELECT price_added, item_weight, item_name, item_length, item_height, item_width, id, image from merchandise WHERE deleted IS NULL AND (item_name LIKE ?)");
 		$stmt->bind_param("s", $search);
-		$stmt->bind_result($price_added_from_db, $item_weight_from_db, $item_name_from_db, $item_length_from_db, $item_height_from_db, $item_width_from_db, $id_from_db);
+		$stmt->bind_result($price_added_from_db, $item_weight_from_db, $item_name_from_db, $item_length_from_db, $item_height_from_db, $item_width_from_db, $id_from_db, $image_from_db);
 		$stmt->execute();
 		$array = array();
 		while($stmt->fetch()){
@@ -134,6 +134,7 @@ class getAllItems{
 			$table->item_width = $item_width_from_db;
 			$table->item_height = $item_height_from_db;
 			$table->item_weight = $item_weight_from_db;
+			$table->item_image = $image_from_db;
 			array_push($array, $table);
 			
 			}

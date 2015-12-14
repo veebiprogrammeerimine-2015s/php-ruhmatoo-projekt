@@ -3,3 +3,15 @@ body { padding-top: 70px; }
 	margin-top: 7px;
 	margin-bottom: 7px;
 }
+#picturs{
+	text-align: center;
+}
+#footer {
+    background-color: #F3F3F3;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    position: static;
+    bottom: 0px;
+    margin-bottom:0px;
+    width:100%;
+}

@@ -122,6 +122,8 @@
 				<th>Kauba Laius</th>
 				<th>Kauba Kõrgus</th>
 				<th>Kauba Kaal</th>
+				<th>Laoseis</th>
+				<th>Ladu</th>
 				<th>Muuda</th>
 				<th>Kustuta</th>
 			</tr>
@@ -138,6 +140,8 @@
 					echo "<td><input class='form-control' name='item_width' value='".$table_array[$i]->item_width."'></td>";
 					echo "<td><input class='form-control' name='item_height' value='".$table_array[$i]->item_height."'></td>";
 					echo "<td><input class='form-control' name='item_weight' value='".$table_array[$i]->item_weight."'></td>";
+					echo "<td><input class='form-control' name='noinstorage'>1</td>";
+					echo "<td><input class='form-control' name='item_ladu'>1</td>";
 					echo "<td><input class='btn btn-defaultx btn-block' name='update' type='submit' value='Uuenda'></td>";
 					echo "<td><a class='btn btn-default btn-block' href='/pages/storageitems.php'>Katkesta</a></td>";
 					echo "</form>";
@@ -150,6 +154,8 @@
 					echo "<td>".$table_array[$i]->item_width."</td>"; 
 					echo "<td>".$table_array[$i]->item_height."</td>"; 
 					echo "<td>".$table_array[$i]->item_weight."</td>"; 
+					echo "<td><input class='form-control' name='noinstorage'></td>";
+					echo "<td><input class='form-control' name='item_ladu'></td>";
 					echo '<td><a class="btn btn-info btn-block" href="/pages/storageitems.php?edit='.$table_array[$i]->id.'">Muuda</a></td>';
 					echo '<td><a class="btn btn-info btn-block" href="/pages/storageitems.php?delete='.$table_array[$i]->id.'">Kustuta</a></td></tr>';
 					

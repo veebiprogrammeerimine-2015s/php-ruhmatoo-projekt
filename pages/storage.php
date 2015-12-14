@@ -32,11 +32,11 @@
 <?php require_once(__DIR__."/../header.php"); ?>
 <div class="text">Create Storage</div>
 	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-	<?php if(isset($response->success)):	 ?>
+	<?php if(isset($response->success)):?>
   
   <p><?=$response->success->message;?></p>
 
-  <?php	elseif(isset($response->error)): ?>
+  <?php	elseif(isset($response->error)):?>
 
   <p><?=$response->error->message;?></p>
   

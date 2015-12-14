@@ -45,6 +45,6 @@
 			</div>
 		</div>
 	</div>
-<?require_once (__ROOT__.'/smth.php');?>
+
 
 <?php require_once("footer.php"); ?>

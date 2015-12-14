@@ -10,12 +10,7 @@
 
 ?>
 
-<?php require_once(__ROOT__"/header.php");?>
-    //**********//
-    //***HTML***//
-    //**********//
-	
-	
-	
+<?php require_once(__ROOT__."/header.php");
 
-<?php require_once(__ROOT__"/footer.php"); ?>
+
+require_once(__ROOT__."/footer.php"); ?>

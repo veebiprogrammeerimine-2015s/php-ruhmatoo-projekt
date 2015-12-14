@@ -23,8 +23,12 @@
 			} else {
 				echo '<li><a href="/index.php">Avaleht</a></li>';
 			}
-			?>
-			<?php
+			if($page_title == 'Pood'){
+				echo '<li class="active"><a href="/pages/store.php">Pood<span class="sr-only"></span></a></li>';
+			} else {
+				echo '<li><a href="/pages/store.php">Pood</a></li>';
+			}
+
 			if(!isset($_SESSION['logged_in_user_id'])){
 				if($page_title == 'LogIn'){
 					echo '<li class="active"><a href="/pages/login.php">Log In<span class="sr-only"></span></a></li>'; 
@@ -32,17 +36,15 @@
 					echo '<li><a href="/pages/login.php">Log In</a>';
 				}
 			}
-			?>
-			<?php
-				if(!isset($_SESSION['logged_in_user_id'])){
-					if($page_title == 'Register'){
-						echo '<li class="active"><a href=/pages/create.php>Kasutaja loomine<span class="sr-only">(current)</span></a></li>';
-					} else {
-						echo '<li><a href=/pages/create.php>Kasutaja loomine</a></li>';
-					}
+			
+			if(!isset($_SESSION['logged_in_user_id'])){
+				if($page_title == 'Register'){
+					echo '<li class="active"><a href=/pages/create.php>Kasutaja loomine<span class="sr-only">(current)</span></a></li>';
+				} else {
+					echo '<li><a href=/pages/create.php>Kasutaja loomine</a></li>';
 				}
-			?>
-			<?php
+			}
+			
 			if(isset($_SESSION['logged_in_user_id'])){
 				if($page_title == 'User edit'){
 					echo '<li class="active"><a href="pages/userpage.php">Kasutaja andmete muutmine<span class="sr-only">(current)</span></a></li>';
@@ -61,7 +63,7 @@
 					echo '<li><a href="pages/storage.php" >Lisa ladu<span class="sr-only"></span></a></li>';
 					echo '<li><a href="pages/userpageadmin.php">Kasutaja muutmine<span class="sr-only">(current)</span></a></li>';
 					echo '<li><a href="pages/storageitems.php">Kaup<span class="sr-only">(current)</span></a></li>';
-
+					echo '<li><a href="pages/storageitemimage.php">Kauba pilt<span class="sr-only">(current)</span></a></li>';
 				echo '</ul>';
 			echo '</li>';
 			}?>
