@@ -55,8 +55,8 @@
 							 <td>'.$users[$i]->created.'</td>';
 
 					echo '<td><div class="btn-group" role="group">';
-					echo '<button name="update" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>';
-					echo '<a href="users.php" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>';
+					echo '<button name="update" class="btn btn-success btn-sm" type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>';
+					echo '<a href="users.php" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>';
 					echo '</div></td>';
 					echo '</tr>';
 					} else {
@@ -66,7 +66,7 @@
 							 <td>'.$users[$i]->usergroup.'</td>
 							 <td>'.$users[$i]->cv.'</td>
 							 <td>'.$users[$i]->created.'</td>';
-					echo '<td><a href="?edit='.$users[$i]->id.'"><button type="button" class="btn btn-info">';
+					echo '<td><a href="?edit='.$users[$i]->id.'"><button type="button" class="btn btn-info btn-sm">';
 					echo '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Muuda';
 					echo '</button></a></td>';
 					echo '</tr>';
