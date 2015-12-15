@@ -1,16 +1,17 @@
 <?php
   require_once("functions.php");
-	
+
 	//variables
 	$email = "";
 	$password = "";
-	
+	$checkbox = "";
+
 	//errors
 	$email_error = "";
 	$password_error = "";
-	
+
 	//login start
-	
+
 	if( $_SERVER["REQUEST_METHOD"] == "POST") {
 		if (isset($_POST["login"])){
 			if (empty($_POST["email"])) {
@@ -24,30 +25,63 @@
 			} else {
 				$password = cleanInput($_POST["password"]);
 			}
-      // Kui oleme siia jõudnud, võime kasutaja sisse logida
-			if($password_error == "" && $email_error == ""){
+
+			if (empty($_POST["remember"])) {
+				$checkbox = "";
+			} else {
+				$checkbox = cleanInput($_POST["remember"]);
+			}
+
+			if($password_error == "" && $email_error == "" && $checkbox == "on"){
+                echo '<h1>Olemas!!!</h1>';
+				$hash = hash("sha512", $password);
+				$login_response = $User->logInCookie($email, $hash);
+            }
+			elseif ($password_error == "" && $email_error == ""){
                 $hash = hash("sha512", $password);
                 $login_response = $User->loginUser($email, $hash);
-            
+
             }
 		}
 	}
-	
+
 	//login end
 
 if(!isset($_SESSION['logged_in_user_id'])):
 ?>
+<div class="row">
+	<form class="navbar-form navbar-right" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 
-<form class="navbar-form navbar-right" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 	<div class="form-group">
 		<input class="form-control input-sm" name="email" type="email" placeholder="E-post" value="<?php echo $email; ?>">
 	</div>
+
 	<div class="form-group">
 		<input class="form-control input-sm" name="password" type="password" placeholder="Parool" value="<?php echo $password; ?>">
 	</div>
+
 	<input type="submit" name="login" value="Logi sisse" class="btn btn-default btn-sm">
+
 	<a href="register.php"><input type="button" name="register" value="Registreeru" class="btn btn-default btn-sm"></a><br>
-	<a href="forgot.php">Unustasid parooli?</a>
+
+	<div class="col-sm-4 checkbox">
+		<label>
+		  <input name="remember" type="checkbox"> Mäleta mind
+		</label>
+	</div>
+
+	<div class="col-sm-4">
+		<a href="forgot.php">Unustasid parooli?</a>
+	</div>
+
+
+
+
+
+</div>
+
+
+
 	<?php if(isset($login_response->error)): ?>
 
 	<p style="color:red;">
@@ -57,27 +91,24 @@ if(!isset($_SESSION['logged_in_user_id'])):
 	<?php endif; ?>
 </form>
 
-<?php 
+<?php
 	else: ?>
 		<form class="navbar-form navbar-right">Tere, <?=$_SESSION['logged_in_user_email'];?><br>
 		<a class="btn btn-default btn-xs" href="?logout=1">Logi välja</a>
 			<a class="btn btn-default btn-xs" href="profile.php">Profiil</a>
-		
+
 		</form>
 <?php endif; ?>
-	
+
 <?php
 	if(isset($_GET["logout"])) {
+  setcookie( 'ID_my_site');
+  setcookie( 'Email_my_site');
+  setcookie( 'Key_my_site');
+  setcookie( 'Group_my_site');
 	//kustutame sessiooni muutujad
 	session_destroy();
 	header("Location: index.php");
 	exit();
 	}
 ?>
-
-
-
-
-
-
-

@@ -7,7 +7,8 @@
 	require_once("profile.class.php");
 	require_once("admin.class.php");
     $database = "if15_raunkos_ntb";
-	
+
+
 	//paneme sessiooni serveris toole, saame kasutada SESSIOS[]
 	session_start();
 
@@ -18,7 +19,51 @@
 	$Insert = new Insert($mysqli);
 	$Profile = new Profile($mysqli);
 	$Admin = new Admin($mysqli);
-	
+
+
+	if(isset($_COOKIE['ID_my_site']))
+	{
+		/*var_dump ($_COOKIE['ID_my_site']);
+		var_dump ($_COOKIE['Email_my_site']);
+		var_dump ($_COOKIE['Key_my_site']);
+		var_dump ($_COOKIE['Group_my_site']);*/
+		$struser = (string)$_COOKIE['Email_my_site'];
+		$strkey = (string)$_COOKIE['Key_my_site'];
+		$intid = (int)$_COOKIE['ID_my_site'];
+		$intgroup = (int)$_COOKIE['Group_my_site'];
+
+		/*var_dump ($struser);
+		var_dump ($strkey);
+		var_dump ($intid);
+		var_dump ($intgroup);*/
+
+
+		$User->checkCookie($intid, $struser, $strkey, $intgroup);
+		#var_dump ($error);
+
+	/*$userid = $_COOKIE['ID_my_site'];
+	$username = $_COOKIE['Email_my_site'];
+	$password = $_COOKIE['Key_my_site'];
+	$usergroup = $_COOKIE['Group_my_site'];*/
+
+	#$User->checkCookie($userid, $username, $password, $usergroup);
+
+	/*$correct = $User->checkCookie($userid, $username, $password, $usergroup);
+
+	$_SESSION['logged_in_user_id'] = $correct->id;
+	$_SESSION['logged_in_user_email'] = $correct->user;
+	$_SESSION['logged_in_user_pass'] = $correct->pass;
+	$_SESSION['logged_in_user_group'] = $correct->group;*/
+
+
+	/*echo $username.'<br>';
+	echo $userid.'<br>';
+	echo $password.'<br>';
+	echo $usergroup.'<br>';
+	$User->checkCookie($userid, $username, $password, $usergroup);*/
+	}
+
+
 	function randStrGen($len){
 		$result = "";
 		$chars = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -29,15 +74,16 @@
 		}
 		return $result;
 	}
-	
+
+
 //Ümber tegemisele
 			function filterParish() {
 				$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-				
+
 				$stmt = $mysqli->prepare("SELECT parish, COUNT(parish) FROM job_offers WHERE active IS NOT NULL AND deleted IS NULL GROUP BY parish");
 				$stmt->bind_result($parish_from_db, $parish_count_db);
 				$stmt->execute();
-        
+
 				$array = array();
 			//Iga rea kohta teeme midagi
 				while($stmt->fetch()) {
@@ -49,19 +95,19 @@
 				return $array;
 				//Saime andmed katte
 				echo($name_from_db);
-				
-			
+
+
 		$stmt->close();
 		$mysqli->close();
 	}
-	
+
 			function filterLocation() {
 				$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-				
+
 				$stmt = $mysqli->prepare("SELECT location, COUNT(location) FROM job_offers WHERE active IS NOT NULL AND deleted IS NULL GROUP BY location");
 				$stmt->bind_result($location_from_db, $location_count_db);
 				$stmt->execute();
-        
+
 				$array = array();
 			//Iga rea kohta teeme midagi
 				while($stmt->fetch()) {
@@ -73,25 +119,25 @@
 				return $array;
 				//Saime andmed katte
 				echo($name_from_db);
-				
-			
+
+
 		$stmt->close();
 		$mysqli->close();
 	}
 //Ümber tegemisele lõpp
 
 
-	
-	
-	
-	
-	
+
+
+
+
+
   function cleanInput($data) {
   	$data = trim($data);
   	$data = stripslashes($data);
   	$data = htmlspecialchars($data);
   	return $data;
   }
-	
-	
+
+
  ?>

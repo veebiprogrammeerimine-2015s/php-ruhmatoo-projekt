@@ -11,6 +11,24 @@ class User {
 	#####LOGIN#####
 	###############
 
+  function checkCookie($userid, $username, $password, $usergroup){
+    $stmt = $this->connection->prepare("SELECT id, email, password, usergroup FROM ntb_users WHERE id=? AND email=? AND password=? AND usergroup=?");
+    $stmt->bind_param("issi", $userid, $username, $password, $usergroup);
+    $stmt->bind_result($dbid, $dbusername, $dbpassword, $dbusergroup);
+    $stmt->execute();
+
+    if($stmt->fetch()) {
+      $_SESSION['logged_in_user_id'] = $dbid;
+    	$_SESSION['logged_in_user_email'] = $dbusername;
+    	$_SESSION['logged_in_user_pass'] = $dbpassword;
+    	$_SESSION['logged_in_user_group'] = $dbusergroup;
+
+		}
+
+    $stmt->close();
+}
+
+
 		function logInCookie($email, $hash){
 		//Emaili ja parooli kontroll
 		$response = new StdClass();
@@ -32,19 +50,29 @@ class User {
 		$stmt->close();
 		//Kontroll kinni
 		//Kasutaja sisse logimine
-        $stmt = $this->connection->prepare("SELECT id, email, usergroup FROM ntb_users WHERE email=? AND password=?");
+        $stmt = $this->connection->prepare("SELECT id, email, password, usergroup FROM ntb_users WHERE email=? AND password=?");
         $stmt->bind_param("ss", $email, $hash);
-        $stmt->bind_result($id_from_db, $email_from_db, $usergroup_from_db);
+        $stmt->bind_result($id_from_db, $email_from_db, $password, $usergroup_from_db);
         $stmt->execute();
         if($stmt->fetch()){
 
-			// sessioon salvestatakse serveris
-			setcookie(ID_my_site, $id_from_db);
-			setcookie(Key_my_site, $email_from_db);
-			setcookie(Group_my_site, $usergroup_from_db);
+          $_SESSION['logged_in_user_id'] = $id_from_db;
+          $_SESSION['logged_in_user_email'] = $email_from_db;
+          $_SESSION['logged_in_user_pass'] = $password;
+          $_SESSION['logged_in_user_group'] = $usergroup_from_db;
 
-			header("Location: profile.php");
-			exit();
+          $expCookie = time()+60*60*24*30;
+    			// sessioon salvestatakse serveris
+          setrawcookie(ID_my_site, $id_from_db, $expCookie);
+
+    			setrawcookie(Email_my_site, $email_from_db, $expCookie);
+
+    			setrawcookie(Key_my_site, $password, $expCookie);
+
+    			setrawcookie(Group_my_site, $usergroup_from_db, $expCookie);
+
+    			header("Location: profile.php");
+    			exit();
 
         }
         $stmt->close();
