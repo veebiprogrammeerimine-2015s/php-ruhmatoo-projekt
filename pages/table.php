@@ -52,7 +52,7 @@
 		deletePark($_GET["delete"]);
 	}
 //PARide sisestamiseks
-	if(isset($_POST["pars"])){
+	if(isset($_GET["pars"])){
 		$park_id = $_GET["id"];
 		$nr_of_baskets = $_GET["nr"];
 		
