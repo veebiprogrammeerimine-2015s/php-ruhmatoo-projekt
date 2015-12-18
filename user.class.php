@@ -205,11 +205,47 @@ class User {
   #######################
 	#####EDIT PASSWORD#####
 	#######################
+
+  function checkPassword($userid, $oldpass) {
+    $checkresponse = new StdClass();
+
+    $stmt = $this->connection->prepare("SELECT id FROM ntb_users WHERE id = ? AND password = ?");
+		$stmt->bind_param("is", $userid, $oldpass);
+		$stmt->bind_result($id);
+		$stmt->execute();
+		if(!$stmt->fetch()) {
+			$error = new StdClass();
+			$error->message = "Sisestatud vana parool oli vale!";
+			$checkresponse->error = $error;
+			return $checkresponse;
+
+		} else {
+      $success = new StdClass();
+			$checkresponse->success = $success;
+    }
+
+    $stmt->close();
+    return $checkresponse;
+  }
+
   function changePassword($userid, $password) {
+    $response = new StdClass();
+
     $stmt = $this->connection->prepare("UPDATE ntb_users SET password = ? WHERE id = ?");
     $stmt->bind_param("si", $password, $userid);
-    $stmt->execute();
+    if($stmt->execute()) {
+      $success = new StdClass();
+			$success->message = "Parool vahetatud!";
+			$response->success = $success;
+
+    } else {
+      $error = new StdClass();
+			$error->message = "Väike ahvike pätsas midagi ära! Võta meiega ühendust!";
+			$response->error = $error;
+    }
+
     $stmt->close();
+    return $response;
   }
 
 

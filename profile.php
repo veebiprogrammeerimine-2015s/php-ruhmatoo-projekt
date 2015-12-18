@@ -18,7 +18,47 @@
 	##########################
 	### SEARCHER VARIABLES ###
 	##########################
+	$oldpassword_error = $newpassword_error = $repeatpassword_error = "";
+	$oldpassword = $newpassword = $repeatpassword = "";
 
+	if(isset($_SESSION['logged_in_user_id'])) {
+		if( $_SERVER["REQUEST_METHOD"] == "POST") {
+			if(isset($_POST["change_password"])){
+
+				if (empty($_POST["oldpassword"]) ) {
+					$oldpassword_error = "See väli on kohustuslik";
+				}else{
+					$oldpassword = cleanInput($_POST["oldpassword"]);
+				}
+
+				if (empty($_POST["newpassword"]) ) {
+					$newpassword_error = "See väli on kohustuslik";
+				}else{
+					$newpassword = cleanInput($_POST["newpassword"]);
+				}
+
+				if (empty($_POST["repeatpassword"]) ) {
+					$repeatpassword_error = "See väli on kohustuslik";
+				}else{
+					$repeatpassword = cleanInput($_POST["repeatpassword"]);
+				}
+
+				if($oldpassword_error == "" && $newpassword_error == "" && $repeatpassword_error == ""){
+					$oldhash = hash("sha512", $oldpassword);
+					$checkresponse = $User->checkPassword($_SESSION['logged_in_user_id'], $oldhash);
+					if(isset($checkresponse->success)) {
+						if($newpassword != $repeatpassword){
+							$checkresponse = "Paroolid ei klappinud omavahel!";
+						} else {
+							$newhash = hash("sha512", $newpassword);
+							$passresponse = $User->changePassword($_SESSION['logged_in_user_id'], $newhash);
+						}
+					}
+				}
+
+			}
+		}
+	}
 
 
 
@@ -58,35 +98,35 @@
 					}
 				}
 			}
+			$old_name = $company_check->name;
+			if( $_SERVER["REQUEST_METHOD"] == "POST") {
+					if(isset($_POST["edit_employer"])) {
+					if (empty($_POST["job_company1"])) {
+						$job_company_error1 = "See väli on kohustuslik!";
+					} else {
+						$job_company1 = cleaninput($_POST["job_company1"]);
+					}
+
+					if (empty($_POST["job_email1"])) {
+						$job_email_error1 = "See väli on kohustuslik!";
+					} else {
+						$job_email1 = cleaninput($_POST["job_email1"]);
+					}
+
+					if (empty($_POST["job_number1"])) {
+						$job_number_error1 = "See väli on kohustuslik!";
+					} else {
+						$job_number1 = cleaninput($_POST["job_number1"]);
+					}
+
+					if ($job_company_error1 == "" && $job_email_error1 == "" && $job_number_error1 == "") {
+						$response = $Profile->editCompany($job_company1, $job_email1, $job_number1, $old_name);
+					}
+
+			}
 		}
 	}
-	$old_name = $company_check->name;
-	if( $_SERVER["REQUEST_METHOD"] == "POST") {
-			if(isset($_POST["edit_employer"])) {
-			if (empty($_POST["job_company1"])) {
-				$job_company_error1 = "See väli on kohustuslik!";
-			} else {
-				$job_company1 = cleaninput($_POST["job_company1"]);
-			}
-
-			if (empty($_POST["job_email1"])) {
-				$job_email_error1 = "See väli on kohustuslik!";
-			} else {
-				$job_email1 = cleaninput($_POST["job_email1"]);
-			}
-
-			if (empty($_POST["job_number1"])) {
-				$job_number_error1 = "See väli on kohustuslik!";
-			} else {
-				$job_number1 = cleaninput($_POST["job_number1"]);
-			}
-
-			if ($job_company_error1 == "" && $job_email_error1 == "" && $job_number_error1 == "") {
-				$response = $Profile->editCompany($job_company1, $job_email1, $job_number1, $old_name);
-			}
-
-		}
-	}
+}
 ?>
 
 <script>
@@ -113,6 +153,37 @@ $(document).ready(function () {
 -->
 <?php if($_SESSION['logged_in_user_group'] == 1):?>
 <div class="row">
+
+	<?php if(isset($passresponse->success)): ?>
+
+	<div class="alert alert-success alert-dismissible fade in" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+		<p><?=$passresponse->success->message;?></p>
+	</div>
+
+	<?php elseif(isset($passresponse->error)): ?>
+
+	<div class="alert alert-danger alert-dismissible fade in" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+		<p><?=$passresponse->error->message;?></p>
+	</div>
+
+<?php elseif(isset($checkresponse->error)): ?>
+
+	<div class="alert alert-danger alert-dismissible fade in" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+		<p><?=$checkresponse->error->message;?></p>
+	</div>
+
+<?php elseif(!empty($checkresponse)): ?>
+
+	<div class="alert alert-danger alert-dismissible fade in" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+		<p><?=$checkresponse;?></p>
+	</div>
+
+	<?php endif; ?>
+
 	<div class="col-xs-12">
 	<div class="col-xs-12 col-sm-2">
 	<h2>Profiil</h2>
