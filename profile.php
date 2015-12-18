@@ -27,19 +27,23 @@
 
 				if (empty($_POST["oldpassword"]) ) {
 					$oldpassword_error = "See väli on kohustuslik";
-				}else{
+				} else{
 					$oldpassword = cleanInput($_POST["oldpassword"]);
 				}
 
 				if (empty($_POST["newpassword"]) ) {
 					$newpassword_error = "See väli on kohustuslik";
-				}else{
+				} else {
+					if(strlen($_POST["newpassword"]) < 8) {
+						$checklength = "Uus parool peab olema vähemalt 8 tähemärki pikk!";
+					} else {
 					$newpassword = cleanInput($_POST["newpassword"]);
 				}
+			}
 
 				if (empty($_POST["repeatpassword"]) ) {
 					$repeatpassword_error = "See väli on kohustuslik";
-				}else{
+				} else {
 					$repeatpassword = cleanInput($_POST["repeatpassword"]);
 				}
 
@@ -173,6 +177,13 @@ $(document).ready(function () {
 	<div class="alert alert-danger alert-dismissible fade in" role="alert">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 		<p><?=$checkresponse->error->message;?></p>
+	</div>
+
+<?php elseif(!empty($checklength)): ?>
+
+	<div class="alert alert-danger alert-dismissible fade in" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+		<p><?=$checklength;?></p>
 	</div>
 
 <?php elseif(!empty($checkresponse)): ?>
