@@ -88,6 +88,24 @@
 		}
 	}
 ?>
+
+<script>
+function passwordMatch() {
+    var newpass = $("#newpassword").val();
+    var repeatpass = $("#repeatpassword").val();
+
+    if (newpass != repeatpass)
+        document.getElementById("checking").className = "form-group has-error"
+		else
+				document.getElementById("checking").className = "form-group has-success"
+}
+
+$(document).ready(function () {
+   $("#repeatpassword").keyup(passwordMatch);
+});
+
+</script>
+
 <!--
 ########################
 ### SEARCHER PROFIIL ###
@@ -159,9 +177,26 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 				</pre>
 			</div>
 
+			<h3>Muuda parooli</h3>
 			<div class="form-horizontal col-xs-12 col-sm-8">
-				<h3>Muuda parooli</h3>
-				PASS
+
+					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+						<div class="form-group">
+							<label for="oldpassword">Parool</label>
+							<input type="password" class="form-control" name="oldpassword">
+						</div>
+						<div class="form-group">
+							<label for="newpassword">Uus Parool</label>
+							<input type="password" class="form-control" id="newpassword" name="newpassword">
+						</div>
+					  <div id="checking" class="form-group">
+					    <label for="repeatpassword">Korda uut parooli</label>
+					    <input type="password" class="form-control" id="repeatpassword" name="repeatpassword">
+					  </div>
+						<div class="form-group pull-right">
+							<input class="btn btn-success btn-sm" type="submit" name="change_password" value="Muuda parooli">
+						</div>
+					</form>
 			</div>
 
 		</div>

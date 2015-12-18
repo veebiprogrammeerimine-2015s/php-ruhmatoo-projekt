@@ -26,7 +26,7 @@ class User {
 		}
 
     $stmt->close();
-}
+  }
 
 
 		function logInCookie($email, $hash){
@@ -76,8 +76,6 @@ class User {
         }
         $stmt->close();
 
-        $mysqli->close();
-
     }
 
 
@@ -118,8 +116,6 @@ class User {
 
         }
         $stmt->close();
-
-        $mysqli->close();
 
     }
 
@@ -205,6 +201,16 @@ class User {
 		return $response;
 
     }
+
+  #######################
+	#####EDIT PASSWORD#####
+	#######################
+  function changePassword($userid, $password) {
+    $stmt = $this->connection->prepare("UPDATE ntb_users SET password = ? WHERE id = ?");
+    $stmt->bind_param("si", $password, $userid);
+    $stmt->execute();
+    $stmt->close();
+  }
 
 
 	##########################
