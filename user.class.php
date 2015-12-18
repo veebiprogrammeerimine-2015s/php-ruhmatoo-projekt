@@ -11,9 +11,9 @@ class User {
 	#####LOGIN#####
 	###############
 
-  function checkCookie($userid, $username, $password, $usergroup){
-    $stmt = $this->connection->prepare("SELECT id, email, password, usergroup FROM ntb_users WHERE id=? AND email=? AND password=? AND usergroup=?");
-    $stmt->bind_param("issi", $userid, $username, $password, $usergroup);
+  function checkCookie($userid, $username, $password){
+    $stmt = $this->connection->prepare("SELECT id, email, password, usergroup FROM ntb_users WHERE id=? AND email=? AND password=?");
+    $stmt->bind_param("iss", $userid, $username, $password);
     $stmt->bind_result($dbid, $dbusername, $dbpassword, $dbusergroup);
     $stmt->execute();
 
@@ -63,13 +63,12 @@ class User {
 
           $expCookie = time()+60*60*24*30;
     			// sessioon salvestatakse serveris
-          setrawcookie(ID_my_site, $id_from_db, $expCookie);
+          setcookie(ID_my_site, $id_from_db, $expCookie);
 
-    			setrawcookie(Email_my_site, $email_from_db, $expCookie);
+    			setcookie(Email_my_site, $email_from_db, $expCookie);
 
-    			setrawcookie(Key_my_site, $password, $expCookie);
+    			setcookie(Key_my_site, $password, $expCookie);
 
-    			setrawcookie(Group_my_site, $usergroup_from_db, $expCookie);
 
     			header("Location: profile.php");
     			exit();

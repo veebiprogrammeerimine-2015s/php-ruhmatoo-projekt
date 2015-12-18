@@ -30,7 +30,6 @@
 		$struser = (string)$_COOKIE['Email_my_site'];
 		$strkey = (string)$_COOKIE['Key_my_site'];
 		$intid = (int)$_COOKIE['ID_my_site'];
-		$intgroup = (int)$_COOKIE['Group_my_site'];
 
 		/*var_dump ($struser);
 		var_dump ($strkey);
@@ -38,7 +37,7 @@
 		var_dump ($intgroup);*/
 
 
-		$User->checkCookie($intid, $struser, $strkey, $intgroup);
+		$User->checkCookie($intid, $struser, $strkey);
 		#var_dump ($error);
 
 	/*$userid = $_COOKIE['ID_my_site'];

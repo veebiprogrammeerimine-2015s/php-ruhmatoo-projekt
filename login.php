@@ -33,7 +33,6 @@
 			}
 
 			if($password_error == "" && $email_error == "" && $checkbox == "on"){
-                echo '<h1>Olemas!!!</h1>';
 				$hash = hash("sha512", $password);
 				$login_response = $User->logInCookie($email, $hash);
             }
