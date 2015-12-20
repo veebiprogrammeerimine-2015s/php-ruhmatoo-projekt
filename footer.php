@@ -1,12 +1,12 @@
 
       <!-- Footer start -->
-      
-    <footer "class="navbar"> <!-- /footer -->
-      <div class="navbar navbar-fixed-bottom text-center">
+    <div class="row">
+     <!--  <footer "class="navbar"> footer -->
+      <div class="navbar text-center">
         <p class="text-muted">Copyright &copy; 2015</p>
       </div>
-    </footer>
-
+   <!--  </footer> -->
+	</div>
     
 	</div>  <!-- /main container end -->
 
