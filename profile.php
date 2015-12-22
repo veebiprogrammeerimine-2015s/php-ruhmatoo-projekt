@@ -6,6 +6,11 @@
 		exit();
 	}
 	
+	$modify_fname = "";
+	$modify_sname = "";
+	$modify_country = "";
+	$modify_profilepic = "";
+	
 	$target_dir = "profile_pics/";
 	$target_file = $target_dir.$_SESSION["logged_in_user_id"].".jpg";
 	
@@ -68,6 +73,28 @@
 		
 	}
 	
+	if(isset($_POST["modify"])){
+				if ( empty($_POST["modify_fname"]) ) {
+					echo "Test";
+				}else{
+					$modify_fname = cleanInput($_POST["modify_fname"]);
+				}
+				if ( empty($_POST["modify_sname"]) ) {
+					echo "Test2";
+				}else{
+					$modify_sname = cleanInput($_POST["modify_sname"]);
+				}
+				if ( empty($_POST["modify_country"]) ) {
+					echo "Test3";
+				} else {
+					$modify_country = cleanInput($_POST["modify_country"]);
+					}
+				}
+
+				$create_response = $User->modifyUser($modify_fname, $modify_sname, $modify_country);
+					
+				
+		
 ?>
 <?php if(isset($_SESSION["login_success_message"])): ?>
 	
@@ -83,13 +110,13 @@
 
 <h2> Name </h2>
 	<input name="first_name "placeholder="Firstname">
-	<input type="submit" name="submit_first" value="Submit">
 <h2> Surname </h2>
 	<input name="surname "placeholder="Surname">
-	<input type="submit" name="submit_surname" value="Submit">
 <h2> Country </h2>
 	<input name="country "placeholder="Country">
-	<input type="submit" name="submit_country" value="Submit">
+	<br><br><br>
+	<input type="submit" name="submit_modify" value="Submit">
+
 
 	<h2>Profile picture</h2>
 

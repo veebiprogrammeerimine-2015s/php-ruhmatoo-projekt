@@ -26,7 +26,7 @@ class User {
 			
 			$error = new StdClass();
 			$error->id = 0;
-			$error->message = "Sellise e-postiga kasutaja on juba olemas!";
+			$error->message = "Email already in use!";
 			
 			$response->error = $error;
 			
@@ -44,7 +44,7 @@ class User {
 		if($stmt->execute()){
 			
 			$success = new StdClass();
-			$success->message = "Kasutaja edukalt loodud!";
+			$success->message = "User successfully created!";
 			
 			$response->success = $success;
 			
@@ -53,7 +53,7 @@ class User {
 			// midagi läks katki
 			$error = new StdClass();
 			$error->id = 1;
-			$error->message = "Midagi läks katki!";
+			$error->message = "Something went broken!";
 			
 			$response->error = $error;
 			
@@ -79,7 +79,7 @@ class User {
 			
 			$error = new StdClass();
 			$error->id = 0;
-			$error->message = "Sellist kasutajat ei ole!";
+			$error->message = "Such user doesn't exist!";
 			
 			$response->error = $error;
 			return $response;
@@ -98,7 +98,7 @@ class User {
 			
 			// kõik õige 
 			$success = new StdClass();
-			$success->message = "Kasutaja edukalt sisselogitud!";
+			$success->message = "User successfully logged into!";
 			
 			$response->success = $success;
 			
@@ -114,11 +114,45 @@ class User {
 			// parool vale
 			$error = new StdClass();
 			$error->id = 1;
-			$error->message = "Parool oli vale!";
+			$error->message = "Wrong password!";
 			
 			$response->error = $error;
 			
 		}
+		$stmt->close();
+		
+		return $response;
+	}
+	
+		function modifyUser($modify_fname, $modify_sname, $modify_country, $modify_profilepic){
+		
+
+		$response = new StdClass();
+		
+
+		$stmt = $this->connection->prepare("INSERT INTO user_creation (Firstname, Surname, Country, Profilepic) VALUES (?,?,?,?)");
+		$stmt->bind_param("sss", $modify_fname, $modify_sname, $modify_country, $modify_profilepic);
+		
+		
+		// sai edukalt salvestatud
+		if($stmt->execute()){
+			
+			$success = new StdClass();
+			$success->message = "User successfully updated!";
+			
+			$response->success = $success;
+			
+		}else{
+			
+			// midagi läks katki
+			$error = new StdClass();
+			$error->id = 1;
+			$error->message = "Something is broken!";
+			
+			$response->error = $error;
+			
+		}
+		
 		$stmt->close();
 		
 		return $response;
