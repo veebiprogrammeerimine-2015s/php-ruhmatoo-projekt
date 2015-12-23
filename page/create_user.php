@@ -76,14 +76,27 @@
 				
 			}
 			
-			if($user_group_error == "" && $create_user_email_error == "" && $create_user_password_error == "" && $first_name_error == "" && $last_name_error == ""){
-				echo hash("sha512", $create_user_password);
-				echo $first_name." ".$last_name." võib kasutaja luua! Kasutajanimi on ".$create_user_email." ja parool on ".$create_user_password;
+			if($_POST["user_group"] == "3") {
+
+				if($user_group_error == "" && $create_user_email_error == "" && $create_user_password_error == "" && $first_name_error == "" && $last_name_error == "" && $company_name_error == "" && $company_description_error == ""){
+					echo hash("sha512", $create_user_password);
+					echo $first_name." ".$last_name." võib kasutaja luua! Kasutajanimi on ".$create_user_email." ja parool on ".$create_user_password;
+					
+					$hash = hash("sha512", $create_user_password);
+					
+					$create_response = $User->createUser($user_group, $first_name, $last_name, $create_user_email, $hash, $company_name, $company_description);
+				}
 				
-				$hash = hash("sha512", $create_user_password);
+			} else {
 				
-				$create_response = $User->createUser($user_group, $first_name, $last_name, $create_user_email, $hash, $company_name, $company_description);
-				
+				if($user_group_error == "" && $create_user_email_error == "" && $create_user_password_error == "" && $first_name_error == "" && $last_name_error == ""){
+					echo hash("sha512", $create_user_password);
+					echo $first_name." ".$last_name." võib kasutaja luua! Kasutajanimi on ".$create_user_email." ja parool on ".$create_user_password;
+					
+					$hash = hash("sha512", $create_user_password);
+					
+					$create_response = $User->createUser($user_group, $first_name, $last_name, $create_user_email, $hash, $company_name, $company_description);
+				}
 			}
 		}
 	}
@@ -116,7 +129,7 @@
 		<?php endif; ?>
 		
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-			<select id="user_group" name="user_group">
+			<select id="user_group" name="user_group" onchange="showInput()">
 				<option value="">[ Kasutaja ]</option>
 				<option value="2"<?=$user_group == "2" ? "selected='selected'" : ""?>>Ajakirjanik</option>
 				<option value="3"<?=$user_group == "3" ? "selected='selected'" : ""?>>Ettevõte</option>
@@ -125,12 +138,10 @@
 			<input name="create_user_password" type="password" placeholder="Parool">* <?php echo $create_user_password_error; ?> <br><br>	
 			<input name="first_name" type="text" placeholder="Eesnimi" value="<?php echo $first_name; ?>">* <?php echo $first_name_error; ?> <br><br>
 			<input name="last_name" type="text" placeholder="Perekonnanimi" value="<?php echo $last_name; ?>">* <?php echo $last_name_error; ?> <br><br>
-			
-			
-			<input name="company_name" type="text" placeholder="Ettevõtte nimi" value="<?php echo $company_name; ?>">* <?php echo $company_name_error; ?> <br><br>
-			<input name="company_description" type="text" placeholder="Ettevõtte kirjeldus" value="<?php echo $company_description; ?>">* <?php echo $company_description_error; ?> <br><br>
-			
-			
+			<div id="company_info" style="display:none;">
+				<input name="company_name" type="text" placeholder="Ettevõtte nimi" value="<?php echo $company_name; ?>">* <?php echo $company_name_error; ?> <br><br>
+				<input name="company_description" type="text" placeholder="Ettevõtte kirjeldus" value="<?php echo $company_description; ?>">* <?php echo $company_description_error; ?> <br><br>
+			</div>
 			<input name ="create_user" type="submit" value="Loo kasutaja">
 		</form>
 <?php require_once("../footer.php"); ?>
