@@ -36,9 +36,9 @@ class OfferManager {
 			$search = "%".$keyword."%";
 		}
 		
-		$stmt = $this->connection->prepare("SELECT company_ID, request_ID, text_type, subject, description, target_group, source, length, offer_deadline, work_deadline, output, status, created FROM requests WHERE company_ID=? AND deleted IS NULL AND (request_ID LIKE ? OR text_type LIKE ? OR subject LIKE ? OR description LIKE ? OR target_group LIKE ? OR source LIKE ? OR length LIKE ? OR offer_deadline LIKE ? OR work_deadline LIKE ? OR output LIKE ? OR status LIKE ? OR created LIKE ?)");
-		$stmt->bind_param("iisssssssssss", $_SESSION["logged_in_user_id"], $id_from_db, $search, $search, $search, $search, $search, $search, $search, $search, $search, $search, $search);
-		$stmt->bind_result($user_id_from_db, $id_from_db, $text_type_from_db, $subject_from_db, $description_from_db, $target_group_from_db, $source_from_db, $length_from_db, $offer_deadline_from_db, $work_deadline_from_db, $output_from_db, $status_from_db, $created_from_db);
+		$stmt = $this->connection->prepare("SELECT request_ID, company_ID, company_name, text_type, subject, description, target_group, source, length, offer_deadline, work_deadline, output, status, requests.created FROM requests JOIN users ON users.user_id=requests.company_id WHERE requests.deleted IS NULL AND (request_ID LIKE ? OR company_ID LIKE ? OR company_name LIKE ? OR text_type LIKE ? OR subject LIKE ? OR description LIKE ? OR target_group LIKE ? OR source LIKE ? OR length LIKE ? OR offer_deadline LIKE ? OR work_deadline LIKE ? OR output LIKE ? OR status LIKE ? OR requests.created LIKE ?)");
+		$stmt->bind_param("iissssssssssss", $id_from_db, $company_id_from_db, $search, $search, $search, $search, $search, $search, $search, $search, $search, $search, $search, $search);
+		$stmt->bind_result($id_from_db, $company_id_from_db, $company_name_from_db, $text_type_from_db, $subject_from_db, $description_from_db, $target_group_from_db, $source_from_db, $length_from_db, $offer_deadline_from_db, $work_deadline_from_db, $output_from_db, $status_from_db, $created_from_db);
 		$stmt->execute();
 		
 		$array = array();
@@ -48,7 +48,8 @@ class OfferManager {
 			$order = new Stdclass();
 			
 			$order->request_ID = $id_from_db;
-			$order->company_id = $user_id_from_db;
+			$order->company_id = $company_id_from_db;
+			$order->company_name = $company_name_from_db;
 			$order->text_type = $text_type_from_db;
 			$order->subject = $subject_from_db;
 			$order->target_group = $target_group_from_db;

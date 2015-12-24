@@ -3,7 +3,7 @@
 	require_once("functions.php");
 
     if(isset($_SESSION['logged_in_user_id'])){
-        header("Location: data.php");
+        header("Location: requests.php");
     }
 
 	$email_error = "";
@@ -36,9 +36,12 @@
 				
 				if(isset($login_response->success)){
 					$_SESSION["logged_in_user_id"] = $login_response->success->user->id;
-					$_SESSION["user_email"] = $login_response->success->user->email;
+					$_SESSION["logged_in_user_group_id"] = $login_response->success->user->group_id;
+					$_SESSION["logged_in_user_first_name"] = $login_response->success->user->first_name;
+					$_SESSION["logged_in_user_last_name"] = $login_response->success->user->last_name;
+					$_SESSION["logged_in_user_email"] = $login_response->success->user->email;
 					
-					header("Location: data.php");
+					header("Location: requests.php");
 					
 					exit();
 				}

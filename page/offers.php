@@ -9,6 +9,10 @@
 		header("Location: login.php");
 	}
 	
+	if($_SESSION["logged_in_user_group_id"] == "3"){
+		header("Location: requests.php");
+	}
+	
 	if(isSet($_GET["logout"])){
 		session_destroy();
 		header("Location: login.php");
@@ -17,7 +21,7 @@
 	$offers_array = $OfferManager->getOffersData();
 ?>
 
-Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
+Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
 
 <h2>Pakkumiste tabel</h2>
 

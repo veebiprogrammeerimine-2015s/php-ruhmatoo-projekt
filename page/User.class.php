@@ -13,9 +13,9 @@ class User {
 		
 		$response = new StdClass();
 		
-		$stmt = $this->connection->prepare("SELECT user_id, e_mail FROM users WHERE e_mail=? AND password=?");
+		$stmt = $this->connection->prepare("SELECT user_id, user_group_ID, first_name, last_name, e_mail FROM users WHERE e_mail=? AND password=?");
 		$stmt->bind_param("ss", $email, $hash);
-		$stmt->bind_result($id_from_db, $email_from_db);
+		$stmt->bind_result($id_from_db, $group_id_from_db, $first_name_from_db, $last_name_from_db, $email_from_db);
 		$stmt->execute();
 		
 		if($stmt->fetch()){
@@ -25,6 +25,9 @@ class User {
 			
 			$user = new StdClass();
 			$user->id = $id_from_db;
+			$user->group_id = $group_id_from_db;
+			$user->first_name = $first_name_from_db;
+			$user->last_name = $last_name_from_db;
 			$user->email = $email_from_db;
 			
 			$success->user = $user;

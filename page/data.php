@@ -7,14 +7,18 @@
 	if(!isSet($_SESSION["logged_in_user_id"])){
 		header("Location: login.php");
 	}
+	
+	if($_SESSION["logged_in_user_group_id"] == "2"){
+		header("Location: requests.php");
+	}
 
 	if(isSet($_GET["logout"])){
 		session_destroy();
 		header("Location: login.php");
 	}
 	
-	$text_type = $subject = $target_group = $description = $source = $length = $work_deadline = $work_deadline = $output = $m = "";
-	$text_type_error = $subject_error = $target_group_error = $description_error = $source_error = $length_error = $offer_deadline_error_1 = $offer_deadline_error_2 = $work_deadline_error_2 = $work_deadline_error_2 = $output_error = "";
+	$text_type = $subject = $target_group = $description = $source = $length = $offer_deadline = $work_deadline = $output = $m = "";
+	$text_type_error = $subject_error = $target_group_error = $description_error = $source_error = $length_error = $offer_deadline_error_1 = $offer_deadline_error_2 = $work_deadline_error_1 = $work_deadline_error_2 = $output_error = "";
 	
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		
@@ -82,8 +86,8 @@
 				$output = cleanInput($_POST["output"]);
 			}
 			
-			if ($text_type_error == "" && $subject_error == "" && $target_group_error == "" && $description_error == "" && $source_error == "" && $length_error == "" && $deadline_error_1 == "" && $deadline_error_2 == "" && $output_error == ""){
-				$m = $OfferManager->createNewOrder($text_type, $subject, $target_group, $description, $source, $length, $deadline, $output);
+			if ($text_type_error == "" && $subject_error == "" && $target_group_error == "" && $description_error == "" && $source_error == "" && $length_error == "" && $offer_deadline_error_1 == "" && $offer_deadline_error_2 == "" && $work_deadline_error_1 == "" && $work_deadline_error_2 == "" && $output_error == ""){
+				$m = $OfferManager->createNewOrder($text_type, $subject, $target_group, $description, $source, $length, $offer_deadline, $work_deadline, $output);
 				if($m != ""){
 					$text_type = "";
 					$subject = "";
@@ -91,7 +95,8 @@
 					$target_group = "";
 					$source = ""; 
 					$length = "";
-					$deadline = "";
+					$offer_deadline = "";
+					$work_deadline = "";
 					$output = "";
 				}
 			}
@@ -107,7 +112,7 @@
 	
 ?>
 
-Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
+Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
 
 <h2>Tellimuse esitamine</h2>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">

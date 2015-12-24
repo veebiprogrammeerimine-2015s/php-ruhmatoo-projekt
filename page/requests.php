@@ -39,7 +39,7 @@
 	
 ?>
 
-Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
+Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
 
 <h2>Tellimuste tabel</h2>
 
@@ -48,40 +48,76 @@ Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-d
 	<input type="submit" value="otsi">
 </form>
 
-<table border=1>
-<tr>
-    <th>teksti tüüp</th>
-    <th>teema</th>
-	<th>kirjeldus</th>
-	<th>sihtgrupp</th>
-    <th>allikad</th>
-    <th>maht</th>
-    <th>tähtaeg</th>
-	<th>tähtaeg</th>
-	<th>ilmumiskoht</th>
-    <th></th>
-	<th></th>
-	<th></th>
-</tr>
 
-<?php
-	for($i = 0; $i < count($orders_array); $i++){
+<?php 
+	
+	if($_SESSION["logged_in_user_group_id"] == "3"){
+		echo "<table border=1>";
 		echo "<tr>";
-		echo "<td>".$orders_array[$i]->text_type."</td>";
-		echo "<td>".$orders_array[$i]->subject."</td>";
-		echo "<td>".$orders_array[$i]->description."</td>";
-		echo "<td>".$orders_array[$i]->target_group."</td>";
-		echo "<td>".$orders_array[$i]->source."</td>";
-		echo "<td>".$orders_array[$i]->length."</td>";
-		echo "<td>".$orders_array[$i]->offer_deadline."</td>";
-		echo "<td>".$orders_array[$i]->work_deadline."</td>";
-		echo "<td>".$orders_array[$i]->output."</td>";
-		echo "<td><a href='?delete=".$orders_array[$i]->request_ID."'>kustuta</a></td>";
-		echo "<td><a href='edit.php?edit_id=".$orders_array[$i]->request_ID."'>muuda</a></td>";
-		echo "<td><a href='offers_data.php?offers_data_id=".$orders_array[$i]->request_ID."'>tee pakkumine</a></td>";
+		echo "<th>teksti tüüp</th>";
+		echo "<th>teema</th>";
+		echo "<th>kirjeldus</th>";
+		echo "<th>sihtgrupp</th>";
+		echo "<th>allikad</th>";
+		echo "<th>maht</th>";
+		echo "<th>pakkumise tähtaeg</th>";
+		echo "<th>tellimuse tähtaeg</th>";
+		echo "<th>ilmumiskoht</th>";
+		echo "<th></th>";
+		echo "<th></th>";
+		echo "</tr>";
+
+		for($i = 0; $i < count($orders_array); $i++){
+			if($orders_array[$i]->company_id == $_SESSION["logged_in_user_id"]){
+				echo "<tr>";
+				echo "<td>".$orders_array[$i]->text_type."</td>";
+				echo "<td>".$orders_array[$i]->subject."</td>";
+				echo "<td>".$orders_array[$i]->description."</td>";
+				echo "<td>".$orders_array[$i]->target_group."</td>";
+				echo "<td>".$orders_array[$i]->source."</td>";
+				echo "<td>".$orders_array[$i]->length."</td>";
+				echo "<td>".$orders_array[$i]->offer_deadline."</td>";
+				echo "<td>".$orders_array[$i]->work_deadline."</td>";
+				echo "<td>".$orders_array[$i]->output."</td>";
+				echo "<td><a href='?delete=".$orders_array[$i]->request_ID."'>kustuta</a></td>";
+				echo "<td><a href='edit.php?edit_id=".$orders_array[$i]->request_ID."'>muuda</a></td>";
+				echo "<tr>";
+			}
+		}
+	} else {
+		echo "<table border=1>";
 		echo "<tr>";
+		echo "<th>tellija</th>";
+		echo "<th>teksti tüüp</th>";
+		echo "<th>teema</th>";
+		echo "<th>kirjeldus</th>";
+		echo "<th>sihtgrupp</th>";
+		echo "<th>allikad</th>";
+		echo "<th>maht</th>";
+		echo "<th>pakkumise tähtaeg</th>";
+		echo "<th>tellimise tähtaeg</th>";
+		echo "<th>ilmumiskoht</th>";
+		echo "<th></th>";
+		echo "</tr>";
+		
+		for($i = 0; $i < count($orders_array); $i++){
+			echo "<tr>";
+			echo "<td>".$orders_array[$i]->company_name."</td>";
+			echo "<td>".$orders_array[$i]->text_type."</td>";
+			echo "<td>".$orders_array[$i]->subject."</td>";
+			echo "<td>".$orders_array[$i]->description."</td>";
+			echo "<td>".$orders_array[$i]->target_group."</td>";
+			echo "<td>".$orders_array[$i]->source."</td>";
+			echo "<td>".$orders_array[$i]->length."</td>";
+			echo "<td>".$orders_array[$i]->offer_deadline."</td>";
+			echo "<td>".$orders_array[$i]->work_deadline."</td>";
+			echo "<td>".$orders_array[$i]->output."</td>";
+			echo "<td><a href='offers_data.php?offers_data_id=".$orders_array[$i]->request_ID."'>tee pakkumine</a></td>";
+			echo "<tr>";
+		}
 	}
 ?>
 </table><br>
 
-<a href="data.php">Tellimuse esitamine</a>
+<a href="data.php">Tellimuse esitamine</a> <br>
+<a href="offers.php">Esitatud pakkumised</a>
