@@ -167,6 +167,25 @@ class OfferManager {
 		
 		$stmt->close();
 	}
+
+function createNewFeedback($from_user, $to_user, $offer_ID, $feedback){
+		
+		$stmt = $this->connection->prepare("INSERT INTO feedback(from_user, to_user, offer_ID, feedback) VALUES(?,?,?,?)");
+		$stmt->bind_param("iiis", $_SESSION['logged_in_user_id'], $from_user, $to_user, $offer_ID, $feedback);
+		
+		$message = "";
+		
+		if($stmt->execute()){
+            $message = "Edukalt andmebaasi salvestatud!";
+		}
+		
+		$stmt->close();
+		
+		return $message;
+	}	
+	
+	
 }
+
 
 ?>

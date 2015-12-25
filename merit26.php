@@ -1,5 +1,5 @@
 <?php
 //Meriti fail test
- echo  
+ echo "minu proov"; 
 
 ?>
