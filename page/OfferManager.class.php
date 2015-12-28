@@ -170,7 +170,7 @@ class OfferManager {
 
 function createNewFeedback($from_user, $to_user, $offer_ID, $feedback){
 		
-		$stmt = $this->connection->prepare("INSERT INTO feedback(from_user, to_user, offer_ID, feedback) VALUES(?,?,?,?)");
+		$stmt = $this->connection->prepare("INSERT INTO feedback(from_user, to_user, offer_ID, feedback, date) VALUES(?,?,?,?, NOW())");
 		$stmt->bind_param("iiis", $_SESSION['logged_in_user_id'], $to_user, $offer_ID, $feedback);
 		
 		$message = "";
@@ -183,8 +183,7 @@ function createNewFeedback($from_user, $to_user, $offer_ID, $feedback){
 		
 		return $message;
 	}	
-	
-	
+		
 }
 
 

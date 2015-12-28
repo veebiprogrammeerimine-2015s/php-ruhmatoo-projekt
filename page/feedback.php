@@ -29,7 +29,7 @@
 					
 			if($feedback_error == ""){
 				$OfferManager->addNewFeedback($_SESSION['logged_in_user_id'], $to_user, $offer_ID, $feedback);
-				header("Location: requests.php");  //mis siia?
+				header("Location: requests.php");  
 			}
 		}
 	}
@@ -48,7 +48,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 <h2>Tagasiside</h2>
 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-	
+	<input type="hidden" name="offer_id" value="<?=$_GET["offers_data_id"];?>">
 	<textarea style="resize:none" name="comment" rows="10" cols="28" placeholder="Tagasiside"><?=$feedback;?></textarea>* <?=$feedback_error;?><br><br>
 	<input name="add_new_feedback" type="submit" value="Anna tagasisidet">
-</form>
+</form> 
