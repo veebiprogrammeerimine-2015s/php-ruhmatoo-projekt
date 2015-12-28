@@ -139,7 +139,14 @@ class OfferManager {
 	
 	function getOffersData(){
 		
-		$stmt = $this->connection->prepare("SELECT subject, company_name, offer_ID, requests.request_ID, journalist_ID, date, price, comment, accepted FROM offers JOIN requests ON requests.request_ID=offers.request_ID JOIN users ON users.user_ID=requests.company_ID WHERE journalist_ID=?");
+		if($_SESSION["logged_in_user_group_id"] == "3"){
+			$stmt = $this->connection->prepare("SELECT subject, company_name, offer_ID, requests.request_ID, journalist_ID, date, price, comment, accepted FROM offers JOIN requests ON requests.request_ID=offers.request_ID JOIN users ON users.user_ID=requests.company_ID WHERE company_ID=?");	
+		}else if($_SESSION["logged_in_user_group_id"] == "2"){
+			$stmt = $this->connection->prepare("SELECT subject, company_name, offer_ID, requests.request_ID, journalist_ID, date, price, comment, accepted FROM offers JOIN requests ON requests.request_ID=offers.request_ID JOIN users ON users.user_ID=requests.company_ID WHERE journalist_ID=?");	
+		}else{
+			$stmt = $this->connection->prepare("SELECT subject, company_name, offer_ID, requests.request_ID, journalist_ID, date, price, comment, accepted FROM offers JOIN requests ON requests.request_ID=offers.request_ID JOIN users ON users.user_ID=requests.company_ID");
+		}
+		
 		$stmt->bind_param("i", $_SESSION["logged_in_user_id"]);
 		$stmt->bind_result($subject_from_db, $company_name_from_db, $offer_ID_from_db, $request_ID_from_db, $journalist_ID_from_db, $offer_date_from_db, $price_from_db, $comment_from_db, $accepted_from_db);
 		$stmt->execute();
@@ -150,9 +157,10 @@ class OfferManager {
 			
 			$offer = new Stdclass();
 			
+			
 			$offer->subject = $subject_from_db;
 			$offer->company_name = $company_name_from_db;
-			$offer->id = $offer_ID_from_db;
+			$offer->offer_id = $offer_ID_from_db;
 			$offer->request_id = $request_ID_from_db;
 			$offer->journalist_id = $journalist_ID_from_db;
 			$offer->offer_date = $offer_date_from_db;
@@ -167,23 +175,37 @@ class OfferManager {
 		
 		$stmt->close();
 	}
+	
+	function updateOffersData($offer_id, $request_id){
+		
+		$stmt = $this->connection->prepare("UPDATE offers SET accepted=1 WHERE offer_ID =?");
+		$stmt->bind_param("i", $offer_id);
+		$stmt->execute();
+		
+		$stmt = $this->connection->prepare("UPDATE offers SET accepted=0 WHERE accepted IS NULL AND request_ID=?");
+		$stmt->bind_param("i", $request_id);
+		$stmt->execute();
+		
+		header("Location:offers.php");
+		
+		$stmt->close();
+	}
 
-function createNewFeedback($from_user, $to_user, $offer_ID, $feedback){
+	function createNewFeedback($from_user, $to_user, $offer_ID, $feedback){
 		
 		$stmt = $this->connection->prepare("INSERT INTO feedback(from_user, to_user, offer_ID, feedback) VALUES(?,?,?,?)");
-		$stmt->bind_param("iiis", $_SESSION['logged_in_user_id'], $from_user, $to_user, $offer_ID, $feedback);
+		$stmt->bind_param("iiis", $from_user, $to_user, $offer_ID, $feedback);
 		
 		$message = "";
 		
 		if($stmt->execute()){
-            $message = "Edukalt andmebaasi salvestatud!";
+			$message = "Edukalt andmebaasi salvestatud!";
 		}
 		
 		$stmt->close();
 		
 		return $message;
-	}	
-	
+	}
 	
 }
 

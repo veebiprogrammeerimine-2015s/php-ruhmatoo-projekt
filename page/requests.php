@@ -84,6 +84,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 				echo "<tr>";
 			}
 		}
+		
 	} else {
 		echo "<table border=1>";
 		echo "<tr>";

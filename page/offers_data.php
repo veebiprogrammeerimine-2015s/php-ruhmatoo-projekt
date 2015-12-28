@@ -7,7 +7,11 @@
 	if(!isSet($_SESSION["logged_in_user_id"])){
 		header("Location: login.php");
 	}
-
+	
+	if($_SESSION["logged_in_user_group_id"] == "3"){
+		header("Location: requests.php");
+	}
+	
 	if(isSet($_GET["logout"])){
 		session_destroy();
 		header("Location: login.php");
