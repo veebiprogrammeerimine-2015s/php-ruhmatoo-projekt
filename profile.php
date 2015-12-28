@@ -22,6 +22,14 @@
 	$oldpassword = $newpassword = $repeatpassword = "";
 
 	if(isset($_SESSION['logged_in_user_id'])) {
+		if( $_SERVER["REQUEST_METHOD"] == "GET") {
+			if(isset($_GET["personal"])){
+
+			}
+		}
+	}
+
+	if(isset($_SESSION['logged_in_user_id'])) {
 		if( $_SERVER["REQUEST_METHOD"] == "POST") {
 			if(isset($_POST["change_password"])){
 
@@ -201,8 +209,13 @@ $(document).ready(function () {
 	</div>
 	<div class="col-xs-12 col-sm-10">
 	<ul class="nav nav-tabs pull-right" role="tablist">
+	<?php if(isset($_GET["personal"])): ?>
+	<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Konto andmed</a></li>
+	<li role="presentation" class="active"><a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Isiklikud andmed</a></li>
+	<?php else: ?>
 	<li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Konto andmed</a></li>
 	<li role="presentation"><a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Isiklikud andmed</a></li>
+	<?php endif; ?>
 	<li role="presentation"><a href="#password" aria-controls="password" role="tab" data-toggle="tab">Muuda parooli</a></li>
 	<li role="presentation"><a href="#resumes" aria-controls="resumes" role="tab" data-toggle="tab">Konto CVd</a></li>
 	</ul>
@@ -212,7 +225,11 @@ $(document).ready(function () {
 	<!-- Tab panes -->
 	<div class="tab-content">
 
+		<?php if(isset($_GET["personal"])): ?>
+		<div role="tabpanel" class="tab-pane" id="profile">
+		<?php else: ?>
 		<div role="tabpanel" class="tab-pane active" id="profile">
+		<?php endif; ?>
 			<div class="col-xs-12 col-sm-4">
 				<h3>Info</h3>
 				<pre class="pre-scrollable">
@@ -252,7 +269,11 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 			</div>
 		</div>
 
+		<?php if(isset($_GET["personal"])): ?>
+			<div role="tabpanel" class="tab-pane active" id="personal">
+		<?php else: ?>
 		<div role="tabpanel" class="tab-pane" id="personal">
+		<?php endif; ?>
 			<div class="col-xs-12 col-sm-4">
 				<h3>Info</h3>
 				<pre class="pre-scrollable">
@@ -265,13 +286,51 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 			<div class="form-horizontal col-xs-12 col-sm-8">
 
 				<h3>
-					Konto andmed
-					<button type="button" class="btn btn-info btn-sm pull-right">
-  					<span class="glyphicon glyphicon-pencil"></span> Muuda
-					</button>
+					Isiklikud andmed
+					<a href="?personal">
+						<button type="button" class="btn btn-info btn-sm pull-right">
+	  					<span class="glyphicon glyphicon-pencil"></span> Muuda
+						</button>
+					</a>
 				</h3>
+				<?php if(isset($_GET["personal"])): ?>
+					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+						<table class="table table-striped table-bordered">
 
+							<tr>
+								<td><label> Eesnimi </label></td>
+								<td><input type="text" name="first" class="form-control input-sm"></td>
+							</tr>
+							<tr>
+								<td><label> Perekonnanimi </label></td>
+								<td><input type="text" name="last" class="form-control input-sm"></td>
+							</tr>
+							<tr>
+								<td><label> Maakond </label></td>
+								<td><input type="text" name="county" class="form-control input-sm"></td>
+							</tr>
+							<tr>
+								<td><label> Vald </label></td>
+								<td><input type="text" name="parish" class="form-control input-sm"></td>
+							</tr>
+							<tr>
+								<td><label> Telefoni number </label></td>
+								<td><input type="text" name="number" class="form-control input-sm"></td>
+							</tr>
+						</table>
+						<div class="btn-group pull-right" role="group">
 
+							<a href="profile.php" class="btn btn-danger btn-sm">
+								<span class="glyphicon glyphicon-remove"></span> Katkesta
+							</a>
+
+							<button type="submit" name="save_personal" class="btn btn-success btn-sm">
+								<span class="glyphicon glyphicon-ok"></span> Salvesta
+							</button>
+
+						</div>
+				</form>
+				<?php else: ?>
 				<table class="table table-striped table-bordered">
 					<tr>
 						<td><label> Eesnimi </label></td>
@@ -294,6 +353,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 						<td>Echo number</td>
 					</tr>
 				</table>
+				<?php endif; ?>
 			</div>
 		</div>
 
