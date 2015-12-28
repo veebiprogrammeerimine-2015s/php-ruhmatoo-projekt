@@ -101,10 +101,8 @@ if(!isset($_SESSION['logged_in_user_id'])):
 
 <?php
 	if(isset($_GET["logout"])) {
-  setcookie( 'ID_my_site');
-  setcookie( 'Email_my_site');
-  setcookie( 'Key_my_site');
-  setcookie( 'Group_my_site');
+  setcookie('authUser');
+
 	//kustutame sessiooni muutujad
 	session_destroy();
 	header("Location: index.php");

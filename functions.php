@@ -21,45 +21,9 @@
 	$Admin = new Admin($mysqli);
 
 
-	if(isset($_COOKIE['ID_my_site']))
+	if(isset($_COOKIE['authUser']))
 	{
-		/*var_dump ($_COOKIE['ID_my_site']);
-		var_dump ($_COOKIE['Email_my_site']);
-		var_dump ($_COOKIE['Key_my_site']);
-		var_dump ($_COOKIE['Group_my_site']);*/
-		$struser = (string)$_COOKIE['Email_my_site'];
-		$strkey = (string)$_COOKIE['Key_my_site'];
-		$intid = (int)$_COOKIE['ID_my_site'];
-
-		/*var_dump ($struser);
-		var_dump ($strkey);
-		var_dump ($intid);
-		var_dump ($intgroup);*/
-
-
-		$User->checkCookie($intid, $struser, $strkey);
-		#var_dump ($error);
-
-	/*$userid = $_COOKIE['ID_my_site'];
-	$username = $_COOKIE['Email_my_site'];
-	$password = $_COOKIE['Key_my_site'];
-	$usergroup = $_COOKIE['Group_my_site'];*/
-
-	#$User->checkCookie($userid, $username, $password, $usergroup);
-
-	/*$correct = $User->checkCookie($userid, $username, $password, $usergroup);
-
-	$_SESSION['logged_in_user_id'] = $correct->id;
-	$_SESSION['logged_in_user_email'] = $correct->user;
-	$_SESSION['logged_in_user_pass'] = $correct->pass;
-	$_SESSION['logged_in_user_group'] = $correct->group;*/
-
-
-	/*echo $username.'<br>';
-	echo $userid.'<br>';
-	echo $password.'<br>';
-	echo $usergroup.'<br>';
-	$User->checkCookie($userid, $username, $password, $usergroup);*/
+		$User->checkCookie($_COOKIE['authUser']);
 	}
 
 

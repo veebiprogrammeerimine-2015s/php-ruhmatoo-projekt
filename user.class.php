@@ -11,21 +11,27 @@ class User {
 	#####LOGIN#####
 	###############
 
-  function checkCookie($userid, $username, $password){
-    $stmt = $this->connection->prepare("SELECT id, email, password, usergroup FROM ntb_users WHERE id=? AND email=? AND password=?");
-    $stmt->bind_param("iss", $userid, $username, $password);
-    $stmt->bind_result($dbid, $dbusername, $dbpassword, $dbusergroup);
+  function checkCookie($cookie){
+    $stmt = $this->connection->prepare("SELECT user_id FROM user_cookies WHERE random_hash = ?");
+    $stmt->bind_param("s", $cookie);
+    $stmt->bind_result($user_id);
     $stmt->execute();
 
     if($stmt->fetch()) {
-      $_SESSION['logged_in_user_id'] = $dbid;
-    	$_SESSION['logged_in_user_email'] = $dbusername;
-    	$_SESSION['logged_in_user_pass'] = $dbpassword;
-    	$_SESSION['logged_in_user_group'] = $dbusergroup;
-
+      $user = new Stdclass();
+      $user->id = $user_id;
 		}
 
     $stmt->close();
+    $stmt = $this->connection->prepare("SELECT id, email, usergroup FROM ntb_users WHERE id = ?");
+    $stmt->bind_param("i", $user->id);
+    $stmt->bind_result($user_id, $user_email, $user_group);
+    $stmt->execute();
+    if($stmt->fetch()) {
+      $_SESSION['logged_in_user_id'] = $user_id;
+      $_SESSION['logged_in_user_email'] = $user_email;
+      $_SESSION['logged_in_user_group'] = $user_group;
+    }
   }
 
 
@@ -58,24 +64,27 @@ class User {
 
           $_SESSION['logged_in_user_id'] = $id_from_db;
           $_SESSION['logged_in_user_email'] = $email_from_db;
-          $_SESSION['logged_in_user_pass'] = $password;
           $_SESSION['logged_in_user_group'] = $usergroup_from_db;
 
           $expCookie = time()+60*60*24*30;
+          $random_id = time() + $id_from_db;
+          $hash_id = hash("md5", $random_id);
     			// sessioon salvestatakse serveris
-          setcookie(ID_my_site, $id_from_db, $expCookie);
+          setcookie(authUser, $hash_id, $expCookie);
 
-    			setcookie(Email_my_site, $email_from_db, $expCookie);
-
-    			setcookie(Key_my_site, $password, $expCookie);
+          #$stmt->close();
 
 
-    			header("Location: profile.php");
-    			exit();
+    			#header("Location: profile.php");
+    			#exit();
 
         }
         $stmt->close();
-
+        $stmt = $this->connection->prepare("INSERT INTO user_cookies (user_id, random_hash) VALUES ('$id_from_db', '$hash_id')");
+        $stmt->execute();
+        $stmt->close();
+        header("Location: profile.php");
+        exit();
     }
 
 
