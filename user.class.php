@@ -11,18 +11,24 @@ class User {
 	#####LOGIN#####
 	###############
 
+  #If cookie exists then this fn checks this
   function checkCookie($cookie){
     $stmt = $this->connection->prepare("SELECT user_id FROM user_cookies WHERE random_hash = ?");
     $stmt->bind_param("s", $cookie);
     $stmt->bind_result($user_id);
     $stmt->execute();
 
+    #Everything is fine, user id to object
     if($stmt->fetch()) {
       $user = new Stdclass();
       $user->id = $user_id;
-		}
+		} else {
+      header("Location: index.php");
+  		exit();
+    }
 
     $stmt->close();
+    #Gets userdata from users and creates session
     $stmt = $this->connection->prepare("SELECT id, email, usergroup FROM ntb_users WHERE id = ?");
     $stmt->bind_param("i", $user->id);
     $stmt->bind_result($user_id, $user_email, $user_group);
@@ -36,14 +42,13 @@ class User {
 
 
 		function logInCookie($email, $hash){
-		//Emaili ja parooli kontroll
 		$response = new StdClass();
-
+    #Checks if user and password are correct
 		$stmt = $this->connection->prepare("SELECT id FROM ntb_users WHERE email=? AND password=?");
 		$stmt->bind_param("ss", $email, $hash);
 		$stmt->bind_result($id);
 		$stmt->execute();
-
+    #False
 		if(!$stmt->fetch()) {
 
 			$error = new StdClass();
@@ -54,62 +59,58 @@ class User {
 			return $response;
 		}
 		$stmt->close();
-		//Kontroll kinni
-		//Kasutaja sisse logimine
-        $stmt = $this->connection->prepare("SELECT id, email, password, usergroup FROM ntb_users WHERE email=? AND password=?");
-        $stmt->bind_param("ss", $email, $hash);
-        $stmt->bind_result($id_from_db, $email_from_db, $password, $usergroup_from_db);
-        $stmt->execute();
-        if($stmt->fetch()){
+		#True, creates new session
+    $stmt = $this->connection->prepare("SELECT id, email, password, usergroup FROM ntb_users WHERE email=? AND password=?");
+    $stmt->bind_param("ss", $email, $hash);
+    $stmt->bind_result($id_from_db, $email_from_db, $password, $usergroup_from_db);
+    $stmt->execute();
 
-          $_SESSION['logged_in_user_id'] = $id_from_db;
-          $_SESSION['logged_in_user_email'] = $email_from_db;
-          $_SESSION['logged_in_user_group'] = $usergroup_from_db;
+    if($stmt->fetch()){
+      $_SESSION['logged_in_user_id'] = $id_from_db;
+      $_SESSION['logged_in_user_email'] = $email_from_db;
+      $_SESSION['logged_in_user_group'] = $usergroup_from_db;
+      #Creating cookie exp. date and random hash to authenticate user if user returns
+      $expCookie = time()+60*60*24*30;
+      $random_id = time() + $id_from_db;
+      $hash_id = hash("md5", $random_id);
+			// sessioon salvestatakse serveris
+      setcookie(authUser, $hash_id, $expCookie);
 
-          $expCookie = time()+60*60*24*30;
-          $random_id = time() + $id_from_db;
-          $hash_id = hash("md5", $random_id);
-    			// sessioon salvestatakse serveris
-          setcookie(authUser, $hash_id, $expCookie);
+    }
 
-          #$stmt->close();
-
-
-    			#header("Location: profile.php");
-    			#exit();
-
-        }
-        $stmt->close();
-        $stmt = $this->connection->prepare("SELECT id FROM user_cookies WHERE user_id=?");
-        $stmt->bind_param("i", $id_from_db);
-        $stmt->bind_result($cookie_id);
-        $stmt->execute();
-        if($stmt->fetch()){
-          $stmt->close();
-          $stmt = $this->connection->prepare("UPDATE user_cookies SET random_hash = ? WHERE user_id = ?");
-          $stmt->bind_param("si", $hash_id, $id_from_db);
-          $stmt->execute();
-        } else {
+    $stmt->close();
+    #Checks database if cookie with the same user id exists
+    $stmt = $this->connection->prepare("SELECT id FROM user_cookies WHERE user_id=?");
+    $stmt->bind_param("i", $id_from_db);
+    $stmt->bind_result($cookie_id);
+    $stmt->execute();
+    #If exists, then overwrites it
+    if($stmt->fetch()){
+      $stmt->close();
+      $stmt = $this->connection->prepare("UPDATE user_cookies SET random_hash = ? WHERE user_id = ?");
+      $stmt->bind_param("si", $hash_id, $id_from_db);
+      $stmt->execute();
+    #Else inserts new cookie to database
+      } else {
         $stmt->close();
         $stmt = $this->connection->prepare("INSERT INTO user_cookies (user_id, random_hash) VALUES (?, ?)");
         $stmt->bind_param("is", $id_from_db, $hash_id);
         $stmt->execute();
-        }
-        $stmt->close();
-        header("Location: profile.php");
-        exit();
+      }
+    $stmt->close();
+    header("Location: profile.php");
+    exit();
     }
 
 
 	function logInUser($email, $hash){
-		//Emaili ja parooli kontroll
 		$response = new StdClass();
-
+    #Checks if user and password are correct
 		$stmt = $this->connection->prepare("SELECT id FROM ntb_users WHERE email=? AND password=?");
 		$stmt->bind_param("ss", $email, $hash);
 		$stmt->bind_result($id);
 		$stmt->execute();
-
+    #False
 		if(!$stmt->fetch()) {
 
 			$error = new StdClass();
@@ -120,24 +121,22 @@ class User {
 			return $response;
 		}
 		$stmt->close();
-		//Kontroll kinni
-		//Kasutaja sisse logimine
-        $stmt = $this->connection->prepare("SELECT id, email, usergroup FROM ntb_users WHERE email=? AND password=?");
-        $stmt->bind_param("ss", $email, $hash);
-        $stmt->bind_result($id_from_db, $email_from_db, $usergroup_from_db);
-        $stmt->execute();
-        if($stmt->fetch()){
+		#Creating new session
+    $stmt = $this->connection->prepare("SELECT id, email, usergroup FROM ntb_users WHERE email=? AND password=?");
+    $stmt->bind_param("ss", $email, $hash);
+    $stmt->bind_result($id_from_db, $email_from_db, $usergroup_from_db);
+    $stmt->execute();
+    if($stmt->fetch()){
 
-			// sessioon salvestatakse serveris
-			$_SESSION['logged_in_user_id'] = $id_from_db;
-			$_SESSION['logged_in_user_email'] = $email_from_db;
-			$_SESSION['logged_in_user_group'] = $usergroup_from_db;
-			//Suuname kasutaja teisele lehele
-			header("Location: profile.php");
-			exit();
+  		$_SESSION['logged_in_user_id'] = $id_from_db;
+  		$_SESSION['logged_in_user_email'] = $email_from_db;
+  		$_SESSION['logged_in_user_group'] = $usergroup_from_db;
 
-        }
-        $stmt->close();
+  		header("Location: profile.php");
+  		exit();
+      }
+
+      $stmt->close();
 
     }
 
@@ -146,14 +145,14 @@ class User {
 	##################
 
     function createUser($create_email, $hash){
-		//Emaili kontroll
+		#Checks email
 		$response = new StdClass();
 
 		$stmt = $this->connection->prepare("SELECT id FROM ntb_users WHERE email=?");
 		$stmt->bind_param("s", $create_email);
 		$stmt->bind_result($id);
 		$stmt->execute();
-
+    #If email exists, returns error
 		if($stmt->fetch()) {
 
 			$error = new StdClass();
@@ -163,12 +162,10 @@ class User {
 
 			return $response;
 		}
-        //Emaili kontroll kinni
-
-		//Konto loomine
-        $stmt = $this->connection->prepare("INSERT INTO ntb_users (email, password, usergroup, created) VALUES (?,?,1,NOW())");
-        $stmt->bind_param("ss", $create_email, $hash);
-        if($stmt->execute()) {
+    #Creates new user
+      $stmt = $this->connection->prepare("INSERT INTO ntb_users (email, password, usergroup, created) VALUES (?,?,1,NOW())");
+      $stmt->bind_param("ss", $create_email, $hash);
+      if($stmt->execute()) {
 			$success = new StdClass();
 			$success->message = "Kasutaja loodud!";
 			$response->success = $success;
@@ -186,14 +183,14 @@ class User {
 
 
 	function createEmployer($create_email, $hash){
-		//Emaili kontroll
+		#Checks email
 		$response = new StdClass();
 
 		$stmt = $this->connection->prepare("SELECT id FROM ntb_users WHERE email=?");
 		$stmt->bind_param("s", $create_email);
 		$stmt->bind_result($id);
 		$stmt->execute();
-
+    #Exists, give error
 		if($stmt->fetch()) {
 
 			$error = new StdClass();
@@ -203,12 +200,10 @@ class User {
 
 			return $response;
 		}
-        //Emaili kontroll kinni
-
-		//Konto loomine
-        $stmt = $this->connection->prepare("INSERT INTO ntb_users (email, password, usergroup, created) VALUES (?,?,2,NOW())");
-        $stmt->bind_param("ss", $create_email, $hash);
-        if($stmt->execute()) {
+    #New employer
+      $stmt = $this->connection->prepare("INSERT INTO ntb_users (email, password, usergroup, created) VALUES (?,?,2,NOW())");
+      $stmt->bind_param("ss", $create_email, $hash);
+      if($stmt->execute()) {
 			$success = new StdClass();
 			$success->message = "Kasutaja loodud!";
 			$response->success = $success;
@@ -230,7 +225,7 @@ class User {
 
   function checkPassword($userid, $oldpass) {
     $checkresponse = new StdClass();
-
+    #Checks old password
     $stmt = $this->connection->prepare("SELECT id FROM ntb_users WHERE id = ? AND password = ?");
 		$stmt->bind_param("is", $userid, $oldpass);
 		$stmt->bind_result($id);
@@ -252,7 +247,7 @@ class User {
 
   function changePassword($userid, $password) {
     $response = new StdClass();
-
+    #If everything is OK, changes password
     $stmt = $this->connection->prepare("UPDATE ntb_users SET password = ? WHERE id = ?");
     $stmt->bind_param("si", $password, $userid);
     if($stmt->execute()) {
@@ -277,16 +272,18 @@ class User {
 
 	function checkEmail($email) {
 		$checkresponse = new StdClass();
-
+    #Checks if email exists
 		$stmt = $this->connection->prepare("SELECT id FROM ntb_users WHERE email = ?");
 		$stmt->bind_param("s", $email);
 		$stmt->bind_result($id);
 		$stmt->execute();
+    #Doesn't exist, gives error
 		if(!$stmt->fetch()) {
 			$error = new StdClass();
 			$error->message = "Sellist emaili meil ei eksisteeri!";
 			$checkresponse->error = $error;
 			return $checkresponse;
+    #Exists, gives success msg, which is used to send email
 		} else {
 			$success = new StdClass();
 			$success->message = "Email saadetud!";
