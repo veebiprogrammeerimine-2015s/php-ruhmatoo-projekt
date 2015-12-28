@@ -80,8 +80,21 @@ class User {
 
         }
         $stmt->close();
-        $stmt = $this->connection->prepare("INSERT INTO user_cookies (user_id, random_hash) VALUES ('$id_from_db', '$hash_id')");
+        $stmt = $this->connection->prepare("SELECT id FROM user_cookies WHERE user_id=?");
+        $stmt->bind_param("i", $id_from_db);
+        $stmt->bind_result($cookie_id);
         $stmt->execute();
+        if($stmt->fetch()){
+          $stmt->close();
+          $stmt = $this->connection->prepare("UPDATE user_cookies SET random_hash = ? WHERE user_id = ?");
+          $stmt->bind_param("si", $hash_id, $id_from_db);
+          $stmt->execute();
+        } else {
+        $stmt->close();
+        $stmt = $this->connection->prepare("INSERT INTO user_cookies (user_id, random_hash) VALUES (?, ?)");
+        $stmt->bind_param("is", $id_from_db, $hash_id);
+        $stmt->execute();
+        }
         $stmt->close();
         header("Location: profile.php");
         exit();
