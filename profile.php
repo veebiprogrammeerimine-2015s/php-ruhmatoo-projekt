@@ -202,6 +202,7 @@ $(document).ready(function () {
 	<div class="col-xs-12 col-sm-10">
 	<ul class="nav nav-tabs pull-right" role="tablist">
 	<li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Konto andmed</a></li>
+	<li role="presentation"><a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Isiklikud andmed</a></li>
 	<li role="presentation"><a href="#password" aria-controls="password" role="tab" data-toggle="tab">Muuda parooli</a></li>
 	<li role="presentation"><a href="#resumes" aria-controls="resumes" role="tab" data-toggle="tab">Konto CVd</a></li>
 	</ul>
@@ -210,6 +211,7 @@ $(document).ready(function () {
 	<div class="col-xs-12">
 	<!-- Tab panes -->
 	<div class="tab-content">
+
 		<div role="tabpanel" class="tab-pane active" id="profile">
 			<div class="col-xs-12 col-sm-4">
 				<h3>Info</h3>
@@ -249,6 +251,55 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 
 			</div>
 		</div>
+
+		<div role="tabpanel" class="tab-pane" id="personal">
+			<div class="col-xs-12 col-sm-4">
+				<h3>Info</h3>
+				<pre class="pre-scrollable">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ornare sit amet erat id convallis. In hac habitasse platea dictumst. Sed a mauris sodales, tincidunt sapien non, hendrerit enim. Suspendisse potenti. Phasellus ut dui scelerisque, ultrices ex sed, fringilla dui. Ut fermentum enim sit amet sapien tristique, quis convallis nibh dapibus. Cras accumsan massa a augue elementum facilisis. Aenean dictum mauris ut erat rutrum faucibus. Praesent ac sollicitudin eros.
+
+Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, facilisis neque. Donec sit amet hendrerit erat. Morbi maximus egestas massa. In diam metus, molestie a blandit non, lobortis eu purus. Mauris id sapien sit amet nibh auctor luctus. Curabitur pretium mauris id ullamcorper blandit. Donec non interdum ligula. Cras sit amet magna dui.
+				</pre>
+			</div>
+
+			<div class="form-horizontal col-xs-12 col-sm-8">
+
+				<h3>
+					Konto andmed
+					<button type="button" class="btn btn-info btn-sm pull-right">
+  					<span class="glyphicon glyphicon-pencil"></span> Muuda
+					</button>
+				</h3>
+
+
+				<table class="table table-striped table-bordered">
+					<tr>
+						<td><label> Eesnimi </label></td>
+						<td>Echo eesnimi</td>
+					</tr>
+					<tr>
+						<td><label> Perekonnanimi </label></td>
+						<td>Echo perenimi</td>
+					</tr>
+					<tr>
+						<td><label> Maakond </label></td>
+						<td>Echo maakond</td>
+					</tr>
+					<tr>
+						<td><label> Vald </label></td>
+						<td>Echo vald</td>
+					</tr>
+					<tr>
+						<td><label> Telefoni number </label></td>
+						<td>Echo number</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+
+
+
 		<div role="tabpanel" class="tab-pane" id="password">
 			<div class="col-xs-12 col-sm-4">
 				<h3>Info</h3>
@@ -292,8 +343,18 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 			</div>
 
 			<div class="form-horizontal col-xs-12 col-sm-8">
-				<h3>Minu CVd</h3>
-				CVd
+				<h3>Minu CVd
+					<a href="newresume.php">
+					<button type="button" class="btn btn-default" aria-label="Plus">
+  					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Uus
+					</button>
+				</a>
+				</h3>
+				if stmt not fetch
+				Pole ühtegi CVd
+				<br>
+				if fetch
+				for loop
 			</div>
 		</div>
 
