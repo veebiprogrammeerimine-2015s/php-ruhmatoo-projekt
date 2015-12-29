@@ -20,17 +20,46 @@
 	##########################
 	$oldpassword_error = $newpassword_error = $repeatpassword_error = "";
 	$oldpassword = $newpassword = $repeatpassword = "";
-
-	if(isset($_SESSION['logged_in_user_id'])) {
-		if( $_SERVER["REQUEST_METHOD"] == "GET") {
-			if(isset($_GET["personal"])){
-
-			}
-		}
-	}
+	$first = $last = $county = $parish = $number = "";
+	$first_error = $last_error = $county_error = $parish_error = $number_error = "";
+	$personal = $Profile->getPersonal($_SESSION['logged_in_user_id']);
 
 	if(isset($_SESSION['logged_in_user_id'])) {
 		if( $_SERVER["REQUEST_METHOD"] == "POST") {
+
+			if(isset($_POST["save_personal"])){
+
+				if (empty($_POST["first"]) ) {
+					$first_error = "See väli on kohustuslik";
+				} else{
+					$first = cleanInput($_POST["first"]);
+				}
+				if (empty($_POST["last"]) ) {
+					$last_error = "See väli on kohustuslik";
+				} else{
+					$last = cleanInput($_POST["last"]);
+				}
+				if (empty($_POST["county"]) ) {
+					$county_error = "See väli on kohustuslik";
+				} else{
+					$county = cleanInput($_POST["county"]);
+				}
+				if (empty($_POST["parish"]) ) {
+					$parish_error = "See väli on kohustuslik";
+				} else{
+					$parish = cleanInput($_POST["parish"]);
+				}
+				if (empty($_POST["number"]) ) {
+					$number_error = "See väli on kohustuslik";
+				} else{
+					$number = cleanInput($_POST["number"]);
+				}
+				if($first_error == "" && $last_error == "" && $county_error == "" && $parish_error == "" && $number_error == ""){
+					$response_personal = $Profile->editPersonal($_SESSION['logged_in_user_id'], $first, $last, $county, $parish, $number);
+				}
+
+			}
+
 			if(isset($_POST["change_password"])){
 
 				if (empty($_POST["oldpassword"]) ) {
@@ -151,10 +180,29 @@ function passwordMatch() {
 		else
 				document.getElementById("checking").className = "form-group has-success"
 }
+function isOkay() {
+var firsts = document.getElementById("first").value;
+var lasts = document.getElementById("last").value;
+var countys = document.getElementById("county").value;
+var parishs = document.getElementById("parish").value;
+var numbers = document.getElementById("number").value;
+	if (firsts == 0 || lasts == 0 || countys == 0 || parishs == 0 || numbers == 0)
+		document.getElementById("save_personal").className = "btn btn-success btn-sm disabled";
+	else
+		document.getElementById("save_personal").className = "btn btn-success btn-sm";
+}
+
+$(document).ready(isOkay);
 
 $(document).ready(function () {
    $("#repeatpassword").keyup(passwordMatch);
+	 $("#first").keyup(isOkay);
+	 $("#last").keyup(isOkay);
+	 $("#county").keyup(isOkay);
+	 $("#parish").keyup(isOkay);
+	 $("#number").keyup(isOkay);
 });
+
 
 </script>
 
@@ -168,38 +216,52 @@ $(document).ready(function () {
 
 	<?php if(isset($passresponse->success)): ?>
 
-	<div class="alert alert-success alert-dismissible fade in" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-		<p><?=$passresponse->success->message;?></p>
-	</div>
+		<div class="alert alert-success alert-dismissible fade in" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+			<p><?=$passresponse->success->message;?></p>
+		</div>
 
 	<?php elseif(isset($passresponse->error)): ?>
 
-	<div class="alert alert-danger alert-dismissible fade in" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-		<p><?=$passresponse->error->message;?></p>
-	</div>
+		<div class="alert alert-danger alert-dismissible fade in" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+			<p><?=$passresponse->error->message;?></p>
+		</div>
 
-<?php elseif(isset($checkresponse->error)): ?>
+	<?php elseif(isset($response_personal->success)): ?>
 
-	<div class="alert alert-danger alert-dismissible fade in" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-		<p><?=$checkresponse->error->message;?></p>
-	</div>
+		<div class="alert alert-success alert-dismissible fade in" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+			<p><?=$response_personal->success->message;?></p>
+		</div>
 
-<?php elseif(!empty($checklength)): ?>
+	<?php elseif(isset($response_personal->error)): ?>
 
-	<div class="alert alert-danger alert-dismissible fade in" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-		<p><?=$checklength;?></p>
-	</div>
+		<div class="alert alert-danger alert-dismissible fade in" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+			<p><?=$response_personal->error->message;?></p>
+		</div>
 
-<?php elseif(!empty($checkresponse)): ?>
+	<?php elseif(isset($checkresponse->error)): ?>
 
-	<div class="alert alert-danger alert-dismissible fade in" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-		<p><?=$checkresponse;?></p>
-	</div>
+		<div class="alert alert-danger alert-dismissible fade in" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+			<p><?=$checkresponse->error->message;?></p>
+		</div>
+
+	<?php elseif(!empty($checklength)): ?>
+
+		<div class="alert alert-danger alert-dismissible fade in" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+			<p><?=$checklength;?></p>
+		</div>
+
+	<?php elseif(!empty($checkresponse)): ?>
+
+		<div class="alert alert-danger alert-dismissible fade in" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+			<p><?=$checkresponse;?></p>
+		</div>
 
 	<?php endif; ?>
 
@@ -299,23 +361,23 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 
 							<tr>
 								<td><label> Eesnimi </label></td>
-								<td><input type="text" name="first" class="form-control input-sm"></td>
+								<td><input id="first" type="text" name="first" class="form-control input-sm" value="<?=$first;?>"></td>
 							</tr>
 							<tr>
 								<td><label> Perekonnanimi </label></td>
-								<td><input type="text" name="last" class="form-control input-sm"></td>
+								<td><input id="last" type="text" name="last" class="form-control input-sm" value="<?=$last;?>"></td>
 							</tr>
 							<tr>
 								<td><label> Maakond </label></td>
-								<td><input type="text" name="county" class="form-control input-sm"></td>
+								<td><input id="county" type="text" name="county" class="form-control input-sm" value="<?=$county;?>"></td>
 							</tr>
 							<tr>
 								<td><label> Vald </label></td>
-								<td><input type="text" name="parish" class="form-control input-sm"></td>
+								<td><input id="parish" type="text" name="parish" class="form-control input-sm" value="<?=$parish;?>"></td>
 							</tr>
 							<tr>
 								<td><label> Telefoni number </label></td>
-								<td><input type="text" name="number" class="form-control input-sm"></td>
+								<td><input id="number" type="text" name="number" class="form-control input-sm" value="<?=$number;?>"></td>
 							</tr>
 						</table>
 						<div class="btn-group pull-right" role="group">
@@ -324,7 +386,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 								<span class="glyphicon glyphicon-remove"></span> Katkesta
 							</a>
 
-							<button type="submit" name="save_personal" class="btn btn-success btn-sm">
+							<button type="submit" id="save_personal" name="save_personal" class="btn btn-success btn-sm">
 								<span class="glyphicon glyphicon-ok"></span> Salvesta
 							</button>
 
@@ -334,23 +396,23 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 				<table class="table table-striped table-bordered">
 					<tr>
 						<td><label> Eesnimi </label></td>
-						<td>Echo eesnimi</td>
+						<td><?=$personal->first;?></td>
 					</tr>
 					<tr>
 						<td><label> Perekonnanimi </label></td>
-						<td>Echo perenimi</td>
+						<td><?=$personal->last;?></td>
 					</tr>
 					<tr>
 						<td><label> Maakond </label></td>
-						<td>Echo maakond</td>
+						<td><?=$personal->county;?></td>
 					</tr>
 					<tr>
 						<td><label> Vald </label></td>
-						<td>Echo vald</td>
+						<td><?=$personal->parish;?></td>
 					</tr>
 					<tr>
 						<td><label> Telefoni number </label></td>
-						<td>Echo number</td>
+						<td><?=$personal->number;?></td>
 					</tr>
 				</table>
 				<?php endif; ?>

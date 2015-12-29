@@ -22,10 +22,7 @@ class User {
     if($stmt->fetch()) {
       $user = new Stdclass();
       $user->id = $user_id;
-		} else {
-      header("Location: index.php");
-  		exit();
-    }
+		} 
 
     $stmt->close();
     #Gets userdata from users and creates session

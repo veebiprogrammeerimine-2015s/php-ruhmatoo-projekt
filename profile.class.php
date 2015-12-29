@@ -7,7 +7,77 @@ class Profile {
     }
 
 	/*Tööotsija*/
+	function editPersonal($id, $first, $last, $county, $parish, $number) {
+		$response = new StdClass();
+		$stmt = $this->connection->prepare("SELECT id FROM ntb_personal WHERE user_id = ?");
+		$stmt->bind_param("i", $id);
+		$stmt->execute();
 
+		if($stmt->fetch()) {
+
+			$stmt->close();
+
+			$stmt = $this->connection->prepare("UPDATE ntb_personal SET firstname = ?, lastname = ?, county = ?, parish = ?, telnumber = ? WHERE user_id = ?");
+			$stmt->bind_param("ssssii", $first, $last, $county, $parish, $number, $id);
+			if($stmt->execute()) {
+
+				$success = new StdClass();
+				$success->message = "Andmed muudetud!";
+				$response->success = $success;
+
+			} else {
+				$error = new StdClass();
+				$error->id = 0;
+				$error->message = "Palun täida kõik väljad!";
+				$response->error = $error;
+			}
+			$stmt->close();
+		} else {
+
+			$stmt = $this->connection->prepare("INSERT INTO ntb_personal (user_id, firstname, lastname, county, parish, telnumber) VALUES (?,?,?,?,?,?)");
+			$stmt->bind_param("issssi", $id, $first, $last, $county, $parish, $number);
+			if($stmt->execute()) {
+
+				$success = new StdClass();
+				$success->message = "Andmed muudetud!";
+				$response->success = $success;
+
+			} else {
+				$error = new StdClass();
+				$error->id = 1;
+				$error->message = "Palun täida kõik väljad!";
+				$response->error = $error;
+			}
+			$stmt->close();
+
+		}
+		return ($response);
+		header ("Location: profile.php");
+		exit();
+	}
+
+	function getPersonal($userid) {
+		$stmt = $this->connection->prepare("SELECT firstname, lastname, county, parish, telnumber FROM ntb_personal WHERE user_id = ?");
+		$stmt->bind_param("i", $userid);
+		$stmt->bind_result($first, $last, $county, $parish, $telnumber);
+		$stmt->execute();
+		$personal = new StdClass();
+		if($stmt->fetch()) {
+			$personal->first = $first;
+			$personal->last = $last;
+			$personal->county = $county;
+			$personal->parish = $parish;
+			$personal->number = $telnumber;
+		} else {
+			$personal->first = "";
+			$personal->last = "";
+			$personal->county = "";
+			$personal->parish = "";
+			$personal->number = "";
+		}
+		return ($personal);
+		$stmt->close();
+	}
 
 	/*Tööotsija lõpp*/
 
@@ -65,12 +135,6 @@ class Profile {
 		$stmt = $this->connection->prepare("SET foreign_key_checks = 1");
 		$stmt->execute();
 
-		#$stmt = $this->connection->prepare("SET foreign_key_checks = 0;
-		#									UPDATE job_company JOIN job_offers ON job_offers.company = job_company.name SET job_offers.company='$name', job_company.name='$name', job_company.email='$email', job_company.number=$number WHERE job_company.user_id = $user AND job_offers.user_id = $user;
-		#									SET foreign_key_checks = 1;");
-		#$stmt->bind_param("sssiii", $name, $name, $email, $number, $user, $user);
-		#var_dump($stmt->bind_param);
-		#$stmt->execute();
 		$stmt->close();
 		header ("Location: profile.php");
 	}
