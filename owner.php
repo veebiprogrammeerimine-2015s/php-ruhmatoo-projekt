@@ -1,9 +1,5 @@
 <?php
 	require_once("functions.php");
-	// data.php
-	
-	// kui kasutaja ei ole sisseloginud,
-	// siis suunan tagasi
 	if(!isset($_SESSION["logged_in_user_id"])){
 		header("Location: login.php");
 		

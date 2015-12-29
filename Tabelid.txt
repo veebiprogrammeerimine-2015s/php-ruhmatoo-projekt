@@ -16,13 +16,13 @@ CREATE TABLE animals(
 CREATE TABLE vets(
 	aid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	dr_name VARCHAR(50),
-	a_animal_id INT
+	a_animal_name varchar(50)
 );
 
 CREATE TABLE procedures(
+	p_doctor_name VARCHAR(50),
 	procedure_name VARCHAR(50),
-	dr_id INT,
-	dr_animal_id INT
+	dr_animal_name VARCHAR(50)
 );
 
 CREATE TABLE times(
@@ -31,10 +31,10 @@ CREATE TABLE times(
 );
 
 CREATE TABLE operations(
+	o_doctor_name VARCHAR(50),
 	operation_name VARCHAR(50),
 	difficulty VARCHAR(50),
-	dr_id INT,
-	o_animal_id INT,
+	op_animal_name VARCHAR(50),
 	date TIMESTAMP
 );
 
