@@ -209,7 +209,13 @@ class OfferManager {
 
 	}
 	
-	function getFeedbackData(){}
+	function getFeedbackData(){
+		
+		$stmt = $this->connection->prepare("")
+		$stmt->
+		
+		
+	}
 }
 
 ?>
