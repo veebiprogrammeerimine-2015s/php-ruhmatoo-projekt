@@ -1,5 +1,11 @@
 <?php	
-
+	
+	/* Siin on selline jama, et: kui inimene valib kasutajaks "ettevõtte", siis tekib javascripti (ridadel 145 - 148) abil kaks uut välja, kuhu saab sisestada
+	ettevõtte nime ja kirjelduse; kui aga andmeid sisestada valesti (nt jätab inimene kasutajanime sisestamata ja süsteem küsib uut sisestamist),
+	siis kaovad need kaks javascripti-abil-tekitatud-välja ära.
+	
+	Javascript on eraldi lehele, functions.js. */
+	
 	require_once("functions.php");
 
 	$user_group_error = "";

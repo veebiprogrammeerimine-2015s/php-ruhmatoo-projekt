@@ -1,10 +1,10 @@
 <?php
 	
-	/* Hetkel on selline jama, et kuna funktsioon "addNewFeedback" vÃµtab informatsiooni aadressirealt ($_GET) (rida 37),
-	siis juhul, kui seda aadressiriba uuendada (nt inimene sisestab andmeid valesti), siis need $_GET vÃ¤Ã¤rtused (mis saadakse
-	ridadelt 58 ja 59) kaovad ju Ã¤ra ja seega ei saa seda kÃµike andmebaasi salvestada.
+	/* Hetkel on selline jama, et kuna funktsioon "addNewFeedback" võtab informatsiooni aadressirealt ($_GET) (rida 37),
+	siis juhul, kui seda aadressiriba uuendada (nt inimene sisestab andmeid valesti), siis need $_GET väärtused (mis saadakse
+	ridadelt 58 ja 59) kaovad ju ära ja seega ei saa seda kõike andmebaasi salvestada.
 
-	TÃ¤pselt sama jama on ka offers_data.php puhul*/
+	Täpselt sama jama on ka offers_data.php puhul*/
 	
 	
 	require_once("functions.php");
@@ -51,7 +51,7 @@
 
 ?>
 
-Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="text-decoration:none">[logi vÃ¤lja]</a>
+Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
 
 <h2>Tagasiside</h2>
 
@@ -60,4 +60,4 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 	<input type="hidden" name="to_user_id" value="<?=$_GET["to_user_id"];?>">
 	<textarea style="resize:none" name="feedback" rows="10" cols="28" placeholder="Tagasiside"><?=$feedback;?></textarea>* <?=$feedback_error;?><br><br>
 	<input name="add_new_feedback" type="submit" value="Anna tagasisidet">
-</form> 
+</form>

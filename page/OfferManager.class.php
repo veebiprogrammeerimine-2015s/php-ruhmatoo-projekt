@@ -140,15 +140,15 @@ class OfferManager {
 	function getOffersData(){
 		
 		if($_SESSION["logged_in_user_group_id"] == "3"){
-			$stmt = $this->connection->prepare("SELECT subject, company_name, offer_ID, requests.request_ID, journalist_ID, date, price, comment, accepted FROM offers JOIN requests ON requests.request_ID=offers.request_ID JOIN users ON users.user_ID=requests.company_ID WHERE company_ID=?");	
+			$stmt = $this->connection->prepare("SELECT subject, company_name, company_ID, offer_ID, requests.request_ID, journalist_ID, date, price, comment, accepted FROM offers JOIN requests ON requests.request_ID=offers.request_ID JOIN users ON users.user_ID=requests.company_ID WHERE company_ID=?");	
 		}else if($_SESSION["logged_in_user_group_id"] == "2"){
-			$stmt = $this->connection->prepare("SELECT subject, company_name, offer_ID, requests.request_ID, journalist_ID, date, price, comment, accepted FROM offers JOIN requests ON requests.request_ID=offers.request_ID JOIN users ON users.user_ID=requests.company_ID WHERE journalist_ID=?");	
+			$stmt = $this->connection->prepare("SELECT subject, company_name, company_ID, offer_ID, requests.request_ID, journalist_ID, date, price, comment, accepted FROM offers JOIN requests ON requests.request_ID=offers.request_ID JOIN users ON users.user_ID=requests.company_ID WHERE journalist_ID=?");	
 		}else{
-			$stmt = $this->connection->prepare("SELECT subject, company_name, offer_ID, requests.request_ID, journalist_ID, date, price, comment, accepted FROM offers JOIN requests ON requests.request_ID=offers.request_ID JOIN users ON users.user_ID=requests.company_ID");
+			$stmt = $this->connection->prepare("SELECT subject, company_name, company_ID, offer_ID, requests.request_ID, journalist_ID, date, price, comment, accepted FROM offers JOIN requests ON requests.request_ID=offers.request_ID JOIN users ON users.user_ID=requests.company_ID");
 		}
 		
 		$stmt->bind_param("i", $_SESSION["logged_in_user_id"]);
-		$stmt->bind_result($subject_from_db, $company_name_from_db, $offer_ID_from_db, $request_ID_from_db, $journalist_ID_from_db, $offer_date_from_db, $price_from_db, $comment_from_db, $accepted_from_db);
+		$stmt->bind_result($subject_from_db, $company_name_from_db, $company_id_from_db, $offer_ID_from_db, $request_ID_from_db, $journalist_ID_from_db, $offer_date_from_db, $price_from_db, $comment_from_db, $accepted_from_db);
 		$stmt->execute();
 		
 		$array = array();
@@ -160,6 +160,7 @@ class OfferManager {
 			
 			$offer->subject = $subject_from_db;
 			$offer->company_name = $company_name_from_db;
+			$offer->company_id = $company_id_from_db;
 			$offer->offer_id = $offer_ID_from_db;
 			$offer->request_id = $request_ID_from_db;
 			$offer->journalist_id = $journalist_ID_from_db;
@@ -191,10 +192,10 @@ class OfferManager {
 		$stmt->close();
 	}
 
-	function createNewFeedback($from_user, $to_user, $offer_ID, $feedback){
+	function addNewFeedback($from_user, $to_user, $offer_ID, $feedback){
 		
 		$stmt = $this->connection->prepare("INSERT INTO feedback(from_user, to_user, offer_ID, feedback, date) VALUES(?,?,?,?, NOW())");
-		$stmt->bind_param("iiis", $_SESSION['logged_in_user_id'], $to_user, $offer_ID, $feedback);
+		$stmt->bind_param("iiis", $from_user, $to_user, $offer_ID, $feedback);
 		
 		$message = "";
 		
@@ -206,9 +207,9 @@ class OfferManager {
 		
 		return $message;
 
-	}	
-		
+	}
+	
+	function getFeedbackData(){}
 }
-
 
 ?>
