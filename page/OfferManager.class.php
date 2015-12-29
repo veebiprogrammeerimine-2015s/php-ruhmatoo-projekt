@@ -157,7 +157,6 @@ class OfferManager {
 			
 			$offer = new Stdclass();
 			
-			
 			$offer->subject = $subject_from_db;
 			$offer->company_name = $company_name_from_db;
 			$offer->company_id = $company_id_from_db;
@@ -211,10 +210,39 @@ class OfferManager {
 	
 	function getFeedbackData(){
 		
-		$stmt = $this->connection->prepare("")
-		$stmt->
+		$stmt = $this->connection->prepare("SELECT from_user, first_name, last_name, company_name, feedback, date FROM feedback JOIN users ON feedback.from_user=users.user_ID");
+		$stmt->bind_param();
+		$stmt->bind_result($from_user_id, $from_user_first_name, $from_user_last_name, $from_user_company_name, $feedback_text, $date);
+		$stmt->execute();
 		
+		$stmt = $this->connection->prepare("SELECT to_user, first_name, last_name, company_name FROM feedback JOIN users ON feedback.to_user=users.user_ID");
+		$stmt->bind_param();
+		$stmt->bind_result($to_user_id, $to_user_first_name, $to_user_last_name, $to_user_company_name);
+		$stmt->execute();
 		
+		$array = array();
+		
+		while($stmt->fetch()){
+			
+			$feedback = new Stdclass();
+	
+			$feedback->from_user_id = $from_user_id;
+			$feedback->from_user_first_name = $from_user_first_name;
+			$feedback->from_user_last_name = $from_user_last_name;
+			$feedback->from_user_company_name = $from_user_company_name;
+			$feedback->feedback_text = $feedback_text;
+			$feedback->feedback_date = $date;
+			$feedback->to_user_id = $to_user_id;
+			$feedback->to_user_first_name = $to_user_first_name;
+			$feedback->to_user_last_name = $to_user_last_name;
+
+			array_push($array, $feedback);
+		}
+		
+		return $array;
+		
+		$stmt->close();
+	
 	}
 }
 
