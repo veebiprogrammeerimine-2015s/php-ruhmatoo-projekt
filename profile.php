@@ -467,8 +467,8 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 			<div class="form-horizontal col-xs-12 col-sm-8">
 				<h3>Minu CVd
 					<a href="newresume.php">
-					<button type="button" class="btn btn-default" aria-label="Plus">
-  					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Uus
+					<button type="button" class="btn btn-info btn-sm pull-right" aria-label="Plus">
+  					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Uus CV
 					</button>
 				</a>
 				</h3>
