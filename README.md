@@ -26,8 +26,8 @@
     
 
     **kokkuvõte: mida õppisid juurde? mis ebaõnnestus? mis oli keeruline? (kirjutab iga tiimi liige).**
-	Harri Ruttas:
 
+	**Harri Ruttas:**
     * **Ebaõnnestumine** Proovisin ajaxi päringutega lisada automaatse tabeli update kuid ebaõnnestus. Samuti proovisin ka lisada radadest pildid mis muutuksid halliks kui on kinni -samuti ebaõnnestus . Proovisin mitmeid functions mida ma ei mäleta täpselt kuid lõpuks tüdinesin ära nendest.
 
     * **Õppisin juurde** mitmeid css functione samuti natukene ajaxsi päringud kuid ikkagi ma hakkama ei saand sellega, siis ka veel mitmeid mysql päringuid kuidas neid välja tuua ja kuidas ühendust luua php-ga. 
