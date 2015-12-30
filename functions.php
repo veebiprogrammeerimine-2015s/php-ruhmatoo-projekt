@@ -18,7 +18,6 @@
 			$search= "%".$keyword."%";
 		}
 		
-		$mysqli = new mysqli($servername, $server_username, $server_password, $database);
 
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 			$stmt = $mysqli->prepare("SELECT id, title, season, description, picture from series WHERE 
@@ -60,7 +59,31 @@
 			$mysqli->close();
 			}
 	
-
-
+	function dropdown(){
+		
+		$html = "";
+		
+		$html .= '<select name="new_dd_selection">';
+		//$html .= '<option>1</option>';
+		//$html .= '<option>2</option>';
+		//$html .= '<option>3</option>';
+		//$html .= '<option selected>3</option>';
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		$stmt = $mysqli->prepare("SELECT id, name FROM user_list where user_id=?");
+		
+		$stmt->bind_param("i", $_SESSION["logged_in_user_id"]);
+		$stmt->bind_result($id, $name);
+		$stmt->execute();
+		
+		while($stmt->fetch()){
+			$html .= '<option value="'.$id.'">'.$name.'</option>';
+			
+		}
+		
+		
+		$html .= '</select>';
+		
+		return $html;
+	}
 	
 ?>
