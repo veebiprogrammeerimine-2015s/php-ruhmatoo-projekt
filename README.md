@@ -1,7 +1,7 @@
 # Bowling Broneering kohapeal veebilehest
 
 
-	**Tööst**
+1. **Tööst**
     * suurelt projekti nime;
     * Rühma liikmed: Harri Ruttas , Marianne Kristiina Orusalu;
     *  Eesmärk:Lihtsustada bowlingu tööliste elu, samuti ka klientide elu. kliendid saavad veebikaudu võtta endale raja ja tellida toidud. Samuti Köögis näevad töölised mis on tellitud ja saavad teha toitu.;
