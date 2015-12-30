@@ -37,11 +37,20 @@
     * suurelt projekti nime;
     * rühma liikmete nimed;
     * eesmärki (3-4 lauset, mis probleemi üritate lahendada);
-    * kirjeldus (sihtrühm, eripära võrreldes teiste samalaadsete rakendustega - kirjeldada vähemalt 2-3 sarnast rakendust mida eeskujuks võtta);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada huviala
-        * ...
+    * Kirjeldus: 
+	* Klient
+	* Kohapeal registreerud kui pole registreerunud .
+	* Võtad endale raja. 
+	* Saad toitu tellida.
+	* Soovikorral hinnangu anda .
+	* Maksta toidu eest ja kui oled mängimise lõpetanud siis saad ise raja kinni panna.;
+
+    * funktsionaalsuse loetelu prioriteedi järjekorras
+		*V0.1 – Lisati Login ja reg
+		*V0.2 – Lisasati Broneering mis oli vigane ja vigane menüü
+		*V0.3 – Lisati söögi valik teeninudse hindamine vigane klendi login parandatud ja lisati tööliste login rolliga ja söögi hindamine maksmine.
+		*V0.4 – Parandati vead mis koodis oli ja lisati mõningad lihtsamad täiustused koodi.
+		
     * andmebaasi skeem loetava pildina + tabelite loomise SQL laused;
     * **kokkuvõte:** mida õppisid juurde? mis ebaõnnestus? mis oli keeruline? (kirjutab iga tiimi liige).
 
