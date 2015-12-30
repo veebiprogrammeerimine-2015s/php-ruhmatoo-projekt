@@ -1,12 +1,10 @@
 <?php 
 require_once('functions.php'); 
 
-if(isset($_SESSION["logged_in_user_id"])){
-    header("Location: member.php");
-    exit();
-  }
-
-
+// if(isset($_SESSION["logged_in_user_id"])){
+//     header("Location: member.php");
+// 	exit();
+// }
 
   $username = "";
   $username_error = "";
@@ -24,87 +22,75 @@ if(isset($_SESSION["logged_in_user_id"])){
   $password1 ="";
   $password2 ="";
   
-  if($_SERVER["REQUEST_METHOD"] == "POST"){
-    if(isset($_POST['registreeri'])) {
-      if ( empty($_POST["username"]) ) {
-        $username_error = "See väli on kohustuslik";
-      }
-      else{
-        $username = test_input($_POST["username"]);
-      } 
-      if ( empty($_POST["firstname"]) ) {
-        $firstname_error = "See väli on kohustuslik";
-      }
-      else{
-        $firstname = test_input($_POST["firstname"]);
-      }     
-      if ( empty($_POST["lastname"]) ) {
-        $lastname_error = "See väli on kohustuslik";
-      }
-      else{
-        $lastname = test_input($_POST["lastname"]);
-      }
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+	if(isset($_POST['registreeri'])) {
+	  if ( empty($_POST["username"]) ) {
+	    $username_error = "See väli on kohustuslik";
+	  }
+	  else{
+	    $username = test_input($_POST["username"]);
+	  } 
+	  if ( empty($_POST["firstname"]) ) {
+	    $firstname_error = "See väli on kohustuslik";
+	  }
+	  else{
+	    $firstname = test_input($_POST["firstname"]);
+	  }     
+	  if ( empty($_POST["lastname"]) ) {
+	    $lastname_error = "See väli on kohustuslik";
+	  }
+	  else{
+	    $lastname = test_input($_POST["lastname"]);
+	  }
 
-      if ( empty($_POST["email2"]) ) {
-        $email2_error = "See väli on kohustuslik";
-      }
-      else{
-        $email2 = test_input($_POST["email2"]);
-      }
-      
-      if ( empty($_POST["password2"]) ) {
-        $password2_error = "See väli on kohustuslik"; 
-      }
-      if ( empty($_POST["password3"]) ) {
-        $password3_error = "See väli on kohustuslik"; 
-      }
-      else{ 
-        if(strlen($_POST["password2"]) < 8) {
-          $password2_error ="Peab olema vähemalt 8 sümbolit pikk!";
-        }
-        else{
-          $password2 = test_input($_POST["password2"]);
-        }
-      }
-      
-      if ($_POST["password2"] != $_POST["password3"]) {
-        $password3_error = "Paroolid ei kattu. Proovi uuesti."; 
-      } 
-        
-      if( $email2_error == "" && $password2_error == ""){
-        $hash = hash("sha512", $password2);
-        echo "Võib kasutajat luua! Kasutajanimi on ".$email2." ja parool on ".$password2. "ja räsi on ".$hash;
-        createUser($username, $firstname, $lastname, $email2, $hash);
-      } 
-    }
-  } 
+	  if ( empty($_POST["email2"]) ) {
+	    $email2_error = "See väli on kohustuslik";
+	  }
+	  else{
+	    $email2 = test_input($_POST["email2"]);
+	  }
+	  
+	  if ( empty($_POST["password2"]) ) {
+	    $password2_error = "See väli on kohustuslik"; 
+	  }
+	  if ( empty($_POST["password3"]) ) {
+	    $password3_error = "See väli on kohustuslik"; 
+	  }
+	  else{ 
+	    if(strlen($_POST["password2"]) < 8) {
+	      $password2_error ="Peab olema vähemalt 8 sümbolit pikk!";
+	    }
+	    else{
+	      $password2 = test_input($_POST["password2"]);
+	    }
+	  }
+	  
+	  if ($_POST["password2"] != $_POST["password3"]) {
+	    $password3_error = "Paroolid ei kattu. Proovi uuesti."; 
+	  } 
+	    
+	  if( $email2_error == "" && $password2_error == ""){
+	    $hash = hash("sha512", $password2);
+	    echo "Võib kasutajat luua! Kasutajanimi on ".$email2." ja parool on ".$password2. "ja räsi on ".$hash;
+	    createUser($username, $firstname, $lastname, $email2, $hash);
+	  } 
+	}
+} 
+  
+
     
-    
-  function test_input($data) {  
-    $data = trim($data);  
-    $data = stripslashes($data); 
-    $data = htmlspecialchars($data);
+function test_input($data) {  
+	$data = trim($data);  
+	$data = stripslashes($data); 
+	$data = htmlspecialchars($data);
 
-    return $data;
-  }
-
+	return $data;
+}
 
 
-  $username = "";
-  $username_error = "";
-  $email1_error = "";
-  $email2_error = "";
-  $password1_error = "";
-  $password2_error = "";
-  $password3_error ="";
-  $firstname_error ="";
-  $lastname_error ="";
-  $email1 ="";
-  $email2 ="";
-  $firstname ="";
-  $lastname ="";
-  $password1 ="";
-  $password2 ="";
+
+
+
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   if(isset($_POST['login'])){
@@ -130,7 +116,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       
     }
   }
+}
+  $usernameW = "";
+  $usernameW_error = "";
+  $passwordW_error = "";
+  $passwordW ="";
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+  if(isset($_POST['loginW'])){
+    if ( empty($_POST["usernameW"]) ) {
+      $usernameW_error = "See väli on kohustuslik";
+    }
+    else{
+      $usernameW = test_input($_POST["usernameW"]);
+    }
+
+    if ( empty($_POST["passwordW"]) ) {
+      $passwordW_error = "See väli on kohustuslik"; 
+    }
+    else{
+      $passwordW = test_input($_POST["passwordW"]);
+    }
+
+    if($passwordW_error == "" && $usernameW_error == ""){
+      
+      $hash = hash("sha512", $passwordW);
+      loginUserW($usernameW, $hash);
+
+      
+    }
+  }
 }   
+
 
 
   require('layout/header.php'); 

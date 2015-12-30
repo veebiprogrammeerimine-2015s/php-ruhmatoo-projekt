@@ -1,3 +1,4 @@
+
 		<div class="regContainer">
 			<h2>Loo kasutaja</h2>
 			<form class="form-style-4" action ="index.php#reg" method="post">
@@ -11,4 +12,4 @@
 		</div>
 
 			</form>
-		</div>
+		

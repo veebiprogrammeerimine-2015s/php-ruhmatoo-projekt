@@ -1,34 +1,26 @@
 <?php
   require_once("functions.php");
-
-
   require_once("conf.php");
-    if(!isset($_SESSION["logged_in_user_id"])){
+  if(!isset($_SESSION["logged_in_user_id"])){
     header("Location: member.php");
   }
-  
-  if(isset($_GET["s88k"])){
-    header("Location: member.php#ready");
-  }
-
 
   if(isset($_GET["logout"])){
-    session_destroy();
-    header("Location: index.php");
+      $q = 'UPDATE rajad SET staatus=0 WHERE ID=1 LIMIT 1';
+      $muuda = $yhendus->prepare($q);
+      $muuda->bind_param('i',$_REQUEST['rada']);
+      $muuda->execute();
+      $muuda->close();
   }
-  
+
   function test_input($data) {  
     $data = trim($data);  //võtab ära tühikud,enterid,tabid
     $data = stripslashes($data);  //võtab ära tagurpidi kaldkriipsud
     $data = htmlspecialchars($data);  //teeb htmli tekstiks, nt < läheb &lt
     return $data;
   }
-
-
-
-
-
 ?>
+
  <?php require('layout/headerloggedin.php');  ?>
 
         <!-- Main Tab Container -->
@@ -36,17 +28,17 @@
         <div id="tab-container" class="tab-container">
           <!-- Tab List -->
             <ul class='etabs'>
-                <li class='tab' id="tab-row">
-                  <a href="#row"><i class="icon-user"></i><span> Vali rada</span></a>
+                <li class='false tab' id="tab-row">
+                  <a href="#row "><i class="icon-user" ></i><span> Vali rada</span></a>
                 </li>
-                <li class='tab' id="tab-food">
+                <li class='false tab' id="tab-row">
                   <a href="#food"><i class="icon-file-text"></i><span> vali Toit soovil</span></a>
                 </li>
-                <li class='tab'>
+                <li class='false tab' id="tab-ready">
                   <a href="#ready"><i class="icon-heart"></i><span> Valmis</span></a>
                 </li>
-                <li class='tab'>
-                  <a href="#contact"><i class="icon-envelope"></i><span> kontaktid</span></a>
+                <li class='tab false' id="tab-grade">
+                  <a href="#grade"><i class="icon-envelope"></i><span> Hinda</span></a>
                 </li>
             </ul>
           <!-- End Tab List -->
@@ -58,32 +50,30 @@
 
                   echo "
                     <form action='#food'>
-                       <dl>
-                      <dt style='font-weight: bold;'>Valige rada:</dt>
-                      <dd>";
+                        <dl>
+                        <dt style='font-weight: bold;'>Valige rada:</dt>
+                        <dd>";
                         $q = 'SELECT ID, kohti FROM rajad WHERE staatus=0';
                         $rajad = $yhendus->prepare($q);
                         $rajad->execute();
-                        //Vaatame, kas on üldse vabu radau
                         $rajad->store_result();
                         $vabu = $rajad->num_rows;
                         if($vabu == 0) {
                           echo 'Vabandame, hetkel pole ühtegi vaba rada.';
                         } else { echo "
-                          <select name='rajad'>
-                          <option></option>";
-                          $rajad->bind_result($ID, $kohti);                            
-                          while($rajad->fetch()) {
-                            echo '<option value="'.$ID.'">'.$kohti.' kohaga rada</option>';
+                            <select name='rajad'>
+                            <option></option>";
+                            $rajad->bind_result($ID, $kohti);                            
+                            while($rajad->fetch()) {
+                              echo '<option value="'.$ID.'">'.$kohti.' kohaga rada</option>';
                           }
                           $rajad->close();
                           echo "
                            </select>";
                         } echo"
 
-                      </dd>                                   
-                      
-                      <br>
+                        </dd>                                   
+                        <br>
                         <input"; if($vabu == 0) { echo " disabled='disabled' "; } echo" class='button' type='submit' name='rada' value='Edasi' />
                        </dl>
                     </form>";
@@ -111,43 +101,43 @@
                     echo "
                     <p>Valisite ".$_SESSION['max_kohti']." kohaga raja. <a href='member.php'>Muuda</a></p>
                     <h3>Vali menüüst</h3>
-                    <form action='#'>
+                    <form action='#ready'>
                       <input type='hidden' name='rada' value='".$_REQUEST['rajad']."' />
                        <dl>
-                       <h4>Praed:</h4>
+                       <h4>snaks:</h4>
                       <dd><ul>";
                       $q = 'SELECT menyyID, nimi, hind FROM menyy WHERE tyyp=2';
-                      $praad = $yhendus->prepare($q);
-                      $praad->execute();
-                      $praad->bind_result($menyyID, $nimi, $hind); 
+                      $snak = $yhendus->prepare($q);
+                      $snak->execute();
+                      $snak->bind_result($menyyID, $nimi, $hind); 
                       $i = 0;
-                      while($praad->fetch()) {
+                      while($snak->fetch()) {
                          $i++;
-                         echo '<li><input type="hidden" name="praad'.$i.'" value="'.$menyyID.'" />'.$nimi.' - '.$hind.'€ Kogus: 0 <input type="range" name="praad'.$i.'_kogus" value="0" min="0" max="'.$_SESSION['max_kohti'].'" />'.$_SESSION['max_kohti'].'</li>';
+                         echo '<li><input type="hidden" name="snak'.$i.'" value="'.$menyyID.'" />'.$nimi.' - '.$hind.'€ Kogus: 0 <input type="range" name="snak'.$i.'_kogus" value="0" min="0" max="'.$_SESSION['max_kohti'].'" />'.$_SESSION['max_kohti'].'</li>';
                       }
-                      $_SESSION['praade'] = $i;
-                      $praad->close();
+                      $_SESSION['snake'] = $i;
+                      $snak->close();
                       echo "</ul>
                       
                       </dd>
                        
-                      <h4>Supid:</h4>
+                      <h4>Joogid:</h4>
                       <dd><ul>";
                       $q = 'SELECT menyyID, nimi, hind FROM menyy WHERE tyyp=1';
-                      $supp = $yhendus->prepare($q);
-                      $supp->execute();
-                      $supp->bind_result($menyyID, $nimi, $hind);
+                      $jook = $yhendus->prepare($q);
+                      $jook->execute();
+                      $jook->bind_result($menyyID, $nimi, $hind);
                       $j = 0;
-                      while($supp->fetch()) {
+                      while($jook->fetch()) {
                         $j++;
-                        echo '<li><input type="hidden" name="supp'.$j.'" value="'.$menyyID.'" />'.$nimi.' - '.$hind.'€ Kogus: 0 <input type="range" name="supp'.$j.'_kogus" value="0" min="0" max="'.$_SESSION['max_kohti'].'" />'.$_SESSION['max_kohti'].'</li>';
+                        echo '<li><input type="hidden" name="jook'.$j.'" value="'.$menyyID.'" />'.$nimi.' - '.$hind.'€ Kogus: 0 <input type="range" name="jook'.$j.'_kogus" value="0" min="0" max="'.$_SESSION['max_kohti'].'" />'.$_SESSION['max_kohti'].'</li>';
                       }
-                      $_SESSION['suppe'] = $j;
-                      $supp->close();
+                      $_SESSION['Jooke'] = $j;
+                      $jook->close();
                       echo "</ul>
                       </dd>
                       
-                       <h4>Magustoit:</h4>
+                       <h4>Alko:</h4>
                       <dd><ul>";
                       $q = 'SELECT menyyID, nimi, hind FROM menyy WHERE tyyp=3';
                       $magus = $yhendus->prepare($q);
@@ -160,14 +150,14 @@
                         $k++;
                         echo '<li><input type="hidden" name="mt'.$k.'" value="'.$menyyID.'" />'.$nimi.' - '.$hind.'€ Kogus: 0 <input type="range" name="mt'.$k.'_kogus" value="0" min="0" max="'.$_SESSION['max_kohti'].'" />'.$_SESSION['max_kohti'].'</li>';
                       }
-                      $_SESSION['magustoite'] = $k;
+                      $_SESSION['alko'] = $k;
                       $magus->close();
 
                       echo "</ul>
                       </dd>                                    
                       
                       <br>
-                        <input class='button' type='submit' name='s88k' value='Telli' />
+                        <input class='button' type='submit' name='food' value='Telli' />
                        </dl>
                     </form>";
                     }
@@ -179,11 +169,9 @@
               <div class="break">
             </section>
           </div> 
-              <!-- End food Tab Data -->
-              <!-- pildid Tab Data -->
                    <div id="ready">
                           <section class="clearfix">
-                              <?php
+                                <?php
 
                                 //tellimus on algul puudu, notice vältimine
                                 if(!isset($_SESSION['tellimusID'])) { $_SESSION['tellimusID'] = ''; }
@@ -197,61 +185,60 @@
                                   $tellimus->fetch();
                                   $tellimus->close();
                                   echo '<h3>tellimuse '.$tellimusID.' tellimus</h3>';
-                                  //Kuvame tellimused
-                                  
+
                                   $hind_kokku = 0;
                                   $q = 'SELECT m.nimi, m.hind, t.kogus FROM tellimus_toit t LEFT JOIN menyy m ON m.menyyID=t.menyyID WHERE t.tellimusID=?';
-                                  $praed = $yhendus->prepare($q);
-                                  $praed->bind_param('i', $_SESSION['tellimusID']);
-                                  $praed->execute();
-                                  $praed->bind_result($nimi, $hind, $kogus);
+                                  $snaks = $yhendus->prepare($q);
+                                  $snaks->bind_param('i', $_SESSION['tellimusID']);
+                                  $snaks->execute();
+                                  $snaks->bind_result($nimi, $hind, $kogus);
                                   echo '<ul>';
-                                  while($praed->fetch()) {
+                                  while($snaks->fetch()) {
                                     echo '<li>'.$nimi.' '. $kogus.'tk. Hind: '.($hind*$kogus).'€</li>';
                                     $hind_kokku = $hind_kokku + ($hind*$kogus);
                                   }
-                                  $praed->close();
+                                  $snaks->close();
                                   echo '</ul><br /><br /><h3>Arve kokku: '. $hind_kokku .'€</h3>';
-                                  session_destroy();
+                                  
                                   
                                 } else {
-                                  //Lisame tellimuse andmebaasi
-                                  if(isset($_REQUEST['s88k'])) {
-                                    //Lisame tellimuse
+
+                                  if(isset($_REQUEST['food'])) {
+
                                     $q = 'INSERT INTO tellimus SET rajaID=?, staatus=1';
                                     $lisa = $yhendus->prepare($q);
                                     $lisa->bind_param('i', $_REQUEST['rada']);
                                     $lisa->execute() or trigger_error($lisa->error); 
                                     $_SESSION['tellimusID'] = $lisa->insert_id;
                                     $lisa->close();
-                                    //Muudame raja staatust
+
                                     $q = 'UPDATE rajad SET staatus=1 WHERE ID=? LIMIT 1';
                                     $muuda = $yhendus->prepare($q);
                                     $muuda->bind_param('i',$_REQUEST['rada']);
                                     $muuda->execute();
                                     $muuda->close();
-                                    //Praed
-                                    for($i = 1; $i <= $_SESSION['praade']; $i++) {
-                                      if($_REQUEST['praad'.$i.'_kogus'] != 0) {
+
+                                    for($i = 1; $i <= $_SESSION['snake']; $i++) {
+                                      if($_REQUEST['snak'.$i.'_kogus'] != 0) {
                                         $lisapq = 'INSERT INTO tellimus_toit SET tellimusID=?, menyyID=?, kogus=?';
                                         $lisap = $yhendus->prepare($lisapq);
-                                        $lisap->bind_param('iii', $_SESSION['tellimusID'], $_REQUEST['praad'.$i], $_REQUEST['praad'.$i.'_kogus']);
+                                        $lisap->bind_param('iii', $_SESSION['tellimusID'], $_REQUEST['snak'.$i], $_REQUEST['snak'.$i.'_kogus']);
                                         $lisap->execute();
                                         $lisap->close();
                                       }
                                     }
-                                    //Supid
-                                    for($j = 1; $j <= $_SESSION['suppe']; $j++) {
-                                      if($_REQUEST['supp'.$j.'_kogus'] != 0) {
+
+                                    for($j = 1; $j <= $_SESSION['Jooke']; $j++) {
+                                      if($_REQUEST['jook'.$j.'_kogus'] != 0) {
                                         $lisasq = 'INSERT INTO tellimus_toit SET tellimusID=?, menyyID=?, kogus=?';
                                         $lisas = $yhendus->prepare($lisasq);
-                                        $lisas->bind_param('iii', $_SESSION['tellimusID'], $_REQUEST['supp'.$j], $_REQUEST['supp'.$j.'_kogus']);
+                                        $lisas->bind_param('iii', $_SESSION['tellimusID'], $_REQUEST['jook'.$j], $_REQUEST['jook'.$j.'_kogus']);
                                         $lisas->execute();
                                         $lisas->close();
                                       }
                                     }
-                                    //Magustoidud
-                                    for($k = 1; $k <= $_SESSION['magustoite']; $k++) {
+
+                                    for($k = 1; $k <= $_SESSION['alko']; $k++) {
                                       if($_REQUEST['mt'.$k.'_kogus'] != 0) {
                                         $lisamtq = 'INSERT INTO tellimus_toit SET tellimusID=?, menyyID=?, kogus=?';
                                         $lisamt = $yhendus->prepare($lisamtq);
@@ -261,67 +248,121 @@
                                       }
                                     }
                                     
-                                    //session_destroy();
                                   }
                                   
-                                }
+                                }                              
 
+                                  if(!isset($_SESSION['tellimusID'])) { $_SESSION['tellimusID'] = ''; }
+                                  if($_SESSION['tellimusID'] != '') {
+                                    if(isset($_REQUEST['maksa'])) {
+                                        $muudaq = 'UPDATE tellimus SET staatus=4 WHERE tellimusID=? AND staatus=3';
+                                        $muuda = $yhendus->prepare($muudaq);
+                                        $muuda->bind_param('i', $_SESSION['tellimusID']);
+                                        $muuda->execute() or trigger_error(mysql_error());
+                                        $muuda->close();
+                                        
+                                    }
+
+                                    $q = 'SELECT tellimusID, staatus as tellimus_staatus FROM tellimus WHERE tellimusID=?';
+                                    $tellimus = $yhendus->prepare($q);
+                                    $tellimus->bind_param('i', $_SESSION['tellimusID']);
+                                    $tellimus->execute();
+                                    $tellimus->bind_result($tellimusID, $tellimus_staatus);
+                                    $tellimus->fetch();
+                                    if($tellimus_staatus == 5) {
+                                        session_destroy();
+                                        exit();
+                                    }
+                                    $tellimus->close();
+
+                  
+
+                                    
+                                    //Laseme maksta kliendil arve, kui staatus on 2(köögist siia saadetud)
+                                    if($tellimus_staatus == 3) {
+                                        echo '
+                                        <form action="#">
+                                            <input type="submit" name="maksa" value="Maksa arve" />
+                                        </form><br />';
+                                    }
+                                    elseif($tellimus_staatus == 4) {
+                                        echo '<p style="color: green;">Arve makstud</p><p>kuid enne,<p><a href="#grade"> Hinda tellimusi </a>';
+                                    } else {
+                                        echo '<p>Tellimus on veel täitmisel</p>';
+                                    }
+                                  }
                               ?>
                               
                         <div class="break">
                     </section>
                 </div> 
-
-              <!-- End pildid Data -->
-              <!-- Contact Tab Data -->
-                <div id="contact">
+                <div id="grade">
                     <section class="clearfix">
                        <div class="g1">
-                         <div class="sny-icon-box">
-                           <div class="sny-icon">
-                              <i class="icon-globe"></i>
-                            </div>
-                            <div class="sny-icon-content">
-                              <h4>Aadress</h4>
-                              <p>kauntari 12b</p>
-                            </div>
-                         </div>
-                       </div>
-                       <div class="g1">
-                         <div class="sny-icon-box">
-                           <div class="sny-icon">
-                              <i class="icon-phone"></i>
-                            </div>
-                            <div class="sny-icon-content">
-                              <h4>Telefon</h4>
-                              <p>5600399<br/>609883273</p>
-                            </div>
-                         </div>
-                       </div>
-                       <div class="g1">
-                         <div class="sny-icon-box">
-                           <div class="sny-icon">
-                              <i class="icon-user"></i>
-                            </div>
-                            <div class="sny-icon-content">
-                              <h4>Meist</h4>
-                              <p>Oleme 5 tärni bowling kus saad lõbusalt aega veeta broneerimiseks loggi sisse</p>
-                            </div>
-                         </div>
-                       </div>
+                        <?php
+                                    //Lubame hinnata sööki
+                                    if(isset($_REQUEST['hinda_s88k'])) {
+                                        //Kontrollime, et hinne on ikkagi number(et ei esitataks "Vali hinne")
+                                        if(is_numeric($_REQUEST['hinne'])) {
+                                            //Lisame hinnangu tabelisse
+                                            $lisaq = 'INSERT INTO hinnangud_s88k SET tellimusID=?, hinnang=?, lisatud=NOW()';
+                                            $lisa = $yhendus->prepare($lisaq);
+                                            $lisa->bind_param('is', $_SESSION['tellimusID'], $_REQUEST['hinne']);
+                                            $lisa->execute();
+                                            $lisa->close();
+                                            echo '<div style="color: green;">Hinnang söögile lisatud</div>';
+                                        }
+                                    }
+                                    
+                                    //Hinda teenindust
+                                    //Lubame hinnata sööki
+                                    if(isset($_REQUEST['hinda_teenindus'])) {
+                                        //Kontroll
+                                        if(is_numeric($_REQUEST['hinne'])) {
+                                            //Lisame hinnangu tabelisse
+                                            $lisaq = 'INSERT INTO hinnangud_tellimus SET tellimusID=?, hinnang=?, lisatud=NOW()';
+                                            $lisa = $yhendus->prepare($lisaq);
+                                            $lisa->bind_param('is', $_SESSION['tellimusID'], $_REQUEST['hinne']);
+                                            $lisa->execute();
+                                            $lisa->close();
+                                            echo '<div style="color: green;">Hinnang teenindusele lisatud</div>';
+                                        }
+                                    }
+                          if($tellimus_staatus == 3 || $tellimus_staatus == 4) {
+                              echo '
+                              <h2>Hinda sööki</h2>
+                              <form action="#grade">
+                                  <select name="hinne">
+                                      <option>Vali hinne</option>
+                                      <option value="5">5</option>
+                                      <option value="4">4</option>
+                                      <option value="3">3</option>
+                                      <option value="2">2</option>
+                                      <option value="1">1</option>
+                                  </select>
+                                  <input type="submit" name="hinda_s88k" value="Hinda sööki" />
+                              </form><br />';
+                          }
+                          echo '
+                          <h2>Hinda teenindust</h2>
+                          <form action="#grade">
+                              <select name="hinne">
+                                  <option>Vali hinne</option>
+                                  <option value="5">5</option>
+                                  <option value="4">4</option>
+                                  <option value="3">3</option>
+                                  <option value="2">2</option>
+                                  <option value="1">1</option>
+                              </select>
+                              <input type="submit" name="hinda_teenindus" value="Hinda tellmust" />
+                          </form>';
+                        ?>
                        <div class="break"></div>
-                       
                     </section>
                 </div>
-              <!-- End Contact Data -->
             </div>
         </div>
-        <!-- End Tab Container -->
-
-    </div><!-- #main -->
-</div><!-- #main-container -->
-
-
-
+    </div>
+</div>
 </body>
 </html>

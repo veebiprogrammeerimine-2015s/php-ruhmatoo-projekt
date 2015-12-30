@@ -1,11 +1,7 @@
   <?php
   require_once("../../../config.php");
-    if(!isset($_SESSION["logged_in_user_id"])){
+    if(!isset($_SESSION["logged_in_userW_username"])){
     header("Location: index.php");
-  }
-    if(isset($_GET["logout"])){
-      session_destroy();
-      header("Location: index.php");
   }
   ?>
 <html lang="en">
@@ -20,7 +16,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Harri Ruttas</title>
+  <title>HarriRuttas</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
   <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
@@ -36,6 +32,7 @@
   <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
   <script src="js/vendor/jquery.hashchange.min.js"></script>
   <script src="js/vendor/jquery.easytabs.min.js"></script>
+
   <script src="js/main.js"></script>
 </head>
   <body class="bg-fixed bg-1">
@@ -49,10 +46,9 @@
                 </h2>
                 <h4>
                    
-                    <p>Tere, 
-                    <?=$_SESSION["logged_in_user_username"];?>
-                    <p><a href="?logout=1"> Lõpeta Mängimine </a>
-
+                    <p>Tere, <?=$_SESSION["logged_in_userW_username"];?>
+                      <a href="?logout=1"> Logi välja </a>
                 </h4>
             </div>
         </header>
+        <!-- Header End -->

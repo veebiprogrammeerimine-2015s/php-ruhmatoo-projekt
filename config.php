@@ -1,8 +1,4 @@
-
 <?php
-	// config.php
-	$servername = "localhost";
-	$username = "if15";
-	$password = "ifikad15"
+  $yhendus=new mysqli("localhost", "if15", "ifikad15", "if15_Harri_bowling");
 
 ?>
