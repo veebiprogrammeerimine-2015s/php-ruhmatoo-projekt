@@ -2,12 +2,10 @@
 
 
 
-
-    * Rühma liikmed: Harri Ruttas , Marianne Kristiina Orusalu
-    * Eesmärk: 
-       *Lihtsustada bowlingu tööliste elu, samuti ka klientide elu. kliendid saavad veebikaudu võtta endale raja ja tellida toidud. Samuti Köögis näevad töölised mis on tellitud ja saavad teha toitu.
-
-    * Kirjeldus: 
+## Tööjuhend
+    1. Rühma liikmed: Harri Ruttas , Marianne Kristiina Orusalu
+    1. Eesmärk:Lihtsustada bowlingu tööliste elu, samuti ka klientide elu. kliendid saavad veebikaudu võtta endale raja ja tellida toidud. Samuti Köögis näevad töölised mis on tellitud ja saavad teha toitu.
+    1. Kirjeldus: 
 		*Klient
 			*Kohapeal registreerud kui pole registreerunud .
 			*Võtad endale raja. 
@@ -26,7 +24,7 @@
 
     * andmebaasi skeem loetava pildina + tabelite loomise SQL laused;
 	**kokkuvõte:**
-	Harri Ruttas:
+	2. Harri Ruttas:
 		Proovisin ajaxi päringutega lisada automaatse tabeli update kuid ebaõnnestus. Samuti proovisin ka lisada radadest pildid mis muutuksid halliks kui on kinni -samuti ebaõnnestus . Proovisin mitmeid functions mida ma ei mäleta täpselt kuid lõpuks tüdinesin ära nendest.
 
 		Õppisin juurde mitmeid css functione samuti natukene ajaxsi päringud kuid ikkagi ma hakkama ei saand sellega, siis ka veel mitmeid mysql päringuid kuidas neid välja tuua ja kuidas ühendust luua php-ga. 
@@ -34,6 +32,11 @@
 		Keeruline.
 		Oli enamasti vigade otsimine ikka päris mitu korda sai kood ära kustutud ja uuesti alustatud kuna lihtsalt ei leidnud viga üles tavaliselt oli lihtsalt nimi vale kuna copymisel ununes lihtsalt password1 muuta password2-ks . Kuid lõpus muutus see palju lihtsamaks kuna teadsid mis vead võivad olla .
 
-
+## Abiks
+* **Testserver:** greeny.cs.tlu.ee, [tunneli loomise juhend](http://minitorn.tlu.ee/~jaagup/kool/java/kursused/09/veebipr/naited/greenytunnel/greenytunnel.pdf)
+* **Abiks tunninäited (rühmade lõikes):** [I rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-I-ruhm), [II rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-II-ruhm), [III rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-III-ruhm)
+* **Stiilijuhend:** [Coding Style Guide](http://www.php-fig.org/psr/psr-2/)
+* **GIT õpetus:** [Become a git guru.](https://www.atlassian.com/git/tutorials/)
+* **Abimaterjale:** [Veebirakenduste loomine PHP ja MySQLi abil](http://minitorn.tlu.ee/~jaagup/kool/java/loeng/veebipr/veebipr1.pdf), [PHP with MySQL Essential Training] (http://www.lynda.com/MySQL-tutorials/PHP-MySQL-Essential-Training/119003-2.html)
 
 
