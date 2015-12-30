@@ -7,7 +7,7 @@
 	require_once("profile.class.php");
 	require_once("admin.class.php");
 	require_once("resume.class.php");
-  $database = "if15_raunkos_ntb";
+  $database = "vhost45490s0";
 
 
 	//paneme sessiooni serveris toole, saame kasutada SESSIOS[]
