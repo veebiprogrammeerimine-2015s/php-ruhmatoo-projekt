@@ -22,10 +22,10 @@
         * V0.2 – Lisasati Broneering mis oli vigane ja vigane menüü
         * V0.3 – Lisati söögi valik teeninudse hindamine vigane klendi login parandatud ja lisati tööliste login rolliga ja söögi hindamine maksmine.
         * V0.4 – Parandati vead mis koodis oli ja lisati mõningad lihtsamad täiustused koodi.
-    * andmebaasi skeem loetava pildina + tabelite loomise SQL laused;
-    * **kokkuvõte:** mida õppisid juurde? mis ebaõnnestus? mis oli keeruline? (kirjutab iga tiimi liige).
 
+    
 
+    ## **kokkuvõte:** mida õppisid juurde? mis ebaõnnestus? mis oli keeruline? (kirjutab iga tiimi liige).
 	**Harri Ruttas:**
 
     * Proovisin ajaxi päringutega lisada automaatse tabeli update kuid ebaõnnestus. Samuti proovisin ka lisada radadest pildid mis muutuksid halliks kui on kinni -samuti ebaõnnestus . Proovisin mitmeid functions mida ma ei mäleta täpselt kuid lõpuks tüdinesin ära nendest.
