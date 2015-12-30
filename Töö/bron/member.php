@@ -1,3 +1,4 @@
+
 <?php
   require_once("functions.php");
   require_once("conf.php");
@@ -22,6 +23,7 @@
   }
 
 ?>
+
 
  <?php require('layout/headerloggedin.php');  ?>
 
