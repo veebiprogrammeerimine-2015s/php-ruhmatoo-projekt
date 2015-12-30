@@ -9,9 +9,35 @@
 	require_once ("functions.php");
 ?>
 <?php
-	$personal = $Profile->getPersonal($_SESSION['logged_in_user_id']);
-  $firstname = $lastname = $county = $parish = $email = $number = $workexp = $positives = $additional = $school = "";
-  $firstname_error = $lastname_error = $county_error = $parish_error = $email_error = $number_error = $workexp_error = $positives_error = $additional_error = $school_error = "";
+	$resume_name = "";
+	$resume_name_error = "";
+
+
+	if(isset($_SESSION['logged_in_user_id'])) {
+		if($_SESSION['logged_in_user_group'] == 1) {
+			if( $_SERVER["REQUEST_METHOD"] == "POST") {
+
+				if(isset($_POST["new_resume"])){
+					if (empty($_POST["resume_name"]) ) {
+						$resume_name_error = "See väli on kohustuslik";
+					}else{
+						$resume_name = cleanInput($_POST["resume_name"]);
+					}
+
+					if ($resume_name_error == "") {
+						$link = time() + $_SESSION['logged_in_user_id'];
+						$hashlink = hash("md5", $link);
+						$response = $Resume->newResume($_SESSION['logged_in_user_id'], $resume_name, $hashlink);
+
+					}
+
+				}
+
+			}
+		}
+	}
+
+
  ?>
 <div class="row">
   <div class="col-xs-12 col-sm-4">
@@ -27,135 +53,12 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
     <h3>Uue CV loomine</h3>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 
-			<div class="panel-group" id="accordion1">
+			<div class="form-group">
+				<label for="resume_name">CV nimi</label>
+				<input type="text" class="form-control" name="resume_name">
+			</div>
 
-				<!-- Personal -->
-				<div class="panel panel-default">
-			    <div class="panel-heading" role="tab" id="headingTwo">
-			      <h4 class="panel-title">
-			        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#personal" aria-expanded="false" aria-controls="personal">
-			          Isiklikud andmed
-			        </a>
-			      </h4>
-			    </div>
-			    <div id="personal" class="panel-collapse collapse" role="tabpanel" aria-labelledby="personal">
-			      <div class="panel-body">
-
-							<table class="table table-striped table-bordered">
-								<tr>
-									<td><label> Eesnimi </label></td>
-									<td><?=$personal->first;?></td>
-								</tr>
-								<tr>
-									<td><label> Perekonnanimi </label></td>
-									<td><?=$personal->last;?></td>
-								</tr>
-								<tr>
-									<td><label> Maakond </label></td>
-									<td><?=$personal->county;?></td>
-								</tr>
-								<tr>
-									<td><label> Vald </label></td>
-									<td><?=$personal->parish;?></td>
-								</tr>
-								<tr>
-									<td><label> Telefoni number </label></td>
-									<td><?=$personal->number;?></td>
-								</tr>
-							</table>
-
-			      </div>
-			    </div>
-			  </div>
-
-				<!-- Education -->
-		    <div class="panel panel-default">
-
-		        <div class="panel-heading">
-		             <h4 class="panel-title">
-		                 <a data-toggle="collapse" data-parent="#accordion3" href="#education">
-		                 Hariduskäik
-		                 </a>
-		             </h4>
-		        </div>
-
-		        <div id="education" class="panel-collapse collapse">
-		            <div class="panel-body">
-
-		                <div class="panel-group" id="accordion2">
-
-		                    <div class="panel panel-default">
-		                        <div class="panel-heading">
-		                             <h4 class="panel-title">
-		                                <a data-toggle="collapse" data-parent="#accordion2" href="#type1">
-		                                    Põhiharidus
-		                                </a>
-		                              </h4>
-		                        </div>
-		                        <div id="type1" class="panel-collapse collapse">
-		                            <div class="panel-body">
-																	<table class="table table-striped table-condensed table-bordered">
-																		For loopiga tõmbab kõik kasutaja koolid läbi
-																		<tr>
-																			<td><label> Kool </label></td>
-																			<td> Blah </td>
-																		</tr>
-
-																		<tr>
-																			<td><label> Aastad </label></td>
-																			<td> 1900 - 2015 </td>
-																		</tr>
-																		<tr>
-
-																			<td><label> Lisainfo </label></td>
-																			<td> Blah Blah </td>
-																		</tr>
-
-																	</table>
-																</div>
-		                        </div>
-		                    </div>
-
-		                    <div class="panel panel-default">
-		                        <div class="panel-heading">
-		                            <h4 class="panel-title">
-		                                <a data-toggle="collapse" data-parent="#accordion2" href="#type2">
-		                                    Keskharidus
-		                                </a>
-		                            </h4>
-		                        </div>
-		                        <div id="type2" class="panel-collapse collapse">
-		                            <div class="panel-body">Panel 3.2</div>
-		                        </div>
-		                    </div>
-
-												<div class="panel panel-default">
-														<div class="panel-heading">
-																<h4 class="panel-title">
-																		<a data-toggle="collapse" data-parent="#accordion2" href="#type3">
-																				Kutseharidus
-																		</a>
-																</h4>
-														</div>
-														<div id="type3" class="panel-collapse collapse">
-																<div class="panel-body">Panel 3.2</div>
-														</div>
-												</div>
-
-		                </div>
-		            </div>
-
-		        </div>
-		    </div>
-				<!-- Experience (Work and courses) -->
-
-				<!-- Additional (Positives, add. info) -->
-
-		</div>
-
-
-
-			<button type="button" class="btn btn-success pull-right" aria-label="Left Align">
+			<button type="submit" name="new_resume" class="btn btn-success pull-right" aria-label="Left Align">
 			Edasi <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 			</button>
       </div>

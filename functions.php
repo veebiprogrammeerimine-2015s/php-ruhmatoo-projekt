@@ -6,7 +6,8 @@
 	require_once("insert.class.php");
 	require_once("profile.class.php");
 	require_once("admin.class.php");
-    $database = "if15_raunkos_ntb";
+	require_once("resume.class.php");
+  $database = "if15_raunkos_ntb";
 
 
 	//paneme sessiooni serveris toole, saame kasutada SESSIOS[]
@@ -19,6 +20,7 @@
 	$Insert = new Insert($mysqli);
 	$Profile = new Profile($mysqli);
 	$Admin = new Admin($mysqli);
+	$Resume = new Resume($mysqli);
 
 
 	if(isset($_COOKIE['authUser']))
