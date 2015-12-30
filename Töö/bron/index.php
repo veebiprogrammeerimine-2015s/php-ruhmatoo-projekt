@@ -57,11 +57,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	    $password3_error = "See väli on kohustuslik"; 
 	  }
 	  else{ 
-	    if(strlen($_POST["password2"]) < 8) {
+	    if(strlen($_POST["password3"]) < 8) {
 	      $password2_error ="Peab olema vähemalt 8 sümbolit pikk!";
 	    }
 	    else{
-	      $password2 = test_input($_POST["password2"]);
+	      $password2 = test_input($_POST["password3"]);
 	    }
 	  }
 	  
@@ -71,7 +71,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	    
 	  if( $email2_error == "" && $password2_error == ""){
 	    $hash = hash("sha512", $password2);
-	    echo "Võib kasutajat luua! Kasutajanimi on ".$email2." ja parool on ".$password2. "ja räsi on ".$hash;
 	    createUser($username, $firstname, $lastname, $email2, $hash);
 	  } 
 	}

@@ -13,12 +13,14 @@
       $muuda->close();
   }
 
+
   function test_input($data) {  
     $data = trim($data);  //võtab ära tühikud,enterid,tabid
     $data = stripslashes($data);  //võtab ära tagurpidi kaldkriipsud
     $data = htmlspecialchars($data);  //teeb htmli tekstiks, nt < läheb &lt
     return $data;
   }
+
 ?>
 
  <?php require('layout/headerloggedin.php');  ?>
@@ -115,7 +117,7 @@
                          $i++;
                          echo '<li><input type="hidden" name="snak'.$i.'" value="'.$menyyID.'" />'.$nimi.' - '.$hind.'€ Kogus: 0 <input type="range" name="snak'.$i.'_kogus" value="0" min="0" max="'.$_SESSION['max_kohti'].'" />'.$_SESSION['max_kohti'].'</li>';
                       }
-                      $_SESSION['snake'] = $i;
+                      $_SESSION['snaks'] = $i;
                       $snak->close();
                       echo "</ul>
                       
@@ -218,7 +220,7 @@
                                     $muuda->execute();
                                     $muuda->close();
 
-                                    for($i = 1; $i <= $_SESSION['snake']; $i++) {
+                                    for($i = 1; $i <= $_SESSION['snaks']; $i++) {
                                       if($_REQUEST['snak'.$i.'_kogus'] != 0) {
                                         $lisapq = 'INSERT INTO tellimus_toit SET tellimusID=?, menyyID=?, kogus=?';
                                         $lisap = $yhendus->prepare($lisapq);
@@ -281,7 +283,7 @@
                                     //Laseme maksta kliendil arve, kui staatus on 2(köögist siia saadetud)
                                     if($tellimus_staatus == 3) {
                                         echo '
-                                        <form action="#">
+                                        <form action="#ready">
                                             <input type="submit" name="maksa" value="Maksa arve" />
                                         </form><br />';
                                     }

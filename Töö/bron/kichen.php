@@ -19,30 +19,19 @@
          <div id="tab-container" class="tab-container">
           <!-- Tab List -->
             <ul class='etabs'>
-                <li class='tab' id="tab-row">
-                  <a href="#row"><i class="icon-user"></i><span> Vali rada</span></a>
+                <li class='tab' id="tab-kichen">
+                  <a href="#kichen"><i class="icon-user"></i><span> Tellimused</span></a>
                 </li>
-                <li class='tab' id="tab-food">
-                  <a href="#food"><i class="icon-file-text"></i><span> vali Toit soovil</span></a>
-                </li>
-                <li class='tab'>
-                  <a href="#ready"><i class="icon-heart"></i><span> Valmis</span></a>
-                </li>
-                <li class='tab'>
-                  <a href="#contact"><i class="icon-envelope"></i><span> kontaktid</span></a>
+                <li class='tab' id="tab-grade">
+                  <a href="#grade"><i class="icon-file-text"></i><span> Hinded antud</span></a>
                 </li>
             </ul>
-          <!-- End Tab List -->
-            <div id="tab-data-wrap">
-              <!-- row Tab Data -->
-          <div id="row">
+        <div id="tab-data-wrap">
+              <!-- kichen Tab Data -->
+          <div id="kichen">
               <section class="clearfix">
-		<div id="main">
-			<div class="container">
-				<div class="row main-row">
-					<div class="12u">
 						<section>
-							<div id="menyykiht">
+							<div id="menu">
                                <?php
 									if(isset($_REQUEST['muuda_sooki'])) {
 										$sookid = $_REQUEST['sook'];
@@ -104,12 +93,53 @@
 											$valmis = 1;
 										}
         						?>
+        						  <div class="break">
 								</div>
 						</section>
 					</div>
-				</div>
-			</div>
-		</div>
+			          <div id="grade">
+			              <section class="clearfix">
+									<section>
+										<div id="grade">
+										<center>
+												<?php
+
+                                    $toiduq = 'SELECT AVG(hinnang) as toidu_keskmine, COUNT(hinnang) as kokku_toit FROM hinnangud_s88k';
+                                    $toidu = $yhendus->prepare($toiduq);
+                                    $toidu->execute();
+                                    $toidu->bind_result($toidu_keskmine, $kokku_toit);
+                                    $toidu->fetch();
+                                    $toidu->close();
+
+                                    $teenindusq = 'SELECT AVG(hinnang) as teeninduse_keskmine, COUNT(hinnang) as kokku_teenindus FROM hinnangud_tellimus';
+                                    $teenindus = $yhendus->prepare($teenindusq);
+                                    $teenindus->execute();
+                                    $teenindus->bind_result($teeninduse_keskmine, $kokku_teenindus);
+                                    $teenindus->fetch();
+                                    $teenindus->close();
+                                    echo '<h3><p>Püüame ennast parandada Töölised vaatame kuida on teid hinnatud</p><h3>';
+                                    
+                                    echo '<h4>Toit</h4>
+                                    <p>Teenindust on kokku hinnatud '.$kokku_toit.' korda. Keskmise hinde '.round($toidu_keskmine, 1) .' järgi on teenindus ';
+                                    if($toidu_keskmine < 1) { echo 'Väga HULLLLLLL.</p>'; }
+                                    if($toidu_keskmine < 2) { echo 'Mida Te teete.</p>'; }
+                                    if($toidu_keskmine < 3) { echo 'Proovige Paremini.</p>'; }
+                                    if($toidu_keskmine < 4) { echo 'Hea Pane täierauaga edasi.</p>'; }
+                                    if($toidu_keskmine > 4) { echo 'Supppper jätka samas vaimus.</p>'; }
+                                    
+                                    echo '<h4>Teenindus</h4>
+                                    <p>Teenindust on kokku hinnatud '.$kokku_teenindus.' korda. Keskmise hinde '.round($teeninduse_keskmine, 1) .' järgi on teenindus ';
+                                    if($teeninduse_keskmine < 1) { echo 'Väga HULLLLLLL.</p>'; }
+                                    if($teeninduse_keskmine < 2) { echo 'Mida Te teete.</p>'; }
+                                    if($teeninduse_keskmine < 3) { echo 'Proovige Paremini.</p>'; }
+                                    if($teeninduse_keskmine < 4) { echo 'Hea Pane täierauaga edasi.</p>'; }
+                                    if($teeninduse_keskmine > 4) { echo 'Supppper jätka samas vaimus.</p>'; }
+                                ?>
+                                </center>
+			        						  <div class="break">
+											</div>
+									</section>
+								</div>
 <?php
   $yhendus->close();
 ?>
