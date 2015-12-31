@@ -1,6 +1,10 @@
 <?php
     //loome AB ühenduse
-	require_once("../config_global.php");
+	if ($page_file == "index.php") {
+		require_once("../config_global.php");
+	} else {
+		require_once("../../config_global.php");
+	}
 	require_once("user.class.php");
 	require_once("job.class.php");
 	require_once("insert.class.php");
@@ -8,6 +12,7 @@
 	require_once("admin.class.php");
 	require_once("resume.class.php");
   $database = "vhost45490s0";
+	$myurl = "/php-ruhmatoo-projekt/";
 
 
 	//paneme sessiooni serveris toole, saame kasutada SESSIOS[]
@@ -15,11 +20,11 @@
 
 	$mysqli = new mysqli($servername, $server_username, $server_password, $database);
 
-	$User = new User($mysqli);
+	$User = new User($mysqli, $myurl);
 	$Job = new Job($mysqli);
 	$Insert = new Insert($mysqli);
 	$Profile = new Profile($mysqli);
-	$Admin = new Admin($mysqli);
+	$Admin = new Admin($mysqli, $myurl);
 	$Resume = new Resume($mysqli);
 
 

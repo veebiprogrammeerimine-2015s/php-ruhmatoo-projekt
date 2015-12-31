@@ -8,7 +8,8 @@
     <title><?php echo $page_title; ?></title>
 		<!--<link href="styles/style.css" rel="stylesheet">-->
     <!-- Bootstrap -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+
+      <link href="<?php $_SERVER['DOCUMENT_ROOT']; ?>/php-ruhmatoo-projekt/css/bootstrap.css" rel="stylesheet">
 	<!--<link href="css/bootstrap-theme.css" rel="stylesheet">-->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -19,9 +20,13 @@
     <![endif]-->
   </head>
 	<body>
-	<?php require_once ("functions.php"); ?>
+	<?php require_once ("inc/functions.php"); ?>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.js"></script>
+  <?php if ($page_file == "index.php"): ?>
+	   <script type="text/javascript" src="js/bootstrap.js"></script>
+  <?php else: ?>
+     <script type="text/javascript" src="../js/bootstrap.js"></script>
+  <?php endif; ?>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -33,21 +38,27 @@
 					<span class="icon-bar"></span>
 				</button>
 				<div class="col-xs-8 col-md-3">
-					<a class="navbar-brand"><div class="logoback"><a href="index.php"><img src="images/logo.png" alt="logo"></a></div></a>
+					<a class="navbar-brand">
+            <div class="logoback">
+              <a href="<?=$myurl; ?>index.php">
+                <?php if ($page_file == "index.php"): ?>
+                  <img src="images/logo.png" alt="logo">
+                <?php else: ?>
+                  <img src="../images/logo.png" alt="logo">
+                <?php endif; ?>
+              </a>
+            </div>
+          </a>
 				</div>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<div class="navbar-right col-sm-7 col-md-8"><?php require_once("login.php"); ?></div>
+				<div class="navbar-right col-sm-7 col-md-8"><?php require_once("content/login.php"); ?></div>
 				<div class="col-sm-7 col-md-8 col-lg-9" style="margin-top: 42px;"><?php require_once("menu.php"); ?>
 				</div>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
-	
+
 	<div class="container">
-	
-	
-	
-	

@@ -1,32 +1,33 @@
+<?php require_once ("inc/functions.php"); ?>
 <ul class="nav navbar-nav">
 <?php if($page_file != "index.php") { ?>
-<li><a href="index.php">Avaleht</a></li>
+<li><a href="<?=$myurl; ?>index.php">Avaleht</a></li>
 <?php } else { ?>
-<li class="active"><a href="index.php">Avaleht</a></li>
+<li class="active"><a href="<?=$myurl; ?>index.php">Avaleht</a></li>
 <?php } ?>
 
 <?php if($page_file != "jobs.php") { ?>
-<li><a href="jobs.php">Tööpakkumised</a></li>
+<li><a href="<?=$myurl; ?>content/jobs.php">Tööpakkumised</a></li>
 <?php } else { ?>
-<li class="active"><a href="jobs.php">Tööpakkumised</a></li>
+<li class="active"><a href="<?=$myurl; ?>content/jobs.php">Tööpakkumised</a></li>
 <?php } ?>
 
 <?php if($page_file != "joblaw.php") { ?>
-<li><a href="joblaw.php">Tööõigusseadused</a></li>
+<li><a href="<?=$myurl; ?>content/joblaw.php">Tööõigusseadused</a></li>
 <?php } else { ?>
-<li class="active"><a href="joblaw.php">Tööõigusseadused</a></li>
+<li class="active"><a href="<?=$myurl; ?>content/joblaw.php">Tööõigusseadused</a></li>
 <?php } ?>
 
 <?php if($page_file != "about.php") { ?>
-<li><a href="about.php">Meist</a></li>
+<li><a href="<?=$myurl; ?>content/about.php">Meist</a></li>
 <?php } else { ?>
-<li class="active"><a href="about.php">Meist</a></li>
+<li class="active"><a href="<?=$myurl; ?>content/about.php">Meist</a></li>
 <?php } ?>
 
 <?php if($page_file != "contact.php") { ?>
-<li><a href="contact.php">Kontakt</a></li>
+<li><a href="<?=$myurl; ?>content/contact.php">Kontakt</a></li>
 <?php } else { ?>
-<li class="active"><a href="contact.php">Kontakt</a></li>
+<li class="active"><a href="<?=$myurl; ?>content/contact.php">Kontakt</a></li>
 <?php } ?>
 </ul>
 <?php
@@ -40,44 +41,44 @@ if($_SESSION['logged_in_user_group'] == 3):
 	   <li role="separator" class="divider"></li>
 	   <li class="dropdown-header">Töökohad</li>
 	   <li role="separator" class="divider"></li>
-	   
+
 			<?php if($page_file != "newjob.php") { ?>
-			<li><a href="newjob.php">Uus töökoht</a></li>
+			<li><a href="<?=$myurl; ?>content/newjob.php">Uus töökoht</a></li>
 			<?php } else { ?>
-			<li class="active"><a href="newjob.php">Uus töökoht</a></li>
+			<li class="active"><a href="<?=$myurl; ?>content/newjob.php">Uus töökoht</a></li>
 			<?php } ?>
 
 			<?php if($page_file != "insert.php") { ?>
-			<li><a href="insert.php">Asukoha andmed</a></li>
+			<li><a href="<?=$myurl; ?>admin/insert.php">Asukoha andmed</a></li>
 			<?php } else { ?>
-			<li class="active"><a href="insert.php">Asukoha andmed</a></li>
+			<li class="active"><a href="<?=$myurl; ?>admin/insert.php">Asukoha andmed</a></li>
 			<?php } ?>
-			
+
 			<?php if($page_file != "editjobs.php") { ?>
-			<li><a href="editjobs.php">Muuda töökohti</a></li>
+			<li><a href="<?=$myurl; ?>admin/editjobs.php">Muuda töökohti</a></li>
 			<?php } else { ?>
-			<li class="active"><a href="editjobs.php">Muuda töökohti</a></li>
+			<li class="active"><a href="<?=$myurl; ?>admin/editjobs.php">Muuda töökohti</a></li>
 			<?php } ?>
-			
+
 		<li role="separator" class="divider"></li>
 		<li class="dropdown-header">Kasutajad</li>
 		<li role="separator" class="divider"></li>
-		
+
 			<?php if($page_file != "users.php") { ?>
-			<li><a href="users.php">Kasutajad</a></li>
+			<li><a href="<?=$myurl; ?>admin/users.php">Kasutajad</a></li>
 			<?php } else { ?>
-			<li class="active"><a href="users.php">Kasutajad</a></li>
+			<li class="active"><a href="<?=$myurl; ?>admin/users.php">Kasutajad</a></li>
 			<?php } ?>
-			
+
 			<?php if($page_file != "companies.php") { ?>
-			<li><a href="companies.php">Ettevõtted</a></li>
+			<li><a href="<?=$myurl; ?>admin/companies.php">Ettevõtted</a></li>
 			<?php } else { ?>
-			<li class="active"><a href="companies.php">Ettevõtted</a></li>
+			<li class="active"><a href="<?=$myurl; ?>admin/companies.php">Ettevõtted</a></li>
 			<?php } ?>
 	  </ul>
 	</li>
 </ul>
-<?php 
+<?php
 endif;
 endif;
 ?>
@@ -90,21 +91,21 @@ if($_SESSION['logged_in_user_group'] == 2):
 	  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tööpakkuja<span class="caret"></span></a>
 	  <ul class="dropdown-menu">
 			<?php if($page_file != "newjob.php") { ?>
-			<li><a href="newjob.php">Uus töökoht</a></li>
+			<li><a href="<?=$myurl; ?>content/newjob.php">Uus töökoht</a></li>
 			<?php } else { ?>
-			<li class="active"><a href="newjob.php">Uus töökoht</a></li>
+			<li class="active"><a href="<?=$myurl; ?>content/newjob.php">Uus töökoht</a></li>
 			<?php } ?>
-			
+
 			<?php if($page_file != "myjobs.php") { ?>
-			<li><a href="myjobs.php">Minu tööpakkumised</a></li>
+			<li><a href="<?=$myurl; ?>content/myjobs.php">Minu tööpakkumised</a></li>
 			<?php } else { ?>
-			<li class="active"><a href="myjobs.php">Minu tööpakkumised</a></li>
+			<li class="active"><a href="<?=$myurl; ?>content/myjobs.php">Minu tööpakkumised</a></li>
 			<?php } ?>
 
 	  </ul>
 	</li>
 </ul>
-<?php 
+<?php
 endif;
 endif;
 ?>

@@ -3,8 +3,8 @@
 	$page_file = "users.php";
 ?>
 <?php
-	require_once("header.php");
-	require_once ("functions.php");
+	require_once("../header.php");
+	require_once ("../inc/functions.php");
 
 
 	if(!isset($_SESSION['logged_in_user_id'])) {
@@ -23,6 +23,7 @@
 		if($_SESSION['logged_in_user_group'] == 3) {
 			if(isset($_GET["update"])) {
 				$Admin->updateUser($_GET["userid"], $_GET["email"], $_GET["usergroup"]);
+				
 			}
 		}
 	}
@@ -81,5 +82,5 @@
 
 
 <?php
-	require_once("footer.php");
+	require_once("../footer.php");
 ?>

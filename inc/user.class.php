@@ -2,9 +2,11 @@
 class User {
 
     private $connection;
+    public $url;
 
-    function __construct($mysqli){
+    function __construct($mysqli, $myurl){
         $this->connection = $mysqli;
+        $this->url = $myurl;
     }
 
 	###############
@@ -22,7 +24,7 @@ class User {
     if($stmt->fetch()) {
       $user = new Stdclass();
       $user->id = $user_id;
-		} 
+		}
 
     $stmt->close();
     #Gets userdata from users and creates session
@@ -95,7 +97,7 @@ class User {
         $stmt->execute();
       }
     $stmt->close();
-    header("Location: profile.php");
+    header("Location: ".$this->url."content/profile.php");
     exit();
     }
 
@@ -129,7 +131,7 @@ class User {
   		$_SESSION['logged_in_user_email'] = $email_from_db;
   		$_SESSION['logged_in_user_group'] = $usergroup_from_db;
 
-  		header("Location: profile.php");
+  		header("Location: ".$this->url."content/profile.php");
   		exit();
       }
 

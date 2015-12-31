@@ -11,7 +11,13 @@
         $stmt = $this->connection->prepare("INSERT INTO ntb_resumes (user_id, name, link, inserted) VALUES (?, ?, ?, NOW())");
         $stmt->bind_param("iss", $userid, $name, $link);
         if ($stmt->execute()) {
-          header("Location: editresume.php?resume=".$link);
+          #Create new file
+          $link_file = "edit/".$link.".php";
+          $new_file = fopen($link_file, "w");
+          #Create content to new file
+          $content = '<?php include("../editresume.php"); ?>';
+          fwrite($new_file, $content);
+          header("Location: ".$link_file);
           exit();
         }
         $stmt->close();

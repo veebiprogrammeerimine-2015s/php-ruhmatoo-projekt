@@ -5,8 +5,8 @@
 	$page_file = "jobs.php";
 ?>
 <?php
-	require_once("header.php"); 
-	require_once ("functions.php");
+	require_once("../header.php");
+	require_once ("../inc/functions.php");
 ?>
 <?php
 
@@ -30,11 +30,11 @@
 	$job_array = $Job->getAllData();
 
 
-	
+
 	$keyword = "";
 	if (isset($_GET["keyword"])) {
 		$keyword = cleanInput($_GET["keyword"]);
-	
+
 		//otsime
 		$job_array = $Job->getAllData($keyword);
 	} else {
@@ -71,20 +71,6 @@
 	</div>
 </div>
 
-<!--modal-->
-
-<!--<div class="list-group">
-	<a class="list-group-item" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-		<h4 class="list-group-item-heading">List group item heading</h4>
-	</a>
-	<div class="collapse" id="collapseExample">
-		<div class="well">
-			<p class="list-group-item-text">asd</p>
-		</div>
-	</div>
-
-</div>-->
-
 <div class="col-xs-12 col-sm-10">
 	<form action="jobs.php" method="get" class="col-xs-12 col-sm-12">
 		<div class="input-group">
@@ -96,7 +82,7 @@
 	</form>
 	<div class="col-xs-12 col-sm-12">
 	<br>
-	
+
 		<div class="list-group">
 		<?php
 			for($i = 0; $i < count($job_array); $i++) {
@@ -116,11 +102,11 @@
 				echo '</div>';
 				echo '</div>';
 			}
-		
+
 			?>
 		</div>
 
-	
+
 	</div>
 </div>
-<?php require_once("footer.php"); ?>
+<?php require_once("../footer.php"); ?>

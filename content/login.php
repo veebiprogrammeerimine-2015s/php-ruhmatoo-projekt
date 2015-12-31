@@ -1,5 +1,9 @@
 <?php
-  require_once("functions.php");
+  if ($page_file == "index.php") {
+    require_once("inc/functions.php");
+  } else {
+    require_once("../inc/functions.php");
+  }
 
 	//variables
 	$email = "";
@@ -70,7 +74,7 @@ if(!isset($_SESSION['logged_in_user_id'])):
 	</div>
 
 	<div class="col-sm-4">
-		<a href="forgot.php">Unustasid parooli?</a>
+		<a href="<?=$myurl; ?>content/forgot.php">Unustasid parooli?</a>
 	</div>
 
 
@@ -94,18 +98,18 @@ if(!isset($_SESSION['logged_in_user_id'])):
 	else: ?>
 		<form class="navbar-form navbar-right">Tere, <?=$_SESSION['logged_in_user_email'];?><br>
 		<a class="btn btn-default btn-xs" href="?logout=1">Logi välja</a>
-			<a class="btn btn-default btn-xs" href="profile.php">Profiil</a>
+			<a class="btn btn-default btn-xs" href="<?=$myurl; ?>content/profile.php">Profiil</a>
 
 		</form>
 <?php endif; ?>
 
 <?php
 	if(isset($_GET["logout"])) {
-  setcookie('authUser');
 
+  setcookie('authUser');
 	//kustutame sessiooni muutujad
 	session_destroy();
-	header("Location: index.php");
+	header("Location: ".$myurl."index.php");
 	exit();
 	}
 ?>

@@ -5,8 +5,8 @@
 	$page_file = "index.php";
 ?>
 <?php
-	require_once("header.php"); 
-	require_once ("functions.php");
+	require_once("header.php");
+	require_once ("inc/functions.php");
 ?>
 
 
@@ -27,7 +27,7 @@
 						for($i = 0; $i < count($job_array); $i++) {
 							echo "<h4 id='jobname'><li>".$job_array[$i]->name."</li></h4><br>".$job_array[$i]->company.", ".$job_array[$i]->parish."<br>";
 					}
-					
+
 				}
 			?>
 		</ol>
@@ -36,7 +36,7 @@
 		<h3 id="statbar">Uudised</h3>
 		<p>Siia kuvatakse uudised</p>
 	</div>
-	
+
 	<div class="col-xs-12 col-sm-4">
 		<h3 id="statbar">Stastistika</h3>
 		<p>Hetkel on aktiivseid töid: <?php echo count($job_array);?></p>

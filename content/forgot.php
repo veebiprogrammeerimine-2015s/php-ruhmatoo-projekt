@@ -3,14 +3,14 @@
 	$page_file = "forgot.php";
 ?>
 <?php
-	require_once("header.php"); 
-	require_once ("functions.php");
-	
+	require_once("../header.php");
+	require_once ("../inc/functions.php");
+
 	if(isset($_SESSION['logged_in_user_id'])) {
 		header("Location: index.php");
 		exit ();
 	}
-	
+
 	$email = "";
 	$email_error = "";
 	$keyresponse = "";
@@ -20,22 +20,22 @@
 	$emailcheck = "";
 	$link = time();
 	$newpass = randStrGen(10);
-	
+
 	#if (isset($_GET["key"]) && isset($_GET["email"])){
 		$key = cleanInput($_GET["key"]);
 		$emailcheck = cleanInput($_GET["email"]);
-		
+
 		if ($key != "" && $emailcheck != "") {
 			$keyresponse = $User->checkKey($emailcheck, $key);
-			
+
 			if(isset($keyresponse->success)) {
 				$usedIP = $_SERVER['REMOTE_ADDR'];
 				$getpw = $User->getPass($emailcheck, $key, $usedIP);
 			}
 		}
 	#}
-	
-	
+
+
 	if( $_SERVER["REQUEST_METHOD"] == "POST") {
 		if (isset($_POST["send"])){
 			if (empty($_POST["email"])) {
@@ -44,7 +44,7 @@
 				$email = cleanInput($_POST["email"]);
 			}
 			if($email_error == ""){
-				
+
                 $hash = hash("md5", $link);
 				$httplink = "http://ntb.devweb.eu/forgot.php?key=".$hash."&email=".$email;
 				$checkresponse = $User->checkEmail($email);
@@ -59,16 +59,16 @@
 
 					//Send mail
 					mail($email,"[NTB] Konto ".$email." parooli taastamine",$msg);
-					
+
 					}
 				}
-            
+
             }
 		}
 
 	}
-	
-	
+
+
 ?>
 <h3>Unustasid parooli?</h3>
 
@@ -129,4 +129,4 @@
 </form>
 </div>
 
-<?php require_once("footer.php"); ?>
+<?php require_once("../footer.php"); ?>

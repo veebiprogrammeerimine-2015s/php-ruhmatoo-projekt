@@ -6,13 +6,13 @@
 ?>
 
 <?php
-	require_once("functions.php");
+	require_once("../inc/functions.php");
 
 	//variables
 	$create_email = "";
 	$create_password = "";
-	
-	
+
+
 	//errors
 	$create_email_error = "";
 	$create_password_error = "";
@@ -37,12 +37,12 @@
 			if(	$create_email_error == "" && $create_password_error == ""){
                 // tekitan parooliräsi
                 $hash = hash("sha512", $create_password);
-                
+
 				$response = $User->createUser($create_email, $hash);
-                
+
             }
         }
-		
+
 		if(isset($_POST["create_employer"])){
 			if ( empty($_POST["createE_email"]) ) {
 				$create_email_error = "See väli on kohustuslik";
@@ -61,12 +61,12 @@
 			if(	$create_email_error == "" && $create_password_error == ""){
                 // tekitan parooliräsi
                 $hash = hash("sha512", $create_password);
-                
+
 				$response = $User->createEmployer($create_email, $hash);
-                
+
             }
         }
-				
+
 	}
 //register end
 
@@ -77,12 +77,12 @@
 	//Faili nimi
 	$page_file = "register.php";
 ?>
-<?php 
-	require_once("header.php"); 
-	require_once("menu.php");
+<?php
+	require_once("../header.php");
+	require_once("../menu.php");
 ?>
 
-	  
+
 <?php if(isset($response->success)): ?>
 
 <div class="alert alert-success alert-dismissible fade in" role="alert">
@@ -98,7 +98,7 @@
 </div>
 
 <?php endif; ?>
-		  
+
 
 <div class="col-xs-12 col-sm-6">
 <h1>Info</h1>
@@ -121,7 +121,7 @@
   <!-- Tab panes -->
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="applicant">
-		  
+
 		<div class="form-group">
 			<h1>Registreeru</h1>
 		  </div>
@@ -135,10 +135,10 @@
 			<input class="btn btn-default btn-sm btn-block"type="submit" name="create" value="Loo konto">
 		</div>
 
-	 
+
   </div>
     <div role="tabpanel" class="tab-pane" id="employer">
-	
+
 		<div class="form-group">
 			<h1>Registreeru tööandjaks</h1>
 		  </div>
@@ -151,11 +151,10 @@
 		<div class="form-group">
 			<input class="btn btn-default btn-sm btn-block"type="submit" name="create_employer" value="Loo konto">
 		</div>
-	
+
 	</div>
   </div>
   </form>
 </div>
 
-<?php require_once("footer.php"); ?>
-	
+<?php require_once("../footer.php"); ?>

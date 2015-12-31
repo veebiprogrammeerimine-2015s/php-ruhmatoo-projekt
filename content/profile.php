@@ -3,8 +3,8 @@
 	$page_title = "Profiil";
 	//Faili nimi
 	$page_file = "profile.php";
-	require_once("header.php");
-	require_once("functions.php");
+	require_once("../header.php");
+	require_once ("../inc/functions.php");
 ?>
 
 <?php
@@ -579,5 +579,5 @@ Admin profiil
 PROFILE END
 -->
 <?php
-	require_once("footer.php");
+	require_once("../footer.php");
 ?>

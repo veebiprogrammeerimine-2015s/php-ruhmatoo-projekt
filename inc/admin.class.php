@@ -1,10 +1,13 @@
 <?php
 class Admin {
-	private $connection;
 
-    function __construct($mysqli){
-        $this->connection = $mysqli;
-    }
+	private $connection;
+	public $url;
+
+	function __construct($mysqli, $myurl){
+			$this->connection = $mysqli;
+			$this->url = $myurl;
+	}
 
 	function getCompanies() {
 		$stmt = $this->connection->prepare("SELECT ntb_users.email, job_company.name, job_company.email, job_company.number FROM job_company JOIN ntb_users ON ntb_users.id = job_company.user_id");
@@ -40,7 +43,7 @@ class Admin {
 		$stmt = $this->connection->prepare("SET foreign_key_checks = 1");
 		$stmt->execute();
 
-		header("Location: companies.php");
+		header("Location: ".$this->url."admin/companies.php");
 		$stmt->close();
 
 	}
@@ -68,8 +71,8 @@ class Admin {
 		$stmt = $this->connection->prepare("UPDATE ntb_users SET email = ?, usergroup = ? WHERE id = ?");
 		$stmt->bind_param("sii", $email, $usergroup, $id);
 		$stmt->execute();
+		header("Location ".$this->url."admin/users.php");
 
-		header("Location: users.php");
 		$stmt->close();
 
 	}
