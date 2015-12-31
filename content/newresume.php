@@ -5,8 +5,8 @@
 	$page_file = "newresume.php";
 ?>
 <?php
-	require_once("header.php");
-	require_once ("functions.php");
+	require_once("../header.php");
+	require_once ("../inc/functions.php");
 ?>
 <?php
 	$resume_name = "";
@@ -66,4 +66,4 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
     </form>
   </div>
 </div>
-<?php require_once("footer.php"); ?>
+<?php require_once("../footer.php"); ?>

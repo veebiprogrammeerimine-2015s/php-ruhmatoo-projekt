@@ -25,7 +25,7 @@
 	$Insert = new Insert($mysqli);
 	$Profile = new Profile($mysqli);
 	$Admin = new Admin($mysqli, $myurl);
-	$Resume = new Resume($mysqli);
+	$Resume = new Resume($mysqli, $myurl);
 
 
 	if(isset($_COOKIE['authUser']))

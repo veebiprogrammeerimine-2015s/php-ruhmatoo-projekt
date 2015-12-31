@@ -5,8 +5,8 @@
 	$page_file = "editresume.php";
 ?>
 <?php
-	require_once("header.php");
-	require_once ("functions.php");
+	require_once("../header.php");
+	require_once ("../inc/functions.php");
 
 ?>
 <?php
@@ -232,4 +232,4 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
   </div>
 </div>
 
-<?php require_once("footer.php"); ?>
+<?php require_once("../footer.php"); ?>

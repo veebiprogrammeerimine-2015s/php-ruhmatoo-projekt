@@ -23,6 +23,7 @@
 	$first = $last = $county = $parish = $number = "";
 	$first_error = $last_error = $county_error = $parish_error = $number_error = "";
 	$personal = $Profile->getPersonal($_SESSION['logged_in_user_id']);
+	$my_resume = $Resume->getResumes($_SESSION['logged_in_user_id']);
 
 	if(isset($_SESSION['logged_in_user_id'])) {
 		if( $_SERVER["REQUEST_METHOD"] == "POST") {
@@ -76,7 +77,7 @@
 					} else {
 					$newpassword = cleanInput($_POST["newpassword"]);
 				}
-			}
+				}
 
 				if (empty($_POST["repeatpassword"]) ) {
 					$repeatpassword_error = "See väli on kohustuslik";
@@ -171,37 +172,37 @@
 ?>
 
 <script>
-function passwordMatch() {
-    var newpass = $("#newpassword").val();
-    var repeatpass = $("#repeatpassword").val();
+	function passwordMatch() {
+	    var newpass = $("#newpassword").val();
+	    var repeatpass = $("#repeatpassword").val();
 
-    if (newpass != repeatpass)
-        document.getElementById("checking").className = "form-group has-error"
+	    if (newpass != repeatpass)
+	        document.getElementById("checking").className = "form-group has-error"
+			else
+					document.getElementById("checking").className = "form-group has-success"
+	}
+	function isOkay() {
+	var firsts = document.getElementById("first").value;
+	var lasts = document.getElementById("last").value;
+	var countys = document.getElementById("county").value;
+	var parishs = document.getElementById("parish").value;
+	var numbers = document.getElementById("number").value;
+		if (firsts == 0 || lasts == 0 || countys == 0 || parishs == 0 || numbers == 0)
+			document.getElementById("save_personal").className = "btn btn-success btn-sm disabled";
 		else
-				document.getElementById("checking").className = "form-group has-success"
-}
-function isOkay() {
-var firsts = document.getElementById("first").value;
-var lasts = document.getElementById("last").value;
-var countys = document.getElementById("county").value;
-var parishs = document.getElementById("parish").value;
-var numbers = document.getElementById("number").value;
-	if (firsts == 0 || lasts == 0 || countys == 0 || parishs == 0 || numbers == 0)
-		document.getElementById("save_personal").className = "btn btn-success btn-sm disabled";
-	else
-		document.getElementById("save_personal").className = "btn btn-success btn-sm";
-}
+			document.getElementById("save_personal").className = "btn btn-success btn-sm";
+	}
 
-$(document).ready(isOkay);
+	$(document).ready(isOkay);
 
-$(document).ready(function () {
-   $("#repeatpassword").keyup(passwordMatch);
-	 $("#first").keyup(isOkay);
-	 $("#last").keyup(isOkay);
-	 $("#county").keyup(isOkay);
-	 $("#parish").keyup(isOkay);
-	 $("#number").keyup(isOkay);
-});
+	$(document).ready(function () {
+	   $("#repeatpassword").keyup(passwordMatch);
+		 $("#first").keyup(isOkay);
+		 $("#last").keyup(isOkay);
+		 $("#county").keyup(isOkay);
+		 $("#parish").keyup(isOkay);
+		 $("#number").keyup(isOkay);
+	});
 
 
 </script>
@@ -472,11 +473,29 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 					</button>
 				</a>
 				</h3>
-				if stmt not fetch
-				Pole ühtegi CVd
-				<br>
-				if fetch
-				for loop
+					<table class="table table-hover table-striped">
+							<thead>
+								<tr>
+									<th>Kasutaja</th>
+									<th>Sisestatud</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<?php
+									for($i = 0; $i < count($my_resume); $i++) {
+										echo '<tr>
+												 <td>'.$my_resume[$i]->name.'</td>
+												 <td>'.$my_resume[$i]->inserted.'</td>';
+										echo '<td><a href="'.$myurl."edit/".$my_resume[$i]->link.'.php"><button type="button" class="btn btn-info btn-sm">';
+										echo '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Muuda';
+										echo '</button></a></td>';
+										echo '</tr>';
+										}
+								?>
+
+					 </tbody>
+				 </table>
 			</div>
 		</div>
 
