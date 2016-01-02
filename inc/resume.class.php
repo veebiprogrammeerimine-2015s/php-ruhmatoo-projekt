@@ -49,8 +49,8 @@
     }
 
     function thisResume($link) {
-      $stmt = $this->connection->prepare("SELECT id, name FROM ntb_resumes WHERE link = '$link'");
-      #$stmt->bind_param("s", $link);
+      $stmt = $this->connection->prepare("SELECT id, name FROM ntb_resumes WHERE link = ?");
+      $stmt->bind_param("s", $link);
       $stmt->bind_result($id, $name);
       $stmt->execute();
       $thisResume = new StdClass();
@@ -65,13 +65,104 @@
     }
 
 
-    function newPrimary($cvid, $school, $start, $end, $info) {
-      $stmt = $this->connection->prepare("INSERT INTO ntb_schools (resume_id, school, type, info, start, endtime) VALUES (?, ?, 1, ?, ?, ?)");
-      $stmt->bind_param("issii", $cvid, $school, $info, $start, $end);
+    function newPrimary($cvid, $school, $start, $end, $info, $type, $link) {
+      $stmt = $this->connection->prepare("INSERT INTO ntb_schools (resume_id, school, type, info, start, endtime) VALUES (?, ?, ?, ?, ?, ?)");
+      $stmt->bind_param("isisii", $cvid, $school, $type, $info, $start, $end);
       $stmt->execute();
+      header("Location: ".$link);
       $stmt->close();
     }
 
+    function getPrimary($cvid) {
+      $stmt = $this->connection->prepare("SELECT ntb_schools.id, school, info, start, endtime, school_types.type FROM ntb_schools INNER JOIN school_types ON school_types.id = ntb_schools.type WHERE ntb_schools.resume_id = ? AND ntb_schools.deleted IS NULL ORDER BY endtime DESC");
+      $stmt->bind_param("i", $cvid);
+      $stmt->bind_result($id, $school, $info, $start, $endtime, $type);
+      $stmt->execute();
+
+      $array = array();
+
+      while ($stmt->fetch()) {
+        $primary = new StdClass();
+        $primary->id = $id;
+        $primary->school = $school;
+        $primary->info = $info;
+        $primary->start = $start;
+        $primary->end = $endtime;
+        $primary->type = $type;
+        array_push($array, $primary);
+      }
+
+      return ($array);
+      $stmt->close();
+    }
+
+    function deletePrimary($id, $user_id, $link) {
+      $stmt = $this->connection->prepare("UPDATE ntb_schools INNER JOIN ntb_resumes ON ntb_resumes.id = ntb_schools.resume_id SET ntb_schools.deleted = NOW() WHERE ntb_schools.id = ? AND ntb_resumes.user_id = ?");
+      $stmt->bind_param("ii", $id, $user_id);
+      $stmt->execute();
+
+      header("Location: ".$link);
+      $stmt->close();
+    }
+
+    function editPrimary($id, $name, $start, $end, $info, $type, $user_id, $link) {
+      $stmt = $this->connection->prepare("UPDATE ntb_schools INNER JOIN ntb_resumes ON ntb_resumes.id = ntb_schools.resume_id SET ntb_schools.school = ?, ntb_schools.info = ?, ntb_schools.type = ?, ntb_schools.start = ?, ntb_schools.endtime = ? WHERE ntb_schools.id = ? AND ntb_resumes.user_id = ?");
+      $stmt->bind_param("ssiiiii", $name, $info, $type, $start, $end, $id, $user_id);
+      $stmt->execute();
+
+      header("Location: ".$link);
+      $stmt->close();
+    }
+
+    function typeDropdown() {
+
+      $html = '';
+      $html .= '<select name="primary_type" class="form-control">';
+
+      $stmt = $this->connection->prepare("SELECT id, type FROM school_types");
+      $stmt->bind_result($id, $type);
+      $stmt->execute();
+      while($stmt->fetch()) {
+        $html .= '<option value="'.$id.'">'.$type.'</option>';
+      }
+      $stmt->close();
+      $html .= '</select>';
+
+      return $html;
+
+    }
+
+    function currentTypeDropdown($primary_id) {
+      $stmt = $this->connection->prepare("SELECT type FROM ntb_schools WHERE id = ?");
+      $stmt->bind_param("i", $primary_id);
+      $stmt->bind_result($current_type);
+      $stmt->execute();
+      $current = new StdClass();
+      if($stmt->fetch()) {
+        $current->type = $current_type;
+      }
+      $stmt->close();
+
+      $html = '';
+      $html .= '<select name="primary_type" class="form-control">';
+
+      $stmt = $this->connection->prepare("SELECT id, type FROM school_types");
+      $stmt->bind_result($id, $type);
+      $stmt->execute();
+      while($stmt->fetch()) {
+        if ($current->type == $id) {
+          $html .= '<option value="'.$id.'" selected>'.$type.'</option>';
+        } else {
+          $html .= '<option value="'.$id.'">'.$type.'</option>';
+        }
+
+      }
+      $stmt->close();
+      $html .= '</select>';
+
+      return $html;
+
+    }
 
 
   }

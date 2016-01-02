@@ -17,21 +17,45 @@
 	$current = $_SERVER['PHP_SELF'];
 	$path = pathinfo($current);
 	$file_to_trim = $path['basename'];
-	#var_dump ($file_to_trim);
 	$trimmed = rtrim($file_to_trim, ".php");
-	#$fixed = $trimmed;
-	#var_dump ($trimmed);
 	$cvid = $Resume->thisResume($trimmed);
-	#var_dump ($cvid);
-	#var_dump ($cvid->id);
+	$getPrimary = $Resume->getPrimary($cvid->id);
 
 
-  $primary_name = $primary_start = $primary_end = $primary_info = "";
+  $primary_name = $primary_start = $primary_end = $primary_info = $primary_type = "";
   $primary_name_error = $primary_start_error = "";
+
+	if(isset($_SESSION['logged_in_user_id'])) {
+		if($_SESSION['logged_in_user_group'] == 1) {
+			if(isset($_GET["delete"])) {
+				$Resume->deletePrimary($_GET["delete"], $_SESSION['logged_in_user_id'], $file_to_trim);
+			}
+		}
+	}
 
   if(isset($_SESSION['logged_in_user_id'])) {
     if($_SESSION['logged_in_user_group'] == 1) {
       if( $_SERVER["REQUEST_METHOD"] == "POST") {
+
+				if(isset($_POST["update"])) {
+					if (empty($_POST["primary_name"]) ) {
+						$primary_name_error = "See väli on kohustuslik";
+					}else{
+						$primary_name = cleanInput($_POST["primary_name"]);
+					}
+          if (empty($_POST["primary_start"]) ) {
+						$primary_start_error = "See väli on kohustuslik";
+					}else{
+						$primary_start = cleanInput($_POST["primary_start"]);
+					}
+          $primary_end = cleanInput($_POST["primary_end"]);
+          $primary_info = cleanInput($_POST["primary_info"]);
+					$primary_type = cleanInput($_POST["primary_type"]);
+
+					if ($primary_name_error == "" && $primary_start_error == "") {
+					$Resume->editPrimary($_POST["primary_id"], $primary_name, $primary_start, $primary_end, $primary_info, $primary_type, $_SESSION['logged_in_user_id'], $file_to_trim);
+					}
+				}
 
         if(isset($_POST["new_primary"])){
           if (empty($_POST["primary_name"]) ) {
@@ -46,9 +70,10 @@
 					}
           $primary_end = cleanInput($_POST["primary_end"]);
           $primary_info = cleanInput($_POST["primary_info"]);
+					$primary_type = cleanInput($_POST["primary_type"]);
 
           if ($primary_name_error == "" && $primary_start_error == "") {
-						$response = $Resume->newPrimary($cvid->id, $primary_name, $primary_start, $primary_end, $primary_info);
+						$response = $Resume->newPrimary($cvid->id, $primary_name, $primary_start, $primary_end, $primary_info, $primary_type, $file_to_trim);
 
 					}
 
@@ -61,33 +86,21 @@
 
 
 <div class="row">
-  <div class="col-xs-12 col-sm-4">
+  <!--<div class="col-xs-12 col-sm-4">
     <h3>Info</h3>
     <pre class="pre-scrollable">
 CVDE KIRJELDUS TULEB KA SIIA ipsum dolor sit amet, consectetur adipiscing elit. Integer ornare sit amet erat id convallis. In hac habitasse platea dictumst. Sed a mauris sodales, tincidunt sapien non, hendrerit enim. Suspendisse potenti. Phasellus ut dui scelerisque, ultrices ex sed, fringilla dui. Ut fermentum enim sit amet sapien tristique, quis convallis nibh dapibus. Cras accumsan massa a augue elementum facilisis. Aenean dictum mauris ut erat rutrum faucibus. Praesent ac sollicitudin eros.
 
 Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, facilisis neque. Donec sit amet hendrerit erat. Morbi maximus egestas massa. In diam metus, molestie a blandit non, lobortis eu purus. Mauris id sapien sit amet nibh auctor luctus. Curabitur pretium mauris id ullamcorper blandit. Donec non interdum ligula. Cras sit amet magna dui.
     </pre>
-  </div>
+  </div>-->
 
-  <div class="col-xs-12 col-sm-8">
-    <h3>Uue CV loomine</h3>
+  <div class="col-xs-12 col-sm-12">
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 
-			<div class="panel-group" id="accordion1">
-
 				<!-- Personal -->
-				<div class="panel panel-default">
-			    <div class="panel-heading" role="tab" id="headingTwo">
-			      <h4 class="panel-title">
-			        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#personal" aria-expanded="false" aria-controls="personal">
-			          Isiklikud andmed
-			        </a>
-			      </h4>
-			    </div>
-			    <div id="personal" class="panel-collapse collapse" role="tabpanel" aria-labelledby="personal">
-			      <div class="panel-body">
-
+				<div id="personal">
+			  	<h3>Isiklikud andmed</h3>
 							<table class="table table-striped table-bordered">
 								<tr>
 									<td><label> Eesnimi </label></td>
@@ -110,121 +123,139 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 									<td><?=$personal->number;?></td>
 								</tr>
 							</table>
-
 			      </div>
-			    </div>
-			  </div>
 
 				<!-- Education -->
-		    <div class="panel panel-default">
+						<div id="education">
+		             <h3>
+									 Hariduskäik
+										<button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#new_school">
+                          <span class="glyphicon glyphicon-plus"></span> Uus kool
+                    </button>
+								 </h3>
+										<table class="table table-hover table-condensed table-striped table-responsive">
+											<thead>
+												<tr>
+													<th>Kool</th>
+													<th>Algus</th>
+													<th>Lõpp</th>
+													<th>Lisainfo</th>
+													<th>Tüüp</th>
+													<th>Admin</th>
+												</tr>
+											</thead>
+											<tbody>
+												<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+												<?php
+												for($i = 0; $i < count($getPrimary); $i++) {
+													if(isset($_GET["edit"]) && $_GET["edit"] == $getPrimary[$i]->id) {
+														$current_type = $Resume->currentTypeDropdown($getPrimary[$i]->id);
+														echo '<input type="hidden" name="primary_id" value="'.$getPrimary[$i]->id.'">';
+														echo '<tr>
+																 <td><input class="form-control" type="text" name="primary_name" value="'.$getPrimary[$i]->school.'"></td>
+																 <td><input class="form-control" type="text" name="primary_start" value="'.$getPrimary[$i]->start.'"></td>
+																 <td><input class="form-control" type="text" name="primary_end" value="'.$getPrimary[$i]->end.'"></td>
+																 <td><input class="form-control" type="text" name="primary_info" value="'.$getPrimary[$i]->info.'"></td>
+																 <td>'.$current_type.'</td>';
+														echo '<td>';
 
-		        <div class="panel-heading">
-		             <h4 class="panel-title">
-		                 <a data-toggle="collapse" data-parent="#accordion3" href="#education">
-		                 Hariduskäik
-		                 </a>
-		             </h4>
-		        </div>
+														echo '<div class="btn-group" role="group">';
+														echo '<button type="submit" name="update" class="btn btn-success btn-sm">
+																			<span class="glyphicon glyphicon-ok"></span> Salvesta
+																		</button>';
+														echo '<a href="'.$file_to_trim.'" class="btn btn-warning btn-sm">
+																			<span class="glyphicon glyphicon-remove"></span> Katkesta
+																		</a>';
+														echo '</div>';
+														echo '</td>';
+														echo '</tr>';
 
-		        <div id="education" class="panel-collapse collapse">
-		            <div class="panel-body">
+													} else {
+														echo '<tr>
+																 <td>'.$getPrimary[$i]->school.'</td>
+																 <td>'.$getPrimary[$i]->start.'</td>
+																 <td>'.$getPrimary[$i]->end.'</td>
+																 <td>'.$getPrimary[$i]->info.'</td>
+																 <td>'.$getPrimary[$i]->type.'</td>';
+														echo '<td><div class="btn-group" role="group">';
 
-		                <div class="panel-group" id="accordion2">
+														echo '<a href="?edit='.$getPrimary[$i]->id.'" class="btn btn-info btn-sm">
+																		<span class="glyphicon glyphicon-pencil"></span> Muuda
+																	</a>';
+														echo '<a href="?delete='.$getPrimary[$i]->id.'" class="btn btn-danger btn-sm">
+																		<span class="glyphicon glyphicon-remove"></span> Kustuta
+																	</a>';
+														echo '</div></td>';
+														echo '</tr>';
+													}
+												}
 
-		                    <div class="panel panel-default">
-		                        <div class="panel-heading">
-		                             <h4 class="panel-title">
-		                                <a data-toggle="collapse" data-parent="#accordion2" href="#type1">
-		                                    Põhiharidus
-		                                </a>
-		                              </h4>
-		                        </div>
-		                        <div id="type1" class="panel-collapse collapse">
-		                            <div class="panel-body">
-																	<table class="table table-striped table-condensed table-bordered">
-																		For loopiga tõmbab kõik kasutaja koolid läbi
-																		<tr>
-																			<td><label> Kool </label></td>
-																			<td> Blah </td>
-																		</tr>
 
-																		<tr>
-																			<td><label> Aastad </label></td>
-																			<td> 1900 - 2015 </td>
-																		</tr>
-																		<tr>
+												?>
+											</form>
+											</tbody>
+										</table>
+										<!-- Modal -->
+										<div class="modal fade" id="new_school" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+										  <div class="modal-dialog" role="document">
+										    <div class="modal-content">
+													<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+										      <div class="modal-header">
+										        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										        <h4 class="modal-title" id="myModalLabel">Lisa uus kool</h4>
+										      </div>
+										      <div class="modal-body" style="height: 300px;">
+														<div class="col-sm-12">
+				                      <div class="col-sm-6">
 
-																			<td><label> Lisainfo </label></td>
-																			<td> Blah Blah </td>
-																		</tr>
+				                        <div class="form-group">
+				                          <label for="primary_name">Kooli nimi *</label>
+				                          <input type="text" class="form-control" name="primary_name">
+				                        </div>
+				                      </div>
+															<div class="col-sm-6">
 
-																	</table>
-                                  <h3>Lisa uus</h3>
-                                  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-                                    <div class="col-sm-6">
-                                      <div class="form-group">
-                                        <label for="primary_name">Kooli nimi</label>
-                                        <input type="text" class="form-control" name="primary_name">
-                                      </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                      <div class="form-group">
-                                        <div class="col-sm-6" style="padding-right: 0px;">
-                                          <label for="primary_start">Algus</label>
-                                          <input type="text" class="form-control" name="primary_start">
-                                        </div>
-                                        <div class="col-sm-6" style="padding-right: 0px;">
-                                          <label for="primary_end">Lõpp</label>
-                                          <input type="text" class="form-control" name="primary_end">
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                      <textarea class="form-control" rows="2" name="primary_info" type="text"></textarea>
-                                      <br>
-                                      <button type="submit" name="new_primary" class="btn btn-success pull-right" aria-label="Left Align">
-                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Lisa
-                                      </button>
-                                    </div>
-                                  </div>
+																<label for="primary_type">Kooli tüüp *</label>
 
-                                  </form>
+																	<?=$Resume->typeDropdown();?>
 
 																</div>
-		                        </div>
-		                    </div>
+				                      <div class="col-sm-12">
+				                        <div class="form-group">
+				                          <div class="col-sm-6" style="padding-left: 0px;">
+				                            <label for="primary_start">Algus *</label>
+				                            <input type="text" class="form-control" name="primary_start">
+				                          </div>
+				                          <div class="col-sm-6" style="padding-right: 0px;">
+				                            <label for="primary_end">Lõpp</label>
+				                            <input type="text" class="form-control" name="primary_end">
+				                          </div>
+				                        </div>
+				                      </div>
+				                      <div class="col-xs-12">
+																<label for="primary_info">Lisainfo</label>
+				                        <textarea class="form-control" rows="4" name="primary_info" type="text"></textarea>
+				                      </div>
 
-		                    <div class="panel panel-default">
-		                        <div class="panel-heading">
-		                            <h4 class="panel-title">
-		                                <a data-toggle="collapse" data-parent="#accordion2" href="#type2">
-		                                    Keskharidus
-		                                </a>
-		                            </h4>
-		                        </div>
-		                        <div id="type2" class="panel-collapse collapse">
-		                            <div class="panel-body">Panel 3.2</div>
-		                        </div>
-		                    </div>
+													</div>
+										      </div>
+										      <div class="modal-footer">
+														<button type="button" class="btn btn-danger" data-dismiss="modal">
+															<span class="glyphicon glyphicon-remove"></span> Katkesta
+														</button>
 
-												<div class="panel panel-default">
-														<div class="panel-heading">
-																<h4 class="panel-title">
-																		<a data-toggle="collapse" data-parent="#accordion2" href="#type3">
-																				Kutseharidus
-																		</a>
-																</h4>
-														</div>
-														<div id="type3" class="panel-collapse collapse">
-																<div class="panel-body">Panel 3.2</div>
-														</div>
-												</div>
+														<button type="submit" name="new_primary" class="btn btn-success">
+															<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Lisa
+														</button>
+										      </div>
+													</form>
+										    </div>
+										  </div>
+										</div>
 
-		                </div>
-		            </div>
-
+							</div>
 		        </div>
-		    </div>
+
 				<!-- Experience (Work and courses) -->
 
 				<!-- Additional (Positives, add. info) -->
