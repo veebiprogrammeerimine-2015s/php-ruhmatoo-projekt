@@ -5,7 +5,7 @@
 	
 	session_start();
 	
-	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+	$mysqli = new mysqli($servername, $server_username, $server_password, $database);
 	
 	function getSeries($keyword=""){
 		
@@ -20,7 +20,7 @@
 			$search= "%".$keyword."%";
 		}
 		
-			
+			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 			$stmt = $mysqli->prepare("SELECT id, title, season, description, picture from series WHERE 
 			(title LIKE ?)");
 			echo $mysqli->error;
