@@ -224,5 +224,60 @@
     header("Location: ".$link);
     $stmt->close();
   }
+
+  ###############################
+  ### Resume: Work experience ###
+  ###############################
+
+  function newWork($cvid, $company, $name, $content, $info, $start, $end, $link) {
+    $stmt = $this->connection->prepare("INSERT INTO ntb_workexp (resume_id, company, name, content, info, start, endtime) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("issssii", $cvid, $company, $name, $content, $info, $start, $end);
+    $stmt->execute();
+    header("Location: ".$link);
+    $stmt->close();
+  }
+
+  function getWorkexp($cvid) {
+    $stmt = $this->connection->prepare("SELECT id, company, name, content, info, start, endtime FROM ntb_workexp WHERE resume_id = ? AND deleted IS NULL ORDER BY endtime DESC");
+    $stmt->bind_param("i", $cvid);
+    $stmt->bind_result($id, $company, $name, $content, $info, $start, $endtime);
+    $stmt->execute();
+
+    $array = array();
+
+    while ($stmt->fetch()) {
+      $work = new StdClass();
+      $work->id = $id;
+      $work->company = $company;
+      $work->name = $name;
+      $work->content = $content;
+      $work->info = $info;
+      $work->start = $start;
+      $work->end = $endtime;
+
+      array_push($array, $work);
+    }
+    return ($array);
+    $stmt->close();
+
+  }
+
+  function deleteWork($id, $user_id, $link) {
+    $stmt = $this->connection->prepare("UPDATE ntb_workexp INNER JOIN ntb_resumes ON ntb_resumes.id = ntb_workexp.resume_id SET ntb_workexp.deleted = NOW() WHERE ntb_workexp.id = ? AND ntb_resumes.user_id = ?");
+    $stmt->bind_param("ii", $id, $user_id);
+    $stmt->execute();
+
+    header("Location: ".$link);
+    $stmt->close();
+  }
+
+  function editWork($id, $company, $name, $content, $info, $start, $end, $user_id, $link) {
+    $stmt = $this->connection->prepare("UPDATE ntb_workexp INNER JOIN ntb_resumes ON ntb_resumes.id = ntb_workexp.resume_id SET ntb_workexp.company = ?, ntb_workexp.name = ?, ntb_workexp.content = ?, ntb_workexp.info = ?, ntb_workexp.start = ?, ntb_workexp.endtime = ? WHERE ntb_workexp.id = ? AND ntb_resumes.user_id = ?");
+    $stmt->bind_param("ssssiiii", $company, $name, $content, $info, $start, $end, $id, $user_id);
+    $stmt->execute();
+
+    header("Location: ".$link);
+    $stmt->close();
+  }
 }
 ?>

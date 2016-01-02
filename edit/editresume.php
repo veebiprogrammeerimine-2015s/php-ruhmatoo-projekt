@@ -19,14 +19,19 @@
 	$file_to_trim = $path['basename'];
 	$trimmed = rtrim($file_to_trim, ".php");
 	$cvid = $Resume->thisResume($trimmed);
+
 	$getPrimary = $Resume->getPrimary($cvid->id);
 	$getCourses = $Resume->getCourses($cvid->id);
+	$getWorkexp = $Resume->getWorkexp($cvid->id);
 
   $primary_name = $primary_start = $primary_end = $primary_info = $primary_type = "";
   $primary_name_error = $primary_start_error = "";
 
 	$course_trainer = $course_name = $course_duration = $course_info = $course_year = "";
 	$course_name_error = "";
+
+	$work_company = $work_name = $work_content = $work_info = $work_start = $work_end = "";
+	$work_company_error = $work_name_error = $work_content_error = $work_start_error = "";
 
 	if(isset($_SESSION['logged_in_user_id'])) {
 		if($_SESSION['logged_in_user_group'] == 1) {
@@ -37,6 +42,11 @@
 		if($_SESSION['logged_in_user_group'] == 1) {
 			if(isset($_GET["delete_course"])) {
 				$Resume->deleteCourse($_GET["delete_course"], $_SESSION['logged_in_user_id'], $file_to_trim);
+			}
+		}
+		if($_SESSION['logged_in_user_group'] == 1) {
+			if(isset($_GET["delete_work"])) {
+				$Resume->deleteWork($_GET["delete_work"], $_SESSION['logged_in_user_id'], $file_to_trim);
 			}
 		}
 	}
@@ -82,6 +92,35 @@
 						}
 				}
 
+				if(isset($_POST["update_work"])) {
+					if (empty($_POST["work_company"]) ) {
+						$work_company_error = "See väli on kohustuslik";
+					}else{
+						$work_company = cleanInput($_POST["work_company"]);
+					}
+					if (empty($_POST["work_name"]) ) {
+						$work_name_error = "See väli on kohustuslik";
+					}else{
+						$work_name = cleanInput($_POST["work_name"]);
+					}
+					if (empty($_POST["work_content"]) ) {
+						$work_content_error = "See väli on kohustuslik";
+					}else{
+						$work_content = cleanInput($_POST["work_content"]);
+					}
+					if (empty($_POST["work_start"]) ) {
+						$work_start_error = "See väli on kohustuslik";
+					}else{
+						$work_start = cleanInput($_POST["work_start"]);
+					}
+					$work_info = cleanInput($_POST["work_info"]);
+					$work_end = cleanInput($_POST["work_end"]);
+
+					if ($work_company_error == "" && $work_name_error == "" && $work_content_error == "" && $work_start_error == "") {
+					$Resume->editWork($_POST["work_id"], $work_company, $work_name, $work_content, $work_info, $work_start, $work_end, $_SESSION['logged_in_user_id'], $file_to_trim);
+					}
+			}
+
         if(isset($_POST["new_primary"])){
           if (empty($_POST["primary_name"]) ) {
 						$primary_name_error = "See väli on kohustuslik";
@@ -123,6 +162,36 @@
 					if ($primary_name_error == "" && $primary_start_error == "") {
 						$response = $Resume->newPrimary($cvid->id, $primary_name, $primary_start, $primary_end, $primary_info, $primary_type, $file_to_trim);
 
+					}
+
+				}
+
+				if(isset($_POST["new_work"])){
+					if (empty($_POST["work_company"]) ) {
+						$work_company_error = "See väli on kohustuslik";
+					}else{
+						$work_company = cleanInput($_POST["work_company"]);
+					}
+					if (empty($_POST["work_name"]) ) {
+						$work_name_error = "See väli on kohustuslik";
+					}else{
+						$work_name = cleanInput($_POST["work_name"]);
+					}
+					if (empty($_POST["work_content"]) ) {
+						$work_content_error = "See väli on kohustuslik";
+					}else{
+						$work_content = cleanInput($_POST["work_content"]);
+					}
+					if (empty($_POST["work_start"]) ) {
+						$work_start_error = "See väli on kohustuslik";
+					}else{
+						$work_start = cleanInput($_POST["work_start"]);
+					}
+					$work_info = cleanInput($_POST["work_info"]);
+					$work_end = cleanInput($_POST["work_end"]);
+
+					if ($work_company_error == "" && $work_name_error == "" && $work_content_error == "" && $work_start_error == "") {
+					$Resume->newWork($cvid->id, $work_company, $work_name, $work_content, $work_info, $work_start, $work_end, $file_to_trim);
 					}
 
 				}
@@ -174,6 +243,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 			      </div>
 
 						<!-- Education -->
+				<!-- Education -->
 				<div id="education">
              <h3>
 							 Hariduskäik
@@ -306,7 +376,6 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 								</div>
 
 					</div>
-
 				<!-- Additional courses -->
 				<div id="courses">
 					<h3>
@@ -443,10 +512,139 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 				<div id="workexp">
 					<h3>
 						Varasem töökogemus
-						 <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#new_school">
+						 <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#new_work">
 									 <span class="glyphicon glyphicon-plus"></span> Uus töö
 						 </button>
 					</h3>
+					<table class="table table-hover table-condensed table-striped table-responsive">
+						<thead>
+							<tr>
+								<th>Ettevõte</th>
+								<th>Amet</th>
+								<th>Töö sisu</th>
+								<th>Lisainfo</th>
+								<th>Algus</th>
+								<th>Lõpp</th>
+							</tr>
+						</thead>
+						<tbody>
+							<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+							<?php
+							for($i = 0; $i < count($getWorkexp); $i++) {
+								if(isset($_GET["edit_work"]) && $_GET["edit_work"] == $getWorkexp[$i]->id) {
+
+									echo '<input type="hidden" name="work_id" value="'.$getWorkexp[$i]->id.'">';
+									echo '<tr>
+											 <td><input class="form-control" type="text" name="work_company" value="'.$getWorkexp[$i]->company.'"></td>
+											 <td><input class="form-control" type="text" name="work_name" value="'.$getWorkexp[$i]->name.'"></td>
+											 <td><input class="form-control" type="text" name="work_content" value="'.$getWorkexp[$i]->content.'"></td>
+											 <td><input class="form-control" type="text" name="work_info" value="'.$getWorkexp[$i]->info.'"></td>
+											 <td><input class="form-control" type="text" name="work_start" value="'.$getWorkexp[$i]->start.'"></td>
+											 <td><input class="form-control" type="text" name="work_end" value="'.$getWorkexp[$i]->end.'"></td>';
+									echo '<td>';
+
+									echo '<div class="btn-group" role="group">';
+									echo '<button type="submit" name="update_work" class="btn btn-success btn-sm">
+														<span class="glyphicon glyphicon-ok"></span>
+													</button>';
+									echo '<a href="'.$file_to_trim.'" class="btn btn-warning btn-sm">
+														<span class="glyphicon glyphicon-remove"></span>
+													</a>';
+									echo '</div>';
+									echo '</td>';
+									echo '</tr>';
+
+								} else {
+									echo '<tr>
+											 <td>'.$getWorkexp[$i]->company.'</td>
+											 <td>'.$getWorkexp[$i]->name.'</td>
+											 <td>'.$getWorkexp[$i]->content.'</td>
+											 <td>'.$getWorkexp[$i]->info.'</td>
+											 <td>'.$getWorkexp[$i]->start.'</td>
+											 <td>'.$getWorkexp[$i]->end.'</td>';
+									echo '<td><div class="btn-group" role="group">';
+
+									echo '<a href="?edit_work='.$getWorkexp[$i]->id.'" class="btn btn-info btn-sm">
+													<span class="glyphicon glyphicon-pencil"></span> Muuda
+												</a>';
+									echo '<a href="?delete_work='.$getWorkexp[$i]->id.'" class="btn btn-danger btn-sm">
+													<span class="glyphicon glyphicon-remove"></span> Kustuta
+												</a>';
+									echo '</div></td>';
+									echo '</tr>';
+								}
+							}
+
+
+							?>
+						</form>
+						</tbody>
+					</table>
+					<!-- Modal -->
+					<div class="modal fade" id="new_work" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">Lisa uus varasem töökoht</h4>
+								</div>
+								<div class="modal-body" style="height: 500px;">
+									<div class="col-sm-12">
+										<div class="col-sm-12">
+										<div class="col-sm-6">
+
+											<div class="form-group">
+												<label for="work_company">Ettevõte *</label>
+												<input type="text" class="form-control" name="work_company">
+											</div>
+										</div>
+										<div class="col-sm-6">
+
+											<label for="work_name">Amet *</label>
+											<input type="text" class="form-control" name="work_name">
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="form-group">
+												<div class="col-sm-6">
+													<label for="work_start">Algus *</label>
+													<input type="text" class="form-control" name="work_start">
+												</div>
+												<div class="col-sm-6">
+													<label for="work_end">Lõpp</label>
+													<input type="text" class="form-control" name="work_end">
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="col-sm-12">
+											<label for="work_content">Töö sisu *</label>
+											<textarea class="form-control" rows="3" name="work_content" type="text"></textarea>
+										</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="col-sm-12">
+											<label for="work_info">Lisainfo</label>
+											<textarea class="form-control" rows="3" name="work_info" type="text"></textarea>
+										</div>
+										</div>
+
+								</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-danger" data-dismiss="modal">
+										<span class="glyphicon glyphicon-remove"></span> Katkesta
+									</button>
+
+									<button type="submit" name="new_work" class="btn btn-success">
+										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Lisa
+									</button>
+								</div>
+								</form>
+							</div>
+						</div>
+					</div>
 				</div>
 
 				<!-- Additional (Positives, add. info) -->
