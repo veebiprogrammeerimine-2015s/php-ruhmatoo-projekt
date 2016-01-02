@@ -9,6 +9,10 @@
         $this->url = $myurl;
     }
 
+    ################################
+    ### Default stuff in Resumes ###
+    ################################
+
     function getResumes($userid) {
       $stmt = $this->connection->prepare("SELECT id, name, link, inserted FROM ntb_resumes WHERE user_id = ?");
       $stmt->bind_param("i", $userid);
@@ -25,7 +29,7 @@
   			$my_resume->inserted = $inserted;
 
   			array_push($array, $my_resume);
-  	}
+  	   }
   		return $array;
   		$stmt->close();
     }
@@ -39,7 +43,7 @@
         $link_file = "../edit/".$link.".php";
         $new_file = fopen($link_file, "w");
         #Create content to new file
-        $content = '<?php include("editresume.php"); ?>';
+        $content = '<?php require_once("editresume.php"); ?>';
         fwrite($new_file, $content);
         header("Location: ".$link_file);
         exit();
@@ -64,6 +68,9 @@
       $stmt->close();
     }
 
+    #######################
+    ### Resume: SCHOOLS ###
+    #######################
 
     function newPrimary($cvid, $school, $start, $end, $info, $type, $link) {
       $stmt = $this->connection->prepare("INSERT INTO ntb_schools (resume_id, school, type, info, start, endtime) VALUES (?, ?, ?, ?, ?, ?)");
@@ -164,6 +171,58 @@
 
     }
 
+    #######################
+    ### Resume: COURSES ###
+    #######################
+
+    function newCourse($cvid, $name, $trainer, $duration, $info, $year, $link) {
+      $stmt = $this->connection->prepare("INSERT INTO ntb_courses (resume_id, trainer, course, duration, info, year) VALUES (?, ?, ?, ?, ?, ?)");
+      $stmt->bind_param("issssi", $cvid, $trainer, $name, $duration, $info, $year);
+      $stmt->execute();
+      header("Location: ".$link);
+      $stmt->close();
+    }
+
+    function getCourses($cvid) {
+      $stmt = $this->connection->prepare("SELECT id, trainer, course, duration, info, year FROM ntb_courses WHERE resume_id = ? AND deleted IS NULL ORDER BY year DESC");
+      $stmt->bind_param("i", $cvid);
+      $stmt->bind_result($id, $trainer, $course_name, $duration, $info, $year);
+      $stmt->execute();
+
+      $array = array();
+
+      while ($stmt->fetch()) {
+        $course = new StdClass();
+        $course->id = $id;
+        $course->trainer = $trainer;
+        $course->course = $course_name;
+        $course->duration = $duration;
+        $course->info = $info;
+        $course->year = $year;
+
+        array_push($array, $course);
+      }
+      return ($array);
+      $stmt->close();
 
   }
+
+  function editCourse($id, $name, $trainer, $duration, $info, $year, $user_id, $link) {
+    $stmt = $this->connection->prepare("UPDATE ntb_courses INNER JOIN ntb_resumes ON ntb_resumes.id = ntb_courses.resume_id SET ntb_courses.trainer = ?, course = ?, duration = ?, info = ?, year = ? WHERE ntb_courses.id = ? AND ntb_resumes.user_id = ?");
+    $stmt->bind_param("ssssiii", $trainer, $name, $duration, $info, $year, $id, $user_id);
+    $stmt->execute();
+
+    header("Location: ".$link);
+    $stmt->close();
+  }
+
+  function deleteCourse($id, $user_id, $link) {
+    $stmt = $this->connection->prepare("UPDATE ntb_courses INNER JOIN ntb_resumes ON ntb_resumes.id = ntb_courses.resume_id SET ntb_courses.deleted = NOW() WHERE ntb_courses.id = ? AND ntb_resumes.user_id = ?");
+    $stmt->bind_param("ii", $id, $user_id);
+    $stmt->execute();
+
+    header("Location: ".$link);
+    $stmt->close();
+  }
+}
 ?>
