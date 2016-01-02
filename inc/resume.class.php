@@ -49,21 +49,25 @@
     }
 
     function thisResume($link) {
-      $stmt = $this->connection->prepare("SELECT id FROM ntb_resumes WHERE link = ?");
-      $stmt->bind_param("s", $link);
-      $stmt->bind_result($resume_id);
+      $stmt = $this->connection->prepare("SELECT id, name FROM ntb_resumes WHERE link = '$link'");
+      #$stmt->bind_param("s", $link);
+      $stmt->bind_result($id, $name);
       $stmt->execute();
-      if ($stmt->fetch()) {
-        $resume = new StdClass();
-        $resume->id = $resume_id;
-      }
-      return ($resume);
+      $thisResume = new StdClass();
+
+      while($stmt->fetch()) {
+        $thisResume = new StdClass();
+        $thisResume->id = $id;
+        $thisResume->name = $name;
+    }
+      return ($thisResume);
       $stmt->close();
     }
 
-    function newPrimary($school, $start, $end, $info) {
+
+    function newPrimary($cvid, $school, $start, $end, $info) {
       $stmt = $this->connection->prepare("INSERT INTO ntb_schools (resume_id, school, type, info, start, endtime) VALUES (?, ?, 1, ?, ?, ?)");
-      $stmt->bind_param("issii", $resume->id, $school, $info, $start, $end);
+      $stmt->bind_param("issii", $cvid, $school, $info, $start, $end);
       $stmt->execute();
       $stmt->close();
     }

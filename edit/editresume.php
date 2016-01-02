@@ -14,8 +14,18 @@
   $personal = $Profile->getPersonal($_SESSION['logged_in_user_id']);
   $firstname = $lastname = $county = $parish = $email = $number = $workexp = $positives = $additional = $school = "";
   $firstname_error = $lastname_error = $county_error = $parish_error = $email_error = $number_error = $workexp_error = $positives_error = $additional_error = $school_error = "";
-  $resumelink = cleanInput($_GET["resume"]);
-  $resume = $Resume->thisResume($resumelink);
+	$current = $_SERVER['PHP_SELF'];
+	$path = pathinfo($current);
+	$file_to_trim = $path['basename'];
+	#var_dump ($file_to_trim);
+	$trimmed = rtrim($file_to_trim, ".php");
+	#$fixed = $trimmed;
+	#var_dump ($trimmed);
+	$cvid = $Resume->thisResume($trimmed);
+	#var_dump ($cvid);
+	#var_dump ($cvid->id);
+
+
   $primary_name = $primary_start = $primary_end = $primary_info = "";
   $primary_name_error = $primary_start_error = "";
 
@@ -38,7 +48,7 @@
           $primary_info = cleanInput($_POST["primary_info"]);
 
           if ($primary_name_error == "" && $primary_start_error == "") {
-						$response = $Resume->newPrimary($primary_name, $primary_start, $primary_end, $primary_info);
+						$response = $Resume->newPrimary($cvid->id, $primary_name, $primary_start, $primary_end, $primary_info);
 
 					}
 
