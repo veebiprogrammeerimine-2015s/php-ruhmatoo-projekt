@@ -62,9 +62,9 @@
             echo "<tr>";
             echo "<td>".$contest_array[$i]->contest_name."</td>";
             echo "<td>".$contest_array[$i]->name."</td>";
-			echo "<td><input type='text'></td>";
-			echo "<td><input type='text'></td>";
-			echo "<td><input type='text'></td>";
+			echo "<td></td>";
+			echo "<td></td>";
+			echo "<td></td>";
             echo "<td><a href='?delete=".$contest_array[$i]->id."'>X</a></td>";
             echo "<td><a href='?edit=".$contest_array[$i]->id."'>Muuda</a></td>";
             
