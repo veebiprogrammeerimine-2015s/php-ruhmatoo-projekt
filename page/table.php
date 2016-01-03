@@ -21,6 +21,7 @@
     $contest_array = getAllData();
     
     $keyword = "";
+	
     if(isset($_GET["keyword"])){
         $keyword = $_GET["keyword"];
         //otsime
