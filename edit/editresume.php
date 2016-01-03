@@ -33,6 +33,9 @@
 	$work_company = $work_name = $work_content = $work_info = $work_start = $work_end = "";
 	$work_company_error = $work_name_error = $work_content_error = $work_start_error = "";
 
+	$add_positive = "";
+	$add_info = "";
+
 	if(isset($_SESSION['logged_in_user_id'])) {
 		if($_SESSION['logged_in_user_group'] == 1) {
 			if(isset($_GET["delete"])) {
@@ -194,6 +197,12 @@
 					$Resume->newWork($cvid->id, $work_company, $work_name, $work_content, $work_info, $work_start, $work_end, $file_to_trim);
 					}
 
+				}
+				if(isset($_POST["save_add"])){
+					$add_positive = cleanInput($_POST["add_positive"]);
+					$add_info = cleanInput($_POST["add_info"]);
+
+					$Resume->saveAdd($cvid->id, $_SESSION['logged_in_user_id'], $add_positive, $add_info, $file_to_trim);
 				}
 
       }
@@ -649,18 +658,58 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 
 				<!-- Additional (Positives, add. info) -->
 				<div id="additional">
+
 					<h3>
 						Lisainformatsioon
+						<a href="?edit_add" class="btn btn-info btn-sm pull-right">
+									<span class="glyphicon glyphicon-pencil"></span> Muuda
+						</a>
 					</h3>
+					<?php if(isset($_GET["edit_add"])): ?>
+
+						<div class="col-sm-6">
+							<label for="add_positive">Positiivsed küljed</label>
+							<textarea class="form-control" rows="3" name="add_positive" type="text"><?=$cvid->pos;?></textarea>
+						</div>
+						<div class="col-sm-6">
+							<label for="add_info">Lisainformatsioon endast</label>
+							<textarea class="form-control" rows="3" name="add_info" type="text"><?=$cvid->add;?></textarea>
+						</div>
+						<div class="col-sm-12">
+						<br>
+						<div class="btn-group pull-right" role="group">
+							<a href="<?=$file_to_trim;?>" class="btn btn-danger">
+								<span class="glyphicon glyphicon-remove"></span> Katkesta
+							</a>
+
+							<button type="submit" name="save_add" class="btn btn-success">
+								<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Salvesta
+							</button>
+						</div>
+
+						</div>
+
+					<?php else: ?>
+
+						<div class="col-sm-6">
+							<label for="add_positive">Positiivsed küljed</label>
+							<textarea class="form-control" rows="3" name="add_positive" type="text" readonly><?=$cvid->pos; ?></textarea>
+						</div>
+						<div class="col-sm-6">
+							<label for="add_info">Lisainformatsioon endast</label>
+							<textarea class="form-control" rows="3" name="add_info" type="text" readonly><?=$cvid->add; ?></textarea>
+						</div>
+					<?php endif; ?>
+
 				</div>
 		</div>
-
-
-
-			<button type="button" class="btn btn-success pull-right" aria-label="Left Align">
-			Edasi <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		<div class="col-sm-12">
+			<br>
+			<button type="button" class="btn btn-success pull-right">
+			Edasi <span class="glyphicon glyphicon-chevron-right"></span>
 			</button>
       </div>
+		</div>
 
     </form>
   </div>

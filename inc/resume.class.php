@@ -53,9 +53,9 @@
     }
 
     function thisResume($link) {
-      $stmt = $this->connection->prepare("SELECT id, name FROM ntb_resumes WHERE link = ?");
+      $stmt = $this->connection->prepare("SELECT id, name, positives, additional FROM ntb_resumes WHERE link = ?");
       $stmt->bind_param("s", $link);
-      $stmt->bind_result($id, $name);
+      $stmt->bind_result($id, $name, $pos, $add);
       $stmt->execute();
       $thisResume = new StdClass();
 
@@ -63,6 +63,8 @@
         $thisResume = new StdClass();
         $thisResume->id = $id;
         $thisResume->name = $name;
+        $thisResume->pos = $pos;
+        $thisResume->add = $add;
     }
       return ($thisResume);
       $stmt->close();
@@ -278,6 +280,20 @@
 
     header("Location: ".$link);
     $stmt->close();
+  }
+
+  ##########################
+  ### Resume: Additional ###
+  ##########################
+
+  function saveAdd($id, $user_id, $pos, $add, $link) {
+    $stmt = $this->connection->prepare("UPDATE ntb_resumes SET positives = ?, additional = ? WHERE id = ? AND user_id = ?");
+    $stmt->bind_param("ssii", $pos, $add, $id, $user_id);
+    $stmt->execute();
+
+    header("Location: ".$link);
+    $stmt->close();
+
   }
 }
 ?>
