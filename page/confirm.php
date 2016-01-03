@@ -8,16 +8,16 @@
 			
 		$Confirm->saveNewEntry($_GET["confirm"],$_GET["user_id"]);
 		
+		global $array;
+		
 		$array = $Confirm->getAllData($_GET["confirm"],$_GET["user_id"]);
 		var_dump($array);
+		
 	}else{
-		// küsid kõigi andmeb
+		// küsid kõigi andmed
 		
 		//$Confirm->getAllDataFromAll();
 	}
-	
-	
-	
 	
 
 ?>
@@ -50,21 +50,20 @@
             
             echo "<td>".$array[$i]->contest."</td>";
             echo "<td>".$array[$i]->name."</td>";
-			echo "<td></td>";
-			echo "<td></td>";
-			echo "<td></td>";
+			echo "<td><input type='text'></td>";
+			echo "<td><input type='text'></td>";
+			echo "<td><input type='text'></td>";
             echo "<td><input name='update' type='submit'></td>";
             echo "</form>";
             echo "</tr>";
         }else{
             //lihtne vaade
             echo "<tr>";
-           
             echo "<td>".$array[$i]->contest."</td>";
             echo "<td>".$array[$i]->name."</td>";
-			echo "<td></td>";
-			echo "<td></td>";
-			echo "<td></td>";
+			echo "<td><input type='text'></td>";
+			echo "<td><input type='text'></td>";
+			echo "<td><input type='text'></td>";
             echo "<td><a href='?delete=".$array[$i]->id."'>X</a></td>";
             echo "<td><a href='?edit=".$array[$i]->id."'>Muuda</a></td>";
             
