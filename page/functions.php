@@ -8,6 +8,7 @@
     */   
     
     require_once("../../config_global.php");
+
     $database = "if15_klinde";
     
     //paneme sessiooni serveris tööle, saame kasutada SESSION[]
