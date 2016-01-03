@@ -9,9 +9,17 @@
 	require_once ("../inc/functions.php");
 ?>
 <?php
-  $currentJob = $Job->singleJobData($_GET['id']);
-  $current_id = $_GET['id'];
-  echo $current_id;
+
+	$my_resumes = $Resume->getResumes($_SESSION['logged_in_user_id']);
+
+	$motivation = "";
+	$selected_resume = "";
+	$current = $_SERVER['PHP_SELF'];
+	$path = pathinfo($current);
+	$file_to_trim = $path['basename'];
+	$trimmed = rtrim($file_to_trim, ".php");
+	$currentJob = $Job->singleJobData($trimmed);
+
   echo "Ettevõte:".$currentJob->company;
   echo "<br>Kandideerid ametile:".$currentJob->name;
   echo "<br>Töö kirjeldus:".$currentJob->description;
@@ -21,22 +29,40 @@
     if($_SESSION['logged_in_user_group'] == 1) {
       if( $_SERVER["REQUEST_METHOD"] == "POST") {
         if(isset($_POST["send_cv"])) {
+					$selected_resume = cleanInput($_POST["my_resume"]) + 0;
           $motivation = cleanInput($_POST["motivation"]);
-          $Resume->sendResume($current_id, $_SESSION['logged_in_user_id'], $motivation);
+          $Resume->sendResume($trimmed, $_SESSION['logged_in_user_id'], $selected_resume, $motivation);
 
         }
       }
     }
   }
 ?>
+<div class="col-sm-12">
 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 <label for="motivation">Motivatsioonikiri</label>
 <textarea class="form-control" rows="6" name="motivation" type="text"></textarea>
+</div>
 <br>
-<button type="submit" name="send_cv" class="btn btn-success pull-right">
-  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Saada CV
-</button>
+
+<div class="col-sm-6">
+	<br>
+	<select name="my_resume" class="form-control">
+		<?php for($i = 0; $i < count($my_resumes); $i++){
+			echo '<option value="'.$my_resumes[$i]->id.'">'.$my_resumes[$i]->name.'</option>';
+
+		}?>
+	</select>
+</div>
+
+<div class="col-sm-6">
+	<br>
+	<button type="submit" name="send_cv" class="btn btn-success pull-right">
+	  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Saada CV
+	</button>
+</div>
+
 </form>
 
 

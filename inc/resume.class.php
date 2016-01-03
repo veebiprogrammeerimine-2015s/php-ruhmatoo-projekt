@@ -13,16 +13,25 @@
     ### Send Resume ###
     ###################
 
-    function sendResume($job_id, $user_id, $motivation) {
-      $stmt = $this->connection->prepare("INSERT INTO got_cv (job_id, sender_id, motivation, sent_time) VALUES (?, ?, ?, NOW())");
-      $stmt->bind_param("iis", $job_id, $user_id, $motivation);
-      var_dump ($job_id, $user_id, $motivation);
+    function sendResume($link, $user_id, $cv_id, $motivation) {
+      $stmt = $this->connection->prepare("SELECT id FROM job_offers WHERE link = ?");
+      $stmt->bind_param("s", $link);
+      $stmt->bind_result($id);
       $stmt->execute();
-      header("Location: jobs.php");
+      if($stmt->fetch()) {
+        $job = new StdClass();
+        $job->id = $id;
+      }
       $stmt->close();
 
-      #Siia tuleb mail saatmine
+      $stmt = $this->connection->prepare("INSERT INTO got_cv (job_id, sender_id, cv_id, motivation, sent_time) VALUES (?,?,?,?,NOW())");
+      $stmt->bind_param("iiis", $job->id, $user_id, $cv_id, $motivation);
+      #var_dump ($job_id, $user_id, $cv_id, $motivation);
+      $stmt->execute();
 
+      #header("Location: ../content/jobs.php");
+
+      $stmt->close();
     }
 
     ################################
