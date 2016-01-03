@@ -9,6 +9,22 @@
         $this->url = $myurl;
     }
 
+    ###################
+    ### Send Resume ###
+    ###################
+
+    function sendResume($job_id, $user_id, $motivation) {
+      $stmt = $this->connection->prepare("INSERT INTO got_cv (job_id, sender_id, motivation, sent_time) VALUES (?, ?, ?, NOW())");
+      $stmt->bind_param("iis", $job_id, $user_id, $motivation);
+      var_dump ($job_id, $user_id, $motivation);
+      $stmt->execute();
+      header("Location: jobs.php");
+      $stmt->close();
+
+      #Siia tuleb mail saatmine
+
+    }
+
     ################################
     ### Default stuff in Resumes ###
     ################################

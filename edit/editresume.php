@@ -268,7 +268,6 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 											<th>Lõpp</th>
 											<th>Lisainfo</th>
 											<th>Tüüp</th>
-											<th>Tegevused</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -304,7 +303,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 														 <td>'.$getPrimary[$i]->end.'</td>
 														 <td>'.$getPrimary[$i]->info.'</td>
 														 <td>'.$getPrimary[$i]->type.'</td>';
-												echo '<td><div class="btn-group" role="group">';
+												echo '<td><div class="btn-group pull-right" role="group">';
 
 												echo '<a href="?edit='.$getPrimary[$i]->id.'" class="btn btn-info btn-sm">
 																<span class="glyphicon glyphicon-pencil"></span> Muuda
@@ -401,7 +400,6 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 								<th>Kestvus</th>
 								<th>Lisainfo</th>
 								<th>Aasta</th>
-								<th>Tegevused</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -437,7 +435,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 											 <td>'.$getCourses[$i]->duration.'</td>
 											 <td>'.$getCourses[$i]->info.'</td>
 											 <td>'.$getCourses[$i]->year.'</td>';
-									echo '<td><div class="btn-group" role="group">';
+									echo '<td><div class="btn-group pull-right" role="group">';
 
 									echo '<a href="?edit_course='.$getCourses[$i]->id.'" class="btn btn-info btn-sm">
 													<span class="glyphicon glyphicon-pencil"></span> Muuda
@@ -552,7 +550,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 											 <td><input class="form-control" type="text" name="work_end" value="'.$getWorkexp[$i]->end.'"></td>';
 									echo '<td>';
 
-									echo '<div class="btn-group" role="group">';
+									echo '<div class="btn-group " role="group">';
 									echo '<button type="submit" name="update_work" class="btn btn-success btn-sm">
 														<span class="glyphicon glyphicon-ok"></span>
 													</button>';
@@ -571,7 +569,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 											 <td>'.$getWorkexp[$i]->info.'</td>
 											 <td>'.$getWorkexp[$i]->start.'</td>
 											 <td>'.$getWorkexp[$i]->end.'</td>';
-									echo '<td><div class="btn-group" role="group">';
+									echo '<td><div class="btn-group pull-right" role="group">';
 
 									echo '<a href="?edit_work='.$getWorkexp[$i]->id.'" class="btn btn-info btn-sm">
 													<span class="glyphicon glyphicon-pencil"></span> Muuda
@@ -705,9 +703,9 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 		</div>
 		<div class="col-sm-12">
 			<br>
-			<button type="button" class="btn btn-success pull-right">
-			Edasi <span class="glyphicon glyphicon-chevron-right"></span>
-			</button>
+			<a href="../content/profile.php" class="btn btn-success pull-right">
+				Edasi <span class="glyphicon glyphicon-chevron-right"></span>
+			</a>
       </div>
 		</div>
 
