@@ -48,8 +48,14 @@
             if($password_error == "" && $email_error == ""){
 
                 $hash = hash("sha512", $password);
-                $User->logInUser($email, $hash);
-                                             
+                $login_response = $User->logInUser($email, $hash);
+                                         
+				if (isset($login_response->success)){
+					$_SESSION["user_id"] = $login_response->success->user->id;
+					$_SESSION["user_email"] = $login_response->success->user->email;
+					
+				$_SESSION["login_message"] = $login_response->success->message;
+				}						 
                 }
             }
             
@@ -85,10 +91,10 @@
         }
 
             if($firstname_error == "" && $lastname_error == "" && $create_email_error == "" && $create_password_error == "" ){
-                
+               // echo "Võib kasutajat luua! Kasutajanimi on ".$create_email." ja parool on ".$create_password;
                 $hash = hash ("sha512", $create_password);
                 
-                $User->createUser($create_email, $hash);  
+                $response = $User->createUser($create_email, $hash);  
             }
         } //create if end 
     }
@@ -112,6 +118,7 @@
     $page_file_name="login.php";
 ?>
     
+<<<<<<< HEAD
 
 
 <!DOCTYPE html>
@@ -167,13 +174,39 @@
 	<div class="container-fluid">
 		
         <h2>Logi sisse</h2>
+
+<?php
+    require_once("../header.php");
+?>
+		<p>Tegemist on lehega, kus on võimalik eelregistreerida erinevatele spordisündmustele</p>
+        <h2>Login</h2>
+		
+		<?php if(isset($login_response->error)): ?>
+		<p style="color:red;"><?=$login_response->error->message;?></p>
+		 <?php endif; ?>
+		
+
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <input name="email" type="email" placeholder="E-post" value="<?php echo $email; ?>">* <?php echo $email_error;?> <br><br>
         <input name="password" type="password" placeholder="Parool">* <?php echo $password_error;?> <br><br>
         <input name= "login"type="submit" value="Logi sisse">
         </form>
         
+
         <h2>Loo kasutaja</h2>
+
+		 
+  <?php if(isset($response->success)): ?>
+  
+  <p style="color:green;"><?=$response->success->message;?><p>
+  
+  <?php elseif(isset($response->error)): ?>
+  
+  <p style="color:red;"><?=$response->error->message;?><p>
+  
+  <?php endif; ?>
+		
+
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <input type="text" name="firstname" placeholder="Eesnimi" value="<?php echo $firstname; ?>">* <?php echo $firstname_error;?><br><br>
 		<input type="text" name="lastname" placeholder="Perenimi" value="<?php echo $lastname; ?>">*<?php echo $lastname_error;?><br><br>
