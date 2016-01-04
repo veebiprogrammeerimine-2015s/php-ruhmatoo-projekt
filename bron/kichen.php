@@ -103,9 +103,7 @@
 											}
 											$ready = 1;
 										}
-										if(''){
-											echo "Pole tellimusi";
-										}
+
 
 
         						?>
