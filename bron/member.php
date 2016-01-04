@@ -1,23 +1,16 @@
-
 <?php
   require_once("functions.php");
   require_once("../../config.php");
   require('layout/header.php'); 
-
-
-
-
   function test_input($data) {  
     $data = trim($data);  //võtab ära tühikud,enterid,tabid
     $data = stripslashes($data);  //võtab ära tagurpidi kaldkriipsud
     $data = htmlspecialchars($data);  //teeb htmli tekstiks, nt < läheb &lt
     return $data;
   }
-
     if(!isset($_SESSION["logged_in_user_id"])){
     header("Location: member.php");
   }
-
     if(isset($_GET["logout"])){
   $q = 'UPDATE rows_t SET staatus_t=0 WHERE staatus_t=1 LIMIT 1';
    $change = $connection->prepare($q);
@@ -27,7 +20,6 @@
      session_destroy();
       header("Location: index.php");
   }
-
   ?>
         <header id="header">
             <div id="logo">
@@ -66,7 +58,6 @@
           <div id="row">
               <section class="clearfix">
                 <?php
-
                   echo "
                     <form action='#food'>
                         <dl>
@@ -90,7 +81,6 @@
                           echo "
                            </select>";
                         } echo"
-
                         </dd>                                   
                         <br>
                         <input"; if($free == 0) { echo " disabled='disabled' "; } echo" class='button' type='submit' name='row' value='Edasi' />
@@ -116,7 +106,6 @@
                     $row->fetch();
                     $_SESSION['max_seats'] = $seats;
                     $row->close();
-
                     echo "
                     <p>Valisite ".$_SESSION['max_seats']." kohaga raja. <a href='member.php'>Muuda</a></p>
                     <h3>Vali menüüst</h3>
@@ -163,15 +152,12 @@
                       $sweet->execute();
                       $sweet->bind_result($menuID, $name, $price);
                       $k = 0;
-
-
                       while($sweet->fetch()) {
                         $k++;
                         echo '<li><input type="hidden" name="mt'.$k.'" value="'.$menuID.'" />'.$name.' - '.$price.'€ Kogus: 0 <input type="range" name="mt'.$k.'_amount" value="0" min="0" max="'.$_SESSION['max_seats'].'" />'.$_SESSION['max_seats'].'</li>';
                       }
                       $_SESSION['vodka'] = $k;
                       $sweet->close();
-
                       echo "</ul>
                       </dd>                                    
                       
@@ -181,8 +167,6 @@
                     </form>";
                     }
                   } 
-
-
                 ?>
                 
               <div class="break">
@@ -191,7 +175,6 @@
                    <div id="ready">
                           <section class="clearfix">
                                 <?php
-
                                 //service on algul puudu, notice vältimine
                                 if(!isset($_SESSION['orderID'])) { $_SESSION['orderID'] = ''; }
                                 //tellimus haldamine
@@ -204,7 +187,6 @@
                                   $service->fetch();
                                   $service->close();
                                   echo '<h3>tellimuse '.$orderID.' tellimus</h3>';
-
                                   $price_total = 0;
                                   $q = 'SELECT m.name_t, m.price_t, t.amount_t FROM order_food_t t LEFT JOIN menu_t m ON m.menuID_t=t.menuID_t WHERE t.orderID_t=?';
                                   $snaks = $connection->prepare($q);
@@ -221,22 +203,18 @@
                                   
                                   
                                 } else {
-
                                   if(isset($_REQUEST['food'])) {
-
                                     $q = 'INSERT INTO order_t SET rowID_t=?, staatus_t=1';
                                     $add = $connection->prepare($q);
                                     $add->bind_param('i', $_REQUEST['row']);
                                     $add->execute() or trigger_error($add->error); 
                                     $_SESSION['orderID'] = $add->insert_id;
                                     $add->close();
-
                                    $q = 'UPDATE rows_t SET staatus_t=1 WHERE ID=? LIMIT 1';
                                     $change = $connection->prepare($q);
                                     $change->bind_param('i',$_REQUEST['row']);
                                     $change->execute();
                                     $change->close();
-
                                     for($i = 1; $i <= $_SESSION['snaks']; $i++) {
                                       if($_REQUEST['snak'.$i.'_amount'] != 0) {
                                         $addpq = 'INSERT INTO order_food_t SET orderID_t=?, menuID_t=?, amount_t=?';
@@ -246,7 +224,6 @@
                                         $addp->close();
                                       }
                                     }
-
                                     for($j = 1; $j <= $_SESSION['drinks']; $j++) {
                                       if($_REQUEST['drink'.$j.'_amount'] != 0) {
                                         $addsq = 'INSERT INTO order_food_t SET orderID_t=?, menuID_t=?, amount_t=?';
@@ -256,7 +233,6 @@
                                         $adds->close();
                                       }
                                     }
-
                                     for($k = 1; $k <= $_SESSION['vodka']; $k++) {
                                       if($_REQUEST['mt'.$k.'_amount'] != 0) {
                                         $addmtq = 'INSERT INTO order_food_t SET orderID_t=?, menuID_t=?, amount_t=?';
@@ -270,7 +246,6 @@
                                   }
                                   
                                 }                              
-
                                   if(!isset($_SESSION['orderID'])) { $_SESSION['orderID'] = ''; }
                                   if($_SESSION['orderID'] != '') {
                                     if(isset($_REQUEST['pay'])) {
@@ -281,7 +256,6 @@
                                         $change->close();
                                         
                                     }
-
                                     $q = 'SELECT orderID_t, staatus_t as order_staatus FROM order_t WHERE orderID_t=?';
                                     $service = $connection->prepare($q);
                                     $service->bind_param('i', $_SESSION['orderID']);
@@ -293,9 +267,7 @@
                                         exit();
                                     }
                                     $service->close();
-
                   
-
                                     
                                     //Laseme maksta kliendil arve, kui status on 2(köögist siia saadetud)
                                     if($service_status == 3) {
@@ -333,7 +305,6 @@
                                         }
                                     }
                                     
-
                                     //Lubame hinnata sööki
                                     if(isset($_REQUEST['grade_service'])) {
                                         //Kontroll

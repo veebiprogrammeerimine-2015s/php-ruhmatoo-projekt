@@ -1,3 +1,4 @@
+
 <?php
 
 	//Loome ühenduse andmebaasiga
@@ -7,7 +8,7 @@
 
 	session_start();
 	
-	
+
 	
 	function createUser($username, $firstname, $lastname, $email, $hash){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);

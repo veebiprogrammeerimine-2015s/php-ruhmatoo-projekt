@@ -1,7 +1,9 @@
 <?php
   require_once("functions.php");
   require_once("../../config.php");
-
+    if(!isset($_SESSION["logged_in_userW_id"])){
+    header("Location: kichen.php");
+  }
   if(isset($_GET["logout"])){
     session_destroy();
     header("Location: index.php");
