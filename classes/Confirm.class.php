@@ -57,8 +57,6 @@ Class Confirm{
 
             
 
-            array_push($array, $all_contest);
-
             
         }
         //saadan tagasi
