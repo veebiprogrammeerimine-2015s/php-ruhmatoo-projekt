@@ -25,10 +25,7 @@
 
 ?>
 
-<p>
-Tere, <?=$_SESSION['user_email'];?> <a href="?logout=1">Logi välja</a>
-</p>
-<br>
+
 <h2>Lisa huviala</h2>
 <?php if(isset($add_interest_response->error)): ?>
   
