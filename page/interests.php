@@ -25,7 +25,9 @@
 
 ?>
 
-
+<a href="data.php">Tagasi registreerimislehele!</a>
+<br>
+<br>
 <h2>Lisa huviala</h2>
 <?php if(isset($add_interest_response->error)): ?>
   
