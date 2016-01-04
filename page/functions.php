@@ -45,6 +45,7 @@
     function getAllData($keyword=""){
         $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
         $stmt = $mysqli->prepare("SELECT id, user_id, contest_name, name FROM contests");
+		// küsi juurde tabelist, et ei oleks kirjet confirm tabelis JOIN (left, inner)
         $stmt->bind_result($id_from_db, $user_id_from_db, $contest_name_from_db, $name_from_db);
         $stmt->execute();
         //iga rea kohta, mis on andmebaasis, teeme midagi 

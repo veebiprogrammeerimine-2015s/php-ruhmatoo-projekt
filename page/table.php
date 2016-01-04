@@ -80,10 +80,13 @@
             echo "<td>".$contest_array[$i]->id."</td>";
             echo "<td>".$contest_array[$i]->user_id."</td>";
             echo "<td>".$contest_array[$i]->contest_name."</td>";
-            echo "<td>".$contest_array[$i]->name."</td>";
-            echo "<td><a href='?delete=".$contest_array[$i]->id."'>X</a></td>";
-            echo "<td><a href='?edit=".$contest_array[$i]->id."'>Muuda</a></td>";
-            echo "<td><a href='confirm.php?confirm=".$contest_array[$i]->id."&user_id=".$contest_array[$i]->user_id."'>Kinnita</a></td>";
+            echo "<td><a href='user.php?id=".$contest_array[$i]->user_id."'>".$contest_array[$i]->name."</a></td>";
+			if($contest_array[$i]->user_id == $_SESSION['logged_in_user_id']){
+				echo "<td><a href='?delete=".$contest_array[$i]->id."'>X</a></td>";
+				echo "<td><a href='?edit=".$contest_array[$i]->id."'>Muuda</a></td>";
+				
+				echo "<td><a href='confirm.php?edit=".$contest_array[$i]->id."&user_id=".$contest_array[$i]->user_id."'>Kinnita</a></td>";
+			}
             echo "</tr>";
             
         }
