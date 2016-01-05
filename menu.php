@@ -102,6 +102,12 @@ if($_SESSION['logged_in_user_group'] == 2):
 			<li class="active"><a href="<?=$myurl; ?>content/myjobs.php">Minu tööpakkumised</a></li>
 			<?php } ?>
 
+			<?php if($page_file != "sentresumes.php") { ?>
+			<li><a href="<?=$myurl; ?>content/sentresumes.php">Esitatud CVd</a></li>
+			<?php } else { ?>
+			<li class="active"><a href="<?=$myurl; ?>content/sentresumes.php">Esitatud CVd</a></li>
+			<?php } ?>
+
 	  </ul>
 	</li>
 </ul>

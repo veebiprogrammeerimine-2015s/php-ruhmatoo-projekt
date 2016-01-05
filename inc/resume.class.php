@@ -9,6 +9,78 @@
         $this->url = $myurl;
     }
 
+    ########################
+    ### Employee resumes ###
+    ########################
+
+    function getSentResumes($user) {
+      $stmt = $this->connection->prepare("SELECT got_cv.id, answer_types.answer, got_cv.sent_time, job_offers.name, ntb_personal.firstname, ntb_personal.lastname FROM got_cv
+                                          INNER JOIN job_offers ON job_offers.id = got_cv.job_id
+                                          INNER JOIN ntb_personal ON ntb_personal.id = got_cv.sender_id
+                                          INNER JOIN answer_types ON answer_types.id = got_cv.answer_type
+                                          WHERE job_offers.user_id = ? ORDER BY got_cv.sent_time DESC");
+      $stmt->bind_param("i", $user);
+      $stmt->bind_result($id, $answer, $sent_time, $job_name, $send_first, $send_last);
+      $stmt->execute();
+
+
+
+      $array = array();
+      if($stmt->fetch()) {
+        $job = new StdClass();
+        $job->id = $id;
+        $job->job = $job_name;
+        $job->first = $send_first;
+        $job->last = $send_last;
+        $job->answer = $answer;
+        $job->time = $sent_time;
+        array_push($array, $job);
+      }
+      return $array;
+      $stmt->close();
+    }
+
+    function answerTypes() {
+      $html = '';
+      $html .= '<select name="answer_type" class="form-control">';
+
+      $stmt = $this->connection->prepare("SELECT id, answer FROM answer_types");
+      $stmt->bind_result($id, $type);
+      $stmt->execute();
+
+      $html .= '<option selected>----</option>';
+      while($stmt->fetch()) {
+        $html .= '<option value="'.$id.'">'.$type.'</option>';
+      }
+      $stmt->close();
+      $html .= '</select>';
+
+      return $html;
+    }
+
+    function sendAnswer($id, $type, $answer) {
+      $response = new StdClass();
+      $stmt = $this->connection->prepare("UPDATE got_cv SET answer_type = ?, answer = ? WHERE id = ?");
+      $stmt->bind_param("isi", $type, $answer, $id);
+      if($stmt->execute()) {
+        $success = new StdClass();
+        $success->message = "Vastus edukalt saadetud!!";
+        $response->success = $success;
+
+        #Saadab meili
+
+      } else {
+        $error = new StdClass();
+        $error->message = "Midagi läks valesti! Anna teada administraatorile!";
+        $response->error = $error;
+      }
+
+      return $response;
+      $stmt->close();
+
+    }
+
+
     ###################
     ### Send Resume ###
     ###################
