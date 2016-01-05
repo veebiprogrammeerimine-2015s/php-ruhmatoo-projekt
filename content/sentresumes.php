@@ -87,7 +87,7 @@
 									<a class="btn btn-success btn-sm" data-toggle="modal" data-target="#'.$sent_cv[$i]->id.'">
 										<span class="glyphicon glyphicon-comment"></span> Vasta
 									</a>
-									<a class="btn btn-info btn-sm">
+									<a href="../pdf/resume.php?id='.$sent_cv[$i]->id.'" class="btn btn-info btn-sm">
 										<span class="glyphicon glyphicon-open-file"></span> Vaata
 									</a>
 

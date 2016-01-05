@@ -9,6 +9,63 @@
         $this->url = $myurl;
     }
 
+    ##################
+    ### Resume PDF ###
+    ##################
+
+    function getPersonal($id) {
+      $stmt = $this->connection->prepare("SELECT ntb_personal.firstname, lastname, county, parish, telnumber, ntb_users.email FROM ntb_personal
+                                          INNER JOIN ntb_users ON ntb_users.id = ntb_personal.user_id
+                                          INNER JOIN ntb_resumes ON ntb_resumes.user_id = ntb_personal.user_id
+                                          INNER JOIN got_cv ON got_cv.cv_id = ntb_resumes.id
+                                          WHERE got_cv.id = ?");
+      $stmt->bind_param("i", $id);
+      $stmt->bind_result($first, $last, $county, $parish, $number, $email);
+      $stmt->execute();
+
+
+      if($stmt->fetch()) {
+        $personal = new StdClass();
+        $personal->first = $first;
+        $personal->last = $last;
+        $personal->county = $county;
+        $personal->parish = $parish;
+        $personal->number = $number;
+        $personal->email = $email;
+
+      }
+      return ($personal);
+
+      $stmt->close();
+    }
+
+    function getEducation($id) {
+      $stmt = $this->connection->prepare("SELECT school_types.type, ntb_schools.school, info, start, endtime FROM ntb_schools
+                                          INNER JOIN school_types ON school_types.id = ntb_schools.type
+                                          INNER JOIN ntb_resumes ON ntb_resumes.id = ntb_schools.resume_id
+                                          INNER JOIN got_cv ON got_cv.cv_id = ntb_resumes.id
+                                          WHERE got_cv.id = ? ORDER BY ntb_schools.endtime DESC");
+      $stmt->bind_param("i", $id);
+      $stmt->bind_result($type, $name, $info, $start, $end);
+      $stmt->execute();
+
+      $array = array();
+      while($stmt->fetch()) {
+        $school = new StdClass();
+        $school->name = $name;
+        $school->type = $type;
+        $school->info = $info;
+        $school->start = $start;
+        $school->end = $end;
+
+        array_push($array, $school);
+
+      }
+      return ($array);
+
+      $stmt->close();
+    }
+
     ########################
     ### Employee resumes ###
     ########################
@@ -23,8 +80,6 @@
       $stmt->bind_result($id, $answer, $sent_time, $job_name, $send_first, $send_last);
       $stmt->execute();
 
-
-
       $array = array();
       if($stmt->fetch()) {
         $job = new StdClass();
@@ -38,6 +93,82 @@
       }
       return $array;
       $stmt->close();
+    }
+
+    function resumeToPDF() {
+        $stmt = $this->connection->prepare("SELECT
+                                            ntb_schools.school, school_types.type, ntb_schools.info, ntb_schools.start, ntb_schools.endtime,
+                                            ntb_workexp.company, ntb_workexp.name, ntb_workexp.content, ntb_workexp.info, ntb_workexp.start, ntb_workexp.endtime,
+                                            ntb_courses.trainer, ntb_courses.course, ntb_courses.duration, ntb_courses.info, ntb_courses.year,
+                                            ntb_personal.firstname, ntb_personal.lastname, ntb_personal.county, ntb_personal.parish, ntb_personal.telnumber,
+                                            ntb_users.email, ntb_resumes.positives, ntb_resumes.additional FROM ntb_resumes
+                                            INNER JOIN ntb_schools ON ntb_schools.resume_id = ntb_resumes.id
+                                            INNER JOIN school_types ON school_types.id = ntb_schools.type
+                                            INNER JOIN ntb_workexp ON ntb_workexp.resume_id = ntb_resumes.id
+                                            INNER JOIN ntb_courses ON ntb_courses.resume_id = ntb_resumes.id
+                                            INNER JOIN ntb_personal ON ntb_personal.user_id = ntb_resumes.user_id
+                                            INNER JOIN ntb_users ON ntb_users.id = ntb_resumes.user_id
+                                            WHERE ntb_schools.deleted IS NULL AND ntb_resumes.deleted IS NULL AND ntb_courses.deleted IS NULL
+                                            AND ntb_workexp.deleted IS NULL AND ntb_resumes.id = 21");
+
+
+        $stmt->bind_result($school_name, $school_type, $school_info, $school_start, $school_end,
+                           $work_company, $work_name, $work_content, $work_info, $work_start, $work_end,
+                           $course_trainer, $course_name, $course_duration, $course_info, $course_year,
+                           $personal_first, $personal_last, $personal_county, $personal_parish, $personal_number,
+                           $personal_email, $resume_positives, $resume_additional);
+        $stmt->execute();
+
+
+        #$stmt->bind_param("i", $id);
+
+
+        $array = array();
+        while($stmt->fetch()) {
+
+          $school = new StdClass();
+          $school->sch_name = $school_name;
+          $school->sch_type = $school_type;
+          $school->sch_info = $school_info;
+          $school->sch_start = $school_start;
+          $school->sch_end = $school_end;
+          array_push($array, $school);
+          $work = new StdClass();
+          $work->work_company = $work_company;
+          $work->work_name = $work_name;
+          $work->work_content = $work_content;
+          $work->work_info = $work_info;
+          $work->work_start = $work_start;
+          $work->work_end = $work_end;
+          array_push($array, $work);
+
+          $course = new StdClass();
+          $course->cor_trainer = $course_trainer;
+          $course->cor_name = $course_name;
+          $course->cor_duration = $course_duration;
+          $course->cor_info = $course_info;
+          $course->cor_year = $course_year;
+          array_push($array, $course);
+
+          $personal = new StdClass();
+          $personal->per_first = $personal_first;
+          $personal->per_last = $personal_last;
+          $personal->per_county = $personal_county;
+          $personal->per_parish = $personal_parish;
+          $personal->per_number = $personal_number;
+          $personal->per_email = $personal_email;
+          array_push($array, $personal);
+
+          $resume = new StdClass();
+          $resume->res_positives = $resume_positives;
+          $resume->res_additional = $resume_additional;
+          array_push($array, $resume);
+        }
+
+        return ($array);
+        #var_dump ($resume->school_name);
+
+        $stmt->close();
     }
 
     function answerTypes() {
