@@ -1,5 +1,12 @@
 <?php require_once("header.php"); ?>
-    
+<?php require_once("functions.php");
+
+	//kui kasutaja on sisseloginud,
+	//siis suuunan data.php lehele
+	if(isset($_SESSION["logged_in_user_id"])){
+		header("Location: data.php");
+	}
+    ?>
 	<!-- ###################### -->
 	<!-- ####### MENÜÜ ######## -->
 	<!-- ###################### -->
@@ -28,8 +35,9 @@
 </nav>
 	
 <br><br><br><br><br><br>
+
 <!-- ###################### -->
-<!-- ####### SISU ######## -->
+<!-- ####### SISU ######### -->
 <!-- ###################### -->	
 
 <div class="container">
