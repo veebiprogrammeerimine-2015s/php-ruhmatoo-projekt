@@ -87,15 +87,16 @@
 			return $message;	
 	}
 //PARide lisamiseks
-		function insertPars($park_id, $nr_of_baskets){
+		function saveParData($basket, $par, $park_id){
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 			
-			$stmt = $mysqli->prepare("INSERT INTO pars (park_id) VALUES (?)");
-			$stmt->bind_param("i",$park_id);
+			$stmt = $mysqli->prepare("INSERT INTO pars (park_id, basket_nr, par) VALUES (?,?,?)");
+			$stmt->bind_param("iii",$park_id, $basket, $par);
 		$stmt->execute();
+		echo $stmt->error;
 		$stmt->close();
 		$mysqli->close();
-		}
+		} 	
 	
 
 
