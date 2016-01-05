@@ -33,7 +33,7 @@
 		if($add_name_error == "" && $add_basket_error == ""){
 				
 				$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-				$stmt = $mysqli->prepare("INSERT INTO park_list (park_name, basket_number) VALUES (?, ?)");
+				$stmt = $mysqli->prepare("INSERT INTO parks_php (park_name, nr_of_baskets) VALUES (?, ?)");
 				$stmt->bind_param("si", $add_name, $add_basket);
 				
 				$stmt->execute();
