@@ -13,7 +13,7 @@
     //****************
 
     
-    $InterestManager = new InterestManager($mysqli, $_SESSION['user_id']);
+    $InterestManager = new InterestManager($mysqli, $_SESSION['logged_in_user_id']);
     
     if(isset($_GET["new_interest"])){
         $add_interest_response = $InterestManager->addInterest($_GET["new_interest"]);

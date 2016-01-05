@@ -1,3 +1,4 @@
+
 <?php
     class InterestManager {
     
@@ -86,9 +87,9 @@
         
 		$response = new StdClass();
 		//kas selline interest olemas
-		$stmt = $this->connection->prepare("SELECT id FROM user_interests WHERE interests_id = ?");
+		$stmt = $this->connection->prepare("SELECT id FROM user_interests WHERE interests_id = ? AND user_id=?");
         echo $this->connection->error;
-		$stmt->bind_param("i", $interest_id);
+		$stmt->bind_param("ii", $interest_id, $this->user_id);
         echo $stmt->error;
 		$stmt->execute();
 		
