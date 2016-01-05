@@ -21,45 +21,45 @@ $InterestManager = new InterestManager($mysqli, $_GET["id"]);
 ?>
 	
 	<br><br><br><br>
+<div class="jumbotron">
+		<div class="container">
+			<h1> </h1>
+			<table border=1>
 
-	<div class="container">
-		<h1> </h1>
-		<table border=1>
-
-		<tr>
+			<tr>
+				
+				<th>Osaleja nimi</th>
+				<th>Võistlus</th>
+				<th>Tulemus</th>
+				<th>Hinda võistlust</th>
+				<th>Kommentaarid</th>
+			</tr>
+		<div>
+	<?php
+		//osalejad ükshaaval läbi käia
+		for($i = 0; $i < count($contest_array); $i++){ //SIIN ON MIDAGI VALESTI? 
+		//tabelis ainult esimesel viskab selle rea ette kinnituslehel
 			
-			<th>Osaleja nimi</th>
-			<th>Võistlus</th>
-			<th>Tulemus</th>
-			<th>Hinda võistlust</th>
-			<th>Kommentaarid</th>
-		</tr>
-	<div>
-<?php
-    //osalejad ükshaaval läbi käia
-    for($i = 0; $i < count($contest_array); $i++){ //SIIN ON MIDAGI VALESTI? 
-	//tabelis ainult esimesel viskab selle rea ette kinnituslehel
-        
-		if($contest_array[$i]->user_id == $_GET["id"]){
-        //kasutaja tahab rida muuta
-            //lihtne vaade
-            echo "<tr>";
-            echo "<td>".$contest_array[$i]->user."</td>";
-            echo "<td>".$contest_array[$i]->contest_name."</td>";
-            echo "<td>".$contest_array[$i]->result."</td>";
-			echo "<td>".$contest_array[$i]->grade."</td>";
-            echo "<td>".$contest_array[$i]->run_comment."</td>";
-            echo "</tr>";
-            
-        }
-        
-    }
-    
-?>
+			if($contest_array[$i]->user_id == $_GET["id"]){
+			//kasutaja tahab rida muuta
+				//lihtne vaade
+				echo "<tr>";
+				echo "<td>".$contest_array[$i]->user."</td>";
+				echo "<td>".$contest_array[$i]->contest_name."</td>";
+				echo "<td>".$contest_array[$i]->result."</td>";
+				echo "<td>".$contest_array[$i]->grade."</td>";
+				echo "<td>".$contest_array[$i]->run_comment."</td>";
+				echo "</tr>";
+				
+			}
+			
+		}
+		
+	?>
 
-</table>
+	</table>
 
-<?=$InterestManager->getUserInterests();?>
-
+	<?=$InterestManager->getUserInterests();?>
+</div>
 <?php require_once("../footer.php"); ?> 
 

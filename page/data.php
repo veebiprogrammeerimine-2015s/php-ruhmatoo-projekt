@@ -77,10 +77,12 @@
     require_once("../header.php");
 ?>
 
+<div class="jumbotron">
 	<div class="container">
-		Tere, <?=$_SESSION['logged_in_user_email'];?> <br><a href="?logout=1">Logi välja</a><br>
+	
+		<p>Tere, <?=$_SESSION['logged_in_user_email'];?><p> <br>
 		
-		<p>Siin on võimalik eelregistreerida võistlustele. Tuleb sisestada võistluse nimi ja enda nimi või klubi.</p>
+		<p>Siin lehel on tel võimalik eelregistreerida võistlustele. Tuleb sisestada võistluse nimi ja enda või klubi nimi.</p>
 
 		<h2>Eelregistreerimine võistlustele</h2>
 		  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
@@ -93,5 +95,5 @@
 			
 		  </form>
 	</div>
-	
+</div>
 <?php require_once("../footer.php"); ?> 
