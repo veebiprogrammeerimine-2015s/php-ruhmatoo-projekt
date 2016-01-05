@@ -10,26 +10,31 @@ $InterestManager = new InterestManager($mysqli, $_GET["id"]);
 	$contest_array = $Confirm->getAllData();
 ?>
 
+<?php 
+    // lehe nimi
+    $page_title = "Kasutaja info";
 
+?>
 
-// küsid kasutaja andmed kus id on selline
+<?php
+    require_once("../header.php");
+?>
+	
+	<br><br><br><br>
 
-// kus võistlustel osalenud
+	<div class="container">
+		<h1> </h1>
+		<table border=1>
 
-// näitad tema huvialad
-
-<h1> </h1>
-<table border=1>
-
-<tr>
-    
-    <th>Osaleja nimi</th>
-    <th>Võistlus</th>
-    <th>Tulemus</th>
-    <th>Hinda võistlust</th>
-    <th>Kommentaarid</th>
-</tr>
-
+		<tr>
+			
+			<th>Osaleja nimi</th>
+			<th>Võistlus</th>
+			<th>Tulemus</th>
+			<th>Hinda võistlust</th>
+			<th>Kommentaarid</th>
+		</tr>
+	<div>
 <?php
     //osalejad ükshaaval läbi käia
     for($i = 0; $i < count($contest_array); $i++){ //SIIN ON MIDAGI VALESTI? 
@@ -54,7 +59,7 @@ $InterestManager = new InterestManager($mysqli, $_GET["id"]);
 
 </table>
 
-
-
 <?=$InterestManager->getUserInterests();?>
+
+<?php require_once("../footer.php"); ?> 
 
