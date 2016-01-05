@@ -29,9 +29,37 @@
   	return $data;
 	}
 ?>	
-<?php var_dump($add_list_response);?>
+<?php 
+	
+	if(isset($add_list_response)){
+		var_dump($add_list_response);
+	}
+?>
 	
 <form method="post">
     <input name="name" type="text">
     <input type="submit" name="createList" value="Submit">
 </form>
+
+<?php
+
+// küsid kõik kasutaja listid
+$array_of_user_lists = $Series->getUserLists();
+
+foreach($array_of_user_lists as $list){
+	echo "<h1>".$list->name.$list->id."</h1>";
+	
+	$episodes_in_single_list = $Series->getEpisodesInList($list->id);
+	var_dump($episodes_in_single_list);
+	
+	foreach($episodes_in_single_list as $episode){
+		echo "<p>".$episode->title."</p>";
+	}
+	
+	
+}
+
+
+	// iga listi kohta küsid episoodid mis seal sees on
+
+?>

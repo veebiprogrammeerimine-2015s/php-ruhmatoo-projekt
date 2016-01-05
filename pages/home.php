@@ -1,9 +1,11 @@
 <?php require_once("../header.php"); ?>
 <?php require_once("../functions.php"); ?>
+<?php require_once("../classes/Series.class.php"); ?>
+
 home sortBy date_created limit = 4 - peaks andma 4 viimast sisestaud seriaali
 
 <?php
-	
+	$Series = new Series($mysqli, $_SESSION["logged_in_user_id"]);
 	
 	
 	$keyword = "";
@@ -20,6 +22,15 @@ home sortBy date_created limit = 4 - peaks andma 4 viimast sisestaud seriaali
 	}
 	
 	
+	if(isset($_POST["createList"])){
+	
+		// 1 seriaali id, 2 listi id
+		//saveToList($_POST["add"], $_POST["new_dd_selection"]);
+		
+		
+		// VAATA series.class rida 133
+		$Series->addToList($_POST["add"], $_POST["new_dd_selection"]);
+	}
 	
 
 	
@@ -46,7 +57,7 @@ home sortBy date_created limit = 4 - peaks andma 4 viimast sisestaud seriaali
 	<?php
 	
 		
-		
+		var_dump($_POST);
 	
 		// trükime välja read
 		// massiivi pikkus count()
@@ -60,7 +71,19 @@ home sortBy date_created limit = 4 - peaks andma 4 viimast sisestaud seriaali
 					echo "<td>".$series_array[$i]->season."</td>";
 					echo "<td>".$series_array[$i]->description."</td>";
 					echo "<td><img src='".$series_array[$i]->picture."' width='200px'></td>";
-					echo "<td><a href='?add=1'>Lisa</a></td>";
+					echo "<td><a href='?add=".$series_array[$i]->id."'>Lisa</a></td>";
+					
+					if(isset($_GET["add"]) && $series_array[$i]->id == $_GET["add"]){
+						echo "<td>"; ?>
+							
+							<form method="post">
+								<input type="hidden" name="add" value="<?=$_GET["add"];?>" type="text">
+								<?php echo dropdown($_GET["add"]); ?>
+								<input type="submit" name="createList" value="Submit">
+							</form>
+
+						<?php echo "</td>";
+					} 
 					
 					echo "</tr>";
 					
@@ -72,11 +95,5 @@ home sortBy date_created limit = 4 - peaks andma 4 viimast sisestaud seriaali
 	
 	?>
 </table>
-<?php if(isset($_GET["add"])){ ?>
-<form method="post">
-    <input type="hidden" name="add" value="<?=$_GET["add"];?>" type="text">
-	<?php echo dropdown(); ?>
-    <input type="submit" name="createList" value="Submit">
-</form>
-<?php } ?>
+
 <?php require_once("../footer.php"); ?>

@@ -135,8 +135,8 @@ class Series {
 		$response = new StdClass();
 		
 		//kas sellel kasutajal on see list
-		$stmt = $this->connection->prepare("SELECT user_list.id, series_list.id FROM user_list, series_list WHERE user_list.id = series_list.list_id AND series_list.episode_id=? AND user_list.id=? AND user_list.user_id=?");
-		$stmt->bind_param("is", $this->user_id, $new_series_id);
+		$stmt = $this->connection->prepare("SELECT series_list.id FROM user_list, series_list WHERE user_list.id = series_list.list_id AND series_list.episode_id=? AND user_list.id=? AND user_list.user_id=?");
+		$stmt->bind_param("iii", $episode_id, $list_id, $this->user_id);
 		$stmt->bind_result($id);
 		$stmt->execute();
 		
@@ -158,7 +158,7 @@ class Series {
 		$stmt = $this->connection->prepare("INSERT INTO series_list (episode_id, list_id) VALUES (?,?)");
 				
 		
-		$stmt->bind_param("is", $this->user_id, $new_series_id);
+		$stmt->bind_param("ii", $episode_id, $list_id);
 		if($stmt->execute()) {
 			
 			$success = new StdClass();
@@ -186,7 +186,48 @@ class Series {
 		
 	}
 	
+	function getUserLists(){
+		
+		// get all lists of logged in user
+		$stmt = $this->connection->prepare("SELECT id, name FROM user_list WHERE user_id=?");
+		$stmt->bind_param("i", $this->user_id);
+		$stmt->bind_result($id, $name);
+		$stmt->execute();
+		
+		$array_of_lists = array();
+		while($stmt->fetch()){
+			
+			$list = new StdClass();
+			$list->id = $id;
+			$list->name = $name;
+			
+			array_push($array_of_lists, $list);
+		}
+		
+		return $array_of_lists;
+	}
 	
+	function getEpisodesInList($list_id){
+		
+		// get episodes in user list
+		$stmt = $this->connection->prepare("SELECT series.id, series.title FROM series_list, series WHERE series_list.episode_id = series.id AND series_list.list_id=?");
+		$stmt->bind_param("i", $list_id);
+		$stmt->bind_result($id, $title);
+		$stmt->execute();
+		
+		$array_of_episodes = array();
+		while($stmt->fetch()){
+			
+			$episode = new StdClass();
+			$episode->id = $id;
+			$episode->title = $title;
+			
+			array_push($array_of_episodes, $episode);
+		}
+		
+		return $array_of_episodes;
+	
+	}
 	
 	
 	

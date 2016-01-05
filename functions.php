@@ -60,7 +60,7 @@
 			$mysqli->close();
 			}
 	
-	function dropdown(){
+	function dropdown($episode_id){
 		
 		$html = "";
 		
@@ -71,7 +71,7 @@
 		//$html .= '<option selected>3</option>';
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		$stmt = $mysqli->prepare("SELECT id, name FROM user_list where user_id=?");
-		
+		// SELECT user_list.id, user_list.name FROM user_list RIGHT JOIN series_list on user_list.id = series_list.list_id WHERE series_list.episode_id IS NULL AND  user_list.user_id=6
 		$stmt->bind_param("i", $_SESSION["logged_in_user_id"]);
 		$stmt->bind_result($id, $name);
 		$stmt->execute();
@@ -86,5 +86,37 @@
 		
 		return $html;
 	}
+	
+	/*function saveToList($episode_id, $list_id){
+		
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+
+		$stmt = $mysqli->prepare("SELECT id FROM series_list WHERE episode_id=? AND list_id=?");
+		
+		$stmt->bind_param("ii", $episode_id, $list_id);
+		$stmt->bind_result($id);
+		$stmt->execute();
+		
+		if($stmt->fetch()){
+			
+			echo "Juba olemas";
+			return;
+			
+		}
+		
+		$stmt->close();
+		
+		$stmt = $mysqli->prepare("INSERT INTO series_list (episode_id, list_id) values (?,?)");
+		$stmt->bind_param("ii", $episode_id, $list_id);
+		if($stmt->execute()){
+			
+			echo "Edukalt lisatud";
+			
+		}
+		
+		
+		
+	}*/
 	
 ?>
