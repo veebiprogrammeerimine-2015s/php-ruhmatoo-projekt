@@ -72,7 +72,7 @@
 			</footer>
 		</div>
 </html>
-=======
+
 <?php
     //lehe nimi
     $page_title="Avaleht";
