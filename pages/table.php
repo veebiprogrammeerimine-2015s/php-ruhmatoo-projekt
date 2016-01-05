@@ -56,7 +56,7 @@
 		$park_id = $_GET["id"];
 		$nr_of_baskets = $_GET["nr"];
 		
-		insertPars ($park_id, $nr_of_baskets);
+		insertPars($park_id, $nr_of_baskets);
 		
 		header("Location: insert_pars.php");
 	}
