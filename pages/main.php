@@ -12,12 +12,7 @@
 		session_destroy();
 		header("Location: login.php");
 	}
-	
-	if(isset($_GET["table"])){
-			
-		header("Location: table.php");
-		
-	}
+
 	
 	$park_list = getParkData();
 	
@@ -31,7 +26,7 @@
 <p>Siia leküljele tuleb: mängude ajalugu, kasutaja saab uusi mänge luua ja loodud mänge mängima minna</p>
 
 <p>
-	<a href="?table=1">SISESTA UUS PARK</a>
+	<a href="table.php">SISESTA UUS PARK</a>
 	
 </p>
 <h1>Discgolfi pargid</h1>
@@ -50,7 +45,7 @@
 				
 				echo "<td>".$park_list[$i]->park_name."</td>";
 				echo "<td>".$park_list[$i]->basket_number."</td>";
-				echo "<td><a href='new_game_0.php?id=".$park_list[$i]->id."&nr=".$park_list[$i]->basket_number."'>Mine Mängima</a></td>";
+				echo "<td><a href='new_game_0.php?id=".$park_list[$i]->id."'>Mine Mängima</a></td>";
 				
 			echo "</tr>";
 		}
