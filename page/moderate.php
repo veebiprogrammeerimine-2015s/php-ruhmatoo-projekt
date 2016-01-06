@@ -40,6 +40,7 @@ $keyword = "";
     <th>Kommentaari aeg</th>
     <th>Kommentaar</th>
 	<th>Kontrollitud</th>
+	<th>Kustuta</th>
 	</tr>
 <?php
 
@@ -57,8 +58,8 @@ $keyword = "";
 			echo "<td>".$procomments_array[$i]->user_id."</td>";
             echo "<td>".$procomments_array[$i]->inserted."</td>";
             echo "<td>".$procomments_array[$i]->comment."</td>";
-			echo "<td><a href='?confirm=".$procomments_array[$i]->id."'>ACCEPT</a></td>";
-            echo "<td><a href='?delete=".$procomments_array[$i]->id."'>DELETE</a></td>";
+			echo "<td><a href='?confirm=".$procomments_array[$i]->id."'>AKTSEPTEERI</a></td>";
+            echo "<td><a href='?delete=".$procomments_array[$i]->id."'>KUSTUTA</a></td>";
             echo "</form>";
             echo "</tr>";
 			}
