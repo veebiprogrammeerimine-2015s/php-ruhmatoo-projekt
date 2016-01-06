@@ -1,0 +1,47 @@
+<?php
+	require_once("../configglobal.php");
+	require_once("User.class.php");
+	
+	
+	
+	session_start();
+	
+	//loome ab'i ühenduse
+	$mysqli = new mysqli($servername, $server_username, $server_password, $database);
+
+	mysqli_set_charset($mysqli, "utf8");
+	//Uus instants klassist User
+	$User = new User($mysqli);
+	
+	
+	//näita backu button
+	function createBackButton($href_to_back){
+			
+		echo '<a href="'.$href_to_back.'" class="btn btn-info" role="button">Tagasi</a>';
+		
+	}
+	
+	// Error teadete loomise funktsioon
+	
+	function buildMainError($message){
+    		$html = '<div class="row">';
+    		$html .= '<div class="alert alert-warning">';
+    		$html .= '<strong>Warning! </strong>'.$message;
+    		$html .= '</div>';
+    		$html .= '</div>';
+    		
+    		return $html;
+    	}
+    	
+    // main success message built
+    
+    function buildMainSuccess($message){
+    		
+    		$html = '<div class="alert alert-success">';
+    		$html .= '<strong>Success! </strong>'.$message;
+    		$html .= '</div>';
+    		
+    		return $html;
+    	}
+    	
+?>
