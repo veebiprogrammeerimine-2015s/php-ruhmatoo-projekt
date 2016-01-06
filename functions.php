@@ -71,5 +71,20 @@
         $stmt->close();
         $mysqli->close();
     }
-
-?>
+	
+	function deleteCarData($id){
+        
+        $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+        
+        // uuendan välja deleted, lisan praeguse date'i
+        $stmt = $mysqli->prepare("UPDATE procomment SET DELETED=NOW() WHERE id=?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        
+        // tühjendame aadressirea
+        header("Location: moderate.php");
+        
+        $stmt->close();
+        $mysqli->close();
+	}
+	?>

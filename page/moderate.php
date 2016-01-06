@@ -39,7 +39,9 @@ $keyword = "";
 	
 			echo "<tr>";
             echo "<form action='table.php' method='get'>";
-            // input mida v‰lja ei n‰idata
+
+            // input mida v√§lja ei n√§idata
+
             echo "<input type='hidden' name='id' value='".$procomments_array[$i]->id."'>";
             echo "<td>".$procomments_array[$i]->id."</td>";
             echo "<td>".$procomments_array[$i]->pro_id."</td>";
@@ -48,7 +50,7 @@ $keyword = "";
             echo "<td>".$procomments_array[$i]->comment."</td>";
 			echo "<td><input name='confirm' value='".$procomments_array[$i]->accepted."' ></td>";
             echo "<td><input name='update' type='submit'></td>";
-            
+            echo "<td><a href='?delete=".$procomments_array[$i]->id."'>DELETE</a></td>";
             echo "</form>";
             echo "</tr>";
 		 
