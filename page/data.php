@@ -88,7 +88,8 @@
                     <h2 class="intro-text text-center">Tere, <?=$_SESSION['logged_in_user_email'];?>!
                     </h2>
 					<hr>
-					<p class="text-center">Soovid ülevaadet oma võistlustest, siis pane võistlused kirja, et oleks hea hiljem kokkuvõtet teha.</p>
+					<p class="text-center">Soovid ülevaadet oma võistlustest, siis pane võistlused kirja, et oleks hea hiljem kokkuvõtet teha. Osalejate all on kirjas
+					kõik registreerunud osalejad ning vajutades nime peale näeb võistleja tulemusi. Tulemuste all saab kirjutada võistluse tulemusi. Head võistluselamust!</p>
 					
 
 					  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >

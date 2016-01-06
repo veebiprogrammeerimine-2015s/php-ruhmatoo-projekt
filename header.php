@@ -47,7 +47,7 @@
             <li><a href="login.php">Logi sisse</a></li>
 			<li><a href="data.php">Registreerimine</a></li>
 			<li><a href="table.php">Osalejad</a></li>
-			<li><a href="confirm.php">Tulemused ja kommentaarid</a></li>
+			<li><a href="confirm.php">Tulemused</a></li>
 			<li><a href="interests.php">Huvide lisamine</a></li>
 			<li><a href="?logout=1">Logi välja</a></li>
           </ul>
