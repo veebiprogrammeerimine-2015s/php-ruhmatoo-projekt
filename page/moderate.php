@@ -12,6 +12,10 @@ if(isset($_GET["delete"])) {
 		deleteComment($_GET["delete"]);
 	}
 
+if(isset($_GET["accept"])) {
+		acceptComment($_GET["accept"]);
+	}
+	
 $keyword = "";
 	if(isset($_GET["keyword"])){
 		$keyword = $_GET["keyword"];
@@ -53,26 +57,13 @@ $keyword = "";
 			echo "<td>".$procomments_array[$i]->user_id."</td>";
             echo "<td>".$procomments_array[$i]->inserted."</td>";
             echo "<td>".$procomments_array[$i]->comment."</td>";
-			echo "<td><input name='confirm' value='".$procomments_array[$i]->accepted."' ></td>";
-            echo "<td><input name='update' type='submit'></td>";
+			echo "<td><a href='?confirm=".$procomments_array[$i]->id."'>ACCEPT</a></td>";
             echo "<td><a href='?delete=".$procomments_array[$i]->id."'>DELETE</a></td>";
             echo "</form>";
             echo "</tr>";
-		 
-			
-			
-			
-		
-		
-			
-            
 			}
-			
-            
             echo "</tr>";
-		
-	
-	
+
 ?>
 </table>
 <?php
