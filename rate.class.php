@@ -7,6 +7,34 @@ class Rate {
         $this->connection = $mysqli;
     }
 
+	function allProfessors($keyword="") {
+		if ($keyword == "") {
+			$search = "%%";
+		}else{
+			$search = "%".$keyword."%";
+		}
+
+		$stmt = $this->connection->prepare("SELECT professors.id, firstname, lastname, schools.school FROM professors
+																				INNER JOIN schools ON schools.id = professors.school
+																				WHERE professors.firstname LIKE ? OR lastname LIKE ? OR schools.school LIKE ?");
+		$stmt->bind_param("sss", $search, $search, $search);
+		$stmt->bind_result($id, $first, $last, $school);
+		$stmt->execute();
+
+		$array = array();
+		while($stmt->fetch()) {
+			$professor = new StdClass();
+			$professor->id = $id;
+			$professor->first = $first;
+			$professor->last = $last;
+			$professor->school = $school;
+			array_push($array, $professor);
+		}
+		return ($array);
+		$stmt->close();
+	}
+
+
   function newProfessor($first, $last, $school) {
     $response = new StdClass();
     $stmt = $this->connection->prepare("SELECT id FROM professors WHERE firstname = ? AND lastname = ? AND school = ?");
