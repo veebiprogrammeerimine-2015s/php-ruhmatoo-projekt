@@ -1,0 +1,1 @@
+<?php require_once("../prof/professor.php"); ?>

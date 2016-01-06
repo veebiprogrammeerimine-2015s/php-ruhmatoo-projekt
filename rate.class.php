@@ -28,14 +28,31 @@ class Rate {
     $stmt->bind_param("ssi", $first, $last, $school);
     if($stmt->execute()) {
       $success = new StdClass();
-      $success->message = "Uus professor loodud";
+      $success->message = "Uus professor loodud!";
       $response->success = $success;
   } else {
       $error = new StdClass();
       $error->id = 1;
-      $error->message = "Uus professor loodud";
+      $error->message = "Midagi katki!";
       $response->error = $error;
   }
+		$stmt->close();
+
+		$stmt = $this->connection->prepare("SELECT id FROM professors WHERE firstname = ? AND lastname = ? AND school = ?");
+		$stmt->bind_param("ssi", $first, $last, $school);
+		$stmt->bind_result($id);
+		$stmt->execute();
+		if($stmt->fetch()) {
+			#Create new file
+			$link_file = "../prof/".$id.".php";
+			$new_file = fopen($link_file, "w");
+			#Create content to new file
+			$content = '<?php require_once("../prof/professor.php"); ?>';
+			fwrite($new_file, $content);
+
+		}
+
+
     return ($response);
 
     $stmt->close();
