@@ -15,6 +15,7 @@
   $file_to_trim = $path['basename'];
   $trimmed = rtrim($file_to_trim, ".php");
   $professor = $Rate->getProfData($trimmed);
+  $comments = $Rate->getComments($trimmed);
   $add_help = 0;
   $add_clarity = 0;
   $add_exam = 0;
@@ -33,7 +34,6 @@
   $median_clarity = $add_clarity / count($professor[0]);
   $median_exam = $add_exam / count($professor[0]);
   $median_class = $add_class / count($professor[0]);
-  echo $_SESSION['logged_in_user_id'];
 ?>
 
  <div class="col-sm-6">
@@ -71,7 +71,12 @@
 <div class="col-sm-6">
   <br>
   <br>
- <?php require_once("../page/rate_points.php"); ?>
+ <?php
+   for($i = 0; $i < count(); $i++) {
+     echo 'Kood:'.;
+     echo '<pre>'..'</pre>';
+    }
+ ?>
 </div>
 <div class="col-sm-6">
   <br>

@@ -185,5 +185,5 @@ class Rate {
     return ($response);
 
     $stmt->close();
-  }
+  }	
 }
