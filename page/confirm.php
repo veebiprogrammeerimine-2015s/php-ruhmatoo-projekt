@@ -8,20 +8,19 @@
     }
 	
 	if(isset($_GET["logout"])){
-	//kustutame sessiooni muutujad
+	
 	session_destroy();
 	header("Location: login.php");
     }
 	
 	$Confirm = new Confirm($mysqli);
-	//$array = getAllData();
+	
 	
 	if(isset($_GET["edit"])) {
 			
 		$Confirm->saveNewEntry($_GET["edit"],$_SESSION['logged_in_user_id']);
 		
-		//$contest_array = $Confirm->getAllData($_GET["user_id"]);
-		//var_dump($contest_array);
+
 		
 	}
 	$contest_array = $Confirm->getAllData();
@@ -55,7 +54,7 @@
 				<br><br>
 				
 				<hr>
-				<h2 class="intro-text text-center">Tulemused
+				<h2 class="intro-text text-center">Võistluste tulemused
 				</h2>
 				<hr>
 
@@ -73,10 +72,9 @@
 				</tr>
 				<?php
 					//osalejad ükshaaval läbi käia
-					for($i = 0; $i < count($contest_array); $i++){ //SIIN ON MIDAGI VALESTI? 
+					for($i = 0; $i < count($contest_array); $i++){
 					//tabelis ainult esimesel viskab selle rea ette kinnituslehel
-						//if($contest_array[$i]->user_id == aadressieal){
-						//kasutaja tahab rida muuta
+						
 						if(isset($_GET["edit_confirm"]) && $_GET["edit_confirm"] == $contest_array[$i]->id){
 							echo "<tr>";
 							echo "<form action='confirm.php' method='get'>";
@@ -91,7 +89,7 @@
 							echo "</form>";
 							echo "</tr>";
 						}else{
-							//lihtne vaade
+							
 							echo "<tr>";
 							echo "<td>".$contest_array[$i]->user."</td>";
 							echo "<td>".$contest_array[$i]->contest_name."</td>";
