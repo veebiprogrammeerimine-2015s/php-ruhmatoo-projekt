@@ -82,18 +82,18 @@ class User {
 		return $response;
 	}
 	
-	function logoutUser($user_ID, $log_out){
-		$response = new StdClass();
+	function logoutUser(){
+		
 		//$User->logOut(); -> lisame andmebaasi et kasutaja logis välja
 		$stmt = $this->connection->prepare("INSERT INTO history (user_ID, log_out) VALUES (?, NOW())");
-			$stmt->bind_param ("i", $_SESSION["logged_in_user_id"]);
-			$stmt->execute();
-			$stmt->close();
+		$stmt->bind_param ("i", $_SESSION["logged_in_user_id"]);
+		$stmt->execute();
+		$stmt->close();
 				
 		};
 		
 		$stmt->close();
-		return $response;
+		
 	}
 }
 ?>
