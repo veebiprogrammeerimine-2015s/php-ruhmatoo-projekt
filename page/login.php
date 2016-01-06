@@ -152,6 +152,7 @@
 						<input type="checkbox">Mäleta mind
 						</label>
 					</div>
+					
 					<button name= "login" type="submit" class="btn btn-primary">Logi sisse</button>
 
 				</form>
@@ -179,20 +180,22 @@
 
 				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 					<div class="form-group">
-						<label for="exampleInputName">Eesnimi</label>
-						<input type="text" name="firstname" class="form-control" id="exampleInputName" placeholder="Eesnimi" value="<?php echo $firstname; ?>">* <?php echo $firstname_error;?>
+						<label for="exampleInputName">Eesnimi*</label>
+						<input type="text" name="firstname" class="form-control" id="exampleInputName" placeholder="Eesnimi" value="<?php echo $firstname; ?>"><?php echo $firstname_error;?>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputLastname">Perekonnanimi</label>
-						<input type="text" name="lastname" class="form-control" id="exampleInputLastname" placeholder="Perenimi" value="<?php echo $lastname; ?>">*<?php echo $lastname_error;?>
+						<label for="exampleInputLastname">Perekonnanimi*</label>
+						<input type="text" name="lastname" class="form-control" id="exampleInputLastname" placeholder="Perenimi" value="<?php echo $lastname; ?>"><?php echo $lastname_error;?>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail1">Email</label>
-						<input type="email" name="create_email" class="form-control" id="exampleInputEmail1" placeholder="E-post" value="<?php echo $create_email; ?>">*<?php echo $create_email_error;?>
+						<label for="exampleInputEmail1">Email*</label>
+						<input type="email" name="create_email" class="form-control" id="exampleInputEmail1" placeholder="E-post" value="<?php echo $create_email; ?>"><?php echo $create_email_error;?>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">Password</label>
-						<input type="password" name="create_password" class="form-control" id="exampleInputPassword1" placeholder="Parool" value="<?php echo $create_password; ?>">*<?php echo $create_password_error;?>
+						<label for="exampleInputPassword1">Password*</label>
+						<input type="password" name="create_password" class="form-control" id="exampleInputPassword1" placeholder="Parool" value="<?php echo $create_password; ?>"><?php echo $create_password_error;?>
+						<br>
+						<p>* Väli on kohustuslik!</p>
 					</div>
 					<button type="submit" name="create" class="btn btn-primary">Loo kasutaja</button>
 				</form>
