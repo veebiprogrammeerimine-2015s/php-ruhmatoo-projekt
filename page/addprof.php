@@ -8,8 +8,8 @@
 
 ?>
 <?php
-  $firstname_error = $lastname_error = "";
-  $firstname = $lastname = "";
+  $firstname_error = $lastname_error = $school_error = "";
+  $firstname = $lastname = $school = "";
 
   if($_SERVER["REQUEST_METHOD"] == "POST") {
       if(isset($_POST["add"])){
@@ -28,7 +28,7 @@
       if (empty($_POST["school"]) ) {
         $school_error = "See väli on kohustuslik";
       }else{
-        $school = cleanInput($_POST["lastname"]);
+        $school = cleanInput($_POST["school"]);
       }
 
       if ($firstname_error == "" && $lastname_error == "" && $school_error == "") {
@@ -40,6 +40,18 @@
  ?>
 <div class="row">
   <div class="col-sm-12">
+    <?php if(isset($response->success)): ?>
+    <div class="alert alert-success alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <p><?=$response->success->message;?></p>
+    </div>
+
+    <?php elseif(isset($response->error)): ?>
+    <div class="alert alert-danger alert-dismissible fade in" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <p><?=$response->error->message;?></p>
+    </div>
+    <?php endif; ?>
     <div class="col-sm-6">
       <h1>Uus professor</h1>
       <p>Kas leidsid professori, kes on puudu?</p>
@@ -55,7 +67,7 @@
           <input type="text" class="form-control" name="lastname">
           <?=$lastname_error;?>
           <br>
-          SELECT
+          <?=$Rate->schoolDropdown(); ?>
           <?=$school_error;?>
           <br>
           <input type="submit" name="add" class="btn btn-primary pull-right">
