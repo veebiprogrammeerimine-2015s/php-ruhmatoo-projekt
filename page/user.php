@@ -36,7 +36,11 @@ $InterestManager = new InterestManager($mysqli, $_GET["id"]);
 	<div class="row">
 		<div class="box">
 			<div class="col-lg-12">
-				<h1>Kasutaja info</h1>
+				<hr>
+				<h2 class="intro-text text-center">Kasutaja tulemused
+				</h2>
+				<hr>
+
 				<table class="table table-condensed">
 
 				<tr>
@@ -74,7 +78,10 @@ $InterestManager = new InterestManager($mysqli, $_GET["id"]);
 
 	<div class="row">
 		<div class="col-lg-12">
-			<p>Kasutaja huvid</p>
+			<hr>
+			<h2 class="intro-text text-center">Huvid
+			</h2>
+			<hr>
 		</div>
 	</div>
 
@@ -83,5 +90,6 @@ $InterestManager = new InterestManager($mysqli, $_GET["id"]);
 		</div>
 	</div>
 </div>
+
 <?php require_once("../footer.php"); ?> 
 

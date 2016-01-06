@@ -126,8 +126,11 @@
 	<div class="row">
 		<div class="box">
 			<div class="col-lg-12">
-				<p>Tegemist on lehega, kus on võimalik eelregistreerida erinevatele spordisündmustele</p>
-				
+				<hr>
+                <h2 class="intro-text text-center">Logi sisse või loo kasutaja ja võidki alustada.
+                </h2>
+				<hr>
+
 				<h2>Logi sisse</h2>
 				
 				<?php if(isset($login_response->error)): ?>

@@ -61,9 +61,11 @@
 		<div class="box">
 			<div class="col-lg-12">
 				<br>
-				<p>Siin ilmuvad tabeli kujul kõik eelregistreerunud.</p>
-				<br>
-				<h1>Osalejad</h1>
+				<hr>
+                <h2 class="intro-text text-center">Registreerunud
+				</h2>
+				<hr>
+
 				<form action="table.php" method="get">
 					<input name="keyword" type="search" value="<?=$keyword?>">
 					<input type="submit" value="Otsi"><br><br>

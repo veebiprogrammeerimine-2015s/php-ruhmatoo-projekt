@@ -47,9 +47,14 @@
 			<div class="col-lg-12">
 
 				<br>
-				Kui tegeled peale jooksmise veel millegagi, siis siin saab muud huvid kirja panna.
+					<hr>
+                    <h2 class="intro-text text-center">Huvialad
+                    </h2>
+					<hr>
+					
+					<p class="text-center">Kui jooksimise vahepeal jääb aega teisteks hobideks, siis pane needki kirja, ehk on kellelgi veel samad huvid.</p>
 				<br>
-				<h2>Lisa huviala</h2>
+
 				<?php if(isset($add_interest_response->error)): ?>
 				  
 				  <p style="color:red"><?=$add_interest_response->error->message;?></p>
@@ -64,7 +69,10 @@
 					<input type="submit" value="Lisa">
 				</form>
 
-				<h2>Minu huvialad</h2>
+				<hr>
+				<h2 class="intro-text text-center">Lisatud huvialad
+				</h2>
+				<hr>
 				<?php if(isset($add_user_interest_response->error)): ?>
 				  
 				  <p style="color:red"><?=$add_user_interest_response->error->message;?></p>
@@ -79,7 +87,10 @@
 					<input type="submit" value="Lisa">
 				</form>
 
-				<h2>Loetelu</h2>
+					<hr>
+                    <h2 class="intro-text text-center">Minu huvialad
+                    </h2>
+					<hr>
 				<?=$InterestManager->getUserInterests();?>
 			</div>
 		</div>

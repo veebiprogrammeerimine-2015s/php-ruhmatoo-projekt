@@ -29,7 +29,7 @@
         //kuiõnnestub, siis tõene, kui viga, siis else
         if($stmt->execute()){
             //õnnestus
-            $message = "edukalt andmebaasi salvestatud!";
+            $message = "Edukalt andmebaasi salvestatud!";
         }
 
 

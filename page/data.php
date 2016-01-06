@@ -84,11 +84,13 @@
 			<div class="box">
 				<div class="col-lg-12">
 		
-					<p>Tere, <?=$_SESSION['logged_in_user_email'];?>!<p> <br>
+					<hr>
+                    <h2 class="intro-text text-center">Tere, <?=$_SESSION['logged_in_user_email'];?>!
+                    </h2>
+					<hr>
+					<p class="text-center">Soovid ülevaadet oma võistlustest, siis pane võistlused kirja, et oleks hea hiljem kokkuvõtet teha.</p>
 					
-					<p>Siin lehel on tel võimalik eelregistreerida võistlustele. Tuleb sisestada võistluse nimi ja enda või klubi nimi.</p>
 
-					<h2>Eelregistreerimine võistlustele</h2>
 					  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 						<label>Võistlus</label>
 						<input id="contest" name="contest" type="text"  value="<?=$contest;?>"> <?=$contest_error; ?><br><br>
@@ -97,6 +99,7 @@
 						<input type="submit" name="add_competitor" value="Lisa">
 						<p style="color:green;"><?=$m;?></p>
 					  </form>
+					  
 				</div>
 			</div>
 		</div>

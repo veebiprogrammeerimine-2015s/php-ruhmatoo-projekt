@@ -24,13 +24,14 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -48,9 +49,7 @@
 			<li><a href="table.php">Osalejad</a></li>
 			<li><a href="confirm.php">Tulemused ja kommentaarid</a></li>
 			<li><a href="interests.php">Huvide lisamine</a></li>
-		  <ul class="nav navbar-nav navbar-right">
 			<li><a href="?logout=1">Logi välja</a></li>
-          </ul>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -59,182 +58,183 @@
 	<br><br><br><br>
 	
 	<style>
-body {
-    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: url('../jooks.JPG') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-}
+		body {
+			font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+			background: url('../jooks.JPG') no-repeat center center fixed;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			background-size: cover;
+			-o-background-size: cover;
+		}
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-weight: 700;
-    letter-spacing: 1px;
-}
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			font-weight: 700;
+			letter-spacing: 1px;
+		}
 
-p {
-    font-size: 1.25em;
-    line-height: 1.6;
-    color: #000;
-}
+		p {
+			font-size: 1.25em;
+			line-height: 1.6;
+			color: #000;
+		}
 
-hr {
-    max-width: 400px;
-    border-color: #999999;
-}
+		hr {
+			max-width: 400px;
+			border-color: #999999;
+		}
 
-.brand,
-.address-bar {
-    display: none;
-}
+		.brand,
+		.address-bar {
+			display: none;
+		}
 
-.navbar-brand {
-    font-weight: 900;
-    letter-spacing: 2px;
-}
+		.navbar-brand {
+			font-weight: 700;
+			letter-spacing: 2px;
+		}
 
-.navbar-nav {
-    font-weight: 400;
-    letter-spacing: 3px;
-}
+		.navbar-nav {
+			font-weight: 400;
+			letter-spacing: 3px;
+		}
 
-.brand-before,
-.brand-name {
-    text-transform: capitalize;
-}
+		.brand-before,
+		.brand-name {
+			text-transform: capitalize;
+		}
 
-.brand-before {
-    margin: 15px 0;
-}
+		.brand-before {
+			margin: 15px 0;
+		}
 
-.brand-name {
-    margin: 0;
-    font-size: 4em;
-}
+		.brand-name {
+			margin: 0;
+			font-size: 4em;
+		}
 
-.tagline-divider {
-    margin: 15px auto 3px;
-    max-width: 250px;
-    border-color: #999999;
-}
+		.tagline-divider {
+			margin: 15px auto 3px;
+			max-width: 250px;
+			border-color: #999999;
+		}
 
-.box {
-    margin-bottom: 20px;
-    padding: 30px 15px;
-    background: #fff;
-    background: rgba(255,255,255,0.9);
-}
+		.box {
+			margin-bottom: 20px;
+			padding: 30px 15px;
+			background: #fff;
+			background: rgba(255,255,255,0.9);
+		}
 
-.intro-text {
-    text-transform: uppercase;
-    font-size: 1.25em;
-    font-weight: 400;
-    letter-spacing: 1px;
-}
+		.intro-text {
+			text-transform: uppercase;
+			font-size: 1.25em;
+			font-weight: 400;
+			letter-spacing: 1px;
+		}
 
-.img-border {
-    float: none;
-    margin: 0 auto 0;
-    border: #999999 solid 1px;
-}
+		.img-border {
+			float: none;
+			margin: 0 auto 0;
+			border: #999999 solid 1px;
+		}
 
-.img-left {
-    float: none;
-    margin: 0 auto 0;
-}
+		.img-right {
+			float: none;
+			margin: 0 auto 0;
+		}
 
-footer {
-    background: #fff;
-    background: rgba(255,255,255,0.9);
-}
+		footer {
+			background: #fff;
+			background: rgba(255,255,255,0.9);
+		}
 
-footer p {
-    margin: 0;
-    padding: 50px 0;
-}
+		footer p {
+			margin: 0;
+			padding: 50px 0;
+		}
 
-@media screen and (min-width:768px) {
-    .brand {
-        display: inherit;
-        margin: 0;
-        padding: 30px 0 10px;
-        text-align: center;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
-        font-size: 5em;
-        font-weight: 700;
-        line-height: normal;
-        color: #fff;
-    }
+		@media screen and (min-width:768px) {
+			.brand {
+				display: inherit;
+				margin: 0;
+				padding: 30px 0 10px;
+				text-align: center;
+				text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+				font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+				font-size: 5em;
+				font-weight: 700;
+				line-height: normal;
+				color: #fff;
+			}
 
-    .top-divider {
-        margin-top: 0;
-    }
+			.top-divider {
+				margin-top: 0;
+			}
 
-    .img-left {
-        float: left;
-        margin-right: 25px;
-    }
+			.img-right {
+				float: right;
+				margin-left: 25px;
+			}
 
-    .address-bar {
-        display: inherit;
-        margin: 0;
-        padding: 0 0 40px;
-        text-align: center;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        text-transform: uppercase;
-        font-size: 1.25em;
-        font-weight: 400;
-        letter-spacing: 3px;
-        color: #fff;
-    }
+			.address-bar {
+				display: inherit;
+				margin: 0;
+				padding: 0 0 40px;
+				text-align: center;
+				text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+				text-transform: uppercase;
+				font-size: 1.25em;
+				font-weight: 400;
+				letter-spacing: 3px;
+				color: #fff;
+			}
 
-    .navbar {
-        border-radius: 0;
-    }
+			.navbar {
+				border-radius: 0;
+			}
 
-    .navbar-header {
-        display: none;
-    }
+			.navbar-header {
+				display: none;
+			}
 
-    .navbar {
-        min-height: 0;
-    }
+			.navbar {
+				min-height: 0;
+			}
 
-    .navbar-default {
-        border: none;
-        background: #fff;
-        background: rgba(255,255,255,0.9);
-    }
+			.navbar-default {
+				border: none;
+				background: #fff;
+				background: rgba(255,255,255,0.9);
+			}
+			
+						.nav>li>a {
+				padding: 15px;
+			}
 
-    .nav>li>a {
-        padding: 35px;
-    }
+			.navbar-nav>li>a {
+				line-height: normal;
+			}
 
-    .navbar-nav>li>a {
-        line-height: normal;
-    }
+			.navbar-nav {
+				display: table;
+				float: none;
+				margin: 0 auto;
+				table-layout: fixed;
+				font-size: 1.25em;
+			}
 
-    .navbar-nav {
-        display: table;
-        float: none;
-        margin: 0 auto;
-        table-layout: fixed;
-        font-size: 1.25em;
-    }
-}
+		}
 
-@media screen and (min-width:1200px) {
-    .box:after {
-        content: '';
-        display: table;
-        clear: both;
-    }
-}
+		@media screen and (min-width:1200px) {
+			.box:after {
+				content: '';
+				display: table;
+				clear: both;
+			}
+		}
 	</style>

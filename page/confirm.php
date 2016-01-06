@@ -53,10 +53,12 @@
 			<div class="col-lg-12">
 		
 				<br><br>
-				<p>Siin saab kirja panna võistluste tulemused ja lisada kommentaare võistluse kohta.</p>
+				
+				<hr>
+				<h2 class="intro-text text-center">Tulemused
+				</h2>
+				<hr>
 
-
-				<h1>Tulemused ja kommentaarid</h1>
 				<form action="confirm.php" method="get">
 					
 				</form>
