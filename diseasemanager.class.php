@@ -144,8 +144,13 @@ class DiseaseManager{
 	}
 	function getDrTimes($user_id, $selected_date){
 		$table_data = array();
-		$stmt=$this->connection->prepare("SELECT af_doctor_available.id, date_appoitmnt, time_start, time_end, booking_status FROM af_doctor_available JOIN af_booking_statuses ON af_booking_statuses.id = af_doctor_available.af_booking_statuses_id JOIN af_doctors ON af_doctors.id = af_doctor_available.af_doctors_id WHERE af_persons_id = ? AND date_appoitmnt = ?");
-		$stmt->bind_param("is", $user_id, $selected_date);
+		if(empty($selected_date)){
+			$stmt=$this->connection->prepare("SELECT af_doctor_available.id, date_appoitmnt, time_start, time_end, booking_status FROM af_doctor_available JOIN af_booking_statuses ON af_booking_statuses.id = af_doctor_available.af_booking_statuses_id JOIN af_doctors ON af_doctors.id = af_doctor_available.af_doctors_id WHERE af_persons_id = ?");
+			$stmt->bind_param("i", $user_id);
+		}else{
+			$stmt=$this->connection->prepare("SELECT af_doctor_available.id, date_appoitmnt, time_start, time_end, booking_status FROM af_doctor_available JOIN af_booking_statuses ON af_booking_statuses.id = af_doctor_available.af_booking_statuses_id JOIN af_doctors ON af_doctors.id = af_doctor_available.af_doctors_id WHERE af_persons_id = ? AND date_appoitmnt = ?");
+			$stmt->bind_param("is", $user_id, $selected_date);
+		}
 		$stmt->bind_result($id_to_delete, $date, $start_time, $end_time, $status);
 		$stmt->execute();
 		while($stmt->fetch()){
@@ -163,5 +168,42 @@ class DiseaseManager{
 		}
 		$stmt->close();
 		return $table_data;
+	}////$_SESSION["id_from_db"]
+	function addDate($id, $date, $start, $end){
+		$response=new StdClass();
+		$stmt=$this->connection->prepare("SELECT af_doctor_available.id FROM af_doctor_available JOIN af_doctors ON af_doctors.id = af_doctor_available.af_doctors_id WHERE af_persons_id = ? AND date_appoitmnt = ? AND time_start = ?");
+		$stmt->bind_param("iss", $id, $date, $start);
+		$stmt->execute();
+		if($stmt->fetch()){
+			$error=new StdClass();
+			$error->id=0;
+			$error->message="Aeg juba olemas";
+			$response->error=$error;
+			return $response;
+		}
+		$stmt->close();
+		$stmt=$this->connection->prepare("SELECT af_doctors_id FROM af_doctor_available JOIN af_doctors ON af_doctors.id = af_doctor_available.af_doctors_id WHERE af_persons_id = ?");
+		$stmt->bind_param("i", $id);
+		$stmt->bind_result($drid);
+		$stmt->execute();
+		$stmt->fetch();
+		$stmt->close();
+		
+		//echo($drid." ".$date." ".$start." ".$end);
+		
+		$stmt=$this->connection->prepare("INSERT INTO af_doctor_available (af_doctors_id, date_appoitmnt, time_start, time_end) VALUES (?, ?, ?, ?)");
+		$stmt->bind_param("isss", $drid, $date, $start, $end);
+		if($stmt->execute()){
+			$success=new StdClass();
+			$success->message="Edukalt uus aeg lisatud";
+			$response->success=$success;
+		}else{
+			$error=new StdClass();
+			$error->id=1;
+			$error->message="Midagi läks katki";
+			$response->error=$error;
+		}
+		$stmt->close();
+		return $response;
 	}
 }?>
