@@ -87,4 +87,21 @@
         $stmt->close();
         $mysqli->close();
 	}
+	
+	function acceptComment($accepted){
+        
+        $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+        
+        $stmt = $mysqli->prepare("UPDATE procomment SET accepted='NOW()' WHERE id=?");
+        $stmt->bind_param("s", $accepted);
+        $stmt->execute();
+        
+        // tühjendame aadressirea
+        //header("Location: table.php");
+        
+        $stmt->close();
+        $mysqli->close();
+        
+    }
+	
 	?>
