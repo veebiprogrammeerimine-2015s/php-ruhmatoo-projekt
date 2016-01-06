@@ -38,8 +38,11 @@
 				}
 		  
 				if($password_error == "" && $email_error == ""){
+
 					echo "<br>";
 					echo "User ".$email.". ";
+
+				
 					
 					$password_hash = hash("sha512", $password);
 					
