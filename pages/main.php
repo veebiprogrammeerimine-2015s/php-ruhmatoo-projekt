@@ -51,7 +51,3 @@
 		}
 ?>
 </table>
-
-<?php
-echo $_SESSION["id_from_db"];
-?>
