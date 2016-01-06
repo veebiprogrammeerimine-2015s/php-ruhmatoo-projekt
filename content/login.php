@@ -65,7 +65,7 @@ if(!isset($_SESSION['logged_in_user_id'])):
 
 	<input type="submit" name="login" value="Logi sisse" class="btn btn-default btn-sm">
 
-	<a href="register.php"><input type="button" name="register" value="Registreeru" class="btn btn-default btn-sm"></a><br>
+	<a href="content/register.php"><input type="button" name="register" value="Registreeru" class="btn btn-default btn-sm"></a><br>
 
 	<div class="col-sm-4 checkbox">
 		<label>
