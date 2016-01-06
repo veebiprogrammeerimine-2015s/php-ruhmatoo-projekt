@@ -115,53 +115,86 @@
     $page_title="Logi sisse";
 
 ?>
-    <br>
-	
-	<div class="container-fluid">
-		
 
 <?php
     require_once("../header.php");
-?>
-		<p>Tegemist on lehega, kus on võimalik eelregistreerida erinevatele spordisündmustele</p>
-		
-        <h2>Logi sisse</h2>
-		
-		<?php if(isset($login_response->error)): ?>
-		<p style="color:red;"><?=$login_response->error->message;?></p>
-		 <?php endif; ?>
-		
+?>	
+   
+<br>
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <input name="email" type="email" placeholder="E-post" value="<?php echo $email; ?>">* <?php echo $email_error;?> <br><br>
-        <input name="password" type="password" placeholder="Parool">* <?php echo $password_error;?> <br><br>
-        <input name= "login"type="submit" value="Logi sisse">
-        </form>
-        
+<div class="container">
+	<div class="row">
+		<div class="col-lg-6">
+			<p>Tegemist on lehega, kus on võimalik eelregistreerida erinevatele spordisündmustele</p>
+			
+			<h2>Logi sisse</h2>
+			
+			<?php if(isset($login_response->error)): ?>
+			<p style="color:red;"><?=$login_response->error->message;?></p>
+			 <?php endif; ?>
+			
 
-        <h2>Loo kasutaja</h2>
+			<form class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+				<div class="form-group">
+					<label class="sr-only" for="exampleInputEmail3">Email</label>
+					<input name="email" type="email" class="form-control" id="exampleInputEmail3" placeholder="E-post" value="<?php echo $email; ?>">* <?php echo $email_error;?> 
+				</div>
+				<div class="form-group">
+					<label class="sr-only" for="exampleInputPassword3">Parool</label>
+					<input name="password" class="form-control" id="exampleInputPassword3" type="password" placeholder="Parool">* <?php echo $password_error;?>
+				</div>
+				 <div class="checkbox">
+					<label>
+					<input type="checkbox">Mäleta mind
+					</label>
+				</div>
+				<button name= "login" type="submit" class="btn btn-primary">Logi sisse</button>
 
-		 
-  <?php if(isset($response->success)): ?>
-  
-  <p style="color:green;"><?=$response->success->message;?><p>
-  
-  <?php elseif(isset($response->error)): ?>
-  
-  <p style="color:red;"><?=$response->error->message;?><p>
-  
-  <?php endif; ?>
-		
+			</form>
+			</div>
+		</div>
 
-		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <input type="text" name="firstname" placeholder="Eesnimi" value="<?php echo $firstname; ?>">* <?php echo $firstname_error;?><br><br>
-		<input type="text" name="lastname" placeholder="Perenimi" value="<?php echo $lastname; ?>">*<?php echo $lastname_error;?><br><br>
-		<input type="email" name="create_email" placeholder="E-post" value="<?php echo $create_email; ?>">*<?php echo $create_email_error;?><br><br>
-		<input type="password" name="create_password" placeholder="Parool" value="<?php echo $create_password; ?>">*<?php echo $create_password_error;?><br><br>
-		<input type="submit" name="create" value="Loo">
-		
-		</form>
+	<div class="row">
+		<div class="col-lg-6">
+
+			<h2>Loo kasutaja</h2>
+
+			 
+			<?php if(isset($response->success)): ?>
+
+			<p style="color:green;"><?=$response->success->message;?><p>
+
+			<?php elseif(isset($response->error)): ?>
+
+			<p style="color:red;"><?=$response->error->message;?><p>
+
+			<?php endif; ?>
+
+
+			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+				<div class="form-group">
+					<label for="exampleInputName">Eesnimi</label>
+					<input type="text" name="firstname" class="form-control" id="exampleInputName" placeholder="Eesnimi" value="<?php echo $firstname; ?>">* <?php echo $firstname_error;?>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputLastname">Perekonnanimi</label>
+					<input type="text" name="lastname" class="form-control" id="exampleInputLastname" placeholder="Perenimi" value="<?php echo $lastname; ?>">*<?php echo $lastname_error;?>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Email</label>
+					<input type="email" name="create_email" class="form-control" id="exampleInputEmail1" placeholder="E-post" value="<?php echo $create_email; ?>">*<?php echo $create_email_error;?>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">Password</label>
+					<input type="password" name="create_password" class="form-control" id="exampleInputPassword1" placeholder="Parool" value="<?php echo $create_password; ?>">*<?php echo $create_password_error;?>
+				</div>
+				<button type="submit" name="create" class="btn btn-primary">Loo kasutaja</button>
+			</form>
+		</div>
 	<div>
-	
+</div>
+
+<br><br><br>
+
 <?php require_once("../footer.php"); ?> 
 

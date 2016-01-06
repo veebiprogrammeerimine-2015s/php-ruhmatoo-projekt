@@ -7,6 +7,12 @@
     header("Location: login.php");
     }
 	
+	if(isset($_GET["logout"])){
+	//kustutame sessiooni muutujad
+	session_destroy();
+	header("Location: login.php");
+    }
+	
 	$Confirm = new Confirm($mysqli);
 	//$array = getAllData();
 	
@@ -39,28 +45,31 @@
     require_once("../header.php");
 ?>
 
-	<div class="container">
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+	
+			<br><br>
+			<p>Siin saab kirja panna võistluste tulemused ja lisada kommentaare võistluse kohta.</p>
 
-		
-		<br><br>
-		<p>Siin saab kirja panna võistluste tulemused ja lisada kommentaare võistluse kohta.</p>
 
+			<h1>Tulemused ja kommentaarid</h1>
+			<form action="confirm.php" method="get">
+				
+			</form>
+			<table class="table table-condensed">
 
-		<h1>Tulemused ja kommentaarid</h1>
-		<form action="confirm.php" method="get">
-			
-		</form>
-		<table border=1>
-
-		<tr>
-			
-			<th>Osaleja nimi</th>
-			<th>Võistlus</th>
-			<th>Tulemus</th>
-			<th>Hinda võistlust</th>
-			<th>Kommentaarid</th>
-		</tr>
-	<div>
+			<tr>
+				
+				<th>Osaleja nimi</th>
+				<th>Võistlus</th>
+				<th>Tulemus</th>
+				<th>Hinda võistlust</th>
+				<th>Kommentaarid</th>
+			</tr>
+		</div>
+	</div>
+</div>
 	
 	
 <?php

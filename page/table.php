@@ -9,6 +9,13 @@
     if(!isset($_SESSION['logged_in_user_id'])){
         header("Location: login.php");
     }
+	
+	if(isset($_GET["logout"])){
+	//kustutame sessiooni muutujad
+	session_destroy();
+	header("Location: login.php");
+    }
+	
     //kuulan, kas kasutaja tahab kustutada
     if(isset($_GET["delete"])){
         $Table->deleteContestData($_GET["delete"]);
@@ -47,29 +54,33 @@
     require_once("../header.php");
 ?>
 
-<div class="jumbotron">
-	<div class="container">
 
-	<br>
-		<p>Siin ilmuvad tabeli kujul kõik eelregistreerunud.</p>
-	<br>
-		<h1>Osalejad</h1>
-		<form action="table.php" method="get">
-			<input name="keyword" type="search" value="<?=$keyword?>">
-			<input type="submit" value="Otsi"><br><br>
-		</form>
-		<table border=1>
-		<tr>
-			<th>id</th>
-			<th>Kasutaja id</th>
-			<th>Võistlus</th>
-			<th>Osaleja nimi/klubi</th>
-			<th>Kustuta</th>
-			<th>Muuda</th>
-			<th>Kinnita osalus</th>
-		</tr>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+
+			<br>
+				<p>Siin ilmuvad tabeli kujul kõik eelregistreerunud.</p>
+			<br>
+				<h1>Osalejad</h1>
+				<form action="table.php" method="get">
+					<input name="keyword" type="search" value="<?=$keyword?>">
+					<input type="submit" value="Otsi"><br><br>
+				</form>
+				<table class="table table-condensed">
+				<tr>
+					<th>id</th>
+					<th>Kasutaja id</th>
+					<th>Võistlus</th>
+					<th>Osaleja nimi/klubi</th>
+					<th>Kustuta</th>
+					<th>Muuda</th>
+					<th>Kinnita osalus</th>
+				</tr>
+		</div>
 	</div>
 </div>
+
 	
 <?php
     //osalejad ükshaaval läbi käia
