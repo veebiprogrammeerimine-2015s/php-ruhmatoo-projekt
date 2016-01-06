@@ -75,6 +75,8 @@
 		
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 			
+			
+			
 			$stmt = $mysqli->prepare("INSERT INTO game_php (user_id, game_name, park_id) VALUES (?, ?, ?)");
 			$stmt->bind_param("isi", $_SESSION["id_from_db"], $game_name, $park_id);
 			
@@ -119,8 +121,8 @@
 		function saveResult($basket_nr, $result){
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 			
-			$stmt = $mysqli->prepare("INSERT INTO results_php (basket_nr, result, game_id, user_id) VALUES (?, ?, ?, ?)");
-			$stmt->bind_param("iiii", $basket_nr, $result, $_SESSION["game_id"], $_SESSION["id_from_db"]);
+			$stmt = $mysqli->prepare("INSERT INTO results_php (basket_nr, result, game_id) VALUES (?, ?, ?)");
+			$stmt->bind_param("iii", $basket_nr, $result, $_SESSION["game_id"]);
 			if($stmt->execute()){
 				$message = "Tulemus salvestatud!";
 			}else {
