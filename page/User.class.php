@@ -90,10 +90,10 @@ class User {
 		$stmt->execute();
 		$stmt->close();
 				
-		};
+		}
 		
-		$stmt->close();
 		
-	}
+		
+	
 }
 ?>
