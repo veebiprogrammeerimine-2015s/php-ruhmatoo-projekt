@@ -216,15 +216,38 @@
 					<div class="container ">
 					  <h1>Welcome to ListIt</h1>
 					  <div class="row">
-						  <div class="col-sm-6 col-md-6">
+					  
+						<div class="col-sm-6 col-md-4">
+							<div class="thumbnail">
+							  <img src="http://findicons.com/files/icons/1580/devine_icons_part_2/512/account_and_control_w.png" alt="popcorn">
+							  <div class="caption">
+								<h3>Create user</h3></br>
+								<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+							  </div>
+							</div>
+						</div>
+						
+						<div class="col-sm-6 col-md-4">
 							<div class="thumbnail">
 							  <img src="http://www.clowns4kids.com/images/popcorn-film-party.png" alt="popcorn">
+							  <div class="caption">
+								<h3>Add series</h3></br>
+								<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+							  </div>
+							</div>
+						</div>
+					  
+						<div class="col-sm-6 col-md-4">
+							<div class="thumbnail">
+							  <img src="http://www.halliecrawford.com/wp-content/uploads/2015/05/list.png" alt="popcorn">
 							  <div class="caption">
 								<h3>Make your own lists of series</h3>
 								<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
 							  </div>
 							</div>
-						  </div>
+						</div>
+						  
+						  
 
 						</div>
 					</div>

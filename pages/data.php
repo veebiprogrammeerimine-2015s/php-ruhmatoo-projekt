@@ -111,7 +111,7 @@
 			</div>
 			<div class="form-group">
 				<label for="description" >Description</label><br>
-				<textarea name="description" rows="10" cols="100"><?php echo $description; ?></textarea> <?php echo $description_error; ?><br><br>
+				<textarea name="description" rows="7" cols="60"><?php echo $description; ?></textarea> <?php echo $description_error; ?><br><br>
 			</div>
 			<div class="form-group">
 				<label for="picture" >Add series cover</label><br>
@@ -121,20 +121,10 @@
 		  </form>
 	</div>
 </div>
-
-<form method="post">
-    <input name="name" type="text">
-    <input type="submit" name="createList" value="Submit">
-</form>
+</br>
+</br>
+</br>
 
 
-<a href="?add=1">Lisa</a>
-<?php if(isset($_GET["add"])){ ?>
-<form method="post">
-    <input type="hidden" name="add" value="<?=$_GET["add"];?>" type="text">
-	<?php echo dropdown(); ?>
-    <input type="submit" name="createList" value="Submit">
-</form>
-<?php } ?>
 
   <?php require_once("../footer.php"); ?>
