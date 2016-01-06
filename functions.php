@@ -4,7 +4,7 @@
 	require_once("rate.class.php");
 
 
-	$database = "if15_rate_my"; #Kui ma peaks teile edasipidi ka midagi sellist saatma siis pane asemele if15_rate_my
+	$database = "vhost45490s2"; #Kui ma peaks teile edasipidi ka midagi sellist saatma siis pane asemele if15_rate_my
 
 	session_start();
 

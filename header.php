@@ -37,18 +37,22 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="page/login.php">Logi Sisse</a>
+      <a class="navbar-brand" href="http://devweb.eu/RYHMAT/php-ruhmatoo-projekt/page/login.php">Logi Sisse</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="page/register.php">Registreeru <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Menüü</a></li>
+        <li class="active"><a href="http://devweb.eu/RYHMAT/php-ruhmatoo-projekt/page/register.php">Registreeru <span class="sr-only">(current)</span></a></li>
+        <li><a href="http://devweb.eu/RYHMAT/php-ruhmatoo-projekt/page/profile.php">Profiil</a></li>
+		<li><a href="http://devweb.eu/RYHMAT/php-ruhmatoo-projekt/page/professors.php">Professorid</a></li>
+		<li><a href="http://devweb.eu/RYHMAT/php-ruhmatoo-projekt/page/addprof.php">Professori lisamine</a></li>
+		
+		<li><a href="http://devweb.eu/RYHMAT/php-ruhmatoo-projekt/page/moderate.php">Modereerimine</a></li>
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Avalehele</a></li>
+        <li><a href="http://devweb.eu/RYHMAT/php-ruhmatoo-projekt/index.php">Avalehele</a></li>
         <li class="dropdown">
 
 

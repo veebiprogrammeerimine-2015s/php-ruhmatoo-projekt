@@ -62,7 +62,7 @@ $keyword = "";
 			echo "<td>".$procomments_array[$i]->user_id."</td>";
             echo "<td>".$procomments_array[$i]->inserted."</td>";
             echo "<td>".$procomments_array[$i]->comment."</td>";
-			echo "<td><a href='?confirm=".$procomments_array[$i]->id."'>AKTSEPTEERI</a></td>";
+			echo "<td><a href='?accept=".$procomments_array[$i]->id."'>AKTSEPTEERI</a></td>";
             echo "<td><a href='?delete=".$procomments_array[$i]->id."'>KUSTUTA</a></td>";
             echo "</form>";
             echo "</tr>";

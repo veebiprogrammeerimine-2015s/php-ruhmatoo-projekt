@@ -2,7 +2,7 @@
 
 
 
-**Rühma liikmete nimed:** 
+**Rühma liikmete nimed:**
 Karl Grossberg
 Rauno Kosula
 Raiko Lepik
@@ -26,47 +26,44 @@ Eraldi kasutajad Õppejõule ja Üliõpilastele
 
 
 **Andmebaas:**
+* procommet
+** id, pro_id, user_id, comment, accepted, inserted, deleted
+* professors
+** id, userid, firstname, lastname, school
+* ratingpro
+** id, userid, profid, helpful, clarity, examgrade, classrate
+* schools
+** id, school
+* usergroups
+** id, name
+* users
+** id, code, email, password, firstname, lastname, school, usergroup, inserted
 
-
-
-Tree
-
-README.md
-
-index.php
-
-header.php
-
-footer.php
-
-disain.css
-
-file.php
-
-registerpage.php
-
-rate.php
-
-profile.php
-
-login.php
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+����php-ruhmatoo-projekt
+    �   disain.css
+    �   footer.php
+    �   functions.php
+    �   header.php
+    �   index.php
+    �   rate.class.php
+    �   README.md
+    �   user.class.php
+    �   
+    ����fail
+    �       file.php
+    �       
+    ����page
+    �       addprof.php
+    �       comments.php
+    �       login.php
+    �       moderate.php
+    �       professors.php
+    �       profile.php
+    �       rate.php
+    �       rate_points.php
+    �       register.php
+    �       registerpage.php
+    �       
+    ����prof
+            7.php
+            professor.php
