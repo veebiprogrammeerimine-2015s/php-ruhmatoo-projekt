@@ -39,45 +39,49 @@
     require_once("../header.php");
 ?>
 
+<br><br>
+
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="box">
+			<div class="col-lg-12">
 
-			<br>
-			Kui tegeled peale jooksmise veel millegagi, siis siin saab muud huvid kirja panna.
-			<br>
-			<h2>Lisa huviala</h2>
-			<?php if(isset($add_interest_response->error)): ?>
-			  
-			  <p style="color:red"><?=$add_interest_response->error->message;?></p>
-			<?php elseif(isset($add_interest_response->success)): ?>
+				<br>
+				Kui tegeled peale jooksmise veel millegagi, siis siin saab muud huvid kirja panna.
+				<br>
+				<h2>Lisa huviala</h2>
+				<?php if(isset($add_interest_response->error)): ?>
+				  
+				  <p style="color:red"><?=$add_interest_response->error->message;?></p>
+				<?php elseif(isset($add_interest_response->success)): ?>
 
-			<p style="color:green;">
-				<?=$add_interest_response->success->message;?>
-			</p>
-			  <?php endif; ?>
-			<form>
-				<input name="new_interest"> <br><br>
-				<input type="submit" value="Lisa">
-			</form>
-
-			<h2>Minu huvialad</h2>
-			<?php if(isset($add_user_interest_response->error)): ?>
-			  
-			  <p style="color:red"><?=$add_user_interest_response->error->message;?></p>
-			<?php elseif(isset($add_user_interest_response->success)): ?>
-
-			<p style="color:green;">
-				<?=$add_user_interest_response->success->message;?>
-			</p>
-			  <?php endif; ?>
+				<p style="color:green;">
+					<?=$add_interest_response->success->message;?>
+				</p>
+				  <?php endif; ?>
 				<form>
-				<?=$InterestManager->createDropdown();?>
-				<input type="submit" value="Lisa">
-			</form>
+					<input name="new_interest"> <br><br>
+					<input type="submit" value="Lisa">
+				</form>
 
-			<h2>Loetelu</h2>
-			<?=$InterestManager->getUserInterests();?>
+				<h2>Minu huvialad</h2>
+				<?php if(isset($add_user_interest_response->error)): ?>
+				  
+				  <p style="color:red"><?=$add_user_interest_response->error->message;?></p>
+				<?php elseif(isset($add_user_interest_response->success)): ?>
+
+				<p style="color:green;">
+					<?=$add_user_interest_response->success->message;?>
+				</p>
+				  <?php endif; ?>
+					<form>
+					<?=$InterestManager->createDropdown();?>
+					<input type="submit" value="Lisa">
+				</form>
+
+				<h2>Loetelu</h2>
+				<?=$InterestManager->getUserInterests();?>
+			</div>
 		</div>
 	</div>
 </div>

@@ -30,49 +30,47 @@ $InterestManager = new InterestManager($mysqli, $_GET["id"]);
     require_once("../header.php");
 ?>
 	
-	<br><br><br><br>
-<div class="jumbotron">
-	<div class="container">
-		<div class="row">
+<br><br>
+
+<div class="container">
+	<div class="row">
+		<div class="box">
 			<div class="col-lg-12">
-				<h1> </h1>
+				<h1>Kasutaja info</h1>
 				<table class="table table-condensed">
 
 				<tr>
-					
 					<th>Osaleja nimi</th>
 					<th>Võistlus</th>
 					<th>Tulemus</th>
 					<th>Hinda võistlust</th>
 					<th>Kommentaarid</th>
 				</tr>
-			<div>
-		<?php
-			//osalejad ükshaaval läbi käia
-			for($i = 0; $i < count($contest_array); $i++){ //SIIN ON MIDAGI VALESTI? 
-			//tabelis ainult esimesel viskab selle rea ette kinnituslehel
-				
+				<?php
+				//osalejad ükshaaval läbi käia
+				for($i = 0; $i < count($contest_array); $i++){ //SIIN ON MIDAGI VALESTI? 
+				//tabelis ainult esimesel viskab selle rea ette kinnituslehel
+
 				if($contest_array[$i]->user_id == $_GET["id"]){
 				//kasutaja tahab rida muuta
-					//lihtne vaade
-					echo "<tr>";
-					echo "<td>".$contest_array[$i]->user."</td>";
-					echo "<td>".$contest_array[$i]->contest_name."</td>";
-					echo "<td>".$contest_array[$i]->result."</td>";
-					echo "<td>".$contest_array[$i]->grade."</td>";
-					echo "<td>".$contest_array[$i]->run_comment."</td>";
-					echo "</tr>";
-					
-				}
-				
-			}
-			
-		?>
+				//lihtne vaade
+				echo "<tr>";
+				echo "<td>".$contest_array[$i]->user."</td>";
+				echo "<td>".$contest_array[$i]->contest_name."</td>";
+				echo "<td>".$contest_array[$i]->result."</td>";
+				echo "<td>".$contest_array[$i]->grade."</td>";
+				echo "<td>".$contest_array[$i]->run_comment."</td>";
+				echo "</tr>";
 
-		</table>
-		
-		<br>
-		
+				}
+
+				}
+
+				?>
+
+			</table>
+
+			<br>
 
 	<div class="row">
 		<div class="col-lg-12">
@@ -80,7 +78,7 @@ $InterestManager = new InterestManager($mysqli, $_GET["id"]);
 		</div>
 	</div>
 
-	<?=$InterestManager->getUserInterests();?>
+				<?=$InterestManager->getUserInterests();?>
 			</div>
 		</div>
 	</div>

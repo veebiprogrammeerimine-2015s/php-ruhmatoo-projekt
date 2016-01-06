@@ -12,15 +12,16 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="box">
+			<div class="col-lg-12">
 
 
-			<br>
+				<br>
 
-			<p class="text-center">Uusaasta lubadus läks meelest? Pole hullu, pane end proovile ja registreeri võistlusele, sest pole halba ilma on valesti valitud riietus.</p>
+				<p class="text-center">Uusaasta lubadus läks meelest? Pole hullu, pane end proovile ja registreeri võistlusele, sest pole halba ilma on valesti valitud riietus.</p>
 
-			<img class="img-responsive img-border img-center" src="dets2015.jpg" alt="">
-		<div/>
+				<img class="img-responsive img-border img-center" src="dets2015.jpg" alt="">
+			<div/>
 	</div>
 
 </div>

@@ -12,16 +12,15 @@
 			}
 		</style>
 
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<footer class="text-center"> <!-- Jalus -->
-				
-						<p>Jooks24, 2015</p> 
-					</footer>
-				</div>
-			<div>
-		</div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>Copyright &copy; Jooks24, 2015</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     </body>
 </html>    
