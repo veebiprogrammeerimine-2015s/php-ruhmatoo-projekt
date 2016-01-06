@@ -92,10 +92,7 @@
 	<div class="row">
 
 			
-		<p>
-			Tere, <?=$_SESSION["name"];?>
-			<a href="?logout=1">Logi välja</a>
-		</p>
+		
 
 		<h2>Add new series</h2>
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
@@ -122,7 +119,6 @@
 </br>
 </br>
 </br>
-
-
+</br>
 
   <?php require_once("../footer.php"); ?>

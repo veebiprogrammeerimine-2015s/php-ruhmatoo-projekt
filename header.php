@@ -36,8 +36,11 @@
       </ul>
 	  <ul class="nav navbar-nav navbar-right">
 		  <li>
-			  <a href="login.php">Account</a></li>
-			  
+			 
+			  <p>
+					Tere, <?=$_SESSION["name"];?>
+					<a href="?logout=1">Logi välja</a>
+			  </p>
 				
 			</ul>
 		
