@@ -47,12 +47,6 @@
         <li><a href="#">Menüü</a></li>
 
       </ul>
-      <form class="navbar-form navbar-left" role="Professori nimi">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Otsi</button>
-      </form>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Avalehele</a></li>
         <li class="dropdown">

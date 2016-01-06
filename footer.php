@@ -7,7 +7,7 @@ $(document).ready(function() {
  var footerTop = $('.page-footer').position().top + footerHeight;
 
  if (footerTop < docHeight) {
-  $('.page-footer').css('margin-top', 1+ (docHeight - footerTop) + 'px');
+  $('.page-footer').css('margin-top', 10+ (docHeight - footerTop) + 'px');
  }
 });
 </script>
