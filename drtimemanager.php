@@ -33,7 +33,35 @@
 		$DiseaseManager->deleteDisease($_GET["delete"]);
 	}
 	$allDiseases = $DiseaseManager->getUserDiseases($_SESSION["id_from_db"]);
+	
+	if(isset($_GET["valik"])){
+		$allTimes = $DiseaseManager->getDrTimes($_SESSION["id_from_db"], $_GET["valik"]);
+	}
 ?>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3 col-md-offset-3">
+		<h3>Kuupäevad</h3>
+		<form>
+			<?=$DiseaseManager->getDrDates($_SESSION["id_from_db"]);?>
+			<button type="submit" class="btn">Vali</button>
+		</form>
+		</div>
+	</div><br>
+	<div class="row">
+		<div class="col-md-2">
+			<h3>Lisa uus aeg</h3>
+		</div>
+		<div class="col-md-6 col-md-offset-1">
+				<?php if(isset($_GET["valik"])){
+				$allTimes = $DiseaseManager->getDrTimes($_SESSION["id_from_db"], $_GET["valik"]);
+				echo $DiseaseManager->build_table($allTimes);
+				}?>
+		</div>
+	</div>
+</div>
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-3">

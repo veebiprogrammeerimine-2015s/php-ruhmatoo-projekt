@@ -128,4 +128,40 @@ class DiseaseManager{
 		}
 		$stmt->close();
 	}
+	function getDrDates($user_id){
+			$html = '';
+			$html.='<select name="valik">';
+			$stmt=$this->connection->prepare("SELECT date_appoitmnt FROM af_doctor_available JOIN af_booking_statuses ON af_booking_statuses.id = af_doctor_available.af_booking_statuses_id JOIN af_doctors ON af_doctors.id = af_doctor_available.af_doctors_id WHERE af_persons_id = ? AND CURDATE()<=date_appoitmnt");
+			$stmt->bind_param("i", $user_id);
+			$stmt->bind_result($name);
+			$stmt->execute();
+			while($stmt->fetch()){
+				$html.='<option value="'.$name.'">'.$name.'</option>';
+			}
+			$stmt->close();
+			$html.='</select>';
+			return $html;
+	}
+	function getDrTimes($user_id, $selected_date){
+		$table_data = array();
+		$stmt=$this->connection->prepare("SELECT af_doctor_available.id, date_appoitmnt, time_start, time_end, booking_status FROM af_doctor_available JOIN af_booking_statuses ON af_booking_statuses.id = af_doctor_available.af_booking_statuses_id JOIN af_doctors ON af_doctors.id = af_doctor_available.af_doctors_id WHERE af_persons_id = ? AND date_appoitmnt = ?");
+		$stmt->bind_param("is", $user_id, $selected_date);
+		$stmt->bind_result($id_to_delete, $date, $start_time, $end_time, $status);
+		$stmt->execute();
+		while($stmt->fetch()){
+				//echo "<pre>";
+				$table_row = new StdClass();
+				//$table_row->id = $id_to_delete;
+				$table_row->Kuupäev = $date;
+				$table_row->Algus = $start_time;
+				$table_row->Lõpp = $end_time;
+				$table_row->Staatus = $status;
+				//$table_row->Eemalda = "<a href='?delete=".$id_to_delete."'>Eemalda</a>";
+				array_push($table_data, $table_row);
+				//var_dump($table_data);
+				//echo "</pre>";
+		}
+		$stmt->close();
+		return $table_data;
+	}
 }?>
