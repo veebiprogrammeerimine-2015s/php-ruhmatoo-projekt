@@ -22,7 +22,7 @@ class Table{
         $array = array(); 
         
         while($stmt->fetch()){
-            //suvaline muutuja, kus hoida auto andmeid, hetkeni kuni lisame massiivi
+            //suvaline muutuja, kus hoida andmeid, hetkeni kuni lisame massiivi
             
             //tühi objekt, kus hoiame väärtuseid
             $contest_array = new StdClass();
@@ -31,7 +31,7 @@ class Table{
             $contest_array->name = $name_from_db;
 
             
-            //lisan massiivi - auto lisan massiivi
+            //lisan massiivi - lisan massiivi
             array_push($array, $all_contest);
             //echo "<pre>";
             //var_dump($array); 

@@ -67,35 +67,43 @@
     
 ?>
 
-Tere, <?=$_SESSION['logged_in_user_email'];?> <br><a href="?logout=1">Logi välja</a>
+<?php 
+    // lehe nimi
+    $page_title = "Registreerimine";
 
-<h2>Eelregistreerimine võistlustele</h2>
-  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-    <label>Võistlus</label>
-  	<input id="contest" name="contest" type="text"  value="<?=$contest;?>"> <?=$contest_error; ?><br><br>
-    <label>Nimi/klubi</label>
-  	<input id="name" name="name" type="" value="<?=$name; ?>"> <?=$name_error; ?><br><br>
-  	<input type="submit" name="add_competitor" value="Lisa">
-    <p style="color:green;"><?=$m;?></p>
-	
-  </form>
-  <?php
-    //lehe nimi
-    $page_title="Registreeri";
-    
-    //faili nimi
-    $page_file_name="data.php";
 ?>
-	<?php
-        if($page_file_name != "table.php"){ 
-            echo '<li><a href="table.php">Registreeritud osalejad</a></li>';
-        } else{ 
-            echo '<li>Tabel</li>';
-        }
-        if($page_file_name != "interests.php"){ 
-        echo '<li><a href="interests.php">Kasutajate huvid</a></li>';
-        } else{ 
-            echo '<li>Huvid</li>';
-        } 
-    ?>
-    
+
+<?php
+    require_once("../header.php");
+?>
+
+<br><br>
+
+	<div class="container">
+		<div class="row">
+			<div class="box">
+				<div class="col-lg-12">
+		
+					<hr>
+                    <h2 class="intro-text text-center">Tere, <?=$_SESSION['logged_in_user_email'];?>!
+                    </h2>
+					<hr>
+					<p class="text-center">Soovid ülevaadet oma võistlustest, siis pane võistlused kirja, et oleks hea hiljem kokkuvõtet teha. Osalejate all on kirjas
+					kõik registreerunud osalejad ning vajutades nime peale näeb võistleja tulemusi. Tulemuste all saab kirjutada võistluse tulemusi. Head võistluselamust!</p>
+					
+
+					  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+						<label>Võistlus</label>
+						<input id="contest" name="contest" type="text"  value="<?=$contest;?>"> <?=$contest_error; ?><br><br>
+						<label>Nimi/klubi</label>
+						<input id="name" name="name" type="" value="<?=$name; ?>"> <?=$name_error; ?><br><br>
+						<input type="submit" name="add_competitor" value="Lisa">
+						<p style="color:green;"><?=$m;?></p>
+					  </form>
+					  
+				</div>
+			</div>
+		</div>
+	</div>
+
+<?php require_once("../footer.php"); ?> 
