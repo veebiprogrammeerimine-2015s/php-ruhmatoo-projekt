@@ -1,4 +1,5 @@
 <?php
+
 class Rate {
 
 	private $connection;
@@ -56,9 +57,16 @@ class Rate {
     return $html;
     $stmt->close();
   }
-
-
-
-  }
-
+  
+	
+	//insert into
+	$comment_error = "";
+	if($_SERVER["REQUEST_METHOD"] == "POST") {
+	if(isset($_POST["submit"]))}
+	
+      if (empty($_POST["comment"]) ) {
+        $comment_error = "See väli on kohustuslik";
+      }else{
+        $comment = cleanInput($_POST["comment"]);
+      }
   ?>

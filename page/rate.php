@@ -2,19 +2,17 @@
 
 	require_once("../header.php");
 	
-	
 ?>
-
-<textarea rows="4" cols="75">
+ <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+ 
+<textarea name="comment" rows="4" cols="75">
 Siin saad anda tagasisidet professori kohta. 
 </textarea>
 
-<div class="nupp">
-  <h2>Saada oma vastus</h2>     
-  <button type="button" class="btn btn-success">Saada</button>
-</div>
-  
 
+  <h2>Saada oma vastus</h2>     
+  <button type="submit" class="btn btn-success" name="saada">Saada</button>
+</form>
 
 <?php
 
