@@ -72,7 +72,7 @@
         $mysqli->close();
     }
 	
-	function deleteCarData($id){
+	function deleteComment($id){
         
         $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
         
