@@ -30,7 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		}
 
 		if ($helpful_error == "" && $clarity_error == "" && $exam_error == "" && $class_error == "") {
-			$response = $Rate->ratePro(1, $trimmed, $helpful, $clarity, $exam, $class);
+			$response = $Rate->ratePro($_SESSION['logged_in_user_id'], $trimmed, $helpful, $clarity, $exam, $class);
 		}
 	}
 }

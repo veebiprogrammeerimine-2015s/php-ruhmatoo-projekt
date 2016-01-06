@@ -33,7 +33,7 @@
   $median_clarity = $add_clarity / count($professor[0]);
   $median_exam = $add_exam / count($professor[0]);
   $median_class = $add_class / count($professor[0]);
-
+  echo $_SESSION['logged_in_user_id'];
 ?>
 
  <div class="col-sm-6">
