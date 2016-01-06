@@ -10,7 +10,7 @@
 
 	if(isSet($_GET["logout"])){
 		
-		
+		$User->logoutUser();
 		session_destroy();
 		header("Location: login.php");
 	}
