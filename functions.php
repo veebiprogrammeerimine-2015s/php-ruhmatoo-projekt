@@ -133,5 +133,41 @@
 	
 		return $message;
 	
-	}			
+	}
+
+//Tulemuste kuvamine mängu lõpus
+
+		function getGameData(){
+			
+			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+			
+			$stmt = $mysqli->prepare("SELECT results_php.basket_nr, results_php.result, pars_php.par FROM results_php
+			JOIN game_php ON game_php.game_id=results_php.game_id
+			JOIN parks_php ON parks_php.park_id=game_php.park_id
+			JOIN pars_php ON pars_php.park_id=parks_php.park_id
+			WHERE game_php.game_id=?");			
+			$stmt->bind_param("i", $_SESSION["game_id"]);
+			echo $stmt->error;
+			$stmt->bind_result($basket_nr, $result, $par);
+			$stmt->execute();
+			
+			$array = array();
+			
+			while($stmt->fetch()){
+				
+				$game_data = new StdClass();
+				$game_data->basket_nr = $basket_nr;
+				$game_data->result = $result;
+				$game_data->par = $par;
+				
+				array_push($array, $game_data);
+			}
+		
+			$stmt->close();
+			$mysqli->close();
+			
+			return $array;
+		}
+			
+			
 ?>

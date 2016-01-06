@@ -108,7 +108,7 @@
 				echo "<td><a href='insert_pars.php?id=".$park_list[$i]->id."&nr=".$park_list[$i]->basket_number."'> 	PARs</a></td>";
 				echo "<td><a href='?delete=".$park_list[$i]->id."'><input type='submit' name='delete' value='X'></td>";
 				echo "<td><a href='?edit=".$park_list[$i]->id."'><input type='submit' name='edit' value='edit'</td>";
-				echo "<td><a href='?play=".$park_list[$i]->id."'><input type='submit' name='play' value='Mine mängima!'></td>";
+				
 				
 			echo "</tr>"; 
 			}
