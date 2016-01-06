@@ -54,7 +54,7 @@
 					
 					<p class="text-center">Kui jooksimise vahepeal jääb aega teisteks hobideks, siis pane needki kirja, ehk on kellelgi veel samad huvid.</p>
 				<br>
-
+				<p style="margin:10px">
 				<?php if(isset($add_interest_response->error)): ?>
 				  
 				  <p style="color:red"><?=$add_interest_response->error->message;?></p>
