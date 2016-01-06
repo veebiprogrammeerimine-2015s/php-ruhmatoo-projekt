@@ -38,12 +38,22 @@
 				}
 		  
 				if($password_error == "" && $email_error == ""){
-					echo "Võib sisse logida! Kasutajanimi on ".$email." ja parool on ".$password;
+					echo "<br>";
+					echo "User ".$email.". ";
 					
 					$password_hash = hash("sha512", $password);
 					
 			
-					loginUser($email, $password_hash);
+					$login_response = $User->loginUser($email, $password_hash);
+					if(isset($login_response->success)){
+						$_SESSION["id_from_db"] = $login_response->success->user->id;
+						$_SESSION["user_email"] = $login_response->success->user->email;
+						
+						header("Location: main.php");
+						exit();
+					}
+					
+					
 				}
 			} 
 		
@@ -72,16 +82,12 @@
 				}
 				
 				if(	$create_name_error == "" && $create_email_error == "" && $create_password_error == ""){
-					echo "<br></br>
-					<br></br> Tere, ".$create_name." Sinu kasutaja on edukalt loodud! Sinu kasutajanimi on ".$create_email;
+					echo "<br><br><br> Tere, ".$create_name." Sinu kasutaja on edukalt loodud! Sinu kasutajanimi on ".$create_email;
 					
 					$password_hash = hash("sha512", $create_password);
 					echo "<br>";
 					
-					
-					
-					createUser($create_name, $create_email, $password_hash);
-					
+					$create_response = $User->createUser($create_name, $create_email, $password_hash);
 				}
 			} 
 		}
@@ -92,11 +98,12 @@
 			$data = stripslashes($data);
 			$data = htmlspecialchars($data);
 			return $data;
-		}
-		
-		
+		}		
 ?>
 
+
+
+<!-- MENÜÜ -->
 <nav class="navbar navbar-inverse navbar-fixed-top">  <!-- default - hall; navbar fixed top hoiab seda üleval kinni -->
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -118,11 +125,11 @@
   </div><!-- /.container-fluid -->
 </nav>
 
+<br><br><br><br>
 
-<br></br>
-<br></br>
 
 <!-- SISU -->
+
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-1 col-sm-9">
@@ -183,7 +190,7 @@
 		</div>
 	
 </div>
-
-
+</body>
+</html>
 
 <?php require_once("../footer.php"); ?>
