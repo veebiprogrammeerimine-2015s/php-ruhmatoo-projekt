@@ -80,11 +80,14 @@ class DiseaseManager{
 		$stmt->bind_result($id_to_delete, $desease_name);
 		$stmt->execute();
 		while($stmt->fetch()){
-			$table_row = new StdClass();
-			//$table_row->id = $id_to_delete;
-			$table_row->Haigus = $desease_name;
-			$table_row->Eemalda = "<a href='?delete=".$id_to_delete."'>Eemalda</a>";
-			array_push($table_data, $table_row);	
+				//echo "<pre>";
+				$table_row = new StdClass();
+				//$table_row->id = $id_to_delete;
+				$table_row->Haigus = $desease_name;
+				$table_row->Eemalda = "<a href='?delete=".$id_to_delete."'>Eemalda</a>";
+				array_push($table_data, $table_row);
+				//var_dump($table_data);
+				//echo "</pre>";
 		}
 		$stmt->close();
 		return $table_data;
@@ -116,14 +119,13 @@ class DiseaseManager{
     	return $html;
 	}
 	function deleteDisease($id_to_be_deleted){
-		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("UPDATE af_doctors_deseases SET deleted=NOW() WHERE af_deseases_id=? AND af_doctors_id_id=?");
+		$stmt=$this->connection->prepare("DELETE FROM af_doctors_deseaes WHERE af_deseases_id=? AND af_doctors_id=?");
+		echo($id_to_be_deleted." hello ".$_SESSION["id_from_db"]);
 		$stmt->bind_param("ii", $id_to_be_deleted, $_SESSION["id_from_db"]);
 		if($stmt->execute()){
 			//kui on edukas
 			header("Location: drtimemanager.php");
 		}
 		$stmt->close();
-		$mysqli->close();
 	}
 }?>

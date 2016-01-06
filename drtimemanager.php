@@ -28,10 +28,9 @@
 		$added_user_Diseases = $DiseaseManager->addUserDisease($_GET["dropdownselect"], $_SESSION["id_from_db"]);
 		
 	}
-	
 	//kas kasutaja tahab kustutada, kas aadressi real on ?delete=??
 	if(isset($_GET["delete"])){
-		deleteDisease($_GET["delete"]);
+		$DiseaseManager->deleteDisease($_GET["delete"]);
 	}
 	$allDiseases = $DiseaseManager->getUserDiseases($_SESSION["id_from_db"]);
 ?>
