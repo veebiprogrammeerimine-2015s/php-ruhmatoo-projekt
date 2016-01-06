@@ -10,11 +10,7 @@
 
 	if(isSet($_GET["logout"])){
 		
-		//$User->logOut(); -> lisad andmebaasi et kasutaja logis välja
-		$stmt = $this->connection->prepare("INSERT INTO history (user_ID, log_out) VALUES (?, NOW())");
-			$stmt->bind_param ("i", $_SESSION["logged_in_user_id"]);
-			$stmt->execute();
-			$stmt->close();
+		
 		session_destroy();
 		header("Location: login.php");
 	}
