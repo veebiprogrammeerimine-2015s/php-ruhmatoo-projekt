@@ -33,7 +33,7 @@
         // accepted IS NULL - ei ole vastu võetud
         
 		$stmt = $mysqli->prepare("SELECT id, pro_id, user_id, inserted, comment, accepted FROM procomment 
-		WHERE accepted IS NULL AND (inserted LIKE ? OR comment LIKE ? OR accepted like ?)");
+		WHERE accepted IS NULL AND DELETED IS NULL AND(inserted LIKE ? OR comment LIKE ? OR accepted like ?)");
         
 		echo $mysqli->error;
 		
@@ -92,12 +92,12 @@
         
         $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
         
-        $stmt = $mysqli->prepare("UPDATE procomment SET accepted='NOW()' WHERE id=?");
+        $stmt = $mysqli->prepare("UPDATE procomment SET accepted=NOW() WHERE id=?");
         $stmt->bind_param("s", $accepted);
         $stmt->execute();
         
         // tühjendame aadressirea
-        //header("Location: table.php");
+        //header("Location: moderate.php");
         
         $stmt->close();
         $mysqli->close();
