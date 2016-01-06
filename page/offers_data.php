@@ -6,6 +6,7 @@
 	
 	if(!isSet($_SESSION["logged_in_user_id"])){
 		header("Location: login.php");
+		exit();
 	}
 	
 	if($_SESSION["logged_in_user_group_id"] == "3"){
@@ -56,7 +57,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 
 <h2>Pakkumise tegemine</h2>
 
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+<form action="<?php echo htmlspecialchars("offers_data.php?offers_data_id=".$_GET["offers_data_id"]); ?>" method="post">
 	<input type="hidden" name="request_id" value="<?=$_GET["offers_data_id"];?>">
 	<input name="price" type="number" placeholder="Hind" value="<?=$price;?>">* <?=$price_error;?><br><br>
 	<textarea style="resize:none" name="comment" rows="10" cols="28" placeholder="Kommentaar"><?=$comment;?></textarea>* <?=$comment_error;?><br><br>

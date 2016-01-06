@@ -34,7 +34,7 @@ class User {
 			$response->success = $success;
 			
 			
-			header("Location: data.php");
+			//header("Location: data.php?tere");
 			
 		}else{
 			
@@ -46,17 +46,24 @@ class User {
 			
 		}
 		
-        $stmt->close();
+		$stmt->close();
+		
+		if(isset($response->success)){
+			
+			$stmt = $this->connection->prepare("INSERT INTO history (user_ID, log_in) VALUES (?, NOW())");
+			$stmt->bind_param ("i", $response->success->user->id);
+			$stmt->execute();
+			$stmt->close();
+			
+		}
+       
         return $response;
 	}
 	
 	function createUser($user_group, $first_name, $last_name, $create_user_email, $hash, $company_name, $company_description){
 		
 		$response = new StdClass();
-		
-		/* Alumise koodireaga on selline probleem, et kui kasutajaks on "ajakirjanik", siis programm sistestab andmetabelis
-		väljadele "company name" ja "company_description" tühjad väljad */		
-		
+
 		$stmt = $this->connection->prepare("INSERT INTO users (user_group_ID, first_name, last_name, e_mail, password, company_name, company_description, created) VALUES (?,?,?,?,?,?,?, NOW())");
 		$stmt->bind_param ("issssss", $user_group, $first_name, $last_name, $create_user_email, $hash, $company_name, $company_description);
 		

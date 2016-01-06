@@ -6,3 +6,11 @@ function showInput(){
 		company.style.display="none";
 	}
 }
+
+window.onload = function(){
+	
+	// see käivitub kui leht on laetud ehk kogu html brauseris
+	
+	showInput();
+	
+}
