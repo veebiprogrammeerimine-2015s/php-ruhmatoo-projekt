@@ -52,6 +52,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 <?php 
 	
 	if($_SESSION["logged_in_user_group_id"] == "3"){
+
 		echo "<table border=1>";
 		echo "<tr>";
 		echo "<th>teksti tüüp</th>";
@@ -99,6 +100,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 		echo "<th>tellimise tähtaeg</th>";
 		echo "<th>ilmumiskoht</th>";
 		echo "<th></th>";
+		echo "<th></th>";
 		echo "</tr>";
 		
 		for($i = 0; $i < count($orders_array); $i++){
@@ -113,6 +115,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 			echo "<td>".$orders_array[$i]->offer_deadline."</td>";
 			echo "<td>".$orders_array[$i]->work_deadline."</td>";
 			echo "<td>".$orders_array[$i]->output."</td>";
+			echo "<td><a href='feedback.php?user_feedback_id=".$orders_array[$i]->company_id."'>vaata tagasisidet</a></td>";
 			echo "<td><a href='offers_data.php?offers_data_id=".$orders_array[$i]->request_ID."'>tee pakkumine</a></td>";
 			echo "<tr>";
 		}

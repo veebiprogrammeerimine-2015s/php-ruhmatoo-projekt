@@ -57,7 +57,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 			echo "<td>".$offers_array[$i]->comment."</td>";
 			echo "<td>".$offers_array[$i]->accepted."</td>";
 			if($offers_array[$i]->accepted == "1"){
-				echo "<td><a href='feedback_data.php?offer_id=".$offers_array[$i]->offer_id."&to_user_id=".$offers_array[$i]->company_id."'>tagasiside</a></td>";
+				echo "<td><a href='feedback_data.php?offer_id=".$offers_array[$i]->offer_id."&to_user_id=".$offers_array[$i]->company_id."'>anna tagasisidet</a></td>";
 			}
 			echo "<tr>";
 		}
@@ -77,6 +77,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 		echo "<th>accepted</th>";
 		echo "<th></th>";
 		echo "<th></th>";
+		echo "<th></th>";
 		echo "</tr>";
 	
 		for($i = 0; $i < count($offers_array); $i++){
@@ -88,9 +89,10 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 			echo "<td>".$offers_array[$i]->price."</td>";
 			echo "<td>".$offers_array[$i]->comment."</td>";
 			echo "<td>".$offers_array[$i]->accepted."</td>";
+			echo "<td><a href='feedback.php?user_feedback_id=".$offers_array[$i]->journalist_id."'>vaata tagasisidet</a></td>";
 			echo "<td><a href='?update_1=".$offers_array[$i]->offer_id."&update_2=".$offers_array[$i]->request_id."'>aktsepteeri</a></td>";
 			if($offers_array[$i]->accepted == "1"){
-				echo "<td><a href='feedback_data.php?offer_id=".$offers_array[$i]->offer_id."&to_user_id=".$offers_array[$i]->journalist_id."'>tagasiside</a></td>";
+				echo "<td><a href='feedback_data.php?offer_id=".$offers_array[$i]->offer_id."&to_user_id=".$offers_array[$i]->journalist_id."'>anna tagasisidet</a></td>";
 			}
 			echo "<tr>";
 		}
