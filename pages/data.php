@@ -96,8 +96,6 @@
 			Tere, <?=$_SESSION["name"];?>
 			<a href="?logout=1">Logi välja</a>
 		</p>
-<?php var_dump($add_response);?>
-<?php var_dump($add_list_response);?>
 
 		<h2>Add new series</h2>
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >

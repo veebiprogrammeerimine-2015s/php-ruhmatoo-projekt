@@ -13,10 +13,8 @@
 		
 		if($keyword == ""){
 			//ei otsi midagi
-			echo "Ei otsi";
 		}else{
 			//otsin
-			echo "Otsin ";
 			$search= "%".$keyword."%";
 		}
 		
