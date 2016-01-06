@@ -62,4 +62,6 @@ foreach($array_of_user_lists as $list){
 
 	// iga listi kohta küsid episoodid mis seal sees on
 
+	
 ?>
+<?php require_once("../footer.php"); ?>

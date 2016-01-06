@@ -2,8 +2,6 @@
 <?php require_once("../functions.php"); ?>
 <?php require_once("../classes/Series.class.php"); ?>
 
-home sortBy date_created limit = 4 - peaks andma 4 viimast sisestaud seriaali
-
 <?php
 	$Series = new Series($mysqli, $_SESSION["logged_in_user_id"]);
 	
@@ -37,14 +35,17 @@ home sortBy date_created limit = 4 - peaks andma 4 viimast sisestaud seriaali
 ?>
 
 
-<h2>Series list</h2>
+<h2>All added series</h2>
 
 <form action="home.php" method="get">
 	<input type="search" name="keyword" value="<?=$keyword;?>">
-	<input type="submit" value="Otsi">
+	<input type="submit" value="Search">
 </form>
 
-<table >
+<div class="container">
+
+<table class="table table bordered" >
+	<thead>
 	<tr>
 		
 		<th>Name</th>
@@ -53,7 +54,9 @@ home sortBy date_created limit = 4 - peaks andma 4 viimast sisestaud seriaali
 		<th>Picture</th>
 		<th>Add to list</th>
 	</tr>
-	
+	<thead>
+<table >
+<div>	
 	<?php
 	
 		
@@ -64,7 +67,7 @@ home sortBy date_created limit = 4 - peaks andma 4 viimast sisestaud seriaali
 		for($i = 0; $i < count($series_array); $i++){
 			//echo $series_array[$i]->id;
 			
-					
+					echo "<tbody>";
 					echo "<tr>";
 					
 					echo "<td>".$series_array[$i]->title."</td>";
@@ -86,6 +89,7 @@ home sortBy date_created limit = 4 - peaks andma 4 viimast sisestaud seriaali
 					} 
 					
 					echo "</tr>";
+					echo "</tbody>";
 					
 				
 			
@@ -95,5 +99,10 @@ home sortBy date_created limit = 4 - peaks andma 4 viimast sisestaud seriaali
 	
 	?>
 </table>
+</br>
+</br>
+</br>
+</br>
+
 
 <?php require_once("../footer.php"); ?>
