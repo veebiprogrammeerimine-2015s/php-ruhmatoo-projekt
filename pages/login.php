@@ -104,6 +104,14 @@
 		}		
 ?>
 
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="utf-8">
+<base target="_blank">
+<link rel="stylesheet" type="text/css" href="yldine.css">
+</head>
+<body>
 
 
 <!-- MENÜÜ -->
@@ -128,7 +136,7 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-<br><br><br><br>
+<br><br><br>
 
 
 <!-- SISU -->
@@ -137,10 +145,19 @@
 	<div class="row">
 		<div class="col-md-6 col-md-offset-1 col-sm-9">
 			<div class="jumbotron">
-				<h1>Welcome to disc golf page!</h1>
+				<h1>Welcome to </h1>
+				<h1>disc golf </h1>
+				<h1>page!</h1>
 				<p>...</p>
+
+				
 			</div>
 		</div>
+
+
+
+
+
 
 		
 <!-- SISSE LOGIMINE -->		
@@ -162,14 +179,14 @@
 			  <div class="form-group">
 			  <?php if(isset($login_response->error)): ?>
   
-				<p style="color:red;">
+				<p style="color:white;">
 				<?=$login_response->error->message;?>
 				</p>
 			
 			  
 			  <?php elseif(isset($login_response->success)): ?>
   
-				<p style="color:green;">
+				<p style="color:white;">
 				<?=$login_response->success->message;?>
 				</p>
 			  <?php endif; ?> 
@@ -210,12 +227,12 @@
 			  <div class="form-group">
 			  
 			  <?php if(isset($create_response->error)): ?>
-				<p style="color:red;">
+				<p style="color:white;">
 				<?=$create_response->error->message;?>
 				</p>
 				<?php elseif(isset($create_response->success)): ?>
   
-				<p style="color:green;">
+				<p style="color:white;">
 				<?=$create_response->success->message;?>
 				</p>
 				
