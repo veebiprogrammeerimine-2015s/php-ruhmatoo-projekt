@@ -7,6 +7,72 @@ class Rate {
         $this->connection = $mysqli;
     }
 
+
+	function getProfData($profid) {
+		$stmt = $this->connection->prepare("SELECT ratingpro.id, helpful, clarity, examgrade, classrate,
+																				professors.firstname, lastname, schools.school FROM ratingpro
+																				INNER JOIN professors ON professors.id = ratingpro.profid
+																				INNER JOIN schools ON schools.id = professors.school
+																				WHERE ratingpro.profid = ?");
+		$stmt->bind_param("i", $profid);
+		$stmt->bind_result($id, $helpful, $clarity, $exam, $class, $first, $last, $school);
+		$stmt->execute();
+
+		$array = array();
+
+		while($stmt->fetch()) {
+			$data = new StdClass();
+			$personal = new StdClass();
+			$data->id = $id;
+			$data->help = $helpful;
+			$data->clarity = $clarity;
+			$data->exam = $exam;
+			$data->class = $class;
+			array_push($array, $data);
+			$personal->first = $first;
+			$personal->last = $last;
+			$personal->school = $school;
+
+		}
+		return array($array, $personal);
+		$stmt->close();
+	}
+
+	function ratePro($user_id, $prof_id, $help, $clarity, $exam, $class) {
+		$response = new StdClass();
+		$stmt = $this->connection->prepare("SELECT id FROM ratingpro WHERE userid = ?");
+		$stmt->bind_param("i", $user_id);
+		$stmt->bind_result($id);
+		$stmt->execute();
+
+		if($stmt->fetch()) {
+
+			$error = new StdClass();
+			$error->id = 0;
+			$error->message = "Oled juba hinnangu andnud!";
+			$response->error = $error;
+
+			return $response;
+		}
+
+		$stmt->close();
+		$stmt = $this->connection->prepare("INSERT INTO ratingpro (userid, profid, helpful, clarity, examgrade, classrate)
+																				VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("iiiiii", $user_id, $prof_id, $help, $clarity, $exam, $class);
+    if($stmt->execute()) {
+      $success = new StdClass();
+      $success->message = "Uus hinnang antud!";
+      $response->success = $success;
+  } else {
+      $error = new StdClass();
+      $error->id = 1;
+      $error->message = "Midagi katki!";
+      $response->error = $error;
+  }
+		return $response;
+		$stmt->close();
+	}
+
 	function allProfessors($keyword="") {
 		if ($keyword == "") {
 			$search = "%%";
