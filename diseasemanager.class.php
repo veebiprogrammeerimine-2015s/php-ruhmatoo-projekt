@@ -119,14 +119,13 @@ class DiseaseManager{
     	return $html;
 	}
 	function deleteDisease($id_to_be_deleted){
-		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("UPDATE af_doctors_deseases SET deleted=NOW() WHERE af_deseases_id=? AND af_doctors_id_id=?");
+		$stmt=$this->connection->prepare("DELETE FROM af_doctors_deseaes WHERE af_deseases_id=? AND af_doctors_id=?");
+		echo($id_to_be_deleted." hello ".$_SESSION["id_from_db"]);
 		$stmt->bind_param("ii", $id_to_be_deleted, $_SESSION["id_from_db"]);
 		if($stmt->execute()){
 			//kui on edukas
 			header("Location: drtimemanager.php");
 		}
 		$stmt->close();
-		$mysqli->close();
 	}
 }?>
