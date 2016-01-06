@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 class Rate {
 
@@ -168,8 +169,22 @@ class Rate {
     $stmt->close();
   }
 
-
-
+  function newComment($comment){
+	$response = new StdClass();
+	$stmt = $this->connection->prepare("INSERT INTO procomment (comment) VALUES (?)");
+  $stmt->bind_param("s", $comment);
+  if($stmt->execute()) {
+      $success = new StdClass();
+      $success->message = "kommentaar saadetud";
+      $response->success = $success;.
+  } else {
+      $error = new StdClass();
+      $error->id = 1;
+      $error->message = "kommentaari ei saadetud";
+      $response->error = $error;
   }
+    return ($response);
 
-  ?>
+    $stmt->close();
+  }
+}
