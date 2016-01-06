@@ -17,3 +17,4 @@
 	Sisselogitud kasutajaga <?=$_SESSION["user_email"];?>
 	<a href="?logout=1"> Logi välja</a>
 </p>
+<p>m2ng l2bi!!!</p>

@@ -70,6 +70,9 @@
 	
 //Uue mängu alustamine
 	function startNewGame($game_name, $park_id){
+			
+			$message = "";
+		
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 			
 			$stmt = $mysqli->prepare("INSERT INTO game_php (user_id, game_name, park_id) VALUES (?, ?, ?)");
@@ -83,10 +86,50 @@
 		}
 		
 		$stmt->close();
+	
+	//Küsin korvide arvu ja tekitan sessiooni muutuja
+		$stmt = $mysqli->prepare("SELECT nr_of_baskets, park_name FROM parks_php WHERE park_id=?");
+		$stmt->bind_param("i", $park_id);
+		$stmt->bind_result($nr_of_baskets, $park_name);
+		$stmt->execute();
+		if($stmt->fetch()){
+			$_SESSION["nr_of_baskets"] = $nr_of_baskets;
+			$_SESSION["park_name"] = $park_name;
+		}
+		
+		
+		$stmt->close();
+	//Küsin mängu id ja tekitan sessiooni muutuja
+		$stmt = $mysqli->prepare("SELECT game_id FROM game_php WHERE game_name=? AND park_id=?");
+		$stmt->bind_param("si", $game_name, $park_id);
+		$stmt->bind_result($game_id);
+		$stmt->execute();
+		if($stmt->fetch()){
+			$_SESSION["game_id"] = $game_id;
+		}
+	
+		$mysqli->close();
+		
+		return $message;
 		
 		
 	}
-		
+//Tulemuste salvestamine
+
+		function saveResult($basket_nr, $result){
+			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+			
+			$stmt = $mysqli->prepare("INSERT INTO results_php (basket_nr, result, game_id, user_id) VALUES (?, ?, ?, ?)");
+			$stmt->bind_param("iiii", $basket_nr, $result, $_SESSION["game_id"], $_SESSION["id_from_db"]);
+			if($stmt->execute()){
+				$message = "Tulemus salvestatud!";
+			}else {
+				echo $stmt->error;
+			}
+		$stmt->close();
+		$mysqli->close();		
 	
+		return $message;
 	
+	}			
 ?>

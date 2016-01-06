@@ -12,11 +12,40 @@
 		session_destroy();
 		header("Location: login.php");
 	}
-	
-	//$park_id = $_GET["id"];
-	//$nr_of_baskets = $_GET["nr"];
+
 	
 //mängu alustamine	
+	$game_name =  $game_name_error =  "";
+	
+	$park_id = $_GET["id"];
+	
+	if(isset($_POST["start_new_game"])){
+			if ( empty($_POST["game_name"]) ) {
+				$game_name_error = "Palun pane mängule nimi!";
+			}else{
+				$game_name = cleanInput($_POST["game_name"]);
+			}
+	if(	$game_name_error == ""){
+		// functions.php failis käivitan funktsiooni
+				$msg = startNewGame ($game_name, $park_id);
+				
+				if($msg != ""){
+					//salvestamine õnnestus
+					//suunan 1. korvi lehele
+					header("Location: new_game_1.php?k=1");
+					
+					echo $msg;
+					
+				}
+			}
+	}
+	
+	function cleanInput($data) {
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
+	  }
 	
 
 ?>
@@ -25,34 +54,9 @@
 	<a href="?logout=1"> Logi välja</a>
 </p>
 <h2>Pane mängule nimi:</h2><br>
-<table border= 1>
-	<tr>
-		
-		<th>Mängu nimi</th>
-	<tr>
-<?php
 
-	if(isset($_POST['save'])){
-		//var_dump($_POST);
-		$game_name = $_POST["game_name"];
-		startNewGame($game_name, $_GET["id"]);
-	}
-	
-
-	echo "<form action=new_game_0.php method='post'>";
-	echo "<table>";
-	echo "<tr>";
-	echo "<td><input name='park_id' type='hidden' value='".$_GET["id"]."'></td>";
-	echo "<td><input name='nr_of_baskets' type='hidden' value='".$_GET["nr"]."'></td>";
-	echo "<td><input name='game_name'>"."</td>";
-	echo "<td>"."</td>";
-	echo "</table>";
-	echo "<input type='submit' name='save' value='salvesta'>";
-	echo "</form";
-	
-	
-	
-
-
-
-?>
+<form action="<?php echo htmlspecialchars("new_game_0.php?id=".$park_id);?>" method="post" >
+  	<label for="game_name" >Mängu nimetus</label> <input id="game_name" name="game_name" type="text" value="<?=$game_name; ?>"> <?=$game_name_error; ?>
+	<input id="park_id" name="park_id" type="hidden" value="<?=$park_id; ?>">
+	<input type="submit" name="start_new_game" value="Alusta mängu">
+  </form>
