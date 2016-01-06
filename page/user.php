@@ -11,13 +11,6 @@ $InterestManager = new InterestManager($mysqli, $_GET["id"]);
 ?>
 
 
-
-// küsid kasutaja andmed kus id on selline
-
-// kus võistlustel osalenud
-
-// näitad tema huvialad
-
 <h1> </h1>
 <table border=1>
 
@@ -32,7 +25,7 @@ $InterestManager = new InterestManager($mysqli, $_GET["id"]);
 
 <?php
     //osalejad ükshaaval läbi käia
-    for($i = 0; $i < count($contest_array); $i++){ //SIIN ON MIDAGI VALESTI? 
+    for($i = 0; $i < count($contest_array); $i++){ 
 	//tabelis ainult esimesel viskab selle rea ette kinnituslehel
         
 		if($contest_array[$i]->user_id == $_GET["id"]){
