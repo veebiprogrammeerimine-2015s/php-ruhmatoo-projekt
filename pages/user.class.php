@@ -19,7 +19,7 @@ class User {
 			
 			$error = new StdClass();
 			$error->id = 0;
-			$error->message = "Sellise e-postiga kasutaja on juba olemas";
+			$error->message = "This username is already taken!";
 			
 			$response->error = $error;
 			
@@ -33,13 +33,13 @@ class User {
 		
 		if($stmt->execute()){
 			$success = new StdClass();
-			$success->message = "Kasutaja on edukalt salvestatud";
+			$success->message = "The username has been successfully saved!";
 			$response->success = $success;
 					
 		}else{
 			$error = new StdClass();
 			$error->id = 1;
-			$error->message = "Midagi läks katki!";
+			$error->message = "Something went wrong!";
 			
 			$response->error = $error;			
 		}
@@ -59,7 +59,7 @@ class User {
 		if(!$stmt->fetch()){
 			$error = new StdClass();
 			$error->id = 0;
-			$error->message = "Sellise e-postiga kasutajat ei ole olemas!";
+			$error->message = "User with this email doesn't exist!";
 			
 			$response->error = $error;
 			return $response;	
@@ -73,7 +73,7 @@ class User {
 		$stmt->execute();
 		if($stmt->fetch()){
 			$success = new StdClass();
-			$success->message = "Kasutaja edukalt sisse logitud";
+			$success->message = "Success!";
 			
 			$user = new StdClass();
 			$user->id = $id_from_db;
@@ -85,7 +85,7 @@ class User {
 		}else{
 			$error = new StdClass();
 			$error->id = 1;
-			$error->message = "Vale parool!";
+			$error->message = "Wrong password!";
 			
 			$response->error = $error;
 		}
