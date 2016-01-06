@@ -4,6 +4,7 @@
 </head>
 
 <body>
+<link rel="stylesheet" href="kujundus.css" type="text/css" /> 
 <br><br><br>
-<?php require_once("menu.php"); ?>
+<?php require_once("menyy.php"); ?>
 <br><br><br>

@@ -27,13 +27,13 @@
 	?>
 <?php 
 		
-		if($file_name == "../data.php"){ 
+		if($file_name == "data.php"){ 
 		
-			echo "<li>Lisa auto</li>";
+			echo "<li>Lisa parandus</li>";
 		
 		}else{
 	
-			echo '<li><a href="data.php">Lisa auto</a></li>';
+			echo '<li><a href="data.php">Lisa parandus</a></li>';
 		}
 		
 	?>
