@@ -7,6 +7,11 @@
 <Title><?php echo $page_title?></title>
 
 <?php
+
+if(isset($_GET["delete"])) {
+		deleteComment($_GET["delete"]);
+	}
+
 $keyword = "";
 	if(isset($_GET["keyword"])){
 		$keyword = $_GET["keyword"];
