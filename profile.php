@@ -7,4 +7,3 @@ require_once("../header.php");
 
 ?>
 
-<h1>Profiil</h1>
