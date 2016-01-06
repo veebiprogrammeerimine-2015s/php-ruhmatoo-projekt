@@ -1,8 +1,4 @@
-<?php
 
-	require_once("../header.php");
-
-?>
 <?php
 
 	$comment_error = "";
@@ -30,11 +26,3 @@
 	<br>
 	<button type="submit" class="btn btn-success pull-right" name="saada">Saada</button>
 </form>
-
-<?php
-
-
-	require_once("../footer.php");
-
-
-?>

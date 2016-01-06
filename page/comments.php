@@ -1,0 +1,7 @@
+<?php
+
+//kommentaari kuvamine
+
+
+
+?>

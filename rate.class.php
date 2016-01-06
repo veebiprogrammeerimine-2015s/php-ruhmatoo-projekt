@@ -185,5 +185,25 @@ class Rate {
     return ($response);
 
     $stmt->close();
-  }	
+	}
+
+	  function getComments($profid) {
+		$stmt = $this->connection->prepare("SELECT procomment.id, comment, users.code FROM procomment INNER JOIN users ON users.id = procomment.user_id WHERE DELETED IS NULL AND accepted IS NOT NULL AND procomment.pro_id = ?");
+		$stmt->bind_param("i", $profid);
+		$stmt->bind_result($id, $comment_db, $code);
+		$stmt->execute();
+
+		$array = array();
+		while($stmt->fetch()) {
+			$comment = new StdClass();
+			$comment->id = $id;
+			$comment->comment = $comment_db;
+			$comment->code = $code;
+
+			array_push($array, $comment);
+		}
+		return ($array);
+		$stmt->close();
+	}
 }
+?>

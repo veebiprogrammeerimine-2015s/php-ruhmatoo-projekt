@@ -15,24 +15,28 @@ if(isset($_GET["delete"])) {
 if(isset($_GET["accept"])) {
 		acceptComment($_GET["accept"]);
 	}
-	
+
 $keyword = "";
 	if(isset($_GET["keyword"])){
 		$keyword = $_GET["keyword"];
-		
+
 		$procomments_array = getAllData($keyword);
-		
+
 	}else{
 		$procomments_array = getAllData();
 	}
 ?>
 <h1>Kommentaarid</h1>
-	<form action="table.php" method="get">
-		<input name="keyword" type="search" value="<?=$keyword?>">
-		<input type="submit" value="otsi">
+	<form action="moderate.php" method="get">
+		<div class="col-sm-6">
+			<input class="form-control" name="keyword" type="search" value="<?=$keyword?>">
+		</div>
+		<div class="col-sm-1">
+			<input class="btn btn-default" type="submit" value="otsi">
+		</div>
 	<form>
 	<br><br>
-	<table border=1>
+	<table class="table table-striped table-hover">
 	<tr>
 	<th>Kommentaari id</th>
 	<th>Proffessori id</th>
@@ -45,8 +49,8 @@ $keyword = "";
 <?php
 
 	for($i = 0; $i < count($procomments_array); $i++){
-		
-	
+
+
 			echo "<tr>";
             echo "<form action='table.php' method='get'>";
 
@@ -68,6 +72,6 @@ $keyword = "";
 ?>
 </table>
 <?php
-	
+
 	require_once("../footer.php");
 ?>

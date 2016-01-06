@@ -36,52 +36,57 @@
   $median_class = $add_class / count($professor[0]);
 ?>
 
- <div class="col-sm-6">
-   <table class="table table-striped table-bordered">
+   <div class="col-sm-6">
+     <table class="table table-striped table-bordered">
 
-     <tr>
-       <td><label> Nimi </label></td>
-       <td><?=$professor[1]->first." ".$professor[1]->last;?></td>
-     </tr>
-     <tr>
-       <td><label> Kool </label></td>
-       <td><?=$professor[1]->school;?></td>
-     </tr>
-     <tr>
-       <td><label> Abivalmidus </label></td>
-       <td><?=$median_help;?></td>
-     </tr>
-     <tr>
-       <td><label> Selgus </label></td>
-       <td><?=$median_clarity;?></td>
-     </tr>
-     <tr>
-       <td><label> Eksamihinne </label></td>
-       <td><?=$median_exam;?></td>
-     </tr>
-     <tr>
-       <td><label> Üldine hinne </label></td>
-       <td><?=$median_class;?></td>
-     </tr>
-   </table>
-</div>
-<div class="col-sm-6">
- <?php require_once("../page/rate_points.php"); ?>
-</div>
-<div class="col-sm-6">
+       <tr>
+         <td><label> Nimi </label></td>
+         <td><?=$professor[1]->first." ".$professor[1]->last;?></td>
+       </tr>
+       <tr>
+         <td><label> Kool </label></td>
+         <td><?=$professor[1]->school;?></td>
+       </tr>
+       <tr>
+         <td><label> Abivalmidus </label></td>
+         <td><?=$median_help;?></td>
+       </tr>
+       <tr>
+         <td><label> Selgus </label></td>
+         <td><?=$median_clarity;?></td>
+       </tr>
+       <tr>
+         <td><label> Eksamihinne </label></td>
+         <td><?=$median_exam;?></td>
+       </tr>
+       <tr>
+         <td><label> Üldine hinne </label></td>
+         <td><?=$median_class;?></td>
+       </tr>
+     </table>
+  </div>
+  <div class="col-sm-6">
+   <?php require_once("../page/rate_points.php"); ?>
+  </div>
+  <div class="col-sm-6">
+    <br>
+    <br>
+   <?php
+     for($i = 0; $i < count($comments); $i++) {
+       echo 'Kood:'.$comments[$i]->code;
+       echo '<pre>'.$comments[$i]->comment.'</pre>';
+      }
+   ?>
+   <br>
+   <br>
+  </div>
+  <div class="col-sm-6">
+    <br>
+    <br>
+   <?php require_once("../page/rate.php"); ?>
+   <br>
+   <br>
+  </div>
   <br>
   <br>
- <?php
-   for($i = 0; $i < count(); $i++) {
-     echo 'Kood:'.;
-     echo '<pre>'..'</pre>';
-    }
- ?>
-</div>
-<div class="col-sm-6">
-  <br>
-  <br>
- <?php require_once("../page/rate.php"); ?>
-</div>
-
 <?php require_once("../footer.php"); ?>
