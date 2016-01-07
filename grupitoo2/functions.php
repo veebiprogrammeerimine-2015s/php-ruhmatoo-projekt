@@ -50,4 +50,33 @@
 		$mysqli->close();
 		return $message;
 	}
+	function getreviews(){
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		$stmt = $mysqli->prepare("SELECT user_id, bar, cocktails, service, interior, prices, score, info FROM reviews ORDER BY score DESC");
+		$stmt->bind_result($user_id, $bar, $cocktails, $service, $interior, $prices, $score, $info);
+		$stmt->execute();
+
+		$array = array();
+
+		while($stmt->fetch()){
+
+			$review = new StdClass();
+			$review->user_id = $user_id;
+			$review->bar = $bar;
+			$review->cocktails = $cocktails;
+			$review->service = $service;
+			$review->interior = $interior;
+			$review->prices = $prices;
+			$review->score = $score;
+			$review->info = $info;
+			
+			// lisame selle massiivi
+			array_push($array, $review);
+		}
+		
+		$stmt->close();
+		$mysqli->close();
+		
+		return $array;				
+	}
 ?>
