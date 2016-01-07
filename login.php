@@ -1,4 +1,25 @@
 <?php require_once("header.php"); ?>
+<?php require_once("functions.php"); 
+
+$email1 = "";
+$name = "";
+$password1 = "";
+
+if (isset($_SESSION["logged_in_user_id"])){
+       header("Location: data.php");
+
+ 
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+       if(isset($_POST['login'])){
+       
+             $hash = hash("sha512", $password1);
+            loginUser($email1, $hash);
+        }
+    }
+
+}
+?>
+
 <html>
 
 <head>
@@ -13,8 +34,8 @@
                 <img class="profile-img" src="pildid/jalgpall.ico"
                     alt="sveg">
                 <form class="form-signin">
-                <input type="text" class="form-control" name="email1" placeholder="Email" required autofocus>
-                <input type="password" class="form-control" name="parool2" placeholder="Parool" required>
+                <input type="email" class="form-control" name="email1" placeholder="Email" required autofocus> <br>
+                <input type="password" class="form-control" name="parool2" placeholder="Parool" required> <br>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                     Logi sisse</button>
                 <label class="checkbox pull-left">
@@ -28,5 +49,4 @@
         </div>
     </div>
 </div>
-  </body>
-  </html>
+

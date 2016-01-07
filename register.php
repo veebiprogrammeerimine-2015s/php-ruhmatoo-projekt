@@ -1,4 +1,27 @@
 <?php require_once("header.php"); ?>
+<?php require_once("functions.php") ?>
+<?php
+
+$email2 = "";
+$name = "";
+$password2 = "";
+
+
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+       if(isset($_POST['registreeri'])){
+        
+             $hash = hash("sha512", $password2);
+            createUser($email2, $name, $hash);
+        }
+    }
+
+
+
+
+?>
+
+
 <html>
 
 <head>
@@ -13,11 +36,12 @@
                 <img class="profile-img" src="pildid/jalgpall.ico"
                     alt="sveg">
                 <form class="form-signin">
-                <input type="text" class="form-control" placeholder="Email" name="email2" required autofocus>
-                <input type="text" class="form-control" placeholder="Nimi" name="name" required autofocus>
-                <input type="password" class="form-control" name="parool2" placeholder="Parool" required>
+                <input type="text" class="form-control" placeholder="Email" name="email2" required autofocus> <br>
+                <input type="text" class="form-control" placeholder="Nimi" name="name" required autofocus> <br>
+                <input type="password" class="form-control" name="parool2" placeholder="Parool" required> <br>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                     Registreeri</button>
+					<?php createUser($email2, $name, $hash); ?>
                 
                 
                 </form>
