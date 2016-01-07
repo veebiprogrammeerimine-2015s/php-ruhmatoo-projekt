@@ -76,7 +76,7 @@
 		<th>PARs</th>
 		<th>X</th>
 		<th>Edit</th>
-		<th></th>
+		
 	</tr>
 	
 	<?php

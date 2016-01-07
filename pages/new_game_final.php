@@ -13,7 +13,7 @@
 		header("Location: login.php");
 	}
 	
-	$results_list = getGameData();
+	$results_list = getGameData($_SESSION["game_id"]);
 ?>
 <p>
 	Sisselogitud kasutajaga <?=$_SESSION["user_email"];?>
@@ -29,11 +29,27 @@
 </tr>
 <?php
 	
+	$previous_basket = -1;
+	
 	for($i = 0; $i < count($results_list); $i++){
+		
+		if ($results_list[$i]->basket_nr == $previous_basket){
+			continue;
+		}else{
+			if($previous_basket != -1){
+				$i = $i + $previous_basket;
+			}
+			
+		}
+			
+		
 		echo "<tr>";
 			echo "<td>".$results_list[$i]->basket_nr."</td>";
 			echo "<td>".$results_list[$i]->par."</td>";
 			echo "<td>".$results_list[$i]->result."</td>";
 		echo "</tr>";
+		
+		$previous_basket = $results_list[$i]->basket_nr;
+		
 	}
 ?>

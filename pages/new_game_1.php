@@ -52,7 +52,7 @@
 	Sisselogitud kasutajaga <?=$_SESSION["user_email"];?>
 	<a href="?logout=1"> Logi välja</a>
 </p>
-<h1>siin v6iks olla m2ngitava pargi nimi</h1>
+<h1>You are playing at: <?php echo $_SESSION["park_name"]; ?></h1>
 <h2><?=$_GET["k"];?>. korv</h2>
 <p>siin v6iks n2idata, kui palju on antud korvi par</p>
 	<form action="new_game_1.php?k=<?php echo $_GET["k"]; ?>" method="post" >
@@ -60,3 +60,6 @@
 		<input id="result" name="result" type="number" value="<?=$result; ?>"> <?=$result_error; ?><br>	
 		<input type="submit" name="save" value="Salvesta">
 	</form>
+	
+
+	

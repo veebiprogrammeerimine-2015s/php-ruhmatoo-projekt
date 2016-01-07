@@ -137,7 +137,7 @@
 
 //Tulemuste kuvamine mängu lõpus
 
-		function getGameData(){
+		function getGameData($game_id){
 			
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 			
@@ -146,7 +146,7 @@
 			JOIN parks_php ON parks_php.park_id=game_php.park_id
 			JOIN pars_php ON pars_php.park_id=parks_php.park_id
 			WHERE game_php.game_id=?");			
-			$stmt->bind_param("i", $_SESSION["game_id"]);
+			$stmt->bind_param("i", $game_id);
 			echo $stmt->error;
 			$stmt->bind_result($basket_nr, $result, $par);
 			$stmt->execute();

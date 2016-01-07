@@ -108,7 +108,7 @@
 <html lang="et">
 <head>
 <meta charset="utf-8">
-<base target="_blank">
+
 <link rel="stylesheet" type="text/css" href="yldine.css">
 </head>
 <body>
@@ -193,8 +193,8 @@
 			  
 			  
 			  </div>
-			  <button name ="login" type="submit" value="Log in" class="btn btn-success pull-right hidden-xs">Log in</button>
-			  <button name ="login" type="submit" value="Log in" class="btn btn-success btn-block visible-xs">Log in</button>
+			  <input name="login" type="submit" value="Log in" class="btn btn-success pull-right hidden-xs">
+			  <input name="login" type="submit" value="Log in" class="btn btn-success btn-block visible-xs">
 			</form>
 			
 			<br></br>
