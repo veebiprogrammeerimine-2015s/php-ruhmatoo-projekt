@@ -2,7 +2,7 @@
 	$page_title = "avaleht";
 	$file_name = "home.php";
 ?>
-
+#
 <!--####################-->
 <!--# DATABASE ÜHENDUS #-->
 <!--####################-->
