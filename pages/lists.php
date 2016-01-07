@@ -49,7 +49,7 @@
 	<h2>Create new list</h2>
 <form method="post">
     <input name="name" type="text">
-    <input type="submit" name="createList" value="Submit">
+    <input type="submit" name="createList" value="Submit" class="btn btn-success">
 </form>
 <br>
 

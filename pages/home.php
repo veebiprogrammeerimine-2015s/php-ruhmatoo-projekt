@@ -39,7 +39,7 @@
 
 <form action="home.php" method="get">
 	<input type="search" name="keyword" value="<?=$keyword;?>">
-	<input type="submit" value="Search">
+	<input type="submit" value="Search" class="btn btn-warning">
 </form>
 
 <div class="container">
