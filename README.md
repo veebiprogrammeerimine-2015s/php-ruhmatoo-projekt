@@ -1,37 +1,52 @@
-# PHP rühmatöö projekt
-**Rühmatööde demo päev** on valitud eksamipäev jaanuaris, kuhu tuleks tullakse terve rühmaga koos!
+# 3. kodutoo (I rühm)
 
-## Tööjuhend
-1. Üks rühma liikmetest fork'ib endale käesoleva repositooriumi ning annab teistele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi README.md faili vastavalt nõutele
-1. Tee valmis korralik veebirakendus
-
-### Nõuded
-
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * rühma liikmete nimed;
-    * eesmärki (3-4 lauset, mis probleemi üritate lahendada);
-    * kirjeldus (sihtrühm, eripära võrreldes teiste samalaadsete rakendustega - kirjeldada vähemalt 2-3 sarnast rakendust mida eeskujuks võtta);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
+ * #JOOKS24
+	
+    * ###Liikmed:
+	Karl Markus Wahlberg, Katariina Linde
+	
+    * ###Eesmärk: 
+	Aidata jooksuhuvilistel registreerida jooksudele. 
+	
+    * ###Sihtrühm, eripära:
+	Spordihuvilised. Eripära on see, et lisaks registreerimisele on see ka sotsiaalse suunitlusega. Jooksjad saavad enda tulemusi kirja panna ning kogemusi kirjeldada.
+	Selleks tuleb kasutaja luua, sisse logida, valida jooks ja broneerida.
+	Edasi on vajalik kinnitus ning kui on joostud, saab sisestada ka tulemuse ja anda tagasisidet jooksuürituse kohta ning enda vormi kohta.
+	###Sarnased: 
+		* <a href="http://www.marathon100.com">marathon100</a>
+		* <a href="http://www.jooks.ee">jooks.ee</a>
+	
+    * ###Funktsionaalsuse loetelu prioriteedi järjekorras:
         * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada huviala
-        * ...
+        * v0.2 Saab registreerida jooksule
+        * v0.3 Saab kinnitada jooksu
+		* v0.4 Tabel, kus on tulemused
+		* v0.5 Jooksu tagasiside tabel
+		* v0.6 Huvialade tabel, kasutajate ühised huvid
+		
     * andmebaasi skeem loetava pildina + tabelite loomise SQL laused;
     * **kokkuvõte:** mida õppisid juurde? mis ebaõnnestus? mis oli keeruline? (kirjutab iga tiimi liige).
 
 
-2. **Veebirakenduse nõuded:**
-    * kasutusel on vähemalt 6 tabelit;
-    * kood on jaotatud klassidesse;
-    * muutujad/tabelid on inglise keeles;
-    * rakendus on piisava funktsionaalsusega ja turvaline;
-    * kõik tiimi liikmed on panustanud rakenduse arendusprotsessi.
+1. Lähtu ülesannete puhul alati oma ideest ning ole loominguline
+  * loo vähemalt 1 tabel andmete hoidmiseks (lisa table.txt fail tabeli kirjeldusega)
+  * ainult sisseloginud kasutaja saab kirjeid tabelisse lisada
+  * kirjeid saab muuta
+  * kõik või ainult kasutaja ise saab enda lisatud kirjeid vaadata (oleneb rakendusest)
+  * otsing
+  * abi saad tunnitöödest 5, 6 ja 7
 
-## Abiks
-* **Testserver:** greeny.cs.tlu.ee, [tunneli loomise juhend](http://minitorn.tlu.ee/~jaagup/kool/java/kursused/09/veebipr/naited/greenytunnel/greenytunnel.pdf)
-* **Abiks tunninäited (rühmade lõikes):** [I rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-I-ruhm), [II rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-II-ruhm), [III rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-III-ruhm)
-* **Stiilijuhend:** [Coding Style Guide](http://www.php-fig.org/psr/psr-2/)
-* **GIT õpetus:** [Become a git guru.](https://www.atlassian.com/git/tutorials/)
-* **Abimaterjale:** [Veebirakenduste loomine PHP ja MySQLi abil](http://minitorn.tlu.ee/~jaagup/kool/java/loeng/veebipr/veebipr1.pdf), [PHP with MySQL Essential Training] (http://www.lynda.com/MySQL-tutorials/PHP-MySQL-Essential-Training/119003-2.html)
+1. **OLULINE! ÄRA POSTITA GITHUBI GREENY MYSQL PAROOLE.** Selleks toimi järgmiselt:
+  * loo eraldi fail `config.php`. Lisa sinna kasutaja ja parool ning tõsta see enda koduse töö kaustast ühe taseme võrra väljapoole
+  ```PHP
+  $servername = "localhost";
+  $username = "username";
+  $password = "password";
+  ```
+  * Andmebaasi nimi lisa aga kindlasti enda faili ja `require_once` käsuga küsi parool ja kasutajanimi `config.php` failist, siis saan kodust tööd lihtsamini kontrollida
+  ```PHP
+  // ühenduse loomiseks kasuta
+  require_once("../config.php");
+  $database = "database";
+  $mysqli = new mysqli($servername, $username, $password, $database);
+  ```
