@@ -77,7 +77,7 @@
 					<th>Võistlus</th>
 					<th>Osaleja nimi/klubi</th>
 					<th>Kustuta</th>
-					<th>Muuda</th>
+					
 					<th>Kinnita osalus</th>
 				</tr>
 				<?php
@@ -108,8 +108,7 @@
 							echo "<td><a href='user.php?id=".$contest_array[$i]->user_id."'>".$contest_array[$i]->name."</a></td>";
 							if($contest_array[$i]->user_id == $_SESSION['logged_in_user_id']){
 								echo "<td><a href='?delete=".$contest_array[$i]->id."'>X</a></td>";
-								echo "<td><a href='?edit=".$contest_array[$i]->id."'>Muuda</a></td>";
-								
+								//echo "<td><a href='?edit=".$contest_array[$i]->id."'>Muuda</a></td>";
 								echo "<td><a href='confirm.php?edit=".$contest_array[$i]->id."&user_id=".$contest_array[$i]->user_id."'>Kinnita</a></td>";
 							}
 							echo "</tr>";
