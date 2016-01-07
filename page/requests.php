@@ -51,6 +51,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 
 <?php 
 	
+	/*ETTEVÕTTE ENDA TÖÖPAKKUMISTE TABEL */
 	if($_SESSION["logged_in_user_group_id"] == "3"){
 
 		echo "<table border=1>";
@@ -64,6 +65,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 		echo "<th>pakkumise tähtaeg</th>";
 		echo "<th>tellimuse tähtaeg</th>";
 		echo "<th>ilmumiskoht</th>";
+		echo "<th>staatus</th>";
 		echo "<th></th>";
 		echo "<th></th>";
 		echo "</tr>";
@@ -80,12 +82,14 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 				echo "<td>".$orders_array[$i]->offer_deadline."</td>";
 				echo "<td>".$orders_array[$i]->work_deadline."</td>";
 				echo "<td>".$orders_array[$i]->output."</td>";
+				echo "<td>".$orders_array[$i]->status."</td>";
 				echo "<td><a href='?delete=".$orders_array[$i]->request_ID."'>kustuta</a></td>";
 				echo "<td><a href='edit.php?edit_id=".$orders_array[$i]->request_ID."'>muuda</a></td>";
 				echo "<tr>";
 			}
 		}
-		
+	
+	/*KÕIK TÖÖPAKKUMISED, MÕELDUD AJAKIRJANIKELE JA ADMINILE */
 	} else {
 		echo "<table border=1>";
 		echo "<tr>";
@@ -104,20 +108,22 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 		echo "</tr>";
 		
 		for($i = 0; $i < count($orders_array); $i++){
-			echo "<tr>";
-			echo "<td>".$orders_array[$i]->company_name."</td>";
-			echo "<td>".$orders_array[$i]->text_type."</td>";
-			echo "<td>".$orders_array[$i]->subject."</td>";
-			echo "<td>".$orders_array[$i]->description."</td>";
-			echo "<td>".$orders_array[$i]->target_group."</td>";
-			echo "<td>".$orders_array[$i]->source."</td>";
-			echo "<td>".$orders_array[$i]->length."</td>";
-			echo "<td>".$orders_array[$i]->offer_deadline."</td>";
-			echo "<td>".$orders_array[$i]->work_deadline."</td>";
-			echo "<td>".$orders_array[$i]->output."</td>";
-			echo "<td><a href='feedback.php?user_feedback_id=".$orders_array[$i]->company_id."'>vaata tagasisidet</a></td>";
-			echo "<td><a href='offers_data.php?offers_data_id=".$orders_array[$i]->request_ID."'>tee pakkumine</a></td>";
-			echo "<tr>";
+			if(empty($orders_array[$i]->status)){
+				echo "<tr>";
+				echo "<td>".$orders_array[$i]->company_name."</td>";
+				echo "<td>".$orders_array[$i]->text_type."</td>";
+				echo "<td>".$orders_array[$i]->subject."</td>";
+				echo "<td>".$orders_array[$i]->description."</td>";
+				echo "<td>".$orders_array[$i]->target_group."</td>";
+				echo "<td>".$orders_array[$i]->source."</td>";
+				echo "<td>".$orders_array[$i]->length."</td>";
+				echo "<td>".$orders_array[$i]->offer_deadline."</td>";
+				echo "<td>".$orders_array[$i]->work_deadline."</td>";
+				echo "<td>".$orders_array[$i]->output."</td>";
+				echo "<td><a href='feedback.php?user_feedback_id=".$orders_array[$i]->company_id."'>vaata tagasisidet</a></td>";
+				echo "<td><a href='offers_data.php?offers_data_id=".$orders_array[$i]->request_ID."'>tee pakkumine</a></td>";
+				echo "<tr>";
+			}
 		}
 	}
 ?>

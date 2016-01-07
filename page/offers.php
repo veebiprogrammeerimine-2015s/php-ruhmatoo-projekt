@@ -15,7 +15,7 @@
 	}
 	
 	if(isset($_GET["update_1"], $_GET["update_2"])){
-		$OfferManager->updateOffersData($_GET["update_1"], $_GET["update_2"]);
+		$OfferManager->updateOffersAndRequestsData($_GET["update_1"], $_GET["update_2"]);
 	}
 	
 	$offers_array = $OfferManager->getOffersData();
@@ -94,7 +94,9 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 			echo "<td>".$offers_array[$i]->comment."</td>";
 			echo "<td>".$offers_array[$i]->accepted."</td>";
 			echo "<td><a href='feedback.php?user_feedback_id=".$offers_array[$i]->journalist_id."'>vaata tagasisidet</a></td>";
-			if($offers_array[$i]->accepted != "1"){
+			if($offers_array[$i]->accepted == "1" or $offers_array[$i]->accepted == "0"){
+				echo "<td></td>";
+			} else {
 				echo "<td><a href='?update_1=".$offers_array[$i]->offer_id."&update_2=".$offers_array[$i]->request_id."'>aktsepteeri</a></td>";
 			}
 			if($offers_array[$i]->accepted == "1"){
