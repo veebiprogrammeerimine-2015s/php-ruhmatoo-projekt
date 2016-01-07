@@ -60,26 +60,74 @@ Tere, <?php echo $_SESSION["user_email"]; ?>
 
 <?php
 ######################################## TEST ENDA CRITIC SISESTUSFUNKTSIOON ###################################################
-	$critic = "";
-	$critic_error = "";
-	// et ei ole tühjad
-	// clean input
-	// salvestate
+
+	$bar = "";
+	$bar_error = "";
+	$cocktails = "";
+	$cocktails_error = "";
+	$service = "";
+	$service_error = "";
+	$interior = "";
+	$interior_error = "";
+	$prices = "";
+	$prices_error = "";
+	$score = "";
+	$score_error = "";
+	$info = "";
+	$info_error = "";
+	
 	
 	if(isset($_POST["create"])){
 
-		if ( empty($_POST["critic"])) {
-			$critic_error = "See väli on kohustuslik";
+
+		if ( empty($_POST["bar"])) {
+			$bar_error = "See väli on kohustuslik";
 		}else{
-			$critic = cleanInput($_POST["critic"]);
+			$bar = cleanInput($_POST["bar"]);
+		}
+		if ( empty($_POST["cocktails"])) {
+			$cocktails_error = "See väli on kohustuslik";
+		}else{
+			$cocktails = cleanInput($_POST["cocktails"]);
+		}
+		if ( empty($_POST["service"])) {
+			$service_error = "See väli on kohustuslik";
+		}else{
+			$service = cleanInput($_POST["service"]);
+		}
+		if ( empty($_POST["interior"])) {
+			$interior_error = "See väli on kohustuslik";
+		}else{
+			$interior = cleanInput($_POST["interior"]);
+		}
+		if ( empty($_POST["prices"])) {
+			$prices_error = "See väli on kohustuslik";
+		}else{
+			$prices = cleanInput($_POST["prices"]);
+		}
+		if ( empty($_POST["score"])) {
+			$score_error = "See väli on kohustuslik";
+		}else{
+			$score = cleanInput($_POST["score"]);
+		}
+		if ( empty($_POST["info"])) {
+			$info_error = "See väli on kohustuslik";
+		}else{
+			$info = cleanInput($_POST["info"]);
 		}
 
-		if(	$critic_error == ""){
+		if(	$bar_error == "" && $cocktails_error == "" && $service_error == "" && $interior_error == "" && $prices_error == "" && $score_error == "" && $info_error == ""){
 			
 			// functions.php failis käivina funktsiooni
-			$msg = insertreview($critic);
+			$msg = insertreview($bar, $cocktails, $service, $interior, $prices, $score, $info);
 			if($msg !=""){
-				$critic = "";
+				$bar = "";
+				$cocktails = "";
+				$service = "";
+				$interior = "";
+				$prices = "";
+				$score = "";
+				$info = "";
 				echo $msg;
 				
 				
@@ -95,10 +143,32 @@ Tere, <?php echo $_SESSION["user_email"]; ?>
 	
 ?>
 
- <h2>Critic</h2>
+ <h2>Arvustuse sisestamine</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  	<label for="critic" >Critic</label><br>
-	<input id="critic" name="critic" type="text" value="<?=$critic; ?>"> <?=$critic_error; ?><br><br>
+  	<label for="bar" >Asutuse nimi</label><br>
+	<input id="bar" name="bar" type="text" value="<?=$bar; ?>"> <?=$bar_error; ?><br><br>
+	
+	<label for="cocktails" >Degusteeritud kokteilid</label><br>
+	<input id="cocktails" name="cocktails" type="text" value="<?=$cocktails; ?>"> <?=$cocktails_error; ?><br><br>
+	
+	<label for="service" >Teeninduse üldhinne (1-10p)</label><br>
+	<input id="service" name="service" type="number" value="<?=$service; ?>"> <?=$service_error; ?><br><br> 
+	
+	<label for="interior" >Atmosfääri üldhinne (1-10p)</label><br>
+	<input id="interior" name="interior" type="number" value="<?=$interior; ?>"> <?=$interior_error; ?><br><br>
+	
+	<label for="prices" >Hinnatase (1-10p)</label><br>
+	<input id="prices" name="prices" type="number" value="<?=$prices; ?>"> <?=$prices_error; ?><br><br>
+	
+	<label for="score" >Üleüldine koondhinne (1-10p)</label><br>
+	<input id="score" name="score" type="number" value="<?=$score; ?>"> <?=$score_error; ?><br><br>
+	
+	<label for="info" >Info</label><br>
+	<input id="info" name="info" type="text" value="<?=$info; ?>"> <?=$info_error; ?><br><br>
+	
+	
+	
+	
   	<input type="submit" name="create" value="Salvesta">
   </form>
 

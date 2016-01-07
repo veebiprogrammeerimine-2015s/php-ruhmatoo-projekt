@@ -44,12 +44,14 @@
 		}
 	
 	
+
 	
-	# MAIN FUNCTION - REVIEWS
-	function insertreview($bar, $cocktails, $service, $interior, $prices, $score, $info){
+	
+	# TESTFUNKTSIOON "CRITIC"
+	function insertreview($critic){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("INSERT INTO reviews (user_id, bar, cocktails, service, interior, prices, score, info) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-		$stmt->bind_param("issiiiis", $_SESSION["id_from_db"], $bar, $cocktails, $service, $interior, $prices, $score, $info); 
+		$stmt = $mysqli->prepare("INSERT INTO test2 (user_id, critic) VALUES (?, ?)");
+		$stmt->bind_param("is", $_SESSION["id_from_db"], $critic); 
 		$message = "";
 		if($stmt->execute()){
 			// sisestan sõnumi, mis tuleb juhul, kui andmed sisestati edukalt!
