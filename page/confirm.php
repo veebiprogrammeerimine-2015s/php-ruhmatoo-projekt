@@ -31,6 +31,7 @@
 		header("Location: confirm.php");
 		exit();
 	}
+	
 
 ?>
 
@@ -98,7 +99,7 @@
 							echo "<td>".$contest_array[$i]->run_comment."</td>";
 							
 							if($contest_array[$i]->user_id == $_SESSION['logged_in_user_id']){
-							echo "<td><a href='?delete=".$contest_array[$i]->id."'>X</a></td>";
+							//echo "<td><a href='?delete=".$contest_array[$i]->id."'>X</a></td>";
 							echo "<td><a href='?edit_confirm=".$contest_array[$i]->id."'>Muuda</a></td>";
 							}
 							echo "</tr>";
