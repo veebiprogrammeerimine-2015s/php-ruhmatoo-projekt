@@ -28,6 +28,14 @@
   	$data = htmlspecialchars($data);
   	return $data;
 	}
+	
+	if(isset($_GET["delete"])){
+		
+		echo "Kustutame id ".$_GET["delete"];
+		//käivitan funktsiooni, saadan kaasa id!
+		$Series->deleteFromList($_GET["delete"]);
+		
+	}
 ?>	
 <?php 
 	
@@ -44,7 +52,7 @@
 <h2>My Lists</h2>
 
 <?php
-	
+
 // küsid kõik kasutaja listid
 $array_of_user_lists = $Series->getUserLists();
 
@@ -53,9 +61,25 @@ foreach($array_of_user_lists as $list){
 	
 	$episodes_in_single_list = $Series->getEpisodesInList($list->id);
 	
-	foreach($episodes_in_single_list as $episode){
-		echo "<p>".$episode->title."</p>";
+
+
+	
+	for($i = 0; $i < count($episodes_in_single_list); $i++){
+		
+		
+			echo "<tbody>";
+			echo "<tr>";
+			foreach($episodes_in_single_list as $episode){
+				echo "<td>".$episode->title."</td>";
+				echo "<td>"." Season ".$episode->season."</td>";
+				echo "<td><a href='?delete=".$episode->id."'>X</a></td>";
+				echo "</tr>";
+				
+			}
+				
+		
 	}
+
 	
 	
 }
@@ -65,4 +89,3 @@ foreach($array_of_user_lists as $list){
 
 	
 ?>
-<?php require_once("../footer.php"); ?>

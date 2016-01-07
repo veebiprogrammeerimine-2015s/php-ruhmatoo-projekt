@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+    <?phprequire_once("../functions.php");?>
+	<?php
+	
+	if(isset($_GET["logout"])){
+		//aadressireal on olemas muutuja logout
+		
+		//kusutame kõik session muutujad ja peatame sessiooni
+		session_destroy();
+		
+		header("Location: login.php");
+	}
+	?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -36,11 +48,14 @@
       </ul>
 	  <ul class="nav navbar-nav navbar-right">
 		  <li>
-			 
-			  <p>
-					Tere, <?=$_SESSION["name"];?>
+		  
+				<li>
+						<?=$_SESSION["name"];?>
+				</li>
+			  <li>
+					
 					<a href="?logout=1">Logi välja</a>
-			  </p>
+			  </li>
 				
 			</ul>
 		

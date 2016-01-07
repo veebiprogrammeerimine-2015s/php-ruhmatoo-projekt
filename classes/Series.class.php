@@ -210,9 +210,9 @@ class Series {
 	function getEpisodesInList($list_id){
 		
 		// get episodes in user list
-		$stmt = $this->connection->prepare("SELECT series.id, series.title FROM series_list, series WHERE series_list.episode_id = series.id AND series_list.list_id=?");
+		$stmt = $this->connection->prepare("SELECT series.id, series.title, series.season FROM series_list, series WHERE series_list.episode_id = series.id AND series_list.list_id=?");
 		$stmt->bind_param("i", $list_id);
-		$stmt->bind_result($id, $title);
+		$stmt->bind_result($id, $title, $season);
 		$stmt->execute();
 		
 		$array_of_episodes = array();
@@ -221,7 +221,7 @@ class Series {
 			$episode = new StdClass();
 			$episode->id = $id;
 			$episode->title = $title;
-			
+			$episode->season = $season;
 			array_push($array_of_episodes, $episode);
 		}
 		
@@ -229,8 +229,21 @@ class Series {
 	
 	}
 	
+	function deleteFromList($id){
+		
+		
+		$stmt = $this->connection->prepare("UPDATE series_list SET deleted=NOW() WHERE series_list.id=?");
+		$stmt->bind_param("i", $id);
+		if($stmt->execute()){
+			// sai kustutatud
+			// kustutame aadressirea tühjaks
+			header("Location: lists.php");
+			
+		}
+		
+		$stmt->close();
+		$mysqli->close();
 	
-	
-	
+	}
 	
 } ?>
