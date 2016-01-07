@@ -19,7 +19,7 @@
 			
 			echo "List created";
 			
-			$add_list_response = $Series->createList($name);
+			$Series->createList($name);
 		}
 	}
 	function cleanInput($data) {
@@ -43,14 +43,21 @@
 		var_dump($add_list_response);
 	}
 ?>
+<div class="container">
+	<div class="row">
+
 	<h2>Create new list</h2>
 <form method="post">
     <input name="name" type="text">
     <input type="submit" name="createList" value="Submit">
 </form>
 <br>
+
+
+
 <h2>My Lists</h2>
 
+	
 <?php
 
 // küsid kõik kasutaja listid
@@ -73,3 +80,5 @@ foreach($array_of_user_lists as $list){
 
 	
 ?>
+</div>
+</div>
