@@ -41,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="password" class="form-control" name="parool2" placeholder="Parool" required> <br>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                     Registreeri</button>
-					<?php createUser($email2, $name, $hash); ?>
+					
                 
                 
                 </form>
