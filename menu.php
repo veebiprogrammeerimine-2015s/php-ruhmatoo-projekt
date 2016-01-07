@@ -25,6 +25,21 @@
 		}
 		
 	?>
+<<<<<<< HEAD
 
+=======
+<?php 
+		
+		if($file_name == "data.php"){ 
+		
+			echo "<li>Lisa parandus</li>";
+		
+		}else{
+	
+			echo '<li><a href="data.php">Lisa parandus</a></li>';
+		}
+		
+	?>
+>>>>>>> katariin
 
 </ul> 

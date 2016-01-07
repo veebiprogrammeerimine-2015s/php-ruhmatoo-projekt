@@ -70,11 +70,14 @@
 				echo "<br>";
 				echo $password_hash;
 				
+<<<<<<< HEAD
 				createUser($create_name, $create_secondname, $create_login, $password_hash, $create_email , $create_mobile);
 				
+=======
+>>>>>>> katariin
 			}
 		
-		
+		createUser($create_login, $create_email, $password_hash, $create_name, $create_secondname, $create_age, $create_eriala);
 		
   
  
@@ -90,8 +93,11 @@
 
 ?>
 
-
+ <html>
+ <body>
+ <link rel="stylesheet" href="kujundus.css" type="text/css" /> 
 		<h2>Create user</h2>
+<<<<<<< HEAD
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 
 			<label>Login:</label> <input name="create_login" type="login" placeholder="Login" value="<?php echo $create_login; ?>"> <?php echo $create_login_error; ?><br><br>
@@ -103,11 +109,34 @@
 			<input name="create_eriala" type="text" placeholder="Eriala" value="<?php echo $create_eriala; ?>"> <?php echo $create_eriala_error; ?><br><br>
 
 			<input name="create" type="submit" value="create user" > <br><br>
+=======
+		<div>
+		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" class="field" >
+			<label>Login:</label> <input class="input" name="create_login" type="login" placeholder="Login" value="<?php echo $create_login; ?>"> <?php echo $create_login_error; ?><br><br>
+			<label>E-mail:</label> <input class="input" name="create_email" type="email" placeholder="E-post" value="<?php echo $create_email; ?>"> <?php echo $create_email_error; ?><br><br>
+			<label>Parool:</label> <input class="input" name="create_password" type="password" placeholder="Parool"> <?php echo $create_password_error; ?> <br><br>
+			<label>Nimi:</label> <input class="input" name="create_name" type="text" placeholder="Nimi" value="<?php echo $create_name; ?>"> <?php echo $create_name_error; ?><br><br>
+			<label>Perekonnanimi:</label> <input class="input" name="create_secondname" type="text" placeholder="Perekonnanimi" value="<?php echo $create_secondname; ?>"> <?php echo $create_secondname_error; ?><br><br>
+			<label>Vanus:</label> <input class="input" name="create_age" type="text" placeholder="Vanus" value="<?php echo $create_age; ?>"> <?php echo $create_age_error; ?><br><br>
+			<label>Eriala:</label><input class="input" name="create_eriala" type="text" placeholder="Eriala" value="<?php echo $create_eriala; ?>"> <?php echo $create_eriala_error; ?><br><br>
+			</div>
+			<input  name="create" type="submit" class="button3" value="create user" > <br><br>
+>>>>>>> katariin
 			
 		</form>
+</body>
+</html>		
+		
+		
+
 <?php 
-	$file_name = "register.php";
-	$page_title = "Register";
+	$file_name = "registration.php";
+	$page_title = "Registration";
 	require_once("header.php"); ?>
 	
 <?php require_once("foother.php"); ?>
+
+
+
+
+

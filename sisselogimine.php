@@ -75,11 +75,14 @@
 
   <h2>Log in</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  	E-mail: <input name="email" type="email" placeholder="E-post"> <?php echo $email_error; ?><br><br>
-  	Parool: <input name="password" type="password" placeholder="Parool" value="<?php echo $password; ?>"> <?php echo $password_error; ?><br><br>
-  	<input type="submit" name="login" value="Log in">
+  	E-mail: <input class="input" name="email" type="email" placeholder="E-post"> <?php echo $email_error; ?><br><br>
+  	Parool: <input class="input" name="password" type="password" placeholder="Parool" value="<?php echo $password; ?>"> <?php echo $password_error; ?><br><br>
+  	<input type="submit" class="button3" name="login" value="Log in">
   </form>
+  <br><br><br><br>
+
   
+<<<<<<< HEAD
 
   <?php
 	require_once("header.php");
@@ -88,8 +91,11 @@
 
   
   <?php 
+=======
+<?php 
+>>>>>>> katariin
 		
-		if($file_name == "register.php"){ 
+		if($file_name == "registration.php"){ 
 		
 			echo "<li>Registreerimine</li>";
 		
@@ -98,4 +104,14 @@
 			echo '<li><a href="registration.php">Registreerimine</a></li>';
 		}
 		
+<<<<<<< HEAD
 ?>
+=======
+?>
+
+
+<?php require_once("menyy.php"); ?>
+
+
+
+>>>>>>> katariin

@@ -1,0 +1,144 @@
+body
+{
+	background-image: url("teh.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	padding: 25px;
+	margin: 25px;	
+	-moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+	font-family: "Century Gothic";
+	color: black;
+	font-weight: bold;
+    font-size: 22px;
+}
+
+#menyy{
+
+	padding: 10px;
+	margin: 10px;
+	font-style: italic;
+	position: absolute;             /*static, absolute, relative */
+	top: 20px;
+	right: 20px;
+    text-transform: uppercase;
+	font-size: 22;
+	color: #008000;
+	font-family: Courier New, Courier, monospace;
+	list-style-type: upper-roman;
+}
+
+.pealkiri2{
+	font-size: 48px;
+	/*xx-small...medium ...xx-large, larger, smaller*/
+	margin: 15px;
+	padding: 15px;
+	font-family: "Times New Roman", Times, serif;
+	font-style: italic; 
+	color: #48D1CC;
+}
+
+
+h2 {
+	font-style: oblique;              /*normal, italic, oblique*/
+	/*paks kiri*/
+	font-size: 2em;
+	font-family: Calibri, cursive;
+	text-decoration: underline;       /*none, underline, overline, */
+	letter-spacing: ; 
+}
+
+
+
+a:active{
+	
+	color: #00BFFF;
+}
+
+
+a:link{
+	
+	color: #00BFFF;
+}
+
+
+a:hover{
+	
+	color: white;
+}
+
+.input {
+	width: 300px;
+	font-size: 13px;
+	padding: 6px 0 4px 10px;
+	border: 1px solid #cecece;
+	background: #F6F6f6;
+	border-radius: 8px;
+}
+
+
+
+:-moz-placeholder {
+
+color: #1E90FF;
+
+}
+
+
+::-webkit-input-placeholder {
+
+color: #1E90FF;
+
+}
+
+
+
+.contact_form input:focus + .form_hint {display: inline;}
+
+.contact_form input:required:valid + .form_hint {background: #28921f;} /* change form hint color when valid */
+
+.contact_form input:required:valid + .form_hint::before {color:#28921f;} /* change form hint arrow color when valid */
+
+
+
+
+
+input.button3 {
+  position: relative;
+  display: inline-block;
+  font-family: Arial,Helvetica,FreeSans,"Liberation Sans","Nimbus Sans L",sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: rgb(245,245,245);
+  text-shadow: 0 -1px rgba(0,0,0,.1);
+  text-decoration: none;
+  user-select: none;
+  padding: .3em 1em;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  background: #0c9c0d linear-gradient(#82d18d, #0c9c0d);
+  box-shadow: inset #72de26 0 -1px 1px, inset 0 1px 1px #98ff98, #3caa3c 0 0 0 1px, rgba(0,0,0,.3) 0 2px 5px;
+  -webkit-animation: pulsate 1.2s linear infinite;
+  animation: pulsate 1.2s linear infinite;
+  float:left;
+}
+input.button3:hover {
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+  cursor: pointer;
+}
+input.button3:active {
+  top: 1px;
+  color: #fff;
+  text-shadow: 0 -1px rgba(0,0,0,.3), 0 0 5px #ffd, 0 0 8px #fff;
+  box-shadow: 0 -1px 3px rgba(0,0,0,.3), 0 1px 1px #fff, inset 0 1px 2px rgba(0,0,0,.8), inset 0 -1px 0 rgba(0,0,0,.05);
+}
+@-webkit-keyframes pulsate {
+  50% {color: #fff; text-shadow: 0 -1px rgba(0,0,0,.3), 0 0 5px #ffd, 0 0 8px #fff;}
+}
+@keyframes pulsate {
+  50% {color: #fff; text-shadow: 0 -1px rgba(0,0,0,.3), 0 0 5px #ffd, 0 0 8px #fff;}
+}
