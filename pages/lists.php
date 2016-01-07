@@ -55,7 +55,8 @@
 
 
 
-<h2>My Lists</h2>
+<h1>My Lists</h1>
+
 
 	
 <?php
@@ -64,7 +65,7 @@
 $array_of_user_lists = $Series->getUserLists();
 
 foreach($array_of_user_lists as $list){
-	echo "<h1>".$list->name."</h1>";
+	echo "<h2>".$list->name."</h2>";
 	
 	$episodes_in_single_list = $Series->getEpisodesInList($list->id);
 	
@@ -80,5 +81,8 @@ foreach($array_of_user_lists as $list){
 
 	
 ?>
+
+	
+
 </div>
 </div>
