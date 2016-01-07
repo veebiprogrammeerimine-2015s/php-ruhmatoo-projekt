@@ -44,14 +44,19 @@
 		}
 	
 	
+	#					$stmt = $mysqli->prepare("INSERT INTO test (id, critic) VALUES (?, ?)");
+	#					$stmt->bind_param("is", $_SESSION["id_from_db"], $critic); 
+	
+	
+	
 	function insertreview($critic){
-		// globals on muutuja kõigist php failidest mis on ühendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		
-		$stmt = $mysqli->prepare("INSERT INTO test (id, critic) VALUES (?, ?)");
+		echo $_SESSION["id_from_db"]; #Leht saab andmebaasist kasutaja id ilusasti kätte ja prindib selle lehele välja
+		$stmt = $mysqli->prepare("INSERT INTO test2 (user_id, critic) VALUES (?, ?)");
 		$stmt->bind_param("is", $_SESSION["id_from_db"], $critic); 
 		######### SIIN REAL VISKAB ERRORI #########
 			#   Fatal error: Call to a member function bind_param() on a non-object in /home/kaurkal/public_html/GT_Kaur_Tauno_Koit/php-ruhmatoo-projekt/grupitoo2/functions.php on line 52 		
+			# Vist on kamm, et ta ei sisesta andmebaasist saadud kasutaja id-d uute tabelisse?
 		if($stmt->execute()){
 			// sisestan sõnumi, mis tuleb juhul, kui andmed sisestati edukalt!
 			$message = "Edukalt sisestatud andmebaasi";
