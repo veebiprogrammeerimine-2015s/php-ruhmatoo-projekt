@@ -34,3 +34,10 @@
     * **Keeruline Oli** enamasti vigade otsimine ikka päris mitu korda sai kood ära kustutud ja uuesti alustatud kuna lihtsalt ei leidnud viga üles tavaliselt oli lihtsalt nimi vale kuna copymisel ununes lihtsalt password1 muuta password2-ks . Kuid lõpus muutus see palju lihtsamaks kuna teadsid mis vead võivad olla .
 
 
+    **Marianne Kristiina Orusalu:**
+    * **Ebaõnnestumine:** Paljud funksonaalsused millest korralikult aru ei saand kuna ja leitsime lihtsama varjandi .
+
+    * **Õppisin juurde:** Igasugused mysql päringud kuidas välja tuua php-s . 
+
+    * **Keeruline Oli:**  Vigade leidmine, mysql päringud php-s .
+
