@@ -178,13 +178,17 @@ class OfferManager {
 		$stmt->close();
 	}
 	
-	function updateOffersData($offer_id, $request_id){
+	function updateOffersAndRequestsData($offer_id, $request_id){
 		
 		$stmt = $this->connection->prepare("UPDATE offers SET accepted=1 WHERE offer_ID =?");
 		$stmt->bind_param("i", $offer_id);
 		$stmt->execute();
 		
 		$stmt = $this->connection->prepare("UPDATE offers SET accepted=0 WHERE accepted IS NULL AND request_ID=?");
+		$stmt->bind_param("i", $request_id);
+		$stmt->execute();
+		
+		$stmt = $this->connection->prepare("UPDATE requests SET status=1 WHERE request_ID=?");
 		$stmt->bind_param("i", $request_id);
 		$stmt->execute();
 		
