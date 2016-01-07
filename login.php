@@ -1,12 +1,14 @@
 <?php require_once("header.php"); ?>
-<?php require_once("functions.php");
-
-	//kui kasutaja on sisseloginud,
-	//siis suuunan data.php lehele
+<?php require_once("functions.php"); ?>
+<?php 
+	 // Andmebaasi ühendus
 	if(isset($_SESSION["logged_in_user_id"])){
 		header("Location: data.php");
 	}
-    
+	
+	
+	
+	
 	
 	
 	/////////////////////////MUUTUJAD ERRORITE JAOKS
@@ -18,7 +20,7 @@
 	$firstname_error ="";
 	$lastname_error ="";
 	
-	/////////////////////////MUUTUJAD LOGIN
+	////////////////////////////MUUTUJAD LOGIN
 	
 	$email1 ="";
 	$email2 ="";
@@ -135,15 +137,15 @@ armastajatega.</h1>
 			<form>
 				<h1>CREATE NEW USER</h1>
 			  <div class="form-group">
-				<input type="email" class="form-control" name="email2" id="exampleInputEmail1" placeholder="Email"> <?php echo $email2_error; ?>
+				<input type="email" class="form-control" value ="<?php echo $email2 ?>" name="email2" id="exampleInputEmail1" placeholder="Email"> <?php echo $email2_error; ?>
 			  </div>
 			  
 				<div class="row">
 					<div class="col-md-8">
 						<div class="form-group">
 						<input type="password" name="password2" class="form-control" id="exampleInputPassword1" placeholder="Password"><?php echo $password2_error; ?>
-						<input type="text" name="firstname" class="form-control" id="exampleInputFirstName" placeholder="First name"><?php echo $firstname_error;?>
-						<input type="text" name="lastname" class="form-control" id="exampleInputLastName" placeholder="Last name"><?php echo $lastname_error;?>
+						<input type="text" value ="<?php echo $firstname ?>" name="firstname" class="form-control" id="exampleInputFirstName" placeholder="First name"><?php echo $firstname_error;?>
+						<input type="text" value ="<?php echo $lastname ?>" name="lastname" class="form-control" id="exampleInputLastName" placeholder="Last name"><?php echo $lastname_error;?>
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -161,5 +163,5 @@ armastajatega.</h1>
 	</div>
 
 </div>
-
+	?>
 	
