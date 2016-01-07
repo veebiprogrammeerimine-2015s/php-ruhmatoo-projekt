@@ -241,6 +241,34 @@ class OfferManager {
 		$stmt->close();
 		
 	}
+	
+	function getHistoryData(){
+		
+		$stmt = $this->connection->prepare("SELECT session_ID, history.user_ID, first_name, last_name, log_in, log_out FROM history JOIN users ON users.user_ID=history.user_ID");
+		$stmt->bind_result($session_id_from_db, $user_id_from_db, $user_first_name_from_db, $user_last_name_from_db, $log_in_from_db, $log_out_from_db);
+		$stmt->execute();
+
+		$array = array();
+		
+		while($stmt->fetch()){
+			
+			$history = new Stdclass();
+	
+			$history->session_identification = $session_id_from_db;
+			$history->user_id = $user_id_from_db;
+			$history->user_first_name = $user_first_name_from_db;
+			$history->user_last_name = $user_last_name_from_db;
+			$history->log_in = $log_in_from_db;
+			$history->log_out = $log_out_from_db;
+
+			array_push($array, $history);
+		}
+		
+		return $array;
+
+		$stmt->close();
+
+	}
 }
 
 ?>
