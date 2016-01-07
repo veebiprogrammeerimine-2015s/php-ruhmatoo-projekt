@@ -1,9 +1,8 @@
 <?php require_once("header.php"); ?>
 <?php require_once("functions.php"); 
 
-$email1 = "";
-$name = "";
-$password1 = "";
+$email = "";
+$password = "";
 
 if (isset($_SESSION["logged_in_user_id"])){
        header("Location: data.php");

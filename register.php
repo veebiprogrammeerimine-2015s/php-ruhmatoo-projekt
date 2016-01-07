@@ -2,9 +2,9 @@
 <?php require_once("functions.php") ?>
 <?php
 
-$email2 = "";
-$name = "";
-$password2 = "";
+$create_email = "";
+$create_name = "";
+$create_password = "";
 
 
 
@@ -12,7 +12,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
        if(isset($_POST['registreeri'])){
         
              $hash = hash("sha512", $password2);
-            createUser($email2, $name, $hash);
+            createUser($create_email, $create_name, $create_hash);
         }
     }
 
@@ -41,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="password" class="form-control" name="parool2" placeholder="Parool" required> <br>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                     Registreeri</button>
-					<?php createUser($email2, $name, $hash); ?>
+					
                 
                 
                 </form>
