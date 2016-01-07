@@ -1,4 +1,25 @@
 <?php require_once("header.php"); ?>
+<?php require_once("functions.php"); ?> 
+<?php require_once("footer.php"); ?>
+$email1 = "";
+$name = "";
+$password1 = "";
+
+if (isset($_SESSION["logged_in_user_id"])){
+       header("Location: data.php");
+
+ 
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+       if(isset($_POST['login'])){
+       
+             $hash = hash("sha512", $password1);
+            loginUser($email1, $hash);
+        }
+    }
+
+}
+?>
+
 <html>
 
 <head>
@@ -13,22 +34,26 @@
                 <img class="profile-img" src="pildid/jalgpall.ico"
                     alt="sveg">
                 <form class="form-signin">
-                <input type="text" class="form-control" placeholder="Email" required autofocus>
-                <input type="password" class="form-control" placeholder="Password" required>
+                <input type="email" class="form-control" name="email1" placeholder="Email" required autofocus> <br>
+                <input type="password" class="form-control" name="parool2" placeholder="Parool" required> <br>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
-                    Sign in</button>
+                    Logi sisse</button>
                 <label class="checkbox pull-left">
                     <input type="checkbox" value="remember-me">
-                    Remember me
+                    Jäta mind meelde
                 </label>
-                <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+                
                 </form>
             </div>
-            <a href="#" class="text-center new-account">Create an account </a>
+            <a href="register.php" class="text-center new-account">Loo kasutaja </a>
         </div>
     </div>
 </div>
+<<<<<<< HEAD
   </body>
   </html>
   
 <?php require_once("footer.php"); ?>
+=======
+
+>>>>>>> 78a8e7af95241d3fb998aa26f5678429c1b471af
