@@ -1,22 +1,22 @@
 <?php
 
 	//laeme funktsiooni failis
-	require_once("function.php");
+	require_once("function2.php");
 	
 	//kontrollin, kas kasutaja on sisseloginud
-	if(isset($_SESSION["user_id_from_db"])){
+	if(isset($_SESSION["administrator_id_from_db"])){
 		// suunan data lehele
-		header("Location: data.php");
+		header("Location: data2.php");
 	}
 
      // Teen errori muutujad
 	      //siiselogimine
-	$user_email_error = "";
-	$user_password_error = "";	 
+         $administrator_email_error = "";
+         $administrator_password_hash_error = "";
 	
 	//Teen vaartuse muutujad
-	$user_email = "";
-	$user_password="";
+	     $administrator_email = "";
+		 $administrator_password_hash = "";
 	
 	
 		if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -28,19 +28,19 @@
 			echo "Vajutas log in nuppu!";
 			
 			if ( empty($_POST["email"]) ) {
-				$user_email_error = "E-mail on kohustuslik";
+				$administrator_email_error = "E-mail on kohustuslik";
 			}else{
-				$user_email = cleanInput($_POST["email"]);
+				$administrator_email = cleanInput($_POST["email"]);
 			}
 			
 			if ( empty($_POST["password"]) ) {
-				$user_password_error = "Parool on kohustuslik";
+				$administrator_password_hash_error = "Parool on kohustuslik";
 			}else{
-				$user_password = cleanInput($_POST["password"]);
+				$administrator_password_hash = cleanInput($_POST["password"]);
 			}
       // Kui oleme siia joudnud, voime kasutaja sisse logida
-			if($user_password_error == "" && $user_email_error == ""){
-				echo "Saab sisse logida! Kasutajanimi on ".$user_email." ja parool on ".$user_password;
+			if($administrator_email_error == ""  && $administrator_password_hash_error == "" ){
+				echo "Saab sisse logida! Kasutajanimi on ".$administrator_email." ja parool on ".$administrator_password_hash;
 			}
 		
 		}
@@ -57,6 +57,7 @@
 
 	
 
+ 
 
 <html>
 <head>
@@ -84,41 +85,17 @@
 
   <h2>Log in</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  	E-mail: <input class="input" name="email" type="email" placeholder="E-post" value="<?php echo $user_email; ?>"> <?php echo $user_email_error; ?><br><br>
-  	Parool: <input class="input" name="password" type="password" placeholder="Parool" value="<?php echo $user_password; ?>"> <?php echo $user_password_error; ?><br><br>
+  	E-mail: <input class="input" name="email" type="email" placeholder="E-post" value="<?php echo $administrator_email; ?>"> <?php echo $administrator_email_error; ?><br><br>
+  	Parool: <input class="input" name="password" type="password" placeholder="Parool" value="<?php echo $administrator_password_hash; ?>"> <?php echo $administrator_password_hash_error; ?><br><br>
   	<input type="submit" class="button3" name="login" value="Log in">
   </form>
   <br><br><br><br>
 
 
- <?php
+
+  <?php
 	require_once("header.php");
 ?>
-
 <?php require_once("foother.php");?>
 
   
-
-
-<?php
-		
-		//if($file_name == "registration.php"){ 
-		
-			//echo "<li>Registreerimine</li>";
-		
-		//}else{
-	
-			//echo '<li><a href="registration.php">Registreerimine</a></li>';
-		//}
-		
-
-
-
-
-
- require_once("menyy.php"); 
- 
-?>
-
-
-

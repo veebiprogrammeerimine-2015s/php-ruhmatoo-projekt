@@ -1,8 +1,14 @@
 <?php
-	require_once("functions.php");
-	//kontrollin, kas kasutaja on sisseligunud
+
+	//laeme funktsiooni failis
+	require_once("function.php");
 	
-	//kontrollin, kas kasutaja on registreerinud
+	//kontrollin, kas kasutaja on sisseloginud
+	if(isset($_SESSION["user_id_from_db"])){
+		// suunan data lehele
+		header("Location: data.php");
+	}
+	
 	
 		
 	
@@ -20,6 +26,7 @@
 	$create_secondname = "";
 	$create_login = "";
 	$create_mobile = "";
+	$create_age = "";
 	
 	if(isset($_POST["create"])){
 		
@@ -57,33 +64,33 @@
 				$create_secondname = cleanInput($_POST["create_secondname"]);
 			}
 			
-			if ( empty($_POST["create_mobile"]) ) {
-				$create_age_error = "See väli on kohustuslik";
+			if ( empty($_POST["create_age"]) ) {
+				$create_age = "";
 			}else{
-				$create_age = cleanInput($_POST["create_mobile"]);
+				$create_age = cleanInput($_POST["create_age"]);
+			}
+			
+			if ( empty($_POST["create_mobile"]) ) {
+				$create_mobile_error = "See väli on kohustuslik";
+			}else{
+				$create_mobile = cleanInput($_POST["create_mobile"]);
 			}
    
 			if(	$create_email_error == "" && $create_password_error == ""){
 				echo "Nüüd oled registreeritud! <br> Kasutajanimi: ".$create_email." <br> Parool: ".$create_password;
 				
-				$password_hash = hash("sha512", $create_password);
+				$create_password = hash("sha512", $create_password);
 				echo "<br>";
-				echo $password_hash;
+				echo $create_password;
 				
-<<<<<<< HEAD
-				createUser($create_name, $create_secondname, $create_login, $password_hash, $create_email , $create_mobile);
-				
-=======
->>>>>>> katariin
+		
+		    createUser($create_login, $create_email, $create_password, $create_name, $create_secondname, $create_age, $create_mobile);
+			
 			}
-		
-		createUser($create_login, $create_email, $password_hash, $create_name, $create_secondname, $create_age, $create_eriala);
-		
   
  
 }
-//sdfffffffffffffffffffffffffffffffff
-//funktsioon, mis eemaldab kõikvõimaliku üleliigse tekstist
+
 		function cleanInput($data) {
 		$data = trim($data);
 		$data = stripslashes($data);
@@ -97,19 +104,7 @@
  <body>
  <link rel="stylesheet" href="kujundus.css" type="text/css" /> 
 		<h2>Create user</h2>
-<<<<<<< HEAD
-		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 
-			<label>Login:</label> <input name="create_login" type="login" placeholder="Login" value="<?php echo $create_login; ?>"> <?php echo $create_login_error; ?><br><br>
-			<label>E-mail:</label> <input name="create_email" type="email" placeholder="E-post" value="<?php echo $create_email; ?>"> <?php echo $create_email_error; ?><br><br>
-			<label>Parool:</label> <input name="create_password" type="password" placeholder="Parool"> <?php echo $create_password_error; ?> <br><br>
-			<label>Nimi:</label> <input name="create_name" type="text" placeholder="Nimi" value="<?php echo $create_name; ?>"> <?php echo $create_name_error; ?><br><br>
-			<label>Perekonnanimi:</label> <input name="create_secondname" type="text" placeholder="Perekonnanimi" value="<?php echo $create_secondname; ?>"> <?php echo $create_secondname_error; ?><br><br>
-			<label>Vanus:</label> <input name="create_age" type="text" placeholder="Age" value="<?php echo $create_age; ?>"> <?php echo $create_age_error; ?><br><br>
-			<input name="create_eriala" type="text" placeholder="Eriala" value="<?php echo $create_eriala; ?>"> <?php echo $create_eriala_error; ?><br><br>
-
-			<input name="create" type="submit" value="create user" > <br><br>
-=======
 		<div>
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" class="field" >
 			<label>Login:</label> <input class="input" name="create_login" type="login" placeholder="Login" value="<?php echo $create_login; ?>"> <?php echo $create_login_error; ?><br><br>
@@ -117,26 +112,23 @@
 			<label>Parool:</label> <input class="input" name="create_password" type="password" placeholder="Parool"> <?php echo $create_password_error; ?> <br><br>
 			<label>Nimi:</label> <input class="input" name="create_name" type="text" placeholder="Nimi" value="<?php echo $create_name; ?>"> <?php echo $create_name_error; ?><br><br>
 			<label>Perekonnanimi:</label> <input class="input" name="create_secondname" type="text" placeholder="Perekonnanimi" value="<?php echo $create_secondname; ?>"> <?php echo $create_secondname_error; ?><br><br>
-			<label>Vanus:</label> <input class="input" name="create_age" type="text" placeholder="Vanus" value="<?php echo $create_age; ?>"> <?php echo $create_age_error; ?><br><br>
-			<label>Eriala:</label><input class="input" name="create_eriala" type="text" placeholder="Eriala" value="<?php echo $create_eriala; ?>"> <?php echo $create_eriala_error; ?><br><br>
+			<label>Vanus:</label> <input class="input" name="create_age" type="text" placeholder="Vanus" value="<?php echo $create_age; ?>"><br><br>
+			<label>Tel.number:</label><input class="input" name="create_mobile" type="text" placeholder="tel.number" value="<?php echo $create_mobile; ?>"> <?php echo $create_mobile_error; ?><br><br>
 			</div>
 			<input  name="create" type="submit" class="button3" value="create user" > <br><br>
->>>>>>> katariin
-			
-		</form>
-</body>
-</html>		
+        </form>
+
 		
-		
+<?php	require_once("header.php");?>		
 
 <?php 
 	$file_name = "registration.php";
-	$page_title = "Registration";
-	require_once("header.php"); ?>
+	$page_title = "Registration"; ?>
+	
+
 	
 <?php require_once("foother.php"); ?>
 
-
-
+<?php require_once("menyy.php"); ?>
 
 
