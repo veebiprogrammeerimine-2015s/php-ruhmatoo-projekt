@@ -1,4 +1,5 @@
 #KINGS OF COCKTAILS
+* [Koduleht](http://greeny.cs.tlu.ee/~kaurkal/GT_Kaur_Tauno_Koit/php-ruhmatoo-projekt/grupitoo2/home.php)
 
 ##Liikmed
 * Kaur Kaljuma, Tauno Lainevool, Koit Korela
