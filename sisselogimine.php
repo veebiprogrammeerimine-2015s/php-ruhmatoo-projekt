@@ -3,12 +3,6 @@
 	//laeme funktsiooni failis
 	require_once("function.php");
 	
-	//kontrollin, kas kasutaja on sisseloginud
-	if(isset($_SESSION["user_id_from_db"])){
-		// suunan data lehele
-		header("Location: data.php");
-	}
-
      // Teen errori muutujad
 	      //siiselogimine
 	$user_email_error = "";

@@ -2,14 +2,7 @@
 	// siia lisame auto nr märgite vormi
 	//laeme funktsiooni failis
 	require_once("function.php");
-	
-	//kontrollin, kas kasutaja ei ole sisseloginud
-	if(!isset($_SESSION["user_id_from_db"])){
-		// suunan login lehele
-		header("Location: data.php");
-	}
-	
-	
+
 	//login välja, aadressireal on ?logout=1
 	if(isset($_GET["logout"])){
 		//kustutab kõik sessiooni muutujad
@@ -18,9 +11,6 @@
 		header("Location: home.php");
 		
 	}
-	
-	
-	
 	
 	
 	$post_name = $post_done = $post_name_error = "";
