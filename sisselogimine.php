@@ -25,7 +25,7 @@
     // *********************
 		if(isset($_POST["login"])){
 			
-			echo "Vajutas log in nuppu!";
+			header("Location: data.php");
 			
 			if ( empty($_POST["email"]) ) {
 				$user_email_error = "E-mail on kohustuslik";

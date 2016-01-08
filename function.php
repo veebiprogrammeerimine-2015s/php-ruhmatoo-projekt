@@ -37,7 +37,7 @@
 			echo "kasutaja id=".$user_id_from_db;
 			
 			$_SESSION["user_id_from_db"] = $user_id_from_db;
-			//$_SESSION["user_email"] = $user_email_from_db;
+			$_SESSION["user_email"] = $user_email_from_db;
 
 			
 			//suunan kasutaja data.php lehele

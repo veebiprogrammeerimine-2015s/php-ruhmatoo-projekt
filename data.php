@@ -6,7 +6,7 @@
 	//kontrollin, kas kasutaja ei ole sisseloginud
 	if(!isset($_SESSION["user_id_from_db"])){
 		// suunan login lehele
-		header("Location: sisselogimine.php");
+		header("Location: data.php");
 	}
 	
 	
