@@ -15,7 +15,37 @@
 * **Konkurendid:** Hindamine ja pingerea koostamine toimub sarnaselt "Eesti Maitsed - Eesti parimad restoranid", kuid keskendutud on ainult kokteilelamusele. Seetõttu saavad kategoorias osaleda ka kohad, kus ei pakuta sööki või on köögipool nõrk.
 
 
+##Progress
+* **Funktsionaalsuse loetelu:**
+   * v0.1 Valmis on rippmenüü ja avaleht (OK)
+   * v0.2 Inimene saab end lehel registreerida kasutajaks (OK)
+   * v0.3 Kasutaja saab sisse logida (OK)
+   * v0.4 Kasutaja saab sisestada portaali infot (OK)
+   * v0.5 Kodulehe külastaja näeb tabelina infot, mida kasutajad on portaali sisestanud (OK)
+   * v0.6 Portaal on testitud (OK)
+   * v1.0 Portaal on kasutajatele avatud
 
+* **[MySQL tabelid ja käsud](http://www.tlu.ee/~kkkaur/PHP/MySQL_for_PHP.JPG)**
+
+##Kokkuvõte
+* **Kaur:** 
+   * **Mida õppisin juurde:** Andmebaaside loomise loengust on mul MySQL päris selge, kuid alati oli küsimus, et kuidas ma neid tabeleid saan inimesele "käega katsutavaks" teha. Nüüd muutus PHP ja MySQL-i omavaheline seos selgemaks. Muutusid loogiliseks ka PHP-käsud, kuidas info liigub ja tekkis pilt, et PHP on tegelikult päris loogiline keel (info saatmine erinevate lehtede vahel, erinevad funktsioonid ja nende koondamine ühele lehele ning nende kasutamine teistel lehtedel, muutujate määramine ja nende kasutamine jpm). Kasutajate loomine, sisselogimine, andmete sisestamine andmebaasi ja nende andmete kuvamine veebilehel said tehtud läbi ka tunnis, kuid kuna ükski kood ei ole kunagi täpselt sama, siis enda portaalile nende rakenduste tegemine andis mulle nendest parema ülevaate ja kinnistas nende rakenduste tööpõhimõtet.
+   * **Mis ebaõnnestus:** Grupi kokkulepitud ajal kohtumine ja võrdne panustamine.
+   * **Mis oli keeruline:** Kodulehel info sisestamine, selle saatmine andmebaasi ja pärast andmebaasis oleva info kuvamine kodulehel. Sain veateate functions.php lehelt, kuigi tegelikult oli viga sellel lehel, mis infot functions.php lehele saatis (hiljem meenus, et õppejõud rääkis ka tunnis, et PHP-s ei pruugi andmebaaside errorite puhul viga olla tegelikult seal, mis veateates kirjas). Selle vea otsimine ja parandamine oli üsna aeganõudev, kuid väga huvitav ja kui lõpuks selle lahendatud sain, oli kuidagi eufooriline tunne.
+
+* **Tauno:**
+   * **Mida õppisin juurde:**
+   * **Mis ebaõnnestus:** 
+   * **Mis oli keeruline:** 
+ 
+* **Koit:**
+   * **Mida õppisin juurde:**
+   * **Mis ebaõnnestus:** 
+   * **Mis oli keeruline:** 
+
+
+
+------------------
 # PHP rühmatöö projekt
 **Rühmatööde demo päev** on valitud eksamipäev jaanuaris, kuhu tuleks tullakse terve rühmaga koos!
 
