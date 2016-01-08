@@ -130,7 +130,6 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 						$count++;
 					}
 				}
-				
 				if($count == 0){
 					echo "<td><a href='offers_data.php?offers_data_id=".$orders_array[$i]->request_ID."'>tee pakkumine</a></td>";
 				}

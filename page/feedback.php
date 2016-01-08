@@ -15,6 +15,10 @@
 		header("Location: login.php");
 	}
 	
+	if(!isset($_GET["user_feedback_id"])){
+		header("Location: requests.php");
+	}
+
 	$feedback_array = $OfferManager->getFeedbackData();
 
 ?>
