@@ -1,5 +1,4 @@
-<br><br><br><br><br><br><br><br><br><br>
-<p><i>Masterid:</i></p>
+<i>Masterid:</i>
 <ul>
 <li><i>Tantjana</li></i>
 <li><i>Jekaterina</li></i>

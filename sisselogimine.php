@@ -12,6 +12,11 @@
 	$user_email = "";
 	$user_password="";
 	
+	//kontrollin, kas kasutaja on sisseloginud
+	if(isset($_SESSION["id_from_db"])){
+		// suunan data lehele
+		header("Location: data.php");
+	}
 	
 		if($_SERVER["REQUEST_METHOD"] == "POST") {
     // *********************
@@ -19,7 +24,6 @@
     // *********************
 		if(isset($_POST["login"])){
 			
-			header("Location: data.php");
 			
 			if ( empty($_POST["email"]) ) {
 				$user_email_error = "E-mail on kohustuslik";
@@ -35,10 +39,13 @@
       // Kui oleme siia joudnud, voime kasutaja sisse logida
 			if($user_password_error == "" && $user_email_error == ""){
 				echo "Saab sisse logida! Kasutajanimi on ".$user_email." ja parool on ".$user_password;
+			// functions php failis käivitan funktsiooni
+				loginUser($user_email, $user_password);
+			}
 			}
 		
 		}
-		}
+		
 		
 	function cleanInput($data) {
   	$data = trim($data);
@@ -96,20 +103,6 @@
 
 <?php
 		
-		//if($file_name == "registration.php"){ 
-		
-			//echo "<li>Registreerimine</li>";
-		
-		//}else{
-	
-			//echo '<li><a href="registration.php">Registreerimine</a></li>';
-		//}
-		
-
-
-
-
-
  require_once("menyy.php"); 
  
 ?>

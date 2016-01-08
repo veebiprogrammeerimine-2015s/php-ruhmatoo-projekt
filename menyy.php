@@ -5,6 +5,5 @@
  <li><a href="home.php">Avaleht</a></li>
  <li><a href="registration.php">Registreerimine</a></li>
   <li><a href="data.php">Lisa parandus</a></li>
-
  </ul>
 </div>
