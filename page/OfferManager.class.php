@@ -177,7 +177,7 @@ class OfferManager {
 		
 		$stmt->close();
 	}
-	
+
 	function updateOffersAndRequestsData($offer_id, $request_id){
 		
 		$stmt = $this->connection->prepare("UPDATE offers SET accepted=1 WHERE offer_ID =?");
