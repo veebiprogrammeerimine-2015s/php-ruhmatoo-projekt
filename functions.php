@@ -109,7 +109,10 @@
 		if($stmt->fetch()){
 			$_SESSION["game_id"] = $game_id;
 		}
+		$stmt->close();
+		
 	
+		
 		$mysqli->close();
 		
 		return $message;
@@ -121,6 +124,7 @@
 		function saveResult($basket_nr, $result){
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 			
+
 			$stmt = $mysqli->prepare("INSERT INTO results_php (basket_nr, result, game_id) VALUES (?, ?, ?)");
 			$stmt->bind_param("iii", $basket_nr, $result, $_SESSION["game_id"]);
 			if($stmt->execute()){
@@ -129,6 +133,9 @@
 				echo $stmt->error;
 			}
 		$stmt->close();
+		
+			
+		
 		$mysqli->close();		
 	
 		return $message;
@@ -145,7 +152,7 @@
 			JOIN game_php ON game_php.game_id=results_php.game_id
 			JOIN parks_php ON parks_php.park_id=game_php.park_id
 			JOIN pars_php ON pars_php.park_id=parks_php.park_id
-			WHERE game_php.game_id=?");			
+			WHERE game_php.game_id=? AND results_php.basket_nr=pars_php.basket_nr");			
 			$stmt->bind_param("i", $game_id);
 			echo $stmt->error;
 			$stmt->bind_result($basket_nr, $result, $par);

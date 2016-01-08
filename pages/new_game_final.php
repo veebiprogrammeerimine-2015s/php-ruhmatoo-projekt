@@ -33,15 +33,7 @@
 	
 	for($i = 0; $i < count($results_list); $i++){
 		
-		if ($results_list[$i]->basket_nr == $previous_basket){
-			continue;
-		}else{
-			if($previous_basket != -1){
-				$i = $i + $previous_basket;
-			}
-			
-		}
-			
+					
 		
 		echo "<tr>";
 			echo "<td>".$results_list[$i]->basket_nr."</td>";
@@ -49,7 +41,9 @@
 			echo "<td>".$results_list[$i]->result."</td>";
 		echo "</tr>";
 		
-		$previous_basket = $results_list[$i]->basket_nr;
+		
 		
 	}
 ?>
+
+<a href='main.php'>AVALEHELE</a>
