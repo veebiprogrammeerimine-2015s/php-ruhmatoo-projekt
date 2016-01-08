@@ -171,6 +171,24 @@
 			}
 		
 			$stmt->close();
+			
+			$stmt = $mysqli->prepare("SELECT SUM(results_php.result), SUM(pars_php.par), (SUM(results_php.result)-SUM(pars_php.par)) FROM results_php
+			JOIN game_php ON game_php.game_id=results_php.game_id
+			JOIN parks_php ON parks_php.park_id=game_php.park_id
+			JOIN pars_php ON pars_php.park_id=parks_php.park_id
+			WHERE game_php.game_id=? AND results_php.basket_nr=pars_php.basket_nr");
+			$stmt->bind_param("i", $game_id);
+			$stmt->bind_result($sum_results, $sum_pars, $difference);
+			$stmt->execute();
+			if($stmt->fetch()){
+				$_SESSION["sum_results"] = $sum_results;
+				$_SESSION["sum_pars"] = $sum_pars;
+				$_SESSION["difference"] = $difference;
+				
+			}
+			$stmt->close();
+			
+			
 			$mysqli->close();
 			
 			return $array;

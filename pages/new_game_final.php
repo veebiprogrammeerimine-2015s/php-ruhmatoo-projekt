@@ -19,7 +19,15 @@
 	Sisselogitud kasutajaga <?=$_SESSION["user_email"];?>
 	<a href="?logout=1"> Logi välja</a>
 </p>
-<p>m2ng l2bi!!!</p>
+<p>m2ng l2bi!!!<br></p>
+<p>
+total par =  <?php echo $_SESSION["sum_pars"]; ?> <br>
+total result =  <?php echo $_SESSION["sum_results"]; ?> <br>
+difference = <?php echo $_SESSION["difference"]; ?>
+ </p>
+
+
+
 <table border=1 >
 <tr>
 	<th>Korv</th>
