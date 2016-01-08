@@ -22,6 +22,8 @@
 		$orders_array = $OfferManager->getAllData();
 	}
 	
+	$offers_array = $OfferManager->getOffersData();
+	
 	if(isset($_GET["update"])){
 		$OfferManager->updateOrdersData(cleanInput($_GET["request_id"]), cleanInput($_GET["text_type"]), cleanInput($_GET["subject"]), cleanInput($_GET["description"]), cleanInput($_GET["target_group"]), cleanInput($_GET["source"]), cleanInput($_GET["length"]), cleanInput($_GET["offer_deadline"]), cleanInput($_GET["work_deadline"]), cleanInput($_GET["output"]));
 	}
@@ -121,7 +123,18 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 				echo "<td>".$orders_array[$i]->work_deadline."</td>";
 				echo "<td>".$orders_array[$i]->output."</td>";
 				echo "<td><a href='feedback.php?user_feedback_id=".$orders_array[$i]->company_id."'>vaata tagasisidet</a></td>";
-				echo "<td><a href='offers_data.php?offers_data_id=".$orders_array[$i]->request_ID."'>tee pakkumine</a></td>";
+				
+				$count = 0;
+				for($j = 0; $j < count($offers_array); $j++){
+					if($offers_array[$j]->request_id == $orders_array[$i]->request_ID and $offers_array[$j]->journalist_id == $_SESSION["logged_in_user_id"]){
+						$count++;
+					}
+				}
+				
+				if($count == 0){
+					echo "<td><a href='offers_data.php?offers_data_id=".$orders_array[$i]->request_ID."'>tee pakkumine</a></td>";
+				}
+
 				echo "<tr>";
 			}
 		}
