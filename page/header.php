@@ -27,13 +27,13 @@
 
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-			<?php if($_SESSION["logged_in_user_group_id"] != "2"):?>
-			<li><a href="data.php">Tellimuse esitamine</a></li> <?php endif; ?>
+			<?php if($_SESSION["logged_in_user_group_id"] != "2"){
+			echo '<li><a href="data.php">Tellimuse esitamine</a></li>';} ?>
 			<li><a href="requests.php">Tööpakkumised</a></li>
 			<li><a href="offers.php">Ajakirjanike pakkumised</a></li>
 			<li><a href="feedback.php">Tagasiside</a></li>
-			<?php if($_SESSION["logged_in_user_group_id"] == "3"):?>
-			<li><a href="history.php">Ajalugu</a></li> <?php endif; ?> 
+			<?php if($_SESSION["logged_in_user_group_id"] == "1"){
+			echo '<li><a href="history.php">Ajalugu</a></li>' ;} ?> 
 		</ul>
 	</div>
 	</div>
@@ -49,6 +49,7 @@ if(!isSet($_SESSION["logged_in_user_id"])){
 	}
 	
 	if(isSet($_GET["logout"])){
+		$User->logoutUser();
 		session_destroy();
 		header("Location: login.php");
 	}
