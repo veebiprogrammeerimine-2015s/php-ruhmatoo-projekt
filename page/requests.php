@@ -1,6 +1,7 @@
 <?php
 	require_once("functions.php");
 	require_once("OfferManager.class.php");
+	require_once("header.php");
 	
 	$OfferManager = new OfferManager($mysqli, $_SESSION["logged_in_user_id"]);
 	
@@ -41,8 +42,6 @@
 	
 ?>
 
-Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
-
 <h2>Tellimuste tabel</h2>
 
 <form action="requests.php" method="get">
@@ -56,7 +55,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 	/*ETTEVÕTTE ENDA TÖÖPAKKUMISTE TABEL */
 	if($_SESSION["logged_in_user_group_id"] == "3"){
 
-		echo "<table border=1>";
+		echo "<table class='table table-striped'>";
 		echo "<tr>";
 		echo "<th>teksti tüüp</th>";
 		echo "<th>teema</th>";
@@ -93,7 +92,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 	
 	/*KÕIK TÖÖPAKKUMISED, MÕELDUD AJAKIRJANIKELE JA ADMINILE */
 	} else {
-		echo "<table border=1>";
+		echo "<table class='table table-striped'>";
 		echo "<tr>";
 		echo "<th>tellija</th>";
 		echo "<th>teksti tüüp</th>";
