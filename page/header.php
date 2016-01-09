@@ -27,19 +27,13 @@
 
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="history.php">Ajalugu<span class="sr-only">(current)</span></a></li>
-			<li><a href="data.php">Tellimuse esitamine</a></li>
+			<?php if($_SESSION["logged_in_user_group_id"] != "2"):?>
+			<li><a href="data.php">Tellimuse esitamine</a></li> <?php endif; ?>
 			<li><a href="requests.php">Tööpakkumised</a></li>
 			<li><a href="offers.php">Ajakirjanike pakkumised</a></li>
 			<li><a href="feedback.php">Tagasiside</a></li>
-			<?php 
-				if(isset($page_file_name) && $page_file_name != "data.php") { 
-					echo '<li><a href="data.php">Tellimuse esitamine</a></li>';
-				} else { 
-					echo '<li>Tellimuse esitamine</li>';
-				} 
-			?>
-	
+			<?php if($_SESSION["logged_in_user_group_id"] == "3"):?>
+			<li><a href="history.php">Ajalugu</a></li> <?php endif; ?> 
 		</ul>
 	</div>
 	</div>

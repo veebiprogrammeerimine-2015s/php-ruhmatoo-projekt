@@ -5,19 +5,13 @@
 	
 	$OfferManager = new OfferManager($mysqli, $_SESSION["logged_in_user_id"]);
 	
-	if(!isSet($_SESSION["logged_in_user_id"])){
-		header("Location: login.php");
-	}
-	
+		
 	if($_SESSION["logged_in_user_group_id"] == "2"){
 		header("Location: requests.php");
 	}
 
-	if(isSet($_GET["logout"])){
-		session_destroy();
-		header("Location: login.php");
-	}
 	
+	//$page_file_name="data.php";
 	$text_type = $subject = $target_group = $description = $source = $length = $offer_deadline = $work_deadline = $output = $m = "";
 	$text_type_error = $subject_error = $target_group_error = $description_error = $source_error = $length_error = $offer_deadline_error_1 = $offer_deadline_error_2 = $work_deadline_error_1 = $work_deadline_error_2 = $output_error = "";
 	
