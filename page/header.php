@@ -27,11 +27,19 @@
 
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-			<li><a href="#">Link</a></li>
-			<li><a href="#">Link</a></li>
-			<li><a href="#">Link</a></li>
-			<li><a href="#">Link</a></li>
+			<li class="active"><a href="history.php">Ajalugu<span class="sr-only">(current)</span></a></li>
+			<li><a href="data.php">Tellimuse esitamine</a></li>
+			<li><a href="requests.php">Tööpakkumised</a></li>
+			<li><a href="offers.php">Ajakirjanike pakkumised</a></li>
+			<li><a href="feedback.php">Tagasiside</a></li>
+			<?php 
+				if(isset($page_file_name) && $page_file_name != "data.php") { 
+					echo '<li><a href="data.php">Tellimuse esitamine</a></li>';
+				} else { 
+					echo '<li>Tellimuse esitamine</li>';
+				} 
+			?>
+	
 		</ul>
 	</div>
 	</div>
