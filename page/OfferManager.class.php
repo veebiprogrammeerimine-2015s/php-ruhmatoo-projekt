@@ -138,17 +138,17 @@ class OfferManager {
 	}
 	
 	function getOffersData(){
-		
+
 		if($_SESSION["logged_in_user_group_id"] == "3"){
-			$stmt = $this->connection->prepare("SELECT subject, company_name, company_ID, offer_ID, requests.request_ID, journalist_ID, date, price, comment, accepted FROM offers JOIN requests ON requests.request_ID=offers.request_ID JOIN users ON users.user_ID=requests.company_ID WHERE company_ID=?");	
+			$stmt = $this->connection->prepare("SELECT subject, u1.company_name, company_ID, offer_ID, requests.request_ID, journalist_ID, u2.first_name, u2.last_name, date, price, comment, accepted FROM offers JOIN requests ON requests.request_ID=offers.request_ID JOIN users AS u1 ON u1.user_ID=requests.company_ID JOIN users AS u2 ON u2.user_ID=offers.journalist_ID WHERE company_ID=?");	
 		}else if($_SESSION["logged_in_user_group_id"] == "2"){
-			$stmt = $this->connection->prepare("SELECT subject, company_name, company_ID, offer_ID, requests.request_ID, journalist_ID, date, price, comment, accepted FROM offers JOIN requests ON requests.request_ID=offers.request_ID JOIN users ON users.user_ID=requests.company_ID WHERE journalist_ID=?");	
+			$stmt = $this->connection->prepare("SELECT subject, u1.company_name, company_ID, offer_ID, requests.request_ID, journalist_ID, u2.first_name, u2.last_name, date, price, comment, accepted FROM offers JOIN requests ON requests.request_ID=offers.request_ID JOIN users AS u1 ON u1.user_ID=requests.company_ID JOIN users AS u2 ON u2.user_ID=offers.journalist_ID WHERE journalist_ID=?");	
 		}else{
-			$stmt = $this->connection->prepare("SELECT subject, company_name, company_ID, offer_ID, requests.request_ID, journalist_ID, date, price, comment, accepted FROM offers JOIN requests ON requests.request_ID=offers.request_ID JOIN users ON users.user_ID=requests.company_ID");
+			$stmt = $this->connection->prepare("SELECT subject, u1.company_name, company_ID, offer_ID, requests.request_ID, journalist_ID, u2.first_name, u2.last_name, date, price, comment, accepted FROM offers JOIN requests ON requests.request_ID=offers.request_ID JOIN users AS u1 ON u1.user_ID=requests.company_ID JOIN users AS u2 ON u2.user_ID=offers.journalist_ID");
 		}
 		
 		$stmt->bind_param("i", $_SESSION["logged_in_user_id"]);
-		$stmt->bind_result($subject_from_db, $company_name_from_db, $company_id_from_db, $offer_ID_from_db, $request_ID_from_db, $journalist_ID_from_db, $offer_date_from_db, $price_from_db, $comment_from_db, $accepted_from_db);
+		$stmt->bind_result($subject_from_db, $company_name_from_db, $company_id_from_db, $offer_ID_from_db, $request_ID_from_db, $journalist_ID_from_db, $journalist_first_name_from_db, $journalist_last_name_from_db, $offer_date_from_db, $price_from_db, $comment_from_db, $accepted_from_db);
 		$stmt->execute();
 		
 		$array = array();
@@ -163,6 +163,8 @@ class OfferManager {
 			$offer->offer_id = $offer_ID_from_db;
 			$offer->request_id = $request_ID_from_db;
 			$offer->journalist_id = $journalist_ID_from_db;
+			$offer->journalist_first_name = $journalist_first_name_from_db;
+			$offer->journalist_last_name = $journalist_last_name_from_db;
 			$offer->offer_date = $offer_date_from_db;
 			$offer->price = $price_from_db;
 			$offer->comment = $comment_from_db;
@@ -175,14 +177,18 @@ class OfferManager {
 		
 		$stmt->close();
 	}
-	
-	function updateOffersData($offer_id, $request_id){
+
+	function updateOffersAndRequestsData($offer_id, $request_id){
 		
 		$stmt = $this->connection->prepare("UPDATE offers SET accepted=1 WHERE offer_ID =?");
 		$stmt->bind_param("i", $offer_id);
 		$stmt->execute();
 		
 		$stmt = $this->connection->prepare("UPDATE offers SET accepted=0 WHERE accepted IS NULL AND request_ID=?");
+		$stmt->bind_param("i", $request_id);
+		$stmt->execute();
+		
+		$stmt = $this->connection->prepare("UPDATE requests SET status=1 WHERE request_ID=?");
 		$stmt->bind_param("i", $request_id);
 		$stmt->execute();
 		
@@ -238,6 +244,34 @@ class OfferManager {
 
 		$stmt->close();
 		
+	}
+	
+	function getHistoryData(){
+		
+		$stmt = $this->connection->prepare("SELECT session_ID, history.user_ID, first_name, last_name, log_in, log_out FROM history JOIN users ON users.user_ID=history.user_ID");
+		$stmt->bind_result($session_id_from_db, $user_id_from_db, $user_first_name_from_db, $user_last_name_from_db, $log_in_from_db, $log_out_from_db);
+		$stmt->execute();
+
+		$array = array();
+		
+		while($stmt->fetch()){
+			
+			$history = new Stdclass();
+	
+			$history->session_identification = $session_id_from_db;
+			$history->user_id = $user_id_from_db;
+			$history->user_first_name = $user_first_name_from_db;
+			$history->user_last_name = $user_last_name_from_db;
+			$history->log_in = $log_in_from_db;
+			$history->log_out = $log_out_from_db;
+
+			array_push($array, $history);
+		}
+		
+		return $array;
+
+		$stmt->close();
+
 	}
 }
 

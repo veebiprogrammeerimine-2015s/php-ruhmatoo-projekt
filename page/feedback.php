@@ -5,16 +5,11 @@
 	require_once("header.php");
 	
 	$OfferManager = new OfferManager($mysqli, $_SESSION["logged_in_user_id"]);
-	
-	if(!isSet($_SESSION["logged_in_user_id"])){
-		header("Location: login.php");
+			
+	if(!isset($_GET["user_feedback_id"])){
+		header("Location: requests.php");
 	}
-	
-	if(isSet($_GET["logout"])){
-		session_destroy();
-		header("Location: login.php");
-	}
-	
+
 	$feedback_array = $OfferManager->getFeedbackData();
 
 ?>

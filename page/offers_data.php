@@ -1,23 +1,15 @@
 <?php
 	require_once("functions.php");
 	require_once("OfferManager.class.php");
+	require_once("header.php");
 	
 	$OfferManager = new OfferManager($mysqli, $_SESSION["logged_in_user_id"]);
-	
-	if(!isSet($_SESSION["logged_in_user_id"])){
-		header("Location: login.php");
-		exit();
-	}
-	
+		
 	if($_SESSION["logged_in_user_group_id"] == "3"){
 		header("Location: requests.php");
 	}
 	
-	if(isSet($_GET["logout"])){
-		session_destroy();
-		header("Location: login.php");
-	}
-	
+		
 	$price = $comment = "";
 	$price_error = $comment_error = "";
 	
@@ -52,8 +44,6 @@
 	}
 
 ?>
-
-Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
 
 <h2>Pakkumise tegemine</h2>
 
