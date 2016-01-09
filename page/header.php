@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
-	<title><?php echo $page_title ?></title>
+	<title>No Plagiarism</title>
 	<script type="text/javascript" src="functions.js"></script>
 </head>
 <body>
@@ -22,28 +21,35 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="#">No plagiarism</a>
+		<a class="navbar-brand" href="">No Plagiarism</a>
 	</div>
 
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-			<?php if($_SESSION["logged_in_user_group_id"] != "2"){
-			echo '<li><a href="data.php">Tellimuse esitamine</a></li>';} ?>
+			<?php
+				if($_SESSION["logged_in_user_group_id"] != "2"){
+					echo '<li><a href="data.php">Tellimuse esitamine</a></li>';
+				} 
+			?>
 			<li><a href="requests.php">Tööpakkumised</a></li>
 			<li><a href="offers.php">Ajakirjanike pakkumised</a></li>
 			<li><a href="feedback.php">Tagasiside</a></li>
-			<?php if($_SESSION["logged_in_user_group_id"] == "1"){
-			echo '<li><a href="history.php">Ajalugu</a></li>' ;} ?> 
+			<?php
+				if($_SESSION["logged_in_user_group_id"] == "1"){
+					echo '<li><a href="history.php">Ajalugu</a></li>';
+				}
+			?>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href=""><?=$_SESSION['logged_in_user_email'];?></a></li>
+			<li><a href="?logout=1">[logi välja]</a></li>
 		</ul>
 	</div>
 	</div>
 	</nav><br><br><br>
-	
-Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
-
 
 <?php
-if(!isSet($_SESSION["logged_in_user_id"])){
+	if(!isSet($_SESSION["logged_in_user_id"])){
 		header("Location: login.php");
 		exit();
 	}
@@ -54,4 +60,3 @@ if(!isSet($_SESSION["logged_in_user_id"])){
 		header("Location: login.php");
 	}
 ?>
-

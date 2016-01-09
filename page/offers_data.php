@@ -9,7 +9,10 @@
 		header("Location: requests.php");
 	}
 	
-		
+	if(!isset($_GET["offers_data_id"])){
+		header("Location: requests.php");
+	}
+	
 	$price = $comment = "";
 	$price_error = $comment_error = "";
 	

@@ -13,8 +13,6 @@
 	$offers_array = $OfferManager->getOffersData();
 ?>
 
-Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
-
 <h2>Pakkumiste tabel</h2>
 
 <?php
@@ -27,23 +25,23 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 	/* AJAKIRJANIK */
 	if($_SESSION["logged_in_user_group_id"] == "2"){
 		
-		echo "<table border=1>";
+		echo "<table class='table table-striped'>";
 		echo "<tr>";
-		echo "<th>Ajakirjanik</th>";
-		echo "<th>tellimus</th>";
-		echo "<th>tellimus_nimi</th>";
-		echo "<th>tellimus_ettevõte</th>";
-		echo "<th>kuupäev</th>";
-		echo "<th>hind</th>";
-		echo "<th>kommentaar</th>";
-		echo "<th>accepted</th>";
+		
+		
+		echo "<th>Teema</th>";
+		echo "<th>Tellija</th>";
+		echo "<th>Pakkumise kuupäev</th>";
+		echo "<th>Hind (EUR)</th>";
+		echo "<th>Kommentaar</th>";
+		echo "<th>Accepted</th>";
 		echo "<th></th>";
 		echo "</tr>";
 
 		for($i = 0; $i < count($offers_array); $i++){
 			echo "<tr>";
-			echo "<td>".$offers_array[$i]->journalist_first_name." ".$offers_array[$i]->journalist_last_name."</td>";
-			echo "<td>".$offers_array[$i]->request_id."</td>";
+			
+			
 			echo "<td>".$offers_array[$i]->subject."</td>";
 			echo "<td>".$offers_array[$i]->company_name."</td>";
 			echo "<td>".$offers_array[$i]->offer_date."</td>";
@@ -60,7 +58,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 	/* ETTEVÕTE */
 	if($_SESSION["logged_in_user_group_id"] == "3"){
 		
-		echo "<table border=1>";
+		echo "<table class='table table-striped'>";
 		echo "<tr>";
 		echo "<th>Ajakirjanik</th>";
 		echo "<th>tellimus</th>";
@@ -99,4 +97,5 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 	}
 
 ?>
+
 </table><br>

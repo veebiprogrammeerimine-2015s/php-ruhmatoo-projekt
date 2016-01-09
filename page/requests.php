@@ -4,7 +4,7 @@
 	require_once("header.php");
 	
 	$OfferManager = new OfferManager($mysqli, $_SESSION["logged_in_user_id"]);
-			
+	
 	$keyword = "";
 	
 	if(isset($_GET["keyword"])){
@@ -39,7 +39,6 @@
 	<input name="keyword" type="search" value="<?=$keyword?>">
 	<input type="submit" value="otsi">
 </form>
-
 
 <?php 
 	
@@ -129,7 +128,5 @@
 		}
 	}
 ?>
-</table><br>
 
-<a href="data.php">Tellimuse esitamine</a> <br>
-<a href="offers.php">Esitatud pakkumised</a>
+</table><br>

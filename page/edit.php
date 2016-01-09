@@ -1,17 +1,9 @@
 <?php
 	require_once("functions.php");
 	require_once("OfferManager.class.php");
+	require_once("header.php");
 	
 	$OfferManager = new OfferManager($mysqli, $_SESSION["logged_in_user_id"]);
-	
-	if(!isSet($_SESSION["logged_in_user_id"])){
-		header("Location: login.php");
-	}
-	
-	if(isSet($_GET["logout"])){
-		session_destroy();
-		header("Location: login.php");
-	}
 	
 	if(isset($_GET["update"])){
 		$OfferManager->updateOrdersData(cleanInput($_GET["orders_id"]), cleanInput($_GET["text_type"]), cleanInput($_GET["subject"]), cleanInput($_GET["target_group"]), cleanInput($_GET["description"]), cleanInput($_GET["source"]), cleanInput($_GET["length"]), cleanInput($_GET["offer_deadline"]), cleanInput($_GET["work_deadline"]), cleanInput($_GET["output"]));
@@ -30,8 +22,6 @@
         return $data;
 	}
 ?>
-
-Kasutaja: <?=$_SESSION['logged_in_user_id'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
 
 <h2>Tellimuse muutmine</h2>
 

@@ -1,18 +1,12 @@
 <?php
 	require_once("functions.php");
 	require_once("OfferManager.class.php");
+	require_once("header.php");
 	
 	$OfferManager = new OfferManager($mysqli, $_SESSION["logged_in_user_id"]);
 	
-	if(!isSet($_SESSION["logged_in_user_id"])){
-		header("Location: login.php");
-	}
-
-	if(isSet($_GET["logout"])){
-		
-		$User->logoutUser();
-		session_destroy();
-		header("Location: login.php");
+	if(!isSet($_GET["offer_id"])){
+		header("Location: offers.php");
 	}
 	
 	$feedback = "";
@@ -44,8 +38,6 @@
 	}
 
 ?>
-
-Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
 
 <h2>Tagasiside</h2>
 

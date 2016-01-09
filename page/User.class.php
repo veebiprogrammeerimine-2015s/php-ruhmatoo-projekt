@@ -33,9 +33,6 @@ class User {
 			$success->user = $user;
 			$response->success = $success;
 			
-			
-			//header("Location: data.php?tere");
-			
 		}else{
 			
 			$error = new StdClass();

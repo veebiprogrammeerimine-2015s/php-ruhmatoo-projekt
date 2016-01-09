@@ -4,14 +4,11 @@
 	require_once("header.php");
 	
 	$OfferManager = new OfferManager($mysqli, $_SESSION["logged_in_user_id"]);
-	
 		
 	if($_SESSION["logged_in_user_group_id"] == "2"){
 		header("Location: requests.php");
 	}
 
-	
-	//$page_file_name="data.php";
 	$text_type = $subject = $target_group = $description = $source = $length = $offer_deadline = $work_deadline = $output = $m = "";
 	$text_type_error = $subject_error = $target_group_error = $description_error = $source_error = $length_error = $offer_deadline_error_1 = $offer_deadline_error_2 = $work_deadline_error_1 = $work_deadline_error_2 = $output_error = "";
 	
@@ -107,8 +104,6 @@
 	
 ?>
 
-Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
-
 <h2>Tellimuse esitamine</h2>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 	<select id="text_type" name="text_type">
@@ -130,5 +125,3 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 	<input name="add_new_order" type="submit" value="Lisa uus tellimus">
 	<p style="color:green;"><?=$m;?></p>
 </form>
-
-<a href="requests.php">Tellimuste tabel</a>

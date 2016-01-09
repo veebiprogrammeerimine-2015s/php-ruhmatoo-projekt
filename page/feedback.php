@@ -5,16 +5,14 @@
 	require_once("header.php");
 	
 	$OfferManager = new OfferManager($mysqli, $_SESSION["logged_in_user_id"]);
-			
+	
 	if(!isset($_GET["user_feedback_id"])){
-		header("Location: requests.php");
+		header("Location: ?user_feedback_id=".$_SESSION['logged_in_user_id']);
 	}
 
 	$feedback_array = $OfferManager->getFeedbackData();
 
 ?>
-
-Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="text-decoration:none">[logi välja]</a>
 
 <?php
 	
@@ -23,7 +21,7 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 		
 		echo"<h2>Tagasiside</h2>";
 		
-		echo "<table border=1>";
+		echo "<table class='table table-striped'>";
 		echo "<tr>";
 		echo "<th>To:Eesnimi</th>";
 		echo "<th>To:Perekonnanimi</th>";
@@ -47,9 +45,10 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 			echo "<td>".$feedback_array[$i]->feedback_date."</td>";
 			echo "</tr>";
 		}
-	/* SEE ON MÕELDUD AJAKIRJANIKU JA ETTEVÕTTE JAOKS */
+	/* SEE (ALUMINE OSA)ON MÕELDUD AJAKIRJANIKU JA ETTEVÕTTE JAOKS */
 	}else{
 		
+		/* SEE VAATAB JA KAJASTAB SELLE INIMESE, KELLE KOHTA TAGASISIDE ON */
 		for($i = 0; $i < count($feedback_array); $i++){
 			if($_GET["user_feedback_id"] == $feedback_array[$i]->to_user_id){
 				echo "<h2>Tagasiside kasutajale: ".$feedback_array[$i]->to_user_first_name." ".$feedback_array[$i]->to_user_last_name."</h2>";
@@ -57,14 +56,13 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 			}
 		}
 
-		echo "<table border=1>";
+		echo "<table class='table table-striped'>";
 		echo "<tr>";
 		echo "<th>Tagasiside</th>";
-		if($_SESSION["logged_in_user_group_id"] == "3"){
-			echo "<th>From:Ettevõte</th>";
+		echo "<th>Kellelt</th>";
+		if($_SESSION["logged_in_user_group_id"] == "2"){
+			echo "<th>Ettevõte</th>";
 		}
-		echo "<th>From:Eesnimi</th>";
-		echo "<th>From:Perekonnanimi</th>";
 		echo "<th>Kuupäev</th>";
 		echo "</tr>";
 		
@@ -72,11 +70,10 @@ Kasutaja: <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1" style="tex
 			if($_GET["user_feedback_id"] == $feedback_array[$i]->to_user_id){
 				echo "<tr>";
 				echo "<td>".$feedback_array[$i]->feedback_text."</td>";
-				if($_SESSION["logged_in_user_group_id"] == "3"){
+				echo "<td>".$feedback_array[$i]->from_user_first_name." ".$feedback_array[$i]->from_user_last_name."</td>";
+				if($_SESSION["logged_in_user_group_id"] == "2"){
 					echo "<td>".$feedback_array[$i]->from_user_company_name."</td>";
 				}
-				echo "<td>".$feedback_array[$i]->from_user_first_name."</td>";
-				echo "<td>".$feedback_array[$i]->from_user_last_name."</td>";
 				echo "<td>".$feedback_array[$i]->feedback_date."</td>";
 				echo "</tr>";
 			}
