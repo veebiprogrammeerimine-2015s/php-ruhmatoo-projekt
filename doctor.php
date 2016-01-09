@@ -1,9 +1,12 @@
 <?php
 	require_once("functions.php");
+	require_once("dropdown.php");
 	if(!isset($_SESSION["logged_in_user_id"])){
 		header("Location: login.php");
 		
 	}
+	
+	$dropdown = new dropdown($mysqli, $_SESSION["logged_in_user_id"]);
 	
 	if(isset($_GET["logout"])){
 		session_destroy();
@@ -98,6 +101,8 @@
 	<label for="operation_difficulty" >Operatsiooni raskustase</label><br>
 	<input id="operation_difficulty" name="operation_difficulty" type="text" value="<?php echo $operation_difficulty; ?>"> <?php echo $operation_difficulty_error; ?><br><br>
 	<label for="d_animal_name" >Looma nimi</label><br>
-	<input id="d_animal_name" name="d_animal_name" type="text" value="<?php echo $d_animal_name; ?>"> <?php echo $d_animal_name_error; ?><br><br>
+	<form>
+	<<?=$dropdown->createDropdown();?>id="d_animal_name" name="d_animal_name" type="text" value="<?php echo $d_animal_name; ?>"> <?php echo $d_animal_name_error; ?>
+	</form><br><br>
 	<input type="submit" name="docto" value="Salvesta">
 </form>
