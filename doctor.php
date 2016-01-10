@@ -101,8 +101,8 @@
 	<label for="operation_difficulty" >Operatsiooni raskustase</label><br>
 	<input id="operation_difficulty" name="operation_difficulty" type="text" value="<?php echo $operation_difficulty; ?>"> <?php echo $operation_difficulty_error; ?><br><br>
 	<label for="d_animal_name" >Looma nimi</label><br>
-	<form>
-	<<?=$dropdown->createDropdown();?>id="d_animal_name" name="d_animal_name" type="text" value="<?php echo $d_animal_name; ?>"> <?php echo $d_animal_name_error; ?>
+	<form id="d_animal_name" name="d_animal_name" type="text" value="<?php echo $d_animal_name; ?>"> <?php echo $d_animal_name_error; ?>
+	<?=$dropdown->createDropdown();?>
 	</form><br><br>
 	<input type="submit" name="docto" value="Salvesta">
 </form>
