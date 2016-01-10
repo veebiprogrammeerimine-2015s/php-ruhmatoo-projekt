@@ -42,6 +42,9 @@
 					<li>
                         <a href="donations.php">Annetamine</a>
                     </li>
+                    <li>
+                        <a href="create.php">Loo konto</a>
+                    </li>
                 </ul>
             </div>
         </div>
