@@ -11,7 +11,7 @@
 
 1. **README.md sisaldab:**
     * suurelt projekti nime;
-    * rühma liikmete nimed; Henrik 
+    * rühma liikmete nimed;
     * eesmärki (3-4 lauset, mis probleemi üritate lahendada);
     * kirjeldus (sihtrühm, eripära võrreldes teiste samalaadsete rakendustega - kirjeldada vähemalt 2-3 sarnast rakendust mida eeskujuks võtta);
     * funktsionaalsuse loetelu prioriteedi järjekorras, nt
