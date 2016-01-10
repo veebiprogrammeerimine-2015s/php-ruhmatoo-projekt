@@ -9,29 +9,29 @@
 	session_start();
 	
 	// lisame kasutaja ab'i
-	function createUser($create_name, $create_secondname, $user_login, $user_email, $user_password, $user_mobile){
+	function createUser($create_email, $create_password, $create_name){
 		$response = new StdClass();
 		// globals on muutuja koigist php failidest mis on uhendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO user_tech (user_name, user_lastname, user_login, user_email, user_password, user_mobile) VALUES (?, ?, ?, ?, ?, ?)");
-		$stmt->bind_param("sssssi", $create_name, $create_secondname, $user_login, $user_email, $user_password, $user_mobile);
+		$stmt = $mysqli->prepare("INSERT INTO user_tech (email, password, name) VALUES (?, ?, ?)");
+		$stmt->bind_param("sss", $create_email, $create_password, $create_name);
 		$stmt->execute();
+			
 		$stmt->close();
 		$mysqli->close();		
 	}
 	
 	
 	//logime sisse
-	function loginUser($email, $password_hash){
-		$response = new StdClass();
+	function loginUser($email, $password){
+		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("SELECT user_id, user_email FROM user_tech WHERE user_email=? AND user_password=?");
-		$stmt->bind_param("ss", $email, $password_hash);
+		$stmt = $mysqli->prepare("SELECT id, email FROM user_tech WHERE email=? AND password=?");
+		$stmt->bind_param("ss", $email, $password);
 		$stmt->bind_result($id_from_db, $email_from_db);
 		$stmt->execute();
-		
 		if($stmt->fetch()){
 			echo "kasutaja id=".$id_from_db;
 			
@@ -39,11 +39,11 @@
 			$_SESSION["email_from_db"] = $email_from_db;
 			
 			//suunan kasutaja data.php lehele
-			header("Location: data.php");
+			header("Location: post.php");
+			
 			
 		}else{
 			echo "Wrong password or email!";
-			echo $id_from_db;
 		}
 		$stmt->close();
 		
@@ -55,9 +55,9 @@
 		// globals on muutuja kõigist php failidest mis on ühendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO post_tech (post_name, post_done) VALUES (?, ?, ?, ?)");
-		$stmt->bind_param("iss", $_SESSION["id_from_db"], $post_name, $post_done);
-		
+		$stmt = $mysqli->prepare("INSERT INTO post_tech (post_name, post_done, post_user_id, post_administrator_id) VALUES (?, ?, ?, ?)");
+		$stmt->bind_param("ssii", $post_name, $post_done, $post_user_id, $post_administrator_id);
+	
 		$msg = "";
 		
 		if($stmt->execute()){
@@ -76,13 +76,51 @@
 	}
 	
 	
+	
+		//function loginPost($post_name, $post_user_id, $post_administrator_id){
+		
+		//$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		//$stmt = $mysqli->prepare("SELECT  post_id, post_name, post_user_id, post_administrator_id FROM post_tech WHERE post_name=? AND post_user_id=?");
+		//$stmt->bind_param("sii", $post_name, $post_user_id, $post_administrator_id);
+		//$stmt->bind_result($post_id_from_db, $post_name_from_db, $post_user_id_from_db, $post_administrator_id_from_db);
+		//$stmt->execute();
+		
+		//if($stmt->fetch()){
+			//echo "post id=".$post_id_from_db;
+			//echo "kasutaja id=".$post_user_id_from_db;
+			//echo "administrator id=".$post_administrator_id_from_db;
+			
+			//$_SESSION["post_id_from_db"] = $post_id_from_db;
+			//$_SESSION["post_name"] = $post_name_from_db;
+			//$_SESSION["post_user"] = $post_user_from_db;
+			//$_SESSION["post_administrator"] = $post_administrator_from_db;
+
+			
+			//suunan kasutaja data.php lehele
+			//header("Location: data.php");
+			
+			
+		//}else{
+			//echo "Wrong password or email!";
+		//}
+		//$stmt->close();
+		
+		//$mysqli->close();
+	//}
+	
+	
+	
+	
 	function createProduct($product_name, $product_year, $product_problem){
 		// globals on muutuja kõigist php failidest mis on ühendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO product_tech (product_name, product_year, product_promblem, product_user_id, product_administrator_id) VALUES (?, ?, ?, ?, ?)");
-		$stmt->bind_param("isisii", $_SESSION["id_from_db"], $product_name, $product_year, $product_promblem);
-		
+		$stmt = $mysqli->prepare("INSERT INTO product_tech (product_name, product_year, product_problem, product_user_id, product_post_id) VALUES (?, ?, ?, ?, ?)");
+		echo $mysqli->error;
+		$stmt->bind_param("sisii", $product_name, $product_year, $product_problem, $product_user_id, $product_post_id);
+		//$stmt->bind_result($product_name, $product_year, $product_problem, $product_user_id, $product_administrator_id);
+
 		$msg3 = "";
 		
 		if($stmt->execute()){
@@ -106,7 +144,7 @@
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
 		$stmt = $mysqli->prepare("INSERT INTO feedback_tech (feedback_name, feedback_user_id) VALUES (?, ?)");
-		$stmt->bind_param("is", $_SESSION["id_from_db"], $feedback_name);
+		$stmt->bind_param("si", $feedback_name, $feedback_user_id);
 		
 		$msg4 = "";
 		
@@ -133,7 +171,7 @@
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
 		$stmt = $mysqli->prepare("INSERT INTO comment_tech (comment_name, comment_user_id, comment_post_id, comment_administrator_id) VALUES (?, ?, ?, ?)");
-		$stmt->bind_param("is", $_SESSION["id_from_db"], $comment_name);
+		$stmt->bind_param("siii", $comment_name, $comment_user_id, $comment_post_id, $comment_administrator_id);
 		
 		$msg5 = "";
 		
@@ -151,5 +189,5 @@
 		return $msg5;
 		
 	}
-	
+
 ?>

@@ -1,59 +1,63 @@
-<?php
 
+<?php
+	 
+	
 	//laeme funktsiooni failis
 	require_once("function.php");
 	
      // Teen errori muutujad
 	      //siiselogimine
-	$user_email_error = "";
-	$user_password_error = "";	 
+	$email_error = "";
+	$password_error = "";	 
 	
 	//Teen vaartuse muutujad
-	$user_email = "";
-	$user_password="";
+	$email = "";
+	$password="";
 	
 	//kontrollin, kas kasutaja on sisseloginud
 	if(isset($_SESSION["id_from_db"])){
 		// suunan data lehele
-		header("Location: data.php");
+		header("Location: sisselogimine.php");
 	}
-	
-		if($_SERVER["REQUEST_METHOD"] == "POST") {
+	if($_SERVER["REQUEST_METHOD"] == "POST") {
+
     // *********************
     // **** LOGI SISSE *****
     // *********************
 		if(isset($_POST["login"])){
-			
-			
+
 			if ( empty($_POST["email"]) ) {
-				$user_email_error = "E-mail on kohustuslik";
+				$email_error = "See väli on kohustuslik";
 			}else{
-				$user_email = cleanInput($_POST["email"]);
+        // puhastame muutuja võimalikest üleliigsetest sümbolitest
+				$email = cleanInput($_POST["email"]);
 			}
-			
+
 			if ( empty($_POST["password"]) ) {
-				$user_password_error = "Parool on kohustuslik";
+				$password_error = "See väli on kohustuslik";
 			}else{
-				$user_password = cleanInput($_POST["password"]);
+				$password = cleanInput($_POST["password"]);
 			}
-      // Kui oleme siia joudnud, voime kasutaja sisse logida
-			if($user_password_error == "" && $user_email_error == ""){
-				echo "Saab sisse logida! Kasutajanimi on ".$user_email." ja parool on ".$user_password;
-			// functions php failis käivitan funktsiooni
-				loginUser($user_email, $user_password);
+
+      // Kui oleme siia jõudnud, võime kasutaja sisse logida
+			if($password_error == "" && $email_error == ""){
+				echo "Võib sisse logida! Kasutajanimi on ".$email." ja parool on ".$password;
+				// functions php failis käivitan funktsiooni
+				loginUser($email, $password);
 			}
-			}
+
+		} // login if end
+		 
+}
 		
-		}
-		
-		
-	function cleanInput($data) {
+	  // funktsioon, mis eemaldab kõikvõimaliku üleliigse tekstist
+  function cleanInput($data) {
   	$data = trim($data);
   	$data = stripslashes($data);
   	$data = htmlspecialchars($data);
-  	return $data;
+  return $data;
   }
-		
+
 ?>
 
 <html>
@@ -82,8 +86,8 @@
 
   <h2>Log in</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  	E-mail: <input class="input" name="email" type="email" placeholder="E-post" value="<?php echo $user_email; ?>"> <?php echo $user_email_error; ?><br><br>
-  	Parool: <input class="input" name="password" type="password" placeholder="Parool" value="<?php echo $user_password; ?>"> <?php echo $user_password_error; ?><br><br>
+  	E-mail: <input class="input" name="email" type="email" placeholder="E-post" value="<?php echo $email; ?>"> <?php echo $email_error; ?><br><br>
+  	Parool: <input class="input" name="password" type="password" placeholder="Parool" value="<?php echo $password; ?>"> <?php echo $password_error; ?><br><br>
   	<input type="submit" class="button3" name="login" value="Log in">
   </form>
   <br><br><br><br>

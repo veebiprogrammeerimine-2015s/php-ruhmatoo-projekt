@@ -3,6 +3,21 @@
 	//laeme funktsiooni failis
 	require_once("function.php");
 	
+	//kontrollin, kas kasutaja ei ole sisseloginud
+	if(!isset($_SESSION["id_from_db"])){
+		// suunan login lehele
+		header("Location: home.php");
+	echo "on vaja registreerida ikka!";
+	}
+	
+	//login välja, aadressireal on ?logout=1
+	if(isset($_GET["logout"])){
+		//kustutab kõik sessiooni muutujad
+		session_destroy();
+		
+		header("Location: home.php");
+	
+	}
 	
 	$post_name = $post_done = $post_name_error = "";
 	
@@ -10,7 +25,7 @@
 	// clean input
 	// salvestate
 	
-	if(isset($_POST["create"])){
+	if(isset($_POST["post"])){
 		if ( empty($_POST["post_name"]) ) {
 			$post_name_error = "See väli on kohustuslik";
 		}else{
