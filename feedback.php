@@ -1,37 +1,32 @@
-<form action="feedout.php" method="post">
-
 <?php
-$ipi = getenv("REMOTE_ADDR"); 
-$httprefi = getenv ("HTTP_REFERER");
-$httpagenti = getenv ("HTTP_USER_AGENT");
-?>
-<input type="hidden" name="ip" value="<?php echo $ipi ?>" />
-<input type="hidden" name="httpref" value="<?php echo $httprefi ?>" />
-<input type="hidden" name="httpagent" value="<?php echo $httpagenti ?>" />
-<h2 align="center">Feedback</h2>
-<p>Saada andmed: <select name="attn" size="1">
-<option value=" Doctor ">Doktor1</option>
-<option value=" Doctor ">Doktor2</option>
-<option value=" Doctor ">Doktor3</option>
+	require_once("functions.php");
 
-</select>
-<br />
+	if(!isset($_SESSION["logged_in_user_id"])){
+		header("Location: login.php");
+		
+	}	
+?>
+
+<p>
+	Tere, <?=$_SESSION["logged_in_user_email"];?> 
+	<a href="?logout=1"> Logi välja <a> 
+</p>
+
+<form action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> method="post">
+
+<h2> Tagasiside</h2>
 <p>
 Nimi: <input type="text" name="nameis" size="20" /> 
 </p>
 <p>
 Email:<input type="text" name="visitormail" size="20" />
 </p>
-
-<br/> Anna hinnang:<br/> [<input checked="checked" name="rating" type="radio" value="good" /> Good]   [<input name="rating" type="radio" value="bad" /> Bad]   
-
 <br />
-<h3 align="left">Kommentaarid</h3> 
+<h3 align="left">Kommentaar</h3> 
 <p align="left">
-<textarea name="feedback" rows="6" cols="30">kommentaarid</textarea>
+<textarea name="feedback" rows="6" cols="30" placeholder="Kuidas loomal läheb?"></textarea>
 </p>
-<hr />
 <p align="left">
-<input type="submit" value="Submit Feedback" />
+<input type="submit" value="Anna tagasiside" />
 </p>
 </form>
