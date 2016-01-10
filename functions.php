@@ -11,11 +11,12 @@
         
         // GLOBALS saab kätte kõik muutujad mis kasutusel
         $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
-        
         $stmt = $mysqli->prepare("SELECT id, email FROM user_sample WHERE email=? AND password=?");
+		
         $stmt->bind_param("ss", $email, $hash);
         $stmt->bind_result($id_from_db, $email_from_db);
         $stmt->execute();
+		
         if($stmt->fetch()){
             echo "Kasutaja logis sisse id=".$id_from_db;
             

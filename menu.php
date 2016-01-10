@@ -33,4 +33,12 @@
 		<li> Kodu otsivad kassid </li>
 	<?php } ?>
 	
+	<?php
+	// ükskõik mis lehe puhul näitan linki aga kui on home leht siis nime
+	if($page_file_name != "kadunud.php") { ?>
+	<li><a href="otsivad.php">Kadunud kassid</a></li>
+	<?php } else {  ?>
+		<li> Kadunud kassid </li>
+	<?php } ?>
+	
 </ul>
