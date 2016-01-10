@@ -9,14 +9,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Merilin</a>
+      <a class="navbar-brand" href="#">Pealeht</a>
+	  
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
+        <li class="active"><a href="#">Kauplused <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Sisse Logimine</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -24,11 +25,8 @@
  <br><br><br>
  <div class="container">
    <div class="row">
-      <div class="col-sm-6 col-sm-push-6">
-   <ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#">Home</a></li>
-  <li role="presentation"><a href="#">Profile</a></li>
-  <li role="presentation"><a href="#">Messages</a></li>
+      <div class="col-sm-3 col-sm-push-40">
+   
 </ul>
    </div>
    
