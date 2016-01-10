@@ -4,14 +4,12 @@
 	
 	$Worker = new Worker($mysqli);
 	
-	$arrival_date = "";
-	$arrival_time = "";
+	$arrival = "";
 	$departure = "";
 	$fromc = "";
 	$comment = "";
-	$office = "";
-	$datetime = "";
-	$date = ""
+	$office_id = "";
+	$date = "";
 	
 	$arrival_error = "";
 	$fromc_error = "";
@@ -21,11 +19,11 @@
 	
 		if(isset($_POST["submit"])){
 			
-			if(empty($_POST["arrival_date"]) || empty($_POST["arrival_time"])){
+			if(empty($_POST["arrival"])/* || empty($_POST["arrival_time"])*/){
 				
 				$arrival_error = "See väli peab olema täidetud!";
 				
-			}else{
+			}/*else{
 				
 				$arrival_date  = $_POST["arrival_date"];
 				$arrival_time = $_POST["arrival_time"];
@@ -37,7 +35,7 @@
 				//panen formaati mida saab ab'i salvestada
 				$datetime = date("Y-m-d H:i:s", mktime($time[0], $time[1], 0, $date[1], $date[2], $date[0]));
 				
-			}
+			}*/
 			
 			if(empty($_POST["fromc"])){
 				
@@ -61,10 +59,10 @@
 				$departure = cleanInput($_POST["departure"]);
 				$fromc = cleanInput($_POST["fromc"]);
 				$comment = cleanInput($_POST["comment"]);
-				$office = cleanInput($_POST["office"]);
+				$office_id = cleanInput($_POST["office_id"]);
 				$code = sprintf('%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535));
 				
-				$Worker->updatePacket($arrival, $departure, $fromc, $comment, $office, $code);
+				$Worker->updatePacket($arrival, $departure, $fromc, $comment, $office_id, $code);
 			
 			}
 			
@@ -78,25 +76,24 @@
   	$data = htmlspecialchars($data);
   	return $data;
   }
-	
+	/*<input name="departure-time" type="time" value="<?php echo $departure; ?>"> <br><br>
+	<input name="arrival-time" type="time" value="<?php echo $arrival_time; ?>"> <?php echo $arrival_error; ?> <br><br>*/
 ?>
 <body>
+	
 	<p><a href="dataWorker.php">Tagasi</a> eelmisele lehele</p>
 	<h2>Lisa uus pakend</h2>
 	<form action="addPacket.php" method="post">
 			Pakendi saabumine:<br>
-			<input name="arrival-date" type="date" value="<?php echo $arrival_date; ?>"> <?php echo $arrival_error; ?> <br>
-			<input name="arrival-time" type="time" value="<?php echo $arrival_time; ?>"> <?php echo $arrival_error; ?> <br><br>
+			<input name="arrival" type="number" maxlength="14" value="Yearmmddhhmmss"> <?php echo $arrival_error; ?> <br>
 			Pakendi väljumine:<br>
-			<input name="departure-date" type="date" value="<?php echo $departure; ?>"> <br>
-			<input name="departure-time" type="time" value="<?php echo $departure; ?>"> <br><br>
+			<input name="departure" type="number" maxlength="14" value="Yearmmddhhmmss"> <br>
 			Pakendi lähteriik:<br>
 			<input name="fromc" type="text" value="<?php echo $fromc; ?>"> <?php echo $fromc_error; ?><br><br>
 			Märkus:<br>
 			<input name="comment" type="text" value="<?php echo $comment; ?>"> <br><br>
 			Kuhu pakend edasi liigub:<br>
-			<input name="office" type="text" value="<?php echo $office; ?>"> <?php echo $office_error; ?><br><br>
+			<input name="office_id" type="number" maxlength="1" min="1" max="7" value="<?php echo $office_id; ?>"> <?php echo $office_error; ?><br><br>
 		<input type="submit" name="submit">
 	</form>
-	<?=$datetime;?>
 </body>

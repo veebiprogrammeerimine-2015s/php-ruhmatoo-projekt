@@ -28,7 +28,7 @@ class Worker {
 		
 		if($office == "peakontor"){
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-			$stmt = $mysqli->prepare("SELECT packet_id, arrival, fromc, comment, offices.office FROM post_import right join offices on post_import.office_id=offices.office_id WHERE deleted IS NULL AND (packet_id LIKE ? OR arrival LIKE ? OR fromc LIKE ? OR comment LIKE ? OR offices.office LIKE ?)");
+			$stmt = $mysqli->prepare("SELECT packet_id, arrival, fromc, comment, offices.office FROM post_import right join offices on post_import.office_id=offices.office_id WHERE departure = 00000000000000 AND deleted IS NULL AND (packet_id LIKE ? OR arrival LIKE ? OR fromc LIKE ? OR comment LIKE ? OR offices.office LIKE ?) ORDER BY packet_id");
 			echo $mysqli->error;
 			$stmt->bind_param("isssi", $search, $search, $search, $search, $search);
 			$stmt->bind_result($id, $arrival, $fromc, $comment, $office_id);
@@ -50,7 +50,7 @@ class Worker {
 		}else{
 			
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-			$stmt = $mysqli->prepare("SELECT packet_id, arrival, departure, comment FROM ".$office." WHERE (packet_id LIKE ? OR arrival LIKE ? OR departure LIKE ? OR comment LIKE ?)");
+			$stmt = $mysqli->prepare("SELECT packet_id, arrival, departure, comment FROM ".$office." WHERE (packet_id LIKE ? OR arrival LIKE ? OR departure LIKE ? OR comment LIKE ?) ORDER BY packet_id");
 			echo $mysqli->error;
 			$stmt->bind_param("isss", $search, $search, $search, $search);
 			$stmt->bind_result($id, $arrival, $departure, $comment);
@@ -69,6 +69,19 @@ class Worker {
 			return $packet_array;
 			
 		}
+	}
+	
+	function updatePacket($arrival, $departure, $fromc, $comment, $office_id, $code){
+		
+		/*echo "hello ".$code;*/
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		$stmt = $mysqli->prepare("INSERT INTO post_import (arrival, departure, fromc, comment, office_id, code) VALUES (?,?,?,?,?,?)");
+		echo $mysqli->error;
+		$stmt->bind_param("iissss", $arrival, $departure, $fromc, $comment, $office_id, $code);
+		$stmt->execute();
+		echo $mysqli->error;
+		$stmt->close();
+		
 	}
 	
 	
