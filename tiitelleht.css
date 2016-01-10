@@ -4,20 +4,30 @@ nav
 	/*uusasi*/
 	/*box-sizing: border-box*//*content-box, border-box*/
 	width: 250px;
-	height: 150px;
-	padding: 20px;
-	margin: 50px;
 	/*margin-left: 50px;*/
 	/*margin: 10px 50px;*//*ulemine/alumine, vasak/parem*/
 	/*margin: 5px 50px 10px;*//*ulemine, vasak/parem, alumine*/
 	/*margin: 5px 0px 10px 50px;*//*ulemine.....alumine*/
 	position: fixed;/*static, relative, absolute, fixed*/
 	top: 100px;
-	right: 500px;
-	/*left: 200px;*/
 }
 
 body
 {
 	background-image:url("pildid/post.jpg");
 }
+
+
+h1
+{
+	font-size: 2.5em;/*xx-small ... medium large, smaller, larger*/
+	color:#000000;
+	text-align: center; /*left, right, justify, center*/
+	font-family: coolPealkiri;
+	background-color:rgba(250,240,230,0.8);
+	top: 100px;
+	right: 500px;
+	width: 350px;
+	margin-left: 500px;
+}
+
