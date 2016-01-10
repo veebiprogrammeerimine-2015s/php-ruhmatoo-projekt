@@ -38,4 +38,10 @@ CREATE TABLE operations(
 	date TIMESTAMP
 );
 
+CREATE TABLE feedback(
+	feedback_name VARCHAR(50),
+	feedback_email VARCHAR(50),
+	feedback VARCHAR(255)
+);
+
 

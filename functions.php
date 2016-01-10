@@ -67,7 +67,7 @@
 		
 	}
 	
-		function DoctorView($doctor_name, $procedure_name, $operation_name, $operation_date, $operation_difficulty, $d_animal_name){
+	function DoctorView($doctor_name, $procedure_name, $operation_name, $operation_date, $operation_difficulty, $d_animal_name){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		//echo $mysqli->error; 
 		$stmt = $mysqli->prepare("INSERT INTO vets (aid, dr_name, a_animal_name) VALUES (?, ?, ?)");
@@ -113,6 +113,24 @@
 		
 	}
 
+	function feedBack($feedback_name, $feedback_email, $feedback){
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		$stmt = $mysqli->prepare("INSERT INTO feedback (feedback_name, feedback_email, feedback) VALUES (?, ?, ?)");
+		echo $mysqli->error;
+		$stmt->bind_param("sss", $feedback_name, $feedback_email, $feedback);
+		
+	
+		if($stmt->execute()){
+			$message = "Tagasiside edukalt lisatud. ";
+		}else{
+			echo $stmt->error;
+		}
+		return $message;
+		$stmt->close();
+		$mysqli->close();
+		
+		
+	}
 
 
 ?>
