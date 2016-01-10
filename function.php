@@ -10,6 +10,7 @@
 	
 	// lisame kasutaja ab'i
 	function createUser($create_name, $create_secondname, $user_login, $user_email, $user_password, $user_mobile){
+		$response = new StdClass();
 		// globals on muutuja koigist php failidest mis on uhendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
@@ -22,12 +23,12 @@
 	
 	
 	//logime sisse
-	function loginUser($user_email, $user_password){
-		
+	function loginUser($email, $password_hash){
+		$response = new StdClass();
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
 		$stmt = $mysqli->prepare("SELECT user_id, user_email FROM user_tech WHERE user_email=? AND user_password=?");
-		$stmt->bind_param("ss", $user_email, $user_password);
+		$stmt->bind_param("ss", $email, $password_hash);
 		$stmt->bind_result($id_from_db, $email_from_db);
 		$stmt->execute();
 		
@@ -35,15 +36,14 @@
 			echo "kasutaja id=".$id_from_db;
 			
 			$_SESSION["id_from_db"] = $id_from_db;
-			$_SESSION["user_email"] = $email_from_db;
-
+			$_SESSION["email_from_db"] = $email_from_db;
 			
 			//suunan kasutaja data.php lehele
 			header("Location: data.php");
 			
-			
 		}else{
 			echo "Wrong password or email!";
+			echo $id_from_db;
 		}
 		$stmt->close();
 		

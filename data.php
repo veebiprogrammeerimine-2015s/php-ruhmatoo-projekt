@@ -3,21 +3,6 @@
 	//laeme funktsiooni failis
 	require_once("function.php");
 	
-	//kontrollin, kas kasutaja ei ole sisseloginud
-	if(!isset($_SESSION["id_from_db"])){
-		// suunan login lehele
-		header("Location: home.php");
-		
-	}
-		//login välja, aadressireal on ?logout=1
-	if(isset($_GET["logout"])){
-		//kustutab kõik sessiooni muutujad
-		session_destroy();
-		
-		header("Location: home.php");
-		
-	}
-	
 	
 	$post_name = $post_done = $post_name_error = "";
 	
