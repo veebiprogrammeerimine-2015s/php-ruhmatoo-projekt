@@ -60,12 +60,6 @@
 			if($password_error == "" && $email_error == ""){
 
 				echo "Võib sisse logida! Kasutajanimi on ".$email." ja parool on ".$password;
-			
-				$hash = hash("sha512", $password);
-				
-
-				
-				$login_response = $User->loginUser($email, $hash);
 				
 
 				

@@ -9,11 +9,11 @@ class User {
 	}
 	
 
-	function loginUser($email, $hash){
+	function loginUser($email, $password){
 		
 		$response = new StdClass();
 		
-		$stmt = $this->connection->prepare("SELECT id FROM user_sample WHERE email=?");
+		$stmt = $this->connection->prepare("SELECT id FROM post_user WHERE email=?");
 		$stmt->bind_param("s", $email);
 		$stmt->bind_result($id);
 		$stmt->execute();
@@ -31,8 +31,8 @@ class User {
 
 		$stmt->close();
 		
-		$stmt = $this->connection->prepare("SELECT id, email FROM user_sample WHERE email=? AND password=?");
-		$stmt->bind_param("ss", $email, $hash);
+		$stmt = $this->connection->prepare("SELECT id, email FROM post_user WHERE email=? AND password=?");
+		$stmt->bind_param("ss", $email, $password);
 		$stmt->bind_result($id_from_db, $email_from_db);
 		$stmt->execute();
 		if($stmt->fetch()){
