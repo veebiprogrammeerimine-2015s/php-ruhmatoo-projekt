@@ -34,7 +34,7 @@ class App {
      */
     function run($input) {
         $page = isset($input['page']) ? $input['page'] : 'index';
-        if (in_array($page, ['login', 'logout', 'index', 'shops'])) {
+        if (in_array($page, ['login', 'logout', 'index', 'shops', 'data'])) {
             echo $this->loadPage($page, $input);
         } else {
             echo "<h2>Page not found</h2>";
