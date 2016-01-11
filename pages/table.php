@@ -1,6 +1,11 @@
 <?php
 	require_once("../functions.php");
 	
+//kontrollin, kas kasutaja ei ole sisseloginud	
+	if(!isset($_SESSION["id_from_db"])){
+		header("Location: login.php");
+	}
+	
 	if(isset($_GET["main"])){
 			
 		header("Location: main.php");
