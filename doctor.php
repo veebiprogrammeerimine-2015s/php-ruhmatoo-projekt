@@ -137,7 +137,7 @@
 	</div>
 	<br><br><br><br><br>
 	<div class="waves-effect waves-light btn">
-		<input type="submit" name="docto" value="Salvesta">
+	<input type="submit" name="docto" value="Salvesta">
 	</div>
 </div>
 </form>
