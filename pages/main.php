@@ -67,6 +67,7 @@
 			
 				
 				echo "<td>".$game_php[$i]->game_name."</td>";
+				echo "<td>".$game_php[$i]->park_id."</td>";
 				echo "<td>".$game_php[$i]->date."</td>";
 				echo "<td><a href='results.php?id=".$game_php[$i]->id."'>Tulemus</a></td>";
 				
