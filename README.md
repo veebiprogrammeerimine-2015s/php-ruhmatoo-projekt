@@ -43,5 +43,5 @@
 #Kokkuvõte:
 	#Jarmo - Oli huvitav sellist rakendust teha. Kui enamus teiste eksamite jaoks peab kõvasti õppima, siis tänu sellisele kodutööle kadus siin aines see viimane tuupimine ära. Koduse töö käigus meenusid uuesti kursuse käigus õpitud võtted. Raskusi tekitasid mõned SQL lausete moodustamised, kuid lõpuks sai kõik korda. Tekkis raskusi ka mõnest php-loogikast aru saamisega, kuid õppejõu abiga sai ka need selgemaks.
 	#Rasmus -Ülesanne oli tehtav, andmebaasid jooksid loogiliselt, enamuse sai copy/paste-da 	tunnitöödest. Hea harjutus, et tunnis õpitut kinnistada.
-	#Koidu - 
+	#Koidu - Tegin natuke lähemalt tutvust veebilehe kujundamisega ja bootstrapiga. Töö käigus sai meelde tuletada kursuse ajal õpitut, mis oli väga kasulik.
 	#Hendrik - 
