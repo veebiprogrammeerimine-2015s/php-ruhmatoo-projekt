@@ -1,5 +1,6 @@
 <?php
 require_once("../functions.php");
+require_once("../header.php"); 
 
 ?>
 <h1>paride sisestamine</h1>
