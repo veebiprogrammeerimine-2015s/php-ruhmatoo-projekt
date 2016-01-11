@@ -199,14 +199,12 @@
 ?>
 </table>
 
-<br><br><br><br>
-    <div class="container-fluid">
-        <div class="row"  id="body">
-            <div class="col-sm-offset-1 col-sm-6">
-				<h1> Lisa uus kass</h1>
+<br><br>
 
-				  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-				  
+			<h1> Lisa uus kass</h1>
+
+				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+						  
 					<label for="name"> name </label>
 					<input id="name" name="name" type="text" value="<?=$name; ?>"> <?=$name_error; ?><br><br>
 					
@@ -225,10 +223,8 @@
 					
 					<input type="submit" name="add_cat" value="Lisa">
 					<p style="color:green;"><?=$m;?></p>
-					
-				  </form>  
-			</div>
-		</div>
-	</div>
+							
+				</form>  
+
 
 <?php require_once ("footer.php"); ?>
