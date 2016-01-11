@@ -151,10 +151,10 @@
 					<th>Sugu</th>
 					<th>Kirjeldus</th>
 					<th>Kodu leidnud?</th>
-					<? if(isset($access_level) == 2){ ?>
-						<th>Edit</th>
-						<th>Delete</th>
-					<? } ?>
+				<?php if(isset($access_level) == 2){
+					echo "<th>Edit</th>";
+					echo "<th>Delete</th>";
+    			} ?>
 				</tr>
 			</div>
 		</div>
