@@ -39,7 +39,7 @@
 
 ?>
 
-<h2>Tagasiside</h2>
+<h3>Tagasiside</h3>
 
 <form action="<?php echo htmlspecialchars("feedback_data.php?offer_id=".$_GET["offer_id"]."&to_user_id=".$_GET["to_user_id"]); ?>" method="post">
 	<input type="hidden" name="offer_id" value="<?=$_GET["offer_id"];?>">

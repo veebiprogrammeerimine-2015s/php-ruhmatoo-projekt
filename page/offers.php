@@ -13,7 +13,7 @@
 	$offers_array = $OfferManager->getOffersData();
 ?>
 
-<h2>Pakkumiste tabel</h2>
+<h3>Pakkumised</h3>
 
 <?php
 
@@ -27,8 +27,6 @@
 		
 		echo "<table class='table table-striped'>";
 		echo "<tr>";
-		
-		
 		echo "<th>Teema</th>";
 		echo "<th>Tellija</th>";
 		echo "<th>Pakkumise kuupäev</th>";
@@ -40,8 +38,6 @@
 
 		for($i = 0; $i < count($offers_array); $i++){
 			echo "<tr>";
-			
-			
 			echo "<td>".$offers_array[$i]->subject."</td>";
 			echo "<td>".$offers_array[$i]->company_name."</td>";
 			echo "<td>".$offers_array[$i]->offer_date."</td>";
@@ -55,19 +51,20 @@
 		}
 	}
 	
-	/* ETTEVÕTE */
-	if($_SESSION["logged_in_user_group_id"] == "3"){
+	/* ETTEVÕTE JA ADMIN*/
+	else {
 		
 		echo "<table class='table table-striped'>";
 		echo "<tr>";
 		echo "<th>Ajakirjanik</th>";
-		echo "<th>tellimus</th>";
-		echo "<th>tellimus_nimi</th>";
-		echo "<th>tellimus_ettevõte</th>";
-		echo "<th>kuupäev</th>";
-		echo "<th>hind</th>";
-		echo "<th>kommentaar</th>";
-		echo "<th>accepted</th>";
+		echo "<th>Tellimus</th>";
+		if($_SESSION["logged_in_user_group_id"] == "1"){
+			echo "<th>tellimus_ettevõte</th>";
+		}
+		echo "<th>Kuupäev</th>";
+		echo "<th>Hind</th>";
+		echo "<th>Kommentaar</th>";
+		echo "<th>Accepted</th>";
 		echo "<th></th>";
 		echo "<th></th>";
 		echo "<th></th>";
@@ -76,9 +73,10 @@
 		for($i = 0; $i < count($offers_array); $i++){
 			echo "<tr>";
 			echo "<td>".$offers_array[$i]->journalist_first_name." ".$offers_array[$i]->journalist_last_name."</td>";
-			echo "<td>".$offers_array[$i]->request_id."</td>";
 			echo "<td>".$offers_array[$i]->subject."</td>";
-			echo "<td>".$offers_array[$i]->company_name."</td>";
+			if($_SESSION["logged_in_user_group_id"] == "1"){
+				echo "<td>".$offers_array[$i]->company_name."</td>";
+			}
 			echo "<td>".$offers_array[$i]->offer_date."</td>";
 			echo "<td>".$offers_array[$i]->price."</td>";
 			echo "<td>".$offers_array[$i]->comment."</td>";

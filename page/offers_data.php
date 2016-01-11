@@ -48,7 +48,7 @@
 
 ?>
 
-<h2>Pakkumise tegemine</h2>
+<h3>Pakkumise tegemine</h3>
 
 <form action="<?php echo htmlspecialchars("offers_data.php?offers_data_id=".$_GET["offers_data_id"]); ?>" method="post">
 	<input type="hidden" name="request_id" value="<?=$_GET["offers_data_id"];?>">

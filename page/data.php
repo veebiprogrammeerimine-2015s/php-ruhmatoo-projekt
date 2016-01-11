@@ -104,7 +104,7 @@
 	
 ?>
 
-<h2>Tellimuse esitamine</h2>
+<h3>Tellimuse esitamine</h3>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 	<select id="text_type" name="text_type">
 		<option value="">[ Teksti tüüp ]</option>

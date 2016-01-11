@@ -19,7 +19,7 @@
 	/* SEE ON MÕELDUD ADMINI JAOKS */
 	if($_SESSION["logged_in_user_group_id"] == "1"){
 		
-		echo"<h2>Tagasiside</h2>";
+		echo"<h3>Tagasiside</h3>";
 		
 		echo "<table class='table table-striped'>";
 		echo "<tr>";
@@ -51,7 +51,7 @@
 		/* SEE VAATAB JA KAJASTAB SELLE INIMESE, KELLE KOHTA TAGASISIDE ON */
 		for($i = 0; $i < count($feedback_array); $i++){
 			if($_GET["user_feedback_id"] == $feedback_array[$i]->to_user_id){
-				echo "<h2>Tagasiside kasutajale: ".$feedback_array[$i]->to_user_first_name." ".$feedback_array[$i]->to_user_last_name."</h2>";
+				echo "<h3>Tagasiside kasutajale: ".$feedback_array[$i]->to_user_first_name." ".$feedback_array[$i]->to_user_last_name."</h3>";
 				break;
 			}
 		}

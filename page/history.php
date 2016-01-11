@@ -14,7 +14,7 @@
 
 ?>
 
-<h2>Ajalugu</h2>
+<h3>Ajalugu</h3>
 
 <table class='table table-striped'>
 	<tr>

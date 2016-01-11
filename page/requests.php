@@ -33,12 +33,12 @@
 	
 ?>
 
-<h2>Tellimuste tabel</h2>
+<h3>Tööpakkumised</h3>
 
 <form action="requests.php" method="get">
 	<input name="keyword" type="search" value="<?=$keyword?>">
 	<input type="submit" value="otsi">
-</form>
+</form><br>
 
 <?php 
 	
@@ -47,16 +47,16 @@
 
 		echo "<table class='table table-striped'>";
 		echo "<tr>";
-		echo "<th>teksti tüüp</th>";
-		echo "<th>teema</th>";
-		echo "<th>kirjeldus</th>";
-		echo "<th>sihtgrupp</th>";
-		echo "<th>allikad</th>";
-		echo "<th>maht</th>";
-		echo "<th>pakkumise tähtaeg</th>";
-		echo "<th>tellimuse tähtaeg</th>";
-		echo "<th>ilmumiskoht</th>";
-		echo "<th>staatus</th>";
+		echo "<th>Teksti tüüp</th>";
+		echo "<th>Teema</th>";
+		echo "<th>Kirjeldus</th>";
+		echo "<th>Sihtgrupp</th>";
+		echo "<th>Allikad</th>";
+		echo "<th>Maht</th>";
+		echo "<th>Pakkumise tähtaeg</th>";
+		echo "<th>Tellimuse tähtaeg</th>";
+		echo "<th>Ilmumiskoht</th>";
+		echo "<th>Staatus</th>";
 		echo "<th></th>";
 		echo "<th></th>";
 		echo "</tr>";
@@ -84,16 +84,16 @@
 	} else {
 		echo "<table class='table table-striped'>";
 		echo "<tr>";
-		echo "<th>tellija</th>";
-		echo "<th>teksti tüüp</th>";
-		echo "<th>teema</th>";
-		echo "<th>kirjeldus</th>";
-		echo "<th>sihtgrupp</th>";
-		echo "<th>allikad</th>";
-		echo "<th>maht</th>";
-		echo "<th>pakkumise tähtaeg</th>";
-		echo "<th>tellimise tähtaeg</th>";
-		echo "<th>ilmumiskoht</th>";
+		echo "<th>Tellija</th>";
+		echo "<th>Teksti tüüp</th>";
+		echo "<th>Teema</th>";
+		echo "<th>Kirjeldus</th>";
+		echo "<th>Sihtgrupp</th>";
+		echo "<th>Allikad</th>";
+		echo "<th>Maht</th>";
+		echo "<th>Pakkumise tähtaeg</th>";
+		echo "<th>Tellimise tähtaeg</th>";
+		echo "<th>Ilmumiskoht</th>";
 		echo "<th></th>";
 		echo "<th></th>";
 		echo "</tr>";

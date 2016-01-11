@@ -23,7 +23,7 @@
 	}
 ?>
 
-<h2>Tellimuse muutmine</h2>
+<h3>Tellimuse muutmine</h3>
 
 <form action="edit.php" method="get">
 	<input type="hidden" name="orders_id" value="<?=$_GET["edit_id"];?>">
@@ -44,6 +44,6 @@
 	<input name="output" type="text" value="<?=$order->output;?>"><br><br>
 	<input name="update" type="submit" value="Muuda tellimus">
 </form>
-<a href="requests.php" style="text-decoration:none">
+<a href="requests.php" style="text-decoration:none"><br>
 	<input type="button" value="Tühista"/>
 </a>
