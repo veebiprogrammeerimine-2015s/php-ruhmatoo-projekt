@@ -62,16 +62,12 @@
 <div class="historyinfo">
 	<h1>GAMES HISTORY</h1>
 			
-		
-
-
 	<table class="center" border= 1>
 		<tr>
 			<th>Game name</th>
 			<th>Playing time</th>
 		</tr>
-	</table>	
-</div>	
+
 
 
 
@@ -90,3 +86,6 @@
 		}
 		
 ?>
+
+	</table>	
+</div>	

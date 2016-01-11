@@ -17,6 +17,7 @@
 	$results_list = getGameData($_SESSION["game_id"]);
 ?>
 
+
 <p>Your game is over. Your results are here: <br></p>
 <p>
 total par =  <?php echo $_SESSION["sum_pars"]; ?> <br>
