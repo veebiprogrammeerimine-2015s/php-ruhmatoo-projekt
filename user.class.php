@@ -44,12 +44,11 @@ class User {
 
 		}
 
-	function updateUser($new_hash){
-			echo $new_hash;
+		function updateUser($new_hash){
 			$email=$_SESSION["logged_in_user_email"];
-			echo $email;
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 			$stmt = $mysqli->prepare("UPDATE VL_Login SET hash=? WHERE email=? ");
+			echo "tere";
 			$stmt->bind_param("ss", $new_hash, $email);
 			$stmt->execute();
 			$stmt->close();
@@ -89,12 +88,12 @@ class User {
 			}
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 			//echo $category;
-			$stmt = $mysqli->prepare("SELECT Name, Year, Director FROM VL_Movies WHERE Category=?");
+			$stmt = $mysqli->prepare("SELECT id, Name, Year, Director FROM VL_Movies WHERE Category=?");
 			//var_dump($category);
 			echo $mysqli->error;
 			$stmt->bind_param("s", $category);
 			echo $mysqli->error;
-			$stmt->bind_result($Nimi, $Aasta, $Režissöör);
+			$stmt->bind_result($id, $Nimi, $Aasta, $Režissöör);
 			$stmt->execute();
 			// tekitan tühja massiivi, kus edaspidi hoian objekte
 			$movie_array= array();
@@ -102,23 +101,29 @@ class User {
 			// tee midagi seni, kuni saame ab'st ühe rea andmeid
 			while($stmt->fetch()){
 			// seda siin sees tehakse nii mitu korda kuni on ridu
-
+				$sql = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+				$stmt2= $sql->prepare("SELECT link FROM VL_Links WHERE VL_Movies_id=?");
+				$stmt2->bind_param("i", $id);
+				$stmt2->bind_result($link);
+				$stmt2->execute();
+				$stmt2->fetch();
 			//tekitan objekti, kus hakkan hoidma väärtusi
-			$movies = new StdClass();
-			$movies->Name = $Nimi;
-			$movies->Year = $Aasta;
-			$movies->Director = $Režissöör;
+				$movies = new StdClass();
+				$movies->Name = $Nimi;
+				$movies->Year = $Aasta;
+				$movies->Director = $Režissöör;
+				$movies->Link = $link;
 
-			// lisan massiivi ühe rea juurde
-			array_push($movie_array, $movies);
-			// var_dump ütleb muutuja nime ja stuffi
-			//echo "<pre>";
-			//var_dump($car_array);
-			//echo "</pre><br>";
-			}
+				// lisan massiivi ühe rea juurde
+				array_push($movie_array, $movies);
+				// var_dump ütleb muutuja nime ja stuffi
+				//echo "<pre>";
+				//var_dump($car_array);
+				//echo "</pre><br>";
+				}
 
-			// tagastan massiivi, kus kõik read sees
-			return $movie_array;
+				// tagastan massiivi, kus kõik read sees
+				return $movie_array;
 
 			$stmt->close();
 			$mysqli->close();
@@ -136,20 +141,17 @@ class User {
 		  $stmt->bind_result($id, $name, $category, $year, $director);
 		  $stmt->execute();
 
-
+		  // tekitan t�hja massiivi, kus edaspidi hoian objekte
 		  $search_array = array();
 
-
+		  //tee midagi seni, kuni saame ab'ist �he rea andmeid
 			while($stmt->fetch()){
-				/////////////////////Probleem peitub kuskil siin/////////////////////////////////////
 					$sql = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 					$stmt2= $sql->prepare("SELECT link FROM VL_Links WHERE VL_Movies_id=?");
 					$stmt2->bind_param("i", $id);
 					$stmt2->bind_result($link);
 					$stmt2->execute();
 					$stmt2->fetch();
-				/////////////////////////////////////////////////////////////////////////////////////
-
 					$result = new StdClass();
 					$result->id = $id;
 					$result->name = $name;
@@ -161,7 +163,17 @@ class User {
 
 					array_push($search_array, $result);
 
+			$result = new StdClass();
+			$result->id = $id;
+			$result->name = $name;
+			$result->category = $category;
+			$result->year = $year;
+			$result->director = $director;
+
+			array_push($search_array, $result);
 		  }
+
+		  //tagastan massiivi, kus k�ik read sees
 		  return $search_array;
 			$_SESSION["logged_in_user_id"] = $user_id;
 		  $stmt->close();

@@ -131,3 +131,4 @@ $movie_category = "";
 	}
 	?>
 </table>
+
