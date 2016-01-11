@@ -2,14 +2,26 @@
 require_once("../functions.php");
 require_once("../header.php"); 
 
+//kontrollin, kas kasutaja ei ole sisseloginud	
+	if(!isset($_SESSION["id_from_db"])){
+		header("Location: login.php");
+	}
+	
+//login välja	
+	if(isset($_GET["logout"])){
+		session_destroy();
+		header("Location: login.php");
+	}
+
+
 ?>
+
 
 
 <div class="insertpars">
 	<h1>Insert PARs</h1>
 	<table class="center" border= 1>
-		<tr>
-			
+		<tr>			
 			<th>Basket number</th>
 			<th>PAR number</th>
 		<tr>

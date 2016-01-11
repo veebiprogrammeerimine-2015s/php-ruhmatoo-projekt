@@ -2,16 +2,20 @@
 	require_once("../functions.php");
 	require_once("../header.php"); 
 	
-//kontrollin, kas kasutaja ei ole sisseloginud	
-	if(!isset($_SESSION["id_from_db"])){
+
+//login välja	
+	if(isset($_GET["logout"])){
+		session_destroy();
 		header("Location: login.php");
 	}
+
 	
-	if(isset($_GET["main"])){
-			
-		header("Location: main.php");
-		
+	//kontrollin, kas kasutaja ei ole sisseloginud	
+	if(!isset($_SESSION["id_from_db"])){
+		header("Location: login.php");
+
 	}
+	
 	
 	$add_name_error = "";
 	$add_basket_error = "";
