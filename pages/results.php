@@ -14,7 +14,7 @@
 		header("Location: login.php");
 	}
 	
-	$results_php = getResultData($_SESSION["game_id"]);
+	$results_php = getResultData();
 ?>
 
 <table class="center" border=1 >
