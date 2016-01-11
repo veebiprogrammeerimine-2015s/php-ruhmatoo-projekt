@@ -160,7 +160,7 @@
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
 		$stmt = $mysqli->prepare("SELECT post_id,name,user_id FROM post_tech WHERE deleted IS NULL");
-		$stmt->bind_result($post_id, $name, $user_id);
+		$stmt->bind_result($post_id, $post_tech, $id_from_db);
 		$stmt->execute();
 
 		
