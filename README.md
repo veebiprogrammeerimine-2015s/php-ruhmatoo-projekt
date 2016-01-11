@@ -1,4 +1,5 @@
-# PHP rühmatöö projekt
+test
+﻿# PHP rühmatöö projekt
 **Rühmatööde demo päev** on valitud eksamipäev jaanuaris, kuhu tuleks tullakse terve rühmaga koos!
 
 ## Tööjuhend
@@ -10,8 +11,8 @@
 ### Nõuded
 
 1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * rühma liikmete nimed;
+    * suurelt projekti nime
+    * rühma liikmete nimed
     * eesmärki (3-4 lauset, mis probleemi üritate lahendada);
     * kirjeldus (sihtrühm, eripära võrreldes teiste samalaadsete rakendustega - kirjeldada vähemalt 2-3 sarnast rakendust mida eeskujuks võtta);
     * funktsionaalsuse loetelu prioriteedi järjekorras, nt
@@ -35,3 +36,10 @@
 * **Stiilijuhend:** [Coding Style Guide](http://www.php-fig.org/psr/psr-2/)
 * **GIT õpetus:** [Become a git guru.](https://www.atlassian.com/git/tutorials/)
 * **Abimaterjale:** [Veebirakenduste loomine PHP ja MySQLi abil](http://minitorn.tlu.ee/~jaagup/kool/java/loeng/veebipr/veebipr1.pdf), [PHP with MySQL Essential Training] (http://www.lynda.com/MySQL-tutorials/PHP-MySQL-Essential-Training/119003-2.html)
+
+1.
+*KAUBANDUSKESKUS
+*Merilin Takk, Henrik Romanenkov, Kadri Alumets
+*Põhiline on, et inimesed näeksid tooteid ja saaksid neid osta. Võimalikult mugavaks ja lihtsaks lehekülg teha kasutajale. Loogiline ülesehitus. 
+*Eeskujuks võtaksime kaubanduskeskuste koduleheküljed - Ülemiste, Kristiine jne. 2 eeskujuks oleks väiksed interneti E-poed.
+*
