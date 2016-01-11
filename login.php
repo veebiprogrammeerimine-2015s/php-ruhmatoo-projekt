@@ -1,6 +1,6 @@
 <?php require_once("header.php"); ?>
 
-<<<<<<< HEAD
+Tere
 
 
 <br></br><br></br><br></br><br></br>
