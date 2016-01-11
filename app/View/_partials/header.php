@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <title>Kaubamaja</title>
-    <link rel="stylesheet" href="https://bootswatch.com/sandstone/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css">
     <!-- Kaubamaja stiil -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -18,7 +18,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Kaubamaja</a>
+            <a class="navbar-brand" href="index.php?page=index">Kaubamaja</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
@@ -30,4 +30,4 @@
         <!--/.nav-collapse -->
     </div>
 </nav>
-<div class="container">
+<div class="container" id="main">
