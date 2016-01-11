@@ -15,6 +15,7 @@ if (isset($username, $password)) {
 
         //login = true tähendab, et kasutaja on nüüd sisse logitud
         $_SESSION['login'] = true;
+        $_SESSION['owner'] = $result->id;
         //Refreshime headeriga
         header('Location: index.php?page=index');
     }

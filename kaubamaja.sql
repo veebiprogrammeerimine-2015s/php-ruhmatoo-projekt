@@ -1,3 +1,4 @@
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -45,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `profession` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `store_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `employee`
@@ -57,7 +58,11 @@ INSERT INTO `employee` (`id`, `name`, `profession`, `store_id`) VALUES
 (3, 'Mairo Serg', 'Müüja', 3),
 (4, 'Karl Kont', 'Müüja', 3),
 (5, 'Sirli Kaalep', 'Müüja', 4),
-(6, 'Rauno Reep', 'Koristaja', 4);
+(6, 'Rauno Reep', 'Koristaja', 4),
+(7, 'Ülle Puravik', 'Müüja', 2),
+(8, 'Raido Remmelg', 'Müüja', 2),
+(9, 'Guido Vedru', 'Koristaja', 2),
+(10, 'Eero Palmits', 'Lapilükkaja', 2);
 
 -- --------------------------------------------------------
 

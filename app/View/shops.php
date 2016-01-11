@@ -17,10 +17,9 @@ if (count($rawResults) > 0) {
     foreach ($results as $store => $result) {
         ?>
         <div class="row">
-
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?= ucfirst($store) ?></h3>
+                    <h3 class="panel-title"><?= ucfirst($store) ?> <span class="label label-danger pull-right"><?=count($result)?></span></h3>
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
@@ -28,7 +27,7 @@ if (count($rawResults) > 0) {
                         foreach ($result as $store => $row) {
                             ?>
                             <li class="list-group-item">
-                                <span class="badge"><?= $row['product_price'] ?></span>
+                                <span class="badge"><?= $row['product_price'] ?> €</span>
                                 <?= $row['product_name'] ?>
                             </li>
                             <?php
