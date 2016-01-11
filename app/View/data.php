@@ -2,5 +2,13 @@
     exit("Forbidden");
 } ?>
 <?php include(__DIR__ . '/_partials/header.php'); ?>
-    data
+
+<?php
+/**
+ * @var $this App\App
+ */
+    $stmt = $this->pdo->prepare('SELECT * FROM')
+
+?>
+
 <?php include(__DIR__ . '/_partials/footer.php'); ?>

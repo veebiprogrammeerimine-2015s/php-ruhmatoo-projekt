@@ -132,23 +132,25 @@ CREATE TABLE IF NOT EXISTS `product` (
   `name` varchar(256) NOT NULL,
   `price` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`id`, `store_id`, `name`, `price`) VALUES
-(1, 2, 'Nike, tossud', 127.2),
-(2, 2, 'Adibas, sussid', 45),
-(3, 3, 'Kampsun, puuvillane', 29.9),
-(4, 3, 'Särk, roheline', 9.9),
-(5, 3, 'Trussik, lilleline', 2.7),
-(6, 3, '1 sokk', 1.95),
-(7, 4, 'Red bull', 1.95),
-(8, 4, 'Juustukook', 4.5),
-(9, 4, 'Piim', 1.2),
-(10, 4, 'Sai', 0.7);
+(1, 1, 'Nike, tossud', 127.2),
+(2, 1, 'Adibas, sussid', 45),
+(3, 2, 'Kampsun, puuvillane', 29.9),
+(4, 2, 'Särk, roheline', 9.9),
+(5, 2, 'Trussik, lilleline', 2.7),
+(6, 2, '1 sokk', 1.95),
+(7, 3, 'Red bull', 1.95),
+(8, 3, 'Juustukook', 4.5),
+(9, 3, 'Piim', 1.2),
+(10, 3, 'Sai', 0.7),
+(11, 4, 'test', 3333.33),
+(12, 4, 'test2', 444.44);
 
 -- --------------------------------------------------------
 
