@@ -12,16 +12,15 @@
 		
 	}
 	
+	$office = $_GET["office"];
+	
 	if(isset($_GET["delete"])){
 		
-		deletePacket($_GET["delete"]);
+		$Worker->deletePacket($office, $_GET["delete"]);
 		
 	}
 	
 	$keyword="";
-	
-	
-	$office = $_GET["office"];
 	
 	if(isset($_GET["keyword"])){
 		
@@ -33,6 +32,7 @@
 		$packet_array = $Worker->getPacketData($office);
 		
 	}
+	
 ?>
 
 <body>
@@ -87,7 +87,7 @@
 				echo "<td>".$packet_array[$i]->fromc."</td>";
 				echo "<td>".$packet_array[$i]->comment."</td>";
 				echo "<td>".$packet_array[$i]->office_id."</td>";
-				echo "<td><a href='dataWorker.php?".$getvar."&delete=".$packet_array[$i]->id."'>X</a></td>";
+				echo "<td><a href='dataWorker.php?office=".$office."&delete=".$packet_array[$i]->id."'>X</a></td>";
 				echo "<td><a href='edit.php?edit_id=".$packet_array[$i]->id."'>edit</a></td>";
 				echo "</tr>";
 					
@@ -113,7 +113,7 @@
 				echo "<td>".$packet_array[$i]->arrival."</td>";
 				echo "<td>".$packet_array[$i]->departure."</td>";
 				echo "<td>".$packet_array[$i]->comment."</td>";
-				echo "<td><a href='?delete=".$packet_array[$i]->id."'>X</a></td>";
+				echo "<td><a href='dataWorker.php?office=".$office."&delete=".$packet_array[$i]->id."'>X</a></td>";
 				echo "<td><a href='edit.php?edit_id=".$packet_array[$i]->id."'>edit</a></td>";
 				echo "</tr>";
 			}	

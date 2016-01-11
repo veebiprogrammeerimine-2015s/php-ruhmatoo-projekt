@@ -23,19 +23,7 @@
 				
 				$arrival_error = "See väli peab olema täidetud!";
 				
-			}/*else{
-				
-				$arrival_date  = $_POST["arrival_date"];
-				$arrival_time = $_POST["arrival_time"];
-				
-				
-				$date = explode("-", $arrival_date);
-				$time = explode(":", $arrival_time);
-				
-				//panen formaati mida saab ab'i salvestada
-				$datetime = date("Y-m-d H:i:s", mktime($time[0], $time[1], 0, $date[1], $date[2], $date[0]));
-				
-			}*/
+			}
 			
 			if(empty($_POST["fromc"])){
 				
@@ -62,7 +50,7 @@
 				$office_id = cleanInput($_POST["office_id"]);
 				$code = sprintf('%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535));
 				
-				$Worker->updatePacket($arrival, $departure, $fromc, $comment, $office_id, $code);
+				$Worker->addPacket($arrival, $departure, $fromc, $comment, $office_id, $code);
 			
 			}
 			
@@ -76,8 +64,7 @@
   	$data = htmlspecialchars($data);
   	return $data;
   }
-	/*<input name="departure-time" type="time" value="<?php echo $departure; ?>"> <br><br>
-	<input name="arrival-time" type="time" value="<?php echo $arrival_time; ?>"> <?php echo $arrival_error; ?> <br><br>*/
+	
 ?>
 <body>
 	

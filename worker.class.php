@@ -50,7 +50,7 @@ class Worker {
 		}else{
 			
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-			$stmt = $mysqli->prepare("SELECT packet_id, arrival, departure, comment FROM ".$office." WHERE (packet_id LIKE ? OR arrival LIKE ? OR departure LIKE ? OR comment LIKE ?) ORDER BY packet_id");
+			$stmt = $mysqli->prepare("SELECT packet_id, arrival, departure, comment FROM ".$office." WHERE deleted IS NULL AND (packet_id LIKE ? OR arrival LIKE ? OR departure LIKE ? OR comment LIKE ?) ORDER BY packet_id");
 			echo $mysqli->error;
 			$stmt->bind_param("isss", $search, $search, $search, $search);
 			$stmt->bind_result($id, $arrival, $departure, $comment);
@@ -71,7 +71,7 @@ class Worker {
 		}
 	}
 	
-	function updatePacket($arrival, $departure, $fromc, $comment, $office_id, $code){
+	function addPacket($arrival, $departure, $fromc, $comment, $office_id, $code){
 		
 		/*echo "hello ".$code;*/
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
@@ -84,8 +84,41 @@ class Worker {
 		
 	}
 	
-	
-	
+	function deletePacket($office, $id){
+		
+		$offices = array("peakontor", "kopli", "kristiine", "lasna", "mustamae", "nomme", "oismae", "pirita");
+		
+		if (!in_array($office, $offices)) {
+			die("Ära üritagi häkkida");
+		}
+		
+		if($office == "peakontor"){
+			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+			$stmt = $mysqli->prepare("UPDATE post_import SET deleted=NOW() WHERE packet_id=?");
+			$stmt->bind_param("i", $id);
+			if($stmt->execute()){
+
+				header("Location: dataWorker.php");
+				
+			}
+			$stmt->close();
+			
+		}else{
+			
+			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+			echo $office;
+			$stmt = $mysqli->prepare("UPDATE ".$office." SET deleted=NOW() WHERE packet_id=?");
+			$stmt->bind_param("i", $id);
+			if($stmt->execute()){
+
+				header("Location: dataWorker.php?office=$office");
+				
+			}
+			$stmt->close();
+			
+		}	
+		
+	}
 	
 }
 
