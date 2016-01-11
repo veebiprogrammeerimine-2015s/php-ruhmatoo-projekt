@@ -1,12 +1,12 @@
 <html lang="en">
-<?php 
-$movie_category = "";
+<?php
 if(isset($_GET["logout"])){		
 		
 	//session_destroy();
 		
 	header("Location: login.php");
 }
+$movie_category = "";
 ?>
   <head>
     <meta charset="utf-8">
@@ -48,7 +48,7 @@ if(isset($_GET["logout"])){
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Avaleht <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="main.php">Avaleht <span class="sr-only"></span></a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Videod <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -74,8 +74,7 @@ if(isset($_GET["logout"])){
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kasutaja nimi <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Seadmed</a></li>
-            <li><a href="#">Veel midagi</a></li>
+            <li><a href="settings.php">Seadmed</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="?logout=1">Logi välja</a></li>
           </ul>
@@ -90,4 +89,6 @@ if(isset($_GET["logout"])){
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+</body>
+</html>
 <!-- ################################################################################################################################ -->

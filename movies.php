@@ -1,6 +1,7 @@
 <?php 
 	require_once("page/header.php"); 
 	require_once("page/functions.php");
+	require_once("user.class.php");
 ?>
 
 <p>
@@ -29,7 +30,7 @@
 		
 	
 	}
-	
+		
 	
 ?>
 

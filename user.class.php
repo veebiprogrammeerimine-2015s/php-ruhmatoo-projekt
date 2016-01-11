@@ -2,7 +2,6 @@
 class User {
 	//private - klassi sees
 	private $connection;
-	
 	//klassi loomisel (new User)
 	function __construct($mysqli) {
 		
@@ -41,6 +40,16 @@ class User {
 		$stmt->execute();
 		$stmt->close();
 
+		}
+
+	function updateUser($new_hash){
+			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+			$stmt = $mysqli->prepare("UPDATE VL_Login SET hash=? WHERE email=? ");
+			echo "tere";
+			$stmt->bind_param("ss", $new_hash, $SESSION["logged_in_user_email"]);
+			$stmt->execute();
+			$stmt->close();
+			$mysqli->close();
 		}
 		function getCategory($url){
 			if (strpos($url,'Action') == true) {
