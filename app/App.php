@@ -13,8 +13,19 @@ class App {
     public $mysqlPassword = '';
     public $mysqlDatabase = 'kaubamaja';
     public $mysqlHost = 'localhost';
+    /**
+     * @var \PDO
+     */
+    public $pdo;
 
+    function __construct() {
+        //Alustame sessioniga
+        session_start();
+        //loome PDO ühenduse andmebaasiga suhtlemiseks
+        $this->pdo = new \PDO("mysql:host=" . $this->mysqlHost . ';dbname='
+            . $this->mysqlDatabase, $this->mysqlUser, $this->mysqlPassword);
 
+    }
 
     /**
      * $_REQUEST parameetrid peaks minema $input sisse käivitamisel

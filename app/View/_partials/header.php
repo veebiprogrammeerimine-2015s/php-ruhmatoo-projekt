@@ -24,7 +24,19 @@
             <ul class="nav navbar-nav">
                 <li class="<?= $page == 'index' ? 'active' : null ?>"><a href="index.php?page=index">Avaleht</a></li>
                 <li class="<?= $page == 'shops' ? 'active' : null ?>"><a href="index.php?page=shops">Kauplused</a></li>
-                <li class="<?= $page == 'login' ? 'active' : null ?>"><a href="index.php?page=login">Logi sisse</a></li>
+                <?php if (isset($_SESSION['login']) && $_SESSION['login'] == true): ?>
+                    <li class="<?= $page == 'login' ? 'active' : null ?>">
+                        <a href="index.php?page=logout">Logi välja</a>
+                    </li>
+                    <li class="<?= $page == 'data' ? 'active' : null ?>">
+                        <a href="index.php?page=data">Andmed (Töötajad/tooted)</a>
+                    </li>
+                <?php else: ?>
+                    <li class="<?= $page == 'login' ? 'active' : null ?>">
+                        <a href="index.php?page=login">Logi sisse</a>
+                    </li>
+                <?php endif; ?>
+
             </ul>
         </div>
         <!--/.nav-collapse -->
