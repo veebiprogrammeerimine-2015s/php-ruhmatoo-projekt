@@ -19,6 +19,7 @@ if(isset($_GET["keyword"])){
 }
 
 $movie_category = "";
+var_dump($_SESSION["logged_in_user_id"]);
 
 ?>
   <head>
@@ -108,15 +109,8 @@ $movie_category = "";
 
 <!-- ################################################################################################################################ -->
 
-<table border="1"></td>
-	<tr>
-		<!--<th>id</th>-->
-		<th>Name</th>
-		<th>Category</th>
-		<th>Year</th>
-		<th>Director</th>
-		<th>Link</th>
-	</tr>
+<table border="0"></td>
+
 	<?php
 	if(isset($_GET["keyword"])){
 		for($i = 0; $i < count($array_of_results); $i++){
@@ -131,4 +125,3 @@ $movie_category = "";
 	}
 	?>
 </table>
-

@@ -1,5 +1,11 @@
 <?php require_once("page/header.php"); ?>
 <?php require_once("user.class.php");	?>
+<?php	require_once("page/functions.php");	?>
+<?php
+
+
+
+?>
 
 
 <br><br>
@@ -7,7 +13,7 @@
 <div class="container">
 
 	<div class="row">
-		<div class="col-sm-6 col-sm-push-3">
+		<div class="col-sm-6 col-sm-pull-3">
 			<div class="jumbotron">
 				<div class="container">
 					<h2>Teade</h2>
@@ -23,8 +29,12 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 
 </div>
+
+
+
+
 <?php require_once("page/footer.php"); ?>

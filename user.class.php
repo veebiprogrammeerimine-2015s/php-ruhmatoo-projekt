@@ -104,7 +104,7 @@ class User {
 				$sql = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 				$stmt2= $sql->prepare("SELECT link FROM VL_Links WHERE VL_Movies_id=?");
 				$stmt2->bind_param("i", $id);
-				$stmt2->bind_result($link);
+				$stmt2->bind_result($movie_link);
 				$stmt2->execute();
 				$stmt2->fetch();
 			//tekitan objekti, kus hakkan hoidma väärtusi
@@ -112,7 +112,10 @@ class User {
 				$movies->Name = $Nimi;
 				$movies->Year = $Aasta;
 				$movies->Director = $Režissöör;
-				$movies->Link = $link;
+
+
+
+				$movies->Link = $movie_link;
 
 				// lisan massiivi ühe rea juurde
 				array_push($movie_array, $movies);
@@ -129,6 +132,7 @@ class User {
 			$mysqli->close();
 		}
 		function getSearchData($keyword=""){
+			$user_id = $_SESSION["logged_in_user_id"];
 			$search= "%%";
 			if($keyword == ""){
 			}
@@ -158,19 +162,20 @@ class User {
 					$result->category = $category;
 					$result->year = $year;
 					$result->director = $director;
-					$result->link = $link;
-
+						$sqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+						$stmt3= $sqli->prepare("SELECT * FROM VL_Payment WHERE (kasutaja_id = ? AND filmi_id= ? AND end_date >= DATE(now()))");
+						$stmt3->bind_param("ii", $user_id, $id);
+						$stmt3->execute();
+						if($stmt->fetch()){
+							var_dump($link);
+							$result->link = $link;
+						}
+						else{
+							$link = "http://localhost:5555/~robigin/vebprog/php-ruhmatoo-projekt/katki.php";
+							$result->link = $link;
+						}
 
 					array_push($search_array, $result);
-
-			$result = new StdClass();
-			$result->id = $id;
-			$result->name = $name;
-			$result->category = $category;
-			$result->year = $year;
-			$result->director = $director;
-
-			array_push($search_array, $result);
 		  }
 
 		  //tagastan massiivi, kus k�ik read sees
