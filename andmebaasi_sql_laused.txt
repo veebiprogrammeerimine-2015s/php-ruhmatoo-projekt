@@ -1,0 +1,105 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema if15_jarmhab
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema if15_jarmhab
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `if15_jarmhab` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `if15_jarmhab` ;
+
+-- -----------------------------------------------------
+-- Table `if15_jarmhab`.`users_php`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `if15_jarmhab`.`users_php` (
+  `user_id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `name` VARCHAR(45) NOT NULL COMMENT '',
+  `email` VARCHAR(45) NOT NULL COMMENT '',
+  `password` VARCHAR(128) NOT NULL COMMENT '',
+  `created` DATETIME NULL COMMENT '',
+  PRIMARY KEY (`user_id`)  COMMENT '')
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `if15_jarmhab`.`parks_php`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `if15_jarmhab`.`parks_php` (
+  `park_id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `park_name` VARCHAR(45) NOT NULL COMMENT '',
+  `nr_of_baskets` INT NOT NULL COMMENT '',
+  `deleted` DATETIME NULL COMMENT '',
+  PRIMARY KEY (`park_id`)  COMMENT '')
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `if15_jarmhab`.`game_php`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `if15_jarmhab`.`game_php` (
+  `game_id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `user_id` INT NOT NULL COMMENT '',
+  `game_name` VARCHAR(45) NULL COMMENT '',
+  `park_id` INT NOT NULL COMMENT '',
+  `date` DATETIME NULL COMMENT '',
+  PRIMARY KEY (`game_id`)  COMMENT '',
+  INDEX `fk_game_php_users_php_idx` (`user_id` ASC)  COMMENT '',
+  INDEX `fk_game_php_parks_php1_idx` (`park_id` ASC)  COMMENT '',
+  CONSTRAINT `fk_game_php_users_php`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `if15_jarmhab`.`users_php` (`user_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_game_php_parks_php1`
+    FOREIGN KEY (`park_id`)
+    REFERENCES `if15_jarmhab`.`parks_php` (`park_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `if15_jarmhab`.`pars_php`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `if15_jarmhab`.`pars_php` (
+  `par_id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `park_id` INT NOT NULL COMMENT '',
+  `basket_nr` INT NULL COMMENT '',
+  `par` INT NULL COMMENT '',
+  PRIMARY KEY (`par_id`)  COMMENT '',
+  INDEX `fk_pars_php_parks_php1_idx` (`park_id` ASC)  COMMENT '',
+  CONSTRAINT `fk_pars_php_parks_php1`
+    FOREIGN KEY (`park_id`)
+    REFERENCES `if15_jarmhab`.`parks_php` (`park_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `if15_jarmhab`.`results_php`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `if15_jarmhab`.`results_php` (
+  `result_id` INT NOT NULL AUTO_INCREMENT COMMENT '',
+  `game_id` INT NOT NULL COMMENT '',
+  `basket_nr` INT NULL COMMENT '',
+  `result` INT NULL COMMENT '',
+  PRIMARY KEY (`result_id`)  COMMENT '',
+  INDEX `fk_results_php_game_php1_idx` (`game_id` ASC)  COMMENT '',
+  CONSTRAINT `fk_results_php_game_php1`
+    FOREIGN KEY (`game_id`)
+    REFERENCES `if15_jarmhab`.`game_php` (`game_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
