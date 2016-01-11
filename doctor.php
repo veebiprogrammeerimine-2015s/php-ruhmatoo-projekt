@@ -1,4 +1,5 @@
 <?php
+	require("navigation.html");
 	require_once("functions.php");
 	require_once("dropdown.php");
 	if(!isset($_SESSION["logged_in_user_id"])){
