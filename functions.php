@@ -84,25 +84,25 @@
         
     }
 	
-	function createCat($name, $age, $gender, $description, $home_status){
-		
-		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("INSERT INTO cats (name, age, gender, description, home_status) VALUES (?,?,?,?,?)");
-		$stmt->bind_param("sisss", $name, $age, $gender, $description, $home_status);
-		
-		$message="";
-		
-		//kui õnnestub siis tõene kui viga siis else
-		if ($stmt->execute()){
-			//õnnestus
-			$message="edukalt andmebaasi salvestatud";
+		function createCat($name, $age, $gender, $description, $home_status){
+			
+			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+			$stmt = $mysqli->prepare("INSERT INTO cats (name, age, gender, description, home_status) VALUES (?,?,?,?,?)");
+			$stmt->bind_param("sisss", $name, $age, $gender, $description, $home_status);
+			
+			$message="";
+			
+			//kui õnnestub siis tõene kui viga siis else
+			if ($stmt->execute()){
+				//õnnestus
+				$message="edukalt andmebaasi salvestatud";
+			}
+			
+			$stmt->close();
+			$mysqli->close();
+			
+			return $message;
 		}
-		
-		$stmt->close();
-		$mysqli->close();
-		
-		return $message;
-	}
 	
  
     //vaikeväärtus sulgusdes, et vältida errorit, mis tekiks real 31 table.phps

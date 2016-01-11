@@ -8,6 +8,8 @@
 	$page_title="Kasutaja loomine";
 	$page_file_name="create.php";
 	
+	$email = "";
+	$acces_level = "";
 	$errormessage = "";
 	$create_email_error = "";
 	$create_password_error = "";
