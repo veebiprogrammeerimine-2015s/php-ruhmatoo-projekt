@@ -33,9 +33,11 @@
 		header("Location: data.php");
 	}
 	
+	$email = "";
 	$login_email = "";
 	$email_error = "";
 	
+	$password = "";
 	$login_password = "";
 	$password_error = "";
 	
@@ -77,7 +79,7 @@
 
 					$_SESSION["login_success_message"] = $login_response->success->message;
 					
-					/*header("Location: data.php");*/
+					header("Location: data.php");
 					
 					
 				}
