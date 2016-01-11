@@ -295,5 +295,23 @@
 		$mysqli->close();
 		
 	}
-    
+	
+	function adminRights($id, $email, $access_level){
+		$id = "";
+		$email = "";
+		$access_level = "";
+
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+        
+        $response = new StdClass();
+        
+        $stmt = $mysqli->prepare("SELECT id, email, access_level FROM user_sample WHERE id = ? AND email = ? AND access_level = ?");
+        $stmt->bind_param("isi", $id, $email, $access_level);
+        $stmt->bind_result($id, $email, $access_level);
+        $stmt->execute();
+        
+		$stmt->close();
+        
+        $mysqli->close();
+    }
  ?>
