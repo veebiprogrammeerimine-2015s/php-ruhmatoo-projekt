@@ -153,4 +153,69 @@
 		
 	}
 
+	
+	//loome uue funktsiooni, et küsida ab'ist andmeid
+	function getPostList(){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("SELECT post_id,name,user_id FROM post_tech WHERE deleted IS NULL");
+		$stmt->bind_result($post_id, $name, $user_id);
+		$stmt->execute();
+
+		
+		// tühi massiiv kus hoiame objekte (1 rida andmeid)
+		$array = array();
+		
+		// tee tsüklit nii mitu korda, kui saad 
+		// ab'ist ühe rea andmeid
+		while($stmt->fetch()){
+			
+			// loon objekti iga while tsükli kord
+			$car = new StdClass();
+			$car->id = $post_id;
+			$car->number_plate = $name;
+			$car->user_id = $user_id;
+			
+			// lisame selle massiivi
+			array_push($array, $car);
+			//echo "<pre>";
+			//var_dump($array);
+			//echo "</pre>";
+			
+		}
+		
+		$stmt->close();
+		$mysqli->close();
+		
+		return $array;
+		
+		
+	}
+	
+	
+	function deletePostList($id_to_be_deleted){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("UPDATE post_tech SET deleted=NOW() WHERE id=?");
+		$stmt->bind_param("i", $id_to_be_deleted);
+		
+		if($stmt->execute()){
+			// sai edukalt kustutatud
+			header("Location: table.php");
+			
+		}
+		
+		$stmt->close();
+		$mysqli->close();
+		
+	}
+	
+	
+	
+	//$name = "Romil";
+	//echo "Tere ".$name;
+	
+	//var_dump("asdasdasdasd");
 ?>
