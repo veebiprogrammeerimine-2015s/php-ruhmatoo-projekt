@@ -2,12 +2,8 @@
 <?php require_once("user.class.php");	?>
 <?php	require_once("page/functions.php");	?>
 <?php
-	$keyword = "";
-	if(isset($_GET["keyword"])){
-		$keyword = $_GET["keyword"];
-		//echo $keyword;
-		$array_of_results = $user->getSearchData($keyword);
-	}
+
+
 
 ?>
 
@@ -37,32 +33,7 @@
 	</div>
 
 </div>
-<html>
-<body>
 
-	<table border="1"></td>
-		<tr>
-			<!--<th>id</th>-->
-			<th>Name</th>
-			<th>Category</th>
-			<th>Year</th>
-			<th>Director</th>
-		</tr>
-		<?php
-		if(isset($_GET["keyword"])){
-			for($i = 0; $i < count($array_of_results); $i++){
-					echo "<tr>";
-					echo "<td>".$array_of_results[$i]->name."</td>";
-					echo "<td>".$array_of_results[$i]->category."</td>";
-					echo "<td>".$array_of_results[$i]->year."</td>";
-					echo "<td>".$array_of_results[$i]->director."</td>";
-					echo "</tr>";
-			}
-		}
-		?>
-	</table>
-</html>
-</body>
 
 
 
