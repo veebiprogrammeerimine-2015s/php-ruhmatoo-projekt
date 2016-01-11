@@ -15,6 +15,7 @@
 
 	
 	$park_list = getParkData();
+	$game_php = getHistoryData();
 	
 ?>
 <p>
@@ -39,6 +40,7 @@
 	</tr>
 
 <?php
+		
 		for($i = 0; $i < count($park_list); $i++){
 			echo "<tr>";
 			
@@ -51,3 +53,25 @@
 		}
 ?>
 </table>
+<h1>Ajalugu</h1>
+
+<table border= 1>
+	<tr>
+		<th>Park name</th>
+		<th>Time</th>
+		
+	</tr>
+<?php
+		for($i = 0; $i < count($game_php); $i++){
+			echo "<tr>";
+			
+				
+				echo "<td>".$game_php[$i]->game_name."</td>";
+				echo "<td>".$game_php[$i]->date."</td>";
+				echo "<td><a href='results.php?id=".$game_php[$i]->id."'>Tulemus</a></td>";
+				
+				
+			echo "</tr>";
+		}
+		
+?>

@@ -30,13 +30,66 @@
 			array_push($array, $park);
 			
 		}
+	
+	$stmt->close();
+		$mysqli->close();
+		
+		return $array;
+	}
+		
+	function getHistoryData(){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("SELECT game_id, user_id, game_name, park_id, date FROM game_php WHERE user_id = $_SESSION[id_from_db]");
+		echo $mysqli->error;
+		$stmt->bind_result($id, $user_id, $game_name, $park_id, $date);	
+		$stmt->execute();
+		$array = array();
+		while($stmt->fetch()){
+			$game = new StdClass();
+			$game->id = $id;
+			$game->user_id = $user_id;
+			$game->game_name = $game_name;
+			$game->park_id = $park_id;
+			$game->date = $date;
+			
+			array_push($array, $game);
+			
+		}
+	
 		
 		$stmt->close();
 		$mysqli->close();
 		
 		return $array;
-		
 	}
+function getResultData(){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("SELECT result_id, game_id, basket_nr, result FROM results_php");
+		echo $mysqli->error;
+		$stmt->bind_result($result_id, $game_id, $basket_nr, $result);	
+		$stmt->execute();
+		$array = array();
+		while($stmt->fetch()){
+			$result = new StdClass();
+			$result->game_id = $game_id;
+			$result->basket_nr = $basket_nr;
+			$result->result = $result;
+			array_push($array, $result);
+			
+		}
+	
+		
+		$stmt->close();
+		$mysqli->close();
+		
+		return $array;
+	}
+	
+	
 	
 
 //pargi kustutamiseks

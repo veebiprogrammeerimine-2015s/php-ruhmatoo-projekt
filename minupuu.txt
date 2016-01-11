@@ -1,0 +1,10 @@
+.
+├── discgolf_mysql_schema.mwb
+├── hkarilaid.php
+├── jarmhab.php
+├── koidu.php
+├── minupuu.txt
+├── README.md
+└── sizenn.php
+
+0 directories, 7 files
