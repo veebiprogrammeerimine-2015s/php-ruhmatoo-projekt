@@ -1,5 +1,7 @@
 <?php
 	require_once("functions.php");
+	require_once("navigation.html");
+	
 	if(!isset($_SESSION["logged_in_user_id"])){
 		header("Location: login.php");
 		
@@ -55,7 +57,6 @@
 				$message = registerAnimal($owner_name, $animal_name, $animal_kind, $date, $problem);
 				
 				if($message != ""){
-					// õnnestus, teeme inputi väljad tühjaks
 					$problem = "";
 					$date = "";
 					$animal_kind = "";
