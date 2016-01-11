@@ -1,4 +1,6 @@
 <?php
+
+	
 	// siia lisame auto nr märgite vormi
 	//laeme funktsiooni failis
 	require_once("function.php");
@@ -35,7 +37,7 @@
 			
 			// functions.php failis käivina funktsiooni
 			// msq on message funktsioonist mis tagasi saadame
-			$msg = createCarPlate($post_tech, $id_from_db);
+			$msg = createPost($post_tech, $_SESSION["id_from_db"]);
 			
 			if($msg != ""){
 				//salvestamine õnnestus
@@ -65,11 +67,9 @@
 	<a href="?logout=1"> Logi välja</a>
 </p>
 
- <h2>Lisa auto</h2>
+ <h2>Lisa post</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  	<label for="car_plate" >auto nr</label><br>
-	<input id="car_plate" name="car_plate" type="text" value="<?=$car_plate; ?>"> <?=$car_plate_error; ?><br><br>
-  	<label>värv</label><br>
-	<input name="color" type="text" value="<?=$color; ?>"> <?=$color_error; ?><br><br>
+  	<label for="post_tech" >Posti nime</label><br>
+	<input id="post_tech" name="post_tech" type="text" value="<?=$post_tech; ?>"> <?=$post_tech_error; ?><br><br>
   	<input type="submit" name="create" value="Salvesta">
   </form>

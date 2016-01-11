@@ -51,13 +51,13 @@
 	}
 	
 	
-	function createPost($post_name, $id_from_db){
+	function createPost($post_tech, $id_from_db){
 		// globals on muutuja kõigist php failidest mis on ühendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO post_tech (name, post_user_id) VALUES (?, ?)");
-		$stmt->bind_param("si", $post_name, $if_from_db);
-	
+		$stmt = $mysqli->prepare("INSERT INTO post_tech (name, user_id) VALUES (?, ?)");
+		$stmt->bind_param("si", $post_tech, $id_from_db);
+		
 		$msg = "";
 		
 		if($stmt->execute()){
