@@ -15,7 +15,7 @@
     if(isset($_GET["logout"])){
         //kustutame sessiooni muutujad
         session_destroy();
-        header("Location: login.php");
+        header("Location: index.php");
     }
 	
 	

@@ -45,6 +45,9 @@
                     <li>
                         <a href="create.php">Loo konto</a>
                     </li>
+                    <li>
+                        <a href="?logout=1">Logi välja</a>
+                    </li>
                 </ul>
             </div>
         </div>

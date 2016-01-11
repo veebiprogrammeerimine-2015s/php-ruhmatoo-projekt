@@ -76,7 +76,6 @@ function cleanInput($data) {
 						
 						<div class="col-lg-4 hidden-sm hidden-md">
 							<button name="login" type="submit" class="btn btn-info btn-block">Logi sisse</button><br>
-                            <button type="submit" class="btn btn-info">Loo</button>
 						</div>
 						
 						<div class="col-lg-4 hidden-lg hidden-xs pull-right">
