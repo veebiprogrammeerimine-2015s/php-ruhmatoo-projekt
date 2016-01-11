@@ -10,12 +10,8 @@
 ### Nõuded
 
 1. **README.md sisaldab:**
-    * suurelt projekti nime;
-<<<<<<< HEAD
-    * rühma liikmete nimed;
-=======
-    * rühma liikmete nimed; 
->>>>>>> 15c2fa97efd8b9d7307a2949ebe81f6f00793d71
+    * suurelt projekti nime
+    * rühma liikmete nimed
     * eesmärki (3-4 lauset, mis probleemi üritate lahendada);
     * kirjeldus (sihtrühm, eripära võrreldes teiste samalaadsete rakendustega - kirjeldada vähemalt 2-3 sarnast rakendust mida eeskujuks võtta);
     * funktsionaalsuse loetelu prioriteedi järjekorras, nt
