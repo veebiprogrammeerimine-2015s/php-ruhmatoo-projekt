@@ -4,7 +4,6 @@
 		header("Location: login.php");
 		
 	}
-	
 	$problem = "";
 	$date = "";
 	$animal_kind = "";
@@ -69,22 +68,67 @@
 			}
 	}
 ?>
+<head>
+	<link rel="stylesheet" href="materialize.min.css">
+	</head>
+
+<body>
 <p>
 	Tere, <?=$_SESSION["logged_in_user_email"];?> 
-	<a href="?logout=1"> Logi välja <a> 
+	<a href="?logout=1"> Logi välja </a> 
 </p>
 
+<div class="owner_register">
+<div class="row">
 <h2>Registreerimine</h2>
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-	<label for="owner_name" >Omaniku nimi</label><br>
-	<input id="owner_name" name="owner_name" type="text" value="<?php echo $owner_name; ?>"> <?php echo $owner_name_error; ?><br><br>
-	<label for="animal_name" >Looma nimi</label><br>
-	<input id="animal_name" name="animal_name" type="text" value="<?php echo $animal_name; ?>"> <?php echo $animal_name_error; ?><br><br>
-	<label for="animal_kind" >Looma liik</label><br>
-	<input id="animal_kind" name="animal_kind" type="text" value="<?php echo $animal_kind; ?>"> <?php echo $animal_kind_error; ?><br><br>
-	<label for="date" >Kuupäev</label><br>
-	<input id="date" name="date" type="date" value="<?php echo $date; ?>"> <?php echo $date_error; ?><br><br>
-	<label for="problem" >Probleemi kirjeldus</label><br>
-	<textarea id="problem" name="problem" col=40 rows=8 placeholder="Mis probleem on?" value="<?php echo $problem; ?>"> <?php echo $problem_error; ?> </textarea><br><br>
-	<input type="submit" name="register" value="Salvesta">
+<form class="col s12" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+	<div class="row">
+	<div class="input-field col s4">
+			<label for="owner_name">Omaniku nimi</label>
+			<input id="owner_name" type="text" class="validate" value="<?php echo $owner_name; ?>"> <?php echo $owner_name_error; ?><br><br>
+	</div>
+	</div>
+	<div class="row">
+	<div class="input-field col s4">
+		<label for="animal_name">Looma nimi</label>
+		<input id="animal_name" name="animal_name" type="text" class="validate"  value="<?php echo $animal_name; ?>"> <?php echo $animal_name_error; ?><br><br>
+	</div>
+	</div>
+	<div class="row">
+	<div class="input-field col s4">
+		<label for="animal_kind">Looma liik</label>
+		<input id="animal_kind" name="animal_kind" type="text" class="validate"  value="<?php echo $animal_kind; ?>"> <?php echo $animal_kind_error; ?><br><br>
+	</div>
+	</div>
+	<div class="row">
+	<div class="input-field col s4">
+		<label for="date" class="">Kuupäev</label>
+		<input type="date" class="datepicker" value="<?php echo $date; ?>"> <?php echo $date_error; ?><br><br>
+	</div>
+	</div>
+	<div class="row">
+	<div class="input-field col s4">
+	<label for="problem">Probleemi kirjeldus</label>
+	<textarea id="problem"  class="materialize-textarea" name="problem" col=40 rows=8 value="<?php echo $problem; ?>"> <?php echo $problem_error; ?> </textarea>
+	</div>
+	</div>
+	<a class="waves-effect waves-light btn" type="submit" name="register">Salvesta</a>
+</div>
 </form>
+</div>
+</div>
+</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="materialize.min.js"></script>
+
+ <script>
+  $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
+  </script>
+    </body>
+
+<?php
+require("footer.html");
+?>
