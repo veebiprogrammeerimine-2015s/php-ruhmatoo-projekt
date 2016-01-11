@@ -53,7 +53,6 @@
 <div class="newgame1">
 <h1>You are playing at: <?php echo $_SESSION["park_name"]; ?></h1>
 <h2><?=$_GET["k"];?>. basket</h2>
-<p>par = </p>
 	<form action="new_game_1.php?k=<?php echo $_GET["k"]; ?>" method="post" >
 		<label for="result" >Your result</label>
 		<input id="result" name="result" type="number" value="<?=$result; ?>"> <?=$result_error; ?><br><br>
