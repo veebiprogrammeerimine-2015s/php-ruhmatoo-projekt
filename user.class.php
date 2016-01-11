@@ -1,12 +1,12 @@
-<?php 
+<?php
 class User {
 	//private - klassi sees
 	private $connection;
-	
+
 	//klassi loomisel (new User)
 	function __construct($mysqli) {
-		
-		// this tähendab selle klassi muutujat
+
+		// this tï¿½hendab selle klassi muutujat
 		$this->connection = $mysqli;
 	}
 	  function cleanInput($data) {
@@ -21,11 +21,11 @@ class User {
 		$stmt->bind_param("ss", $email, $hash);
 		$stmt->bind_result($id_from_db, $email_from_db);
 		$stmt->execute();
-		if($stmt->fetch()){		  
+		if($stmt->fetch()){
 		  $_SESSION["logged_in_user_id"] = $id_from_db;
 		  $_SESSION["logged_in_user_email"] = $email_from_db;
 		  $user = new StdClass();
-		  $user->email = $email_from_db;		  
+		  $user->email = $email_from_db;
 		  header("Location: main.php");
 		}
 		else{
@@ -48,24 +48,136 @@ class User {
 				echo "action";
 			}
 		}
+		function getSearchData($keyword=""){
+			$search= "%%";
+			if($keyword == ""){
+			}
+			else{
+				$search= "%".$keyword."%";
+			}
+		  $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		  $stmt= $mysqli->prepare("SELECT id, Name, Category, Year, Director FROM VL_Movies WHERE (Name LIKE ? OR Category LIKE ? OR Year LIKE ? OR Director LIKE ?)");
+		  $stmt->bind_param("ssss", $search, $search, $search, $search);
+		  $stmt->bind_result($id, $name, $category, $year, $director);
+		  $stmt->execute();
 
-		else
-		
+		  // tekitan tï¿½hja massiivi, kus edaspidi hoian objekte
+		  $search_array = array();
+
+		  //tee midagi seni, kuni saame ab'ist ï¿½he rea andmeid
+			while($stmt->fetch()){
+			// seda siin sees tehakse
+			// nii mitu korda kui on ridu
+			// tekitan objekti, kus hakkan hoidma vï¿½ï¿½rtusi
+			$result = new StdClass();
+			$result->id = $id;
+			$result->name = $name;
+			$result->category = $category;
+			$result->year = $year;
+			$result->director = $director;
+
+			//lisan massiivi ï¿½he rea juurde
+			array_push($search_array, $result);
+			//var dump ï¿½tleb muutuja tï¿½ï¿½bi ja sisu
+			//echo "<pre>";
+			//var_dump($car_array);
+			//echo "</pre><br>";
+		  }
+
+		  //tagastan massiivi, kus kï¿½ik read sees
+		  return $search_array;
+
+
+		  $stmt->close();
+		  $mysqli->close();
 		}
 
-		function getAccess($user_id, $movie_id){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		function getAccess($movie_id){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("SELECT id, lõpu_kuupäev FROM VL_Payment WHERE kasutaja_id=? AND filmi_id=?");
+		$stmt = $mysqli->prepare("SELECT id, lï¿½pu_kuupï¿½ev FROM VL_Payment WHERE kasutaja_id=? AND filmi_id=?");
 		$stmt->bind_param("ss", $user_id, $movie_id);
 		$stmt->bind_result($payment, $end_date);
 		$stmt->execute();
-		if($stmt->fetch()){		  
+		if($stmt->fetch()){
 		  $user = new StdClass();
-		  $user->payment = $payment;		  
-		  header("Location: access.php");
+		  $user->payment = $payment;
+		  header("Location: https://www.youtube.com/results?search_query=.$");
 		}
 		else{
-		  echo "Puudub juurdepääs";
+		  echo "Puudub juurdepï¿½ï¿½s";
 		}
 	  }
 

@@ -1,5 +1,16 @@
 <?php require_once("page/header.php"); ?>
 <?php require_once("user.class.php");	?>
+<?php	require_once("page/functions.php");	?>
+<?php
+	$keyword = "";
+	if(isset($_GET["keyword"])){
+		$keyword = $_GET["keyword"];
+		//echo $keyword;
+		$array_of_results = $user->getSearchData($keyword);
+		echo $array_of_results[0]->category;
+	}
+
+?>
 
 
 <br><br>
@@ -23,8 +34,38 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 
 </div>
+<html>
+<body>
+
+		<form action="main.php" method="get" >
+			<input type="search" name="keyword" value="<?=$keyword;?>" >
+			<input type="submit" value="Search">
+		</form>
+		<h1>Search</h1>
+		<table border="1">
+		<tr>
+			<!--<th>id</th>-->
+			<th>Name</th>
+			<th>Category</th>
+			<th>Year</th>
+			<th>Director</th>
+		</tr>
+		<?php
+			for($i = 0; $i < count($array_of_messages); $i++){
+					echo "<tr>";
+					//echo "<td>".$array_of_messages[$i]->id."</td>";
+					echo "<td>".$array_of_results[$i]->name."</td>";
+					echo "<td>".$array_of_results[$i]->category."</td>";
+					echo "<td>".$array_of_results[$i]->year."</td>";
+					echo "<td>".$array_of_results[$i]->director."</td>";
+					echo "</tr>";
+
+			}
+		?>
+</html>
+</body>
 <?php require_once("page/footer.php"); ?>
