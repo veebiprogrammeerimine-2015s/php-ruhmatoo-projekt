@@ -5,7 +5,7 @@ class User {
 
 	//klassi loomisel (new User)
 	function __construct($mysqli) {
-		
+
 		// this tähendab selle klassi muutujat
 
 		$this->connection = $mysqli;
@@ -45,10 +45,12 @@ class User {
 		}
 
 	function updateUser($new_hash){
+			echo $new_hash;
+			$email=$_SESSION["logged_in_user_email"];
+			echo $email;
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 			$stmt = $mysqli->prepare("UPDATE VL_Login SET hash=? WHERE email=? ");
-			echo "tere";
-			$stmt->bind_param("ss", $new_hash, $SESSION["logged_in_user_email"]);
+			$stmt->bind_param("ss", $new_hash, $email);
 			$stmt->execute();
 			$stmt->close();
 			$mysqli->close();
@@ -96,17 +98,17 @@ class User {
 			$stmt->execute();
 			// tekitan tühja massiivi, kus edaspidi hoian objekte
 			$movie_array= array();
-		
+
 			// tee midagi seni, kuni saame ab'st ühe rea andmeid
 			while($stmt->fetch()){
 			// seda siin sees tehakse nii mitu korda kuni on ridu
-			
+
 			//tekitan objekti, kus hakkan hoidma väärtusi
 			$movies = new StdClass();
 			$movies->Name = $Nimi;
 			$movies->Year = $Aasta;
 			$movies->Director = $Režissöör;
-			
+
 			// lisan massiivi ühe rea juurde
 			array_push($movie_array, $movies);
 			// var_dump ütleb muutuja nime ja stuffi
@@ -114,10 +116,10 @@ class User {
 			//var_dump($car_array);
 			//echo "</pre><br>";
 			}
-		
+
 			// tagastan massiivi, kus kõik read sees
 			return $movie_array;
-			
+
 			$stmt->close();
 			$mysqli->close();
 		}
@@ -134,14 +136,12 @@ class User {
 		  $stmt->bind_result($id, $name, $category, $year, $director);
 		  $stmt->execute();
 
-		  // tekitan t�hja massiivi, kus edaspidi hoian objekte
+
 		  $search_array = array();
 
-		  //tee midagi seni, kuni saame ab'ist �he rea andmeid
+
 			while($stmt->fetch()){
-			// seda siin sees tehakse
-			// nii mitu korda kui on ridu
-			// tekitan objekti, kus hakkan hoidma v��rtusi
+
 			$result = new StdClass();
 			$result->id = $id;
 			$result->name = $name;
@@ -149,15 +149,10 @@ class User {
 			$result->year = $year;
 			$result->director = $director;
 
-			//lisan massiivi �he rea juurde
-			array_push($search_array, $result);
-			//var dump �tleb muutuja t��bi ja sisu
-			//echo "<pre>";
-			//var_dump($car_array);
-			//echo "</pre><br>";
-		  }
 
-		  //tagastan massiivi, kus k�ik read sees
+			array_push($search_array, $result);
+
+		  }
 		  return $search_array;
 
 
