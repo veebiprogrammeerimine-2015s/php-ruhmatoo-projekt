@@ -1,33 +1,17 @@
-nav
-{
-	background-color:rgb(255,255,255);
-	/*uusasi*/
-	/*box-sizing: border-box*//*content-box, border-box*/
-	width: 250px;
-	/*margin-left: 50px;*/
-	/*margin: 10px 50px;*//*ulemine/alumine, vasak/parem*/
-	/*margin: 5px 50px 10px;*//*ulemine, vasak/parem, alumine*/
-	/*margin: 5px 0px 10px 50px;*//*ulemine.....alumine*/
-	position: fixed;/*static, relative, absolute, fixed*/
-	top: 100px;
-}
-
-body
-{
-	background-image:url("pildid/post.jpg");
-}
-
-
 h1
 {
-	font-size: 2.5em;/*xx-small ... medium large, smaller, larger*/
+	font-size: 2.5em;
 	color:#000000;
-	text-align: center; /*left, right, justify, center*/
-	font-family: coolPealkiri;
+	text-align: center;
 	background-color:rgba(250,240,230,0.8);
-	top: 100px;
-	right: 500px;
-	width: 350px;
-	margin-left: 500px;
 }
 
+img
+{
+	position: center;
+}
+
+p
+{
+	text-align: center;
+}
