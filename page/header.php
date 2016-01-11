@@ -17,7 +17,7 @@ if(isset($_GET["keyword"])){
 	//echo $keyword;
 	$array_of_results = $user->getSearchData($keyword);
 }
-=======
+
 $movie_category = "";
 
 ?>
@@ -129,4 +129,3 @@ $movie_category = "";
 	}
 	?>
 </table>
-=======
