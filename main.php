@@ -7,7 +7,6 @@
 		$keyword = $_GET["keyword"];
 		//echo $keyword;
 		$array_of_results = $user->getSearchData($keyword);
-		echo $array_of_results[0]->category;
 	}
 
 ?>
@@ -45,8 +44,7 @@
 			<input type="search" name="keyword" value="<?=$keyword;?>" >
 			<input type="submit" value="Search">
 		</form>
-		<h1>Search</h1>
-		<table border="1">
+	<table border="1"></td>
 		<tr>
 			<!--<th>id</th>-->
 			<th>Name</th>
@@ -55,17 +53,21 @@
 			<th>Director</th>
 		</tr>
 		<?php
-			for($i = 0; $i < count($array_of_messages); $i++){
+		if(isset($_GET["keyword"])){
+			for($i = 0; $i < count($array_of_results); $i++){
 					echo "<tr>";
-					//echo "<td>".$array_of_messages[$i]->id."</td>";
 					echo "<td>".$array_of_results[$i]->name."</td>";
 					echo "<td>".$array_of_results[$i]->category."</td>";
 					echo "<td>".$array_of_results[$i]->year."</td>";
 					echo "<td>".$array_of_results[$i]->director."</td>";
 					echo "</tr>";
-
 			}
+		}
 		?>
+	</table>
 </html>
 </body>
+
+
+
 <?php require_once("page/footer.php"); ?>
