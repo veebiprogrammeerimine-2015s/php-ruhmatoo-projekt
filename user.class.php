@@ -124,38 +124,38 @@ class User {
 		return $response;
 	}
 	
-		function modifyUser($modify_fname, $modify_sname, $modify_country, $modify_profilepic){
-		
-
-		$response = new StdClass();
-		
-
-		$stmt = $this->connection->prepare("INSERT INTO user_creation (Firstname, Surname, Country, Profilepic) VALUES (?,?,?,?)");
-		$stmt->bind_param("sss", $modify_fname, $modify_sname, $modify_country, $modify_profilepic);
+	function getEditData($edit_id){
 		
 		
-		// sai edukalt salvestatud
-		if($stmt->execute()){
-			
-			$success = new StdClass();
-			$success->message = "User successfully updated!";
-			
-			$response->success = $success;
+		$stmt= $this->prepare("SELECT Firstname, Surname, Country FROM user_creation WHERE id=?");
+		$stmt->bind_param("i",$edit_id);
+		$stmt->bind_result($modify_fname, $modify_sname, $modify_country);
+		$stmt->execute();
+		
+		//object
+		$User = new StdClass();
+		
+		if($stmt->fetch()){
+			// sain
+			$User->Firstname = $modify_fname;
+			$User->Surname = $modify_sname;
+			$User->Country = $modify_country;
 			
 		}else{
-			
-			// midagi läks katki
-			$error = new StdClass();
-			$error->id = 1;
-			$error->message = "Something is broken!";
-			
-			$response->error = $error;
-			
+
 		}
 		
-		$stmt->close();
+		return $user;
 		
-		return $response;
+		$stmt->close;
+	}
+
+	function modifyUser($modify_fname, $modify_sname, $modify_country){
+		
+		$stmt= $this->prepare("UPDATE user_creation SET Firstname=?, Surname=?, Country=? WHERE id=?");
+		$stmt->bind_param("sssi", $modify_fname, $modify_sname, $modify_country, $id);
+
+		$stmt->close();
 	}
 	
 } ?>

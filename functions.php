@@ -11,5 +11,49 @@
 	
 	$User = new User($mysqli);
 	
-	
+	function getThreadData($keyword=""){
+               
+    $search = "%%";
+
+    if($keyword == ""){
+
+                               
+    }else{
+    $search = "%".$keyword."%";
+
+	}
+						
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+						   
+		$stmt = $mysqli->prepare("SELECT teema from PeaTeemad");
+		$stmt->bind_param("ss", $search, $search);
+						   
+		$stmt->bind_result($id, $user_id_from_database, $thread );
+		$stmt->execute();
+						   
+		$thread_array = array();
+						   
+						   
+		while($stmt->fetch()){
+
+		$forum = new StdClass();
+		$forum->id = $id;
+		$forum->thread = $thread;
+		$forum->user_id = $user_id_from_database;
+		$forum->post = $post;
+								   
+
+		array_push($thread_array, $forum);
+
+								   
+								   
+	}
+						   
+		return $thread_array;
+						   
+		$stmt->close();
+		$mysqli->close();
+						   
+	}
+
 ?>
