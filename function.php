@@ -171,10 +171,12 @@
 		// ab'ist ühe rea andmeid
 		while($stmt->fetch()){
 			
+			
+			
 			// loon objekti iga while tsükli kord
 			$posts = new StdClass();
-			$posts->id = $post_id;
-			$posts->number_plate = $name;
+			$posts->post_id = $post_id;
+			$posts->name = $name;
 			$posts->user_id = $user_id;
 			
 			// lisame selle massiivi
