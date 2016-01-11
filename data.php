@@ -132,10 +132,9 @@
 ?>
 
 
+    
 
-Tere, <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1">Logi välja</a>
-
-<h2>Kasside tabel</h2>
+<h1>Kasside tabel</h1>
 <form action="otsivad.php" method="get">
 	<input name="keyword" type="search" value="<?=$keyword?>" >
 	<input type="submit" value="otsi"> 
@@ -145,11 +144,11 @@ Tere, <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1">Logi välja</a
 <table border=1>
 <tr>
 
-	<th>name</th>
-	<th>age</th>
-	<th>gender</th>
-	<th>description</th>
-	<th>home_status</th>
+	<th>Nimi</th>
+	<th>Vanus</th>
+	<th>Sugu</th>
+	<th>Kirjeldus</th>
+	<th>Kodu leidnud?</th>
 	<th>Edit</th>
 	<th>Delete</th>
 
@@ -196,7 +195,7 @@ Tere, <?=$_SESSION['logged_in_user_email'];?> <a href="?logout=1">Logi välja</a
 
 </table>
 
-<h2> Lisa uus kass</h2>
+<h1> Lisa uus kass</h1>
 
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
   
