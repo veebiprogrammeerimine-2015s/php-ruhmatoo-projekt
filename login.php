@@ -1,7 +1,7 @@
 <?php
 	//Login
 
-	require_once("page/functions.php");		
+	require_once("page/functions.php");
 	$email_error = "";
 	$pw_error = "";
 	$email_reg_error = "";
@@ -29,8 +29,7 @@
 			if($pw_error == "" && $email_error == ""){
 				$hash = hash("sha512", $pw);
 				$user->loginUser($email, $hash);
-				echo $user->email;
-				
+
 			}
 		} // login if end
 		// *********************
@@ -55,15 +54,15 @@
 					$hash = hash("sha512", $pw_reg);
 					$user->createUser($email_reg, $hash);
 
-					
+
 				}
 		} // create if end
 	}
   // funktsioon, mis eemaldab kõikvõimaliku üleliigse tekstist
 
-	
-	
-	
+
+
+
 ?>
 <!-- ################################################################################################################ -->
 <html lang="en">
@@ -105,14 +104,14 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    
+
   </div><!-- /.container-fluid -->
 </nav>
 <!-- ################################################################################################################################ -->
 <div class="container">
 
 		<div class="row">
-	
+
 			<div class="col-sm-6">
 
 				<form class="form-horizontal" method="post" action="login.php">

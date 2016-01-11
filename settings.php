@@ -7,7 +7,7 @@
  $new_password_error = "";
  $new2_password_error = "";
  $old_password_error_match = "";
- 
+
  //muutujad
  $old_password = "";
  $new_password = "";
@@ -16,7 +16,7 @@
  // *************************
  // ** UUS PAROOL ***********
  // *************************
- 
+
  if(isset($_POST["new_pw"])){
 	 if (empty($_POST["vana_parool"])){
 		 $old_password_error = "See väli on kohustuslik";
@@ -25,10 +25,10 @@
 	 }
 	 if($new_password == $new2_password){
 		 $new_hash = hash("sha512", $new_password);
-		 updateUser($new_hash);
+		 $user->updateUser($new_hash);
 	 }
  }
- 
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,7 +41,7 @@
 	<input name="uus_parool_uuesti" type="password" placeholder="Uus parool uuesti" value="<?php echo $new2_password; ?>"> <?php echo $new2_password_error; ?> <br><br>
 	<input type="submit" name="new_pw" value="Kinnita">
 	</form>
-	
+
 </body>
 </html>
 
