@@ -56,6 +56,7 @@
 			</div>
 			
 
+
 <br><br>
 
 			<div class="historyinfo">
@@ -69,6 +70,12 @@
 					</tr>
 			</div>	
 		
+
+
+<table border= 1>
+	<tr>
+		<th>Game name</th>
+		<th>Playing time</th>
 
 		
 	
