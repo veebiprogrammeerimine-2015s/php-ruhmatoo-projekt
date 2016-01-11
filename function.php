@@ -51,12 +51,12 @@
 	}
 	
 	
-	function createPost($post_name, $post_done){
+	function createPost($post_name, $id_from_db){
 		// globals on muutuja kõigist php failidest mis on ühendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO post_tech (post_name, post_done, post_user_id, post_administrator_id) VALUES (?, ?, ?, ?)");
-		$stmt->bind_param("ssii", $post_name, $post_done, $post_user_id, $post_administrator_id);
+		$stmt = $mysqli->prepare("INSERT INTO post_tech (name, post_user_id) VALUES (?, ?)");
+		$stmt->bind_param("si", $post_name, $if_from_db);
 	
 		$msg = "";
 		
@@ -74,43 +74,6 @@
 		return $msg;
 		
 	}
-	
-	
-	
-		//function loginPost($post_name, $post_user_id, $post_administrator_id){
-		
-		//$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		
-		//$stmt = $mysqli->prepare("SELECT  post_id, post_name, post_user_id, post_administrator_id FROM post_tech WHERE post_name=? AND post_user_id=?");
-		//$stmt->bind_param("sii", $post_name, $post_user_id, $post_administrator_id);
-		//$stmt->bind_result($post_id_from_db, $post_name_from_db, $post_user_id_from_db, $post_administrator_id_from_db);
-		//$stmt->execute();
-		
-		//if($stmt->fetch()){
-			//echo "post id=".$post_id_from_db;
-			//echo "kasutaja id=".$post_user_id_from_db;
-			//echo "administrator id=".$post_administrator_id_from_db;
-			
-			//$_SESSION["post_id_from_db"] = $post_id_from_db;
-			//$_SESSION["post_name"] = $post_name_from_db;
-			//$_SESSION["post_user"] = $post_user_from_db;
-			//$_SESSION["post_administrator"] = $post_administrator_from_db;
-
-			
-			//suunan kasutaja data.php lehele
-			//header("Location: data.php");
-			
-			
-		//}else{
-			//echo "Wrong password or email!";
-		//}
-		//$stmt->close();
-		
-		//$mysqli->close();
-	//}
-	
-	
-	
 	
 	function createProduct($product_name, $product_year, $product_problem){
 		// globals on muutuja kõigist php failidest mis on ühendatud
