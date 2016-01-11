@@ -125,7 +125,7 @@ $movie_category = "";
 				echo "<td>".$array_of_results[$i]->category."</td>";
 				echo "<td>".$array_of_results[$i]->year."</td>";
 				echo "<td>".$array_of_results[$i]->director."</td>";
-				echo "<td>".$array_of_results[$i]->link."</td>";
+				echo "<td><a href=".$array_of_results[$i]->link.">Link</a></td>";
 				echo "</tr>";
 		}
 	}

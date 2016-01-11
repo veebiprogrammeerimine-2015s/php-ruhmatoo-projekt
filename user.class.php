@@ -142,11 +142,12 @@ class User {
 
 			while($stmt->fetch()){
 				/////////////////////Probleem peitub kuskil siin/////////////////////////////////////
-					var_dump($id);
-					$stmt2= $mysqli->prepare("SELECT link FROM VL_Links WHERE VL_Movies_id=?");
+					$sql = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+					$stmt2= $sql->prepare("SELECT link FROM VL_Links WHERE VL_Movies_id=?");
 					$stmt2->bind_param("i", $id);
 					$stmt2->bind_result($link);
 					$stmt2->execute();
+					$stmt2->fetch();
 				/////////////////////////////////////////////////////////////////////////////////////
 
 					$result = new StdClass();
