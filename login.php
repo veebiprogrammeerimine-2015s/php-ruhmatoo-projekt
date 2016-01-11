@@ -27,10 +27,12 @@
 
 
 <?php
+
+	require_once("functions.php");
 	
-	// LOGIN.PHP
-	
-	//require_once("functions.php");//
+		if(isset($_SESSION["logged_in_user_id"])){
+		header("Location: dataWorker.php");
+	}
 
 	$login_email = "";
 	$email_error = "";
