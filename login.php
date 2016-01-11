@@ -27,82 +27,95 @@
 
 
 <?php
-
 	require_once("functions.php");
 	
-		if(isset($_SESSION["logged_in_user_id"])){
-		header("Location: dataWorker.php");
+	if(isset($_SESSION["logged_in_user_id"])){
+		header("Location: data.php");
 	}
-
+	
 	$login_email = "";
 	$email_error = "";
 	
 	$login_password = "";
 	$password_error = "";
 	
-	$firstname = "";
-	$lastname = "";
-	$firstname_error = "";
-	$lastname_error = "";
-	
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
-		
-		if(isset($_POST["login"])){ 
 
-			if ( empty($_POST["email1"]) ) {
-				$email_error = "See vali on kohustuslik";
+		if(isset($_POST["login"])){
+
+			if ( empty($_POST["email"]) ) {
+				$email_error = "See väli on kohustuslik";
 			}else{
-				$login_email = test_input($_POST["email1"]);
+
+				$email = cleanInput($_POST["email"]);
 			}
-			
-			if ( empty($_POST["password1"]) ) {
-				$password_error = "See vali on kohustuslik";
+			if ( empty($_POST["password"]) ) {
+				$password_error = "See väli on kohustuslik";
 			}else{
+				$password = cleanInput($_POST["password"]);
+			}
+
+			if($password_error == "" && $email_error == ""){
+
+				echo "Võib sisse logida! Kasutajanimi on ".$email." ja parool on ".$password;
+			
+				$hash = hash("sha512", $password);
 				
-				if(strlen($_POST["password1"]) < 8) { 
+
 				
-					$password_error = "Peab olema vahemalt 8 tahemarki pikk!";
+				$login_response = $User->loginUser($email, $hash);
+				
+
+				
+				if(isset($login_response->success)){
 					
-				}else{
-					$login_password = test_input($_POST["password1"]);
+
+					$_SESSION["logged_in_user_id"] = $login_response->user->id;
+					$_SESSION["logged_in_user_email"] = $login_response->user->email;
+
+					
+
+					$_SESSION["login_success_message"] = $login_response->success->message;
+					
+					/*header("Location: data.php");*/
+					
+					
 				}
 				
-			}
-			
-			if($email_error == "" && $password_error ==""){
 				
-				echo "kontrollin sisselogimist ".$login_email." ja parool ";
-			}
-		
-		
-			if($password_error == "" && $email_error == ""){
-				echo "Voib sisse logida! Kasutajanimi on ".$login_email." ja parool on ".$login_password;
-				
-				$hash = hash("sha512", $login_password);
-				
-				echo $hash;
-				
-				loginUser($login_email, $hash);
 			}
 		}
-		
-		
-		
 	}
+
+  function cleanInput($data) {
+  	$data = trim($data);
+  	$data = stripslashes($data);
+  	$data = htmlspecialchars($data);
+  	return $data;
+  }
 	
-	function test_input($data) {
-		 $data = trim($data);
-		 $data = stripslashes($data);
-		 $data = htmlspecialchars($data);
-		 return $data;
-	}
+	
 	
 ?>
-	<h2>Log in</h2>
-	
-		<form action="login.php" method="post" >
-			<input name="email1" type="email" placeholder="Email"> <?php echo $email_error; ?><br><br>
-			<input name="password1" type="password" placeholder="Password"> <?php echo $password_error; ?><br><br>
-			<input name="login" type="submit" value="Log in">
-		</form>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+</head>
+<body>
+
+  <h2>Log in</h2>
+  
+  <?php if(isset($login_response->error)): ?>
+	<p style="color:red;"> <?=$login_response->error->message;?> </p>
+  <?php elseif(isset($login_response->success)): ?>
+	<p style="color:green;"> <?=$login_response->success->message;?> </p>
+  <?php endif; ?>
+  
+  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+  	<input name="email" type="email" placeholder="E-post" value="<?php echo $email; ?>"> <?php echo $email_error; ?><br><br>
+  	<input name="password" type="password" placeholder="Parool" value="<?php echo $password; ?>"> <?php echo $password_error; ?><br><br>
+  	<input type="submit" name="login" value="Log in">
+  </form>
+  
 <?php require_once("footer.php"); ?>
