@@ -1,5 +1,5 @@
 <?php require_once ("header.php"); ?>
-
+<br><br>
 
 <?php
     // kõik mis seotud andmetabeliga, lisamine ja tabeli kujul esitamine
@@ -133,26 +133,31 @@
 
 
     
+    <div class="container-fluid">
+        <div class="row"  id="body">
+            <div class="col-sm-offset-1 col-sm-6">
+				<h1>Kasside tabel</h1>
+				<form action="otsivad.php" method="get">
+					<input name="keyword" type="search" value="<?=$keyword?>" >
+					<input type="submit" value="otsi"> 
+				</form>
 
-<h1>Kasside tabel</h1>
-<form action="otsivad.php" method="get">
-	<input name="keyword" type="search" value="<?=$keyword?>" >
-	<input type="submit" value="otsi"> 
-</form>
+				<br>
+				<table border=1>
+				<tr>
 
-<br>
-<table border=1>
-<tr>
+					<th>Nimi</th>
+					<th>Vanus</th>
+					<th>Sugu</th>
+					<th>Kirjeldus</th>
+					<th>Kodu leidnud?</th>
+					<th>Edit</th>
+					<th>Delete</th>
 
-	<th>Nimi</th>
-	<th>Vanus</th>
-	<th>Sugu</th>
-	<th>Kirjeldus</th>
-	<th>Kodu leidnud?</th>
-	<th>Edit</th>
-	<th>Delete</th>
-
-</tr>
+				</tr>
+			</div>
+		</div>
+	</div>
 
 <?php 
 	
@@ -192,32 +197,38 @@
 	}
 
 ?>
-
 </table>
 
-<h1> Lisa uus kass</h1>
+<br><br><br><br>
+    <div class="container-fluid">
+        <div class="row"  id="body">
+            <div class="col-sm-offset-1 col-sm-6">
+				<h1> Lisa uus kass</h1>
 
-  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  
-	<label for="name"> name </label>
-  	<input id="name" name="name" type="text" value="<?=$name; ?>"> <?=$name_error; ?><br><br>
-	
-	<label for="gender"> gender </label>
-  	<input id="gender" name="gender" type="text" value="<?=$gender; ?>"> <?=$gender_error; ?><br><br>
-	
-	<label for="age"> age </label>
-  	<input id="age" name="age" type="int" value="<?=$age; ?>"> <?=$age_error; ?><br><br>
-	
-	<label for="description"> description </label>
-  	<input id="description" name="description" type="text" value="<?=$description; ?>"> <?=$description_error; ?><br><br>
-	
-	<label for="home_status"> home_status? </label>
-  	<input id="home_status" name="home_status" type="text" value="<?=$home_status; ?>"> <?=$home_status_error; ?><br><br>
-	
-	
-  	<input type="submit" name="add_cat" value="Lisa">
-	<p style="color:green;"><?=$m;?></p>
-	
-  </form>  
-  
-  <?php require_once ("footer.php"); ?>
+				  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+				  
+					<label for="name"> name </label>
+					<input id="name" name="name" type="text" value="<?=$name; ?>"> <?=$name_error; ?><br><br>
+					
+					<label for="gender"> gender </label>
+					<input id="gender" name="gender" type="text" value="<?=$gender; ?>"> <?=$gender_error; ?><br><br>
+					
+					<label for="age"> age </label>
+					<input id="age" name="age" type="int" value="<?=$age; ?>"> <?=$age_error; ?><br><br>
+					
+					<label for="description"> description </label>
+					<input id="description" name="description" type="text" value="<?=$description; ?>"> <?=$description_error; ?><br><br>
+					
+					<label for="home_status"> home_status? </label>
+					<input id="home_status" name="home_status" type="text" value="<?=$home_status; ?>"> <?=$home_status_error; ?><br><br>
+					
+					
+					<input type="submit" name="add_cat" value="Lisa">
+					<p style="color:green;"><?=$m;?></p>
+					
+				  </form>  
+			</div>
+		</div>
+	</div>
+
+<?php require_once ("footer.php"); ?>

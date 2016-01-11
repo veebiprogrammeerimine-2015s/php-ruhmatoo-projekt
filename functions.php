@@ -6,7 +6,6 @@
     //paneme sessiooni serveris tööle, saaame kasutada SESSION[]
     session_start();
     
-    
     function logInUser($email, $hash){
         
         // GLOBALS saab kätte kõik muutujad mis kasutusel
@@ -38,11 +37,47 @@
     
     
     function createUser($create_email, $hash){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+                
+        $response = new StdClass();
         
-        $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+        $stmt = $mysqli->prepare("SELECT id FROM user_sample WHERE email = ?");
+        $stmt->bind_param("s", $create_email);
+        $stmt->bind_result($id);
+        $stmt->execute();
+        
+        if($stmt->fetch()){
+            
+            // email on juba olemas
+            $error = new StdClass();
+            $error->id = 0;
+            $error->message = "Email on juba kasutusel";
+            
+            $response->error = $error;
+            
+            return $response;
+            
+        }
+		
+
         $stmt = $mysqli->prepare("INSERT INTO user_sample (email, password) VALUES (?,?)");
         $stmt->bind_param("ss", $create_email, $hash);
-        $stmt->execute();
+        if($stmt->execute()){
+		    // sisestamine õnnestus
+            $success = new StdClass();
+            $success->message = "Kasutaja edukalt loodud";
+            
+            $response->success = $success;
+            
+        }else{
+            //ei õnnestunud
+            $error = new StdClass();
+            $error->id = 1;
+            $error->message = "Midagi läks katki";
+            
+            $response->error = $error;
+        }
         $stmt->close();
         
         $mysqli->close();
@@ -260,6 +295,5 @@
 		$mysqli->close();
 		
 	}
-    
     
  ?>
