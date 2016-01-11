@@ -59,10 +59,10 @@ INSERT INTO `employee` (`id`, `name`, `profession`, `store_id`) VALUES
 (4, 'Karl Kont', 'Müüja', 3),
 (5, 'Sirli Kaalep', 'Müüja', 4),
 (6, 'Rauno Reep', 'Koristaja', 4),
-(7, 'Ülle Puravik', 'Müüja', 2),
-(8, 'Raido Remmelg', 'Müüja', 2),
-(9, 'Guido Vedru', 'Koristaja', 2),
-(10, 'Eero Palmits', 'Lapilükkaja', 2);
+(7, 'Ülle Puravik', 'Müüja', 1),
+(8, 'Raido Remmelg', 'Müüja', 1),
+(9, 'Guido Vedru', 'Koristaja', 1),
+(10, 'Eero Palmits', 'Lapilükkaja', 1);
 
 -- --------------------------------------------------------
 
