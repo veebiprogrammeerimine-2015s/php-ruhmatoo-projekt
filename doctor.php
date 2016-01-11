@@ -154,8 +154,8 @@
 	</p>
 	</form>
 	<label for="d_animal_name" >Looma nimi</label>
-	<form>
-	<<?=$dropdown->createDropdown();?>id="d_animal_name" name="d_animal_name" type="text" value="<?php echo $d_animal_name; ?>"> <?php echo $d_animal_name_error; ?>
+	<form id="d_animal_name" name="d_animal_name" type="text" value="<?php echo $d_animal_name; ?>"> <?php echo $d_animal_name_error; ?>
+	<?=$dropdown->createDropdown();?>
 	</form>
 	<a class="waves-effect waves-light btn" type="submit" name="register">Salvesta</a>
 </div>

@@ -143,7 +143,6 @@
 <html>
 <head>
   <title>HELENI LOOMAKLIINIK</title>
-  <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
  <link rel="stylesheet" href="materialize.min.css">
@@ -179,12 +178,14 @@
   	<div class="row">
 	<div class="input-field col s4">
 		<label for="password">Parool</label>
-  		<input name="password" type="password"value="<?php echo $password; ?>"> <?php echo $password_error; ?><br><br>
+  		<input name="password" type="password" value="<?php echo $password; ?>"> <?php echo $password_error; ?><br><br>
   	</div>
   	</div>
-  		<a class="waves-effect waves-light btn" type="login" name="login">Logi sisse</a>
-  	</div>
+	<div class="waves-effect waves-light btn">
+  		<input type="submit" name="login" value="Logi sisse">
+	</div>
   </form>
+ </div>
 </div>
 
   
@@ -215,10 +216,12 @@
   	<div class="row">
 	<div class="input-field col s4">
 	<label for="password">Parool</label>
-  	<input name="create_password" type="password"> <?php echo $create_password_error; ?> <br><br>
+  	<input name="create_password" type="password" value="<?php echo $create_password; ?>"> <?php echo $create_password_error; ?> <br><br>
   	</div>
  	</div>
-  	<a class="waves-effect waves-light btn" type="register" name="register">Loo kasutaja</a>
+	<div class="waves-effect waves-light btn" >
+		<input type="submit" name="create" value="Loo kasutaja">
+	</div>
   </div>
   </form>
    </div>

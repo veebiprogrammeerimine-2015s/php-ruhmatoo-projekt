@@ -81,11 +81,11 @@
 <div class="owner_register">
 <div class="row">
 <h2>Registreerimine</h2>
-<form class="col s12" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+<form class="col s12" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 	<div class="row">
 	<div class="input-field col s4">
-			<label for="owner_name">Omaniku nimi</label>
-			<input id="owner_name" type="text" class="validate" value="<?php echo $owner_name; ?>"> <?php echo $owner_name_error; ?><br><br>
+		<label for="owner_name">Omaniku nimi</label>
+		<input id="owner_name" name="owner_name" type="text" class="validate" value="<?php echo $owner_name; ?>"> <?php echo $owner_name_error; ?><br><br>
 	</div>
 	</div>
 	<div class="row">
@@ -103,7 +103,7 @@
 	<div class="row">
 	<div class="input-field col s4">
 		<label for="date" class="">Kuupäev</label>
-		<input type="date" class="datepicker" value="<?php echo $date; ?>"> <?php echo $date_error; ?><br><br>
+		<input id="date" name="date" type="date" class="datepicker" value="<?php echo $date; ?>"> <?php echo $date_error; ?><br><br>
 	</div>
 	</div>
 	<div class="row">
@@ -112,12 +112,17 @@
 	<textarea id="problem"  class="materialize-textarea" name="problem" col=40 rows=8 value="<?php echo $problem; ?>"> <?php echo $problem_error; ?> </textarea>
 	</div>
 	</div>
-	<a class="waves-effect waves-light btn" type="submit" name="register">Salvesta</a>
+	<div class="waves-effect waves-light btn">
+		<input type="submit" name="register" value="Salvesta">
+	</div>
 </div>
 </form>
 </div>
-</div>
-</div>
+
+<form class="waves-effect waves-light btn" action="feedback.php" method="post" >
+	<input type="submit" name="tagasiside" value="Tagasiside">
+</form>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="materialize.min.js"></script>
 
