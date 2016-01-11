@@ -151,9 +151,10 @@
 					<th>Sugu</th>
 					<th>Kirjeldus</th>
 					<th>Kodu leidnud?</th>
-					<th>Edit</th>
-					<th>Delete</th>
-
+					<? if(isset($access_level) == 2){ ?>
+						<th>Edit</th>
+						<th>Delete</th>
+					<? } ?>
 				</tr>
 			</div>
 		</div>
@@ -190,8 +191,10 @@
 			echo "<td>".$cat_array[$i]->gender."</td>";
 			echo "<td>".$cat_array[$i]->description."</td>";
 			echo "<td>".$cat_array[$i]->home_status."</td>";
+		if(isset($access_level) == 2){
 			echo "<td><a href='?edit=".$cat_array[$i]->id."'>Edit</a></td>";
 			echo "<td><a href='?delete=".$cat_array[$i]->id."'>X</a></td>";
+		}
 			echo "</tr>";
 		}
 	}
