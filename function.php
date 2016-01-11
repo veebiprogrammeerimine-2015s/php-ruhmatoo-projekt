@@ -160,7 +160,7 @@
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
 		$stmt = $mysqli->prepare("SELECT post_id,name,user_id FROM post_tech WHERE deleted IS NULL");
-		$stmt->bind_result($post_id, $post_tech, $id_from_db);
+		$stmt->bind_result($post_id, $name, $user_id);
 		$stmt->execute();
 
 		
@@ -172,13 +172,13 @@
 		while($stmt->fetch()){
 			
 			// loon objekti iga while tsükli kord
-			$car = new StdClass();
-			$car->id = $post_id;
-			$car->number_plate = $name;
-			$car->user_id = $user_id;
+			$posts = new StdClass();
+			$posts->id = $post_id;
+			$posts->number_plate = $name;
+			$posts->user_id = $user_id;
 			
 			// lisame selle massiivi
-			array_push($array, $car);
+			array_push($array, $posts);
 			//echo "<pre>";
 			//var_dump($array);
 			//echo "</pre>";
