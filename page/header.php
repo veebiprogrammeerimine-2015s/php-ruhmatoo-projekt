@@ -46,7 +46,8 @@
 		</ul>
 	</div>
 	</div>
-	</nav><br><br><br>
+	</nav>
+	<br><br><br><br><br>
 
 <?php
 	if(!isSet($_SESSION["logged_in_user_id"])){

@@ -9,7 +9,7 @@
 		<title>No Plagiarism</title>
 		<script type="text/javascript" src="functions.js"></script>
 	</head>
-	<body>
+	<body><br>
 	<?php
 		require_once ("menu.php");
 	?>

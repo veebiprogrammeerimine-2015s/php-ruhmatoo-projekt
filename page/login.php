@@ -72,9 +72,16 @@
 		</p>
 		<?php endif; ?>
 		
-		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-			<input name="email" type="email" placeholder="E-post" value ="<?php echo $email; ?>">* <?php echo $email_error; ?> <br><br>
-			<input name="password" type="password" placeholder="Parool">* <?php echo $password_error; ?> <br><br>
-			<input name="login" type="submit" value="Logi sisse">
-		</form>
+		<class="span12">
+			<div style="padding:0 35px">
+				<div class="row-fluid">
+					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+						<input name="email" type="email" placeholder="E-post" value ="<?php echo $email; ?>">* <?php echo $email_error; ?> <br><br>
+						<input name="password" type="password" placeholder="Parool">* <?php echo $password_error; ?> <br><br>
+						<input name="login" type="submit" value="Logi sisse">
+					</form>
+				</div>
+			</div>
+		</div>
+
 <?php require_once("../footer.php"); ?>

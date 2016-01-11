@@ -126,21 +126,28 @@
 				<?=$create_response->success->message;?>
 			</p>
 		<?php endif; ?>
-		
-		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-			<select id="user_group" name="user_group" onchange="showInput()">
-				<option value="">[ Kasutaja ]</option>
-				<option value="2"<?=$user_group == "2" ? "selected='selected'" : ""?>>Ajakirjanik</option>
-				<option value="3"<?=$user_group == "3" ? "selected='selected'" : ""?>>Ettevõte</option>
-			</select>* <?php echo $user_group_error;?><br><br>
-			<input name="create_user_email" type="email" placeholder="E-post" value="<?php echo $create_user_email; ?>">* <?php echo $create_user_email_error; ?> <br><br>
-			<input name="create_user_password" type="password" placeholder="Parool">* <?php echo $create_user_password_error; ?> <br><br>	
-			<input name="first_name" type="text" placeholder="Eesnimi" value="<?php echo $first_name; ?>">* <?php echo $first_name_error; ?> <br><br>
-			<input name="last_name" type="text" placeholder="Perekonnanimi" value="<?php echo $last_name; ?>">* <?php echo $last_name_error; ?> <br><br>
-			<div id="company_info" style="display:none;">
-				<input name="company_name" type="text" placeholder="Ettevõtte nimi" value="<?php echo $company_name; ?>">* <?php echo $company_name_error; ?> <br><br>
-				<input name="company_description" type="text" placeholder="Ettevõtte kirjeldus" value="<?php echo $company_description; ?>">* <?php echo $company_description_error; ?> <br><br>
+
+		<class="span12">
+			<div style="padding:0 35px">
+				<div class="row-fluid">
+					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+						<select id="user_group" name="user_group" onchange="showInput()">
+							<option value="">[ Kasutaja ]</option>
+							<option value="2"<?=$user_group == "2" ? "selected='selected'" : ""?>>Ajakirjanik</option>
+							<option value="3"<?=$user_group == "3" ? "selected='selected'" : ""?>>Ettevõte</option>
+						</select>* <?php echo $user_group_error;?><br><br>
+						<input name="create_user_email" type="email" placeholder="E-post" value="<?php echo $create_user_email; ?>">* <?php echo $create_user_email_error; ?> <br><br>
+						<input name="create_user_password" type="password" placeholder="Parool">* <?php echo $create_user_password_error; ?> <br><br>	
+						<input name="first_name" type="text" placeholder="Eesnimi" value="<?php echo $first_name; ?>">* <?php echo $first_name_error; ?> <br><br>
+						<input name="last_name" type="text" placeholder="Perekonnanimi" value="<?php echo $last_name; ?>">* <?php echo $last_name_error; ?> <br><br>
+						<div id="company_info" style="display:none;">
+							<input name="company_name" type="text" placeholder="Ettevõtte nimi" value="<?php echo $company_name; ?>">* <?php echo $company_name_error; ?> <br><br>
+							<input name="company_description" type="text" placeholder="Ettevõtte kirjeldus" value="<?php echo $company_description; ?>">* <?php echo $company_description_error; ?> <br><br>
+						</div>
+						<input name ="create_user" type="submit" value="Loo kasutaja">
+					</form>
+				</div>
 			</div>
-			<input name ="create_user" type="submit" value="Loo kasutaja">
-		</form>
+		</div>
+
 <?php require_once("../footer.php"); ?>
