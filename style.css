@@ -1,39 +1,17 @@
-h1
+h2
 {
-	color: #FF4500;
-	text-align: center;
-	font-family: Verdana;
-	font-size: 2.5em;
+	padding-left:20px;
 }
 
-p
+form
 {
-	text-indent: 20px;
-	line-height: 150%;
-	color: black;
-	font-family: Verdana;
-	font-size: 14px;
-	font-style: normal;
+	padding-left:20px;
 }
 
-table
+footer
 {
-    border-collapse: collapse;
-}
-
-th
-{
-	background-color: #FF4500;
+	background-color: black;
 	color: white;
-}
-
-th, td
-{
-	padding: 15px;
-	text-align: left;
-}
-
-table, th, td
-{
-   border: 1px solid black;
+	text-align: center;
+	padding-left: 20px;
 }

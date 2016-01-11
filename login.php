@@ -1,5 +1,6 @@
 <?php require_once("header.php"); ?>
 
+
 	<!-- ###################### -->
 	<!-- ####### MENUU ######## -->
 	<!-- ###################### -->
@@ -14,24 +15,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Eesti post</a>
+      <a class="navbar-brand" href="http://localhost:5555/~rusljeg/php-ruhmatoo-projekt/tiitelleht.html">Eesti post</a>
     </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">.<span class="sr-only">(current)</span></a></li>
-        <li><a href="#">.</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
 </nav>
 	
-<br><br><br><br><br><br>
+<br><br><br>
+
 
 	
 
-<?php require_once("footer.php"); ?>
 
 
 <?php
@@ -174,11 +166,6 @@
 	}
 	
 ?>
-<html>
-<head>
-	<title>Login page</title>
-</head>
-<body>
 	<h2>Log in</h2>
 	
 		<form action="login.php" method="post" >
@@ -191,49 +178,10 @@
 		<form action="login.php" method="post" >
 			<input name="firstname" type="name" placeholder="First name"> <?php echo $firstname_error; ?>*<br><br>
 			<input name="lastname" type="name" placeholder="Last name"> <?php echo $lastname_error; ?>*<br><br>
-			<?php
-			
-			echo "<select name='sel_date'>";
-			$i = 1;
-			while ($i <= 31) {
-				echo "<option value='" . $i . "'>$i</option>";
-				$i++;
-			}
-			echo "</select>";
-			
-			echo "<select name='sel_month'>";
-			$month = array(
-				"Jan",
-				"Feb",
-				"Mar",
-				"Apr",
-				"May",
-				"Jun",
-				"Jul",
-				"Aug",
-				"Sep",
-				"Oct",
-				"Nov",
-				"Dec"
-			);
-			foreach ($month as $m) {
-				echo "<option value='" . $m . "'>$m</option>";
-			}
-			echo "</select>";
-			
-			echo "<select name='sel_year'>";
-			$j = 1920;
-			while ($j <= 2015) {
-				echo "<option value='" . $j . "'>$j</option>";
-				$j++;
-			}
-			echo "</select>";
-			?><br><br>
 			<input name="create_email" type="email" placeholder="Email"> <?php echo $create_email_error; ?>*<br><br>
 			<input name="create_email_confirm" type="email" placeholder="Re-enter email"> <?php echo $create_email_confirm_error; ?>*<br><br>
 			<input name="create_password" type="password" placeholder="Password"> <?php echo $create_password_error; ?>*<br><br>
 			<input name="create_password_confirm" type="password" placeholder="Password"> <?php echo $create_password_confirm_error; ?>*<br><br>
 			<input name="create" type="submit" value="Create">
 		</form>
-</body>
-</html>
+<?php require_once("footer.php"); ?>
