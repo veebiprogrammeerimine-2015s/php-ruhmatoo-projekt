@@ -2,7 +2,7 @@
 <footer>
 	<p>Kontakt</p>
 	<p>E-post: name@gmail.com<p>
-	<p>Tel. number<p>
+	<p>Tel. number: +372 5348 7792<p>
 </footer>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

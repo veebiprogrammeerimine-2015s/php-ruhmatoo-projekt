@@ -10,8 +10,11 @@ form
 
 footer
 {
-	background-color: black;
+	background-color: rgb(40,40,40);
 	color: white;
 	text-align: center;
 	padding-left: 20px;
+	position: absolute;
+	width: 100%;
+	bottom: 0px;
 }
