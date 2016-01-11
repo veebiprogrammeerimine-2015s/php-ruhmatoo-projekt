@@ -69,7 +69,6 @@ Siin sa võid lisada sinu post, kus sa võiks kirjeldada oma probleem!<br><br>
 		return $data;
 	  }
 	
-	
 ?>
 
 
