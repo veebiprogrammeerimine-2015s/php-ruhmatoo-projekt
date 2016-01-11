@@ -1,4 +1,3 @@
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -20,7 +19,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `client` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) NOT NULL,
+  `name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
@@ -42,8 +41,8 @@ INSERT INTO `client` (`id`, `name`) VALUES
 
 CREATE TABLE IF NOT EXISTS `employee` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) NOT NULL,
-  `profession` varchar(256) NOT NULL,
+  `name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `profession` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `store_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
@@ -104,9 +103,9 @@ INSERT INTO `invoice` (`id`, `client_id`, `product_id`, `timestamp`) VALUES
 
 CREATE TABLE IF NOT EXISTS `owner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) NOT NULL,
-  `username` varchar(128) NOT NULL,
-  `password` varchar(128) NOT NULL,
+  `name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `username` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `password` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
@@ -129,7 +128,7 @@ INSERT INTO `owner` (`id`, `name`, `username`, `password`) VALUES
 CREATE TABLE IF NOT EXISTS `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` int(11) NOT NULL,
-  `name` varchar(256) NOT NULL,
+  `name` varchar(256) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `price` float NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
@@ -160,7 +159,7 @@ INSERT INTO `product` (`id`, `store_id`, `name`, `price`) VALUES
 
 CREATE TABLE IF NOT EXISTS `store` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) NOT NULL,
+  `name` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `owner_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
