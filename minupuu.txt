@@ -1,10 +1,26 @@
 .
 ├── discgolf_mysql_schema.mwb
-├── hkarilaid.php
-├── jarmhab.php
-├── koidu.php
+├── footer.php
+├── functions.php
+├── header.php
 ├── minupuu.txt
-├── README.md
-└── sizenn.php
+├── pages
+│   ├── discgolf.jpg
+│   ├── insert_pars.php
+│   ├── login.php
+│   ├── main.php
+│   ├── new_game_0.php
+│   ├── new_game_1.php
+│   ├── new_game_final.php
+│   ├── pars.php
+│   ├── php.grupitoo.mwb
+│   ├── results.php
+│   ├── score.php
+│   ├── table.php
+│   ├── user.class.php
+│   └── yldine.css
+├── php.grupitoo.mwb
+└── README.md
 
-0 directories, 7 files
+1 directory, 21 files
+
