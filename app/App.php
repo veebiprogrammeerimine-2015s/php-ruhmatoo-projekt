@@ -13,8 +13,8 @@ class App {
      *
      * @param $input
      */
-    public function run($input) {
-        $page = isset($input['page']);
+    function run($input) {
+        $page = isset($input['page']) ? $input['page'] : 'index';
         if (in_array($page, ['login', 'logout', 'index', 'shops'])) {
             echo $this->loadPage($page, $input);
         } else {
@@ -28,16 +28,20 @@ class App {
      *
      * @param $page
      */
-    public function loadPage($page, $input) {
-        ob_start();
+    function loadPage($page, $input) {
         $dir = __DIR__ . '/View/';
         $file = $dir . str_replace(['..', '/', '\\'], '', $page) . '.php';
+        $output = null;
         //Eemaldame punktid ja kaldkriipsud sest, et neid ei saa nimes olla.
         if (file_exists($file)) {
+            ob_start();
             //Teeme muutujad kättesaadavaks vaatele
             extract($input);
             include($file);
+            $output = ob_get_contents();
+            ob_end_clean();
         }
-        return ob_get_clean();
+
+        return $output;
     }
 }
