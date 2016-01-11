@@ -8,6 +8,14 @@ namespace App;
  * See on põhiline klass mis kõiki asju jooksutab
  */
 class App {
+
+    public $mysqlUser = 'root';
+    public $mysqlPassword = '';
+    public $mysqlDatabase = 'kaubamaja';
+    public $mysqlHost = 'localhost';
+
+
+
     /**
      * $_REQUEST parameetrid peaks minema $input sisse käivitamisel
      *
