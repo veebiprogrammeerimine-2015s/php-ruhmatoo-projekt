@@ -1,10 +1,11 @@
 <html lang="en">
-<?php 
+<?php
+$keyword = "";
 $movie_category = "";
-if(isset($_GET["logout"])){		
-		
+if(isset($_GET["logout"])){
+
 	//session_destroy();
-		
+
 	header("Location: login.php");
 }
 ?>
@@ -81,9 +82,9 @@ if(isset($_GET["logout"])){
           </ul>
         </li>
       </ul>
-      <form class="navbar-form navbar-right" role="search">
+      <form class="navbar-form navbar-right" role="search" method="get">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Otsi">
+          <input type="search" name="keyword" value="<?=$keyword;?>" class="form-control" placeholder="Otsi">
         </div>
         <button type="submit" class="btn btn-default">Otsi</button>
       </form>

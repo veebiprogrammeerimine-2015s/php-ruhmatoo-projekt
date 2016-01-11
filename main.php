@@ -40,10 +40,6 @@
 <html>
 <body>
 
-		<form action="main.php" method="get" >
-			<input type="search" name="keyword" value="<?=$keyword;?>" >
-			<input type="submit" value="Search">
-		</form>
 	<table border="1"></td>
 		<tr>
 			<!--<th>id</th>-->
