@@ -47,12 +47,7 @@
 		  </div><!-- /.container-fluid -->
 		</nav>
 				
-		<br><br><br>
-		<div class="logininfo">
-			<h5>
-				Hi, <?=$_SESSION["user_email"];?>
-			</h5>
-		</div>
 		<br><br>
+		
   </body>
 </html>
