@@ -14,10 +14,12 @@
 	$packet_id_error = "";
 	$nonexist_packet_id = "";
 	
-	$getvar = key($_GET);
-	$getvar1 = key($_POST);
+	//$getvar = key($_GET);
+	//$getvar1 = key($_POST);
 	
-	if(isset($_GET["submit"])){
+	
+	
+	/*if(isset($_GET["submit"])){
 		if($_POST["$packet_id"] != $_POST["$packet_id_from_db"]){
 			$nonexistant_packet_id = "Sellist numbrikoodiga saadetist meil ei ole. Palun proovi uuesti";
 		}
@@ -34,7 +36,9 @@
 			//if ($_POST["$packet_id= $packet_array->id"] != $_POST["$packet_id_from_db"]) {
 			//$nonexist_packet_id = "Sellise numbrikoodiga saadetist meie andmebaasis ei ole. Palun proovi uuesti";
 			//	echo $nonexist_packet_id;
-	}		
+		
+
+	
 	$keyword ="";
 
 	if(isset($_GET["keyword"])){
@@ -50,7 +54,7 @@
 	if(isset($_GET["submit"])){
 		
 		if(empty($_GET["keyword"])){
-			$packet_id_error = "Palun sisestage paki kood.";
+			$packet_id_error = "Palun sisestage paki kood!";
 		}
 		
 	}

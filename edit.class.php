@@ -35,17 +35,33 @@
 			
 		}
 		
-		/*function updatePacket($packet_id, $arrival, $departure, $fromc, $comment, $office_id){
-			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		function updatePacket($office, $arrival, $departure, $fromc, $comment, $office_id, $packet_id){
 			
-			$stmt = $mysqli->prepare("UPDATE post_import SET arrival=?, departure=?, fromc=?, comment=?, ofice_id=?");
-			$stmt->bind_param("issssi", $packet_id, $arrival, $departure, $fromc, $comment, $office_id);
-			if($stmt->execute()){
+			$offices = array("peakontor", "kopli", "kristiine", "lasna", "mustamae", "nomme", "oismae", "pirita");
+		
+			if (!in_array($office, $offices)) {
+				die("Ära üritagi häkkida");
+			}
+			
+			if($office == "peakontor"){
+				
+				$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+				$stmt = $mysqli->prepare("UPDATE post_import SET arrival=?, departure=?, fromc=?, comment=?, office_id=? WHERE packet_id = ? AND deleted IS NULL");
+				$stmt->bind_param("iissii", $arrival, $departure, $fromc, $comment, $office_id, $packet_id);
+				$stmt->execute();
+				$stmt->close();
+			
+			}else{
+				
+				$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+				$stmt = $mysqli->prepare("UPDATE ".$office." SET arrival=?, departure=?, comment=? WHERE packet_id = ? AND deleted IS NULL");
+				$stmt->bind_param("iisi", $arrival, $departure, $comment, $packet_id);
+				$stmt->execute();
+				$stmt->close();
 				
 			}
-			$stmt->close();
 			
-		}*/
+		}
 		
 	}
 ?>

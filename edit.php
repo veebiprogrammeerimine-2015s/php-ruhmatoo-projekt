@@ -8,36 +8,19 @@
 	//}
 	$Edit = new Edit($mysqli);
 	
+	$office = $_GET["office"];
 	$packet_id = $_GET["edit_id"];
 	$packet_array = $Edit->getPacketData($packet_id);
-	/*if(isset($_POST["update_packet"])){
-		//aga id varjatud väljast
-		updatePacket($_POST["id"], $_POST["arrival"], $_POST["departure"], $_POST["fromc"], $_POST["comment"], $_POST["office_id"]);
-	}*/
 	
-	/*if(isset($_GET["edit_id"])){
-		echo $_GET["edit_id"];
-		
-		//id oli aadressireal
-		//tahaks ühte rida kõige uuemaid andmeid, kus id on $_GET["edit_id"]
-		
-		$packet_array = getPacketData($_GET["edit_id"]);
-		var_dump($packet_array);
-		
-	}else{
-		//ei olnud aadressireal
-		echo "VIGA";
-		header("Location:");
-		
-	}*/
-	/*var_dump($packet_array);
-	$arrival = $packet_array[0]->arrival;
-	echo $arrival;*/
+	if(isset($_POST["update_packet"])){
+		$Edit->updatePacket($office, $_POST["arrival"], $_POST["departure"], $_POST["fromc"], $_POST["comment"], $_POST["office_id"], $packet_id);
+		header("Location: dataWorker.php");
+	}
+	
 ?>
 
 <h2>Muuda saadetise andmeid</h2>
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-		<input type="hidden" name="id" value="<?=$_GET["edit_id"];?>">
+<form method="post">
 		
 		<label for ="arrival">Saabumisaeg</label><br>
 		<input id="arrival" name="arrival" type="text" value="<?=$packet_array[0]->arrival;?>"> <br><br>
@@ -51,8 +34,12 @@
 		<label for ="comment">Märkus</label><br>
 		<input id="comment" name="comment" type="text" value="<?=$packet_array[0]->comment;?>"> <br><br>
 		
-		<label for ="office_id">Järgnev kontor</label><br>
-		<input id="office_id" name="office_id" type="text" value="<?=$packet_array[0]->office_id;?>"> <br><br>
+		<?php 
+		if($office == "peakontor"){
+		echo "<label for ='office_id'>Järgnev kontor</label><br>";
+		echo "<input id='office_id' name='office_id' type='text' value=".$packet_array[0]->office_id."> <br><br>";
+		}
+		?>
 		
 		<input type="submit" name="update_packet" value="Salvesta"><br>
 </form>	
