@@ -1,31 +1,76 @@
 <?php
-	if(isset($_POST["search_packet"])){
-		getPacketData($_POST["id"], $_POST["arrival"], $_POST["departure"], $_POST["fromc"], $_POST["comment"], $_POST["office_id"]);
-	}
-	function getPacketData($keyword=""){
-		
-		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("SELECT packet_id, arrival, departure, fromc, comment, offices.office FROM post_import join offices on post_import.office_id=offices.office_id WHERE deleted IS NULL AND (packet_id LIKE ? OR arrival LIKE ? OR departure LIKE ? OR fromc LIKE ? OR comment LIKE ? OR offices.office LIKE ?)");
-		echo $mysqli->error;
-		$stmt->bind_param("issssi", $search, $search, $search, $search, $search, $search);
-		$stmt->bind_result($id, $arrival, $departure, $fromc, $comment, $office_id);
-		$stmt->execute();
-		$packet_array = array();
-		while($stmt->fetch()){
-			$packet = new StdClass();
-			$packet->id = $id;
-			$packet->arrival = $arrival;
-			$packet->departure = $departure;
-			$packet->fromc = $fromc;
-			$packet->comment = $comment;
-			$packet->office_id = $office_id;
-			array_push($packet_array, $packet);
-			
-		}
-		$stmt->close();
-		return $packet_array;
+	require_once("../config_global.php");
+	$database = "if15_teamalpha_3";
 	
+	require_once("functions.php");
+	require_once("client.class.php");
+	/*require_once("header.php");
+	require_once("footer.php");
+	require_once("style.css");*/
+	
+	$Client = new Client($mysqli);
+	
+	$packet_id= "";
+	$packet_id_error = "";
+	$nonexist_packet_id = "";
+	
+	$getvar = key($_GET);
+	$getvar1 = key($_POST);
+	
+	if(isset($_GET["submit"])){
+		if($_POST["$packet_id"] != $_POST["$packet_id_from_db"]){
+			$nonexistant_packet_id = "Sellist numbrikoodiga saadetist meil ei ole. Palun proovi uuesti";
+		}
+		
+		/*else{
+				$packet_id = cleanInput($_POST["$packet_id= $packet_array->id"]);
+				}
+
+			
+			/*if (!in_array($_POST["packet_id"], $packet_id_array)) {
+			$nonexist_packet_id = "Sellise numbrikoodiga saadetist meie andmebaasis ei ole. Palun proovi uuesti";
+				echo $nonexist_packet_id;*/
+		
+			//if ($_POST["$packet_id= $packet_array->id"] != $_POST["$packet_id_from_db"]) {
+			//$nonexist_packet_id = "Sellise numbrikoodiga saadetist meie andmebaasis ei ole. Palun proovi uuesti";
+			//	echo $nonexist_packet_id;
+	}		
+	$keyword ="";
+
+	if(isset($_GET["keyword"])){
+		
+		$keyword= $_GET["keyword"];
+		$packet_array = $Client->getPacketData($keyword);
+		
+	}else{
+
+		$packet_array = $Client->getPacketData();
 	}
+	
+	if(isset($_GET["submit"])){
+		
+		if(empty($_GET["keyword"])){
+			$packet_id_error = "Palun sisestage paki kood.";
+		}
+		
+	}
+	/*if(isset($_GET["submit"])){
+		if(print_r(!empty($packet_array[0]))){
+			echo "Sellist pakki pole";
+		}
+	}*/
+	
+	function cleanInput($data) {	
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
+	}
+	//echo $getvar;
+	//echo $getvar1;
+	/*var_dump ($packet_array);*/
+	//print_r ($packet_array[0]);
+	
 ?>
 
 
@@ -37,21 +82,35 @@
 <body>
 <h1>Saadetise otsing</h1>
 <p>Tere tulemast Teamalpha postilehele. <br>
-Sel lehel saad j‰gida oma saadetise teekonda. Lisak¸simuste korral kirjutage .. <p>
-<form action="klient.php" method="get">
-	<label for ="id">Sisesta otsitava paki id:</label><br>
-	<input id="comment" name="comment" type="text" placeholder="Paki kood"><br><br>
-	<input type="submit" name="search_packet" value="Otsi"><br>
+Sel lehel saad j√§lgida oma saadetise teekonda. Lisak√ºsimuste korral kirjutage info@post.ee v√µi helistage +372 5550 1002 <p>
+<form action="client.php" method="get">
+	<label for ="packet_id">Sisesta otsitava paki id:</label><br>
+	<input id="comment" name="keyword" type="search" placeholder="Paki kood" value="<?=$keyword;?>"> <?=$packet_id_error;?><br><br>
+	<input type="submit" name="submit"><br>
 <form>
 <br><br>
-<table border="1">
+<?php echo $packet_id;?>
+<table border="1" class="table">
 		<tr>
 			<th>Saadetise id</th>
 			<th>Saabumisaeg</th>
-			<th>L‰hteriik</th>
-			<th>M‰rkus</th>
-			<th>J‰rgnev kontor</th>
+			<th>L√§heriik</th>
+			<th>M√§rkus</th>
+			<th>J√§rgnev kontor</th>
 		</tr>
-		
 </body>
 </html>
+	<?php
+		for($i = 0; $i < count($packet_array); $i=$i+1){
+			
+			echo "<td>".$packet_array[$i]->id."</td>";
+			echo "<td>".$packet_array[$i]->arrival."</td>";
+			echo "<td>".$packet_array[$i]->fromc."</td>";
+			echo "<td>".$packet_array[$i]->comment."</td>";
+			echo "<td>".$packet_array[$i]->office_id."</td>";
+			echo "</tr>";
+			
+		}
+		
+	?>
+</table>
