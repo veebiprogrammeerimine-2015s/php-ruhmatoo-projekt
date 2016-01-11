@@ -57,8 +57,8 @@
 
 <table border= 1>
 	<tr>
-		<th>Park name</th>
-		<th>Time</th>
+		<th>Game name</th>
+		<th>Playing time</th>
 		
 	</tr>
 <?php
