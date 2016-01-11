@@ -2,7 +2,7 @@
 		
 
 	// kõik funktsioonid, kus tegeleme AB'iga
-
+	require("navigation.html");
 	require_once("functions.php");
 
 	
@@ -139,13 +139,54 @@
 	</p>
 	
   <?php endif; ?>
-  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-	<input name="email" type="email" placeholder="E-post" value="<?php echo $email; ?>"> <?php echo $email_error; ?><br><br>
-  	<input name="password" type="password" placeholder="Parool" value="<?php echo $password; ?>"> <?php echo $password_error; ?><br><br>
-  	<input type="submit" name="login" value="Log in">
-  </form>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HELENI LOOMAKLIINIK</title>
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+ <link rel="stylesheet" href="materialize.min.css">
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-  <h2>Create user</h2>
+
+    <?php if(isset($login_response->error)): ?>
+  
+	<p style="color:red;">
+		<?=$login_response->error->message;?>
+	</p>
+  
+  <?php elseif(isset($login_response->success)): ?>
+	
+	<p style="color:green;" >
+		<?=$login_response->success->message;?>
+	</p>
+	
+  <?php endif; ?>
+
+ <div class="login-form">
+ <div class="row">
+   <h2>Logi sisse</h2>
+  <form class="col s12" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+	<div class="row">
+	<div class="input-field col s4">
+		<label for="email">E-mail</label>
+		<input name="email" type="email" value="<?php echo $email; ?>"> <?php echo $email_error; ?><br><br>
+  	</div>
+ 	</div>
+  	<div class="row">
+	<div class="input-field col s4">
+		<label for="password">Parool</label>
+  		<input name="password" type="password"value="<?php echo $password; ?>"> <?php echo $password_error; ?><br><br>
+  	</div>
+  	</div>
+  		<a class="waves-effect waves-light btn" type="login" name="login">Logi sisse</a>
+  	</div>
+  </form>
+</div>
+
   
   <?php if(isset($create_response->error)): ?>
   
@@ -161,12 +202,32 @@
 	
   <?php endif; ?>
   
+  <div class="register-form">
+  <h2>Registreeru</h2>
   
-  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  	<input name="create_email" type="email" placeholder="E-post" value="<?php echo $create_email; ?>"> <?php echo $create_email_error; ?><br><br>
-  	<input name="create_password" type="password" placeholder="Parool"> <?php echo $create_password_error; ?> <br><br>
-  	<input type="submit" name="create" value="Create user">
+  <form class="col s12" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+  	<div class="row">
+	<div class="input-field col s4">
+	<label for="email">E-mail</label>
+  	<input name="create_email" type="email" value="<?php echo $create_email; ?>"> <?php echo $create_email_error; ?><br><br>
+  	</div>
+ 	</div>
+  	<div class="row">
+	<div class="input-field col s4">
+	<label for="password">Parool</label>
+  	<input name="create_password" type="password"> <?php echo $create_password_error; ?> <br><br>
+  	</div>
+ 	</div>
+  	<a class="waves-effect waves-light btn" type="register" name="register">Loo kasutaja</a>
+  </div>
   </form>
    </div>
+</div>
+   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+   <script type="text/javascript" src="materialize.min.js"></script>
+
 <body>
 <html>
+<?php
+require("footer.html");
+?>
