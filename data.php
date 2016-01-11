@@ -1,3 +1,15 @@
+ <?php
+	require_once("header.php");
+?>
+
+<h2 class ="pealkiri2">Nuud hakkame!</h2>
+<body> 
+<link rel="stylesheet" href="kujundus.css" type="text/css" /> 
+Siin sa võid lisada sinu post, kus sa võiks kirjeldada oma probleem!<br><br>
+
+<body/> 
+
+<?php require_once("postmenu.php");?>
 <?php
 
 	
@@ -64,7 +76,7 @@
 
 
 <p>
-	Tere, <?=$_SESSION["id_from_db"];?>
+	<?=$_SESSION["email_from_db"];?>
 	<a href="?logout=1"> Logi välja</a>
 </p>
 
