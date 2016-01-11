@@ -68,17 +68,17 @@ function getResultData(){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("SELECT result_id, game_id, basket_nr, result FROM results_php");
+		$stmt = $mysqli->prepare("SELECT result_id, game_id, basket_nr, result FROM results_php WHERE game_id = $_GET[id]");
 		echo $mysqli->error;
 		$stmt->bind_result($result_id, $game_id, $basket_nr, $result);	
 		$stmt->execute();
 		$array = array();
 		while($stmt->fetch()){
-			$result = new StdClass();
-			$result->game_id = $game_id;
-			$result->basket_nr = $basket_nr;
-			$result->result = $result;
-			array_push($array, $result);
+			$results = new StdClass();
+			$results->game_id = $game_id;
+			$results->basket_nr = $basket_nr;
+			$results->result = $result;
+			array_push($array, $results);
 			
 		}
 	

@@ -19,6 +19,13 @@
 	Sisselogitud kasutajaga <?=$_SESSION["user_email"];?>
 	<a href="?logout=1"> Logi välja</a>
 </p>
+<table border=1 >
+<tr>
+	<th>Korv</th>
+	<th>Tulemus</th>
+	
+	
+</tr>
 <?php
 	
 	for($i = 0; $i < count($results_php); $i++){
