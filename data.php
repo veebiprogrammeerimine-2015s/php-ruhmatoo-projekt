@@ -59,8 +59,9 @@
 	  }
 	
 	
-	
 ?>
+
+
 
 <p>
 	Tere, <?=$_SESSION["id_from_db"];?>
