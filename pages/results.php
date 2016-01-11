@@ -1,6 +1,7 @@
 <?php
 //laen funktsiooni faili	
 	require_once("../functions.php");
+	require_once("../header.php"); 
 	
 //kontrollin, kas kasutaja ei ole sisseloginud	
 	if(!isset($_SESSION["id_from_db"])){
@@ -15,14 +16,11 @@
 	
 	$results_php = getResultData($_SESSION["game_id"]);
 ?>
-<p>
-	Sisselogitud kasutajaga <?=$_SESSION["user_email"];?>
-	<a href="?logout=1"> Logi välja</a>
-</p>
-<table border=1 >
+
+<table class="center" border=1 >
 <tr>
-	<th>Korv</th>
-	<th>Tulemus</th>
+	<th>Basket</th>
+	<th>Result</th>
 	
 	
 </tr>
@@ -42,4 +40,3 @@
 	}
 ?>
 
-<a href='main.php'>AVALEHELE</a>

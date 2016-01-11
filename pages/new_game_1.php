@@ -1,6 +1,7 @@
 <?php
 //laen funktsiooni faili	
 	require_once("../functions.php");
+	require_once("../header.php"); 
 	
 //kontrollin, kas kasutaja ei ole sisseloginud	
 	if(!isset($_SESSION["id_from_db"])){
@@ -48,17 +49,15 @@
 		return $data;
 	  }
 ?>
-<p>
-	Sisselogitud kasutajaga <?=$_SESSION["user_email"];?>
-	<a href="?logout=1"> Logi välja</a>
-</p>
+
+<div class="newgame1">
 <h1>You are playing at: <?php echo $_SESSION["park_name"]; ?></h1>
-<h2><?=$_GET["k"];?>. korv</h2>
+<h2><?=$_GET["k"];?>. basket</h2>
 <p>par = </p>
 	<form action="new_game_1.php?k=<?php echo $_GET["k"]; ?>" method="post" >
-		<label for="result" >Minu tulemus</label>
-		<input id="result" name="result" type="number" value="<?=$result; ?>"> <?=$result_error; ?><br>	
-		<input type="submit" name="save" value="Salvesta">
+		<label for="result" >Your result</label>
+		<input id="result" name="result" type="number" value="<?=$result; ?>"> <?=$result_error; ?><br><br>
+		<input type="submit" name="save" value="Save">
 	</form>
-
+</div>
 	

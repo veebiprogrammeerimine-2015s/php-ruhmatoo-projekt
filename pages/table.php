@@ -1,5 +1,6 @@
 <?php
 	require_once("../functions.php");
+	require_once("../header.php"); 
 	
 	if(isset($_GET["main"])){
 			
@@ -68,7 +69,7 @@
 
 
 <h2>Parkide management leht</h2>
-<table border= 1>
+<table class="center" border= 1>
 	<tr>
 		<th>id</th>
 		<th>Park name</th>
@@ -129,7 +130,3 @@
 ?>
 </table>	
 
-<p>
-	<a href="?main=1">MINE AVALEHELE</a>
-	
-</p>
