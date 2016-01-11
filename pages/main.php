@@ -59,25 +59,22 @@
 
 <br><br>
 
-			<div class="historyinfo">
-				<h1>GAMES HISTORY</h1>
-
-				<table class="center" border= 1>
-					<tr>
-						<th>Park name</th>
-						<th>Time</th>
-						
-					</tr>
-			</div>	
+<div class="historyinfo">
+	<h1>GAMES HISTORY</h1>
+			
 		
 
 
-<table border= 1>
-	<tr>
-		<th>Game name</th>
-		<th>Playing time</th>
+	<table class="center" border= 1>
+		<tr>
+			<th>Game name</th>
+			<th>Playing time</th>
+		</tr>
+	</table>	
+</div>	
 
-		
+
+
 	
 <?php
 		for($i = 0; $i < count($game_php); $i++){
