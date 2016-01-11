@@ -39,11 +39,14 @@
 
 ?>
 
-<h3>Tagasiside</h3>
-
-<form action="<?php echo htmlspecialchars("feedback_data.php?offer_id=".$_GET["offer_id"]."&to_user_id=".$_GET["to_user_id"]); ?>" method="post">
-	<input type="hidden" name="offer_id" value="<?=$_GET["offer_id"];?>">
-	<input type="hidden" name="to_user_id" value="<?=$_GET["to_user_id"];?>">
-	<textarea style="resize:none" name="feedback" rows="10" cols="28" placeholder="Tagasiside"><?=$feedback;?></textarea>* <?=$feedback_error;?><br><br>
-	<input name="add_new_feedback" type="submit" value="Anna tagasisidet">
-</form>
+<div class="span12">
+    <div style="padding:0 35px">
+		<h3>Tagasiside</h3>
+		<form action="<?php echo htmlspecialchars("feedback_data.php?offer_id=".$_GET["offer_id"]."&to_user_id=".$_GET["to_user_id"]); ?>" method="post">
+			<input type="hidden" name="offer_id" value="<?=$_GET["offer_id"];?>">
+			<input type="hidden" name="to_user_id" value="<?=$_GET["to_user_id"];?>">
+			<textarea style="resize:none" name="feedback" rows="10" cols="28" placeholder="Tagasiside"><?=$feedback;?></textarea>* <?=$feedback_error;?><br><br>
+			<input name="add_new_feedback" type="submit" value="Anna tagasisidet">
+		</form>
+	</div>
+</div>
