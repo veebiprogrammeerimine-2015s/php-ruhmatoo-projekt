@@ -42,6 +42,6 @@
 
 #Kokkuvõte:
 	#Jarmo - 
-	#Rasmus -
+	#Rasmus -Ülesanne oli tehtav, andmebaasid jooksid loogiliselt, enamuse sai copy/paste-da 	tunnitöödest. Hea harjutus, et tunnis õpitut kinnistada.
 	#Koidu - 
 	#Hendrik - 
