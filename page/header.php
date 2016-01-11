@@ -1,19 +1,25 @@
 <html lang="en">
 <?php	require_once("page/functions.php");	?>
 <?php
+
 $keyword = "";
 $movie_category = "";
 if(isset($_GET["logout"])){
+
 
 	//session_destroy();
 
 	header("Location: login.php");
 }
+
 if(isset($_GET["keyword"])){
 	$keyword = $_GET["keyword"];
 	//echo $keyword;
 	$array_of_results = $user->getSearchData($keyword);
 }
+=======
+$movie_category = "";
+
 ?>
   <head>
     <meta charset="utf-8">
@@ -55,7 +61,7 @@ if(isset($_GET["keyword"])){
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="main.php">Avaleht <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="main.php">Avaleht <span class="sr-only"></span></a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Videod <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -71,7 +77,7 @@ if(isset($_GET["keyword"])){
 			<li><a href="movies.php?=Cat_Thriller">Thriller</a></li>
 			<li><a href="movies.php?=Cat_Ulme">Ulme</a></li>
 			<li><a href="movies.php?=Cat_Sport">Sport</a></li>
-			<li><a href="movies.php?=Cat_Sõda">Sõda</a></li>
+			<li><a href="movies.php?=Cat_War">Sõda</a></li>
 			<li><a href="movies.php?=Cat_Muusikal">Muusikal</a></li>
 			<li><a href="movies.php?=Cat_Õudukad">Õudukad</a></li>
           </ul>
@@ -81,8 +87,7 @@ if(isset($_GET["keyword"])){
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kasutaja nimi <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Seadmed</a></li>
-            <li><a href="#">Veel midagi</a></li>
+            <li><a href="settings.php">Seadmed</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="?logout=1">Logi välja</a></li>
           </ul>
@@ -97,7 +102,12 @@ if(isset($_GET["keyword"])){
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+
 <!-- ################################################################################################################################ -->
+
+<!-- ################################################################################################################################ -->
+
 <table border="1"></td>
 	<tr>
 		<!--<th>id</th>-->
@@ -119,3 +129,4 @@ if(isset($_GET["keyword"])){
 	}
 	?>
 </table>
+=======
