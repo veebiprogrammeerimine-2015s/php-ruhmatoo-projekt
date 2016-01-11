@@ -116,7 +116,6 @@
 	
 ?>
 <?php require_once("../header.php"); ?>
-		<h2>Loo kasutaja</h2>
 		
 		<?php if(isset($create_response->error)):?>
 			<p style="color:red;">

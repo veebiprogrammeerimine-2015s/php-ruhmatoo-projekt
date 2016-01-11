@@ -63,8 +63,8 @@
 	$page_file = "login.php";
 	
 ?>
+
 <?php require_once("../header.php"); ?>
-		<h2>Login</h2>
 		
 		<?php if(isset($login_response->error)): ?>
 		<p style="color:red;">

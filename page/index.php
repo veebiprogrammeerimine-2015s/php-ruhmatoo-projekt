@@ -1,12 +1,8 @@
-<?php
-	//lehe nimi
-	$page_title = "Avaleht";
-	
-	//faili nimi
-	$page_file = "home.php";
-?>
 <?php require_once("../header.php"); ?>
 
-	<h2>Avaleht</h2>
-
+<div class="span4">...
+Ajakirjaniku võimalus leida endale vaheldusrikas töö!
+<br>
+Ettevõtte võimalus leida oma firmat esindavale tekstile hea tegija - küsi pakkumisi, võrdle ja vali parim!
+</div>
 <?php require_once("../footer.php"); ?>
