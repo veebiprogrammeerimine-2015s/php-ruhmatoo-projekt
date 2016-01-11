@@ -141,21 +141,26 @@ class User {
 
 
 			while($stmt->fetch()){
+					var_dump($id);
+					$stmt2= $mysqli->prepare("SELECT link FROM VL_Links WHERE VL_Movies_id=?");
+					$stmt2->bind_param("i", $id);
+					$stmt2->bind_result($link);
+					$stmt2->execute();
 
-			$result = new StdClass();
-			$result->id = $id;
-			$result->name = $name;
-			$result->category = $category;
-			$result->year = $year;
-			$result->director = $director;
+					$result = new StdClass();
+					$result->id = $id;
+					$result->name = $name;
+					$result->category = $category;
+					$result->year = $year;
+					$result->director = $director;
+					$result->link = $link;
 
 
-			array_push($search_array, $result);
+					array_push($search_array, $result);
 
 		  }
 		  return $search_array;
-
-
+			$_SESSION["logged_in_user_id"] = $user_id;
 		  $stmt->close();
 		  $mysqli->close();
 		}

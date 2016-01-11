@@ -115,6 +115,7 @@ $movie_category = "";
 		<th>Category</th>
 		<th>Year</th>
 		<th>Director</th>
+		<th>Link</th>
 	</tr>
 	<?php
 	if(isset($_GET["keyword"])){
@@ -124,6 +125,7 @@ $movie_category = "";
 				echo "<td>".$array_of_results[$i]->category."</td>";
 				echo "<td>".$array_of_results[$i]->year."</td>";
 				echo "<td>".$array_of_results[$i]->director."</td>";
+				echo "<td>".$array_of_results[$i]->link."</td>";
 				echo "</tr>";
 		}
 	}
