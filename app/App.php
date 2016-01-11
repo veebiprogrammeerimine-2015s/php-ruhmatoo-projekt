@@ -24,6 +24,8 @@ class App {
         //loome PDO ühenduse andmebaasiga suhtlemiseks
         $this->pdo = new \PDO("mysql:host=" . $this->mysqlHost . ';dbname='
             . $this->mysqlDatabase, $this->mysqlUser, $this->mysqlPassword);
+        //Selleks, et nimed kuvaksid UTF8 kodeeringus
+        $this->pdo->query('SET NAMES UTF8');
 
     }
 
