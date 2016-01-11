@@ -1,9 +1,13 @@
 <html lang="en">
 <?php
-if(isset($_GET["logout"])){		
-		
+
+$keyword = "";
+$movie_category = "";
+if(isset($_GET["logout"])){
+
+
 	//session_destroy();
-		
+
 	header("Location: login.php");
 }
 $movie_category = "";
@@ -80,15 +84,19 @@ $movie_category = "";
           </ul>
         </li>
       </ul>
-      <form class="navbar-form navbar-right" role="search">
+      <form class="navbar-form navbar-right" role="search" method="get">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Otsi">
+          <input type="search" name="keyword" value="<?=$keyword;?>" class="form-control" placeholder="Otsi">
         </div>
         <button type="submit" class="btn btn-default">Otsi</button>
       </form>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<<<<<<< HEAD
 </body>
 </html>
 <!-- ################################################################################################################################ -->
+=======
+<!-- ################################################################################################################################ -->
+>>>>>>> e35813b940e1f668e1881481958131d9005a1d7c
