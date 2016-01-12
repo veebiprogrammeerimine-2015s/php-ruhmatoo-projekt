@@ -1,37 +1,77 @@
-# PHP rühmatöö projekt
-**Rühmatööde demo päev** on valitud eksamipäev jaanuaris, kuhu tuleks tullakse terve rühmaga koos!
+# NO PLAGIARISM
+Merit Paist, Martti Naaber
 
-## Tööjuhend
-1. Üks rühma liikmetest fork'ib endale käesoleva repositooriumi ning annab teistele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi README.md faili vastavalt nõutele
-1. Tee valmis korralik veebirakendus
+## Eesmärk
+- Luua vabakutseliste ajakirjanike andmebaasi
+- Miks? Sest Eestis ei ole vabakutseliste ajakirjanike andmebaasi
+- Viia omavahel kokku vabakutselised ajakirjanikud ja potentsiaalsed tööandjad üksikute projektide raames
+- Tööandja sisestab projekti (nt uudislugu, pressiteade) ja ajakirjanikud saavad valida projekte, millele pakkumisi teha.
+- Tööandjal on võimalik valida pakkumiste hulgast välja parim pakkumimine
 
-### Nõuded
+## Kirjeldus
+- Sihtgrupiks ettevõtted, kes vajavad kirjutamisteenust, ja vabakutselised ajakirjanikud
+- http://www.designcrowd.com/
 
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * rühma liikmete nimed;
-    * eesmärki (3-4 lauset, mis probleemi üritate lahendada);
-    * kirjeldus (sihtrühm, eripära võrreldes teiste samalaadsete rakendustega - kirjeldada vähemalt 2-3 sarnast rakendust mida eeskujuks võtta);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada huviala
-        * ...
-    * andmebaasi skeem loetava pildina + tabelite loomise SQL laused;
-    * **kokkuvõte:** mida õppisid juurde? mis ebaõnnestus? mis oli keeruline? (kirjutab iga tiimi liige).
+## Lehe tööpõhimõte
+```
+|header.php
+|---menu.php
+|   |---home.php
+|   |---login.php-------|
+|   |---create_user.php |
+|						|
+|						|
+|						|---login.php
+|						  	|   (Ettevõte logib sisse)
+|						  	|---data.php (sisestab tööpakkumise)
+|						  	|---table.php (näeb oma sisestatuid pakkumisi)
+|						  	|---edit.php (saab muuta neid pakkumisi, kus ei ole tehtud ajakirjaniku pakkumist)
+|						  	|---offers.php (saab vaadata ajakirjanike pakkumisi oma tööpakkumistele)
+|						  	|	|---feedback.php (saab anda ajakirjanikule tagasisidet)
+|						  	|
+|						  	|	(Ajakirjanik logib sisse)
+|						  	|---table.php (näeb kõiki tööpakkumisi ja saab teha oma pakkumise)
+|						  	|---offers.php (saab näha oma pakkumisi)
+|						  	|	|---feedback.php (saab anda ettevõttele tagasisidet)
+|						  	|
+|						  	|	(Admin logib sisse)
+|						  	|---admin.php
+|								|---table.php
+|							    |---offers.php
+|							    |---history.php
+|footer.php
+```
+
+## Failipuu
+```
+|pages
+|---menu.php
+|---home.php
+|---login.php
+|---create_user.php
+|---data.php
+|---table.php
+|---edit.php
+|---offers.php
+|---feedback 
+|---history.php
+|---admin.php
+|
+|classes
+|---User.class.php
+|---OfferManager.class.php
+|
+|header.php
+|footer.php
+|functions.php
+```
+
+## Andmebaas
+http://i.imgur.com/nGbm2su.png
+
+## Kokkuvõte
+- Mida õppisid juurde?
+- Mis ebaõnnestus?
+- Mis oli keeruline?
 
 
-2. **Veebirakenduse nõuded:**
-    * kasutusel on vähemalt 6 tabelit;
-    * kood on jaotatud klassidesse;
-    * muutujad/tabelid on inglise keeles;
-    * rakendus on piisava funktsionaalsusega ja turvaline;
-    * kõik tiimi liikmed on panustanud rakenduse arendusprotsessi.
-
-## Abiks
-* **Testserver:** greeny.cs.tlu.ee, [tunneli loomise juhend](http://minitorn.tlu.ee/~jaagup/kool/java/kursused/09/veebipr/naited/greenytunnel/greenytunnel.pdf)
-* **Abiks tunninäited (rühmade lõikes):** [I rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-I-ruhm), [II rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-II-ruhm), [III rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-III-ruhm)
-* **Stiilijuhend:** [Coding Style Guide](http://www.php-fig.org/psr/psr-2/)
-* **GIT õpetus:** [Become a git guru.](https://www.atlassian.com/git/tutorials/)
-* **Abimaterjale:** [Veebirakenduste loomine PHP ja MySQLi abil](http://minitorn.tlu.ee/~jaagup/kool/java/loeng/veebipr/veebipr1.pdf), [PHP with MySQL Essential Training] (http://www.lynda.com/MySQL-tutorials/PHP-MySQL-Essential-Training/119003-2.html)
