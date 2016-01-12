@@ -8,12 +8,13 @@
 	$lastname_error = "";
 	$create_email = "";
 	$create_password = "";
-	$firstname="";
-	$lastname="";
+	$firstname = "";
+	$lastname = "";
 
 
-
-if(isset($_POST["create"])){
+	if($_SERVER["REQUEST_METHOD"] == "POST") {
+		
+		if(isset($_POST["create"])){
 				if ( empty($_POST["create_email"]) ) {
 					$create_email_error = "See väli on kohustuslik";
 				}else{
@@ -57,6 +58,8 @@ if(isset($_POST["create"])){
 				}
 		} // create if end
 	
+	
+	}
   // funktsioon, mis eemaldab kõikvõimaliku üleliigse tekstist
   function cleanInput($data) {
   	$data = trim($data);
@@ -91,10 +94,10 @@ if(isset($_POST["create"])){
                 <img class="profile-img" src="pildid/jalgpall.ico"
                     alt="sveg">
                 <form class="form-signin">
-                <input type="text" class="form-control" placeholder="Email" name="create_email" required autofocus> <?php echo $create_email_error; ?> <br>
+                <input type="email" class="form-control" placeholder="Email" name="create_email" required autofocus> <?php echo $create_email_error; ?> <br>
                 <input type="text" class="form-control" placeholder="Eesnimi" name="firstname" required autofocus> <?php echo $create_password_error; ?> <br>
 				<input type="text" class="form-control" placeholder="Perekonnanimi" name="lastname" required autofocus> <?php echo $firstname_error;?> <br>
-                <input type="password" class="form-control" name="parool2" placeholder="Parool" required> <?php echo $lastname_error;?> <br>
+                <input type="password" class="form-control" name="create_password" placeholder="Parool" required> <?php echo $lastname_error;?> <br>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                     Registreeri</button>
 					
