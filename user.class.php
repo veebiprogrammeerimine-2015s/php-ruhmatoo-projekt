@@ -194,19 +194,15 @@ class User {
 			//$stmt->bind_result($id_from_db, $email_from_db);
 			$stmt->execute();
 			if($stmt->fetch()){
-				echo "olemas";
 				return "1";
 			}
 			else{
-				echo "puudu";
 				return "0";
 			}
 		  }
 		function purchaseMovie(){
 			$id = $_SESSION["logged_in_user_id"];
 			$movie_id = $_SESSION["purchase_id"];
-			var_dump($id);
-			var_dump($movie_id);
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 			$stmt = $mysqli->prepare("INSERT INTO VL_Payment (kasutaja_id, filmi_id, start_date, end_date) VALUES (?, ?, date(now()), (ADDDATE(curdate(), INTERVAL 30 DAY)))");
 			$stmt->bind_param("ii", $id, $movie_id);
