@@ -1,4 +1,4 @@
-<?php require_once("headernav.php"); ?>
+
 <?php require_once("functions.php") ?>
 <?php
 
@@ -12,9 +12,15 @@
 	$lastname = "";
 
 
+<<<<<<< HEAD
+
+if(isset($_POST["create"])){
+	
+=======
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
 		
 		if(isset($_POST["create"])){
+>>>>>>> 767d5ffd353bf8c42da69ba041f9317d5ad576fa
 				if ( empty($_POST["create_email"]) ) {
 					$create_email_error = "See väli on kohustuslik";
 				}else{
@@ -93,12 +99,19 @@
             <div class="account-wall">
                 <img class="profile-img" src="pildid/jalgpall.ico"
                     alt="sveg">
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post"  class="form-signin">
+                <form class="form-signin">
+<<<<<<< HEAD
+                <input type="text" class="form-control" placeholder="Email" name="create_email" required autofocus> <?php echo $create_email_error; ?> <br>
+                <input type="text" class="form-control" placeholder="Eesnimi" name="firstname" required autofocus> <?php echo $firstname_error;?> <br>
+				<input type="text" class="form-control" placeholder="Perekonnanimi" name="lastname" required autofocus> <?php echo $lastname_error;?> <br>
+                <input type="password" class="form-control" name="create_password" placeholder="Parool" required><?php echo $create_password_error; ?>  <br>
+=======
                 <input type="email" class="form-control" placeholder="Email" name="create_email" required autofocus> <?php echo $create_email_error; ?> <br>
                 <input type="text" class="form-control" placeholder="Eesnimi" name="firstname" required autofocus> <?php echo $create_password_error; ?> <br>
 				<input type="text" class="form-control" placeholder="Perekonnanimi" name="lastname" required autofocus> <?php echo $firstname_error;?> <br>
                 <input type="password" class="form-control" name="create_password" placeholder="Parool" required> <?php echo $lastname_error;?> <br>
-                <input class="btn btn-lg btn-primary btn-block" name="create" type="submit">
+>>>>>>> 767d5ffd353bf8c42da69ba041f9317d5ad576fa
+                <button class="btn btn-lg btn-primary btn-block" type="submit">
                     Registreeri</button>
 					
                 

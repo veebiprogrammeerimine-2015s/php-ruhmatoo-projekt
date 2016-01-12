@@ -1,4 +1,4 @@
-
+<?php require_once("headernav.php") ?>
 <?php require_once("functions.php"); ?> 
 
 
@@ -77,10 +77,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="account-wall">
                 <img class="profile-img" src="pildid/jalgpall.ico"
                     alt="sveg">
-                <form class="form-signin">
+                <form class="form-signin" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                 <input type="email" class="form-control" name="email" placeholder="Email"> <?php echo $email_error; ?> <br>
                 <input type="password" class="form-control" name="password" placeholder="Parool"> <?php echo $password_error; ?> <br>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                <input name="login" class="btn btn-lg btn-primary btn-block" type="submit">
                     Logi sisse</button>
                 <label class="checkbox pull-left">
                     <input type="checkbox" value="remember-me">
