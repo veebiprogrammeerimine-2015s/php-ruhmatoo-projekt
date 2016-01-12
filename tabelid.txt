@@ -1,0 +1,68 @@
+
+Kas töötas?!
+
+
+CREATE table VL_Login(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	email VARCHAR(45),
+	hash VARCHAR(255)
+);
+Action
+Die Hard 1988 John McTiernan
+Terminator 1984 James Cameron
+
+Komöödia
+Wedding Ringer 2015 Jeremy Garelick
+Get Hard 2015 Etan Cohen
+
+Seiklus
+Lord of the Rings: Fellowship of the Ring 2001 Peter Jackson
+Pirates of the Carribean: Curse of the Black Pearl 2003 Gore Berbinski
+
+Draama
+Shawshank Redemption 1994 Frank Darabont
+Green Mile 1999 Frank Darabont
+
+Animatsioon
+WALL-E 2008 Anrew Stanton
+Frozen 2013 Chris Buck, Jennifer Lee
+
+Biograafia
+Walk the Line 2005 James Mangold
+Walk 2015 Robert Zemeckis
+
+Krimi
+Oceans Eleven 2001 Steven Soderbergh
+Black Mass 2015 Scott Cooper
+
+Fantaasia
+Harry Potter: And the Half Blood Prince 2009 David Yates
+Hobbit: An Unexpected Journey 2012 Peter Jackson 
+
+Ajalugu
+Schindler's List 1993 Steven Spielberg
+Bridge of Spies 2015 Steven Spielberg
+
+Thriller
+Psycho 1960 Alfred Hitchcock
+Sixth Sense 1999 M. Night Shyamalan
+
+Ulme
+Interstellar 2014 Cristopher Nolan
+Stargate 1994 Roland Emmerich
+
+Sport
+Rocky 1976 John G. Avildsen
+Southpaw 2015 Antoine Fuqua
+
+Sõda
+Saving Private Ryan 1998 Steven Spielberg
+American Sniper 2014 Clint Eastwood
+
+Muusikal
+Sweeney Todd: The Demon Barber of Fleet Street 2007 Tim Burton
+Les Misérables 2012 Tom Hooper
+
+Õudukad
+Alien 1979 Ridley Scott
+The Shining 1980 Stanley Kubrick
