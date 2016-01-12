@@ -34,7 +34,7 @@
 			// $i = $i +1; sama mis $i += 1; sama mis $i++;
 			
 			//kui on see rida mida kasutaja tahab muuta siis kuvan input väljad
-			if(isset($_GET["edit"]) && $post_list[$i]->post_id == $_GET["edit"]){
+			//if(isset($_GET["edit"]) && $post_list[$i]->post_id == $_GET["edit"]){
 				// kasutajale muutmiseks
 				// tavaline rida
 				echo "<tr>";
@@ -45,7 +45,7 @@
 				echo "<td><a href='?delete=".$post_list[$i]->post_id."'>X</a></td>";
 				echo "<td><a href='?edit=".$post_list[$i]->post_id."'>edit</a></td>";
 				echo "</tr>";
-			}
+			//}
 			
 			
 		}
