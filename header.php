@@ -40,6 +40,9 @@
                         <a href="leidnud.php">Kodu leidnud kassid</a>
                     </li>
 					<li>
+                        <a href="leidnud.php">Kadunud kassid</a>
+                    </li>
+					<li>
                         <a href="donations.php">Annetamine</a>
                     </li>
                     <li>
