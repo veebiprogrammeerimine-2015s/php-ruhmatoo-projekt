@@ -155,6 +155,7 @@
 					echo "<th>Edit</th>";
 					echo "<th>Delete</th>";
     			} ?>
+                    
 				</tr>
 			</div>
 		</div>
@@ -195,6 +196,8 @@
 			echo "<td><a href='?edit=".$cat_array[$i]->id."'>Edit</a></td>";
 			echo "<td><a href='?delete=".$cat_array[$i]->id."'>X</a></td>";
 		}
+            if (empty($picture)) $picture = "pic/default.png";
+                echo '<td><img src="'.$picture.'" width="100px" height="100px"</td>';
 			echo "</tr>";
 		}
 	}
