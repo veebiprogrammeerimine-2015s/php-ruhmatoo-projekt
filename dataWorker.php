@@ -1,7 +1,19 @@
 <?php
 	
-	/*/dataWorker.php?peakontor&keyword=pakend_lekib*/
 	require_once("worker.class.php");
+	require_once("header.php");
+	
+	if(!isset($_SESSION["logged_in_user_id"])){
+		header("Location: login.php");
+		
+		exit();
+	}
+	
+	if(isset($_GET["logout"])){
+		session_destroy();
+		
+		header("Location: login.php");
+	}
 	
 	$Worker = new Worker($mysqli);
 	$getvar = key($_GET);
@@ -35,9 +47,7 @@
 	
 ?>
 
-<body>
-
-	<p>Tere, <?php echo $_SESSION["logged_in_user"];?></p>
+	<p>Tere, <?php echo $_SESSION["logged_in_user_email"];?>.</p>
 	
 	<br><br>
 	
@@ -62,7 +72,7 @@
 			
 		</p>
 	<div>
-	<table border="1">
+	<table border="1" class="table">
 	
 	
 	<?php
@@ -88,7 +98,7 @@
 				echo "<td>".$packet_array[$i]->comment."</td>";
 				echo "<td>".$packet_array[$i]->office_id."</td>";
 				echo "<td><a href='dataWorker.php?office=".$office."&delete=".$packet_array[$i]->id."'>X</a></td>";
-				echo "<td><a href='edit.php?edit_id=".$packet_array[$i]->id."'>edit</a></td>";
+				echo "<td><a href='edit.php?office=".$office."&edit_id=".$packet_array[$i]->id."'>edit</a></td>";
 				echo "</tr>";
 					
 			}
@@ -114,7 +124,7 @@
 				echo "<td>".$packet_array[$i]->departure."</td>";
 				echo "<td>".$packet_array[$i]->comment."</td>";
 				echo "<td><a href='dataWorker.php?office=".$office."&delete=".$packet_array[$i]->id."'>X</a></td>";
-				echo "<td><a href='edit.php?edit_id=".$packet_array[$i]->id."'>edit</a></td>";
+				echo "<td><a href='edit.php?office=".$office."&edit_id=".$packet_array[$i]->id."'>edit</a></td>";
 				echo "</tr>";
 			}	
 		}
@@ -127,8 +137,7 @@
 	</div>
 
 	<p>
-		<a href="addPacket.php">Lisa uus pakend</a>
+		<a href="addPacket.php?office=<?=$office; ?>">Lisa uus pakend</a>
 	</p>
 	
-</body>
-
+<?php require_once("footer.php"); ?>

@@ -1,8 +1,16 @@
 <?php
 
 	require_once("worker.class.php");
+	require_once("header.php");
+	
+	if(!isset($_SESSION["logged_in_user_id"])){
+		header("Location: login.php");
+		
+		exit();
+	}
 	
 	$Worker = new Worker($mysqli);
+	$office1 = $_GET["office"];
 	
 	$arrival = "";
 	$departure = "";
@@ -50,7 +58,7 @@
 				$office_id = cleanInput($_POST["office_id"]);
 				$code = sprintf('%04X%04X', mt_rand(0, 65535), mt_rand(0, 65535));
 				
-				$Worker->addPacket($arrival, $departure, $fromc, $comment, $office_id, $code);
+				$Worker->addPacket($office1, $arrival, $departure, $fromc, $comment, $office_id, $code);
 			
 			}
 			
@@ -66,21 +74,33 @@
   }
 	
 ?>
-<body>
 	
 	<p><a href="dataWorker.php">Tagasi</a> eelmisele lehele</p>
 	<h2>Lisa uus pakend</h2>
-	<form action="addPacket.php" method="post">
+	<form method="post">
 			Pakendi saabumine:<br>
-			<input name="arrival" type="number" maxlength="14" value="Yearmmddhhmmss"> <?php echo $arrival_error; ?> <br>
+			<input name="arrival" type="number" maxlength="14" value="Yearmmddhhmmss"> <?php echo $arrival_error; ?> <br><br>
 			Pakendi väljumine:<br>
-			<input name="departure" type="number" maxlength="14" value="Yearmmddhhmmss"> <br>
-			Pakendi lähteriik:<br>
-			<input name="fromc" type="text" value="<?php echo $fromc; ?>"> <?php echo $fromc_error; ?><br><br>
+			<input name="departure" type="number" maxlength="14" value="Yearmmddhhmmss"> <br><br>
+			
+			<?php 
+			if($office1 == "peakontor"){
+			echo "Pakendi lähteriik:<br>";
+			echo "<input name='fromc' type='text' value=".$fromc."> ".$fromc_error."<br><br>";
+			}
+			?>
+			
 			Märkus:<br>
 			<input name="comment" type="text" value="<?php echo $comment; ?>"> <br><br>
-			Kuhu pakend edasi liigub:<br>
-			<input name="office_id" type="number" maxlength="1" min="1" max="7" value="<?php echo $office_id; ?>"> <?php echo $office_error; ?><br><br>
+			
+			<?php 
+			if($office1 == "peakontor"){
+			echo "Kuhu pakend edasi liigub:<br>";
+			echo "<input name='office_id' type='number' maxlength='1' min='1' max='7' value=".$office_id."> ".$office_error." <br><br>";
+			}
+			?>
+			
 		<input type="submit" name="submit">
 	</form>
-</body>
+	
+	<?php require_once("footer.php"); ?>
