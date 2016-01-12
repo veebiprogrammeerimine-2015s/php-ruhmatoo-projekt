@@ -12,7 +12,10 @@
 		
 	}
 	
+	$post_list = getPostList();
 	
+	//var_dump($post_list);
+
 ?>
 
 <table border=1 >
@@ -24,10 +27,7 @@
 	</tr>
 	
 	<?php
-	$post_list = getPostList();
 	
-	//var_dump($post_list);
-
 	// iga massiivis olema elemendi kohta
 		// count($car_list) - massiivi pikkus
 		for($i = 0; $i < count($post_list); $i++){
@@ -44,7 +44,6 @@
 				echo "<td>".$post_list[$i]->user_id."</td>";
 				echo "<td><a href='?delete=".$post_list[$i]->post_id."'>X</a></td>";
 				echo "<td><a href='?edit=".$post_list[$i]->post_id."'>edit</a></td>";
-			
 				echo "</tr>";
 			}
 			

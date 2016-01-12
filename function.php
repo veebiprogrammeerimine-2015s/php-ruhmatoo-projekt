@@ -156,21 +156,14 @@
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("SELECT post_id,name,user_id FROM post_tech WHERE deleted IS NULL");
+		$stmt = $mysqli->prepare("SELECT post_id, name, user_id FROM post_tech");
+		echo $mysqli->error;
 		$stmt->bind_result($post_id, $post_name, $post_user_id);
 		$stmt->execute();
 
-		
 		// tühi massiiv kus hoiame objekte (1 rida andmeid)
 		$array = array();
-		
-		// tee tsüklit nii mitu korda, kui saad 
-		// ab'ist ühe rea andmeid
 		while($stmt->fetch()){
-			
-			
-			
-			// loon objekti iga while tsükli kord
 			$posts = new StdClass();
 			$posts->post_id = $post_id;
 			$posts->name = $post_name;
@@ -188,8 +181,6 @@
 		$mysqli->close();
 		
 		return $array;
-		
-		
 	}
 	
 	
