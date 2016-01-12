@@ -154,13 +154,10 @@
 				<?php if(isset($access_level) == 2){
 					echo "<th>Edit</th>";
 					echo "<th>Delete</th>";
-<<<<<<< HEAD
+
     			} ?>
-=======
-                    echo "<th><a href='picture.php'>Picture</th>";
-    			} ?>
-                    <th>Pilt</th>
->>>>>>> oleloigu
+                    <th>Picture</th>
+    			} ?> 
                     
 				</tr>
 			</div>
@@ -203,23 +200,18 @@
 			echo "<td><a href='?delete=".$cat_array[$i]->id."'>X</a></td>";
 		}
             if (empty($picture)) $picture = "pic/default.png";
-<<<<<<< HEAD
                 echo '<td><img src="'.$picture.'" width="100px" height="100px"</td>';
-=======
-            echo '<td><img src="'.$picture.'" width="100px" height="100px"</td>';
+
             
             
             
->>>>>>> oleloigu
+
 			echo "</tr>";
             
 		}
 	}
 
-<<<<<<< HEAD
-=======
 
->>>>>>> oleloigu
 ?>
 </table>
 
