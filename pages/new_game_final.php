@@ -1,6 +1,7 @@
 <?php
 //laen funktsiooni faili	
 	require_once("../functions.php");
+	require_once("../header.php"); 
 	
 //kontrollin, kas kasutaja ei ole sisseloginud	
 	if(!isset($_SESSION["id_from_db"])){
@@ -15,11 +16,9 @@
 	
 	$results_list = getGameData($_SESSION["game_id"]);
 ?>
-<p>
-	Sisselogitud kasutajaga <?=$_SESSION["user_email"];?>
-	<a href="?logout=1"> Logi välja</a>
-</p>
-<p>m2ng l2bi!!!<br></p>
+
+
+<p>Your game is over. Your results are here: <br></p>
 <p>
 total par =  <?php echo $_SESSION["sum_pars"]; ?> <br>
 total result =  <?php echo $_SESSION["sum_results"]; ?> <br>
@@ -28,11 +27,11 @@ difference = <?php echo $_SESSION["difference"]; ?>
 
 
 
-<table border=1 >
+<table class="center" border=1 >
 <tr>
-	<th>Korv</th>
+	<th>Basket</th>
 	<th>Par</th>
-	<th>Tulemus</th>
+	<th>Result</th>
 	
 </tr>
 <?php
@@ -54,4 +53,3 @@ difference = <?php echo $_SESSION["difference"]; ?>
 	}
 ?>
 
-<a href='main.php'>AVALEHELE</a>

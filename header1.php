@@ -24,19 +24,14 @@
   </head>
   <body>
   
-		  <!-- MENÃœÃœ -->
-		<nav class="navbar navbar-inverse navbar-fixed-top">  <!-- default - hall; navbar fixed top hoiab seda Ã¼leval kinni -->
+		  <!-- MENÜÜ -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">  <!-- default - hall; navbar fixed top hoiab seda üleval kinni -->
 		  <div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
 			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 			  </button>
 			  <a class="navbar-brand" href="main.php">Home</a>
-			</div>
-			<div>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="?logout=1"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
-				</ul>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -48,12 +43,6 @@
 		</nav>
 				
 		<br><br><br>
-		<div class="logininfo">
-			<h5>
-				Hi, <?=$_SESSION["user_email"];?>
-			</h5>
-		</div>
 		<br><br>
-		
   </body>
 </html>

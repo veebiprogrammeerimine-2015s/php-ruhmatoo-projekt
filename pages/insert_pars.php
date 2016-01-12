@@ -1,14 +1,30 @@
 <?php
 require_once("../functions.php");
+require_once("../header.php"); 
+
+//kontrollin, kas kasutaja ei ole sisseloginud	
+	if(!isset($_SESSION["id_from_db"])){
+		header("Location: login.php");
+	}
+	
+//login välja	
+	if(isset($_GET["logout"])){
+		session_destroy();
+		header("Location: login.php");
+	}
+
 
 ?>
-<h1>paride sisestamine</h1>
-<table border= 1>
-	<tr>
-		
-		<th>korvi number</th>
-		<th>PAR</th>
-	<tr>
+
+
+
+<div class="insertpars">
+	<h1>Insert PARs</h1>
+	<table class="center" border= 1>
+		<tr>			
+			<th>Basket number</th>
+			<th>PAR number</th>
+		<tr>
 <?php
 
 	$nr_of_baskets = $_GET["nr"];
@@ -33,7 +49,7 @@ require_once("../functions.php");
 		}
 	}
 	echo "<form action=insert_pars.php method='post'>";
-	echo "<TABLE>";
+	echo "<table>";
 	echo "<td><input name='park_id' type='hidden' value='".$_GET["id"]."'></td>";
 	echo "<td><input name='nr' type='hidden' value='".$_GET["nr"]."'></td>";
 
@@ -49,8 +65,11 @@ require_once("../functions.php");
 	
 
 	}
-	echo "</TABLE>";
-	echo "<input type='submit' name='save' value='salvesta'>";
+	echo "</table>";
+	echo "<input type='submit' name='save' value='Save'>";
 		echo "</form";
 
 ?>
+
+	</table>
+</div>

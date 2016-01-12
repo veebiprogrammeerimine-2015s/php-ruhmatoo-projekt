@@ -1,6 +1,7 @@
 <?php
 //laen funktsiooni faili	
 	require_once("../functions.php");
+	require_once("../header.php"); 
 	
 //kontrollin, kas kasutaja ei ole sisseloginud	
 	if(!isset($_SESSION["id_from_db"])){
@@ -49,14 +50,13 @@
 	
 
 ?>
-<p>
-	Sisselogitud kasutajaga <?=$_SESSION["user_email"];?>
-	<a href="?logout=1"> Logi välja</a>
-</p>
-<h2>Pane mängule nimi:</h2><br>
+
+<div class="newgame">
+<h2>Please, add a name to your game:</h2><br>
 
 <form action="<?php echo htmlspecialchars("new_game_0.php?id=".$park_id);?>" method="post" >
-  	<label for="game_name" >Mängu nimetus</label> <input id="game_name" name="game_name" type="text" value="<?=$game_name; ?>"> <?=$game_name_error; ?>
+  	<label for="game_name" >Game name: </label> <input id="game_name" name="game_name" type="text" value="<?=$game_name; ?>"> <?=$game_name_error; ?>
 	<input id="park_id" name="park_id" type="hidden" value="<?=$park_id; ?>">
-	<input type="submit" name="start_new_game" value="Alusta mängu">
+	<input type="submit" name="start_new_game" value="Go to play">
   </form>
+ </div>

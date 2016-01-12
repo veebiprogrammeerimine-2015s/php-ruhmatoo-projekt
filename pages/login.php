@@ -1,6 +1,6 @@
 
 <?php 
-		require_once("../header.php"); 
+		require_once("../header1.php"); 
 		require_once("../functions.php"); 
 
 		if(isset($_SESSION["id_from_db"])){
@@ -113,32 +113,6 @@
 </head>
 <body>
 
-
-<!-- MENÜÜ -->
-<nav class="navbar navbar-inverse navbar-fixed-top">  <!-- default - hall; navbar fixed top hoiab seda üleval kinni -->
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Home</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-<br><br><br>
-
-
 <!-- SISU -->
 
 <div class="container-fluid">
@@ -148,14 +122,11 @@
 				<h1>Welcome to </h1>
 				<h1>disc golf </h1>
 				<h1>page!</h1>
-				<p>...</p>
+				<p></p>
 
 				
 			</div>
 		</div>
-
-
-
 
 
 
@@ -199,8 +170,8 @@
 			
 			<br></br>
 
+		</div>
 
-	</div>
 
 	<!-- UUS KASUTAJA -->		
 

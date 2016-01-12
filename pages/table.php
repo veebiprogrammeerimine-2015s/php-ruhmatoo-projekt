@@ -1,11 +1,21 @@
 <?php
 	require_once("../functions.php");
+	require_once("../header.php"); 
 	
-	if(isset($_GET["main"])){
-			
-		header("Location: main.php");
-		
+
+//login välja	
+	if(isset($_GET["logout"])){
+		session_destroy();
+		header("Location: login.php");
 	}
+
+	
+	//kontrollin, kas kasutaja ei ole sisseloginud	
+	if(!isset($_SESSION["id_from_db"])){
+		header("Location: login.php");
+
+	}
+	
 	
 	$add_name_error = "";
 	$add_basket_error = "";
@@ -67,13 +77,13 @@
 
 
 
-<h2>Parkide management leht</h2>
-<table border= 1>
+<h2>Please, insert new disc golf park</h2>
+<table class="center" border= 1>
 	<tr>
 		<th>id</th>
 		<th>Park name</th>
-		<th>number of baskets</th>
-		<th>PARs</th>
+		<th>Number of baskets</th>
+		<th>Number of PARs</th>
 		<th>X</th>
 		<th>Edit</th>
 		
@@ -129,7 +139,3 @@
 ?>
 </table>	
 
-<p>
-	<a href="?main=1">MINE AVALEHELE</a>
-	
-</p>
