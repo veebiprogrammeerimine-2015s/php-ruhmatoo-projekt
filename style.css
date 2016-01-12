@@ -1,11 +1,34 @@
-h2
+h1, h2, p, div
 {
 	padding-left:20px;
+	padding-right: 20px;
+	
 }
 
 form
 {
 	padding-left:20px;
+
+}
+
+#login{
+	position: absolute;
+	margin: auto;
+	top: 0;
+	right: 400px;
+	bottom: 400px;
+	left: 0;
+	width: 200px;
+	height: 200px;
+	border-radius: 3px;
+	font-size: 20px;
+	
+}
+
+#login h2
+{
+	font-size: 22px;
+	margin-bottom: 0;
 }
 
 footer
@@ -17,4 +40,26 @@ footer
 	position: absolute;
 	width: 100%;
 	bottom: 0px;
+}
+
+
+th{
+	background-color:#FE642E;
+	text-align: center;	
+}
+
+.table{
+	padding-left:20px;
+	padding-right: 20px;
+	text-align: center;
+	width: 96%;
+}
+
+.navbar-brand-logout{
+
+   position:fixed;
+   right:30px;
+   top: 10px;
+   text-align: center;
+   font-size: 20px;
 }
