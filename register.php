@@ -1,4 +1,4 @@
-<?php require_once("headernav.php"); ?>
+
 <?php require_once("functions.php") ?>
 <?php
 
@@ -14,6 +14,7 @@
 
 
 if(isset($_POST["create"])){
+	
 				if ( empty($_POST["create_email"]) ) {
 					$create_email_error = "See väli on kohustuslik";
 				}else{
@@ -92,9 +93,9 @@ if(isset($_POST["create"])){
                     alt="sveg">
                 <form class="form-signin">
                 <input type="text" class="form-control" placeholder="Email" name="create_email" required autofocus> <?php echo $create_email_error; ?> <br>
-                <input type="text" class="form-control" placeholder="Eesnimi" name="firstname" required autofocus> <?php echo $create_password_error; ?> <br>
-				<input type="text" class="form-control" placeholder="Perekonnanimi" name="lastname" required autofocus> <?php echo $firstname_error;?> <br>
-                <input type="password" class="form-control" name="parool2" placeholder="Parool" required> <?php echo $lastname_error;?> <br>
+                <input type="text" class="form-control" placeholder="Eesnimi" name="firstname" required autofocus> <?php echo $firstname_error;?> <br>
+				<input type="text" class="form-control" placeholder="Perekonnanimi" name="lastname" required autofocus> <?php echo $lastname_error;?> <br>
+                <input type="password" class="form-control" name="create_password" placeholder="Parool" required><?php echo $create_password_error; ?>  <br>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                     Registreeri</button>
 					

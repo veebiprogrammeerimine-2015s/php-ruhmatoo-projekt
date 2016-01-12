@@ -1,4 +1,4 @@
-<?php require_once("headernav.php"); ?>
+
 <?php require_once("functions.php"); ?> 
 
 
@@ -78,8 +78,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 <img class="profile-img" src="pildid/jalgpall.ico"
                     alt="sveg">
                 <form class="form-signin">
-                <input type="email" class="form-control" name="email" placeholder="Email" required autofocus> <?php echo $email_error; ?> <br>
-                <input type="password" class="form-control" name="password" placeholder="Parool" required> <?php echo $password_error; ?> <br>
+                <input type="email" class="form-control" name="email" placeholder="Email"> <?php echo $email_error; ?> <br>
+                <input type="password" class="form-control" name="password" placeholder="Parool"> <?php echo $password_error; ?> <br>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                     Logi sisse</button>
                 <label class="checkbox pull-left">
