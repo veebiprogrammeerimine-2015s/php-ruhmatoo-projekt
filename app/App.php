@@ -9,9 +9,9 @@ namespace App;
  */
 class App {
 
-    public $mysqlUser = 'root';
+    public $mysqlUser = '';
     public $mysqlPassword = '';
-    public $mysqlDatabase = 'kaubamaja';
+    public $mysqlDatabase = '';
     public $mysqlHost = 'localhost';
     /**
      * @var \PDO
