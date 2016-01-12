@@ -69,7 +69,7 @@
  <div class="row">
  <div class="input-field col s4">
   <label for="email">E-mail</label>
-  <input name="fbemail" type="email" value="<?php echo $feedback_email; ?>"> <?php echo $feedback_email_error; ?>
+  <input id="fbemail" name="fbemail" type="email" value="<?php echo $feedback_email; ?>"> <?php echo $feedback_email_error; ?>
    </div>
   </div>
  <div class="row">

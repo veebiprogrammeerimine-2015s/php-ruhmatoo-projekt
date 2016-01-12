@@ -122,7 +122,7 @@
 	<div class="row">
 	<div class="input-field col s4">
 		<label for="date">Operatsiooni kuupäev</label>
-		<input type="date" class="datepicker" value="<?php echo $operation_date; ?>"> <?php echo $operation_date_error; ?>
+		<input type="date" name="operation_date" class="datepicker" value="<?php echo $operation_date; ?>"> <?php echo $operation_date_error; ?>
 	</div>
 	</div>
 	<div class="row">
@@ -133,7 +133,7 @@
 	</div>
 	<div class="input-field col s12">
 		<label for="d_animal_name" >Looma nimi</label>
-		<select id="d_animal_name" name="d_animal_name" value="<?php echo $d_animal_name; ?>"><?=$dropdown->createDropdown();?> <?php echo $d_animal_name_error; ?></select>
+		<select style="display:block;" id="d_animal_name" name="d_animal_name" value="<?php echo $d_animal_name; ?>"><?=$dropdown->createDropdown();?> </select><?php echo $d_animal_name_error; ?>
 	</div>
 	<br><br><br><br><br>
 	<div class="waves-effect waves-light btn">

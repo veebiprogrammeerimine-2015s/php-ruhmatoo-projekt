@@ -17,7 +17,7 @@ class dropdown {
 	function createDropdown(){
 	
 		$html = '';
-		$html .= '<select name="new_dd_selection">';
+		/*$html .= '<select name="new_dd_selection">';*/
 		
 		//$html .= '<option selected>1</option>';
 		//$stmt = $this->connection->prepare("SELECT id, name FROM interests");
@@ -34,7 +34,7 @@ class dropdown {
 		}
 		
 		
-		$html .= '</select>';
+		/*$html .= '</select>';*/
 		return $html;		
 	
 	}
