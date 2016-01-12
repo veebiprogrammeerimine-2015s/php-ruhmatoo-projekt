@@ -187,6 +187,7 @@ class User {
 		}
 		function getAccess($id){
 			$user_id = $_SESSION["logged_in_user_id"];
+			$_SESSION["purchase_id"] = $id;
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 			$stmt = $mysqli->prepare("SELECT * FROM VL_Payment WHERE (kasutaja_id = ? AND filmi_id= ? AND end_date >= DATE(now()))");
 			$stmt->bind_param("ii", $user_id, $id);
@@ -201,6 +202,20 @@ class User {
 				return "0";
 			}
 		  }
+		function purchaseMovie(){
+			$id = $_SESSION["logged_in_user_id"];
+			$movie_id = $_SESSION["purchase_id"];
+			var_dump($id);
+			var_dump($movie_id);
+			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+			$stmt = $mysqli->prepare("INSERT INTO VL_Payment (kasutaja_id, filmi_id, start_date, end_date) VALUES (?, ?, date(now()), (ADDDATE(curdate(), INTERVAL 30 DAY)))");
+			$stmt->bind_param("ii", $id, $movie_id);
+			$stmt->execute();
+			$stmt->close();
+
+
+
+		}
 
 
 
