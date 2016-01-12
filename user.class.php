@@ -181,100 +181,29 @@ class User {
 
 		  //tagastan massiivi, kus k�ik read sees
 		  return $search_array;
-			$_SESSION["logged_in_user_id"] = $user_id;
 		  $stmt->close();
 		  $mysqli->close();
-			
+
 		}
+		function getAccess($id){
+			$user_id = $_SESSION["logged_in_user_id"];
+			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+			$stmt = $mysqli->prepare("SELECT * FROM VL_Payment WHERE (kasutaja_id = ? AND filmi_id= ? AND end_date >= DATE(now()))");
+			$stmt->bind_param("ii", $user_id, $id);
+			//$stmt->bind_result($id_from_db, $email_from_db);
+			$stmt->execute();
+			if($stmt->fetch()){
+				echo "olemas";
+				return "1";
+			}
+			else{
+				echo "puudu";
+				return "0";
+			}
+		  }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		function getAccess($movie_id){
-		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("SELECT id, l�pu_kuup�ev FROM VL_Payment WHERE kasutaja_id=? AND filmi_id=?");
-		$stmt->bind_param("ss", $user_id, $movie_id);
-		$stmt->bind_result($payment, $end_date);
-		$stmt->execute();
-		if($stmt->fetch()){
-		  $user = new StdClass();
-		  $user->payment = $payment;
-		  header("Location: https://www.youtube.com/results?search_query=.$");
-		}
-		else{
-		  echo "Puudub juurdep��s";
-		}
-	  }
 
 }
 ?>
