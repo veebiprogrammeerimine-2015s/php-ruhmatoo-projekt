@@ -1,8 +1,9 @@
 <?php require_once("header.php"); ?>
-<?php require_once("functions2.php"); 
-
-$email = "";
-$password = "";
+<?php require_once("functions.php"); ?> 
+<?php require_once("footer.php"); ?>
+$email1 = "";
+$name = "";
+$password1 = "";
 
 if (isset($_SESSION["logged_in_user_id"])){
        header("Location: data.php");
@@ -48,4 +49,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </div>
     </div>
 </div>
+<<<<<<< HEAD
+  </body>
+  </html>
+  
+<?php require_once("footer.php"); ?>
+=======
 
+>>>>>>> 78a8e7af95241d3fb998aa26f5678429c1b471af

@@ -1,4 +1,4 @@
-<?php require_once("header.php"); ?>
+<?php require_once("headernav.php"); ?>
 <?php require_once("functions.php"); ?>
 <?php
  
