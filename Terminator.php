@@ -1,8 +1,8 @@
 <?php require_once("page/header.php");
       require_once("page/functions.php");
-      $id = 1;
+      $id = 2;
       $control = $user->getAccess($id);
-      if ($control == "2"){
+      if ($control == "1"){
         $link = "https://youtu.be/c4Jo8QoOTQ4";
       }
       else{

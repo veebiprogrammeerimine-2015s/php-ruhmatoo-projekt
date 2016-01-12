@@ -48,7 +48,6 @@ class User {
 			$email=$_SESSION["logged_in_user_email"];
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 			$stmt = $mysqli->prepare("UPDATE VL_Login SET hash=? WHERE email=? ");
-			echo "tere";
 			$stmt->bind_param("ss", $new_hash, $email);
 			$stmt->execute();
 			$stmt->close();
