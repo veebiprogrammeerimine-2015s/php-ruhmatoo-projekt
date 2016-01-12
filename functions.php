@@ -121,9 +121,9 @@
 		
         $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
 		
-        $stmt = $mysqli->prepare("SELECT id, name, age, gender, description, home_status FROM cats WHERE home_status='0' AND(name LIKE ? OR gender LIKE ?)");
+        $stmt = $mysqli->prepare("SELECT id, name, age, gender, description, home_status, picture FROM cats WHERE home_status='0' AND(name LIKE ? OR gender LIKE ?)");
 		$stmt->bind_param("ss", $search, $search);
-        $stmt->bind_result($id_from_db, $name_from_db, $age_from_db, $gender_from_db, $description_from_db, $home_status_from_db);
+        $stmt->bind_result($id_from_db, $name_from_db, $age_from_db, $gender_from_db, $description_from_db, $home_status_from_db, $picture_from_db);
         $stmt->execute();
         
 		//massiiv kus hoiame autosid
@@ -142,6 +142,7 @@
 			$cat->gender=$gender_from_db;
 			$cat->description=$description_from_db;
 			$cat->home_status=$home_status_from_db;
+            $cat->picture=$picture_from_db;
 			
 			//lisan massiivi
 			array_push($array, $cat);
@@ -174,9 +175,9 @@
 		
         $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
 		
-        $stmt = $mysqli->prepare("SELECT id, name, age, gender, description, home_status FROM cats WHERE home_status='1' AND(name LIKE ? OR gender LIKE ?)");
+        $stmt = $mysqli->prepare("SELECT id, name, age, gender, description, home_status, picture FROM cats WHERE home_status='1' AND(name LIKE ? OR gender LIKE ?)");
 		$stmt->bind_param("ss", $search, $search);
-        $stmt->bind_result($id_from_db, $name_from_db, $age_from_db, $gender_from_db, $description_from_db, $home_status_from_db);
+        $stmt->bind_result($id_from_db, $name_from_db, $age_from_db, $gender_from_db, $description_from_db, $home_status_from_db, $picture_from_db);
         $stmt->execute();
         
 		//massiiv kus hoiame autosid
@@ -195,6 +196,7 @@
 			$cat->gender=$gender_from_db;
 			$cat->description=$description_from_db;
 			$cat->home_status=$home_status_from_db;
+            $cat->picture=$picture_from_db;
 			
 			//lisan massiivi
 			array_push($array, $cat);
@@ -212,7 +214,7 @@
     }
 	
 	//vaikeväärtus sulgusdes, et vältida errorit, mis tekiks real 31 table.phps
-    function getAllCats($keyword=""){
+   function getAllCats($keyword=""){
 		
 		$search="";
 		
@@ -227,9 +229,9 @@
 		
         $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
 		
-        $stmt = $mysqli->prepare("SELECT id, name, age, gender, description, home_status FROM cats WHERE deleted IS NULL AND (name LIKE ? OR gender LIKE ?)");
+        $stmt = $mysqli->prepare("SELECT id, name, age, gender, description, home_status, picture FROM cats WHERE deleted IS NULL AND (name LIKE ? OR gender LIKE ?)");
 		$stmt->bind_param("ss", $search, $search);
-        $stmt->bind_result($id_from_db, $name_from_db, $age_from_db, $gender_from_db, $description_from_db, $home_status_from_db);
+        $stmt->bind_result($id_from_db, $name_from_db, $age_from_db, $gender_from_db, $description_from_db, $home_status_from_db, $picture_from_db);
         $stmt->execute();
         
 		//massiiv kus hoiame autosid
@@ -248,6 +250,7 @@
 			$cat->gender=$gender_from_db;
 			$cat->description=$description_from_db;
 			$cat->home_status=$home_status_from_db;
+            $cat->picture=$picture_from_db;
 			
 			//lisan massiivi
 			array_push($array, $cat);
@@ -294,6 +297,7 @@
 		$mysqli->close();
 		
 	}
+
 	
 	function adminRights($id, $email, $access_level){
 
@@ -309,4 +313,18 @@
 		$stmt->close();
         $mysqli->close();
     }
+
+    function updatePicture($cat_id, $picture){
+        $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+		
+		
+        $stmt = $mysqli->prepare("UPDATE cats SET picture = ?  WHERE id= ?");
+        $stmt->bind_param("si", $picture, $cat_id);
+        $stmt->execute();
+		$stmt->close();
+		$mysqli->close();
+    }
+    
+    
+
  ?>
