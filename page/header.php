@@ -1,5 +1,5 @@
 <html lang="en">
-<?php	require_once("page/functions.php");	?>
+<?php	require_once("functions.php");	?>
 <?php
 
 $keyword = "";
@@ -7,19 +7,20 @@ $movie_category = "";
 if(isset($_GET["logout"])){
 
 
-	//session_destroy();
+	session_destroy();
 
 	header("Location: login.php");
 }
 
 if(isset($_GET["keyword"])){
 	$keyword = $_GET["keyword"];
+
 	//echo $keyword;
 	$array_of_results = $user->getSearchData($keyword);
 }
 
 $movie_category = "";
-var_dump($_SESSION["logged_in_user_id"]);
+
 
 ?>
   <head>
@@ -67,7 +68,7 @@ var_dump($_SESSION["logged_in_user_id"]);
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Videod <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="movies.php?=Cat_Action">Action</a></li>
-            <li><a href="movies.php?=Cat_Komöödia">Komöödia</a></li>
+            <li><a href="movies.php?=Cat_Comedy">Comedy</a></li>
             <li><a href="movies.php?=Cat_Seiklus">Seiklus</a></li>
             <li><a href="movies.php?=Cat_Draama">Draama</a></li>
             <li><a href="movies.php?=Cat_Animatsioon">Animatsioon</a></li>
@@ -80,7 +81,7 @@ var_dump($_SESSION["logged_in_user_id"]);
 			<li><a href="movies.php?=Cat_Sport">Sport</a></li>
 			<li><a href="movies.php?=Cat_War">Sõda</a></li>
 			<li><a href="movies.php?=Cat_Muusikal">Muusikal</a></li>
-			<li><a href="movies.php?=Cat_Õudukad">Õudukad</a></li>
+			<li><a href="movies.php?=Cat_Horror">Horror</a></li>
           </ul>
         </li>
       </ul>
@@ -105,20 +106,16 @@ var_dump($_SESSION["logged_in_user_id"]);
 </nav>
 
 
-<!-- ################################################################################################################################ -->
-
-<!-- ################################################################################################################################ -->
-
 <table border="0"></td>
 
 	<?php
 	if(isset($_GET["keyword"])){
 		for($i = 0; $i < count($array_of_results); $i++){
 				echo "<tr>";
-				echo "<td>".$array_of_results[$i]->name."</td>";
-				echo "<td>".$array_of_results[$i]->category."</td>";
-				echo "<td>".$array_of_results[$i]->year."</td>";
-				echo "<td>".$array_of_results[$i]->director."</td>";
+				echo "<td>".$array_of_results[$i]->name." </td>";
+				echo "<td>".$array_of_results[$i]->category." </td>";
+				echo "<td>".$array_of_results[$i]->year." </td>";
+				echo "<td>".$array_of_results[$i]->director." </td>";
 				echo "<td><a href=".$array_of_results[$i]->link.">Link</a></td>";
 				echo "</tr>";
 		}
