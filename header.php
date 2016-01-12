@@ -54,3 +54,11 @@
     </nav>
   </head>
   
+  <?php 
+      // aadressireale tekkis ?logout=1
+    if(isset($_GET["logout"])){
+        //kustutame sessiooni muutujad
+        session_destroy();
+        header("Location: index.php");
+    }
+  ?>

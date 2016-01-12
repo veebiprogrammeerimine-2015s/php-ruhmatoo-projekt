@@ -15,6 +15,13 @@
 	require_once("functions.php");
 	
 	
+	      // aadressireale tekkis ?logout=1
+    if(isset($_GET["logout"])){
+        //kustutame sessiooni muutujad
+        session_destroy();
+        header("Location: index.php");
+    }
+	
 	//kasutaja muudab andmeid
 	if(isset($_GET["update"])){
 		

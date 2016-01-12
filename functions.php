@@ -303,10 +303,10 @@
 
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
         
-        $stmt = $mysqli->prepare("SELECT access_level FROM user_sample WHERE email = ?");
+        $stmt = $mysqli->prepare("SELECT id, email, access_level FROM user_sample WHERE id=? AND email =? AND access_level = ?" );
         $stmt->bind_param("isi", $id, $email, $access_level);
         $stmt->bind_result($id, $email, $access_level);
-        $stmt->execute();
+        $stmt->fetch();
 		
 		return $access_level;
         
