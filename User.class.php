@@ -1,20 +1,21 @@
 <?php 
+
 class User {
 	
 	private $connection;
 	
-	function __construct($mysqli) {
+	function __construct($mysqli){
 		
 		$this->connection = $mysqli;
 	}
 	
 
-	function loginUser($email, $password){
+	function loginUser($email1, $password1){
 		
 		$response = new StdClass();
 		
 		$stmt = $this->connection->prepare("SELECT id FROM post_user WHERE email=?");
-		$stmt->bind_param("s", $email);
+		$stmt->bind_param("s", $email1);
 		$stmt->bind_result($id);
 		$stmt->execute();
 		
@@ -27,12 +28,10 @@ class User {
 			$response->error = $error;
 			return $response;
 		}
-		
-
 		$stmt->close();
 		
 		$stmt = $this->connection->prepare("SELECT id, email FROM post_user WHERE email=? AND password=?");
-		$stmt->bind_param("ss", $email, $password);
+		$stmt->bind_param("ss", $email1, $password1);
 		$stmt->bind_result($id_from_db, $email_from_db);
 		$stmt->execute();
 		if($stmt->fetch()){
@@ -44,7 +43,7 @@ class User {
 			
 			$user = new StdClass();
 			$user->id = $id_from_db;
-			$user->email = $edmail_from_db;
+			$user->email = $email_from_db;
 			
 			$response->user = $user;
 			
