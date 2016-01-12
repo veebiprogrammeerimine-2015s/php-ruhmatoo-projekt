@@ -59,6 +59,7 @@
 				<th>Vanus</th>
 				<th>Sugu</th>
 				<th>Kirjeldus</th>
+                <th>Pilt</th>
 
 			</tr>
             </div>
@@ -77,6 +78,8 @@
 			echo "<td>".$cat_array[$i]->age."</td>";
 			echo "<td>".$cat_array[$i]->gender."</td>";
 			echo "<td>".$cat_array[$i]->description."</td>";
+            if (empty($picture)) $picture = "pic/default.png";
+            echo '<td><img src="'.$picture.'" width="100px" height="100px"</td>';
 			echo "</tr>";
 		
 	}
