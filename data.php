@@ -127,7 +127,7 @@
 		$cat_array=getAllCats();
 	}
 	
-	
+	//$access_level = 2;
 	
 ?>
 
@@ -154,11 +154,8 @@
 				<?php if(isset($access_level) == 2){
 					echo "<th>Edit</th>";
 					echo "<th>Delete</th>";
-
     			} ?>
-                    <th>Picture</th>
-    			} ?> 
-                    
+                    <th>Picture</th>                    
 				</tr>
 			</div>
 		</div>
