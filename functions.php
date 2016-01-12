@@ -263,6 +263,16 @@
 		$mysqli->close();
 		
 	}
+    function updatePicture($cat_id, $picture){
+        $mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["serverusername"], $GLOBALS["serverpassword"], $GLOBALS["database"]);
+		
+		
+        $stmt = $mysqli->prepare("UPDATE cats SET picture = ?  WHERE id= ?");
+        $stmt->bind_param("si", $picture, $cat_id);
+        $stmt->execute();
+		$stmt->close();
+		$mysqli->close();
+    }
     
     
  ?>

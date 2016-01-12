@@ -154,6 +154,7 @@
 				<?php if(isset($access_level) == 2){
 					echo "<th>Edit</th>";
 					echo "<th>Delete</th>";
+                    echo "<th><a href='picture.php'>Picture</th>";
     			} ?>
                     <th>Pilt</th>
                     
@@ -199,9 +200,14 @@
 		}
             if (empty($picture)) $picture = "pic/default.png";
             echo '<td><img src="'.$picture.'" width="100px" height="100px"</td>';
+            
+            
+            
 			echo "</tr>";
+            
 		}
 	}
+
 
 ?>
 </table>
