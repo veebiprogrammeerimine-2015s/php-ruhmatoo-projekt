@@ -1,6 +1,13 @@
 <?php
 	require_once("functions.php");
-	require_once("table.php");
+	if(isset($_GET["logout"])){
+		//aadressireal on olemas muutuja logout
+		
+		//kustutame kõik session muutujad ja peatame sessiooni
+		session_destroy();
+		
+		header("Location: login.php");
+	}
 	//data.php
 	// siia pääseb ligi sisseloginud kasutaja
 	//kui kasutaja ei ole sisseloginud,
@@ -61,6 +68,7 @@
 		$data = htmlspecialchars($data);
 		return $data;
 	}
+	
 
 ?>
 

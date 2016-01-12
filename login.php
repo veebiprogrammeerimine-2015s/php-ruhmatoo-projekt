@@ -77,11 +77,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="account-wall">
                 <img class="profile-img" src="pildid/jalgpall.ico"
                     alt="sveg">
-                <form class="form-signin" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                  <form class="form-signin" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                 <input type="email" class="form-control" name="email" placeholder="Email"> <?php echo $email_error; ?> <br>
                 <input type="password" class="form-control" name="password" placeholder="Parool"> <?php echo $password_error; ?> <br>
-                <input name="login" class="btn btn-lg btn-primary btn-block" type="submit">
-                    Logi sisse</button>
+                <input name="create" class="btn btn-lg btn-primary btn-block" type="submit" value="Logi sisse"><br>
+                  
                 <label class="checkbox pull-left">
                     <input type="checkbox" value="remember-me">
                     Jäta mind meelde

@@ -87,6 +87,8 @@
 </head>
 <body>
 <div class="container">
+<br>
+				<br>
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <h1 class="text-center login-title">Registreeri</h1>
@@ -98,9 +100,11 @@
                 <input type="text" class="form-control" placeholder="Eesnimi" name="firstname" required autofocus> <?php echo $create_password_error; ?> <br>
 				<input type="text" class="form-control" placeholder="Perekonnanimi" name="lastname" required autofocus> <?php echo $firstname_error;?> <br>
                 <input type="password" class="form-control" name="create_password" placeholder="Parool" required> <?php echo $lastname_error;?> <br>
-                <input class="btn btn-lg btn-primary btn-block" name="create" type="submit">
-                    Registreeri</button>
-					
+                <input class="btn btn-lg btn-primary btn-block" name="create" type="submit" value="Registreeri">
+				<br>
+				<br>
+				<br>
+				<p><a href="login.php"> Logi sisse <a> </p>
                 
                 
                 </form>
