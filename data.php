@@ -1,5 +1,5 @@
 <?php require_once ("header.php"); ?>
-
+<br><br>
 
 <?php
     // kõik mis seotud andmetabeliga, lisamine ja tabeli kujul esitamine
@@ -133,28 +133,35 @@
 
 
     
+    <div class="container-fluid">
+        <div class="row"  id="body">
+            <div class="col-sm-offset-1 col-sm-6">
+				<h1>Kasside tabel</h1>
+				<form action="otsivad.php" method="get">
+					<input name="keyword" type="search" value="<?=$keyword?>" >
+					<input type="submit" value="otsi"> 
+				</form>
 
-<h1>Kasside tabel</h1>
-<form action="otsivad.php" method="get">
-	<input name="keyword" type="search" value="<?=$keyword?>" >
-	<input type="submit" value="otsi"> 
-</form>
+				<br>
+				<table border=1>
+				<tr>
 
-<br>
-<table border=1>
-<tr>
+					<th>Nimi</th>
+					<th>Vanus</th>
+					<th>Sugu</th>
+					<th>Kirjeldus</th>
+					<th>Kodu leidnud?</th>
+				<?php if(isset($access_level) == 2){
+					echo "<th>Edit</th>";
+					echo "<th>Delete</th>";
+    			} ?>
+                    
+				</tr>
+			</div>
+		</div>
+	</div>
 
-	<th>Nimi</th>
-	<th>Vanus</th>
-	<th>Sugu</th>
-	<th>Kirjeldus</th>
-	<th>Kodu leidnud?</th>
-	<th>Edit</th>
-	<th>Delete</th>
-
-</tr>
-
-<?php 
+<?php
 	
 	//ükshaaval läbi käia
 	for($i=0; $i<count($cat_array); $i++){
@@ -185,39 +192,45 @@
 			echo "<td>".$cat_array[$i]->gender."</td>";
 			echo "<td>".$cat_array[$i]->description."</td>";
 			echo "<td>".$cat_array[$i]->home_status."</td>";
+		if(isset($access_level) == 2){
 			echo "<td><a href='?edit=".$cat_array[$i]->id."'>Edit</a></td>";
 			echo "<td><a href='?delete=".$cat_array[$i]->id."'>X</a></td>";
+		}
+            if (empty($picture)) $picture = "pic/default.png";
+                echo '<td><img src="'.$picture.'" width="100px" height="100px"</td>';
 			echo "</tr>";
 		}
 	}
 
 ?>
-
 </table>
 
-<h1> Lisa uus kass</h1>
+<br><br>
 
-  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  
-	<label for="name"> name </label>
-  	<input id="name" name="name" type="text" value="<?=$name; ?>"> <?=$name_error; ?><br><br>
-	
-	<label for="gender"> gender </label>
-  	<input id="gender" name="gender" type="text" value="<?=$gender; ?>"> <?=$gender_error; ?><br><br>
-	
-	<label for="age"> age </label>
-  	<input id="age" name="age" type="int" value="<?=$age; ?>"> <?=$age_error; ?><br><br>
-	
-	<label for="description"> description </label>
-  	<input id="description" name="description" type="text" value="<?=$description; ?>"> <?=$description_error; ?><br><br>
-	
-	<label for="home_status"> home_status? </label>
-  	<input id="home_status" name="home_status" type="text" value="<?=$home_status; ?>"> <?=$home_status_error; ?><br><br>
-	
-	
-  	<input type="submit" name="add_cat" value="Lisa">
-	<p style="color:green;"><?=$m;?></p>
-	
-  </form>  
-  
-  <?php require_once ("footer.php"); ?>
+			<h1> Lisa uus kass</h1>
+
+				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+						  
+					<label for="name"> name </label>
+					<input id="name" name="name" type="text" value="<?=$name; ?>"> <?=$name_error; ?><br><br>
+					
+					<label for="gender"> gender </label>
+					<input id="gender" name="gender" type="text" value="<?=$gender; ?>"> <?=$gender_error; ?><br><br>
+					
+					<label for="age"> age </label>
+					<input id="age" name="age" type="int" value="<?=$age; ?>"> <?=$age_error; ?><br><br>
+					
+					<label for="description"> description </label>
+					<input id="description" name="description" type="text" value="<?=$description; ?>"> <?=$description_error; ?><br><br>
+					
+					<label for="home_status"> home_status? </label>
+					<input id="home_status" name="home_status" type="text" value="<?=$home_status; ?>"> <?=$home_status_error; ?><br><br>
+					
+					
+					<input type="submit" name="add_cat" value="Lisa">
+					<p style="color:green;"><?=$m;?></p>
+							
+				</form>  
+
+
+<?php require_once ("footer.php"); ?>
