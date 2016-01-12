@@ -110,8 +110,8 @@
 		// globals on muutuja kõigist php failidest mis on ühendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO feedback_tech (feedback_name, feedback_user_id) VALUES (?, ?)");
-		$stmt->bind_param("si", $feedback_name, $feedback_user_id);
+		$stmt = $mysqli->prepare("INSERT INTO feedback_tech (name) VALUES (?)");
+		$stmt->bind_param("s", $feedback_name);
 		
 		$msg4 = "";
 		
@@ -129,9 +129,6 @@
 		return $msg4;
 		
 	}
-	
-	
-	
 	
 	function createComment($comment_name){
 		// globals on muutuja kõigist php failidest mis on ühendatud
