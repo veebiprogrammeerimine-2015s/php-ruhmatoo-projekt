@@ -3,6 +3,8 @@
 	$database = "if15_teamalpha_3";
 	
 	require_once("edit.class.php");
+	require_once("header.php");
+	require_once("footer.php");
 	//if(!isset($_SESSION["logged_in_user_id"])){
 	//	header("Location: login.php");
 	//}
