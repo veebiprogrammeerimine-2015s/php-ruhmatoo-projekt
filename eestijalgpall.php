@@ -1,7 +1,6 @@
 <?php
-	require_once("functions.php");
 	require_once("header.php");
-	
+	require_once("functions.php");
 
 	//data.php
 	// siia pääseb ligi sisseloginud kasutaja
@@ -27,7 +26,7 @@ if(isset($_GET["logout"])){
 		
 		echo "Kustutame id "  .$_GET["delete"];
 		//käivitan funktsiooni, saadan kaasa id!
-		deletePosts($_GET["delete"]);
+		deleteReview($_GET["delete"]);
 	}
 	
 	if(isset($_POST["save"])) {
@@ -48,21 +47,10 @@ if(isset($_GET["logout"])){
 
 
 
-<h2>Postitused Eesti jalgpallist</h2>
-
-
-
-
-
-
-
-
-
-
 <body style="background-color:#0074D9">
-<h2 style=color:#F8F8FF>Arvustused</h2>
-<a href="mingiteema.php"><h2 style="text-align:right;color:#F8F8FF">Loo ise arvustus</h2></a>
+<h2 style=color:#F8F8FF>Postitused Eesti jalgpallist</h2>
 
+<p><a href="mingiteema.php" class="btn btn-primary" role="button" style="text-align:left;color:#F8F8FF">Loo ise arvustus</a></p>
 <style>
 
 .CSSTableGenerator {
