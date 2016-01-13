@@ -52,6 +52,19 @@
 		$mysqli->close();
 	}
 	
+		function addPost($arvamus ){
+		
+		// Global muutujad, et kätte saada config failist andmed
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("INSERT INTO eestijalgpall (post) VALUES (?)");
+		$stmt->bind_param("s", $arvamus);
+		$stmt->execute();
+		$stmt->close();
+		
+		$mysqli->close();
+		
+	}
 	
 ?>
 	
