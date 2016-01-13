@@ -1,5 +1,6 @@
 <?php
 	require_once("functions.php");
+	require_once("header.php");
 	if(isset($_GET["logout"])){
 		//aadressireal on olemas muutuja logout
 		
@@ -17,59 +18,9 @@
 	}
 	
 
-	$boot_brand = "";
-	$model = "";
-	
-	$boot_brand_error = "";
-	$model_error = "";
-	
 
-	// keegi vajutas nuppu mudeli lisamiseks
-	if(isset($_POST["add_model"])){
-		
-		//echo $_SESSION["logged_in_user_id"];
-		
-		// valideerite väljad
-		if ( empty($_POST["boot_brand"]) ) {
-			$boot_brand_error = "This field is obligatory!";
-		}else{
-			$boot_brand = test_input($_POST["boot_brand"]);
-		}
-		
-		if ( empty($_POST["model"]) ) {
-			$model_error = "This field is obligatory!";
-		}else{
-			$model = test_input($_POST["model"]);
-		}
-		
-		// mõlemad on kohustuslikud
-		if($model_error == "" && $boot_brand_error == ""){
-			//salvestate ab'i fn kaudu addBootData
-			$message = addBootData($boot_brand, $model);
-			
-			if ($message != ""){
-				$boot_brand = "";
-				$model = "";
-				
-				echo $message;
-				
-				
-			}
-			
-		}
-		
-	}
-	
 
 	
-	function test_input($data) {
-		$data = trim($data);
-		$data = stripslashes($data);
-		$data = htmlspecialchars($data);
-		return $data;
-	}
-	
-
 ?>
 
 	<p>Welcome, <?=$_SESSION["logged_in_user_email"];?> </p>
@@ -77,11 +28,3 @@
 
 
 
-<h2>Add your boot</h2>
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-	<label for="boot_brand" >Boot brand</label><br>
-	<input id="boot_brand" name="boot_brand" type="text" value="<?php echo $boot_brand; ?>"> <?php echo $boot_brand_error; ?><br><br>
-	<label for="model">Model</label><br>
-	<input id="model" name="model" type="text" value="<?php echo $model; ?>"> <?php echo $boot_brand_error; ?><br><br>
-	<input name="add boot" type="submit" value="Save">
-</form>
