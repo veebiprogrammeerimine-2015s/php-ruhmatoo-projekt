@@ -115,45 +115,29 @@
 	
 ?>
 
-<div class="container-fluid">
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+</head>
+<body>
 
+  <h2>Log in</h2>
+  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+  	<input name="email" type="email" placeholder="E-post" value="<?php echo $email; ?>"> <?php echo $email_error; ?><br><br>
+  	<input name="password" type="password" placeholder="Parool" value="<?php echo $password; ?>"> <?php echo $password_error; ?><br><br>
+  	<input type="submit" name="login" value="Log in">
+  </form>
 
-	<div class="row">
-	
-		<div class="col-md-3 col-md-offset-1 col-sm-4">
-			<h3>Login</h3>
-			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-			  <div class="form-group">
-				<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" value="<?php echo $email; ?>"> <?php echo $email_error; ?>
-			  </div>
-			  <div class="form-group">
-				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" value="<?php echo $password; ?>"> <?php echo $password_error; ?>
-			  </div>
-			  <button type="submit" class="btn btn-success pull-right hidden-xs">Submit</button>
-			  <button type="submit" class="btn btn-success btn-block visible-xs" value="Log in">Submit</button>
-			</form>
-		</div>
-		
-		<div class="col-md-3 col-md-offset-1 col-sm-4">
-			<h3>Create User</h3>
-			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-			  <div class="form-group">
-				<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" value="<?php echo $create_email; ?>"> <?php echo $create_email_error; ?>
-			  </div>
-			  <div class="form-group">
-				<input type="password" class="form-control" id="exampleInputEmail1" placeholder="Password"> <?php echo $create_password_error; ?>
-			  </div>
-			  <div class="form-group">
-				<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password Again"> <?php echo $create_password_again_error; ?>
-			  </div>
-			  <button type="submit" class="btn btn-success pull-right hidden-xs">Submit</button>
-			  <button type="submit" class="btn btn-success btn-block visible-xs" value="Create user">Submit</button>
-			</form>
-		</div>
-	
-	</div>
+  <h2>Create user</h2>
+  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+  	<input name="create_email" type="email" placeholder="E-post" value="<?php echo $create_email; ?>"> <?php echo $create_email_error; ?><br><br>
+  	<input name="create_password" type="password" placeholder="Parool"> <?php echo $create_password_error; ?> <br><br>
+	<input name="create_password_again" type="password" placeholder="Parool Uuesti"> <?php echo $create_password_again_error; ?> <br><br>
+  	<input type="submit" name="create" value="Create user">
+  </form>
+<body>
+<html>
 
-	
-</div>
 
 <?php require_once("footer.php"); ?>
