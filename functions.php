@@ -118,7 +118,23 @@
 	}	
 				
 				
+		function deletePosts($id) {
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("UPDATE eestijalgpall SET deleted=NOW() WHERE id=?");
+		$stmt->bind_param("i", $id);
+		if($stmt->execute()) {
+			// sai kustutatud
+			// kustutame adressirea tühjaks
+			header("Location: eestijalgpall.php");
 			
+			
+		}
+		$stmt->close();
+		$mysqli->close();
+		
+	}	
 		
 	
 	

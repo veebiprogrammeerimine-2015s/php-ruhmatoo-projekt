@@ -1,6 +1,7 @@
 <?php
-	require_once("header.php");
 	require_once("functions.php");
+	require_once("header.php");
+	
 
 	//data.php
 	// siia pääseb ligi sisseloginud kasutaja
@@ -26,7 +27,7 @@ if(isset($_GET["logout"])){
 		
 		echo "Kustutame id "  .$_GET["delete"];
 		//käivitan funktsiooni, saadan kaasa id!
-		deleteReview($_GET["delete"]);
+		deletePosts($_GET["delete"]);
 	}
 	
 	if(isset($_POST["save"])) {
