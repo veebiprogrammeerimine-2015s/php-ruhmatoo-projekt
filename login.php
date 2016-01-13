@@ -1,3 +1,10 @@
+<?php
+
+	$page_title = "Sisse logimise leht";
+	$file_name = "login.php";
+	
+?>
+
 <?php require_once("header.php"); ?>
 
 <?php
