@@ -32,7 +32,7 @@
       <div class="caption">
         <h3>Eesti Jalgpall</h3>
         <p>Kõik seoses Eesti Jalgpalli ja Eesti Meistriliigaga</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <p><a href="eestijalgpall.php" class="btn btn-primary" role="button">Loe edasi ...</a></p>
       </div>
     </div>
   </div>
@@ -42,8 +42,8 @@
       <img src="pildid/inglisejalgpall" alt="inglise jalgpall" style="width:200px; height:160px;">
       <div class="caption">
         <h3>Inglise jalgpall</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <p>Arutelu seoses Barclays Preemium Liigaga</p>
+        <p><a href="inglisejalgpall.php" class="btn btn-primary" role="button">Loe edasi ...</a></p>
       </div>
     </div>
   </div>
@@ -54,8 +54,8 @@
       <img src="pildid/hispaaniajalgpall" alt="hispaaniajalgpall" style="width:200px; height:160px;">
       <div class="caption">
         <h3>Hispaania jalgpalll</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <p>Arutelu seoses La Ligaga</p>
+        <p><a href="hispaaniajalgpall.php" class="btn btn-primary" role="button">Loe edasi ...</a></p>
       </div>
     </div>
   </div>
@@ -66,8 +66,8 @@
       <img src="pildid/saksamaajalgpall" alt="saksamaajalgpall" style="width:200px; height:160px;">
       <div class="caption">
         <h3>Saksamaa jalgpalll</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <p>Arutelu seoses Bundesligaga</p>
+        <p><a href="saksamaajalgpall.php" class="btn btn-primary" role="button">Loe edasi ...</a></p>
       </div>
     </div>
  
@@ -78,8 +78,8 @@
       <img src="pildid/uefa" alt="uefa" style="width:200px; height:160px;">
       <div class="caption">
         <h3>Meistriteliiga UEFA</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <p>Arutelu seoses Meistriteliigaga UEFA</p>
+        <p><a href="uefa.php" class="btn btn-primary" role="button">Loe edasi ...</a> </p>
       </div>
     </div>
  
