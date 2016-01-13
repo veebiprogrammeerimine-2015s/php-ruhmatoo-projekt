@@ -54,8 +54,11 @@ if(isset($_GET["logout"])){
       </ul>
 	  
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	  
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="?logout=1">Logi välja <span class="sr-only">(current)</span></a></li>
+		<li>Tere, <?=$_SESSION["logged_in_user_email"];?></li>
+			<a href="?logout=1"> </a> </li>
+        <br><li><a href="?logout=1">Logi välja <span class="sr-only">(current)</span></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
