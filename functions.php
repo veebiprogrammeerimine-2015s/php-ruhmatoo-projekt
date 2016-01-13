@@ -61,7 +61,7 @@
 		if($stmt->execute()){
 			// kui on tõene,
 			//siis INSERT õnnestus
-			$message = "Sai edukalt lisatud";
+			$message = "*Sai edukalt lisatud*";
 			 
 			
 		}else{
