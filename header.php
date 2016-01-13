@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Football Forum</title>
+    <title>Jalka Foorum</title>
 
     <!-- Bootstrap -->
    <!-- Latest compiled and minified CSS -->
@@ -21,7 +22,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+<body>
   <!-- ################################################################################################################################ -->
   <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -33,34 +34,21 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Football Forum</a>
+      <a class="navbar-brand" href="data.php">Jalka Foorum</a>
     </div>
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="main.php">Avaleht <span class="sr-only">(current)</span></a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dreamteam <span class="caret"></span></a>
-          
-        </li>
+        <li class="active"><a href="profiil.php">Minu profiil <span class="sr-only">(current)</span></a></li>
       </ul>
-	  <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Kasutaja nimi <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Info</a></li>
-            <li><a href="#">Muuda midagi</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="?logout=1">Logi välja</a></li>
-          </ul>
-        </li>
+	  
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="profiil.php">Logi välja <span class="sr-only">(current)</span></a></li>
       </ul>
-      <form class="navbar-form navbar-right" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Otsi">
-        </div>
-        <button type="submit" class="btn btn-default">Otsi</button>
-      </form>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<!-- ################################################################################################################################ -->
+  
+  
+</html>
+ 
