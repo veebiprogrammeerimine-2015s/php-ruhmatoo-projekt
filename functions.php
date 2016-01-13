@@ -4,6 +4,7 @@
 	$database = "if15_mikkmae";
 	
 	
+	
 	//tekitatakse sessioon, mida hoitakse serveris,
 	// kõik session muutujad on kättesaadavad kuni viimase brauseriakna sulgemiseni
 	session_start();
@@ -76,9 +77,50 @@
 		
 		$stmt->close();
 		
-		$mysqli->close();
+			$mysqli->close(); }
 		
-	}
+			function getPostData() {
+				
+			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		$stmt = $mysqli->prepare("SELECT id, user_id, user_email, timestamp, post from eestijalgpall WHERE deleted IS NULL");
+		//$stmt->bind_param("ssss", $search, $search, $search, $search);
+		$stmt->bind_result($id, $user_id_from_database, $user_email_from_database, $timestamp, $post);
+		$stmt->execute();
+		
+		
+		// tühi massiiv, kus hoian moose ja 
+		$posts_array = array();
+		//tee midagi seni, kuni saame ab'ist ühe rea andmeid
+		while($stmt->fetch()){
+			// seda siin sees tehakse 
+			// nii mitu korda kui on ridu
+				
+			// tekitan objekti, kus hakkan hoitma oma moose ja väärtusi
+			$posts = new StdClass();
+			$posts->id=$id;
+			$posts->user_id=$user_id_from_database;
+			$posts->user_email= $user_email_from_database;
+			$posts->timestamp=$timestamp;
+			$posts->post=$post;
+			
+			//lisan massiivi
+			
+			array_push($posts_array, $posts);
+			
+			
+			
+		}
+		//tagastan massiivi, kus kõik asjad sees, read.
+		return $posts_array;
+		
+		$stmt->close();
+		$mysqli->close();
+	}	
+				
+				
+			
+		
+	
 	
 ?>
 	
