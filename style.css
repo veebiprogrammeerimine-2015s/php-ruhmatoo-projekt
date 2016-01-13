@@ -1,0 +1,68 @@
+#fbname, #fbemail, #feedback, h2 {
+	color:black !important;
+}
+
+
+
+h2{
+	font-size:30px !important;
+}
+
+.owner_register, .doctor-view, .login-form, .register-form, .col .s12{
+	padding-left:50px;
+	padding-top:50px;
+}
+a:active, a:hover{
+	text-decoration:none;
+	color:white;
+}
+
+.input-field .col .s4{
+	font-weight:normal;
+}
+
+label{
+	font-weight:normal;
+}
+.nav-wrapper img {
+	height:60px;
+}
+.navbar-collapse img{
+	height:50px;
+}
+
+.navbar-logo {
+	background:url(loomakliinik_logo.png);
+}
+
+.waves-effect .waves-light .btn {
+	float:right !important;
+}
+
+.jumbotron {
+	background: url(animals.jpg);
+	min-height:280px;
+	background-repeat: no-repeat;
+	padding:50px;
+	background-position-x: center;
+	background-color:#FFF !important;
+}
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+      
+      
+@media(max-width: 767px){
+	.jumbotron {
+		display:none;
+	}
+	.login-form{
+		margin-top:70px;
+	}
+}
