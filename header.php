@@ -1,3 +1,15 @@
+<?php 
+
+if(isset($_GET["logout"])){
+		//aadressireal on olemas muutuja logout
+		
+		//kustutame kõik session muutujad ja peatame sessiooni
+		session_destroy();
+		
+		header("Location: page/login.php");
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,7 +55,7 @@
 	  
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="profiil.php">Logi välja <span class="sr-only">(current)</span></a></li>
+        <li><a href="?logout=1">Logi välja <span class="sr-only">(current)</span></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
