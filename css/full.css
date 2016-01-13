@@ -1,0 +1,34 @@
+body {
+    margin-top: 50px; 
+}
+
+#body{
+	background-color: rgba(0,0,0,0.8);
+	padding: 15px;
+	width:100%;
+	margin: 0px;
+	font: white;
+}
+
+h1{
+	color: white;
+}
+
+p{
+	color: white;
+}
+
+.full {
+    background: url('../background.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+table{
+	color: white;
+}
+label{
+    color:white;
+}
