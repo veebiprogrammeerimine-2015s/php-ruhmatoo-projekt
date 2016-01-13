@@ -9,10 +9,10 @@
 	<?php } ?>
 	
 	<?php 
-		if ($file_name == "login.php"){
-			echo "<li> Login </li>";
+		if ($file_name == "add_car.php"){
+			echo "<li> Auto lisamine </li>";
 		}else {
-			echo '<li> <a href="login.php">Login</a> </li>';
+			echo '<li> <a href="add_car.php">Auto lisamine </a> </li>';
 		}
 
 	?>
@@ -20,7 +20,7 @@
 		if ($file_name == "forum"){
 			echo "<li> Foorum </li>";
 		}else {
-			echo '<li> <a href="forum">Foorum</a> </li>';
+			echo '<li> <a href="http://localhost:5555/~janilv/php-ruhmatoo-projekt/forum/">Foorum</a> </li>';
 		}
 
 	?>

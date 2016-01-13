@@ -1,3 +1,3 @@
-	<p><i>Lehe tegi Kert</p>
+	<p><i>Estonian muscle</p>
 </body>
 </html>
