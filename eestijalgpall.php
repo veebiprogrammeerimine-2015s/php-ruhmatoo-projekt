@@ -1,14 +1,5 @@
 <?php
 	require_once("functions.php");
-	require_once("header.php");
-	if(isset($_GET["logout"])){
-		//aadressireal on olemas muutuja logout
-		
-		//kustutame kõik session muutujad ja peatame sessiooni
-		session_destroy();
-		
-		header("Location: login.php");
-	}
 	//data.php
 	// siia pääseb ligi sisseloginud kasutaja
 	//kui kasutaja ei ole sisseloginud,
@@ -18,25 +9,27 @@
 	}
 	
 
-
-
-	
 ?>
-<p>
-	Tere, <?=$_SESSION["logged_in_user_email"];?>
-	<a href="?logout=1"> Logi välja </a> 
-</p>
+<div align =left>
 <br>
-<a href="data.php"><h2>Tagasi teemade lehele</h2></a>
+<p><a href="data.php" class="btn btn-primary" role="button">Tagasi teemade lehele</a></p>
 <br>
+
 <h2>Postitused Eesti jalgpallist</h2>
 
-<form action="table.php" method="get" >
-	<input type="search" name="keyword" value="">
-	<input type="submit" value="Otsi">
-</form>
-
-
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h1 class="text-left login-title">Otsing</h1>
+            <div class="account-wall">
+                  <form class="form-signin" action="table.php" method="get">
+                <input type="search" class="form-control" name="keyword" placeholder="Email"><br>
+                <input name="login" class="btn btn-lg btn-primary btn-block" type="submit" value="Logi sisse">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <table border=1>
@@ -57,23 +50,20 @@
 
 <html>
 
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-md-4">
+				<h1 class="text-left login-title">Postita</h1>
+				<div class="account-wall">
+					<form class="form-signin" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+					<input type="password" class="form-control" name="password" placeholder="Arvamus"><br>
+					<input name="postita" class="btn btn-lg btn-primary btn-block" type="submit" value="Postita"><br>
+					</form>
+		</div>
+	</div>
 
-<h2>Lisa postitus</h2>
-
-
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-	
-	
-	<label for="Date">Kuupäev</label><br>
-	<input id="date" name="date" type="text" value=""> <br><br>
-	
-	<label for="Teema">Lisa arvamus</label><br>
-	<input id="teema" name="teema" type="text" value=""> <br><br>
-	<input type="submit" name="add_review" value="Lisa">
-	
-</form>
-<a href="../table.php"><h2>Loe teiste postitusi</h2></a>
+<p><a href="table.php" class="btn btn-primary" role="button">Loe teiste postitatud teemasid</a></p>
 </body>
 </html>
-
+</div>
 
