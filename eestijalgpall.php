@@ -1,14 +1,5 @@
 <?php
 	require_once("functions.php");
-	require_once("header.php");
-	if(isset($_GET["logout"])){
-		//aadressireal on olemas muutuja logout
-		
-		//kustutame kõik session muutujad ja peatame sessiooni
-		session_destroy();
-		
-		header("Location: login.php");
-	}
 	//data.php
 	// siia pääseb ligi sisseloginud kasutaja
 	//kui kasutaja ei ole sisseloginud,
@@ -18,16 +9,13 @@
 	}
 	
 
-
-
-	
 ?>
-
+<div align =left>
 <br>
 <p><a href="data.php" class="btn btn-primary" role="button">Tagasi teemade lehele</a></p>
 <br>
 
-<br><h2>Postitused Eesti jalgpallist</h2>
+<h2>Postitused Eesti jalgpallist</h2>
 
 <div class="container">
     <div class="row">
@@ -61,7 +49,7 @@
 <body>
 
 <html>
-<div style='align:left'>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4 col-md-4">
@@ -73,9 +61,9 @@
 					</form>
 		</div>
 	</div>
-</div>
+
 <p><a href="table.php" class="btn btn-primary" role="button">Loe teiste postitatud teemasid</a></p>
 </body>
 </html>
-
+</div>
 
