@@ -1,7 +1,6 @@
 <?php
 	require_once("functions.php");
 	require_once("header.php");
-	
 	if(isset($_GET["logout"])){
 		//aadressireal on olemas muutuja logout
 		
@@ -43,7 +42,7 @@
       <img src="pildid/inglisejalgpall" alt="inglise jalgpall" style="width:200px; height:160px;">
       <div class="caption">
         <h3>Inglise jalgpall</h3>
-        <p>Arutelu seoses Barclays Preemium Liigaga</p>
+        <p>Arutelu seoses Barclays Premium Ligaga</p>
         <p><a href="inglisejalgpall.php" class="btn btn-primary" role="button">Loe edasi ...</a></p>
       </div>
     </div>
@@ -54,7 +53,7 @@
     <div class="thumbnail">
       <img src="pildid/hispaaniajalgpall" alt="hispaaniajalgpall" style="width:200px; height:160px;">
       <div class="caption">
-        <h3>Hispaania jalgpalll</h3>
+        <h3>Hispaania jalgpall</h3>
         <p>Arutelu seoses La Ligaga</p>
         <p><a href="hispaaniajalgpall.php" class="btn btn-primary" role="button">Loe edasi ...</a></p>
       </div>
@@ -66,7 +65,7 @@
     <div class="thumbnail">
       <img src="pildid/saksamaajalgpall" alt="saksamaajalgpall" style="width:200px; height:160px;">
       <div class="caption">
-        <h3>Saksamaa jalgpalll</h3>
+        <h3>Saksamaa jalgpall</h3>
         <p>Arutelu seoses Bundesligaga</p>
         <p><a href="saksamaajalgpall.php" class="btn btn-primary" role="button">Loe edasi ...</a></p>
       </div>
@@ -79,11 +78,9 @@
       <img src="pildid/uefa" alt="uefa" style="width:200px; height:160px;">
       <div class="caption">
         <h3>Meistriteliiga UEFA</h3>
-        <p>Arutelu seoses Meistriteliigaga UEFA</p>
+        <p>Arutelu seoses UEFA Meistriteliigaga</p>
         <p><a href="uefa.php" class="btn btn-primary" role="button">Loe edasi ...</a> </p>
       </div>
     </div>
  
 </div>
-
-<?php require_once("footer.php"); ?>
