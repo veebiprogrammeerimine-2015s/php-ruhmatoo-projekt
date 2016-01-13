@@ -1,6 +1,7 @@
 <?php
 	require_once("functions.php");
 	require_once("header.php");
+	
 	if(isset($_GET["logout"])){
 		//aadressireal on olemas muutuja logout
 		
@@ -84,3 +85,5 @@
     </div>
  
 </div>
+
+<?php require_once("footer.php"); ?>
