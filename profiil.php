@@ -1,6 +1,7 @@
 
 <?php require_once("functions.php") ?>
 <?php require_once("header.php") ?>
+<?php require_once("footer.php"); ?>
 <?php if(isset($_GET["logout"])){
 		//aadressireal on olemas muutuja logout
 		
@@ -40,6 +41,16 @@
                         <td>Email</td>
                         <td><a href="mailto:info@support.com">miguel@gmail.com</a></td>
                      </tr>
+					 <tr>
+					 <td>Eesnimi</td>
+					 <td>Miguel</td>
+					 </tr>
+					 
+					 <tr>
+					 <td>Perekonnanimi</td>
+					 <td>Mjau</td>
+					 </tr>
+                     
                      
                     </tbody>
                   </table>

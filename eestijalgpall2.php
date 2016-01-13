@@ -1,6 +1,8 @@
 <?php
-	require_once("header.php");
 	require_once("functions.php");
+	require_once("header.php");
+	require_once("footer.php");
+	
 
 	//data.php
 	// siia pääseb ligi sisseloginud kasutaja
@@ -26,7 +28,7 @@ if(isset($_GET["logout"])){
 		
 		echo "Kustutame id "  .$_GET["delete"];
 		//käivitan funktsiooni, saadan kaasa id!
-		deleteReview($_GET["delete"]);
+		deletePosts($_GET["delete"]);
 	}
 	
 	if(isset($_POST["save"])) {
@@ -43,7 +45,7 @@ if(isset($_GET["logout"])){
 
 
 <p><a href="data.php" class="btn btn-primary" role="button">Tagasi teemade lehele</a></p>
-<p><a href="mingiteema.php" class="btn btn-primary" role="button" style="text-align:left;color:#F8F8FF">Loo ise arvustus</a></p>
+<p><a href="mingiteema.php" class="btn btn-primary" role="button" style="text-align:left;color:#F8F8FF">Loo ise postitus</a></p>
 
 
 <div class="well">

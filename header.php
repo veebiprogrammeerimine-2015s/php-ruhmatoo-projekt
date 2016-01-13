@@ -6,7 +6,7 @@ if(isset($_GET["logout"])){
 		//kustutame kõik session muutujad ja peatame sessiooni
 		session_destroy();
 		
-		header("Location: page/login.php");
+		header("Location: login.php");
 	}
 ?>
 

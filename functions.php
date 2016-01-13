@@ -6,15 +6,15 @@
 	
 	
 	//tekitatakse sessioon, mida hoitakse serveris,
-	// kõik session muutujad on kättesaadavad kuni viimase brauseriakna sulgemiseni
+	// kÃµik session muutujad on kÃ¤ttesaadavad kuni viimase brauseriakna sulgemiseni
 	session_start();
 	
 	
-	// võtab andmed ja sisestab ab'i
-	// võtame vastu 2 muutujat
+	// vÃµtab andmed ja sisestab ab'i
+	// vÃµtame vastu 2 muutujat
 	function createUser($create_email, $hash, $firstname, $lastname ){
 		
-		// Global muutujad, et kätte saada config failist andmed
+		// Global muutujad, et kÃ¤tte saada config failist andmed
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
 		$stmt = $mysqli->prepare("INSERT INTO users (email, password, first_name, last_name) VALUES (?,?,?,?)");
@@ -35,7 +35,7 @@
 		$stmt->execute();
 		if($stmt->fetch()){
 			// ab'i oli midagi
-			echo "Email ja parool õiged, kasutaja id=".$id_from_db;
+			echo "Email ja parool Ãµiged, kasutaja id=".$id_from_db;
 			
 			// tekitan sessiooni muutujad
 			$_SESSION["logged_in_user_id"] = $id_from_db;
@@ -54,19 +54,19 @@
 	}
 			function addPost($arvamus ){
 		
-		// Global muutujad, et kätte saada config failist andmed
+		// Global muutujad, et kÃ¤tte saada config failist andmed
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
 		$stmt = $mysqli->prepare("INSERT INTO eestijalgpall (user_id, user_email, post) VALUES (?,?,?)");
 		$stmt->bind_param("iis", $_SESSION["logged_in_user_id"], $_SESSION["logged_in_user_email"], $arvamus);
 		if($stmt->execute()){
-			// kui on tõene,
-			//siis INSERT õnnestus
+			// kui on tÃµene,
+			//siis INSERT Ãµnnestus
 			$message = "*Sai edukalt lisatud*";
 			 
 			
 		}else{
-			// kui on väärtus FALSE
+			// kui on vÃ¤Ã¤rtus FALSE
 			// siis kuvame errori
 			echo $stmt->error;
 			
@@ -88,14 +88,14 @@
 		$stmt->execute();
 		
 		
-		// tühi massiiv, kus hoian moose ja 
+		// tÃ¼hi massiiv, kus hoian moose ja 
 		$posts_array = array();
-		//tee midagi seni, kuni saame ab'ist ühe rea andmeid
+		//tee midagi seni, kuni saame ab'ist Ã¼he rea andmeid
 		while($stmt->fetch()){
 			// seda siin sees tehakse 
 			// nii mitu korda kui on ridu
 				
-			// tekitan objekti, kus hakkan hoitma oma moose ja väärtusi
+			// tekitan objekti, kus hakkan hoitma oma moose ja vÃ¤Ã¤rtusi
 			$posts = new StdClass();
 			$posts->id=$id;
 			$posts->user_id=$user_id_from_database;
@@ -110,7 +110,7 @@
 			
 			
 		}
-		//tagastan massiivi, kus kõik asjad sees, read.
+		//tagastan massiivi, kus kÃµik asjad sees, read.
 		return $posts_array;
 		
 		$stmt->close();
@@ -126,8 +126,8 @@
 		$stmt->bind_param("i", $id);
 		if($stmt->execute()) {
 			// sai kustutatud
-			// kustutame adressirea tühjaks
-			header("Location: eestijalgpall.php");
+			// kustutame adressirea tÃ¼hjaks
+			header("Location: eestijalgpall2.php");
 			
 			
 		}
