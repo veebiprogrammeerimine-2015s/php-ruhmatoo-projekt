@@ -51,8 +51,7 @@
 		
 		$mysqli->close();
 	}
-	
-		function addPost($arvamus ){
+			function addPost($arvamus ){
 		
 		// Global muutujad, et kätte saada config failist andmed
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
