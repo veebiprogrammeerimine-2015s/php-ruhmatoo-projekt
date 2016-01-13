@@ -17,10 +17,10 @@
 
 	?>
 	<?php 
-		if ($file_name == "edit.php"){
-			echo "<li> Edit </li>";
+		if ($file_name == "forum"){
+			echo "<li> Foorum </li>";
 		}else {
-			echo '<li> <a href="edit.php">Edit</a> </li>';
+			echo '<li> <a href="forum">Foorum</a> </li>';
 		}
 
 	?>
