@@ -1,4 +1,21 @@
+
+<?php require_once("functions.php") ?>
 <?php require_once("header.php") ?>
+<?php if(isset($_GET["logout"])){
+		//aadressireal on olemas muutuja logout
+		
+		//kustutame kõik session muutujad ja peatame sessiooni
+		session_destroy();
+		
+		header("Location: login.php");
+	}
+	
+	if(!isset($_SESSION["logged_in_user_id"])){
+		header("Location: login.php");
+	}
+	
+	?>
+
 
 <div class="container">
       <div class="row">
@@ -10,7 +27,7 @@
    
           <div class="panel panel-info">
             <div class="panel-heading">
-              <h3 class="panel-title">Sheena Kristin A.Eschor</h3>
+              <h3 class="panel-title">Miguel Mjau</h3>
             </div>
             <div class="panel-body">
               <div class="row">
@@ -21,8 +38,8 @@
                     <tbody>
                       <tr>
                         <td>Email</td>
-                        <td><a href="mailto:info@support.com">info@support.com</a></td>
-                     
+                        <td><a href="mailto:info@support.com">miguel@gmail.com</a></td>
+                     </tr>
                      
                     </tbody>
                   </table>
