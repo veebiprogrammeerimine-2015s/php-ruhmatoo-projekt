@@ -78,7 +78,7 @@
 					<form class="form-signin" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 					<input type="text" class="form-control" name="arvamus" placeholder="Arvamus" value="<?php echo $arvamus; ?>"> <?php echo $arvamus_error; ?><br><br>
 					<input name="add_post" class="btn btn-lg btn-primary btn-block" type="submit" value="Postita"><br>
-					<p><a href="eestijalgpall.php" class="btn btn-primary" role="button">Loe teiste postitatud teemasid</a></p>
+					<p><a href="eestijalgpall2.php" class="btn btn-primary" role="button">Loe teiste postitatud teemasid</a></p>
 					</form>
 		</div>
 	</div>

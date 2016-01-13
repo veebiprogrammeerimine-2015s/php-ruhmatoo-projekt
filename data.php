@@ -32,7 +32,7 @@
       <div class="caption">
         <h3>Eesti Jalgpall</h3>
         <p>Kõik seoses Eesti Jalgpalli ja Eesti Meistriliigaga</p>
-        <p><a href="eestijalgpall.php" class="btn btn-primary" role="button">Loe edasi ...</a></p>
+        <p><a href="eestijalgpall2.php" class="btn btn-primary" role="button">Loe edasi ...</a></p>
       </div>
     </div>
   </div>
