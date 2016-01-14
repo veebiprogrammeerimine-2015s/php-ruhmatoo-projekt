@@ -1,5 +1,5 @@
 #KINGS OF COCKTAILS
-* [Koduleht](http://greeny.cs.tlu.ee/~kaurkal/GT_Kaur_Tauno_Koit/php-ruhmatoo-projekt/grupitoo2/home.php)
+* [Koduleht](http://greeny.cs.tlu.ee/~kaurkal/GT_Kaur_Tauno_Koit/php-ruhmatoo-projekt/grupitoo3/page/home.php)
 
 ##Liikmed
 * Kaur Kaljuma, Tauno Lainevool, Koit Korela
@@ -23,6 +23,8 @@
    * v0.4 Kasutaja saab sisestada portaali infot (OK)
    * v0.5 Kodulehe külastaja näeb tabelina infot, mida kasutajad on portaali sisestanud (OK)
    * v0.6 Portaal on testitud (OK)
+   * v0.7 Lisasime sponsorite lehe (OK)
+   * v0.8 Lisasime kasutaja profiili ja kasutaja pildi lisamise funktsiooni (OK)
    * v1.0 Portaal on kasutajatele avatud
 
 * **[MySQL tabelid ja käsud](http://www.tlu.ee/~kkkaur/PHP/MySQL_for_PHP.JPG)**
@@ -34,14 +36,14 @@
    * **Mis oli keeruline:** Kodulehel info sisestamine, selle saatmine andmebaasi ja pärast andmebaasis oleva info kuvamine kodulehel. Sain veateate functions.php lehelt, kuigi tegelikult oli viga sellel lehel, mis infot functions.php lehele saatis (hiljem meenus, et õppejõud rääkis ka tunnis, et PHP-s ei pruugi andmebaaside errorite puhul viga olla tegelikult seal, mis veateates kirjas). Selle vea otsimine ja parandamine oli üsna aeganõudev, kuid väga huvitav ja kui lõpuks selle lahendatud sain, oli kuidagi eufooriline tunne.
 
 * **Tauno:**
-   * **Mida õppisin juurde:**
-   * **Mis ebaõnnestus:** 
-   * **Mis oli keeruline:** 
+   * **Mida õppisin juurde:** Õppisin juurde php funktsioonide liikumise, kuidas funktsioon liigub erinevate lehtede vahel. Sain kogemusi php koodi lugemisel ja selle kirjutamisel.
+   * **Mis ebaõnnestus:** Oli raske leide sobivat aega grupitööks
+   * **Mis oli keeruline:** Keeruline oli luua huvialade tabelit, mida oleks võimalik muuta ja kustutada.
  
 * **Koit:**
-   * **Mida õppisin juurde:**
-   * **Mis ebaõnnestus:** 
-   * **Mis oli keeruline:** 
+   * **Mida õppisin juurde:** Kuidas sisestada andmeid ja parandasin enda oskusi HTML-is, PHP-s ja mysql-is.
+   * **Mis ebaõnnestus:** Rühma aja planeerimine.
+   * **Mis oli keeruline:** Veebilehe ühtne toimimine.
 
 
 
