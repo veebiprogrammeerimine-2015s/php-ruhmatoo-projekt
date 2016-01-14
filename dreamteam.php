@@ -18,7 +18,8 @@
 	?>
 
 <h1>
-	<div style="text-align: center;">Vabandame, leht on uuendamisel :( </div>
+	<div style="text-align: center;"></div>
 </h1>
 <div style="text-align: center;">
-<img class="center" src="pildid/dreamteam.jpg"alt="sveg"style="width:600px;height:400px;"></img> </div>
+    <p><a href="dreamteam_add.php" class="btn btn-primary" role="button">Loo endale enda dreamteam</a></p>
+    

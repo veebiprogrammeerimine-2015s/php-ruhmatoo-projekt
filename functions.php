@@ -137,7 +137,26 @@
 	}	
 		
 	
-	
+function createTeam($GK, $LB, $CB1, $CB2, $RB, $LM, $CM1, $CM2, $RM, $ST1, $ST2 ){
+		
+		// Global muutujad, et kätte saada config failist andmed
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("INSERT INTO users (GK, LB, CB1, CB2, RB, LM, CM1, CM2, RM, ST1, ST2 WHERE id='".$_SESSION['logged_in_user_id']."') VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+		$stmt->bind_param("sssssssssss", $GK, $LB, $CB1, $CB2, $RB, $LM, $CM1, $CM2, $RM, $ST1, $ST2);
+		$stmt->execute();
+     
+    
+		$stmt->close();
+		
+		$mysqli->close();
+		
+	}
+		
+
+
+
+
 ?>
 	
 	
