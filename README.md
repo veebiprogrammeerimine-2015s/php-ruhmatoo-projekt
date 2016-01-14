@@ -32,3 +32,10 @@
 	
 	Kõige keerulisemaks pidasin seda, kui ul oli kuskil 1 väike typo ja olin kogu koodi juba 3 korda üle kontrollinud ja endiselt ei leidnud viga üles. 
 	
+2.Rasmus-
+	Õppisin sügavamalt kasutama tunnis õpitut, eriti funktsioone ja kuidas neid kasutada. Õppisin, et väiksed kirjavead on alati pinnuks silmas ning kood tuleb alati rahulikult läbi vaadata. Sain parema ülevaate,kuidas üles ehitada veebilehte. 
+	
+	Ebaõnnestusid paljud asjad tööd tehes, kuid rühmana leidsime neile lahendused. 
+	
+	Kõige keerulisem oli minu jaoks suhtluse pool mysql tabelitega, mida üritasime tööle saada terve päeva.
+	
