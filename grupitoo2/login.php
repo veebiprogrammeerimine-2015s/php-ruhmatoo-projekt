@@ -89,7 +89,7 @@ require_once("header.php");
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
   	<input name="email" type="email" placeholder="E-post" value="<?php echo $email; ?>"> <?php echo $email_error; ?><br><br>
   	<input name="password" type="password" placeholder="Parool" value="<?php echo $password; ?>"> <?php echo $password_error; ?><br><br>
-  	<input type="submit" name="login" value="Log in">
+  	<input type="submit" name="login" value="Logi sisse">
   </form>
 
 <body>

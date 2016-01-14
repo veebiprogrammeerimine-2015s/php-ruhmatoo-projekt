@@ -1,3 +1,3 @@
 <html>
-<p><i>"Grupi"-töö 2015</i><br>
+<p><i>Grupitöö 2015</i><br>
 </html>

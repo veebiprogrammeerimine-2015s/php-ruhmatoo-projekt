@@ -7,3 +7,17 @@ CREATE TABLE user (
 	created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	UNIQUE(email)
 );
+
+
+CREATE TABLE reviews(
+	id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+	user_id INT,
+	bar VARCHAR(45),
+	cocktails VARCHAR (255),
+	service INT(10),
+	interior INT(10),
+	prices INT(10),
+	score INT(10),
+	info TEXT,
+	date TIMESTAMP
+);

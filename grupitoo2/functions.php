@@ -6,7 +6,7 @@
 
 	function createUser($create_email, $password_hash){			
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("INSERT INTO user_sample (email, password) VALUES (?, ?)");
+		$stmt = $mysqli->prepare("INSERT INTO users (email, password) VALUES (?, ?)");
 		$stmt->bind_param("ss", $create_email, $password_hash);
 		$stmt->execute();
 		$stmt->close();
@@ -17,7 +17,7 @@
 	function loginUser($email, $password_hash){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);		
-		$stmt = $mysqli->prepare("SELECT id, email FROM user_sample WHERE email=? AND password=?");
+		$stmt = $mysqli->prepare("SELECT id, email FROM users WHERE email=? AND password=?");
 		$stmt->bind_param("ss", $email, $password_hash);
 		$stmt->bind_result($id_from_db, $email_from_db);
 		$stmt->execute();
@@ -52,8 +52,8 @@
 	}
 	function getreviews(){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("SELECT user_id, bar, cocktails, service, interior, prices, score, info FROM reviews ORDER BY score DESC");
-		$stmt->bind_result($user_id, $bar, $cocktails, $service, $interior, $prices, $score, $info);
+		$stmt = $mysqli->prepare("SELECT user_id, bar, cocktails, service, interior, prices, score, info, date FROM reviews ORDER BY score DESC");
+		$stmt->bind_result($user_id, $bar, $cocktails, $service, $interior, $prices, $score, $info, $date);
 		$stmt->execute();
 
 		$array = array();
@@ -62,6 +62,7 @@
 
 			$review = new StdClass();
 			$review->user_id = $user_id;
+			$review->date = $date;
 			$review->bar = $bar;
 			$review->cocktails = $cocktails;
 			$review->service = $service;
@@ -70,7 +71,6 @@
 			$review->score = $score;
 			$review->info = $info;
 			
-			// lisame selle massiivi
 			array_push($array, $review);
 		}
 		

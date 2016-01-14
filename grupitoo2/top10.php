@@ -7,7 +7,7 @@
 	$review_list = getreviews();
 ?>
 
-
+<!DOCTYPE html>
 <html lang="et">
 <head>
 <meta charset="utf-8">
@@ -18,6 +18,7 @@
 <table border=1 >
 		<tr>
 			<th>Arvustaja number</th>
+			<th>Arvustuse kuupäev</th>
 			<th>Asutus</th>
 			<th>Kokteilid</th>
 			<th>Teeninduse üldhinne</th>
@@ -31,6 +32,7 @@
 			for($i = 0; $i < count($review_list); $i++){
 				echo "<tr>";
 				echo "<td>".$review_list[$i]->user_id."</td>";
+				echo "<td>".$review_list[$i]->date."</td>";
 				echo "<td>".$review_list[$i]->bar."</td>";
 				echo "<td>".$review_list[$i]->cocktails."</td>";
 				echo "<td>".$review_list[$i]->service."</td>";
