@@ -28,14 +28,14 @@
  1.Stenver-
 	Õppisin seda, et üks parimad õppimiseviise on rühmatöö, kuna kui ise ei osanud mõnda probleemi lahendada, siis rühmakaaslane oskas ja tihti seletas ka kuidas seda teha. Õppisin juurde kuidas kirjutada php ja ilmselt said selgeks need asjad, mis varasemates loengutes jäid häguseks.
 	
-	Ebaõnnestus meie rühmal kergelt ajaplaneerimin ja lükkasime töö tegemist koguaeg edasi, ehk suurem osa tööst tuli teha viimasel hetkel ja eks selleprast ole meie töös ka mõned puudused. 
+	2.Ebaõnnestus meie rühmal kergelt ajaplaneerimin ja lükkasime töö tegemist koguaeg edasi, ehk suurem osa tööst tuli teha viimasel hetkel ja eks selleprast ole meie töös ka mõned puudused. 
 	
-	Kõige keerulisemaks pidasin seda, kui ul oli kuskil 1 väike typo ja olin kogu koodi juba 3 korda üle kontrollinud ja endiselt ei leidnud viga üles. 
+	3.Kõige keerulisemaks pidasin seda, kui ul oli kuskil 1 väike typo ja olin kogu koodi juba 3 korda üle kontrollinud ja endiselt ei leidnud viga üles. 
 	
-2.Rasmus-
+1.Rasmus-
 	Õppisin sügavamalt kasutama tunnis õpitut, eriti funktsioone ja kuidas neid kasutada. Õppisin, et väiksed kirjavead on alati pinnuks silmas ning kood tuleb alati rahulikult läbi vaadata. Sain parema ülevaate,kuidas üles ehitada veebilehte. 
 	
-	Ebaõnnestusid paljud asjad tööd tehes, kuid rühmana leidsime neile lahendused. 
+	2.Ebaõnnestusid paljud asjad tööd tehes, kuid rühmana leidsime neile lahendused. 
 	
-	Kõige keerulisem oli minu jaoks suhtluse pool mysql tabelitega, mida üritasime tööle saada terve päeva.
+	3.Kõige keerulisem oli minu jaoks suhtluse pool mysql tabelitega, mida üritasime tööle saada terve päeva.
 	
