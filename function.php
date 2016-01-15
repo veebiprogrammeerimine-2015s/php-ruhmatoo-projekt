@@ -1,4 +1,8 @@
 <?php
+	
+	
+	
+	
 	//koik AB'iga seonduv
 	
 	// uhenduse loomiseks kasuta
@@ -156,8 +160,9 @@
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("SELECT post_id,name,user_id FROM post_tech WHERE deleted IS NULL");
-		$stmt->bind_result($post_id, $post_name, $post_user_id);
+		$stmt = $mysqli->prepare("SELECT post_id,name,user_id,admin_id FROM post_tech WHERE deleted IS NULL");
+		echo $mysqli->error;
+		$stmt->bind_result($post_id, $post_name, $post_user_id, $admin_id);
 		$stmt->execute();
 
 		
@@ -175,6 +180,7 @@
 			$posts->post_id = $post_id;
 			$posts->name = $post_name;
 			$posts->user_id = $post_user_id;
+			$posts->admin_id = $admin_id;
 			
 			// lisame selle massiivi
 			array_push($array, $posts);
@@ -210,7 +216,12 @@
 		$mysqli->close();
 		
 	}
-	
+		function cleanInput($data) {
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
+	  }
 	
 	
 	//$name = "Romil";
