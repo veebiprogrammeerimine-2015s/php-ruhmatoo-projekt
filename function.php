@@ -75,6 +75,27 @@
 		
 	}
 	
+	function loginPost($login_post_id){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("SELECT post_id FROM post_tech WHERE post_id=?");
+		$stmt->bind_param("ss", $login_post_id);
+		$stmt->bind_result($post_id_from_db);
+		$stmt->execute();
+		if($stmt->fetch()){
+			
+			$_SESSION["post_id_from_db"] = $post_id_from_db;
+			
+			//suunan kasutaja data.php lehele
+			header("Location: comment.php");	
+		}
+		$stmt->close();
+		
+		$mysqli->close();
+	}
+
+	
 	function createProduct($product_name, $product_year, $product_problem){
 		// globals on muutuja kõigist php failidest mis on ühendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
@@ -130,8 +151,8 @@
 		// globals on muutuja kõigist php failidest mis on ühendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO comment_tech (comment_name, comment_user_id, comment_post_id, comment_administrator_id) VALUES (?, ?, ?, ?)");
-		$stmt->bind_param("siii", $comment_name, $comment_user_id, $comment_post_id, $comment_administrator_id);
+		$stmt = $mysqli->prepare("INSERT INTO comment_tech (comment, user_id, post_id) VALUES (?, ?, ?)");
+		$stmt->bind_param("sii", $comment_name, $_SESSION["id_from_db"], $comment_post_id);
 		
 		$msg5 = "";
 		
@@ -208,8 +229,4 @@
 	
 	
 	
-	//$name = "Romil";
-	//echo "Tere ".$name;
-	
-	//var_dump("asdasdasdasd");
 ?>

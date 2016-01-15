@@ -46,8 +46,7 @@
 				echo "<td>".$post_list[$i]->post_tech_name."</td>";
 				echo "<td>".$post_list[$i]->user_tech_name."</td>";
 				echo "<td>".$post_list[$i]->user_tech_email."</td>";
-				echo "<td><a href='?delete=".$post_list[$i]->post_id."'>X</a></td>";
-				echo "<td><a href='?edit=".$post_list[$i]->post_id."'>edit</a></td>";
+				echo "<td><a href='comment.php?edit=".$post_list[$i]->post_id."'>edit.php</a></td>";
 				echo "</tr>";
 			//}
 			
