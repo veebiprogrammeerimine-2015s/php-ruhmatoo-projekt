@@ -18,6 +18,7 @@
 	$create_name = "";
 	
 	if(isset($_POST["create"])){
+	
 		
 			if ( empty($_POST["create_email"]) ) {
 				$create_email_error = "See väli on kohustuslik";
@@ -44,12 +45,9 @@
 			
 			if(	$create_email_error == "" && $create_password_error == ""){
 				echo "Nüüd oled registreeritud! <br> Kasutajanimi: ".$create_email." <br> Parool: ".$create_password;
-				
 		    createUser($create_email, $create_password, $create_name);
 			
 			}
-  
- 
 }
 
 		function cleanInput($data) {

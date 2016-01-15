@@ -79,6 +79,27 @@
 		
 	}
 	
+	function loginPost($login_post_id){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("SELECT post_id FROM post_tech WHERE post_id=?");
+		$stmt->bind_param("ss", $login_post_id);
+		$stmt->bind_result($post_id_from_db);
+		$stmt->execute();
+		if($stmt->fetch()){
+			
+			$_SESSION["post_id_from_db"] = $post_id_from_db;
+			
+			//suunan kasutaja data.php lehele
+			header("Location: comment.php");	
+		}
+		$stmt->close();
+		
+		$mysqli->close();
+	}
+
+	
 	function createProduct($product_name, $product_year, $product_problem){
 		// globals on muutuja kõigist php failidest mis on ühendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
@@ -134,8 +155,8 @@
 		// globals on muutuja kõigist php failidest mis on ühendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO comment_tech (comment_name, comment_user_id, comment_post_id, comment_administrator_id) VALUES (?, ?, ?, ?)");
-		$stmt->bind_param("siii", $comment_name, $comment_user_id, $comment_post_id, $comment_administrator_id);
+		$stmt = $mysqli->prepare("INSERT INTO comment_tech (comment, user_id, post_id) VALUES (?, ?, ?)");
+		$stmt->bind_param("sii", $comment_name, $_SESSION["id_from_db"], $comment_post_id);
 		
 		$msg5 = "";
 		
@@ -159,28 +180,39 @@
 	function getPostList(){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+<<<<<<< HEAD
 		
 		$stmt = $mysqli->prepare("SELECT post_id,name,user_id,admin_id FROM post_tech WHERE deleted IS NULL");
 		echo $mysqli->error;
 		$stmt->bind_result($post_id, $post_name, $post_user_id, $admin_id);
+=======
+		$stmt = $mysqli->prepare("SELECT post_id, user_id, post_tech.name, user_tech.name, user_tech.email FROM post_tech JOIN user_tech ON post_tech.user_id=user_tech.id");
+		echo $mysqli->error;
+		$stmt->bind_result($post_id, $user_id, $post_tech_name, $user_tech_name, $user_tech_email);
+>>>>>>> 2d43b675ca84df107de4915eb85703c846fed4b8
 		$stmt->execute();
 
-		
 		// tühi massiiv kus hoiame objekte (1 rida andmeid)
 		$array = array();
-		
-		// tee tsüklit nii mitu korda, kui saad 
-		// ab'ist ühe rea andmeid
 		while($stmt->fetch()){
+			$posts = new StdClass();
+			$posts->post_id = $post_id;
+			$posts->user_id = $user_id;
+			$posts->post_tech_name = $post_tech_name;
+			$posts->user_tech_name = $user_tech_name;
+			$posts->user_tech_email = $user_tech_email;
 			
 			
 			
+<<<<<<< HEAD
 			// loon objekti iga while tsükli kord
 			$posts = new StdClass();
 			$posts->post_id = $post_id;
 			$posts->name = $post_name;
 			$posts->user_id = $post_user_id;
 			$posts->admin_id = $admin_id;
+=======
+>>>>>>> 2d43b675ca84df107de4915eb85703c846fed4b8
 			
 			// lisame selle massiivi
 			array_push($array, $posts);
@@ -194,8 +226,6 @@
 		$mysqli->close();
 		
 		return $array;
-		
-		
 	}
 	
 	
@@ -224,8 +254,4 @@
 	  }
 	
 	
-	//$name = "Romil";
-	//echo "Tere ".$name;
-	
-	//var_dump("asdasdasdasd");
 ?>

@@ -81,8 +81,6 @@ Siin sa võid lisada sinu post, kus sa võiks kirjeldada oma probleem!<br><br>
   </form>
 </html>
 
-<?php require_once("table.php");?>
-
-
+<?php require_once("table.php");?> 
 <?php require_once("header.php");?>
 <?php require_once("foother.php");?>
