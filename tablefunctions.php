@@ -1,7 +1,7 @@
 <?php
 
 require_once("../config_global.php");
-	$database= "if15_mats_3a";
+	$database= "if15_mats_3";
 	
 	function getPostsData($keyword=""){
 		
@@ -18,7 +18,7 @@ require_once("../config_global.php");
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt= $mysqli->prepare("SELECT Post, PostId, User from UserPost WHERE deleted IS NULL AND (post LIKE ?)");
+		$stmt= $mysqli->prepare("SELECT id, user_id, post from posts WHERE deleted IS NULL AND (post LIKE ?)");
 		$stmt->bind_param("s",$search);
 		
 		$stmt->bind_result($id, $user_id_from_database, $post);
@@ -48,7 +48,7 @@ require_once("../config_global.php");
 	function deletePosts($id){
 	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 	
-	$stmt = $mysqli->prepare("UPDATE UserPost SET deleted=NOW() WHERE PostId=? AND User=?");
+	$stmt = $mysqli->prepare("UPDATE posts SET deleted=NOW() WHERE id=? AND user_id=?");
 	$stmt->bind_param("ii", $id, $_SESSION["logged_in_user_id"]);
 	if($stmt->execute()){
 		
@@ -64,7 +64,7 @@ require_once("../config_global.php");
 	
 	function updatePosts ($id, $post){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("UPDATE UserPost SET Post=?  WHERE PostId=? AND User=?");
+		$stmt = $mysqli->prepare("UPDATE posts SET post=?  WHERE id=? AND user_id=?");
         $stmt->bind_param("sii", $post, $posts_id, $_SESSION["logged_in_user_id"]);
         if($stmt->execute()){
 			

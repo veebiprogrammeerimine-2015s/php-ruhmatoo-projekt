@@ -123,7 +123,8 @@
 	
    
  ?> 
- 
+ <a href="poststable.php">Posituste vaatamine</a>
+
  <p>Tere, <?=$_SESSION["logged_in_user_id"];?>
 	<a href="?logout=1"> Logi välja <a>
 </p>
