@@ -227,6 +227,40 @@
 		
 	}
 	
-	
+	function getSinglePostData($edit_id){
+		
+		//echo "id on ".$edit_id;
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("SELECT comment, user_id, post_id FROM comment_tech WHERE comment_id=?");
+		//asendan ? märgi
+		$stmt->bind_param("i", $edit_id);
+		$stmt->bind_result($comment_user, $comment_user_id, $comment_post_id);
+		$stmt->execute();
+		
+		//tekitan objekti
+		$car = new Stdclass();
+		
+		//saime ühe rea andmeid
+		if($stmt->fetch()){
+			// saan siin alles kasutada bind_result muutujaid
+			$comment->comment_user = $comment_user;
+			$comment->comment_user_id = $comment_user_id;
+			$comment->comment_post_id = $comment_post_id;
+			
+		}else{
+			// ei saanud rida andmeid kätte
+			// sellist id'd ei ole olemas
+			// see rida võib olla kustutatud
+			header("Location: table.php");
+		}
+		
+		return $car;
+		
+		
+		$stmt->close();
+		$mysqli->close();
+	}
 	
 ?>
