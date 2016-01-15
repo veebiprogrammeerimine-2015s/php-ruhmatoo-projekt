@@ -155,10 +155,9 @@
 	function getPostList(){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		
-		$stmt = $mysqli->prepare("SELECT post_id, name, user_id FROM post_tech");
+		$stmt = $mysqli->prepare("SELECT post_id, user_id, post_tech.name, user_tech.name, user_tech.email FROM post_tech JOIN user_tech ON post_tech.user_id=user_tech.id");
 		echo $mysqli->error;
-		$stmt->bind_result($post_id, $post_name, $post_user_id);
+		$stmt->bind_result($post_id, $user_id, $post_tech_name, $user_tech_name, $user_tech_email);
 		$stmt->execute();
 
 		// tühi massiiv kus hoiame objekte (1 rida andmeid)
@@ -166,8 +165,13 @@
 		while($stmt->fetch()){
 			$posts = new StdClass();
 			$posts->post_id = $post_id;
-			$posts->name = $post_name;
-			$posts->user_id = $post_user_id;
+			$posts->user_id = $user_id;
+			$posts->post_tech_name = $post_tech_name;
+			$posts->user_tech_name = $user_tech_name;
+			$posts->user_tech_email = $user_tech_email;
+			
+			
+			
 			
 			// lisame selle massiivi
 			array_push($array, $posts);

@@ -21,8 +21,10 @@
 <table border=1 >
 	<tr>
 		<th>post_id</th>
-		<th>name</th>
 		<th>user_id</th>
+		<th>post_tech_name</th>
+		<th>user_tech_name</th>
+		<th>user_tech_email</th>
 		<th>X</th>
 	</tr>
 	
@@ -40,8 +42,10 @@
 				echo "<tr>";
 			
 				echo "<td>".$post_list[$i]->post_id."</td>";
-				echo "<td>".$post_list[$i]->name."</td>";
 				echo "<td>".$post_list[$i]->user_id."</td>";
+				echo "<td>".$post_list[$i]->post_tech_name."</td>";
+				echo "<td>".$post_list[$i]->user_tech_name."</td>";
+				echo "<td>".$post_list[$i]->user_tech_email."</td>";
 				echo "<td><a href='?delete=".$post_list[$i]->post_id."'>X</a></td>";
 				echo "<td><a href='?edit=".$post_list[$i]->post_id."'>edit</a></td>";
 				echo "</tr>";
