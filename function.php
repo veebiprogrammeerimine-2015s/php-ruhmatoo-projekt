@@ -227,40 +227,39 @@
 		
 	}
 	
-	function getSinglePostData($edit_id){
-		
-		//echo "id on ".$edit_id;
+		function getSinglePostData(){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		
-		$stmt = $mysqli->prepare("SELECT comment, user_id, post_id FROM comment_tech WHERE comment_id=?");
-		//asendan ? märgi
-		$stmt->bind_param("i", $edit_id);
-		$stmt->bind_result($comment_user, $comment_user_id, $comment_post_id);
+		$stmt = $mysqli->prepare("SELECT post_tech.name, comment, comment_tech.user_id, user_tech.email, user_tech.name FROM comment_tech JOIN user_tech JOIN post_tech ON comment_tech.user_id=user_tech.id AND comment_tech.post_id=post_tech.post_id");
+		echo $mysqli->error;
+		$stmt->bind_result($post_name, $comment_user, $comment_tech_id, $user_tech_email, $user_tech_name);
 		$stmt->execute();
-		
-		//tekitan objekti
-		$car = new Stdclass();
-		
-		//saime ühe rea andmeid
-		if($stmt->fetch()){
-			// saan siin alles kasutada bind_result muutujaid
-			$comment->comment_user = $comment_user;
-			$comment->comment_user_id = $comment_user_id;
-			$comment->comment_post_id = $comment_post_id;
+
+		// tühi massiiv kus hoiame objekte (1 rida andmeid)
+		$array = array();
+		while($stmt->fetch()){
+			$comms = new StdClass();
+			$comms->post_name = $post_name;
+			$comms->comment_user = $comment_user;
+			$comms->comment_tech_id = $comment_tech_id;
+			$comms->user_tech_email = $user_tech_email;
+			$comms->user_tech_name = $user_tech_name;
 			
-		}else{
-			// ei saanud rida andmeid kätte
-			// sellist id'd ei ole olemas
-			// see rida võib olla kustutatud
-			header("Location: table.php");
+			
+			
+			
+			// lisame selle massiivi
+			array_push($array, $comms);
+			//echo "<pre>";
+			//var_dump($array);
+			//echo "</pre>";
+			
 		}
-		
-		return $car;
-		
 		
 		$stmt->close();
 		$mysqli->close();
+		
+		return $array;
 	}
 	
 ?>

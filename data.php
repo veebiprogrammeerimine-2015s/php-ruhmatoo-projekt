@@ -62,12 +62,12 @@ Siin sa võid lisada sinu post, kus sa võiks kirjeldada oma probleem!<br><br>
 		}
     } // create if end
 	
-	function cleanInput($data) {
-		$data = trim($data);
-		$data = stripslashes($data);
-		$data = htmlspecialchars($data);
-		return $data;
-	  }
+function cleanInput($data) {
+  	$data = trim($data);
+  	$data = stripslashes($data);
+  	$data = htmlspecialchars($data);
+  return $data;
+  }
 	
 ?>
 
