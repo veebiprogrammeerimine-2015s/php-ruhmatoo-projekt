@@ -23,7 +23,7 @@
 Tere tulemast meie veebilehele!! :)
 <body/> 
 
-<?php require_once("login.php"); ?>
+
 
 <?php require_once("foother.php");?>
-<?php require_once("function.php"); ?>
+<?php require_once("sisselogimine.php"); ?>

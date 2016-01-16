@@ -180,16 +180,15 @@
 	function getPostList(){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-<<<<<<< HEAD
+
 		
 		$stmt = $mysqli->prepare("SELECT post_id,name,user_id,admin_id FROM post_tech WHERE deleted IS NULL");
 		echo $mysqli->error;
 		$stmt->bind_result($post_id, $post_name, $post_user_id, $admin_id);
-=======
+
 		$stmt = $mysqli->prepare("SELECT post_id, user_id, post_tech.name, user_tech.name, user_tech.email FROM post_tech JOIN user_tech ON post_tech.user_id=user_tech.id");
 		echo $mysqli->error;
 		$stmt->bind_result($post_id, $user_id, $post_tech_name, $user_tech_name, $user_tech_email);
->>>>>>> 2d43b675ca84df107de4915eb85703c846fed4b8
 		$stmt->execute();
 
 		// tühi massiiv kus hoiame objekte (1 rida andmeid)
@@ -204,15 +203,14 @@
 			
 			
 			
-<<<<<<< HEAD
+
 			// loon objekti iga while tsükli kord
 			$posts = new StdClass();
 			$posts->post_id = $post_id;
 			$posts->name = $post_name;
 			$posts->user_id = $post_user_id;
 			$posts->admin_id = $admin_id;
-=======
->>>>>>> 2d43b675ca84df107de4915eb85703c846fed4b8
+
 			
 			// lisame selle massiivi
 			array_push($array, $posts);
