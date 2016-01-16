@@ -28,10 +28,10 @@ require_once("postmenu.php");
 		header("Location: home.php");
 	
 	}
-?>
 
 
-<?php
+
+
 $feedback_name = $feedback_name_error = "";
 	
 	// et ei ole tühjad
@@ -62,9 +62,16 @@ $feedback_name = $feedback_name_error = "";
 			
 		}
    } // create if end
+   function cleanInput($data) {
+  	$data = trim($data);
+  	$data = stripslashes($data);
+  	$data = htmlspecialchars($data);
+  return $data;
+  }
 
 ?>
 
+<?php require_once("feedback_table.php"); ?>
 
 
    <h2>Lisa tagasisidet</h2>

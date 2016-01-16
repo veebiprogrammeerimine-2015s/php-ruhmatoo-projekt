@@ -78,7 +78,7 @@ function cleanInput($data) {
 	<a href="?logout=1"> Logi välja</a>
 </p>
 
- <h2>Lisa parandus</h2>
+ <h2>Lisa postitusi</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
   	<label for="post_tech" >Posti nime</label><br>
 	<input id="post_tech" name="post_tech" type="text" value="<?=$post_tech; ?>"> <?=$post_tech_error; ?><br><br>

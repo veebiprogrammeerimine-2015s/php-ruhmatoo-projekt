@@ -19,13 +19,13 @@
 		header("location: table.php");
 		
 	}else{
-		// saada kätte kõige uuemad andmed selle id kohta
-		//numbrimärk ja värv
-		//küsime andmebaasist andmed id järgi
+		// saada katte koige uuemad andmed selle id kohta
+		//numbrimark ja varv
+		//kusime andmebaasist andmed id jargi
 		
 		//saadan kaasa id
-				//$post_object = getSinglePostData($_GET["edit"]);
-		var_dump($post_object);
+		$post_object = getSinglePostData($_GET["edit"]);
+		//var_dump($post_object);
 	}
 	
 	
@@ -53,7 +53,7 @@
 		for($i = 0; $i < count($comment_list); $i++){
 			// $i = $i +1; sama mis $i += 1; sama mis $i++;
 			
-			//kui on see rida mida kasutaja tahab muuta siis kuvan input väljad
+			//kui on see rida mida kasutaja tahab muuta siis kuvan input valjad
 			//if(isset($_GET["edit"]) && $post_list[$i]->post_id == $_GET["edit"]){
 				// kasutajale muutmiseks
 				// tavaline rida
@@ -76,10 +76,10 @@
 
 
 
-<h2>Muuda autot</h2>
+<h2>Muuda kommentaare</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 	<input type="hidden" name="id" value="<?=$_GET["edit"];?>" > 
-  	<label for="comment" >comment</label><br>
+  	<label for="comment" >Kommentaar</label><br>
 	<input id="comment" name="comment" type="text" value="<?php echo $post_object->comment;?>" ><br><br>
 	<input type="submit" name="update" value="Salvesta">
   </form>
