@@ -23,7 +23,10 @@
 Tere tulemast meie veebilehele!! :)
 <body/> 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0328d815aa2df04c1383b893f0b1e1bd21f6f09d
 
 <?php require_once("foother.php");?>
 <?php require_once("sisselogimine.php"); ?>

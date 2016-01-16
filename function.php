@@ -1,8 +1,4 @@
 <?php
-	
-	
-	
-	
 	//koik AB'iga seonduv
 	
 	// uhenduse loomiseks kasuta
@@ -180,6 +176,7 @@
 	function getPostList(){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+<<<<<<< HEAD
 
 		
 		$stmt = $mysqli->prepare("SELECT post_id,name,user_id,admin_id FROM post_tech WHERE deleted IS NULL");
@@ -189,6 +186,11 @@
 		$stmt = $mysqli->prepare("SELECT post_id, user_id, post_tech.name, user_tech.name, user_tech.email FROM post_tech JOIN user_tech ON post_tech.user_id=user_tech.id");
 		echo $mysqli->error;
 		$stmt->bind_result($post_id, $user_id, $post_tech_name, $user_tech_name, $user_tech_email);
+=======
+		$stmt = $mysqli->prepare("SELECT post_id, user_id, post_tech.name, user_tech.name, user_tech.email FROM post_tech JOIN user_tech ON post_tech.user_id=user_tech.id");
+		echo $mysqli->error;
+		$stmt->bind_result($post_id, $user_id, $post_tech_name, $user_tech_name, $user_tech_email);
+>>>>>>> 0328d815aa2df04c1383b893f0b1e1bd21f6f09d
 		$stmt->execute();
 
 		// tühi massiiv kus hoiame objekte (1 rida andmeid)
@@ -203,6 +205,7 @@
 			
 			
 			
+<<<<<<< HEAD
 
 			// loon objekti iga while tsükli kord
 			$posts = new StdClass();
@@ -211,6 +214,8 @@
 			$posts->user_id = $post_user_id;
 			$posts->admin_id = $admin_id;
 
+=======
+>>>>>>> 0328d815aa2df04c1383b893f0b1e1bd21f6f09d
 			
 			// lisame selle massiivi
 			array_push($array, $posts);
@@ -244,12 +249,40 @@
 		$mysqli->close();
 		
 	}
-		function cleanInput($data) {
-		$data = trim($data);
-		$data = stripslashes($data);
-		$data = htmlspecialchars($data);
-		return $data;
-	  }
 	
+		function getSinglePostData(){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		$stmt = $mysqli->prepare("SELECT post_tech.name, comment, comment_tech.user_id, user_tech.email, user_tech.name FROM comment_tech JOIN user_tech JOIN post_tech ON comment_tech.user_id=user_tech.id AND comment_tech.post_id=post_tech.post_id");
+		echo $mysqli->error;
+		$stmt->bind_result($post_name, $comment_user, $comment_tech_id, $user_tech_email, $user_tech_name);
+		$stmt->execute();
+
+		// tühi massiiv kus hoiame objekte (1 rida andmeid)
+		$array = array();
+		while($stmt->fetch()){
+			$comms = new StdClass();
+			$comms->post_name = $post_name;
+			$comms->comment_user = $comment_user;
+			$comms->comment_tech_id = $comment_tech_id;
+			$comms->user_tech_email = $user_tech_email;
+			$comms->user_tech_name = $user_tech_name;
+			
+			
+			
+			
+			// lisame selle massiivi
+			array_push($array, $comms);
+			//echo "<pre>";
+			//var_dump($array);
+			//echo "</pre>";
+			
+		}
+		
+		$stmt->close();
+		$mysqli->close();
+		
+		return $array;
+	}
 	
 ?>

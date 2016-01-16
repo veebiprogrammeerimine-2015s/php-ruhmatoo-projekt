@@ -25,7 +25,7 @@
 		<th>post_tech_name</th>
 		<th>user_tech_name</th>
 		<th>user_tech_email</th>
-		<th>X</th>
+		<th>LISA KOMENTAAR!</th>
 	</tr>
 	
 	<?php
@@ -46,7 +46,7 @@
 				echo "<td>".$post_list[$i]->post_tech_name."</td>";
 				echo "<td>".$post_list[$i]->user_tech_name."</td>";
 				echo "<td>".$post_list[$i]->user_tech_email."</td>";
-				echo "<td><a href='comment.php?edit=".$post_list[$i]->post_id."'>edit.php</a></td>";
+				echo "<td><a href='comment.php?edit=".$post_list[$i]->post_id."'>Vaata komentaarid</a></td>";
 				echo "</tr>";
 			//}
 			
