@@ -29,7 +29,8 @@
 </p>
 <body> 
 <link rel="stylesheet" href="kujundus.css" type="text/css" /> 
-Tere tulemast meie veebilehele! Siin me saame aidata teid parandusega! :)
+Tere tulemast meie veebilehele! <br>
+Siin me saame aidata teid parandusega! :)
 <body/> 
 <?php require_once("postmenu.php");?>
 <?php require_once("foother.php");?>
