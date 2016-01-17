@@ -17,7 +17,7 @@
 	
 	if(isset($_POST["update"])){
 		
-		updateFlight($_POST["model"], $_POST["make"], $_POST["color"]);
+		updateCar($_POST["model"], $_POST["make"], $_POST["color"]);
 	}
 	
 	if(isset($_GET["delete"])){

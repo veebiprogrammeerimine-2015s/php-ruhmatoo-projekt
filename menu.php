@@ -27,6 +27,15 @@
 	?>
 	
 	<?php 
+		if ($file_name == "user_car.php"){
+			echo "<li> Kasutajate autod </li>";
+		}else {
+			echo '<li> <a href="user_car.php">Kasutajate autod </a> </li>';
+		}
+
+	?>
+	
+	<?php 
 		if ($file_name == "forum"){
 			echo "<li> Foorum </li>";
 		}else {

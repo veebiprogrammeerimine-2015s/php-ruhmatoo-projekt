@@ -121,6 +121,38 @@
 		return $array;
 	}
 	
+	function getCarDataUsers(){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("SELECT  email, model, make, color FROM add_car JOIN users ON users.id=add_car.user_id WHERE deleted IS NULL");
+		echo $mysqli->error;
+		$stmt->bind_result($email, $model, $make, $color);
+		$stmt->execute();
+		
+		$array = array();
+		
+		while($stmt->fetch()){
+			$car = new StdClass();
+			$car->email= $email;
+			$car->model= $model;
+			$car->make= $make;
+			$car->color = $color;
+			
+			
+			array_push($array, $car);
+			
+			
+			
+		}
+		
+		$stmt->close();
+		
+		$mysqli->close();
+		
+		return $array;
+	}
+	
 	function deleteCar($id_to_be_deleted){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
