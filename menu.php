@@ -16,11 +16,21 @@
 		}
 
 	?>
+	
+	<?php 
+		if ($file_name == "cars.php"){
+			echo "<li> Autode nimekiri </li>";
+		}else {
+			echo '<li> <a href="cars.php">Autode nimekiri </a> </li>';
+		}
+
+	?>
+	
 	<?php 
 		if ($file_name == "forum"){
 			echo "<li> Foorum </li>";
 		}else {
-			echo '<li> <a href="http://localhost:5555/~janilv/php-ruhmatoo-projekt/forum/">Foorum</a> </li>';
+			echo '<li> <a href="http://greeny.cs.tlu.ee/~janilv/php-ruhmatoo-projekt/forum/">Foorum</a> </li>';
 		}
 
 	?>

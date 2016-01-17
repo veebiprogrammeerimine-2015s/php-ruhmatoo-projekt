@@ -88,13 +88,14 @@
 	require_once("../configglobal.php");
 	$database = "if15_kertkulp";
 	
-	//loome uue funktsiooni
+	
 	function getCarData(){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("SELECT id, user_id, car_model, car_make, color FROM add_car WHERE deleted IS NULL");
-		$stmt->bind_result($id, $user_id, $car_model, $car_make, $color);
+		$stmt = $mysqli->prepare("SELECT id, model, make, color FROM add_car WHERE deleted IS NULL");
+		echo $mysqli->error;
+		$stmt->bind_result($id, $model, $make, $color);
 		$stmt->execute();
 		
 		$array = array();
@@ -102,10 +103,10 @@
 		while($stmt->fetch()){
 			$car = new StdClass();
 			$car->id = $id;
-			$car->car_model= $car_model;
-			$car->car_make= $car_make;
-			$car->user_id = $user_id;
+			$car->model= $model;
+			$car->make= $make;
 			$car->color = $color;
+			
 			
 			array_push($array, $car);
 			
@@ -129,7 +130,7 @@
 		
 		if($stmt->execute()){
 			
-			header("Location: table.php");
+			header("Location: cars.php");
 			
 		}
 		

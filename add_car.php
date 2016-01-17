@@ -4,7 +4,11 @@
 	$file_name = "add_car.php";
 	
 ?>
- 
+ <?php
+	
+	require_once("header.php")
+
+?>
  <?php
 	
 	require_once("../configglobal.php");
@@ -39,7 +43,7 @@
 			if ( empty($_POST["car_make"]) ) {
 				$car_make_error = "See väli on kohustuslik";
 			}else{
-				$car_model = cleanInput($_POST["car_make"]);
+				$car_make = cleanInput($_POST["car_make"]);
 			}
 			
 			if ( empty($_POST["color"]) ) {
