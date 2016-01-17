@@ -1,6 +1,5 @@
 <?php
 require_once("header.php");
-require_once("foother.php");
 require_once("postmenu.php");
 ?>
 
@@ -71,7 +70,6 @@ $feedback_name = $feedback_name_error = "";
 
 ?>
 
-<?php require_once("feedback_table.php"); ?>
 
 
    <h2>Lisa tagasisidet</h2>
@@ -81,3 +79,7 @@ $feedback_name = $feedback_name_error = "";
 	<input id="feedback_name" name="feedback_name" type="text" value="<?=$feedback_name; ?>"> <?=$feedback_name_error; ?><br><br>
     <input type="submit" class = "button12" name="create2" value="Salvesta">
  </form>
+ 
+ <?php require_once("feedback_table.php");  ?>
+ 
+    <?php  require_once("foother.php");?>

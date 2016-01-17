@@ -31,7 +31,24 @@
 	
 
 		for($i = 0; $i < count($produkt_list); $i++){
-
+			
+ 			if(isset($_GET["edit"]) && $produkt_list[$i]->product_tech_id == $_GET["edit"]){ 
+ 				
+ 				echo "<tr>"; 
+ 					echo "<form action='table.php' method='post'>"; 
+ 						echo "<td>".$produkt_list[$i]->product_tech_id."</td>"; 
+ 					echo "<td>".$produkt_list[$i]->posti_tech_name."</td>";
+                        echo "<td>".$produkt_list[$i]->euseri_tech_email."</td>";						
+ 						echo "<td><input name='product_name' value='".$produkt_list[$i]->product_tech_problem."'></td>"; 
+						echo "<td><input name='product_year' value='".$produkt_list[$i]->posti_tech_name."'></td>";
+                        echo "<td><input name='product_problem' value='".$produkt_list[$i]->useri_tech_email."'></td>";						
+ 						echo "<td><input type='submit' name='update'></td>"; 
+ 						echo "<td><a href='table.php'>cancel</a></td>"; 
+ 				echo "</form>"; 
+ 				echo "</tr>"; 
+ 				 
+               
+             }else{
 
 				echo "<tr>";
 			
@@ -45,7 +62,7 @@
 				echo "</tr>";
 			
 			
-			
+			}
 		}
 	
 	?>

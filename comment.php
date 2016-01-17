@@ -80,6 +80,6 @@
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 	<input type="hidden" name="id" value="<?=$_GET["edit"];?>" > 
   	<label for="comment" >Kommentaar</label><br>
-	<input id="comment" name="comment" type="text" value="<?php echo $post_object->comment;?>" ><br><br>
+	<input id="comment" name="comment" type="text" value="<?php echo $post_object->post_name;?>" ><br><br>
 	<input type="submit" name="update" value="Salvesta">
   </form>

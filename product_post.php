@@ -53,12 +53,7 @@
 	// iga massiivis olema elemendi kohta
 		// count($car_list) - massiivi pikkus
 		for($i = 0; $i < count($pro_list); $i++){
-			// $i = $i +1; sama mis $i += 1; sama mis $i++;
-			
-			//kui on see rida mida kasutaja tahab muuta siis kuvan input valjad
-			//if(isset($_GET["edit"]) && $post_list[$i]->post_id == $_GET["edit"]){
-				// kasutajale muutmiseks
-				// tavaline rida
+		
 				echo "<tr>";
 			
 				echo "<td>".$pro_list[$i]->product_tech_id."</td>";
@@ -76,3 +71,17 @@
 	?>
 
 </table>
+
+
+
+<h2>Parandus</h2>
+  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+	<input type="hidden" name="id" value="<?=$_GET["edit"];?>" > 
+  	<label for="product_name" >Nimetus</label><br>
+	<input id="product_name" name="product_name" type="text" value="<?php echo $pro_object->product_tech_name;?>" ><br><br>
+	<label for="product_year">Aasta</label><br>
+	<input id="product_year" name="product_year" type="text" value="<?php echo $pro_object->product_tech_year;?>" ><br><br>
+	<label for="product_problem" >Probleem</label><br>
+	<input id="product_problem" name="product_problem" type="text" value="<?php echo $pro_object->product_tech_problem;?>" ><br><br>
+	<input type="submit" name="update" value="Salvesta">
+  </form>

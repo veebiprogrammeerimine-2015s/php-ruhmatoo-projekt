@@ -165,7 +165,7 @@
 			$produkt->year = $yearpro;
 			$produkt->problem = $problempro;
 			$produkt->user_id = $user_idpro;
-			$produkt->email = $email_userpro;
+			$produkt->email_user = $email_userpro;
 			
 			
 			
@@ -446,7 +446,7 @@
 			
 			
 			
-			
+			$_SESSION["post_name"] = $post_name;
 			// lisame selle massiivi
 			array_push($array, $comms);
 			//echo "<pre>";

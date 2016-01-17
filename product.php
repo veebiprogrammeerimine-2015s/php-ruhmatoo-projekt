@@ -1,6 +1,5 @@
 <?php
 require_once("header.php");
-require_once("foother.php");
 require_once("postmenu.php");
 ?>
 
@@ -104,6 +103,7 @@ function cleanInput($data) {
   	<input type="submit" name="create_ok" value="Salvesta">
   </form>
 </html>
+
 
 <?php require_once("product_table.php");?> 
 <?php require_once("header.php");?>
