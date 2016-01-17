@@ -1,6 +1,7 @@
 <?php	
 
 	require_once("user.class.php");
+	require_once("functions.php");
 	$page_title = "Threads";
 	$page_file_name = "threads.php";
 	require_once("header.php");
@@ -47,7 +48,7 @@
 		for($i = 0; $i < count($array_of_threads); $i++){
 								
 				echo "<tr>";
-				echo "<td>".$array_of_threads[$i]->teema."</td>";
+				echo "<td>".$thread_array[$i]->teema."</td>";
 				echo "</tr>";
 
 			}

@@ -46,6 +46,12 @@
 		} else {
 			echo '<li><a href="profile.php">Edit profile</a></li>';
 		}
+		
+		if($page_file_name == "threads.php"){
+			echo '<li>Threads</li>';
+		} else {
+			echo '<li><a href="threads.php">Threads</a></li>';
+		}
 	?>
 	
 	
