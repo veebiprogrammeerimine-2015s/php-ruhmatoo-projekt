@@ -127,7 +127,7 @@ class User {
 	function getEditData($edit_id){
 		
 		
-		$stmt= $this->prepare("SELECT Firstname, Surname, Country FROM user_creation WHERE id=?");
+		$stmt= $this->connection->prepare("SELECT Firstname, Surname, Country FROM user_creation WHERE id=?");
 		$stmt->bind_param("i",$edit_id);
 		$stmt->bind_result($modify_fname, $modify_sname, $modify_country);
 		$stmt->execute();
@@ -151,9 +151,11 @@ class User {
 	}
 
 	function modifyUser($modify_fname, $modify_sname, $modify_country){
+		$id=$_SESSION["logged_in_user_id"];
 		
-		$stmt= $this->prepare("UPDATE user_creation SET Firstname=?, Surname=?, Country=? WHERE id=?");
+		$stmt= $this->connection->prepare("UPDATE user_creation SET Firstname=?, Surname=?, Country=? WHERE id=?");
 		$stmt->bind_param("sssi", $modify_fname, $modify_sname, $modify_country, $id);
+		$stmt->execute();
 
 		$stmt->close();
 	}
