@@ -104,6 +104,7 @@ function cleanInput($data) {
   </form>
 </html>
 
+<?php require_once("user_profi/data.php");?>
 
 <?php require_once("product_table.php");?> 
 <?php require_once("header.php");?>

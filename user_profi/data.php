@@ -78,16 +78,18 @@
  		 
  	} 
  	 
+	  
+ //<p> 
+ //	Tere, $_SESSION["email_from_db"]; 
+ //	<a href="?logout=1">Logi valja</a> 
+ //</p> 
+	 
+	 
  ?> 
  
  
- <p> 
- 	Tere, <?=$_SESSION["email_from_db"];?> 
- 	<a href="?logout=1">Logi valja</a> 
- </p> 
  
- 
- <h2>Sinu pilt</h2> 
+ <h2>Pilt</h2> 
  
  
  <?php if(file_exists($target_file)): ?> 

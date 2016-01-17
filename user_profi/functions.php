@@ -5,7 +5,7 @@
  	 
 	$database = "if15_vitamak"; 
  	 
- 	session_start(); 
+ 	//session_start(); 
  	 
  	//loome ab'i uhenduse 
  	$mysqli = new mysqli($servername, $server_username, $server_password, $database); 

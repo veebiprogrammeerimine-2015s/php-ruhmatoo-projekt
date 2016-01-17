@@ -1,5 +1,5 @@
 <div id="menyy">
- <h2>Menüü</h2>
+ <h2>Menuu</h2>
  <ul>
  <link rel="stylesheet" href="kujundus.css" type="text/css" /> 
  <li><a href="post.php">Avaleht</a></li>
