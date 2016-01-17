@@ -4,6 +4,20 @@
 <?php include(__DIR__ . '/_partials/header.php'); ?>
     <div class="row">
         <h4>Pood: <?= ucfirst($_SESSION['owner_name']) ?></h4>
+        <?php
+        /**
+         * @var $this App\App
+         */
+
+        $stmt = $this->pdo->prepare("SELECT * FROM store WHERE owner_id = :owner_id");
+        $stmt->execute([':owner_id' => $_SESSION['owner']]);
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+        $store_id = null;
+        if ($result != null) {
+            $store_id = $result->id;
+        }
+
+        ?>
         <hr/>
     </div>
     <div class="row">
@@ -119,60 +133,65 @@
             </div>
         </div>
     </div>
-	
-	<div class="col-md-4">
+
+    <div class="row">
+        <div class="col-md-4">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">Töötaja sisestamine</h4>
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
-	<form method="post"><input name="add_worker"placeholder="töötaja nimi"/> 
-	<input name="profession" placeholder="eriala"/>
-	<input name="store_id" placeholder="kauplus"/>
-	<input type="submit" value="Lisa" /></form>
-<?php
-$add_worker ="";
-$profession = "";
-$store_id ="";
-$stmt = $this->pdo->prepare("INSERT INTO employee (id, name, profession, store_id) VALUES(NULL, :name, :profession, :store_id)");
-$stmt->execute([
-':name' => $add_worker,
-':profession' => $profession,
-':store_id' => (int)$store_id
-]);
-?>
-                  </ul>
+                        <form method="post">
+                            <input name="add_worker" class="form-control input-sm" placeholder="töötaja nimi"/> <br/>
+                            <input name="profession" class="form-control input-sm" placeholder="eriala"/> <br/>
+                            <input type="submit" class="form-control" value="Lisa"/>
+                        </form>
+                        <?php
+
+                        if (isset($add_worker, $profession)) {
+                            ;
+                            $stmt = $this->pdo->prepare("INSERT INTO employee (id, name, profession, store_id) VALUES(NULL, :name, :profession, :store_id)");
+                            $stmt->execute([
+                                ':name'       => $add_worker,
+                                ':profession' => $profession,
+                                ':store_id'   => (int)$store_id
+                            ]);
+                        }
+                        ?>
+                    </ul>
                 </div>
             </div>
         </div>
-    </div>
-<div class="col-md-6">
+        <div class="col-md-4">
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h4 class="panel-title">Toote sisestamine</h4>
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
-	<form method="post"><input name="add_product"placeholder="toode"/> 
-	<input name="name" placeholder="toote nimi"/>
-	<input name="price" placeholder="toote hind"/>
-	<input type="submit" value="Lisa" /></form>
-<?php
-$add_product ="";
-$name = "";
-$price ="";
-$stmt = $this->pdo->prepare("INSERT INTO product (id, store_id, name, price) VALUES(NULL, :name, :price)");
-$stmt->execute([
-':name' => $add_product,
-':name' => $name,
-':price' => (int)$price
-]);
-?>
-                  </ul>
+                        <form method="post">
+                            <input name="name" class="form-control input-sm" placeholder="Toote nimi"/> <br/>
+                            <input name="price" class="form-control input-sm" placeholder="Toote hind"/> <br/>
+                            <input type="submit" class="form-control" value="Lisa"/>
+                        </form>
+                        <?php
+
+                        if (isset($name, $price)) {
+
+                            $stmt = $this->pdo->prepare("INSERT INTO product (id, store_id, name, price) VALUES(NULL, :store_id,:name, :price)");
+                            $stmt->execute([
+                                ':store_id' => $store_id,
+                                ':name'     => $name,
+                                ':price'    => (int)$price
+                            ]);
+                        }
+                        ?>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-	
+
+
 <?php include(__DIR__ . '/_partials/footer.php'); ?>
