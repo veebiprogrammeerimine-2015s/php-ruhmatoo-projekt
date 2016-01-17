@@ -3,7 +3,7 @@
 namespace App;
 
 /**
- * @author Merilin Takk
+ * @author Merilin Takk, Henrik Romanenkov
  *
  * See on põhiline klass mis kõiki asju jooksutab
  */
@@ -12,13 +12,18 @@ class App {
     public $mysqlUser = '';
     public $mysqlPassword = '';
     public $mysqlDatabase = '';
-    public $mysqlHost = 'localhost';
+    public $mysqlHost = '';
     /**
      * @var \PDO
      */
     public $pdo;
 
-    function __construct() {
+    function __construct($config) {
+        $this->mysqlUser = $config['mysqlUser'];
+        $this->mysqlPassword = $config['mysqlPassword'];
+        $this->mysqlDatabase = $config['mysqlDatabase'];
+        $this->mysqlHost = $config['mysqlHost'];
+
         //Alustame sessioniga
         session_start();
         //loome PDO ühenduse andmebaasiga suhtlemiseks

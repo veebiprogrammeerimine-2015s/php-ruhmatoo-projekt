@@ -119,7 +119,60 @@
             </div>
         </div>
     </div>
-	<form method="post"><input name="add_worker"/>
+	
+	<div class="col-md-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Töötaja sisestamine</h4>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+	<form method="post"><input name="add_worker"placeholder="töötaja nimi"/> 
+	<input name="profession" placeholder="eriala"/>
+	<input name="store_id" placeholder="kauplus"/>
 	<input type="submit" value="Lisa" /></form>
-
+<?php
+$add_worker ="";
+$profession = "";
+$store_id ="";
+$stmt = $this->pdo->prepare("INSERT INTO employee (id, name, profession, store_id) VALUES(NULL, :name, :profession, :store_id)");
+$stmt->execute([
+':name' => $add_worker,
+':profession' => $profession,
+':store_id' => (int)$store_id
+]);
+?>
+                  </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Toote sisestamine</h4>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+	<form method="post"><input name="add_product"placeholder="toode"/> 
+	<input name="name" placeholder="toote nimi"/>
+	<input name="price" placeholder="toote hind"/>
+	<input type="submit" value="Lisa" /></form>
+<?php
+$add_product ="";
+$name = "";
+$price ="";
+$stmt = $this->pdo->prepare("INSERT INTO product (id, store_id, name, price) VALUES(NULL, :name, :price)");
+$stmt->execute([
+':name' => $add_product,
+':name' => $name,
+':price' => (int)$price
+]);
+?>
+                  </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+	
 <?php include(__DIR__ . '/_partials/footer.php'); ?>
