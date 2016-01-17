@@ -105,7 +105,7 @@
  	 
  <?php else: ?> 
  	<form action="data.php" method="post" enctype="multipart/form-data"> 
- 		Select image to upload: 
+ 		Teie tehnika: 
  		<input type="file" name="fileToUpload" id="fileToUpload"> 
  		<input type="submit" value="Upload Image" name="submit"> 
  	</form> 
