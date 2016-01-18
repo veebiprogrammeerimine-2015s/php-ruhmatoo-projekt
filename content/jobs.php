@@ -42,12 +42,25 @@
 		$job_array = $Job->getAllData();
 	}
 ?>
-<!-- Modal -->
-<script type="text/javascript">
-    $(window).load(function(){
-        $('#myModal').modal('show');
-    });
-</script>
+
+<?php if(isset($_SESSION['response']->success)): ?>
+
+<div class="alert alert-success alert-dismissible fade in" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+	<p><?=$_SESSION['response']->success->message;?></p>
+</div>
+
+<?php elseif(isset($_SESSION['response']->error)): ?>
+
+<div class="alert alert-danger alert-dismissible fade in" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+	<p><?=$_SESSION['response']->error->message;?></p>
+</div>
+
+<?php
+	endif;
+	unset($_SESSION['response']);
+?>
 
 <div class="col-xs-12 col-sm-2 text-center">
 	<h4 style="padding-bottom: 30px">FILTER</h4>

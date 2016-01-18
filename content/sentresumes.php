@@ -12,6 +12,7 @@
 
 	#$company = $Job->getMyData($_SESSION['logged_in_user_id']);
 	$sent_cv = $Resume->getSentResumes($_SESSION['logged_in_user_id']);
+	$answered_cv = $Resume->getAnsweredResumes($_SESSION['logged_in_user_id']);
 	$answer = $answer_type = "";
 	$answer_error = $answer_type_error = "";
 
@@ -65,24 +66,26 @@
 <?php endif; ?>
 
 <h3> Laekunud CVd </h3>
-<table class="table table-striped table-condensed">
+<h4 style="margin-bottom: 10px;">Vastamata</h4>
+<table class="table table-striped table-condensed table-responsive">
 	<thead>
 		<tr>
 			<th>Amet</th>
 			<th>Saatja</th>
 			<th>Saadetud</th>
-			<th>Vastus</th>
+			<th></th>
+			<th></th>
 			<th>Valikud</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
 			<?php
 				for($i = 0; $i < count($sent_cv); $i++) {
-					echo '<td>'.$sent_cv[$i]->job.'</td>
+					echo '<tr><td>'.$sent_cv[$i]->job.'</td>
 							  <td>'.$sent_cv[$i]->first.' '.$sent_cv[$i]->last.'</td>
 							  <td>'.$sent_cv[$i]->time.'</td>
-							  <td>'.$sent_cv[$i]->answer.'</td>';
+								<td style="width: 120px;"></td>
+								<td style="width: 120px;"></td>';
 					echo '<td><div class="btn-group">
 									<a class="btn btn-success btn-sm" data-toggle="modal" data-target="#'.$sent_cv[$i]->id.'">
 										<span class="glyphicon glyphicon-comment"></span> Vasta
@@ -91,15 +94,51 @@
 										<span class="glyphicon glyphicon-open-file"></span> Vaata
 									</a>
 
-								</div></td>';
+								</div></td></tr>';
 
 				}
 
 			?>
 
-		</tr>
 	</tbody>
 </table>
+<h4 style="margin-bottom: 10px;">Vastatud</h4>
+<table class="table table-striped table-condensed table-responsive">
+	<thead>
+		<tr>
+			<th>Amet</th>
+			<th>Saatja</th>
+			<th>Saadetud</th>
+			<th>Vastus</th>
+			<th>Põhjus</th>
+			<th>Valikud</th>
+		</tr>
+	</thead>
+	<tbody>
+			<?php
+				for($i = 0; $i < count($answered_cv); $i++) {
+					echo '<tr><td>'.$answered_cv[$i]->job.'</td>
+							  <td>'.$answered_cv[$i]->first.' '.$answered_cv[$i]->last.'</td>
+							  <td>'.$answered_cv[$i]->time.'</td>
+								<td>'.$answered_cv[$i]->answer_type.'</td>
+								<td>'.$answered_cv[$i]->answer.'</td>';
+					echo '<td><div class="btn-group">
+									<a class="btn btn-success btn-sm" data-toggle="modal" data-target="#'.$answered_cv[$i]->id.'">
+										<span class="glyphicon glyphicon-comment"></span> Vasta
+									</a>
+									<a href="../pdf/resume.php?id='.$answered_cv[$i]->id.'" class="btn btn-info btn-sm">
+										<span class="glyphicon glyphicon-open-file"></span> Vaata
+									</a>
+
+								</div></td></tr>';
+
+				}
+
+			?>
+
+	</tbody>
+</table>
+
 <!-- Modal -->
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 <?php
@@ -113,6 +152,36 @@
 		      </div>
 		      <div class="modal-body">';
 		echo '<input type="hidden" name="current_id" value="'.$sent_cv[$i]->id.'">';
+		echo 'Enne vastuse saatmist veendu, et oled vaadanud CVd!
+						Saadetud vastus on lõplik!<br><br>';
+		echo '<label for="answer">Vastus/põhjus</label>
+						<textarea class="form-control" rows="4" name="answer" type="text"></textarea><br>';
+		echo $Resume->answerTypes();
+		echo '</div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-danger" data-dismiss="modal">Katkesta</button>
+		        <button type="submit" name="send_answer" class="btn btn-primary">Saada</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>';
+	}
+?>
+</form>
+
+<!-- Modal -->
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+<?php
+	for($i = 0; $i < count($answered_cv); $i++) {
+		echo '<div class="modal fade" id="'.$answered_cv[$i]->id.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">';
+		echo '  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Vastus ametile: '.$answered_cv[$i]->job.'<br>Saatja: '.$answered_cv[$i]->first.' '.$answered_cv[$i]->last.'</h4>
+		      </div>
+		      <div class="modal-body">';
+		echo '<input type="hidden" name="current_id" value="'.$answered_cv[$i]->id.'">';
 		echo 'Enne vastuse saatmist veendu, et oled vaadanud CVd!
 						Saadetud vastus on lõplik!<br><br>';
 		echo '<label for="answer">Vastus/põhjus</label>

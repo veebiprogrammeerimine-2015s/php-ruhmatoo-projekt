@@ -32,7 +32,7 @@
 					$selected_resume = cleanInput($_POST["my_resume"]) + 0;
           $motivation = cleanInput($_POST["motivation"]);
           $Resume->sendResume($trimmed, $_SESSION['logged_in_user_id'], $selected_resume, $motivation);
-
+					#var_dump($motivation." ".$selected_resume," ".$trimmed);
         }
       }
     }

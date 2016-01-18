@@ -71,22 +71,48 @@
     ########################
 
     function getSentResumes($user) {
-      $stmt = $this->connection->prepare("SELECT got_cv.id, answer_types.answer, got_cv.sent_time, job_offers.name, ntb_personal.firstname, ntb_personal.lastname FROM got_cv
+      $stmt = $this->connection->prepare("SELECT got_cv.id, got_cv.sent_time, job_offers.name, ntb_personal.firstname, ntb_personal.lastname FROM got_cv
                                           INNER JOIN job_offers ON job_offers.id = got_cv.job_id
-                                          INNER JOIN ntb_personal ON ntb_personal.id = got_cv.sender_id
-                                          INNER JOIN answer_types ON answer_types.id = got_cv.answer_type
-                                          WHERE job_offers.user_id = ? ORDER BY got_cv.sent_time DESC");
+                                          INNER JOIN ntb_users ON ntb_users.id = got_cv.sender_id
+                                          INNER JOIN ntb_personal ON ntb_personal.user_id = ntb_users.id
+                                          WHERE job_offers.user_id = ? AND got_cv.answer_type IS NULL ORDER BY got_cv.sent_time DESC");
       $stmt->bind_param("i", $user);
-      $stmt->bind_result($id, $answer, $sent_time, $job_name, $send_first, $send_last);
+      $stmt->bind_result($id, $sent_time, $job_name, $send_first, $send_last);
       $stmt->execute();
 
       $array = array();
-      if($stmt->fetch()) {
+      while($stmt->fetch()) {
         $job = new StdClass();
         $job->id = $id;
         $job->job = $job_name;
         $job->first = $send_first;
         $job->last = $send_last;
+        $job->time = $sent_time;
+        array_push($array, $job);
+      }
+      return $array;
+      $stmt->close();
+    }
+
+    function getAnsweredResumes($user) {
+      $stmt = $this->connection->prepare("SELECT got_cv.id, answer_types.answer, got_cv.answer, got_cv.sent_time, job_offers.name, ntb_personal.firstname, ntb_personal.lastname FROM got_cv
+                                          INNER JOIN job_offers ON job_offers.id = got_cv.job_id
+                                          INNER JOIN ntb_users ON ntb_users.id = got_cv.sender_id
+                                          INNER JOIN ntb_personal ON ntb_personal.user_id = ntb_users.id
+                                          INNER JOIN answer_types ON answer_types.id = got_cv.answer_type
+                                          WHERE job_offers.user_id = ? AND got_cv.answer_type IS NOT NULL ORDER BY got_cv.sent_time DESC");
+      $stmt->bind_param("i", $user);
+      $stmt->bind_result($id, $answer_type, $answer, $sent_time, $job_name, $send_first, $send_last);
+      $stmt->execute();
+
+      $array = array();
+      while($stmt->fetch()) {
+        $job = new StdClass();
+        $job->id = $id;
+        $job->job = $job_name;
+        $job->first = $send_first;
+        $job->last = $send_last;
+        $job->answer_type = $answer_type;
         $job->answer = $answer;
         $job->time = $sent_time;
         array_push($array, $job);
@@ -133,6 +159,7 @@
           $school->sch_start = $school_start;
           $school->sch_end = $school_end;
           array_push($array, $school);
+
           $work = new StdClass();
           $work->work_company = $work_company;
           $work->work_name = $work_name;
@@ -191,7 +218,7 @@
 
     function sendAnswer($id, $type, $answer) {
       $response = new StdClass();
-      $stmt = $this->connection->prepare("UPDATE got_cv SET answer_type = ?, answer = ? WHERE id = ?");
+      $stmt = $this->connection->prepare("UPDATE got_cv SET answer_type = ?, answer = ?, answer_time = NOW() WHERE id = ?");
       $stmt->bind_param("isi", $type, $answer, $id);
       if($stmt->execute()) {
         $success = new StdClass();
@@ -205,7 +232,7 @@
         $error->message = "Midagi läks valesti! Anna teada administraatorile!";
         $response->error = $error;
       }
-
+      header("Location: sentresumes.php");
       return $response;
       $stmt->close();
 
@@ -217,6 +244,7 @@
     ###################
 
     function sendResume($link, $user_id, $cv_id, $motivation) {
+      $response = new StdClass();
       $stmt = $this->connection->prepare("SELECT id FROM job_offers WHERE link = ?");
       $stmt->bind_param("s", $link);
       $stmt->bind_result($id);
@@ -227,13 +255,38 @@
       }
       $stmt->close();
 
+      $stmt = $this->connection->prepare("SELECT id FROM got_cv WHERE job_id = ? AND sender_id = ? AND NOW() < DATE_ADD(sent_time, INTERVAL +3 day)");
+      $stmt->bind_param("ii", $job->id, $user_id);
+      $stmt->bind_result($id);
+      $stmt->execute();
+      if($stmt->fetch()) {
+        $error = new StdClass();
+        $error->id = 0;
+        $error->message = "Oled sellele tööle CV esitanud 3 päeva jooksul!";
+        $response->error = $error;
+        $_SESSION['response'] = $response;
+        header("Location: ../content/jobs.php");
+        exit();
+      }
+      $stmt->close();
+
       $stmt = $this->connection->prepare("INSERT INTO got_cv (job_id, sender_id, cv_id, motivation, sent_time) VALUES (?,?,?,?,NOW())");
       $stmt->bind_param("iiis", $job->id, $user_id, $cv_id, $motivation);
-      #var_dump ($job_id, $user_id, $cv_id, $motivation);
-      $stmt->execute();
 
-      #header("Location: ../content/jobs.php");
+      if($stmt->execute()) {
+        $success = new StdClass();
+        $success->message = "CV on edukalt <strong>saadetud!</strong> Nüüd jääb üle ainult vastust oodata!";
+        $response->success = $success;
+      } else {
+        $error = new StdClass();
+        $error->id = 1;
+        $error->message = "Paistab, et ahvikene ei saanud banaani ning otsustas, et tema ei ole nõus koostööd tegema!<br>Teavita administraatorit!";
+        $response->error = $error;
+      }
 
+      $_SESSION['response'] = $response;
+      header("Location: ../content/jobs.php");
+      exit();
       $stmt->close();
     }
 

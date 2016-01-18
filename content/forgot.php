@@ -45,7 +45,7 @@
 			}
 			if($email_error == ""){
 
-                $hash = hash("md5", $link);
+        $hash = hash("md5", $link);
 				$httplink = "http://ntb.devweb.eu/forgot.php?key=".$hash."&email=".$email;
 				$checkresponse = $User->checkEmail($email);
 				if(isset($checkresponse->success)) {
@@ -63,7 +63,7 @@
 					}
 				}
 
-            }
+      }
 		}
 
 	}
