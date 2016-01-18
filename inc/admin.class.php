@@ -49,8 +49,8 @@ class Admin {
 	}
 
 	function getUsers() {
-		$stmt = $this->connection->prepare("SELECT id, email, usergroup, resume, created FROM ntb_users");
-		$stmt->bind_result($id, $email, $usergroup, $resume, $created);
+		$stmt = $this->connection->prepare("SELECT id, email, usergroup, created FROM ntb_users");
+		$stmt->bind_result($id, $email, $usergroup, $created);
 		$stmt->execute();
 
 		$array = array();
@@ -64,6 +64,8 @@ class Admin {
 			array_push($array, $user);
 		 }
 		return $array;
+
+		$stmt->close();
 
 	}
 

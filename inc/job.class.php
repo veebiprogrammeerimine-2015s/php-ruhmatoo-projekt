@@ -48,30 +48,6 @@ class Job {
 
 	}
 
-	function getHomeData() {
-
-		$stmt = $this->connection->prepare("SELECT name, company, parish FROM job_offers WHERE active IS NOT NULL AND deleted IS NULL ORDER BY active DESC");
-		$stmt->bind_result($name_from_db, $company_from_db, $parish_from_db);
-		$stmt->execute();
-
-		$array = array();
-		//Iga rea kohta teeme midagi
-		while($stmt->fetch()) {
-			$job = new StdClass();
-			$job->name = $name_from_db;
-			$job->company = $company_from_db;
-			$job->parish = $parish_from_db;
-			array_push($array, $job);
-		}
-		return $array;
-		//Saime andmed katte
-		echo($name_from_db);
-
-
-		$stmt->close();
-
-	}
-
 	function singleJobData($link) {
 		$stmt = $this->connection->prepare("SELECT name, description, company, county, parish, location, address FROM job_offers WHERE link = ? ");
 		$stmt->bind_param("s", $link);

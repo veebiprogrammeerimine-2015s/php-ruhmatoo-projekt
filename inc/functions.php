@@ -11,6 +11,7 @@
 	require_once("profile.class.php");
 	require_once("admin.class.php");
 	require_once("resume.class.php");
+	require_once("misc.class.php");
   $database = "vhost45490s0";
 	$myurl = "/php-ruhmatoo-projekt/";
 
@@ -26,6 +27,7 @@
 	$Profile = new Profile($mysqli);
 	$Admin = new Admin($mysqli, $myurl);
 	$Resume = new Resume($mysqli, $myurl);
+	$Misc = new Misc($mysqli);
 
 
 	if(isset($_COOKIE['authUser']))
