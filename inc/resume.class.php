@@ -216,24 +216,68 @@
       return $html;
     }
 
-    function sendAnswer($id, $type, $answer) {
+
+    function sendAnswer($id, $type, $answers) {
       $response = new StdClass();
+
+      $stmt = $this->connection->prepare("SELECT company, name, email FROM job_offers
+                                          INNER JOIN got_cv ON got_cv.job_id = job_offers.id
+										                      INNER JOIN ntb_users ON ntb_users.id = got_cv.sender_id
+                                          WHERE got_cv.id = ?");
+      $stmt->bind_param("i", $id);
+      $stmt->bind_result($company, $name, $email);
+      $stmt->execute();
+      if($stmt->fetch()) {
+        $answer = new StdClass();
+        $answer->company = $company;
+        $answer->name = $name;
+        $answer->email = $email;
+      }
+      $stmt->close();
+
       $stmt = $this->connection->prepare("UPDATE got_cv SET answer_type = ?, answer = ?, answer_time = NOW() WHERE id = ?");
-      $stmt->bind_param("isi", $type, $answer, $id);
+      $stmt->bind_param("isi", $type, $answers, $id);
       if($stmt->execute()) {
         $success = new StdClass();
-        $success->message = "Vastus edukalt saadetud!!";
+        $success->message = "Vastus edukalt saadetud!";
         $response->success = $success;
 
-        #Saadab meili
+        $stmt->close();
+        $stmt = $this->connection->prepare("SELECT answer_types.answer FROM got_cv
+                                            INNER JOIN answer_types ON answer_types.id = got_cv.answer_type
+                                            WHERE got_cv.id = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->bind_result($answer_name);
+        $stmt->execute();
+        $stmt->fetch();
+
+        $to      = $answer->email; // Searcher email
+        $subject = '[NTB] Vastus ettevõttelt '.$answer->company; // Company name
+        $message = '
+Tere,
+
+Teie kandideerimine ettevõttesse '.$answer->company.', töökohale '.$answer->name.' on '.$answer_name.'!
+Ettevõtja poolne tagasiside:
+'.$answers.'
+
+Lugupidamisega,
+Noorte Tööbörs
+www.ntb.ee
+                   '; // Formal letter
+        $headers = 'From: info@ntb.ee' . "\r\n" . // info@ntb.ee mail
+            'Reply-To: rauno@ntb.ee' . "\r\n" . // This is going to be webmaster mail
+            'X-Mailer: PHP/' . phpversion();
+
+        mail($to, $subject, $message, $headers);
 
       } else {
         $error = new StdClass();
         $error->message = "Midagi läks valesti! Anna teada administraatorile!";
         $response->error = $error;
       }
+      $_SESSION['response'] = $response;
       header("Location: sentresumes.php");
-      return $response;
+      exit();
       $stmt->close();
 
     }
@@ -245,13 +289,17 @@
 
     function sendResume($link, $user_id, $cv_id, $motivation) {
       $response = new StdClass();
-      $stmt = $this->connection->prepare("SELECT id FROM job_offers WHERE link = ?");
+      $stmt = $this->connection->prepare("SELECT job_offers.id, job_offers.name, job_company.email FROM job_offers
+                                          INNER JOIN job_company ON job_company.name = job_offers.company
+                                          WHERE job_offers.link = ?");
       $stmt->bind_param("s", $link);
-      $stmt->bind_result($id);
+      $stmt->bind_result($id, $name, $email);
       $stmt->execute();
       if($stmt->fetch()) {
         $job = new StdClass();
         $job->id = $id;
+        $job->name = $name;
+        $job->email = $email;
       }
       $stmt->close();
 
@@ -277,6 +325,27 @@
         $success = new StdClass();
         $success->message = "CV on edukalt <strong>saadetud!</strong> Nüüd jääb üle ainult vastust oodata!";
         $response->success = $success;
+
+        $to      = $job->email; // Employee mail from job_company
+        $subject = '[NTB] Kandideerimine ametile '.$job->name; // ... means job_offers.name
+        $message = '
+Tere,
+
+Teie pakutud töökohale '.$job->name.' on saadetud uus CV!
+CV nägemiseks tuleb suunduda aadressile:
+http://devweb.eu/php-ruhmatoo-projekt/content/sentresumes.php
+Seal saate vaadata Teie pakutud töökohtadele kandideerijate CVsi ning kirjutada neile vastus!
+
+Lugupidamisega,
+Noorte Tööbörs
+www.ntb.ee
+                   '; // Formal letter
+        $headers = 'From: info@ntb.ee' . "\r\n" . // info@ntb.ee mail
+            'Reply-To: rauno@ntb.ee' . "\r\n" . // This is going to be webmaster mail
+            'X-Mailer: PHP/' . phpversion();
+
+        mail($to, $subject, $message, $headers);
+
       } else {
         $error = new StdClass();
         $error->id = 1;

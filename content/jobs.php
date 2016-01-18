@@ -113,9 +113,14 @@
 				echo '<p class="list-group-item-text">'.$job_array[$i]->number.'</p>';
 				echo '<p class="list-group-item-text">'.$job_array[$i]->county.', '.$job_array[$i]->parish.', '.$job_array[$i]->location.', '.$job_array[$i]->address.'</p><br>';
 				echo '<ul class="list-inline">';
-				echo '<li>Sisestatud: '.$job_array[$i]->inserted.'</li><li class="pull-right"><a href="../job/'.$job_array[$i]->link.'.php" class="btn btn-success btn-sm">
+				echo '<li>Sisestatud: '.$job_array[$i]->inserted.'</li>';
+				
+				if($_SESSION['logged_in_user_group'] == 1) {
+				echo '<li class="pull-right"><a href="../job/'.$job_array[$i]->link.'.php" class="btn btn-success btn-sm">
 												Saada CV	<span class="glyphicon glyphicon-share-alt"></span>
-												</a></li>';
+							</a></li>';
+				}
+
 				echo '</ul>';
 				#echo '<p class="list-group-item-text">Sisestatud: '.$job_array[$i]->inserted.'</p>';
 

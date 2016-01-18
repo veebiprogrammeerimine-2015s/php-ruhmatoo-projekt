@@ -268,13 +268,23 @@ class Job {
 	}
 
 	function updateMyData($job_id, $job_name, $job_company, $job_desc, $job_county, $job_parish, $job_location, $job_address, $user_id) {
-
+		$response = new StdClass();
 		$stmt = $this->connection->prepare("UPDATE job_offers INNER JOIN job_company ON job_company.name = job_offers.company SET job_offers.name=?, description=?, company=?, county=?, parish=?, location=?, address=? WHERE id=? AND job_company.user_id=?");
 		$stmt->bind_param("sssssssii", $job_name, $job_desc, $job_company, $job_county, $job_parish, $job_location, $job_address, $job_id, $user_id);
 
-		$stmt->execute();
-		//Tühjendame aadressirea
+		if($stmt->execute()) {
+			$success = new StdClass();
+			$success->message = "Töökohta edukalt muudetud!";
+			$response->success = $success;
+		} else {
+			$error = new StdClass();
+			$error->message = "Midagi läks valesti! Anna teada administraatorile!";
+			$response->error = $error;
+		}
+
+		$_SESSION['response'] = $response;
 		header("Location: myjobs.php");
+		exit();
 
 		$stmt->close();
 
@@ -284,9 +294,19 @@ class Job {
 
 		$stmt = $this->connection->prepare("UPDATE job_offers INNER JOIN job_company ON job_company.name = job_offers.company SET job_offers.deleted=NOW() WHERE id=? AND job_company.user_id=?");
 		$stmt->bind_param("ii", $job_id, $user_id);
-		$stmt->execute();
-		//Tühjendame aadressirea
+		if($stmt->execute()) {
+			$success = new StdClass();
+			$success->message = "Töökohta edukalt kustutatud!";
+			$response->success = $success;
+		} else {
+			$error = new StdClass();
+			$error->message = "Midagi läks valesti! Anna teada administraatorile!";
+			$response->error = $error;
+		}
+
+		$_SESSION['response'] = $response;
 		header("Location: myjobs.php");
+		exit();
 
 		$stmt->close();
 
@@ -297,8 +317,19 @@ class Job {
 		$stmt = $this->connection->prepare("UPDATE job_offers INNER JOIN job_company ON job_company.name = job_offers.company SET job_offers.active=NOW() WHERE job_offers.id=? AND job_company.user_id=?");
 		$stmt->bind_param("ii", $job_id, $user_id);
 
-		$stmt->execute();
+		if($stmt->execute()) {
+			$success = new StdClass();
+			$success->message = "Töökohta muudetud aktiivseks!";
+			$response->success = $success;
+		} else {
+			$error = new StdClass();
+			$error->message = "Midagi läks valesti! Anna teada administraatorile!";
+			$response->error = $error;
+		}
+
+		$_SESSION['response'] = $response;
 		header("Location: myjobs.php");
+		exit();
 
 		$stmt->close();
 
@@ -309,8 +340,19 @@ class Job {
 		$stmt = $this->connection->prepare("UPDATE job_offers INNER JOIN job_company ON job_company.name = job_offers.company SET job_offers.active=NULL WHERE job_offers.id=? AND job_company.user_id=?");
 		$stmt->bind_param("ii", $job_id, $user_id);
 
-		$stmt->execute();
+		if($stmt->execute()) {
+			$success = new StdClass();
+			$success->message = "Töökohta muudetud ebaaktiivseks!";
+			$response->success = $success;
+		} else {
+			$error = new StdClass();
+			$error->message = "Midagi läks valesti! Anna teada administraatorile!";
+			$response->error = $error;
+		}
+
+		$_SESSION['response'] = $response;
 		header("Location: myjobs.php");
+		exit();
 
 		$stmt->close();
 
