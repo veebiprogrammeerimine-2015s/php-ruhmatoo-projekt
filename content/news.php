@@ -14,6 +14,10 @@
 
   $categories = $Misc->getCategories();
 
+  if(isset($_GET['id'])) {
+    $data = $Misc->getNewsData($_GET['id']);
+  }
+
   $cat = 0;
 	if (isset($_GET["category"])) {
 		$cat = cleanInput($_GET["category"]);
@@ -54,6 +58,39 @@
 
 
         }
+
+        if(isset($_POST["edit_news"])) {
+
+          if(empty($_POST["subject"])) {
+            $subject_error = "See väli on kohustuslik!";
+          } else {
+            $subject = cleanInput($_POST["subject"]);
+          }
+
+          if(empty($_POST["category"])) {
+            $category_error = "See väli on kohustuslik!";
+          } else {
+            $category = cleanInput($_POST["category"]);
+          }
+
+          if(empty($_POST["text"])) {
+            $text_error = "See väli on kohustuslik!";
+          } else {
+            $text = $_POST["text"];
+          }
+
+          if($subject_error == "" && $category_error == "" && $text_error == "") {
+
+            $Misc->editNews($_POST['current_id'], $subject, $category, $text);
+          }
+
+
+        }
+
+        if(isset($_POST["delete_news"])) {
+          $Misc->deleteNews($_POST['current_id']);
+        }
+
 			}
 		}
 	}
@@ -122,7 +159,7 @@
         if($_SESSION['logged_in_user_group'] == 3):
       ?>
       <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#editnews">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Muuda
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Muuda
       </button>
       <?php
         endif;
@@ -196,7 +233,7 @@ if(isset($_SESSION['logged_in_user_id'])):
   if($_SESSION['logged_in_user_group'] == 3):
 ?>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
-    <!-- Modal -->
+    <!-- Modal for adding news-->
     <div class="modal fade" id="addnews" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -225,6 +262,52 @@ if(isset($_SESSION['logged_in_user_id'])):
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Sulge</button>
             <button type="submit" name="add_news" class="btn btn-success">Salvesta</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+<?php
+  endif;
+endif;
+?>
+
+<?php
+if(isset($_SESSION['logged_in_user_id'])):
+  if($_SESSION['logged_in_user_group'] == 3):
+?>
+  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
+    <!-- Modal for editing news-->
+    <div class="modal fade" id="editnews" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Lisa uus uudis</h4>
+          </div>
+          <div class="modal-body" style="height: 250px;">
+
+            <input type="hidden" name="current_id" value="<?=$data->id?>">
+            <div class="col-sm-6">
+              <label for="subject">Pealkiri</label>
+              <input class="form-control" type="text" name="subject" value="<?=$data->subject;?>">
+            </div>
+
+            <div class="col-sm-6">
+              <label for="category">Kategooria</label>
+              <?=$Misc->getCurrentCategoriesSelect($_GET['id']);?>
+            </div>
+
+            <div class="col-sm-12">
+              <label for="text">Sisu</label>
+          		<textarea class="form-control" rows="5" name="text" type="text"><?=$data->text;?></textarea>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-danger pull-left" name="delete_news">Kustuta</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Sulge</button>
+            <button type="submit" name="edit_news" class="btn btn-success">Salvesta</button>
           </div>
         </div>
       </div>

@@ -67,6 +67,28 @@
     ### NEWS ###
     ############
 
+    function getNewsData($id) {
+      $stmt = $this->connection->prepare("SELECT news.id, news_categories.name, subject, text, posted FROM news
+                                          INNER JOIN news_categories ON news_categories.id = news.category
+                                          WHERE deleted IS NULL AND news.id = ? ORDER BY posted DESC");
+      $stmt->bind_param("i", $id);
+      $stmt->bind_result($id, $category, $subject, $text, $posted);
+      $stmt->execute();
+
+      $news = new StdClass();
+      if($stmt->fetch()) {
+        $news->id = $id;
+        $news->category = $category;
+        $news->subject = $subject;
+        $news->text = $text;
+        $news->posted = $posted;
+      }
+      return $news;
+
+      $stmt->close();
+
+    }
+
     function getCategories() {
 
       $stmt = $this->connection->prepare("SELECT news_categories.id, name, count(news.id) FROM news_categories
@@ -113,21 +135,101 @@
       $stmt->close();
     }
 
+    function editNews($news_id, $sub, $cat, $text) {
+      $response = new StdClass();
+
+      $stmt = $this->connection->prepare("UPDATE news SET subject = ?, category = ?, text = ? WHERE id = ?");
+      $stmt->bind_param("sisi", $sub, $cat, $text, $news_id);
+
+      if($stmt->execute()) {
+        $success = new StdClass();
+        $success->message = "Uudis edukalt muudetud!";
+        $response->success = $success;
+      } else {
+        $error = new StdClass();
+        $error->message = "Midagi läks valesti! Anna teada administraatorile!";
+        $response->error = $error;
+      }
+
+      $_SESSION['response'] = $response;
+      header("Location: news.php?id=".$news_id);
+      exit();
+
+      $stmt->close();
+    }
+
+    function deleteNews($news_id) {
+      $response = new StdClass();
+
+      $stmt = $this->connection->prepare("UPDATE news SET deleted = NOW() WHERE id = ?");
+      $stmt->bind_param("i", $news_id);
+
+      if($stmt->execute()) {
+        $success = new StdClass();
+        $success->message = "Uudis edukalt kustutatud!";
+        $response->success = $success;
+      } else {
+        $error = new StdClass();
+        $error->message = "Midagi läks valesti! Anna teada administraatorile!";
+        $response->error = $error;
+      }
+
+      $_SESSION['response'] = $response;
+      header("Location: news.php");
+      exit();
+
+      $stmt->close();
+    }
+
     function getCategoriesSelect() {
       $html = '';
   		$html .= '<select name="category" class="form-control">';
       $html .= '<option selected>----</option>';
-      
+
   		$stmt = $this->connection->prepare("SELECT id, name FROM news_categories");
   		$stmt->bind_result($id, $name);
   		$stmt->execute();
   		while($stmt->fetch()) {
   			$html .= '<option value="'.$id.'">'.$name.'</option>';
+
   		}
   		$stmt->close();
   		$html .= '</select>';
 
   		return $html;
+    }
+
+    function getCurrentCategoriesSelect($news_id) {
+      $html = '';
+      $html .= '<select name="category" class="form-control">';
+
+      $stmt1 = $this->connection->prepare("SELECT id, name FROM news_categories");
+      $stmt2 = $this->connection->prepare("SELECT category FROM news WHERE id = ?");
+
+      $stmt2->bind_param("i", $news_id);
+
+      $stmt1->bind_result($id, $name);
+      $stmt2->bind_result($category);
+
+      $stmt2->execute();
+      $stmt2->fetch();
+      $stmt2->close();
+
+      $stmt1->execute();
+      while($stmt1->fetch()) {
+        if($category == $id) {
+          $html .= '<option value="'.$id.'" selected>'.$name.'</option>';
+        } else {
+          $html .= '<option value="'.$id.'">'.$name.'</option>';
+        }
+
+      }
+      $stmt1->close();
+
+
+      $html .= '</select>';
+
+      return $html;
     }
 
 
