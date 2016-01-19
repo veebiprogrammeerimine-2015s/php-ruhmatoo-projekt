@@ -23,11 +23,11 @@
 		<h3 id="statbar">Viimati lisatud tööd</h3>
 		<ol>
 			<?php
-				if (count($job_array) >= 5) {
-					for($i = 0; $i < 5; $i++) {
+				if (count($job_array) >= 10) {
+					for($i = 0; $i < 10; $i++) {
 						echo "<h4 id='jobname'><li>".$job_array[$i]->name."</li></h4><br>".$job_array[$i]->company.", ".$job_array[$i]->parish."<br>";
 					}
-				} elseif (count($job_array) < 5) {
+				} elseif (count($job_array) < 10) {
 						for($i = 0; $i < count($job_array); $i++) {
 							echo "<h4 id='jobname'><li>".$job_array[$i]->name."</li></h4><br>".$job_array[$i]->company.", ".$job_array[$i]->parish."<br>";
 					}
@@ -37,18 +37,38 @@
 		</ol>
 	</div>
 	<div class="col-xs-12 col-sm-4">
-		<h3 id="statbar">Uudised</h3>
+		<h3 id="statbar"><a href="content/news.php" style="color: #333;">Uudised</a></h3>
 		<?php
-		if (count($job_array) >= 5) {
-				for($i = 0; $i < 5; $i++) {
-					echo "<h4 id='jobname'>".$news[$i]->subject."</h4><br>".$news[$i]->category.", ".$news[$i]->posted."<br>";
-					echo '<p>'.$news[$i]->text.'</p>';
-			}
+		if (count($job_array) >= 3) {
+					for($i = 0; $i < 3; $i++) {
+						echo '<div class="media">
+										<div class="media-body">
+											<h4 class="media-heading">'.$news[$i]->subject.'</h4>';
+						if (strlen($news[$i]->text) > 350) {
+							$str = $news[$i]->text;
+							$str = explode( "\n", wordwrap( $news[$i]->text, 350));
+							$str = $str[0] . '<a href="content/news.php?id='.$news[$i]->id.'"> Loe edasi... </a>';
+							echo $str;
+						}
+						echo '</div>
+									</div>';
+				}
 		} else {
-				for($i = 0; $i < count($news); $i++) {
-					echo "<h4 id='jobname'>".$news[$i]->subject."</h4><br>".$news[$i]->category.", ".$news[$i]->posted."<br>";
-					echo '<p>'.$news[$i]->text.'</p>';
-			}
+					for($i = 0; $i < count($news); $i++) {
+						echo '<div class="media">
+										<div class="media-body">
+											<h4 class="media-heading">'.$news[$i]->subject.'</h4>';
+						if (strlen($news[$i]->text) > 350) {
+							$str = $news[$i]->text;
+							$str = explode( "\n", wordwrap( $news[$i]->text, 350));
+							$str = $str[0] . '<a href="content/news.php?id='.$news[$i]->id.'"> Loe edasi... </a>';
+							echo $str;
+						}
+						echo '</div>
+									</div>';
+						/*echo "<h4 id='jobname'>".$news[$i]->subject."</h4><br>".$news[$i]->category.", ".$news[$i]->posted."<br>";
+						echo '<p>'.$news[$i]->text.'</p>';*/
+				}
 		}
 
 		?>

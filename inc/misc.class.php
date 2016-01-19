@@ -32,18 +32,25 @@
 
     }
 
-    function getNews() {
+    function getNews($cat="") {
+      if ($cat == "") {
+        $search = "%%";
+      }else{
+        $search = $cat;
+      }
 
-      $stmt = $this->connection->prepare("SELECT news_categories.name, subject, text, posted FROM news
+      $stmt = $this->connection->prepare("SELECT news.id, news_categories.name, subject, text, posted FROM news
                                           INNER JOIN news_categories ON news_categories.id = news.category
-                                          WHERE deleted IS NULL");
-      $stmt->bind_result($category, $subject, $text, $posted);
+                                          WHERE deleted IS NULL AND category LIKE ? ORDER BY posted DESC");
+      $stmt->bind_param("s", $search);
+      $stmt->bind_result($id, $category, $subject, $text, $posted);
       $stmt->execute();
 
       $array = array();
 
       while($stmt->fetch()) {
         $news = new StdClass();
+        $news->id = $id;
         $news->category = $category;
         $news->subject = $subject;
         $news->text = $text;
@@ -55,6 +62,34 @@
       $stmt->close();
 
     }
+
+    ############
+    ### NEWS ###
+    ############
+
+    function getCategories() {
+
+      $stmt = $this->connection->prepare("SELECT news_categories.id, name, count(news.id) FROM news_categories
+                                          INNER JOIN news ON news.category = news_categories.id
+                                          GROUP BY news_categories.id");
+      $stmt->bind_result($id, $category, $count);
+      $stmt->execute();
+
+      $array = array();
+
+      while($stmt->fetch()) {
+        $categories = new StdClass();
+        $categories->id = $id;
+        $categories->name = $category;
+        $categories->count = $count;
+        array_push($array, $categories);
+      }
+      return $array;
+
+      $stmt->close();
+
+    }
+
 
     ##########################
     ### STATS FOR HOMEPAGE ###
