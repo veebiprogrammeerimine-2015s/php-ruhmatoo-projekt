@@ -43,13 +43,15 @@
 					for($i = 0; $i < 3; $i++) {
 						echo '<div class="media">
 										<div class="media-body">
-											<h4 class="media-heading">'.$news[$i]->subject.'</h4>';
+											<h4 class="media-heading"><a href="content/news.php?id='.$news[$i]->id.'" style="color: #333;">'.$news[$i]->subject.'</a></h4>';
 						if (strlen($news[$i]->text) > 350) {
 							$str = $news[$i]->text;
 							$str = explode( "\n", wordwrap( $news[$i]->text, 350));
 							$str = $str[0] . '<a href="content/news.php?id='.$news[$i]->id.'"> Loe edasi... </a>';
 							echo $str;
-						}
+						} else {
+	            echo $news[$i]->text;
+	          }
 						echo '</div>
 									</div>';
 				}
@@ -57,13 +59,15 @@
 					for($i = 0; $i < count($news); $i++) {
 						echo '<div class="media">
 										<div class="media-body">
-											<h4 class="media-heading">'.$news[$i]->subject.'</h4>';
+											<h4 class="media-heading"><a href="content/news.php?id='.$news[$i]->id.'" style="color: #333;">'.$news[$i]->subject.'</a></h4>';
 						if (strlen($news[$i]->text) > 350) {
 							$str = $news[$i]->text;
 							$str = explode( "\n", wordwrap( $news[$i]->text, 350));
 							$str = $str[0] . '<a href="content/news.php?id='.$news[$i]->id.'"> Loe edasi... </a>';
 							echo $str;
-						}
+						} else {
+	            echo $news[$i]->text;
+	          }
 						echo '</div>
 									</div>';
 						/*echo "<h4 id='jobname'>".$news[$i]->subject."</h4><br>".$news[$i]->category.", ".$news[$i]->posted."<br>";

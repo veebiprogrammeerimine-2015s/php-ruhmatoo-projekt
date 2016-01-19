@@ -9,6 +9,9 @@
 ?>
 <?php
 
+  $text = $category = $subject = "";
+  $text_error = $category_error = $subject_error = "";
+
   $categories = $Misc->getCategories();
 
   $cat = 0;
@@ -20,9 +23,61 @@
 		$news = $Misc->getNews();
 	}
 
+  if(isset($_SESSION['logged_in_user_id'])) {
+		if($_SESSION['logged_in_user_group'] == 3) {
+			if( $_SERVER["REQUEST_METHOD"] == "POST") {
+
+        if(isset($_POST["add_news"])) {
+
+          if(empty($_POST["subject"])) {
+            $subject_error = "See väli on kohustuslik!";
+          } else {
+            $subject = cleanInput($_POST["subject"]);
+          }
+
+          if(empty($_POST["category"])) {
+            $category_error = "See väli on kohustuslik!";
+          } else {
+            $category = cleanInput($_POST["category"]);
+          }
+
+          if(empty($_POST["text"])) {
+            $text_error = "See väli on kohustuslik!";
+          } else {
+            $text = $_POST["text"];
+          }
+
+          if($subject_error == "" && $category_error == "" && $text_error == "") {
+
+            $Misc->addNews($_SESSION['logged_in_user_id'], $subject, $category, $text);
+          }
+
+
+        }
+			}
+		}
+	}
+
 
 ?>
+<?php if(isset($_SESSION['response']->success)): ?>
 
+<div class="alert alert-success alert-dismissible fade in" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+	<p><?=$_SESSION['response']->success->message;?></p>
+</div>
+
+<?php elseif(isset($_SESSION['response']->error)): ?>
+
+<div class="alert alert-danger alert-dismissible fade in" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+	<p><?=$_SESSION['response']->error->message;?></p>
+</div>
+
+<?php
+	endif;
+	unset($_SESSION['response']);
+?>
 
 <div class="col-xs-12 col-sm-8">
   <?php if(!isset($_GET['id'])): ?>
@@ -44,12 +99,14 @@
         for($i = 0; $i < count($news); $i++) {
           echo '<div class="media">
                   <div class="media-body">
-                    <h4 class="media-heading">'.$news[$i]->subject.'</h4>';
+                    <h4 class="media-heading"><a href="?id='.$news[$i]->id.'" style="color: #333;">'.$news[$i]->subject.'</a></h4>';
           if (strlen($news[$i]->text) > 500) {
             $str = $news[$i]->text;
             $str = explode( "\n", wordwrap( $news[$i]->text, 500));
             $str = $str[0] . ' <a href="?id='.$news[$i]->id.'">Loe edasi... </a>';
             echo $str;
+          } else {
+            echo $news[$i]->text;
           }
           echo '</div>
                 </div>';
@@ -58,7 +115,20 @@
       }
     ?>
   <?php else:?>
-    <h3 id="statbar"><a href="news.php" style="color: #333;">Uudised</a></h3>
+    <h3 id="statbar">
+      <a href="news.php" style="color: #333;">Uudised</a>
+      <?php
+      if(isset($_SESSION['logged_in_user_id'])):
+        if($_SESSION['logged_in_user_group'] == 3):
+      ?>
+      <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#editnews">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Muuda
+      </button>
+      <?php
+        endif;
+      endif;
+      ?>
+    </h3>
     <?php
         for($i = 0; $i < count($news); $i++) {
           if($_GET['id'] == $news[$i]->id) {
@@ -103,12 +173,14 @@
         for($i = 0; $i < 5; $i++) {
           echo '<div class="media">
                   <div class="media-body">
-                    <h4 class="media-heading">'.$news[$i]->subject.'</h4>';
+                    <h4 class="media-heading"><a href="?id='.$news[$i]->id.'" style="color: #333;">'.$news[$i]->subject.'</a></h4>';
           if (strlen($news[$i]->text) > 300) {
             $str = $news[$i]->text;
             $str = explode( "\n", wordwrap( $news[$i]->text, 300));
             $str = $str[0] . '<a href="?id='.$news[$i]->id.'"> Loe edasi... </a>';
             echo $str;
+          } else {
+            echo $news[$i]->text;
           }
           echo '</div>
                 </div>';
@@ -141,11 +213,7 @@ if(isset($_SESSION['logged_in_user_id'])):
 
             <div class="col-sm-6">
               <label for="category">Kategooria</label>
-              <select class="form-control" name="category">
-                <option selected>----</option>
-                <option value="">Uudis</option>
-                <option value="">Uuendus</option>
-              </select>
+              <?=$Misc->getCategoriesSelect();?>
             </div>
 
             <div class="col-sm-12">

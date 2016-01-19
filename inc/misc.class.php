@@ -90,6 +90,46 @@
 
     }
 
+    function addNews($user, $sub, $cat, $text) {
+      $response = new StdClass();
+
+      $stmt = $this->connection->prepare("INSERT INTO news (user_id, subject, category, text, posted) VALUES (?, ?, ?, ?, NOW())");
+      $stmt->bind_param("isis", $user, $sub, $cat, $text);
+
+      if($stmt->execute()) {
+        $success = new StdClass();
+  			$success->message = "Uudis edukalt sisestatud!";
+  			$response->success = $success;
+      } else {
+        $error = new StdClass();
+  			$error->message = "Midagi läks valesti! Anna teada administraatorile!";
+  			$response->error = $error;
+      }
+
+      $_SESSION['response'] = $response;
+      header("Location: news.php");
+      exit();
+
+      $stmt->close();
+    }
+
+    function getCategoriesSelect() {
+      $html = '';
+  		$html .= '<select name="category" class="form-control">';
+      $html .= '<option selected>----</option>';
+      
+  		$stmt = $this->connection->prepare("SELECT id, name FROM news_categories");
+  		$stmt->bind_result($id, $name);
+  		$stmt->execute();
+  		while($stmt->fetch()) {
+  			$html .= '<option value="'.$id.'">'.$name.'</option>';
+  		}
+  		$stmt->close();
+  		$html .= '</select>';
+
+  		return $html;
+    }
+
 
     ##########################
     ### STATS FOR HOMEPAGE ###
