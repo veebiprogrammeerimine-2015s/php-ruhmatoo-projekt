@@ -62,127 +62,6 @@
 
 ?>
 
-<?php
-
-	if(isset($_GET['edit'])):
-
-?>
-
-<script>
-	window.onload = function(){
-
-
-		var jsarray = JSON.parse('<?=$jsarray;?>');
-		var jsarray_loc = JSON.parse('<?=$jsarray_loc;?>');
-
-		var selected_county = '<?=$selected_county;?>';
-		var selected_parish = '<?=$selected_parish;?>';
-		var selected_loc = '<?=$selected_loc;?>';
-		console.log(selected_county,selected_parish,selected_loc);
-
-		console.log(jsarray_loc);
-
-		var county_select = document.getElementById('job_county');
-		var parish_select = document.getElementById('job_parish');
-		var loc_select = document.getElementById('job_location');
-
-		var list_of_countys = createListOfCountys(jsarray);
-
-		console.log(list_of_countys);
-
-		createDropDown(list_of_countys, county_select, selected_county);
-		selected_county = null;
-		for(var i = 0; i < jsarray.length; i++){
-			if(jsarray[i].county == county_select.value){
-				createDropDown(jsarray[i].parish, parish_select, selected_parish);
-				selected_parish = null;
-			}
-		}
-
-		//loc_select.innerHTML = '<option>Vali asula</option>';
-		for(var i = 0; i < jsarray_loc.length; i++){
-			if(jsarray_loc[i].parish == parish_select.value){
-				createDropDown(jsarray_loc[i].location, loc_select, selected_loc);
-				selected_loc = null;
-			}
-		}
-
-		county_select.addEventListener('change', function(){
-			console.log('valik muuutus '+ county_select.value);
-
-			for(var i = 0; i < jsarray.length; i++){
-				if(jsarray[i].county == county_select.value){
-					createDropDown(jsarray[i].parish, parish_select, null);
-				}
-			}
-
-			//loc_select.innerHTML = '<option>Vali asula</option>';
-			for(var i = 0; i < jsarray_loc.length; i++){
-				if(jsarray_loc[i].parish == parish_select.value){
-					createDropDown(jsarray_loc[i].location, loc_select, null);
-				}
-			}
-
-		});
-
-		parish_select.addEventListener('change', function(){
-			console.log('valik muuutus '+ parish_select.value);
-
-			for(var i = 0; i < jsarray_loc.length; i++){
-				if(jsarray_loc[i].parish == parish_select.value){
-					createDropDown(jsarray_loc[i].location, loc_select, null);
-				}
-			}
-
-		});
-	}
-
-	function createListOfCountys(jsarray){
-
-		var temp_array = [];
-		for(var i = 0; i < jsarray.length; i++){
-			temp_array.push(jsarray[i].county);
-		}
-		return temp_array;
-	}
-
-	function createDropDown(array, element, selected){
-
-		var html = '';
-
-		for(var i = 0; i < array.length; i++){
-			console.log(selected);
-			if(selected && selected == array[i]){
-
-				html+= '<option selected value="'+array[i]+'">'+
-
-						array[i]+
-
-					'</option>';
-
-			}else{
-
-				html+= '<option value="'+array[i]+'">'+
-
-						array[i]+
-
-					'</option>';
-
-			}
-
-		}
-
-		element.innerHTML = html;
-
-	}
-</script>
-
-
-<?php
-
-	endif;
-
-?>
 <?php if(isset($_SESSION['response']->success)): ?>
 
 <div class="alert alert-success alert-dismissible fade in" role="alert">
@@ -229,7 +108,7 @@
 				echo '<a title="Muuda töö aktiivseks" href="?activate='.$job_array[$i]->id.'" class="btn btn-default"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>';
 			}
 
-			echo '<a title="Kustuta töö" href="?delete='.$job_array[$i]->id.'" class="btn btn-default"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>';
+			echo '<a title="Kustuta töö" class="btn btn-default" onclick="confirmDelete('.$job_array[$i]->id.')"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>';
 			echo '</div>';
 			echo '</h4>';
 			echo '</div>';
@@ -366,5 +245,138 @@
 		}
 	?>
 </div>
+
+<script>
+	function confirmDelete(id) {
+		var confirmation = confirm("Kas oled kindel, et soovid kustutada?");
+		if (confirmation == true) {
+			window.location = "?delete="+id;
+		}
+	};
+</script>
+
+<?php
+
+	if(isset($_GET['edit'])):
+
+?>
+
+<script>
+
+	window.onload = function(){
+
+
+		var jsarray = JSON.parse('<?=$jsarray;?>');
+		var jsarray_loc = JSON.parse('<?=$jsarray_loc;?>');
+
+		var selected_county = '<?=$selected_county;?>';
+		var selected_parish = '<?=$selected_parish;?>';
+		var selected_loc = '<?=$selected_loc;?>';
+		console.log(selected_county,selected_parish,selected_loc);
+
+		console.log(jsarray_loc);
+
+		var county_select = document.getElementById('job_county');
+		var parish_select = document.getElementById('job_parish');
+		var loc_select = document.getElementById('job_location');
+
+		var list_of_countys = createListOfCountys(jsarray);
+
+		console.log(list_of_countys);
+
+		createDropDown(list_of_countys, county_select, selected_county);
+		selected_county = null;
+		for(var i = 0; i < jsarray.length; i++){
+			if(jsarray[i].county == county_select.value){
+				createDropDown(jsarray[i].parish, parish_select, selected_parish);
+				selected_parish = null;
+			}
+		}
+
+		//loc_select.innerHTML = '<option>Vali asula</option>';
+		for(var i = 0; i < jsarray_loc.length; i++){
+			if(jsarray_loc[i].parish == parish_select.value){
+				createDropDown(jsarray_loc[i].location, loc_select, selected_loc);
+				selected_loc = null;
+			}
+		}
+
+		county_select.addEventListener('change', function(){
+			console.log('valik muuutus '+ county_select.value);
+
+			for(var i = 0; i < jsarray.length; i++){
+				if(jsarray[i].county == county_select.value){
+					createDropDown(jsarray[i].parish, parish_select, null);
+				}
+			}
+
+			//loc_select.innerHTML = '<option>Vali asula</option>';
+			for(var i = 0; i < jsarray_loc.length; i++){
+				if(jsarray_loc[i].parish == parish_select.value){
+					createDropDown(jsarray_loc[i].location, loc_select, null);
+				}
+			}
+
+		});
+
+		parish_select.addEventListener('change', function(){
+			console.log('valik muuutus '+ parish_select.value);
+
+			for(var i = 0; i < jsarray_loc.length; i++){
+				if(jsarray_loc[i].parish == parish_select.value){
+					createDropDown(jsarray_loc[i].location, loc_select, null);
+				}
+			}
+
+		});
+	}
+
+	function createListOfCountys(jsarray){
+
+		var temp_array = [];
+		for(var i = 0; i < jsarray.length; i++){
+			temp_array.push(jsarray[i].county);
+		}
+		return temp_array;
+	}
+
+	function createDropDown(array, element, selected){
+
+		var html = '';
+
+		for(var i = 0; i < array.length; i++){
+			console.log(selected);
+			if(selected && selected == array[i]){
+
+				html+= '<option selected value="'+array[i]+'">'+
+
+						array[i]+
+
+					'</option>';
+
+			}else{
+
+				html+= '<option value="'+array[i]+'">'+
+
+						array[i]+
+
+					'</option>';
+
+			}
+
+		}
+
+		element.innerHTML = html;
+
+	}
+</script>
+
+
+<?php
+
+	endif;
+
+?>
+
 
 <?php require_once("../footer.php"); ?>
