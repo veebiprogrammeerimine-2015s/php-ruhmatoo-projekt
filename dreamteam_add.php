@@ -62,7 +62,7 @@ function cleanInput($data) {
 	?>
 
 <html>
-
+<p><a href="dreamteam.php" class="btn btn-primary" role="button">Dreamteam lehele</a></p>
 <head>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
