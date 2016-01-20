@@ -379,7 +379,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 												echo '<a href="?edit='.$getPrimary[$i]->id.'" class="btn btn-info btn-sm">
 																<span class="glyphicon glyphicon-pencil"></span> Muuda
 															</a>';
-												echo '<a href="?delete='.$getPrimary[$i]->id.'" class="btn btn-danger btn-sm">
+												echo '<a class="btn btn-danger btn-sm" onclick="confirmDelete('.$getPrimary[$i]->id.');">
 																<span class="glyphicon glyphicon-remove"></span> Kustuta
 															</a>';
 												echo '</div></td>';
@@ -387,8 +387,21 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 											}
 										}
 
-
+										#href="?delete='.$getPrimary[$i]->id.'"
 										?>
+										<script type="text/javascript">
+
+														function confirmDelete(id) {
+															var r = confirm("Kas oled kindel, et soovid kustutada?");
+															if (r == true) {
+																window.location = "?delete="+id;
+															} else {
+
+															}
+														};
+
+
+													</script>
 									</form>
 									</tbody>
 								</table>
