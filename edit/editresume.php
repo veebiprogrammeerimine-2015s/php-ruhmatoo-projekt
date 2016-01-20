@@ -379,7 +379,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 												echo '<a href="?edit='.$getPrimary[$i]->id.'" class="btn btn-info btn-sm">
 																<span class="glyphicon glyphicon-pencil"></span> Muuda
 															</a>';
-												echo '<a class="btn btn-danger btn-sm" onclick="confirmDelete('.$getPrimary[$i]->id.');">
+												echo '<a class="btn btn-danger btn-sm" onclick="confirmSchoolDelete('.$getPrimary[$i]->id.');">
 																<span class="glyphicon glyphicon-remove"></span> Kustuta
 															</a>';
 												echo '</div></td>';
@@ -387,21 +387,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 											}
 										}
 
-										#href="?delete='.$getPrimary[$i]->id.'"
 										?>
-										<script type="text/javascript">
-
-														function confirmDelete(id) {
-															var r = confirm("Kas oled kindel, et soovid kustutada?");
-															if (r == true) {
-																window.location = "?delete="+id;
-															} else {
-
-															}
-														};
-
-
-													</script>
 									</form>
 									</tbody>
 								</table>
@@ -525,7 +511,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 													echo '<a href="?edit_language='.$getLanguages[$i]->id.'" class="btn btn-info btn-sm">
 																	<span class="glyphicon glyphicon-pencil"></span> Muuda
 																</a>';
-													echo '<a href="?delete_language='.$getLanguages[$i]->id.'" class="btn btn-danger btn-sm">
+													echo '<a class="btn btn-danger btn-sm" onclick="confirmLanguageDelete('.$getLanguages[$i]->id.')">
 																	<span class="glyphicon glyphicon-remove"></span> Kustuta
 																</a>';
 													echo '</div></td>';
@@ -659,7 +645,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 									echo '<a href="?edit_course='.$getCourses[$i]->id.'" class="btn btn-info btn-sm">
 													<span class="glyphicon glyphicon-pencil"></span> Muuda
 												</a>';
-									echo '<a href="?delete_course='.$getCourses[$i]->id.'" class="btn btn-danger btn-sm">
+									echo '<a class="btn btn-danger btn-sm" onclick="confirmCourseDelete('.$getCourses[$i]->id.')">
 													<span class="glyphicon glyphicon-remove"></span> Kustuta
 												</a>';
 									echo '</div></td>';
@@ -793,7 +779,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 									echo '<a href="?edit_work='.$getWorkexp[$i]->id.'" class="btn btn-info btn-sm">
 													<span class="glyphicon glyphicon-pencil"></span> Muuda
 												</a>';
-									echo '<a href="?delete_work='.$getWorkexp[$i]->id.'" class="btn btn-danger btn-sm">
+									echo '<a class="btn btn-danger btn-sm" onclick="confirmWorkDelete('.$getWorkexp[$i]->id.')">
 													<span class="glyphicon glyphicon-remove"></span> Kustuta
 												</a>';
 									echo '</div></td>';
@@ -931,5 +917,35 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
     </form>
   </div>
 
+	<script type="text/javascript">
+
+					function confirmSchoolDelete(id) {
+						var confirmation = confirm("Kas oled kindel, et soovid kustutada?");
+						if (confirmation == true) {
+							window.location = "?delete="+id;
+						}
+					};
+
+					function confirmLanguageDelete(id) {
+						var confirmation = confirm("Kas oled kindel, et soovid kustutada?");
+						if (confirmation == true) {
+							window.location = "?delete_language="+id;
+						}
+					};
+
+					function confirmCourseDelete(id) {
+						var confirmation = confirm("Kas oled kindel, et soovid kustutada?");
+						if (confirmation == true) {
+							window.location = "?delete_course="+id;
+						}
+					};
+
+					function confirmWorkDelete(id) {
+						var confirmation = confirm("Kas oled kindel, et soovid kustutada?");
+						if (confirmation == true) {
+							window.location = "?delete_work="+id;
+						}
+					};
+			</script>
 
 <?php require_once("../footer.php"); ?>
