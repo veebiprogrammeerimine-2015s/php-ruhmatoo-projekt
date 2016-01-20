@@ -142,7 +142,8 @@ function createTeam($GK, $LB, $CB1, $CB2, $RB, $LM, $CM1, $CM2, $RM, $ST1, $ST2 
 		// Global muutujad, et kätte saada config failist andmed
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO users (GK, LB, CB1, CB2, RB, LM, CM1, CM2, RM, ST1, ST2 WHERE id='".$_SESSION['logged_in_user_id']."') VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+		$stmt = $mysqli->prepare("INSERT INTO dreamteam (GK, LB, CB1, CB2, RB, LM, CM1, CM2, RM, ST1, ST2) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+		echo $mysqli->error;
 		$stmt->bind_param("sssssssssss", $GK, $LB, $CB1, $CB2, $RB, $LM, $CM1, $CM2, $RM, $ST1, $ST2);
 		$stmt->execute();
      
@@ -151,11 +152,51 @@ function createTeam($GK, $LB, $CB1, $CB2, $RB, $LM, $CM1, $CM2, $RM, $ST1, $ST2 
 		
 		$mysqli->close();
 		
-	}
+	}	
+
+			function getDreamData() {
+				
+			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		$stmt = $mysqli->prepare("SELECT GK, LB, CB1, CB2, RB, LM, CM1, CM2, RM, ST1, ST2 from dreamteam WHERE deleted IS NULL");
+		//$stmt->bind_param("ssss", $search, $search, $search, $search);
+		$stmt->bind_result( $GK, $LB, $CB1, $CB2, $RB, $LM, $CM1, $CM2, $RM, $ST1, $ST2);
+		$stmt->execute();
 		
-
-
-
+		
+		// tühi massiiv, kus hoian moose ja 
+		$array_of_dream = array();
+		//tee midagi seni, kuni saame ab'ist ühe rea andmeid
+		while($stmt->fetch()){
+			// seda siin sees tehakse 
+			// nii mitu korda kui on ridu
+				
+			// tekitan objekti, kus hakkan hoitma oma moose ja väärtusi
+			$dt = new StdClass();
+			$dt->GK=$GK;
+			$dt->LB=$LB;
+			$dt->CB1= $CB1;
+			$dt->CB2=$CB2;
+			$dt->RB=$RB;
+			$dt->LM=$LM;
+			$dt->CM1=$CM1;
+			$dt->CM2= $CM2;
+			$dt->RM=$RM;
+			$dt->ST1=$ST1;
+			$dt->ST2=$ST2;
+			//lisan massiivi
+			
+			array_push($array_of_dream, $dt);
+			
+			
+			
+		}
+		//tagastan massiivi, kus kõik asjad sees, read.
+		return $array_of_dream;
+		
+		$stmt->close();
+		$mysqli->close();
+	
+	}
 
 ?>
 	
