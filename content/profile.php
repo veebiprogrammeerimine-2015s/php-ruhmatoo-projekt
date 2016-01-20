@@ -57,6 +57,13 @@
 				}
 				if($first_error == "" && $last_error == "" && $county_error == "" && $parish_error == "" && $number_error == ""){
 					$response_personal = $Profile->editPersonal($_SESSION['logged_in_user_id'], $first, $last, $county, $parish, $number);
+				} else {
+					$response = new StdClass();
+					$error = new StdClass();
+					$error->id = 1;
+					$error->message = "Palun täida kõik väljad!";
+					$response->error = $error;
+					$_SESSION['response'] = $response;
 				}
 
 			}
@@ -171,47 +178,32 @@
 }
 ?>
 
-<script>
-	function passwordMatch() {
-	    var newpass = $("#newpassword").val();
-	    var repeatpass = $("#repeatpassword").val();
-
-	    if (newpass != repeatpass)
-	        document.getElementById("checking").className = "form-group has-error"
-			else
-					document.getElementById("checking").className = "form-group has-success"
-	}
-	function isOkay() {
-	var firsts = document.getElementById("first").value;
-	var lasts = document.getElementById("last").value;
-	var countys = document.getElementById("county").value;
-	var parishs = document.getElementById("parish").value;
-	var numbers = document.getElementById("number").value;
-		if (firsts == 0 || lasts == 0 || countys == 0 || parishs == 0 || numbers == 0)
-			document.getElementById("save_personal").className = "btn btn-success btn-sm disabled";
-		else
-			document.getElementById("save_personal").className = "btn btn-success btn-sm";
-	}
-
-	$(document).ready(isOkay);
-
-	$(document).ready(function () {
-	   $("#repeatpassword").keyup(passwordMatch);
-		 $("#first").keyup(isOkay);
-		 $("#last").keyup(isOkay);
-		 $("#county").keyup(isOkay);
-		 $("#parish").keyup(isOkay);
-		 $("#number").keyup(isOkay);
-	});
-
-
-</script>
 
 <!--
 ########################
 ### SEARCHER PROFIIL ###
 ########################
 -->
+
+<?php if(isset($_SESSION['response']->success)): ?>
+
+<div class="alert alert-success alert-dismissible fade in" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+	<p><?=$_SESSION['response']->success->message;?></p>
+</div>
+
+<?php elseif(isset($_SESSION['response']->error)): ?>
+
+<div class="alert alert-danger alert-dismissible fade in" role="alert">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+	<p><?=$_SESSION['response']->error->message;?></p>
+</div>
+
+<?php
+	endif;
+	unset($_SESSION['response']);
+?>
+
 <?php if($_SESSION['logged_in_user_group'] == 1):?>
 <div class="row">
 
@@ -362,23 +354,25 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 
 							<tr>
 								<td><label> Eesnimi </label></td>
-								<td><input id="first" type="text" name="first" class="form-control input-sm" value="<?=$first;?>"></td>
+								<td id="firsts" class="form-group">
+									<input id="first" type="text" name="first" class="form-control input-sm" value="<?=$first;?>">
+								</td>
 							</tr>
 							<tr>
 								<td><label> Perekonnanimi </label></td>
-								<td><input id="last" type="text" name="last" class="form-control input-sm" value="<?=$last;?>"></td>
+								<td id="lasts" class="form-group"><input id="last" type="text" name="last" class="form-control input-sm" value="<?=$last;?>"></td>
 							</tr>
 							<tr>
 								<td><label> Maakond </label></td>
-								<td><input id="county" type="text" name="county" class="form-control input-sm" value="<?=$county;?>"></td>
+								<td id="countys" class="form-group"><input id="county" type="text" name="county" class="form-control input-sm" value="<?=$county;?>"></td>
 							</tr>
 							<tr>
 								<td><label> Vald </label></td>
-								<td><input id="parish" type="text" name="parish" class="form-control input-sm" value="<?=$parish;?>"></td>
+								<td id="parishs" class="form-group"><input id="parish" type="text" name="parish" class="form-control input-sm" value="<?=$parish;?>"></td>
 							</tr>
 							<tr>
 								<td><label> Telefoni number </label></td>
-								<td><input id="number" type="text" name="number" class="form-control input-sm" value="<?=$number;?>"></td>
+								<td id="numbers" class="form-group"><input id="number" type="text" name="number" class="form-control input-sm" value="<?=$number;?>"></td>
 							</tr>
 						</table>
 						<div class="btn-group pull-right" role="group">
@@ -431,17 +425,16 @@ Juhul kui soovid parooli vahetada, siis täida antud vorm ära ja parool saab ed
 				</pre>
 			</div>
 
-
 			<div class="form-horizontal col-xs-12 col-sm-8">
 					<h3>Muuda parooli</h3>
 					<form class="form-horizontal col-xs-12" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 						<div class="form-group">
-							<label for="oldpassword">Parool</label>
+							<label for="oldpassword">Vana parool</label>
 							<input type="password" class="form-control" name="oldpassword">
 						</div>
 						<div class="form-group">
-							<label for="newpassword">Uus Parool</label>
-							<input type="password" class="form-control" id="newpassword" name="newpassword">
+							<label for="newpassword">Uus parool</label>
+							<input type="password" class="form-control" id="newpassword" name="newpassword" data-toggle="tooltip" data-placement="left" title="Parool peab olema vähemalt 8 tähemärki pikk!">
 						</div>
 					  <div id="checking" class="form-group">
 					    <label for="repeatpassword">Korda uut parooli</label>
@@ -476,7 +469,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 					<table class="table table-hover table-striped">
 							<thead>
 								<tr>
-									<th>Kasutaja</th>
+									<th>Nimi</th>
 									<th>Sisestatud</th>
 								</tr>
 							</thead>
@@ -594,6 +587,74 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 Admin profiil
 
 <?php endif; ?>
+
+<script>
+	function passwordMatch() {
+    var newpass = $("#newpassword").val();
+    var repeatpass = $("#repeatpassword").val();
+
+    if (newpass != repeatpass)
+        document.getElementById("checking").className = "form-group has-error"
+		else
+				document.getElementById("checking").className = "form-group has-success"
+	}
+
+	function passwordLength() {
+		var pass = $("#newpassword").val();
+
+		if (pass.length < 8)
+			$('#newpassword').tooltip('show');
+		else
+			$('#newpassword').tooltip('hide');
+	}
+
+	function isOkay() {
+		var firsts = document.getElementById("first").value;
+		var lasts = document.getElementById("last").value;
+		var countys = document.getElementById("county").value;
+		var parishs = document.getElementById("parish").value;
+		var numbers = document.getElementById("number").value;
+
+		if (firsts == 0 || lasts == 0 || countys == 0 || parishs == 0 || numbers == 0)
+			document.getElementById("save_personal").className = "btn btn-success btn-sm disabled";
+			if(firsts == 0)
+				document.getElementById("firsts").className = "form-group input-sm has-error";
+			if(lasts == 0)
+				document.getElementById("lasts").className = "form-control input-sm has-error";
+			if(countys == 0)
+				document.getElementById("countys").className = "form-control input-sm has-error";
+			if(parishs == 0)
+				document.getElementById("parishs").className = "form-control input-sm has-error";
+			if(numbers == 0)
+				document.getElementById("numbers").className = "form-control input-sm has-error";
+		else
+			document.getElementById("save_personal").className = "btn btn-success btn-sm";
+			if(firsts != 0)
+				document.getElementById("firsts").className = "form-group input-sm has-success";
+			if(lasts != 0)
+				document.getElementById("lasts").className = "form-control input-sm has-success";
+			if(countys != 0)
+				document.getElementById("countys").className = "form-control input-sm has-success";
+			if(parishs != 0)
+				document.getElementById("parishs").className = "form-control input-sm has-success";
+			if(numbers != 0)
+				document.getElementById("numbers").className = "form-control input-sm has-success";
+		}
+
+	$(document).ready(function () {
+	   $("#repeatpassword").keyup(passwordMatch);
+		 $("#newpassword").keyup(passwordLength);
+		 $("#first").ready(isOkay);
+		 $("#first").keyup(isOkay);
+		 $("#last").keyup(isOkay);
+		 $("#county").keyup(isOkay);
+		 $("#parish").keyup(isOkay);
+		 $("#number").keyup(isOkay);
+	});
+
+
+</script>
+
 <!--
 PROFILE END
 -->

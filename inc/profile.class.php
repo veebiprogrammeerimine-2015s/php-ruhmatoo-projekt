@@ -51,7 +51,7 @@ class Profile {
 			$stmt->close();
 
 		}
-		return ($response);
+		$_SESSION['response'] = $response;
 		header ("Location: profile.php");
 		exit();
 	}
