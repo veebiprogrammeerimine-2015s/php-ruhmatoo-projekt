@@ -523,6 +523,63 @@ www.ntb.ee
 
     }
 
+    #########################
+    ### Resume: Languages ###
+    #########################
+
+    function newLanguage($cvid, $language, $writing, $speaking, $reading, $info, $link) {
+      $stmt = $this->connection->prepare("INSERT INTO ntb_languages (resume_id, language, writing, speaking, reading, info) VALUES (?, ?, ?, ?, ?, ?)");
+      $stmt->bind_param("isiiis", $cvid, $language, $writing, $speaking, $reading, $info);
+      $stmt->execute();
+      header("Location: ".$link);
+      $stmt->close();
+    }
+
+    function getLanguages($cvid) {
+      $stmt = $this->connection->prepare("SELECT id, language, writing, speaking, reading, info FROM ntb_languages
+                                          WHERE resume_id = ? AND deleted IS NULL ORDER BY language ASC");
+      $stmt->bind_param("i", $cvid);
+      $stmt->bind_result($id, $language, $writing, $speaking, $reading, $info);
+      $stmt->execute();
+
+      $array = array();
+
+      while ($stmt->fetch()) {
+        $languages = new StdClass();
+        $languages->id = $id;
+        $languages->language = $language;
+        $languages->writing = $writing;
+        $languages->speaking = $speaking;
+        $languages->reading = $reading;
+        $languages->info = $info;
+
+        array_push($array, $languages);
+      }
+      return ($array);
+      $stmt->close();
+
+    }
+
+    function editLanguage($id, $language, $writing, $speaking, $reading, $info, $link) {
+      $stmt = $this->connection->prepare("UPDATE ntb_languages SET language = ?, writing = ?, speaking = ?, reading = ?, info = ? WHERE id = ?");
+      $stmt->bind_param("siiisi", $language, $writing, $speaking, $reading, $info, $id);
+      $stmt->execute();
+
+      header("Location: ".$link);
+      $stmt->close();
+    }
+
+    function deleteLanguage($id, $user_id, $link) {
+      $stmt = $this->connection->prepare("UPDATE ntb_languages INNER JOIN ntb_resumes ON ntb_resumes.id = ntb_languages.resume_id SET ntb_languages.deleted = NOW() WHERE ntb_languages.id = ? AND ntb_resumes.user_id = ?");
+      $stmt->bind_param("ii", $id, $user_id);
+      $stmt->execute();
+
+      header("Location: ".$link);
+      $stmt->close();
+    }
+
+
+
     #######################
     ### Resume: COURSES ###
     #######################

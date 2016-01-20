@@ -23,6 +23,7 @@
 	$getPrimary = $Resume->getPrimary($cvid->id);
 	$getCourses = $Resume->getCourses($cvid->id);
 	$getWorkexp = $Resume->getWorkexp($cvid->id);
+	$getLanguages = $Resume->getLanguages($cvid->id);
 
   $primary_name = $primary_start = $primary_end = $primary_info = $primary_type = "";
   $primary_name_error = $primary_start_error = "";
@@ -38,19 +39,25 @@
 
 	if(isset($_SESSION['logged_in_user_id'])) {
 		if($_SESSION['logged_in_user_group'] == 1) {
+
 			if(isset($_GET["delete"])) {
 				$Resume->deletePrimary($_GET["delete"], $_SESSION['logged_in_user_id'], $file_to_trim);
 			}
-		}
-		if($_SESSION['logged_in_user_group'] == 1) {
+
+
 			if(isset($_GET["delete_course"])) {
 				$Resume->deleteCourse($_GET["delete_course"], $_SESSION['logged_in_user_id'], $file_to_trim);
 			}
-		}
-		if($_SESSION['logged_in_user_group'] == 1) {
+
+
 			if(isset($_GET["delete_work"])) {
 				$Resume->deleteWork($_GET["delete_work"], $_SESSION['logged_in_user_id'], $file_to_trim);
 			}
+
+			if(isset($_GET["delete_language"])) {
+				$Resume->deleteLanguage($_GET["delete_language"], $_SESSION['logged_in_user_id'], $file_to_trim);
+			}
+
 		}
 	}
 
@@ -124,6 +131,40 @@
 					}
 			}
 
+			if(isset($_POST["update_language"])) {
+
+				if (empty($_POST["language"]) ) {
+					$language_error = "See väli on kohustuslik";
+				}else{
+					$language = cleanInput($_POST["language"]);
+				}
+
+				if (empty($_POST["writing"]) ) {
+					$writing_error = "See väli on kohustuslik";
+				}else{
+					$writing = cleanInput($_POST["writing"]);
+				}
+
+				if (empty($_POST["speaking"]) ) {
+					$speaking_error = "See väli on kohustuslik";
+				}else{
+					$speaking = cleanInput($_POST["speaking"]);
+				}
+
+				if (empty($_POST["reading"]) ) {
+					$reading_error = "See väli on kohustuslik";
+				}else{
+					$reading = cleanInput($_POST["reading"]);
+				}
+
+				$language_info = cleanInput($_POST["language_info"]);
+
+
+				if ($language_error == "" && $writing_error == "" && $speaking_error == "" && $reading_error == "") {
+				$Resume->editLanguage($_POST["language_id"], $language, $writing, $speaking, $reading, $language_info, $file_to_trim);
+				}
+		}
+
         if(isset($_POST["new_primary"])){
           if (empty($_POST["primary_name"]) ) {
 						$primary_name_error = "See väli on kohustuslik";
@@ -146,6 +187,41 @@
 
         }
 
+				if(isset($_POST["new_language"])){
+
+					if (empty($_POST["language"]) ) {
+						$language_error = "See väli on kohustuslik";
+					}else{
+						$language = cleanInput($_POST["language"]);
+					}
+
+					if (empty($_POST["writing"]) ) {
+						$writing_error = "See väli on kohustuslik";
+					}else{
+						$writing = cleanInput($_POST["writing"]);
+					}
+
+					if (empty($_POST["speaking"]) ) {
+						$speaking_error = "See väli on kohustuslik";
+					}else{
+						$speaking = cleanInput($_POST["speaking"]);
+					}
+
+					if (empty($_POST["reading"]) ) {
+						$reading_error = "See väli on kohustuslik";
+					}else{
+						$reading = cleanInput($_POST["reading"]);
+					}
+
+					$language_info = cleanInput($_POST["language_info"]);
+
+					if ($language_error == "" && $writing_error == "" && $speaking_Error == "" && $reading_error == "") {
+						$response = $Resume->newLanguage($cvid->id, $language, $writing, $speaking, $reading, $language_info, $file_to_trim);
+
+					}
+
+				}
+
 				if(isset($_POST["new_course"])){
 					if (empty($_POST["course_name"]) ) {
 						$course_name_error = "See väli on kohustuslik";
@@ -160,11 +236,6 @@
 
 					if ($course_name_error == "") {
 					$Resume->newCourse($cvid->id, $course_name, $course_trainer, $course_duration, $course_info, $course_year, $file_to_trim);
-					}
-
-					if ($primary_name_error == "" && $primary_start_error == "") {
-						$response = $Resume->newPrimary($cvid->id, $primary_name, $primary_start, $primary_end, $primary_info, $primary_type, $file_to_trim);
-
 					}
 
 				}
@@ -321,7 +392,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 									</form>
 									</tbody>
 								</table>
-								<!-- Modal -->
+								<!-- Modal for adding school -->
 								<div class="modal fade" id="new_school" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 								  <div class="modal-dialog" role="document">
 								    <div class="modal-content">
@@ -384,6 +455,141 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 								</div>
 
 					</div>
+
+				<!-- languages -->
+				<div id="languages">
+	             <h3>
+								 Keelteoskus
+									<button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#new_language">
+	                      <span class="glyphicon glyphicon-plus"></span> Uus keel
+	                </button>
+							 </h3>
+									<table class="table table-hover table-condensed table-striped table-responsive">
+										<thead>
+											<tr>
+												<th>Keel</th>
+												<th>Kirjutamine</th>
+												<th>Rääkimine</th>
+												<th>Lugemine</th>
+												<th>Info</th>
+											</tr>
+										</thead>
+										<tbody>
+											<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+											<?php
+											for($i = 0; $i < count($getLanguages); $i++) {
+												if(isset($_GET["edit_language"]) && $_GET["edit_language"] == $getLanguages[$i]->id) {
+
+													echo '<input type="hidden" name="language_id" value="'.$getLanguages[$i]->id.'">';
+													echo '<tr>
+															 <td><input class="form-control" type="text" name="language" value="'.$getLanguages[$i]->language.'"></td>
+															 <td><input class="form-control" type="text" name="writing" value="'.$getLanguages[$i]->writing.'"></td>
+															 <td><input class="form-control" type="text" name="speaking" value="'.$getLanguages[$i]->speaking.'"></td>
+															 <td><input class="form-control" type="text" name="reading" value="'.$getLanguages[$i]->reading.'"></td>
+															 <td><input class="form-control" type="text" name="language_info" value="'.$getLanguages[$i]->info.'"></td>';
+													echo '<td>';
+
+													echo '<div class="btn-group" role="group">';
+													echo '<button type="submit" name="update_language" class="btn btn-success btn-sm">
+																		<span class="glyphicon glyphicon-ok"></span> Salvesta
+																	</button>';
+													echo '<a href="'.$file_to_trim.'" class="btn btn-warning btn-sm">
+																		<span class="glyphicon glyphicon-remove"></span> Katkesta
+																	</a>';
+													echo '</div>';
+													echo '</td>';
+													echo '</tr>';
+
+												} else {
+													echo '<tr>
+															 <td>'.$getLanguages[$i]->language.'</td>
+															 <td>'.$getLanguages[$i]->writing.'</td>
+															 <td>'.$getLanguages[$i]->speaking.'</td>
+															 <td>'.$getLanguages[$i]->reading.'</td>
+															 <td>'.$getLanguages[$i]->info.'</td>';
+													echo '<td><div class="btn-group pull-right" role="group">';
+
+													echo '<a href="?edit_language='.$getLanguages[$i]->id.'" class="btn btn-info btn-sm">
+																	<span class="glyphicon glyphicon-pencil"></span> Muuda
+																</a>';
+													echo '<a href="?delete_language='.$getLanguages[$i]->id.'" class="btn btn-danger btn-sm">
+																	<span class="glyphicon glyphicon-remove"></span> Kustuta
+																</a>';
+													echo '</div></td>';
+													echo '</tr>';
+												}
+											}
+
+
+											?>
+										</form>
+										</tbody>
+									</table>
+									<!-- Modal for adding language -->
+									<div class="modal fade" id="new_language" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									  <div class="modal-dialog" role="document">
+									    <div class="modal-content">
+												<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+									      <div class="modal-header">
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									        <h4 class="modal-title" id="myModalLabel">Lisa uus keel</h4>
+									      </div>
+									      <div class="modal-body" style="height: 500px;">
+													<div class="col-sm-12">
+														<div class="col-sm-12">
+			                      <div class="col-sm-6">
+
+			                        <div class="form-group">
+			                          <label for="language">Keel *</label>
+			                          <input type="text" class="form-control" name="language">
+			                        </div>
+			                      </div>
+														<div class="col-sm-6">
+
+															<label for="writing">Kirjutamine *</label>
+
+																<input type="text" class="form-control" name="writing">
+
+															</div>
+														</div>
+			                      <div class="col-sm-12">
+			                        <div class="form-group">
+			                          <div class="col-sm-6">
+			                            <label for="speaking">Rääkimine *</label>
+			                            <input type="text" class="form-control" name="speaking">
+			                          </div>
+			                          <div class="col-sm-6">
+			                            <label for="reading">Lugemine *</label>
+			                            <input type="text" class="form-control" name="reading">
+			                          </div>
+			                        </div>
+			                      </div>
+			                      <div class="col-sm-12">
+															<div class="col-sm-12">
+															<label for="language_info">Lisainfo</label>
+			                        <textarea class="form-control" rows="4" name="language_info" type="text"></textarea>
+														</div>
+			                      </div>
+
+												</div>
+									      </div>
+									      <div class="modal-footer">
+													<button type="button" class="btn btn-danger" data-dismiss="modal">
+														<span class="glyphicon glyphicon-remove"></span> Katkesta
+													</button>
+
+													<button type="submit" name="new_language" class="btn btn-success">
+														<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Lisa
+													</button>
+									      </div>
+												</form>
+									    </div>
+									  </div>
+									</div>
+
+						</div>
+
+
 				<!-- Additional courses -->
 				<div id="courses">
 					<h3>
@@ -453,7 +659,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 						</form>
 						</tbody>
 					</table>
-					<!-- Modal -->
+					<!-- Modal for adding courses-->
 					<div class="modal fade" id="new_course" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
@@ -587,7 +793,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 						</form>
 						</tbody>
 					</table>
-					<!-- Modal -->
+					<!-- Modal for adding previous work experiences -->
 					<div class="modal fade" id="new_work" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
