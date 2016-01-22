@@ -536,27 +536,163 @@ www.ntb.ee
     }
 
     function getLanguages($cvid) {
-      $stmt = $this->connection->prepare("SELECT id, language, writing, speaking, reading, info FROM ntb_languages
-                                          WHERE resume_id = ? AND deleted IS NULL ORDER BY language ASC");
-      $stmt->bind_param("i", $cvid);
-      $stmt->bind_result($id, $language, $writing, $speaking, $reading, $info);
-      $stmt->execute();
+      $stmt1 = $this->connection->prepare("SELECT ntb_languages.id, language, writing, speaking, reading, info FROM ntb_languages
+                                          INNER JOIN language_skills ON language_skills.id = ntb_languages.writing
+                                          WHERE resume_id = ? AND deleted IS NULL");
+
+      $stmt2 = $this->connection->prepare("SELECT id, skill FROM language_skills");
+
+      $stmt1->bind_param("i", $cvid);
+
+      $stmt1->bind_result($id, $language, $writing, $speaking, $reading, $info);
+      $stmt2->bind_result($skillid, $skill);
+
+      $stmt2->execute();
+
+      $array2 = array();
+      while($stmt2->fetch()) {
+        $skills = new StdClass();
+        $skills->id = $skillid;
+        $skills->skill = $skill;
+        array_push($array2, $skills);
+      }
+
+      $stmt2->close();
+
+      $stmt1->execute();
 
       $array = array();
-
-      while ($stmt->fetch()) {
+      while ($stmt1->fetch()) {
         $languages = new StdClass();
         $languages->id = $id;
         $languages->language = $language;
-        $languages->writing = $writing;
-        $languages->speaking = $speaking;
-        $languages->reading = $reading;
+
+        foreach ($array2 as $value) {
+
+          if($writing == $value->id) {
+            $languages->writing = $value->skill;
+          }
+          if($speaking == $value->id) {
+            $languages->speaking = $value->skill;
+          }
+          if($reading == $value->id) {
+            $languages->reading = $value->skill;
+          }
+
+        }
+
         $languages->info = $info;
 
         array_push($array, $languages);
       }
       return ($array);
+      $stmt1->close();
+
+    }
+
+    function languageSkills() {
+      $html = '';
+
+      $stmt = $this->connection->prepare("SELECT id, skill FROM language_skills");
+      $stmt->bind_result($id, $skill);
+      $stmt->execute();
+
+      $html .= '<option selected>----</option>';
+      while($stmt->fetch()) {
+        $html .= '<option value="'.$id.'">'.$skill.'</option>';
+      }
       $stmt->close();
+
+      return $html;
+    }
+
+    function currentWritingSkill($language_id) {
+      $stmt = $this->connection->prepare("SELECT writing FROM ntb_languages WHERE id = ?");
+      $stmt->bind_param("i", $language_id);
+      $stmt->bind_result($writing);
+      $stmt->execute();
+      $current = new StdClass();
+      if($stmt->fetch()) {
+        $current->writing = $writing;
+      }
+      $stmt->close();
+
+      $html = '';
+
+      $stmt = $this->connection->prepare("SELECT id, skill FROM language_skills");
+      $stmt->bind_result($id, $skill);
+      $stmt->execute();
+      while($stmt->fetch()) {
+        if ($current->writing == $id) {
+          $html .= '<option value="'.$id.'" selected>'.$skill.'</option>';
+        } else {
+          $html .= '<option value="'.$id.'">'.$skill.'</option>';
+        }
+
+      }
+      $stmt->close();
+
+      return $html;
+
+    }
+
+    function currentSpeakingSkill($language_id) {
+      $stmt = $this->connection->prepare("SELECT speaking FROM ntb_languages WHERE id = ?");
+      $stmt->bind_param("i", $language_id);
+      $stmt->bind_result($speaking);
+      $stmt->execute();
+      $current = new StdClass();
+      if($stmt->fetch()) {
+        $current->speaking = $speaking;
+      }
+      $stmt->close();
+
+      $html = '';
+
+      $stmt = $this->connection->prepare("SELECT id, skill FROM language_skills");
+      $stmt->bind_result($id, $skill);
+      $stmt->execute();
+      while($stmt->fetch()) {
+        if ($current->speaking == $id) {
+          $html .= '<option value="'.$id.'" selected>'.$skill.'</option>';
+        } else {
+          $html .= '<option value="'.$id.'">'.$skill.'</option>';
+        }
+
+      }
+      $stmt->close();
+
+      return $html;
+
+    }
+
+    function currentReadingSkill($language_id) {
+      $stmt = $this->connection->prepare("SELECT reading FROM ntb_languages WHERE id = ?");
+      $stmt->bind_param("i", $language_id);
+      $stmt->bind_result($reading);
+      $stmt->execute();
+      $current = new StdClass();
+      if($stmt->fetch()) {
+        $current->reading = $reading;
+      }
+      $stmt->close();
+
+      $html = '';
+
+      $stmt = $this->connection->prepare("SELECT id, skill FROM language_skills");
+      $stmt->bind_result($id, $skill);
+      $stmt->execute();
+      while($stmt->fetch()) {
+        if ($current->reading == $id) {
+          $html .= '<option value="'.$id.'" selected>'.$skill.'</option>';
+        } else {
+          $html .= '<option value="'.$id.'">'.$skill.'</option>';
+        }
+
+      }
+      $stmt->close();
+
+      return $html;
 
     }
 

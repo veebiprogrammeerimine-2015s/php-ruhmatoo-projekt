@@ -279,6 +279,8 @@
       }
     }
   }
+
+	#var_dump($getLanguages);
  ?>
 
 
@@ -482,9 +484,13 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 													echo '<input type="hidden" name="language_id" value="'.$getLanguages[$i]->id.'">';
 													echo '<tr>
 															 <td><input class="form-control" type="text" name="language" value="'.$getLanguages[$i]->language.'"></td>
-															 <td><input class="form-control" type="text" name="writing" value="'.$getLanguages[$i]->writing.'"></td>
-															 <td><input class="form-control" type="text" name="speaking" value="'.$getLanguages[$i]->speaking.'"></td>
-															 <td><input class="form-control" type="text" name="reading" value="'.$getLanguages[$i]->reading.'"></td>
+
+
+															 <td><select class="form-control" name="writing">' . $Resume->currentWritingSkill($_GET["edit_language"]) . '</select></td>
+															 <td><select class="form-control" name="speaking">' . $Resume->currentSpeakingSkill($_GET["edit_language"]) . '</select></td>
+															 <td><select class="form-control" name="reading">' . $Resume->currentReadingSkill($_GET["edit_language"]) . '</select></td>
+
+
 															 <td><input class="form-control" type="text" name="language_info" value="'.$getLanguages[$i]->info.'"></td>';
 													echo '<td>';
 
@@ -547,7 +553,9 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 
 															<label for="writing">Kirjutamine *</label>
 
-																<input type="text" class="form-control" name="writing">
+																<select class="form-control" name="writing">
+																	<?=$Resume->languageSkills();?>
+																</select>
 
 															</div>
 														</div>
@@ -555,11 +563,19 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 			                        <div class="form-group">
 			                          <div class="col-sm-6">
 			                            <label for="speaking">Rääkimine *</label>
-			                            <input type="text" class="form-control" name="speaking">
+
+																	<select class="form-control" name="speaking">
+																		<?=$Resume->languageSkills();?>
+																	</select>
+
 			                          </div>
 			                          <div class="col-sm-6">
 			                            <label for="reading">Lugemine *</label>
-			                            <input type="text" class="form-control" name="reading">
+
+																	<select class="form-control" name="reading">
+																		<?=$Resume->languageSkills();?>
+																	</select>
+
 			                          </div>
 			                        </div>
 			                      </div>
