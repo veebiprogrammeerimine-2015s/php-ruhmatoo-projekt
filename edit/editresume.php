@@ -936,31 +936,66 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 	<script type="text/javascript">
 
 					function confirmSchoolDelete(id) {
+
+						var start = new Date().getTime();
 						var confirmation = confirm("Kas oled kindel, et soovid kustutada?");
-						if (confirmation == true) {
-							window.location = "?delete="+id;
+						var dt = new Date().getTime() - start;
+
+						for(var i=0; i < 10 && !confirmation && dt < 50; i++){
+								start = new Date().getTime();
+								confirmation = confirm("Kas oled kindel, et soovid kustutada?");
+								dt = new Date().getTime() - start;
 						}
+						if(dt < 50)
+							 window.location = "?delete="+id;
+
 					};
 
 					function confirmLanguageDelete(id) {
+
+						var start = new Date().getTime();
 						var confirmation = confirm("Kas oled kindel, et soovid kustutada?");
-						if (confirmation == true) {
-							window.location = "?delete_language="+id;
+						var dt = new Date().getTime() - start;
+
+						for(var i=0; i < 10 && !confirmation && dt < 50; i++){
+								start = new Date().getTime();
+								confirmation = confirm("Kas oled kindel, et soovid kustutada?");
+								dt = new Date().getTime() - start;
 						}
+						if(dt < 50)
+							window.location = "?delete_language="+id;
 					};
 
 					function confirmCourseDelete(id) {
+
+						var start = new Date().getTime();
 						var confirmation = confirm("Kas oled kindel, et soovid kustutada?");
-						if (confirmation == true) {
-							window.location = "?delete_course="+id;
+						var dt = new Date().getTime() - start;
+
+						for(var i=0; i < 10 && !confirmation && dt < 50; i++){
+								start = new Date().getTime();
+								confirmation = confirm("Kas oled kindel, et soovid kustutada?");
+								dt = new Date().getTime() - start;
 						}
+						if(dt < 50)
+							window.location = "?delete_course="+id;
+
 					};
 
 					function confirmWorkDelete(id) {
+
+						var start = new Date().getTime();
 						var confirmation = confirm("Kas oled kindel, et soovid kustutada?");
-						if (confirmation == true) {
-							window.location = "?delete_work="+id;
+						var dt = new Date().getTime() - start;
+
+						for(var i=0; i < 10 && !confirmation && dt < 50; i++){
+								start = new Date().getTime();
+								confirmation = confirm("Kas oled kindel, et soovid kustutada?");
+								dt = new Date().getTime() - start;
 						}
+						if(dt < 50)
+							window.location = "?delete_work="+id;
+
 					};
 			</script>
 

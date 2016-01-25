@@ -122,7 +122,7 @@
     <div class="input-group">
       <input type="email" name="email" class="form-control" placeholder="Email">
       <span class="input-group-btn">
-        <input class="btn btn-success" type="submit" name="send" value="Saada">
+        <input class="btn btn-success" style="z-index: 1;" type="submit" name="send" value="Saada">
       </span>
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->

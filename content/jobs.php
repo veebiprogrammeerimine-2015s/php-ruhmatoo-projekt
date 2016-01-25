@@ -89,7 +89,7 @@
 		<div class="input-group">
 		<input name="keyword" type="text" class="form-control" placeholder="Otsi..." value="<?=$keyword?>">
 		<span class="input-group-btn">
-			<button class="btn btn-default" type="submit" value="otsi">Otsi!</button>
+			<button class="btn btn-default" style="z-index: 1;" type="submit" value="otsi">Otsi!</button>
 		</span>
 		</div>
 	</form>
@@ -114,7 +114,7 @@
 				echo '<p class="list-group-item-text">'.$job_array[$i]->county.', '.$job_array[$i]->parish.', '.$job_array[$i]->location.', '.$job_array[$i]->address.'</p><br>';
 				echo '<ul class="list-inline">';
 				echo '<li>Sisestatud: '.$job_array[$i]->inserted.'</li>';
-				
+
 				if($_SESSION['logged_in_user_group'] == 1) {
 				echo '<li class="pull-right"><a href="../job/'.$job_array[$i]->link.'.php" class="btn btn-success btn-sm">
 												Saada CV	<span class="glyphicon glyphicon-share-alt"></span>
