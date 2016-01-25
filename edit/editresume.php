@@ -924,6 +924,11 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 		</div>
 		<div class="col-sm-12">
 			<br>
+			<label class="pull-right" for="Edasi">Juhul kui CV on valmis siis vajuta nuppu "Edasi" või suundu ükskõik millisele lehele!</label>
+			</div>
+
+		<div class="col-sm-12">
+			<br>
 			<a href="../content/profile.php" class="btn btn-success pull-right">
 				Edasi <span class="glyphicon glyphicon-chevron-right"></span>
 			</a>

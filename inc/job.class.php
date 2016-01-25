@@ -65,7 +65,7 @@ class Job {
 			$job->address = $job_address;
 		}
 		return ($job);
-		header("Location: jobs.php");
+
 		$stmt->close();
 
 	}

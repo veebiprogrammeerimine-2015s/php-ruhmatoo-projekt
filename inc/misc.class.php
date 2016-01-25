@@ -13,17 +13,27 @@
 
     function getJobs() {
 
-      $stmt = $this->connection->prepare("SELECT name, company, parish FROM job_offers WHERE active IS NOT NULL AND deleted IS NULL ORDER BY active DESC");
-      $stmt->bind_result($name_from_db, $company_from_db, $parish_from_db);
+      $stmt = $this->connection->prepare("SELECT id, job_offers.name, description, company, county, parish, location, address, link, inserted, active, job_company.email, job_company.number FROM job_offers INNER JOIN job_company ON job_company.name = job_offers.company WHERE active IS NOT NULL AND deleted IS NULL ORDER BY active DESC");
+      $stmt->bind_result($id_from_db, $name_from_db, $desc_from_db, $company_from_db, $county_from_db, $parish_from_db, $location_from_db, $address_from_db, $link, $inserted_from_db, $active_from_db, $email_from_db, $number_from_db);
       $stmt->execute();
 
       $array = array();
 
       while($stmt->fetch()) {
         $job = new StdClass();
+        $job->id = $id_from_db;
         $job->name = $name_from_db;
+        $job->description = $desc_from_db;
         $job->company = $company_from_db;
+        $job->county = $county_from_db;
         $job->parish = $parish_from_db;
+        $job->location = $location_from_db;
+        $job->address = $address_from_db;
+        $job->link = $link;
+        $job->inserted = $inserted_from_db;
+        $job->active = $active_from_db;
+        $job->email = $email_from_db;
+        $job->number = $number_from_db;
         array_push($array, $job);
       }
       return $array;
