@@ -42,7 +42,7 @@
 		$job_array = $Job->getAllData();
 	}
 ?>
-
+<h3>Tööpakkumised</h3>
 <?php if(isset($_SESSION['response']->success)): ?>
 
 <div class="alert alert-success alert-dismissible fade in" role="alert">

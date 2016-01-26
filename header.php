@@ -28,17 +28,46 @@
   <?php else: ?>
      <script type="text/javascript" src="../js/bootstrap.js"></script>
   <?php endif; ?>
-	<nav class="navbar navbar-default">
+  <div id="header">
+  <div class="logoback">
+    <a href="<?=$myurl; ?>index.php">
+      <?php if ($page_file == "index.php"): ?>
+        <img src="images/logo.png" alt="logo">
+      <?php else: ?>
+        <img src="../images/logo.png" alt="logo">
+      <?php endif; ?>
+    </a>
+  </div>
+
+  <!--<div id="adresponsive">
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-7">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-3787642905048568"
+         data-ad-slot="3786857934"
+         data-ad-format="auto"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+  <div class="col-sm-1">
+  </div>
+</div>-->
+
+	<nav class="navbar navbar-default" style="box-shadow: 1px 0px 5px 0px #000; border: 0px;">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<button id="toggledrop" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<div class="col-xs-8 col-md-3">
+				<!--<div class="col-xs-8 col-md-3">
 					<a class="navbar-brand">
             <div class="logoback">
               <a href="<?=$myurl; ?>index.php">
@@ -48,18 +77,49 @@
                   <img src="../images/logo.png" alt="logo">
                 <?php endif; ?>
               </a>
-            </div>
-          </a>
+            </div>-->
 				</div>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<div class="navbar-right col-sm-7 col-md-8"><?php require_once("content/login.php"); ?></div>
-				<div class="col-sm-7 col-md-8 col-lg-9" style="margin-top: 42px;"><?php require_once("menu.php"); ?>
+				<!--<div class="navbar-right col-sm-7 col-md-8"><?php require_once("content/login.php"); ?></div>-->
+				<div class="col-sm-12"><?php require_once("menu.php"); ?>
 				</div>
 			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
+		<!--</div> /.container-fluid -->
 	</nav>
+  <div id="ad">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- test728 -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:728px;height:90px"
+         data-ad-client="ca-pub-3787642905048568"
+         data-ad-slot="5263591130"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
 
-	<div class="container">
+</div>
+<script>
+
+  $(document).ready(function(){
+
+    $('#toggledrop').click( function() {
+
+        if($("#movingit").hasClass("isDown")) {
+          $("#movingit").animate({marginTop: "0px"}, 300, "linear");
+          $("#movingit").toggleClass("isDown");
+        } else {
+          $("#movingit").animate({marginTop: "315px"}, 250, "linear");
+          $("#movingit").toggleClass("isDown");
+        }
+
+    });
+
+  });
+
+
+</script>
+	<div id="movingit" class="container">
