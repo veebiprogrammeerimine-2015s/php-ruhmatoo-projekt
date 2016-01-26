@@ -105,18 +105,23 @@
 <script>
 
   $(document).ready(function(){
+    var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
-    $('#toggledrop').click( function() {
+    if(width > 767) {
 
-        if($("#movingit").hasClass("isDown")) {
-          $("#movingit").animate({marginTop: "0px"}, 300, "linear");
-          $("#movingit").toggleClass("isDown");
-        } else {
-          $("#movingit").animate({marginTop: "315px"}, 250, "linear");
-          $("#movingit").toggleClass("isDown");
-        }
+      $('#toggledrop').click( function() {
 
-    });
+          if($("#movingit").hasClass("isDown")) {
+            $("#movingit").animate({marginTop: "0px"}, 300, "linear");
+            $("#movingit").toggleClass("isDown");
+          } else {
+            $("#movingit").animate({marginTop: "315px"}, 250, "linear");
+            $("#movingit").toggleClass("isDown");
+          }
+
+        });
+
+    }
 
   });
 
