@@ -6964,6 +6964,35 @@ button.close {
   }
 }
 
+.left-center {
+  text-align: center;
+}
+
+.left-right {
+  text-align: right;
+  float: right !important;
+}
+
+@media (max-width: 767px) {
+  .left-center {
+    text-align: left;
+    float: none !important;
+    padding-left: 0px;
+  }
+
+  .left-right {
+    text-align: left;
+    float: none !important;
+    padding-left: 0px;
+  }
+}
+
+#footer {
+  border-top: 1px solid #949494;
+  background-color: #CCCCCC;
+  height: auto;
+  box-shadow: inset 0px 10px 10px -12px;
+}
 
 
 
