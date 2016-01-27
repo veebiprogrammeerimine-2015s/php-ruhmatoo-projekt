@@ -39,11 +39,10 @@
     </a>
   </div>
 
-  <!--<div id="adresponsive">
-    <div class="col-sm-4">
-    </div>
-    <div class="col-sm-7">
+  <div id="adresponsive">
+
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- test -->
     <ins class="adsbygoogle"
          style="display:block"
          data-ad-client="ca-pub-3787642905048568"
@@ -52,10 +51,8 @@
     <script>
     (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
+
   </div>
-  <div class="col-sm-1">
-  </div>
-</div>-->
 
 	<nav class="navbar navbar-default" style="box-shadow: 1px 0px 5px 0px #000; border: 0px;">
 		<div class="container-fluid">
@@ -90,14 +87,15 @@
 		<!--</div> /.container-fluid -->
 	</nav>
   <div id="ad">
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script type="text/javascript">
+        google_ad_client = "ca-pub-3787642905048568";
+        google_ad_slot = "5263591130";
+        google_ad_width = 728;
+        google_ad_height = 90;
+    </script>
     <!-- test728 -->
-    <ins class="adsbygoogle"
-         style="display:inline-block;width:728px;height:90px"
-         data-ad-client="ca-pub-3787642905048568"
-         data-ad-slot="5263591130"></ins>
-    <script>
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    <script type="text/javascript"
+    src="//pagead2.googlesyndication.com/pagead/show_ads.js">
     </script>
   </div>
 
