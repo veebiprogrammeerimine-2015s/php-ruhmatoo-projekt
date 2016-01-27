@@ -6994,7 +6994,39 @@ button.close {
   box-shadow: inset 0px 10px 10px -12px;
 }
 
+/*SCROLLBAR FOR NEWS DIV*/
 
+/*CHROME SCROLLBAR*/
+
+#news::-webkit-scrollbar {
+  width: 8px;
+}
+
+#news::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #CCCCCC;
+}
+
+#news::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #ADADAD;
+}
+
+/*FIREFOX SCROLLBAR*/
+
+#news::-moz-scrollbar {
+  width: 8px;
+}
+
+#news::-moz-scrollbar-track {
+  border-radius: 10px;
+  background-color: #CCCCCC;
+}
+
+#news::-moz-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #ADADAD;
+}
 
 
 
