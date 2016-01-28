@@ -368,7 +368,6 @@
 										}
 
 										?>
-										<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
 										<?php for($i = 0; $i < count($getPrimary); $i++): ?>
 											<!-- Modal for editing school -->
 											<div class="modal fade" id="edit_school_<?=$getPrimary[$i]->id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -436,8 +435,6 @@
 											</div>
 										<?php endfor; ?>
 
-
-									</form>
 								</div>
 								<!-- Modal for adding school -->
 								<div class="modal fade" id="new_school" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -511,142 +508,188 @@
 	                      <span class="glyphicon glyphicon-plus"></span> Uus keel
 	                </button>
 							 </h3>
-									<table class="table table-hover table-condensed table-striped table-responsive">
-										<thead>
-											<tr>
-												<th>Keel</th>
-												<th>Kirjutamine</th>
-												<th>Rääkimine</th>
-												<th>Lugemine</th>
-												<th>Info</th>
-											</tr>
-										</thead>
-										<tbody>
-											<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-											<?php
-											for($i = 0; $i < count($getLanguages); $i++) {
-												if(isset($_GET["edit_language"]) && $_GET["edit_language"] == $getLanguages[$i]->id) {
+							 <div class="list-group">
+									 <?php
+									 for($i = 0; $i < count($getLanguages); $i++) {
+											 echo '<div class="list-group-item" role="button" data-toggle="collapse" href="#'.$getLanguages[$i]->id.'" aria-expanded="false" aria-controls="'.$getLanguages[$i]->id.'">';
 
-													echo '<input type="hidden" name="language_id" value="'.$getLanguages[$i]->id.'">';
-													echo '<tr>
-															 <td><input class="form-control" type="text" name="language" value="'.$getLanguages[$i]->language.'"></td>
+											 echo '<h4 class="list-group-item-heading">'.$getLanguages[$i]->language.'</h4>';
+											 echo '<p class="list-group-item-text">Kirjutamine: '.$getLanguages[$i]->writing.' | Rääkimine:'.$getLanguages[$i]->speaking.' | Lugemine: '.$getLanguages[$i]->reading.'</p>';
 
+											 echo '</div>';
 
-															 <td><select class="form-control" name="writing">' . $Resume->currentWritingSkill($_GET["edit_language"]) . '</select></td>
-															 <td><select class="form-control" name="speaking">' . $Resume->currentSpeakingSkill($_GET["edit_language"]) . '</select></td>
-															 <td><select class="form-control" name="reading">' . $Resume->currentReadingSkill($_GET["edit_language"]) . '</select></td>
+											 echo '<div class="collapse" id="'.$getLanguages[$i]->id.'">
+														 <div class="well">';
 
+											 echo '<h4 style="margin-bottom: 5px; margin-top: 0px;">Lisainfo:</h4>
+														 <p class="list-group-item-text">'.$getLanguages[$i]->info.'</p><br>
 
-															 <td><input class="form-control" type="text" name="language_info" value="'.$getLanguages[$i]->info.'"></td>';
-													echo '<td>';
+														 <div class="btn-group" role="group">
 
-													echo '<div class="btn-group" role="group">';
-													echo '<button type="submit" name="update_language" class="btn btn-success btn-sm">
-																		<span class="glyphicon glyphicon-ok"></span> Salvesta
-																	</button>';
-													echo '<a href="'.$file_to_trim.'" class="btn btn-warning btn-sm">
-																		<span class="glyphicon glyphicon-remove"></span> Katkesta
-																	</a>';
-													echo '</div>';
-													echo '</td>';
-													echo '</tr>';
+														 <a data-toggle="modal" data-target="#edit_language_'.$getLanguages[$i]->id.'" class="btn btn-info btn-sm">
+																		 <span class="glyphicon glyphicon-pencil"></span> Muuda
+																	 </a>
+														 <a class="btn btn-danger btn-sm" onclick="confirmLanguageDelete('.$getLanguages[$i]->id.');">
+																		 <span class="glyphicon glyphicon-remove"></span> Kustuta
+																	 </a>
+														 </div>';
 
-												} else {
-													echo '<tr>
-															 <td>'.$getLanguages[$i]->language.'</td>
-															 <td>'.$getLanguages[$i]->writing.'</td>
-															 <td>'.$getLanguages[$i]->speaking.'</td>
-															 <td>'.$getLanguages[$i]->reading.'</td>
-															 <td>'.$getLanguages[$i]->info.'</td>';
-													echo '<td><div class="btn-group pull-right" role="group">';
+											 echo '</div>
+														 </div>';
+									 }
 
-													echo '<a href="?edit_language='.$getLanguages[$i]->id.'" class="btn btn-info btn-sm">
-																	<span class="glyphicon glyphicon-pencil"></span> Muuda
-																</a>';
-													echo '<a class="btn btn-danger btn-sm" onclick="confirmLanguageDelete('.$getLanguages[$i]->id.')">
-																	<span class="glyphicon glyphicon-remove"></span> Kustuta
-																</a>';
-													echo '</div></td>';
-													echo '</tr>';
-												}
-											}
+									 ?>
+									 <?php for($i = 0; $i < count($getPrimary); $i++): ?>
+										 <!-- Modal for editing language -->
+											 <div class="modal fade" id="edit_language_<?=$getLanguages[$i]->id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+												 <div class="modal-dialog" role="document">
+													 <div class="modal-content">
+														 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+														 <div class="modal-header">
+															 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+															 <h4 class="modal-title" id="myModalLabel">Muuda keelt <?=$getLanguages[$i]->language;?></h4>
+														 </div>
+														 <div class="modal-body" style="height: 500px;">
+															 <div class="col-sm-12">
+																 <div class="col-sm-12">
+																 <div class="col-sm-6">
 
+																	 <input type="hidden" name="language_id" value="<?=$getLanguages[$i]->id;?>">
 
-											?>
-										</form>
-										</tbody>
-									</table>
-									<!-- Modal for adding language -->
-									<div class="modal fade" id="new_language" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-									  <div class="modal-dialog" role="document">
-									    <div class="modal-content">
-												<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-									      <div class="modal-header">
-									        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									        <h4 class="modal-title" id="myModalLabel">Lisa uus keel</h4>
-									      </div>
-									      <div class="modal-body" style="height: 500px;">
-													<div class="col-sm-12">
-														<div class="col-sm-12">
-			                      <div class="col-sm-6">
+																	 <div class="form-group">
+																		 <label for="language">Keel *</label>
+																		 <input type="text" class="form-control" name="language" value="<?=$getLanguages[$i]->language;?>">
+																	 </div>
+																 </div>
+																 <div class="col-sm-6">
 
-			                        <div class="form-group">
-			                          <label for="language">Keel *</label>
-			                          <input type="text" class="form-control" name="language">
-			                        </div>
-			                      </div>
-														<div class="col-sm-6">
+																	 <label for="writing">Kirjutamine *</label>
 
-															<label for="writing">Kirjutamine *</label>
+																		 <select class="form-control" name="writing">
+																			 <?=$Resume->currentWritingSkill($getLanguages[$i]->id);?>
+																		 </select>
 
-																<select class="form-control" name="writing">
-																	<?=$Resume->languageSkills();?>
-																</select>
+																	 </div>
+																 </div>
+																 <div class="col-sm-12">
+																	 <div class="form-group">
+																		 <div class="col-sm-6">
+																			 <label for="speaking">Rääkimine *</label>
 
-															</div>
-														</div>
-			                      <div class="col-sm-12">
-			                        <div class="form-group">
-			                          <div class="col-sm-6">
-			                            <label for="speaking">Rääkimine *</label>
+																			 <select class="form-control" name="speaking">
+																				 <?=$Resume->currentSpeakingSkill($getLanguages[$i]->id);?>
+																			 </select>
 
-																	<select class="form-control" name="speaking">
-																		<?=$Resume->languageSkills();?>
-																	</select>
+																		 </div>
+																		 <div class="col-sm-6">
+																			 <label for="reading">Lugemine *</label>
 
-			                          </div>
-			                          <div class="col-sm-6">
-			                            <label for="reading">Lugemine *</label>
+																			 <select class="form-control" name="reading">
+																				 <?=$Resume->currentReadingSkill($getLanguages[$i]->id);?>
+																			 </select>
 
-																	<select class="form-control" name="reading">
-																		<?=$Resume->languageSkills();?>
-																	</select>
+																		 </div>
+																	 </div>
+																 </div>
+																 <div class="col-sm-12">
+																	 <div class="col-sm-12">
+																	 <label for="language_info">Lisainfo</label>
+																	 <textarea class="form-control" rows="4" name="language_info" type="text"><?=$getLanguages[$i]->info;?></textarea>
+																 </div>
+																 </div>
 
-			                          </div>
-			                        </div>
-			                      </div>
-			                      <div class="col-sm-12">
-															<div class="col-sm-12">
-															<label for="language_info">Lisainfo</label>
-			                        <textarea class="form-control" rows="4" name="language_info" type="text"></textarea>
-														</div>
-			                      </div>
+														 </div>
+														 </div>
+														 <div class="modal-footer">
+															<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">
+																 <span class="glyphicon glyphicon-remove"></span> Katkesta
+															</button>
 
-												</div>
-									      </div>
-									      <div class="modal-footer">
-													<button type="button" class="btn btn-danger" data-dismiss="modal">
-														<span class="glyphicon glyphicon-remove"></span> Katkesta
-													</button>
+															<button type="submit" name="update_language" class="btn btn-success btn-sm">
+		 																		<span class="glyphicon glyphicon-ok"></span> Salvesta
+		 													</button>
+														 </div>
+														 </form>
+													 </div>
+												 </div>
+											 </div>
 
-													<button type="submit" name="new_language" class="btn btn-success">
-														<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Lisa
-													</button>
-									      </div>
-												</form>
-									    </div>
-									  </div>
-									</div>
+									 <?php endfor; ?>
+
+							 </div>
+
+							 <!-- Modal for adding language -->
+							 <div class="modal fade" id="new_language" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								 <div class="modal-dialog" role="document">
+									 <div class="modal-content">
+										 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+										 <div class="modal-header">
+											 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+											 <h4 class="modal-title" id="myModalLabel">Lisa uus keel</h4>
+										 </div>
+										 <div class="modal-body" style="height: 500px;">
+											 <div class="col-sm-12">
+												 <div class="col-sm-12">
+												 <div class="col-sm-6">
+
+													 <div class="form-group">
+														 <label for="language">Keel *</label>
+														 <input type="text" class="form-control" name="language">
+													 </div>
+												 </div>
+												 <div class="col-sm-6">
+
+													 <label for="writing">Kirjutamine *</label>
+
+														 <select class="form-control" name="writing">
+															 <?=$Resume->languageSkills();?>
+														 </select>
+
+													 </div>
+												 </div>
+												 <div class="col-sm-12">
+													 <div class="form-group">
+														 <div class="col-sm-6">
+															 <label for="speaking">Rääkimine *</label>
+
+															 <select class="form-control" name="speaking">
+																 <?=$Resume->languageSkills();?>
+															 </select>
+
+														 </div>
+														 <div class="col-sm-6">
+															 <label for="reading">Lugemine *</label>
+
+															 <select class="form-control" name="reading">
+																 <?=$Resume->languageSkills();?>
+															 </select>
+
+														 </div>
+													 </div>
+												 </div>
+												 <div class="col-sm-12">
+													 <div class="col-sm-12">
+													 <label for="language_info">Lisainfo</label>
+													 <textarea class="form-control" rows="4" name="language_info" type="text"></textarea>
+												 </div>
+												 </div>
+
+										 </div>
+										 </div>
+										 <div class="modal-footer">
+											 <button type="button" class="btn btn-danger" data-dismiss="modal">
+												 <span class="glyphicon glyphicon-remove"></span> Katkesta
+											 </button>
+
+											 <button type="submit" name="new_language" class="btn btn-success">
+												 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Lisa
+											 </button>
+										 </div>
+										 </form>
+									 </div>
+								 </div>
+							 </div>
+
 
 						</div>
 

@@ -531,7 +531,7 @@ www.ntb.ee
       $stmt = $this->connection->prepare("INSERT INTO ntb_languages (resume_id, language, writing, speaking, reading, info) VALUES (?, ?, ?, ?, ?, ?)");
       $stmt->bind_param("isiiis", $cvid, $language, $writing, $speaking, $reading, $info);
       $stmt->execute();
-      header("Location: ".$link);
+      header("Location: ".$link."#languages");
       $stmt->close();
     }
 
@@ -701,7 +701,7 @@ www.ntb.ee
       $stmt->bind_param("siiisi", $language, $writing, $speaking, $reading, $info, $id);
       $stmt->execute();
 
-      header("Location: ".$link);
+      header("Location: ".$link."#languages");
       $stmt->close();
     }
 
@@ -710,7 +710,7 @@ www.ntb.ee
       $stmt->bind_param("ii", $id, $user_id);
       $stmt->execute();
 
-      header("Location: ".$link);
+      header("Location: ".$link."#languages");
       $stmt->close();
     }
 
