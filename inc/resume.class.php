@@ -724,7 +724,7 @@ www.ntb.ee
       $stmt = $this->connection->prepare("INSERT INTO ntb_courses (resume_id, trainer, course, duration, info, year) VALUES (?, ?, ?, ?, ?, ?)");
       $stmt->bind_param("issssi", $cvid, $trainer, $name, $duration, $info, $year);
       $stmt->execute();
-      header("Location: ".$link);
+      header("Location: ".$link."#courses");
       $stmt->close();
     }
 
@@ -757,7 +757,7 @@ www.ntb.ee
     $stmt->bind_param("ssssiii", $trainer, $name, $duration, $info, $year, $id, $user_id);
     $stmt->execute();
 
-    header("Location: ".$link);
+    header("Location: ".$link."#courses");
     $stmt->close();
   }
 
@@ -766,7 +766,7 @@ www.ntb.ee
     $stmt->bind_param("ii", $id, $user_id);
     $stmt->execute();
 
-    header("Location: ".$link);
+    header("Location: ".$link."#courses");
     $stmt->close();
   }
 

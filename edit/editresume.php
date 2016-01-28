@@ -350,7 +350,7 @@
 												echo '<div class="collapse" id="'.$getPrimary[$i]->id.'">
 															<div class="well">';
 
-												echo '<h4 style="margin-bottom: 5px; margin-top: 0px;">Lisainfo:</h4>
+												echo '<label for="info">Lisainfo:</label>
 															<p class="list-group-item-text">'.$getPrimary[$i]->info.'</p><br>
 
 															<div class="btn-group" role="group">
@@ -521,7 +521,7 @@
 											 echo '<div class="collapse" id="'.$getLanguages[$i]->id.'">
 														 <div class="well">';
 
-											 echo '<h4 style="margin-bottom: 5px; margin-top: 0px;">Lisainfo:</h4>
+											 echo '<label for="info">Lisainfo:</label>
 														 <p class="list-group-item-text">'.$getLanguages[$i]->info.'</p><br>
 
 														 <div class="btn-group" role="group">
@@ -539,7 +539,7 @@
 									 }
 
 									 ?>
-									 <?php for($i = 0; $i < count($getPrimary); $i++): ?>
+									 <?php for($i = 0; $i < count($getLanguages); $i++): ?>
 										 <!-- Modal for editing language -->
 											 <div class="modal fade" id="edit_language_<?=$getLanguages[$i]->id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 												 <div class="modal-dialog" role="document">
@@ -701,67 +701,113 @@
 									 <span class="glyphicon glyphicon-plus"></span> Uus kursus
 						 </button>
 					</h3>
-					<table class="table table-hover table-condensed table-striped table-responsive">
-						<thead>
-							<tr>
-								<th>Koolitaja</th>
-								<th>Koolitus</th>
-								<th>Kestvus</th>
-								<th>Lisainfo</th>
-								<th>Aasta</th>
-							</tr>
-						</thead>
-						<tbody>
-							<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-							<?php
+
+					<div class="list-group">
+						<?php
 							for($i = 0; $i < count($getCourses); $i++) {
-								if(isset($_GET["edit_course"]) && $_GET["edit_course"] == $getCourses[$i]->id) {
+									echo '<div class="list-group-item" role="button" data-toggle="collapse" href="#'.$getCourses[$i]->id.'" aria-expanded="false" aria-controls="'.$getCourses[$i]->id.'">';
 
-									echo '<input type="hidden" name="course_id" value="'.$getCourses[$i]->id.'">';
-									echo '<tr>
-											 <td><input class="form-control" type="text" name="course_trainer" value="'.$getCourses[$i]->trainer.'"></td>
-											 <td><input class="form-control" type="text" name="course_name" value="'.$getCourses[$i]->course.'"></td>
-											 <td><input class="form-control" type="text" name="course_duration" value="'.$getCourses[$i]->duration.'"></td>
-											 <td><input class="form-control" type="text" name="course_info" value="'.$getCourses[$i]->info.'"></td>
-											 <td><input class="form-control" type="text" name="course_year" value="'.$getCourses[$i]->year.'"></td>';
-									echo '<td>';
+									echo '<h4 class="list-group-item-heading">'.$getCourses[$i]->course.'</h4>';
+									echo '<p class="list-group-item-text">'.$getCourses[$i]->trainer.'</p>';
 
-									echo '<div class="btn-group" role="group">';
-									echo '<button type="submit" name="update_course" class="btn btn-success btn-sm">
-														<span class="glyphicon glyphicon-ok"></span>
-													</button>';
-									echo '<a href="'.$file_to_trim.'" class="btn btn-warning btn-sm">
-														<span class="glyphicon glyphicon-remove"></span>
-													</a>';
 									echo '</div>';
-									echo '</td>';
-									echo '</tr>';
 
-								} else {
-									echo '<tr>
-											 <td>'.$getCourses[$i]->trainer.'</td>
-											 <td>'.$getCourses[$i]->course.'</td>
-											 <td>'.$getCourses[$i]->duration.'</td>
-											 <td>'.$getCourses[$i]->info.'</td>
-											 <td>'.$getCourses[$i]->year.'</td>';
-									echo '<td><div class="btn-group pull-right" role="group">';
+									echo '<div class="collapse" id="'.$getCourses[$i]->id.'">
+												<div class="well">';
 
-									echo '<a href="?edit_course='.$getCourses[$i]->id.'" class="btn btn-info btn-sm">
-													<span class="glyphicon glyphicon-pencil"></span> Muuda
-												</a>';
-									echo '<a class="btn btn-danger btn-sm" onclick="confirmCourseDelete('.$getCourses[$i]->id.')">
-													<span class="glyphicon glyphicon-remove"></span> Kustuta
-												</a>';
-									echo '</div></td>';
-									echo '</tr>';
-								}
+									echo '<label for="year">Aasta:</label>
+												<font class="list-group-item-text">'.$getCourses[$i]->year.'</font><br>
+												<label for="duration">Kestvus:</label>
+												<font class="list-group-item-text">'.$getCourses[$i]->duration.'</font><br>
+												<label for="info">Lisainfo:</label>
+												<p class="list-group-item-text">'.$getCourses[$i]->info.'</p><br>
+
+												<div class="btn-group" role="group">
+
+												<a data-toggle="modal" data-target="#edit_course_'.$getCourses[$i]->id.'" class="btn btn-info btn-sm">
+																<span class="glyphicon glyphicon-pencil"></span> Muuda
+															</a>
+												<a class="btn btn-danger btn-sm" onclick="confirmCourseDelete('.$getCourses[$i]->id.');">
+																<span class="glyphicon glyphicon-remove"></span> Kustuta
+															</a>
+												</div>';
+
+									echo '</div>
+												</div>';
 							}
 
-
 							?>
-						</form>
-						</tbody>
-					</table>
+							<?php for($i = 0; $i < count($getCourses); $i++): ?>
+								<!-- Modal for editing courses -->
+								<div class="modal fade" id="edit_course_<?=$getCourses[$i]->id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel">Muuda kursust <?=$getCourses[$i]->course;?></h4>
+											</div>
+											<div class="modal-body" style="height: 500px;">
+												<div class="col-sm-12">
+													<div class="col-sm-12">
+													<div class="col-sm-6">
+
+														<input type="hidden" name="course_id" value="<?=$getCourses[$i]->id;?>">
+
+														<div class="form-group">
+															<label for="course_trainer">Koolitaja</label>
+															<input type="text" class="form-control" name="course_trainer" value="<?=$getCourses[$i]->trainer;?>">
+														</div>
+													</div>
+													<div class="col-sm-6">
+
+														<label for="course_name">Koolitus *</label>
+														<input type="text" class="form-control" name="course_name" value="<?=$getCourses[$i]->course;?>">
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="form-group">
+															<div class="col-sm-6">
+																<label for="course_duration">Kestvus</label>
+																<input type="text" class="form-control" name="course_duration" value="<?=$getCourses[$i]->duration;?>">
+															</div>
+															<div class="col-sm-6">
+																<label for="course_year">Aasta</label>
+																<input type="text" class="form-control" name="course_year" value="<?=$getCourses[$i]->year;?>">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="col-sm-12">
+														<label for="course_info">Lisainfo</label>
+														<textarea class="form-control" rows="4" name="course_info" type="text"><?=$getCourses[$i]->info;?></textarea>
+													</div>
+													</div>
+
+											</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">
+													<span class="glyphicon glyphicon-remove"></span> Katkesta
+												</button>
+
+												<button type="submit" name="update_course" class="btn btn-success btn-sm">
+								          <span class="glyphicon glyphicon-ok"></span> Salvesta
+								        </button>
+											</div>
+											</form>
+										</div>
+									</div>
+								</div>
+
+
+
+
+							<?php endfor; ?>
+
+					</div>
+
+
 					<!-- Modal for adding courses-->
 					<div class="modal fade" id="new_course" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
