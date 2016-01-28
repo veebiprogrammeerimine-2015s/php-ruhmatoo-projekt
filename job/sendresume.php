@@ -20,8 +20,8 @@
 	$trimmed = rtrim($file_to_trim, ".php");
 	$currentJob = $Job->singleJobData($trimmed);
 
+	echo "<h3>".$currentJob->name."</h3>";
   echo "Ettevõte:".$currentJob->company;
-  echo "<br>Kandideerid ametile:".$currentJob->name;
   echo "<br>Töö kirjeldus:".$currentJob->description;
   echo "<h3>Asukoht:</h3><p>".$currentJob->county."<br>".$currentJob->parish."<br>".$currentJob->location."<br>".$currentJob->address."</p>";
 

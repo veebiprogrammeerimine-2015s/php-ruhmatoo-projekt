@@ -5,7 +5,7 @@
 	$page_file = "editresume.php";
 ?>
 <?php
-	require_once("../header.php");
+
 	require_once ("../inc/functions.php");
 
 ?>
@@ -27,6 +27,7 @@
 
   $primary_name = $primary_start = $primary_end = $primary_info = $primary_type = "";
   $primary_name_error = $primary_start_error = "";
+
 
 	$course_trainer = $course_name = $course_duration = $course_info = $course_year = "";
 	$course_name_error = "";
@@ -279,27 +280,30 @@
       }
     }
   }
-
-	#var_dump($getLanguages);
+	require_once("../header.php");
  ?>
 
 
 <div class="row">
-  <!--<div class="col-xs-12 col-sm-4">
-    <h3>Info</h3>
-    <pre class="pre-scrollable">
-CVDE KIRJELDUS TULEB KA SIIA ipsum dolor sit amet, consectetur adipiscing elit. Integer ornare sit amet erat id convallis. In hac habitasse platea dictumst. Sed a mauris sodales, tincidunt sapien non, hendrerit enim. Suspendisse potenti. Phasellus ut dui scelerisque, ultrices ex sed, fringilla dui. Ut fermentum enim sit amet sapien tristique, quis convallis nibh dapibus. Cras accumsan massa a augue elementum facilisis. Aenean dictum mauris ut erat rutrum faucibus. Praesent ac sollicitudin eros.
+	<div class="col-xs-12 col-sm-3">
+		<h3>CV muutmine</h3>
 
-Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, facilisis neque. Donec sit amet hendrerit erat. Morbi maximus egestas massa. In diam metus, molestie a blandit non, lobortis eu purus. Mauris id sapien sit amet nibh auctor luctus. Curabitur pretium mauris id ullamcorper blandit. Donec non interdum ligula. Cras sit amet magna dui.
-    </pre>
-  </div>-->
+		<ul class="nav nav-pills nav-stacked">
+			<li role="presentation" class="active"><a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Isiklik</a></li>
+		  <li role="presentation"><a href="#education" class="active" aria-controls="education" role="tab" data-toggle="tab">Hariduskäik</a></li>
+		  <li role="presentation"><a href="#languages" aria-controls="languages" role="tab" data-toggle="tab">Keeled</a></li>
+			<li role="presentation"><a href="#courses" aria-controls="courses" role="tab" data-toggle="tab">Kursused</a></li>
+			<li role="presentation"><a href="#workexp" aria-controls="workexp" role="tab" data-toggle="tab">Töökogemus</a></li>
+			<li role="presentation"><a href="#additional" aria-controls="additional" role="tab" data-toggle="tab">Lisainfo</a></li>
+		</ul>
+	</div>
 
-  <div class="col-xs-12 col-sm-12">
+  <div class="col-xs-12 col-sm-9">
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-
+			<div class="tab-content">
 				<!-- Personal -->
-				<div id="personal">
-			  	<h3>Isiklikud andmed</h3>
+				<div role="tabpanel" class="tab-pane active" id="personal">
+						<h3>Isiklik informatsioon</h3>
 							<table class="table table-striped table-bordered">
 								<tr>
 									<td><label> Eesnimi </label></td>
@@ -326,73 +330,115 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 
 						<!-- Education -->
 				<!-- Education -->
-				<div id="education">
+				<div role="tabpanel" class="tab-pane" id="education">
              <h3>
 							 Hariduskäik
 								<button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#new_school">
                       <span class="glyphicon glyphicon-plus"></span> Uus kool
                 </button>
 						 </h3>
-								<table class="table table-hover table-condensed table-striped table-responsive">
-									<thead>
-										<tr>
-											<th>Kool</th>
-											<th>Algus</th>
-											<th>Lõpp</th>
-											<th>Lisainfo</th>
-											<th>Tüüp</th>
-										</tr>
-									</thead>
-									<tbody>
-										<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+								<div class="list-group">
 										<?php
 										for($i = 0; $i < count($getPrimary); $i++) {
-											if(isset($_GET["edit"]) && $_GET["edit"] == $getPrimary[$i]->id) {
-												$current_type = $Resume->currentTypeDropdown($getPrimary[$i]->id);
-												echo '<input type="hidden" name="primary_id" value="'.$getPrimary[$i]->id.'">';
-												echo '<tr>
-														 <td><input class="form-control" type="text" name="primary_name" value="'.$getPrimary[$i]->school.'"></td>
-														 <td><input class="form-control" type="text" name="primary_start" value="'.$getPrimary[$i]->start.'"></td>
-														 <td><input class="form-control" type="text" name="primary_end" value="'.$getPrimary[$i]->end.'"></td>
-														 <td><input class="form-control" type="text" name="primary_info" value="'.$getPrimary[$i]->info.'"></td>
-														 <td>'.$current_type.'</td>';
-												echo '<td>';
+												echo '<div class="list-group-item" role="button" data-toggle="collapse" href="#'.$getPrimary[$i]->id.'" aria-expanded="false" aria-controls="'.$getPrimary[$i]->id.'">';
 
-												echo '<div class="btn-group" role="group">';
-												echo '<button type="submit" name="update" class="btn btn-success btn-sm">
-																	<span class="glyphicon glyphicon-ok"></span> Salvesta
-																</button>';
-												echo '<a href="'.$file_to_trim.'" class="btn btn-warning btn-sm">
-																	<span class="glyphicon glyphicon-remove"></span> Katkesta
-																</a>';
+												echo '<h4 class="list-group-item-heading">'.$getPrimary[$i]->school.' <font size="2">('.$getPrimary[$i]->start.' - '.$getPrimary[$i]->end.')</font></h4>';
+												echo '<p class="list-group-item-text">'.$getPrimary[$i]->type.'</p>';
+
 												echo '</div>';
-												echo '</td>';
-												echo '</tr>';
 
-											} else {
-												echo '<tr>
-														 <td>'.$getPrimary[$i]->school.'</td>
-														 <td>'.$getPrimary[$i]->start.'</td>
-														 <td>'.$getPrimary[$i]->end.'</td>
-														 <td>'.$getPrimary[$i]->info.'</td>
-														 <td>'.$getPrimary[$i]->type.'</td>';
-												echo '<td><div class="btn-group pull-right" role="group">';
+												echo '<div class="collapse" id="'.$getPrimary[$i]->id.'">
+															<div class="well">';
 
-												echo '<a href="?edit='.$getPrimary[$i]->id.'" class="btn btn-info btn-sm">
-																<span class="glyphicon glyphicon-pencil"></span> Muuda
-															</a>';
-												echo '<a class="btn btn-danger btn-sm" onclick="confirmSchoolDelete('.$getPrimary[$i]->id.');">
-																<span class="glyphicon glyphicon-remove"></span> Kustuta
-															</a>';
-												echo '</div></td>';
-												echo '</tr>';
-											}
+												echo '<h4 style="margin-bottom: 5px; margin-top: 0px;">Lisainfo:</h4>
+															<p class="list-group-item-text">'.$getPrimary[$i]->info.'</p><br>
+
+															<div class="btn-group" role="group">
+
+															<a data-toggle="modal" data-target="#edit_school_'.$getPrimary[$i]->id.'" class="btn btn-info btn-sm">
+																			<span class="glyphicon glyphicon-pencil"></span> Muuda
+																		</a>
+															<a class="btn btn-danger btn-sm" onclick="confirmSchoolDelete('.$getPrimary[$i]->id.');">
+																			<span class="glyphicon glyphicon-remove"></span> Kustuta
+																		</a>
+															</div>';
+
+												echo '</div>
+															</div>';
 										}
 
 										?>
+										<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+										<?php for($i = 0; $i < count($getPrimary); $i++): ?>
+											<!-- Modal for editing school -->
+											<div class="modal fade" id="edit_school_<?=$getPrimary[$i]->id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+															<h4 class="modal-title" id="myModalLabel">Muuda kooli <?=$getPrimary[$i]->school;?></h4>
+														</div>
+														<div class="modal-body" style="height: 500px;">
+															<div class="col-sm-12">
+																<div class="col-sm-12">
+																<div class="col-sm-6">
+																	<input type="hidden" name="primary_id" value="<?=$getPrimary[$i]->id;?>">
+																	<div class="form-group">
+																		<label for="primary_name">Kooli nimi *</label>
+																		<input type="text" class="form-control" name="primary_name" value="<?=$getPrimary[$i]->school;?>">
+																	</div>
+																</div>
+																<div class="col-sm-6">
+
+																	<label for="primary_type">Kooli tüüp *</label>
+
+																		<?php
+																		$current_type = $Resume->currentTypeDropdown($getPrimary[$i]->id);
+																		echo $current_type;
+																		?>
+
+																	</div>
+																</div>
+																<div class="col-sm-12">
+																	<div class="form-group">
+																		<div class="col-sm-6">
+																			<label for="primary_start">Algus *</label>
+																			<input type="text" class="form-control" name="primary_start" value="<?=$getPrimary[$i]->start;?>">
+																		</div>
+																		<div class="col-sm-6">
+																			<label for="primary_end">Lõpp</label>
+																			<input type="text" class="form-control" name="primary_end" value="<?=$getPrimary[$i]->end;?>">
+																		</div>
+																	</div>
+																</div>
+																<div class="col-sm-12">
+																	<div class="col-sm-12">
+																	<label for="primary_info">Lisainfo</label>
+																	<textarea class="form-control" rows="4" name="primary_info" type="text"><?=$getPrimary[$i]->info;?></textarea>
+																</div>
+																</div>
+
+														</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">
+																<span class="glyphicon glyphicon-remove"></span> Katkesta
+															</button>
+
+															<button type="submit" name="update" class="btn btn-success btn-sm">
+																<span class="glyphicon glyphicon-ok"></span> Salvesta
+															</button>
+														</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										<?php endfor; ?>
+
+
 									</form>
-									</tbody>
-								</table>
+								</div>
 								<!-- Modal for adding school -->
 								<div class="modal fade" id="new_school" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 								  <div class="modal-dialog" role="document">
@@ -458,7 +504,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 					</div>
 
 				<!-- languages -->
-				<div id="languages">
+				<div role="tabpanel" class="tab-pane" id="languages">
 	             <h3>
 								 Keelteoskus
 									<button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#new_language">
@@ -604,9 +650,8 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 
 						</div>
 
-
 				<!-- Additional courses -->
-				<div id="courses">
+				<div role="tabpanel" class="tab-pane" id="courses">
 					<h3>
 						Kursused
 						 <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#new_course">
@@ -735,9 +780,8 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 					</div>
 				</div>
 
-
 				<!-- Work experience -->
-				<div id="workexp">
+				<div role="tabpanel" class="tab-pane" id="workexp">
 					<h3>
 						Varasem töökogemus
 						 <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#new_work">
@@ -876,7 +920,7 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 				</div>
 
 				<!-- Additional (Positives, add. info) -->
-				<div id="additional">
+				<div role="tabpanel" class="tab-pane" id="additional">
 
 					<h3>
 						Lisainformatsioon
@@ -888,11 +932,11 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 
 						<div class="col-sm-6">
 							<label for="add_positive">Positiivsed küljed</label>
-							<textarea class="form-control" rows="3" name="add_positive" type="text"><?=$cvid->pos;?></textarea>
+							<textarea class="form-control" rows="5" name="add_positive" type="text"><?=$cvid->pos;?></textarea>
 						</div>
 						<div class="col-sm-6">
 							<label for="add_info">Lisainformatsioon endast</label>
-							<textarea class="form-control" rows="3" name="add_info" type="text"><?=$cvid->add;?></textarea>
+							<textarea class="form-control" rows="5" name="add_info" type="text"><?=$cvid->add;?></textarea>
 						</div>
 						<div class="col-sm-12">
 						<br>
@@ -912,20 +956,23 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 
 						<div class="col-sm-6">
 							<label for="add_positive">Positiivsed küljed</label>
-							<textarea class="form-control" rows="3" name="add_positive" type="text" readonly><?=$cvid->pos; ?></textarea>
+							<textarea class="form-control" rows="5" name="add_positive" type="text" readonly><?=$cvid->pos; ?></textarea>
 						</div>
 						<div class="col-sm-6">
 							<label for="add_info">Lisainformatsioon endast</label>
-							<textarea class="form-control" rows="3" name="add_info" type="text" readonly><?=$cvid->add; ?></textarea>
+							<textarea class="form-control" rows="5" name="add_info" type="text" readonly><?=$cvid->add; ?></textarea>
 						</div>
 					<?php endif; ?>
 
 				</div>
-		</div>
-		<div class="col-sm-12">
-			<br>
-			<label class="pull-right" for="Edasi">Juhul kui CV on valmis siis vajuta nuppu "Edasi" või suundu ükskõik millisele lehele!</label>
+
 			</div>
+    </form>
+	</div>
+	<div class="col-sm-12">
+		<br>
+		<label class="pull-right" for="Edasi">Juhul kui CV on valmis siis vajuta nuppu "Edasi" või suundu ükskõik millisele lehele!</label>
+		</div>
 
 		<div class="col-sm-12">
 			<br>
@@ -935,10 +982,20 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
       </div>
 		</div>
 
-    </form>
-  </div>
 
 	<script type="text/javascript">
+
+					// Javascript to enable link to tab
+					var hash = document.location.hash;
+					var prefix = "";
+					if (hash) {
+					$('.nav-pills a[href='+hash.replace(prefix,"")+']').tab('show');
+					}
+
+					// Change hash for page-reload
+					$('.nav-pills a').on('shown.bs.tab', function (e) {
+					window.location.hash = e.target.hash.replace("#", "#" + prefix);
+					});
 
 					function confirmSchoolDelete(id) {
 
@@ -953,7 +1010,8 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 						}
 						if(dt < 50)
 							 window.location = "?delete="+id;
-
+						else
+							window.location = "?delete="+id;
 					};
 
 					function confirmLanguageDelete(id) {
@@ -969,6 +1027,8 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 						}
 						if(dt < 50)
 							window.location = "?delete_language="+id;
+						else
+							window.location = "?delete_language="+id;
 					};
 
 					function confirmCourseDelete(id) {
@@ -983,6 +1043,8 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 								dt = new Date().getTime() - start;
 						}
 						if(dt < 50)
+							window.location = "?delete_course="+id;
+						else
 							window.location = "?delete_course="+id;
 
 					};
@@ -1000,8 +1062,9 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 						}
 						if(dt < 50)
 							window.location = "?delete_work="+id;
-
+						else
+							window.location = "?delete_work="+id;
 					};
-			</script>
+	</script>
 
 <?php require_once("../footer.php"); ?>
