@@ -304,31 +304,17 @@
 				<!-- Personal -->
 				<div role="tabpanel" class="tab-pane active" id="personal">
 						<h3>Isiklik informatsioon</h3>
-							<table class="table table-striped table-bordered">
-								<tr>
-									<td><label> Eesnimi </label></td>
-									<td><?=$personal->first;?></td>
-								</tr>
-								<tr>
-									<td><label> Perekonnanimi </label></td>
-									<td><?=$personal->last;?></td>
-								</tr>
-								<tr>
-									<td><label> Maakond </label></td>
-									<td><?=$personal->county;?></td>
-								</tr>
-								<tr>
-									<td><label> Vald </label></td>
-									<td><?=$personal->parish;?></td>
-								</tr>
-								<tr>
-									<td><label> Telefoni number </label></td>
-									<td><?=$personal->number;?></td>
-								</tr>
-							</table>
-			      </div>
 
-						<!-- Education -->
+						<ul class="list-group">
+						  <li class="list-group-item"><label> Eesnimi: </label> <?=$personal->first;?></li>
+						  <li class="list-group-item"><label> Perekonnanimi: </label> <?=$personal->last;?></li>
+						  <li class="list-group-item"><label> Maakond: </label> <?=$personal->county;?></li>
+						  <li class="list-group-item"><label> Vald: </label> <?=$personal->parish;?></li>
+						  <li class="list-group-item"><label> Telefoni number: </label> <?=$personal->number;?></li>
+						</ul>
+
+				</div>
+
 				<!-- Education -->
 				<div role="tabpanel" class="tab-pane" id="education">
              <h3>
@@ -1106,13 +1092,13 @@
 	</div>
 	<div class="col-sm-12">
 		<br>
-		<label class="pull-right" for="Edasi">Juhul kui CV on valmis siis vajuta nuppu "Edasi" või suundu ükskõik millisele lehele!</label>
+		<label class="pull-right" for="profile">Lahkumiseks vajuta "Profiil"</label>
 		</div>
 
 		<div class="col-sm-12">
 			<br>
 			<a href="../content/profile.php" class="btn btn-success pull-right">
-				Edasi <span class="glyphicon glyphicon-chevron-right"></span>
+				Profiil <span class="glyphicon glyphicon-user"></span>
 			</a>
       </div>
 		</div>
