@@ -364,7 +364,7 @@ www.ntb.ee
     ################################
 
     function getResumes($userid) {
-      $stmt = $this->connection->prepare("SELECT id, name, link, inserted FROM ntb_resumes WHERE user_id = ?");
+      $stmt = $this->connection->prepare("SELECT id, name, link, inserted FROM ntb_resumes WHERE user_id = ? AND deleted IS NULL");
       $stmt->bind_param("i", $userid);
   		$stmt->bind_result($id, $name, $link, $inserted);
   		$stmt->execute();
@@ -400,6 +400,15 @@ www.ntb.ee
       }
       $stmt->close();
 
+    }
+
+    function deleteResume($id, $user_id) {
+      $stmt = $this->connection->prepare("UPDATE ntb_resumes SET deleted = NOW() WHERE id = ? AND user_id = ?");
+      $stmt->bind_param("ii", $id, $user_id);
+      $stmt->execute();
+
+      header("Location: profile.php#resumes");
+      $stmt->close();
     }
 
     function thisResume($link) {

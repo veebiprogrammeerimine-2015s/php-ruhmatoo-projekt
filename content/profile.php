@@ -25,6 +25,13 @@
 	$my_resume = $Resume->getResumes($_SESSION['logged_in_user_id']);
 
 	if(isset($_SESSION['logged_in_user_id'])) {
+		if(isset($_GET['delete'])) {
+			$Resume->deleteResume($_GET['delete'], $_SESSION['logged_in_user_id']);
+		}
+	}
+
+
+	if(isset($_SESSION['logged_in_user_id'])) {
 		if( $_SERVER["REQUEST_METHOD"] == "POST") {
 
 			if(isset($_POST["save_personal"])){
@@ -399,10 +406,19 @@ require_once("../header.php");
 								<?php
 									for($i = 0; $i < count($my_resume); $i++) {
 										echo '<div class="list-group-item">
-												 <h4 class="list-group-item-heading">'.$my_resume[$i]->name.'<a class="pull-right" href="'.$myurl."edit/".$my_resume[$i]->link.'.php"><button type="button" class="btn btn-info btn-sm">
-		 										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Muuda
-		 										</button></a></h4>
-												 <p class="list-group-item-text">'.$my_resume[$i]->inserted.'</p>';
+												 <h4 class="list-group-item-heading">'.$my_resume[$i]->name.'
+												 	<div class="btn-group pull-right">
+
+														<a class="btn btn-info btn-sm" href="'.$myurl."edit/".$my_resume[$i]->link.'.php">
+															<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Muuda
+														</a>
+														<a class="btn btn-danger btn-sm" onclick="confirmDelete('.$my_resume[$i]->id.')">
+															<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Kustuta
+														</a>
+
+													 </div>
+												</h4>';
+										echo '<p class="list-group-item-text">'.$my_resume[$i]->inserted.'</p>';
 										echo '</div>';
 										}
 								?>
@@ -573,6 +589,24 @@ Admin profiil
 			if(numbers != 0)
 				document.getElementById("numbers").className = "list-group-item has-success";
 		}
+
+		function confirmDelete(id) {
+
+			var start = new Date().getTime();
+			var confirmation = confirm("Kas oled kindel, et soovid kustutada?");
+			var dt = new Date().getTime() - start;
+
+			for(var i=0; i < 10 && !confirmation && dt < 50; i++){
+					start = new Date().getTime();
+					confirmation = confirm("Kas oled kindel, et soovid kustutada?");
+					dt = new Date().getTime() - start;
+			}
+			if(dt < 50)
+				 window.location = "?delete="+id;
+			else if(dt > 150 && confirmation == true)
+				window.location = "?delete="+id;
+		};
+
 
 	$(document).ready(function () {
 	   $("#repeatpassword").keyup(passwordMatch);
