@@ -52,7 +52,7 @@ class Profile {
 
 		}
 		$_SESSION['response'] = $response;
-		header ("Location: profile.php");
+		header ("Location: profile.php#personal");
 		exit();
 	}
 

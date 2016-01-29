@@ -1,9 +1,8 @@
 <?php
-	//Lehe nimi
+
 	$page_title = "Profiil";
-	//Faili nimi
 	$page_file = "profile.php";
-	require_once("../header.php");
+
 	require_once ("../inc/functions.php");
 ?>
 
@@ -111,6 +110,7 @@
 
 
 
+
 	##########################
 	### EMPLOYER VARIABLES ###
 	##########################
@@ -176,6 +176,7 @@
 		}
 	}
 }
+require_once("../header.php");
 ?>
 
 
@@ -259,90 +260,45 @@
 	<?php endif; ?>
 
 	<div class="col-xs-12">
-	<div class="col-xs-12 col-sm-2">
-	<h2>Profiil</h2>
+
+	<div class="col-sm-3">
+		<h3>Profiil</h3>
+	  <ul class="nav nav-pills nav-stacked">
+	    <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Konto</a></li>
+	    <li role="presentation"><a href="#personal" class="active" aria-controls="personal" role="tab" data-toggle="tab">Isiklikud andmed</a></li>
+	    <li role="presentation"><a href="#password" aria-controls="password" role="tab" data-toggle="tab">Muuda parooli</a></li>
+	    <li role="presentation"><a href="#resumes" aria-controls="resumes" role="tab" data-toggle="tab">Minu CVd</a></li>
+	  </ul>
 	</div>
-	<div class="col-xs-12 col-sm-10">
-	<ul class="nav nav-tabs pull-right" role="tablist">
-	<?php if(isset($_GET["personal"])): ?>
-	<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Konto andmed</a></li>
-	<li role="presentation" class="active"><a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Isiklikud andmed</a></li>
-	<?php else: ?>
-	<li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Konto andmed</a></li>
-	<li role="presentation"><a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Isiklikud andmed</a></li>
-	<?php endif; ?>
-	<li role="presentation"><a href="#password" aria-controls="password" role="tab" data-toggle="tab">Muuda parooli</a></li>
-	<li role="presentation"><a href="#resumes" aria-controls="resumes" role="tab" data-toggle="tab">Konto CVd</a></li>
-	</ul>
-</div>
-</div>
-	<div class="col-xs-12">
+
 	<!-- Tab panes -->
 	<div class="tab-content">
 
-		<?php if(isset($_GET["personal"])): ?>
-		<div role="tabpanel" class="tab-pane" id="profile">
-		<?php else: ?>
 		<div role="tabpanel" class="tab-pane active" id="profile">
-		<?php endif; ?>
-			<div class="col-xs-12 col-sm-4">
-				<h3>Info</h3>
-				<pre class="pre-scrollable">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ornare sit amet erat id convallis. In hac habitasse platea dictumst. Sed a mauris sodales, tincidunt sapien non, hendrerit enim. Suspendisse potenti. Phasellus ut dui scelerisque, ultrices ex sed, fringilla dui. Ut fermentum enim sit amet sapien tristique, quis convallis nibh dapibus. Cras accumsan massa a augue elementum facilisis. Aenean dictum mauris ut erat rutrum faucibus. Praesent ac sollicitudin eros.
 
-Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, facilisis neque. Donec sit amet hendrerit erat. Morbi maximus egestas massa. In diam metus, molestie a blandit non, lobortis eu purus. Mauris id sapien sit amet nibh auctor luctus. Curabitur pretium mauris id ullamcorper blandit. Donec non interdum ligula. Cras sit amet magna dui.
-				</pre>
-			</div>
 
-			<div class="form-horizontal col-xs-12 col-sm-8">
+			<div class="form-horizontal col-xs-12 col-sm-9">
 
 				<h3>Konto andmed</h3>
 
-				<table class="table table-striped table-bordered">
-					<tr>
-						<td><label> Kasutajanimi </label></td>
-						<td><?=$_SESSION['logged_in_user_email'];?></td>
-					</tr>
-					<tr>
-						<td><label> Konto loodud </label></td>
-						<td><?=date('d.m.Y');?></td>
-					</tr>
-					<tr>
-						<td><label> Viimane külastatus </label></td>
-						<td><?="Puudub";?></td>
-					</tr>
-					<tr>
-						<td><label> Viimane muudatus profiilis </label></td>
-						<td><?="Puudub";?></td>
-					</tr>
-					<tr>
-						<td><label> CVde arv </label></td>
-						<td><?="Puudub";?></td>
-					</tr>
-				</table>
+				<ul class="list-group">
+					<li class="list-group-item"><label> Kasutajanimi: </label> <?=$_SESSION['logged_in_user_email'];?></li>
+					<li class="list-group-item"><label> Konto loodud: </label> </li>
+					<li class="list-group-item"><label> Viimane külastatus: </label> </li>
+					<li class="list-group-item"><label> Viimane muudatus profiilis: </label> </li>
+					<li class="list-group-item"><label> CVde arv: </label> <?=count($my_resume);?> </li>
+				</ul>
 
 			</div>
 		</div>
 
-		<?php if(isset($_GET["personal"])): ?>
-			<div role="tabpanel" class="tab-pane active" id="personal">
-		<?php else: ?>
 		<div role="tabpanel" class="tab-pane" id="personal">
-		<?php endif; ?>
-			<div class="col-xs-12 col-sm-4">
-				<h3>Info</h3>
-				<pre class="pre-scrollable">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ornare sit amet erat id convallis. In hac habitasse platea dictumst. Sed a mauris sodales, tincidunt sapien non, hendrerit enim. Suspendisse potenti. Phasellus ut dui scelerisque, ultrices ex sed, fringilla dui. Ut fermentum enim sit amet sapien tristique, quis convallis nibh dapibus. Cras accumsan massa a augue elementum facilisis. Aenean dictum mauris ut erat rutrum faucibus. Praesent ac sollicitudin eros.
 
-Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, facilisis neque. Donec sit amet hendrerit erat. Morbi maximus egestas massa. In diam metus, molestie a blandit non, lobortis eu purus. Mauris id sapien sit amet nibh auctor luctus. Curabitur pretium mauris id ullamcorper blandit. Donec non interdum ligula. Cras sit amet magna dui.
-				</pre>
-			</div>
-
-			<div class="form-horizontal col-xs-12 col-sm-8">
+			<div class="form-horizontal col-xs-12 col-sm-9">
 
 				<h3>
 					Isiklikud andmed
-					<a href="?personal">
+					<a href="?personal#personal">
 						<button type="button" class="btn btn-info btn-sm pull-right">
 	  					<span class="glyphicon glyphicon-pencil"></span> Muuda
 						</button>
@@ -350,34 +306,33 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 				</h3>
 				<?php if(isset($_GET["personal"])): ?>
 					<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-						<table class="table table-striped table-bordered">
+						<ul class="list-group">
 
-							<tr>
-								<td><label> Eesnimi </label></td>
-								<td id="firsts" class="form-group">
-									<input id="first" type="text" name="first" class="form-control input-sm" value="<?=$first;?>">
-								</td>
-							</tr>
-							<tr>
-								<td><label> Perekonnanimi </label></td>
-								<td id="lasts" class="form-group"><input id="last" type="text" name="last" class="form-control input-sm" value="<?=$last;?>"></td>
-							</tr>
-							<tr>
-								<td><label> Maakond </label></td>
-								<td id="countys" class="form-group"><input id="county" type="text" name="county" class="form-control input-sm" value="<?=$county;?>"></td>
-							</tr>
-							<tr>
-								<td><label> Vald </label></td>
-								<td id="parishs" class="form-group"><input id="parish" type="text" name="parish" class="form-control input-sm" value="<?=$parish;?>"></td>
-							</tr>
-							<tr>
-								<td><label> Telefoni number </label></td>
-								<td id="numbers" class="form-group"><input id="number" type="text" name="number" class="form-control input-sm" value="<?=$number;?>"></td>
-							</tr>
-						</table>
+								<li id="firsts" class="list-group-item">
+									<label> Eesnimi: </label>
+									<input id="first" type="text" name="first" class="form-control input-sm" value="<?=$personal->first;?>">
+								</li>
+								<li id="lasts" class="list-group-item">
+									<label> Perekonnanimi: </label>
+									<input id="last" type="text" name="last" class="form-control input-sm" value="<?=$personal->last;?>">
+								</li>
+								<li id="countys" class="list-group-item">
+									<label> Maakond: </label>
+									<input id="county" type="text" name="county" class="form-control input-sm" value="<?=$personal->county;?>">
+								</li>
+								<li id="parishs" class="list-group-item">
+									<label> Vald: </label>
+									<input id="parish" type="text" name="parish" class="form-control input-sm" value="<?=$personal->parish;?>">
+								</li>
+								<li id="numbers" class="list-group-item">
+									<label> Telefoni number: </label>
+									<input id="number" type="text" name="number" class="form-control input-sm" value="<?=$personal->number;?>">
+								</li>
+
+						</ul>
 						<div class="btn-group pull-right" role="group">
 
-							<a href="profile.php" class="btn btn-danger btn-sm">
+							<a href="profile.php#personal" class="btn btn-danger btn-sm">
 								<span class="glyphicon glyphicon-remove"></span> Katkesta
 							</a>
 
@@ -388,28 +343,13 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 						</div>
 				</form>
 				<?php else: ?>
-				<table class="table table-striped table-bordered">
-					<tr>
-						<td><label> Eesnimi </label></td>
-						<td><?=$personal->first;?></td>
-					</tr>
-					<tr>
-						<td><label> Perekonnanimi </label></td>
-						<td><?=$personal->last;?></td>
-					</tr>
-					<tr>
-						<td><label> Maakond </label></td>
-						<td><?=$personal->county;?></td>
-					</tr>
-					<tr>
-						<td><label> Vald </label></td>
-						<td><?=$personal->parish;?></td>
-					</tr>
-					<tr>
-						<td><label> Telefoni number </label></td>
-						<td><?=$personal->number;?></td>
-					</tr>
-				</table>
+					<ul class="list-group">
+						<li class="list-group-item"><label> Eesnimi: </label> <?=$personal->first;?></li>
+						<li class="list-group-item"><label> Perekonnanimi: </label> <?=$personal->last;?></li>
+						<li class="list-group-item"><label> Maakond: </label> <?=$personal->county;?></li>
+						<li class="list-group-item"><label> Vald: </label> <?=$personal->parish;?></li>
+						<li class="list-group-item"><label> Telefoni number: </label> <?=$personal->number;?></li>
+					</ul>
 				<?php endif; ?>
 			</div>
 		</div>
@@ -418,14 +358,8 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 
 
 		<div role="tabpanel" class="tab-pane" id="password">
-			<div class="col-xs-12 col-sm-4">
-				<h3>Info</h3>
-				<pre class="pre">
-Juhul kui soovid parooli vahetada, siis täida antud vorm ära ja parool saab edukalt muudetud
-				</pre>
-			</div>
 
-			<div class="form-horizontal col-xs-12 col-sm-8">
+			<div class="form-horizontal col-xs-12 col-sm-9">
 					<h3>Muuda parooli</h3>
 					<form class="form-horizontal col-xs-12" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 						<div class="form-group">
@@ -449,16 +383,8 @@ Juhul kui soovid parooli vahetada, siis täida antud vorm ära ja parool saab ed
 		</div>
 
 		<div role="tabpanel" class="tab-pane" id="resumes">
-			<div class="col-xs-12 col-sm-4">
-				<h3>Info</h3>
-				<pre class="pre-scrollable">
-CVDE KIRJELDUS TULEB KA SIIA ipsum dolor sit amet, consectetur adipiscing elit. Integer ornare sit amet erat id convallis. In hac habitasse platea dictumst. Sed a mauris sodales, tincidunt sapien non, hendrerit enim. Suspendisse potenti. Phasellus ut dui scelerisque, ultrices ex sed, fringilla dui. Ut fermentum enim sit amet sapien tristique, quis convallis nibh dapibus. Cras accumsan massa a augue elementum facilisis. Aenean dictum mauris ut erat rutrum faucibus. Praesent ac sollicitudin eros.
 
-Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, facilisis neque. Donec sit amet hendrerit erat. Morbi maximus egestas massa. In diam metus, molestie a blandit non, lobortis eu purus. Mauris id sapien sit amet nibh auctor luctus. Curabitur pretium mauris id ullamcorper blandit. Donec non interdum ligula. Cras sit amet magna dui.
-				</pre>
-			</div>
-
-			<div class="form-horizontal col-xs-12 col-sm-8">
+			<div class="form-horizontal col-xs-12 col-sm-9">
 				<h3>Minu CVd
 					<a href="newresume.php">
 					<button type="button" class="btn btn-info btn-sm pull-right" aria-label="Plus">
@@ -466,35 +392,31 @@ Quisque rutrum egestas sem at luctus. Etiam quis magna mollis, hendrerit ex a, f
 					</button>
 				</a>
 				</h3>
-					<table class="table table-hover table-striped">
-							<thead>
-								<tr>
-									<th>Nimi</th>
-									<th>Sisestatud</th>
-								</tr>
-							</thead>
-							<tbody>
+
+
+							<div class="list-group">
 
 								<?php
 									for($i = 0; $i < count($my_resume); $i++) {
-										echo '<tr>
-												 <td>'.$my_resume[$i]->name.'</td>
-												 <td>'.$my_resume[$i]->inserted.'</td>';
-										echo '<td><a href="'.$myurl."edit/".$my_resume[$i]->link.'.php"><button type="button" class="btn btn-info btn-sm">';
-										echo '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Muuda';
-										echo '</button></a></td>';
-										echo '</tr>';
+										echo '<div class="list-group-item">
+												 <h4 class="list-group-item-heading">'.$my_resume[$i]->name.'<a class="pull-right" href="'.$myurl."edit/".$my_resume[$i]->link.'.php"><button type="button" class="btn btn-info btn-sm">
+		 										<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Muuda
+		 										</button></a></h4>
+												 <p class="list-group-item-text">'.$my_resume[$i]->inserted.'</p>';
+										echo '</div>';
 										}
 								?>
 
-					 </tbody>
-				 </table>
+							</div>
+
 			</div>
 		</div>
 
 		</div>
 	</div>
 </div>
+</div>
+
 <!--
 ########################
 ### EMPLOYER PROFILE ###
@@ -589,6 +511,17 @@ Admin profiil
 <?php endif; ?>
 
 <script>
+
+	var hash = document.location.hash;
+	var prefix = "";
+	if (hash) {
+	$('.nav-pills a[href='+hash.replace(prefix,"")+']').tab('show');
+	}
+
+	$('.nav-pills a').on('shown.bs.tab', function (e) {
+	window.location.hash = e.target.hash.replace("#", "#" + prefix);
+	});
+
 	function passwordMatch() {
     var newpass = $("#newpassword").val();
     var repeatpass = $("#repeatpassword").val();
@@ -618,27 +551,27 @@ Admin profiil
 		if (firsts == 0 || lasts == 0 || countys == 0 || parishs == 0 || numbers == 0)
 			document.getElementById("save_personal").className = "btn btn-success btn-sm disabled";
 			if(firsts == 0)
-				document.getElementById("firsts").className = "form-group input-sm has-error";
+				document.getElementById("firsts").className = "list-group-item has-error";
 			if(lasts == 0)
-				document.getElementById("lasts").className = "form-control input-sm has-error";
+				document.getElementById("lasts").className = "list-group-item has-error";
 			if(countys == 0)
-				document.getElementById("countys").className = "form-control input-sm has-error";
+				document.getElementById("countys").className = "list-group-item has-error";
 			if(parishs == 0)
-				document.getElementById("parishs").className = "form-control input-sm has-error";
+				document.getElementById("parishs").className = "list-group-item has-error";
 			if(numbers == 0)
-				document.getElementById("numbers").className = "form-control input-sm has-error";
-		else
+				document.getElementById("numbers").className = "list-group-item has-error";
+		else if (firsts != 0 && lasts != 0 && countys != 0 && parishs != 0 && numbers != 0)
 			document.getElementById("save_personal").className = "btn btn-success btn-sm";
 			if(firsts != 0)
-				document.getElementById("firsts").className = "form-group input-sm has-success";
+				document.getElementById("firsts").className = "list-group-item has-success";
 			if(lasts != 0)
-				document.getElementById("lasts").className = "form-control input-sm has-success";
+				document.getElementById("lasts").className = "list-group-item has-success";
 			if(countys != 0)
-				document.getElementById("countys").className = "form-control input-sm has-success";
+				document.getElementById("countys").className = "list-group-item has-success";
 			if(parishs != 0)
-				document.getElementById("parishs").className = "form-control input-sm has-success";
+				document.getElementById("parishs").className = "list-group-item has-success";
 			if(numbers != 0)
-				document.getElementById("numbers").className = "form-control input-sm has-success";
+				document.getElementById("numbers").className = "list-group-item has-success";
 		}
 
 	$(document).ready(function () {
