@@ -778,7 +778,7 @@ www.ntb.ee
     $stmt = $this->connection->prepare("INSERT INTO ntb_workexp (resume_id, company, name, content, info, start, endtime) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("issssii", $cvid, $company, $name, $content, $info, $start, $end);
     $stmt->execute();
-    header("Location: ".$link);
+    header("Location: ".$link."#workexp");
     $stmt->close();
   }
 
@@ -812,7 +812,7 @@ www.ntb.ee
     $stmt->bind_param("ii", $id, $user_id);
     $stmt->execute();
 
-    header("Location: ".$link);
+    header("Location: ".$link."#workexp");
     $stmt->close();
   }
 
@@ -821,7 +821,7 @@ www.ntb.ee
     $stmt->bind_param("ssssiiii", $company, $name, $content, $info, $start, $end, $id, $user_id);
     $stmt->execute();
 
-    header("Location: ".$link);
+    header("Location: ".$link."#workexp");
     $stmt->close();
   }
 
@@ -834,7 +834,7 @@ www.ntb.ee
     $stmt->bind_param("ssii", $pos, $add, $id, $user_id);
     $stmt->execute();
 
-    header("Location: ".$link);
+    header("Location: ".$link."#additional");
     $stmt->close();
 
   }

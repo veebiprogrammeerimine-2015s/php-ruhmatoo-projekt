@@ -340,14 +340,14 @@
 								<div class="list-group">
 										<?php
 										for($i = 0; $i < count($getPrimary); $i++) {
-												echo '<div class="list-group-item" role="button" data-toggle="collapse" href="#'.$getPrimary[$i]->id.'" aria-expanded="false" aria-controls="'.$getPrimary[$i]->id.'">';
+												echo '<div class="list-group-item" role="button" data-toggle="collapse" href="#school_'.$getPrimary[$i]->id.'" aria-expanded="false" aria-controls="'.$getPrimary[$i]->id.'">';
 
 												echo '<h4 class="list-group-item-heading">'.$getPrimary[$i]->school.' <font size="2">('.$getPrimary[$i]->start.' - '.$getPrimary[$i]->end.')</font></h4>';
 												echo '<p class="list-group-item-text">'.$getPrimary[$i]->type.'</p>';
 
 												echo '</div>';
 
-												echo '<div class="collapse" id="'.$getPrimary[$i]->id.'">
+												echo '<div class="collapse" id="school_'.$getPrimary[$i]->id.'">
 															<div class="well">';
 
 												echo '<label for="info">Lisainfo:</label>
@@ -511,14 +511,14 @@
 							 <div class="list-group">
 									 <?php
 									 for($i = 0; $i < count($getLanguages); $i++) {
-											 echo '<div class="list-group-item" role="button" data-toggle="collapse" href="#'.$getLanguages[$i]->id.'" aria-expanded="false" aria-controls="'.$getLanguages[$i]->id.'">';
+											 echo '<div class="list-group-item" role="button" data-toggle="collapse" href="#language_'.$getLanguages[$i]->id.'" aria-expanded="false" aria-controls="'.$getLanguages[$i]->id.'">';
 
 											 echo '<h4 class="list-group-item-heading">'.$getLanguages[$i]->language.'</h4>';
 											 echo '<p class="list-group-item-text">Kirjutamine: '.$getLanguages[$i]->writing.' | Rääkimine:'.$getLanguages[$i]->speaking.' | Lugemine: '.$getLanguages[$i]->reading.'</p>';
 
 											 echo '</div>';
 
-											 echo '<div class="collapse" id="'.$getLanguages[$i]->id.'">
+											 echo '<div class="collapse" id="language_'.$getLanguages[$i]->id.'">
 														 <div class="well">';
 
 											 echo '<label for="info">Lisainfo:</label>
@@ -705,14 +705,14 @@
 					<div class="list-group">
 						<?php
 							for($i = 0; $i < count($getCourses); $i++) {
-									echo '<div class="list-group-item" role="button" data-toggle="collapse" href="#'.$getCourses[$i]->id.'" aria-expanded="false" aria-controls="'.$getCourses[$i]->id.'">';
+									echo '<div class="list-group-item" role="button" data-toggle="collapse" href="#course_'.$getCourses[$i]->id.'" aria-expanded="false" aria-controls="'.$getCourses[$i]->id.'">';
 
 									echo '<h4 class="list-group-item-heading">'.$getCourses[$i]->course.'</h4>';
 									echo '<p class="list-group-item-text">'.$getCourses[$i]->trainer.'</p>';
 
 									echo '</div>';
 
-									echo '<div class="collapse" id="'.$getCourses[$i]->id.'">
+									echo '<div class="collapse" id="course_'.$getCourses[$i]->id.'">
 												<div class="well">';
 
 									echo '<label for="year">Aasta:</label>
@@ -877,70 +877,116 @@
 									 <span class="glyphicon glyphicon-plus"></span> Uus töö
 						 </button>
 					</h3>
-					<table class="table table-hover table-condensed table-striped table-responsive">
-						<thead>
-							<tr>
-								<th>Ettevõte</th>
-								<th>Amet</th>
-								<th>Töö sisu</th>
-								<th>Lisainfo</th>
-								<th>Algus</th>
-								<th>Lõpp</th>
-							</tr>
-						</thead>
-						<tbody>
-							<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-							<?php
+
+					<div class="list-group">
+						<?php
 							for($i = 0; $i < count($getWorkexp); $i++) {
-								if(isset($_GET["edit_work"]) && $_GET["edit_work"] == $getWorkexp[$i]->id) {
+									echo '<div class="list-group-item" role="button" data-toggle="collapse" href="#work_'.$getWorkexp[$i]->id.'" aria-expanded="false" aria-controls="'.$getCourses[$i]->id.'">';
 
-									echo '<input type="hidden" name="work_id" value="'.$getWorkexp[$i]->id.'">';
-									echo '<tr>
-											 <td><input class="form-control" type="text" name="work_company" value="'.$getWorkexp[$i]->company.'"></td>
-											 <td><input class="form-control" type="text" name="work_name" value="'.$getWorkexp[$i]->name.'"></td>
-											 <td><input class="form-control" type="text" name="work_content" value="'.$getWorkexp[$i]->content.'"></td>
-											 <td><input class="form-control" type="text" name="work_info" value="'.$getWorkexp[$i]->info.'"></td>
-											 <td><input class="form-control" type="text" name="work_start" value="'.$getWorkexp[$i]->start.'"></td>
-											 <td><input class="form-control" type="text" name="work_end" value="'.$getWorkexp[$i]->end.'"></td>';
-									echo '<td>';
+									echo '<h4 class="list-group-item-heading">'.$getWorkexp[$i]->name.' <font size="2">('.$getPrimary[$i]->start.' - '.$getPrimary[$i]->end.')</font></h4>';
+									echo '<p class="list-group-item-text">'.$getWorkexp[$i]->company.'</p>';
 
-									echo '<div class="btn-group " role="group">';
-									echo '<button type="submit" name="update_work" class="btn btn-success btn-sm">
-														<span class="glyphicon glyphicon-ok"></span>
-													</button>';
-									echo '<a href="'.$file_to_trim.'" class="btn btn-warning btn-sm">
-														<span class="glyphicon glyphicon-remove"></span>
-													</a>';
 									echo '</div>';
-									echo '</td>';
-									echo '</tr>';
 
-								} else {
-									echo '<tr>
-											 <td>'.$getWorkexp[$i]->company.'</td>
-											 <td>'.$getWorkexp[$i]->name.'</td>
-											 <td>'.$getWorkexp[$i]->content.'</td>
-											 <td>'.$getWorkexp[$i]->info.'</td>
-											 <td>'.$getWorkexp[$i]->start.'</td>
-											 <td>'.$getWorkexp[$i]->end.'</td>';
-									echo '<td><div class="btn-group pull-right" role="group">';
+									echo '<div class="collapse" id="work_'.$getWorkexp[$i]->id.'">
+												<div class="well">';
 
-									echo '<a href="?edit_work='.$getWorkexp[$i]->id.'" class="btn btn-info btn-sm">
-													<span class="glyphicon glyphicon-pencil"></span> Muuda
-												</a>';
-									echo '<a class="btn btn-danger btn-sm" onclick="confirmWorkDelete('.$getWorkexp[$i]->id.')">
-													<span class="glyphicon glyphicon-remove"></span> Kustuta
-												</a>';
-									echo '</div></td>';
-									echo '</tr>';
-								}
+									echo '<label for="content">Töö sisu:</label><br>
+												<font class="list-group-item-text">'.$getWorkexp[$i]->content.'</font><br>
+												<label for="add_info">Lisainfo:</label><br>
+												<font class="list-group-item-text">'.$getWorkexp[$i]->info.'</font><br>
+
+												<div class="btn-group" role="group">
+
+												<a data-toggle="modal" data-target="#edit_work_'.$getWorkexp[$i]->id.'" class="btn btn-info btn-sm">
+																<span class="glyphicon glyphicon-pencil"></span> Muuda
+															</a>
+												<a class="btn btn-danger btn-sm" onclick="confirmWorkDelete('.$getWorkexp[$i]->id.');">
+																<span class="glyphicon glyphicon-remove"></span> Kustuta
+															</a>
+												</div>';
+
+									echo '</div>
+												</div>';
 							}
 
-
 							?>
-						</form>
-						</tbody>
-					</table>
+							<?php for($i = 0; $i < count($getWorkexp); $i++): ?>
+								<!-- Modal for editing work -->
+								<div class="modal fade" id="edit_work_<?=$getWorkexp[$i]->id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel">Muuda varasemat töökohta <?=$getWorkexp[$i]->name;?></h4>
+											</div>
+											<div class="modal-body" style="height: 500px;">
+												<div class="col-sm-12">
+													<div class="col-sm-12">
+													<div class="col-sm-6">
+
+														<input type="hidden" name="work_id" value="<?=$getWorkexp[$i]->id;?>">
+
+														<div class="form-group">
+															<label for="work_company">Ettevõte *</label>
+															<input type="text" class="form-control" name="work_company" value="<?=$getWorkexp[$i]->company;?>">
+														</div>
+													</div>
+													<div class="col-sm-6">
+
+														<label for="work_name">Amet *</label>
+														<input type="text" class="form-control" name="work_name" value="<?=$getWorkexp[$i]->name;?>">
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="form-group">
+															<div class="col-sm-6">
+																<label for="work_start">Algus *</label>
+																<input type="text" class="form-control" name="work_start" value="<?=$getWorkexp[$i]->start;?>">
+															</div>
+															<div class="col-sm-6">
+																<label for="work_end">Lõpp</label>
+																<input type="text" class="form-control" name="work_end" value="<?=$getWorkexp[$i]->end;?>">
+															</div>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="col-sm-12">
+														<label for="work_content">Töö sisu *</label>
+														<textarea class="form-control" rows="3" name="work_content" type="text"><?=$getWorkexp[$i]->content;?></textarea>
+													</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="col-sm-12">
+														<label for="work_info">Lisainfo</label>
+														<textarea class="form-control" rows="3" name="work_info" type="text"><?=$getWorkexp[$i]->info;?></textarea>
+													</div>
+													</div>
+
+											</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-danger" data-dismiss="modal">
+													<span class="glyphicon glyphicon-remove"></span> Katkesta
+												</button>
+
+												<button type="submit" name="update_work" class="btn btn-success">
+													<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Salvesta
+												</button>
+											</div>
+											</form>
+										</div>
+									</div>
+								</div>
+
+
+
+							<?php endfor; ?>
+
+					</div>
+
+
 					<!-- Modal for adding previous work experiences -->
 					<div class="modal fade" id="new_work" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
@@ -1099,7 +1145,7 @@
 						}
 						if(dt < 50)
 							 window.location = "?delete="+id;
-						else
+						else if(dt > 150 && confirmation == true)
 							window.location = "?delete="+id;
 					};
 
@@ -1116,7 +1162,7 @@
 						}
 						if(dt < 50)
 							window.location = "?delete_language="+id;
-						else
+						else if(dt > 150 && confirmation == true)
 							window.location = "?delete_language="+id;
 					};
 
@@ -1133,7 +1179,7 @@
 						}
 						if(dt < 50)
 							window.location = "?delete_course="+id;
-						else
+						else if(dt > 150 && confirmation == true)
 							window.location = "?delete_course="+id;
 
 					};
@@ -1151,7 +1197,7 @@
 						}
 						if(dt < 50)
 							window.location = "?delete_work="+id;
-						else
+						else if(dt > 150 && confirmation == true)
 							window.location = "?delete_work="+id;
 					};
 	</script>
