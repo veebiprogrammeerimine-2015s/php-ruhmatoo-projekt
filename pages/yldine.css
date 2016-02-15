@@ -1,0 +1,27 @@
+body{
+	background-color: black;
+	background-image: url("discgolf.jpg");
+    background-repeat: no-repeat;
+	background-position: middle;
+	background-size: 100%;
+}
+
+h1{
+	text-align: right;
+}
+
+
+h3{
+	text-align: left;	
+	font-size: 20px;
+	font-weight: bold;
+	font-variant: small-caps;
+	color: DimGray ;
+}
+
+.jumbotron{
+    background-color: transparent; 
+	color: DimGray ;
+	font-weight: bold;
+	font-variant: small-caps;
+}

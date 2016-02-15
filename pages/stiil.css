@@ -1,0 +1,50 @@
+body {
+	background-color: white;
+}
+
+
+ table.center {
+    margin-left:auto; 
+    margin-right:auto;
+	/*border: 1px solid black;*/
+  }
+
+p, h2 {
+	text-align: center;  
+  }
+
+
+th, td {
+	padding: 10px;
+	height: 30px;
+	text-align: center;
+}
+
+h5 {
+	padding: 2px;
+	text-align: right;
+}
+
+.insertpars {
+	text-align: center;
+}
+
+.parksinfo {
+	text-align: center;
+}
+
+.historyinfo {
+	text-align: center;
+}
+
+.newgame {
+	text-align: center;
+}
+
+.newgame1 {
+	text-align: center;
+}
+
+.container-main {
+	background-color: rgba(255,229,204,0.3); 
+}
