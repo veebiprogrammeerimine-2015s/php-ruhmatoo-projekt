@@ -1,3 +1,27 @@
+Projekti nimi: FOOTBALL FORUM
+Liikmed: Arkadi Listov[arkawa7](https://github.com/arkawa7), Raoul Kirsima[raoulkirsima](https://github.com/raoulkirsima), Mikk Mäe[mikkmae](https://github.com/mikkmae)
+Eesmärk: 
+Luua jalgpallisõpradele eraldi foorum, kus käsitletakse erinevaid parasjagu populaarseid teemasid.
+
+Kirjeldus:
+Sihtgrupiks on igast vanusest ning soost jalgpalli huvilised inimesed.
+Kasutaja saab luua profiili, sisestada enda kohta andmeid.
+Kasutajal on võimalik postitada foorumisse teemasid ning ka teiste lisatud teemasid kommenteerida.
+Eripära võrreldes teiste samalaadsete rakendustega: Kasutajatel on võimalik teha oma "Dreamteam".
+
+NB! Projekti idee võib veel muutuda!
+
+
+
+
+
+
+
+
+
+
+
+
 # PHP rühmatöö projekt
 **Rühmatööde demo päev** on valitud eksamipäev jaanuaris, kuhu tuleks tullakse terve rühmaga koos!
 
@@ -35,3 +59,6 @@
 * **Stiilijuhend:** [Coding Style Guide](http://www.php-fig.org/psr/psr-2/)
 * **GIT õpetus:** [Become a git guru.](https://www.atlassian.com/git/tutorials/)
 * **Abimaterjale:** [Veebirakenduste loomine PHP ja MySQLi abil](http://minitorn.tlu.ee/~jaagup/kool/java/loeng/veebipr/veebipr1.pdf), [PHP with MySQL Essential Training] (http://www.lynda.com/MySQL-tutorials/PHP-MySQL-Essential-Training/119003-2.html)
+
+
+
