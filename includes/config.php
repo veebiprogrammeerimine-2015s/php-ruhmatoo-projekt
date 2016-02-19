@@ -2,7 +2,7 @@
 ob_start();
 session_start();
 
-$db = new PDO("mysql:dbname=blog;host=127.0.0.1", "root", "" );
+$db = new PDO("mysql:dbname=company;host=127.0.0.1", "root", "");
 $disqus = "richardaasa";
 
 //set the error reporting attribute

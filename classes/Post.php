@@ -1,6 +1,9 @@
 <?php
   class Post {
 
+    // Tegelikkuses peaks iga property kohta
+    // omaette getterid/setterid teha
+
     private $_db;
     public $_postID;
     public $_postTitle;
@@ -8,6 +11,7 @@
     public $_postCont;
     public $_postDate;
     public $_postTag;
+    public $_postImg;
     public $_color;
 
     public function __construct(PDO $db, $id) {
@@ -30,11 +34,14 @@
           $this->_postDesc = $result["postDesc"];
           $this->_postDate = $result["postDate"];
           $this->_postTag = $result["postTag"];
+          $this->_postImg = $result["postImg"];
           $this->_color = $result["color"];
           return True;
         }
       } catch (PDOexception $e) {
-        echo "Error is: " . $e-> etmessage();
+        echo "Database Error is: ".$e->getMessage();
+      } catch (Exception $e) {
+        echo "General Error: ".$e->getMessage();
       }
     }
 

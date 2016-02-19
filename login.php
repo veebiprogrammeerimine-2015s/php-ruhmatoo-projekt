@@ -5,7 +5,7 @@
     if($_SESSION["is_admin"] == 1) {
       header("Location: admin.php");
     } else {
-      //header("Location: index.php");
+      header("Location: index.php");
     }
 	}
 

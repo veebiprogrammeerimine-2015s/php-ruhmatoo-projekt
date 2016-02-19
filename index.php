@@ -2,7 +2,7 @@
 
   <div card z-1 class="half-width">
     <div bg-light-blueA700 class="topic"><span icon="account-circle"></span></div>
-    <h2>About me</h2>
+    <h2>About us</h2>
     <p>
       Thank you for dropping by and let me keep it brief for you! I am Richard Aasa, 21 year old student studying software development in Tallinn University, based in Tallinn, Estonia.
       Currently in the process of upgrading my porftolio, so feel free to check back any time! If you are interested in learning more about me have a gander
