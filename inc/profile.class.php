@@ -7,7 +7,7 @@ class Profile {
     }
 
 	/*Tööotsija*/
-	function editPersonal($id, $first, $last, $county, $parish, $number) {
+	function editPersonal($id, $first, $last, $born, $county, $parish, $number) {
 		$response = new StdClass();
 		$stmt = $this->connection->prepare("SELECT id FROM ntb_personal WHERE user_id = ?");
 		$stmt->bind_param("i", $id);
@@ -17,8 +17,8 @@ class Profile {
 
 			$stmt->close();
 
-			$stmt = $this->connection->prepare("UPDATE ntb_personal SET firstname = ?, lastname = ?, county = ?, parish = ?, telnumber = ? WHERE user_id = ?");
-			$stmt->bind_param("ssssii", $first, $last, $county, $parish, $number, $id);
+			$stmt = $this->connection->prepare("UPDATE ntb_personal SET firstname = ?, lastname = ?, born = ?, county = ?, parish = ?, telnumber = ? WHERE user_id = ?");
+			$stmt->bind_param("sssssii", $first, $last, $born, $county, $parish, $number, $id);
 			if($stmt->execute()) {
 
 				$success = new StdClass();
@@ -34,8 +34,8 @@ class Profile {
 			$stmt->close();
 		} else {
 
-			$stmt = $this->connection->prepare("INSERT INTO ntb_personal (user_id, firstname, lastname, county, parish, telnumber) VALUES (?,?,?,?,?,?)");
-			$stmt->bind_param("issssi", $id, $first, $last, $county, $parish, $number);
+			$stmt = $this->connection->prepare("INSERT INTO ntb_personal (user_id, firstname, lastname, born, county, parish, telnumber) VALUES (?,?,?,?,?,?,?)");
+			$stmt->bind_param("isssssi", $id, $first, $last, $born, $county, $parish, $number);
 			if($stmt->execute()) {
 
 				$success = new StdClass();
@@ -57,14 +57,15 @@ class Profile {
 	}
 
 	function getPersonal($userid) {
-		$stmt = $this->connection->prepare("SELECT firstname, lastname, county, parish, telnumber FROM ntb_personal WHERE user_id = ?");
+		$stmt = $this->connection->prepare("SELECT firstname, lastname, born, county, parish, telnumber FROM ntb_personal WHERE user_id = ?");
 		$stmt->bind_param("i", $userid);
-		$stmt->bind_result($first, $last, $county, $parish, $telnumber);
+		$stmt->bind_result($first, $last, $born, $county, $parish, $telnumber);
 		$stmt->execute();
 		$personal = new StdClass();
 		if($stmt->fetch()) {
 			$personal->first = $first;
 			$personal->last = $last;
+			$personal->born = $born;
 			$personal->county = $county;
 			$personal->parish = $parish;
 			$personal->number = $telnumber;

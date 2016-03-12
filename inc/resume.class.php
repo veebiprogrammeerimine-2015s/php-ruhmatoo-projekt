@@ -14,20 +14,20 @@
     ##################
 
     function getPersonal($id) {
-      $stmt = $this->connection->prepare("SELECT ntb_personal.firstname, lastname, county, parish, telnumber, ntb_users.email FROM ntb_personal
+      $stmt = $this->connection->prepare("SELECT ntb_personal.firstname, lastname, born, county, parish, telnumber, ntb_users.email FROM ntb_personal
                                           INNER JOIN ntb_users ON ntb_users.id = ntb_personal.user_id
                                           INNER JOIN ntb_resumes ON ntb_resumes.user_id = ntb_personal.user_id
                                           INNER JOIN got_cv ON got_cv.cv_id = ntb_resumes.id
                                           WHERE got_cv.id = ?");
       $stmt->bind_param("i", $id);
-      $stmt->bind_result($first, $last, $county, $parish, $number, $email);
+      $stmt->bind_result($first, $last, $born, $county, $parish, $number, $email);
       $stmt->execute();
-
 
       if($stmt->fetch()) {
         $personal = new StdClass();
         $personal->first = $first;
         $personal->last = $last;
+        $personal->born = $born;
         $personal->county = $county;
         $personal->parish = $parish;
         $personal->number = $number;
@@ -65,6 +65,33 @@
 
       $stmt->close();
     }
+
+    function getSentCourses($id) {
+      $stmt = $this->connection->prepare("SELECT ntb_courses.id, trainer, course, duration, info, year FROM ntb_courses
+                                          INNER JOIN ntb_resumes ON ntb_resumes.id = ntb_courses.resume_id
+                                          INNER JOIN got_cv ON got_cv.cv_id = ntb_resumes.id
+                                          WHERE got_cv.id = ? ORDER BY ntb_courses.year");
+      $stmt->bind_param("i", $id);
+      $stmt->bind_result($id, $trainer, $course_name, $duration, $info, $year);
+      $stmt->execute();
+
+      $array = array();
+
+      while ($stmt->fetch()) {
+        $course = new StdClass();
+        $course->id = $id;
+        $course->trainer = $trainer;
+        $course->course = $course_name;
+        $course->duration = $duration;
+        $course->info = $info;
+        $course->year = $year;
+
+        array_push($array, $course);
+      }
+      return ($array);
+      $stmt->close();
+
+  }
 
     ########################
     ### Employee resumes ###

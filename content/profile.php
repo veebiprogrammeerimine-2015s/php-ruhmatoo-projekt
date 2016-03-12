@@ -19,8 +19,8 @@
 	##########################
 	$oldpassword_error = $newpassword_error = $repeatpassword_error = "";
 	$oldpassword = $newpassword = $repeatpassword = "";
-	$first = $last = $county = $parish = $number = "";
-	$first_error = $last_error = $county_error = $parish_error = $number_error = "";
+	$first = $last = $born = $county = $parish = $number = "";
+	$first_error = $last_error = $born_error = $county_error = $parish_error = $number_error = "";
 	$personal = $Profile->getPersonal($_SESSION['logged_in_user_id']);
 	$my_resume = $Resume->getResumes($_SESSION['logged_in_user_id']);
 
@@ -46,6 +46,11 @@
 				} else{
 					$last = cleanInput($_POST["last"]);
 				}
+				if (empty($_POST["born"]) ) {
+					$born_error = "See väli on kohustuslik";
+				} else{
+					$born = cleanInput($_POST["born"]);
+				}
 				if (empty($_POST["county"]) ) {
 					$county_error = "See väli on kohustuslik";
 				} else{
@@ -62,7 +67,7 @@
 					$number = cleanInput($_POST["number"]);
 				}
 				if($first_error == "" && $last_error == "" && $county_error == "" && $parish_error == "" && $number_error == ""){
-					$response_personal = $Profile->editPersonal($_SESSION['logged_in_user_id'], $first, $last, $county, $parish, $number);
+					$response_personal = $Profile->editPersonal($_SESSION['logged_in_user_id'], $first, $last, $born, $county, $parish, $number);
 				} else {
 					$response = new StdClass();
 					$error = new StdClass();
@@ -323,6 +328,10 @@ require_once("../header.php");
 									<label> Perekonnanimi: </label>
 									<input id="last" type="text" name="last" class="form-control input-sm" value="<?=$personal->last;?>">
 								</li>
+								<li id="borns" class="list-group-item">
+									<label> Sünniaeg: </label>
+									<input id="born" type="date" name="born" class="form-control input-sm" value="<?=$personal->born;?>">
+								</li>
 								<li id="countys" class="list-group-item">
 									<label> Maakond: </label>
 									<input id="county" type="text" name="county" class="form-control input-sm" value="<?=$personal->county;?>">
@@ -353,6 +362,7 @@ require_once("../header.php");
 					<ul class="list-group">
 						<li class="list-group-item"><label> Eesnimi: </label> <?=$personal->first;?></li>
 						<li class="list-group-item"><label> Perekonnanimi: </label> <?=$personal->last;?></li>
+						<li class="list-group-item"><label> Sünniaeg: </label> <?=$personal->born;?></li>
 						<li class="list-group-item"><label> Maakond: </label> <?=$personal->county;?></li>
 						<li class="list-group-item"><label> Vald: </label> <?=$personal->parish;?></li>
 						<li class="list-group-item"><label> Telefoni number: </label> <?=$personal->number;?></li>

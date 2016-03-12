@@ -5,7 +5,6 @@
 	$page_file = "sentresumes.php";
 ?>
 <?php
-	require_once("../header.php");
 	require_once ("../inc/functions.php");
 ?>
 <?php
@@ -76,7 +75,9 @@
 			}
 		}
 
+		require_once("../header.php");
 ?>
+
 <?php if(isset($_SESSION['response']->success)): ?>
 
 <div class="alert alert-success alert-dismissible fade in" role="alert">
@@ -102,77 +103,112 @@
 
 <h3> Laekunud CVd </h3>
 <h4 style="margin-bottom: 10px;">Vastamata <span style="font-size: 8pt">(Uuemad on eespool)</span></h4>
-<table class="table table-striped table-condensed table-responsive">
-	<thead>
-		<tr>
-			<th>Amet</th>
-			<th>Saatja</th>
-			<th>Saadetud</th>
-			<th></th>
-			<th></th>
-			<th>Valikud</th>
-		</tr>
-	</thead>
-	<tbody>
-			<?php
-				for($i = 0; $i < count($sent_cv); $i++) {
-					echo '<tr><td>'.$sent_cv[$i]->job.'</td>
-							  <td>'.$sent_cv[$i]->first.' '.$sent_cv[$i]->last.'</td>
-							  <td>'.$sent_cv[$i]->time.'</td>
-								<td style="width: 120px;"></td>
-								<td style="width: 120px;"></td>';
-					echo '<td><div class="btn-group">
-									<a class="btn btn-success btn-sm" data-toggle="modal" data-target="#'.$sent_cv[$i]->id.'">
-										<span class="glyphicon glyphicon-comment"></span> Vasta
-									</a>
-									<a href="../pdf/resume.php?id='.$sent_cv[$i]->id.'" class="btn btn-info btn-sm">
-										<span class="glyphicon glyphicon-open-file"></span> Vaata
-									</a>
 
-								</div></td></tr>';
+<ul class="list-group">
+<?php
+	for($i = 0; $i < count($sent_cv); $i++) {
+		echo '<li class="list-group-item">';
 
-				}
+		echo '
+					<table style="width: 100%">
+						<td class="table-25">
+							<span class="badge">'.$sent_cv[$i]->job.'</span>
+						</td>
+						<td class="table-25">
+							<span class="">'.$sent_cv[$i]->first.' '.$sent_cv[$i]->last.'</span>
+						<td class="table-25">
+							<span class="">'.$sent_cv[$i]->time.'</span>
+						</td>
 
-			?>
+					';
 
-	</tbody>
-</table>
+
+		echo '<td class="table-25">
+					<div class="pull-right">
+
+						<div class="dropdown">
+						  <button class="btn btn-xs only-caret" data-toggle="dropdown">
+						    <span class="caret"></span>
+						  </button>
+
+						  <ul class="dropdown-menu dropdown-menu-left pull-left disable-width">
+								<li><a href="" data-toggle="modal" data-target="#'.$sent_cv[$i]->id.'">
+									<span class="glyphicon glyphicon-comment"></span> Vasta
+								</a></li>
+								<li><a href="../pdf/resume.php?id='.$sent_cv[$i]->id.'">
+									<span class="glyphicon glyphicon-open-file"></span> Vaata
+								</a></li>
+						  </ul>
+
+						</div>
+
+					</div></td>';
+
+		echo '</table></li>';
+	}
+?>
+</ul>
+
+
 <h4 style="margin-bottom: 10px;">Vastatud <span style="font-size: 8pt">(Uuemad on eespool)</span></h4>
-<table class="table table-striped table-condensed table-responsive">
-	<thead>
-		<tr>
-			<th>Amet</th>
-			<th>Saatja</th>
-			<th>Saadetud</th>
-			<th>Vastus</th>
-			<th>Põhjus</th>
-			<th>Valikud</th>
-		</tr>
-	</thead>
-	<tbody>
-			<?php
-				for($i = 0; $i < count($answered_cv); $i++) {
-					echo '<tr><td>'.$answered_cv[$i]->job.'</td>
-							  <td>'.$answered_cv[$i]->first.' '.$answered_cv[$i]->last.'</td>
-							  <td>'.$answered_cv[$i]->time.'</td>
-								<td>'.$answered_cv[$i]->answer_type.'</td>
-								<td>'.$answered_cv[$i]->answer.'</td>';
-					echo '<td><div class="btn-group">
-									<a class="btn btn-success btn-sm" data-toggle="modal" data-target="#'.$answered_cv[$i]->id.'">
-										<span class="glyphicon glyphicon-comment"></span> Vasta
-									</a>
-									<a href="../pdf/resume.php?id='.$answered_cv[$i]->id.'" class="btn btn-info btn-sm">
-										<span class="glyphicon glyphicon-open-file"></span> Vaata
-									</a>
 
-								</div></td></tr>';
+<ul class="list-group">
+<?php
+	for($i = 0; $i < count($answered_cv); $i++) {
+		if($answered_cv[$i]->answer_type == "Vastuvõetud") {
+			echo '<li class="list-group-item list-group-item-success" title="'.$answered_cv[$i]->answer_type.'">';
+		} elseif ($answered_cv[$i]->answer_type == "Tagasilükatud") {
+			echo '<li class="list-group-item list-group-item-danger" title="'.$answered_cv[$i]->answer_type.'">';
+		} else {
+			echo '<li class="list-group-item">';
+		}
+		echo '
+					<table style="width: 100%">
+						<td class="table-20">
+							<span class="badge">'.$answered_cv[$i]->job.'</span>
+						</td>
+						<td class="table-20">
+							<span class="">'.$answered_cv[$i]->first.' '.$answered_cv[$i]->last.'</span>
+						<td class="table-20">
+							<span class="">'.$answered_cv[$i]->time.'</span>
+						</td>';
+		echo '<td class="table-20">';
+					if (strlen($answered_cv[$i]->answer) > 30) {
+						$str = $answered_cv[$i]->answer;
+						$str = explode( "\n", wordwrap( $answered_cv[$i]->answer, 30));
+						$str = $str[0] . ' <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>';
+						echo '
+									<a id="popover-'.$answered_cv[$i]->id.'" onclick="showPop('.$answered_cv[$i]->id.')" data-placement="top" data-content="'.$answered_cv[$i]->answer.'">' . $str . '</a>';
+					} else {
+						echo $answered_cv[$i]->answer;
+					}
+		echo '</td>';
 
-				}
+		echo '<td class="table-20">
+					<div class="pull-right">
 
-			?>
+						<div class="dropdown">
+						  <button class="btn btn-xs only-caret" data-toggle="dropdown">
+						    <span class="caret"></span>
+						  </button>
 
-	</tbody>
-</table>
+						  <ul class="dropdown-menu dropdown-menu-left pull-left disable-width">
+								<li><a href="" data-toggle="modal" data-target="#'.$answered_cv[$i]->id.'">
+									<span class="glyphicon glyphicon-comment"></span> Vasta
+								</a></li>
+								<li><a href="../pdf/resume.php?id='.$answered_cv[$i]->id.'">
+									<span class="glyphicon glyphicon-open-file"></span> Vaata
+								</a></li>
+						  </ul>
+
+						</div>
+
+					</div></td>';
+
+		echo '</table></li>';
+	}
+?>
+</ul>
 
 <!-- Modal -->
 <?php
@@ -235,7 +271,41 @@
 	}
 ?>
 
+<script>
+	var opened = [];
+	var active = false;
+	var count = 0;
+
+	document.body.addEventListener("click", function() {
+
+		if(!active) {
+
+			for(var i = 0; i < opened.length; i++) {
+				$("#popover-" + opened[i]).popover("hide")
+		}
+
+		opened = [];
+
+		}
+
+	});
+
+	if(!active) {
+		function showPop(id) {
+			$("#popover-" + id).popover("show")
+			count++
+			active = true;
+
+			setTimeout(function() {
+				active = false;
+			}, 50);
+
+			opened.push(id);
+		}
+
+	}
 
 
+</script>
 
 <?php require_once("../footer.php"); ?>
