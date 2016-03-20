@@ -1,37 +1,42 @@
-# PHP rühmatöö projekt
-**Rühmatööde demo päev** on valitud eksamipäev jaanuaris, kuhu tuleks tullakse terve rühmaga koos!
+# Noorte Tööbörs
+* Liikmed: Rauno Kosula
 
-## Tööjuhend
-1. Üks rühma liikmetest fork'ib endale käesoleva repositooriumi ning annab teistele kirjutamisõiguse/ligipääsu
-1. Tee kohe Pull request
-1. Muuda repositooriumi README.md faili vastavalt nõutele
-1. Tee valmis korralik veebirakendus
+### Eesmärk
+1. Leida esmase töökogemuse võimalus noortele
+1. Anda oma panus, noorte tööpuuduse vähendamiseks
+1. Kogemuse omandamine uutes valdkondades
 
-### Nõuded
+### Kirjeldus
+* Nüüdseks luua uuendatud lehekülg, kus noored saavad otsida hooajaks või pikemaks perspektiiviks endale tööd.
+* Eeskuju:
+	* www.ntb.ee
+	* www.cv.ee
+	* www.cvkeskus.ee
 
-1. **README.md sisaldab:**
-    * suurelt projekti nime;
-    * rühma liikmete nimed;
-    * eesmärki (3-4 lauset, mis probleemi üritate lahendada);
-    * kirjeldus (sihtrühm, eripära võrreldes teiste samalaadsete rakendustega - kirjeldada vähemalt 2-3 sarnast rakendust mida eeskujuks võtta);
-    * funktsionaalsuse loetelu prioriteedi järjekorras, nt
-        * v0.1 Saab teha kasutaja ja sisselogida
-        * v0.2 Saab lisada huviala
-        * ...
-    * andmebaasi skeem loetava pildina + tabelite loomise SQL laused;
-    * **kokkuvõte:** mida õppisid juurde? mis ebaõnnestus? mis oli keeruline? (kirjutab iga tiimi liige).
+### Changelog
+* Ei hakanud siia ümber copy-pastema, formaat oleks sassi läinud
+	* https://docs.google.com/document/d/1vE8Hkn0aeqLXG5PnrJpyACgweiHNCH-bymycEYhxyuk/edit?usp=sharing
 
+* Skeem
+	* http://i.imgur.com/RB7Sw3Z.png
 
-2. **Veebirakenduse nõuded:**
-    * kasutusel on vähemalt 6 tabelit;
-    * kood on jaotatud klassidesse;
-    * muutujad/tabelid on inglise keeles;
-    * rakendus on piisava funktsionaalsusega ja turvaline;
-    * kõik tiimi liikmed on panustanud rakenduse arendusprotsessi.
+* Failipuu
+	* mytree.txt
+	* https://docs.google.com/document/d/1kT17wNZbDJnxAz58_1yZKWgibMEN_IpIFNHq21zSVEk/edit?usp=sharing
 
-## Abiks
-* **Testserver:** greeny.cs.tlu.ee, [tunneli loomise juhend](http://minitorn.tlu.ee/~jaagup/kool/java/kursused/09/veebipr/naited/greenytunnel/greenytunnel.pdf)
-* **Abiks tunninäited (rühmade lõikes):** [I rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-I-ruhm), [II rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-II-ruhm), [III rühm](https://github.com/veebiprogrammeerimine-2015s?utf8=%E2%9C%93&query=-III-ruhm)
-* **Stiilijuhend:** [Coding Style Guide](http://www.php-fig.org/psr/psr-2/)
-* **GIT õpetus:** [Become a git guru.](https://www.atlassian.com/git/tutorials/)
-* **Abimaterjale:** [Veebirakenduste loomine PHP ja MySQLi abil](http://minitorn.tlu.ee/~jaagup/kool/java/loeng/veebipr/veebipr1.pdf), [PHP with MySQL Essential Training] (http://www.lynda.com/MySQL-tutorials/PHP-MySQL-Essential-Training/119003-2.html)
+### Kokkuvõte
+* Mida õppisid juurde? mis ebaõnnestus? mis oli keeruline? (kirjutab iga tiimi liige).
+* Õppisin juurde päris paljusi asju, toon välja need, mis pähe tulevad:
+	* Uute failide loomine läbi koodi (fopen)
+	* Meilide saatmine
+	* Küpsiste kasutamine
+	* Document_root ja mõned teisedki SERVER funktsioonid
+	* Parooli muutmine/taastamine
+* Ebaõnnestus:
+	* Tõenäoliselt ebaõnnestus enda eesmärgini jõudmine, soov oli 0.8ni jõuda ja midagi luua seal, kuid 0.7 rabas jalust.
+* Keeruline:
+	* Kõige keerulisem ehk oli CV loomine. Kui nüüd hakkasin looma seda, mõtlesin, et tegemist saab suht lihtsa asjaga olema, siis lõpuks ma hakkasin enda sõnu sööma ja tegelesin sellega tunduvalt kauem kui oleksin pidanud. Takistuseks oli just lehe pidev refreshi vajamine, et muutuja saaks kuhugi minna ja lõpuks sai lihtsalt kolmandat teed pidi mindud ja leitud tegelikult kõige optimaalsem lahendus.
+	* Meeletult palju nägin ka vaeva sellega, et kui lükkasin kõik failid kaustadesse, et ta hakkaks suunama edaspidi õigetesse kohtadesse.
+
+### Mis kõike tegin?
+Alustatud sai logimise/registeerimise süsteemidega. Seejärel leidsin, et kõige targem oleks alustada just tööandja poolsete funktsioonidega. Enamjaolt mässasin andmebaasi päringutega. Tööandja peab algselt täitma profiilis ära enda firma kontaktandmed ning edasipidi ta neid enam sisestama ei pea. Töölisamisel määrab ta need automaatselt paika. Üksjagu sai vaeva nähtud ka sellega, et kui tööandja peaks enda firma nime muutma, siis ta vahetaks ka kõigil töödel automaatselt nimed ära. Lahenduseni jõudsin niimodi, et lükkasin alguses Foreign key checki välja, muudan andmed kahes tabelis ära ning lükkan foreign key checki taas peale. Sai ka vaevanähtud dropdownidega, et nad oleks dünaamilised, kuid kuna ma ei soovinud seda, et ta hakkaks igakord refreshima lehte siis sai lähenetud javascriptiga. Paraku minu teadmised javascripti osas head pole, õnneks Romil aitas hädast välja. Töödele on määratud ka aktiivne/ebaaktiivne staatus, et tööandja saaks näiteks pisut hiljem samuti sama kuulutust kasutada, ilma, et peaks seda uuesti kirjutama. Seejärel sai mindud admin funktsioonide kallale, et ei peaks koguaeg andmebaasile ligi tikkuma vaid vajalikud muudatused saaks teha otse veebilehel. Admin saab näiteks töid lisada ükskõik millisele ettevõttele. See võtab omakorda ettevõtte kontaktandmed ning määrab need tööle. Viimasena sai pööratud tähelepanu just tavakasutajatele, alustasin parooli taastamisega, mis osutus väga põnevaks väljakutseks. Vastavalt ajale loob ta random hashi ning saadab selle random hashi meilile. Kasutades seda random hashi koos emailiga, siis kontrollitakse, kas selline päring on andmebaasis olemas ning ega see poleks vanem kui 7 päeva. Kui on olemas, siis määrab uue parooli, mis tuli samuti meilile. Järgmine põnev väljakutse oli parooli vahetamine, kuid kuna parooli taastamine oli juba tehtud, siis oli juba korralik põhi all ning sai suhteliselt kiirelt lahendatud. Suurt midagi see ei tee, kontrollib esmalt vana parooli ning seejärel teeb javascript veel oma töö, kas uus ja korda uut klapivad. Tõenäoliselt kõige raskemaks osutus CVde loomine, kus ma alguses plaanisin kasutada bootstrapi "collapse" võimalust, kuid kuna see hakkas meeletult pikaks venima siis jätsin selle sinnapaika. Üksjagu sai disaini osas maadeldud ning lõpuks lükkasin kõik tabelisse, et hiljem tegeleda sellega. Andmete sisestamine töötab seal läbi modali ning lükkab igakord uue andme koheselt andmebaasi sisse. Seejärel sai loodud CV saatmine, see nõudis, et ma teen tööde lisamine pisut ümber ning looksin igale tööle taas omakorda lehe. Seejärel saab tööandja vaadata saadetud CVsi (PDF formaadis) ning kirjutada, kas sobis või ei, mis tulevikus saadab ka meili kirja. Tegeletud sai ka küpsistega, mis nõudis samuti üksjagu vaeva, kogu aja nõudmise põhjus oli see, et küpsiste kontroll oli enne session_starti, muidu suhteliselt tavaline andmebaasi sisestamine/kontroll. Samuti parooli taastamine salvestab tabelisse nii päringu esitaja kui ka kasutaja IP aadressi. 
