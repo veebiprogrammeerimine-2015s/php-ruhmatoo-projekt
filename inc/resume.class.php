@@ -44,7 +44,7 @@
                                           INNER JOIN school_types ON school_types.id = ntb_schools.type
                                           INNER JOIN ntb_resumes ON ntb_resumes.id = ntb_schools.resume_id
                                           INNER JOIN got_cv ON got_cv.cv_id = ntb_resumes.id
-                                          WHERE got_cv.id = ? ORDER BY ntb_schools.endtime DESC");
+                                          WHERE got_cv.id = ? AND ntb_schools.deleted IS NULL ORDER BY ntb_schools.endtime DESC");
       $stmt->bind_param("i", $id);
       $stmt->bind_result($type, $name, $info, $start, $end);
       $stmt->execute();
@@ -66,32 +66,113 @@
       $stmt->close();
     }
 
-    function getSentCourses($id) {
-      $stmt = $this->connection->prepare("SELECT ntb_courses.id, trainer, course, duration, info, year FROM ntb_courses
-                                          INNER JOIN ntb_resumes ON ntb_resumes.id = ntb_courses.resume_id
+    function getSentWork($id) {
+      $stmt = $this->connection->prepare("SELECT ntb_workexp.id, ntb_workexp.company, ntb_workexp.name, ntb_workexp.content,
+                                          ntb_workexp.info, ntb_workexp.start, ntb_workexp.endtime FROM ntb_workexp
+                                          INNER JOIN ntb_resumes ON ntb_resumes.id = ntb_workexp.resume_id
                                           INNER JOIN got_cv ON got_cv.cv_id = ntb_resumes.id
-                                          WHERE got_cv.id = ? ORDER BY ntb_courses.year");
+                                          WHERE got_cv.id = ? AND ntb_workexp.deleted IS NULL ORDER BY ntb_workexp.endtime");
       $stmt->bind_param("i", $id);
-      $stmt->bind_result($id, $trainer, $course_name, $duration, $info, $year);
+      $stmt->bind_result($id, $company, $name, $content, $infos, $start, $end);
       $stmt->execute();
 
       $array = array();
 
       while ($stmt->fetch()) {
-        $course = new StdClass();
-        $course->id = $id;
-        $course->trainer = $trainer;
-        $course->course = $course_name;
-        $course->duration = $duration;
-        $course->info = $info;
-        $course->year = $year;
+        $work = new StdClass();
+        $work->id = $id;
+        $work->company = $company;
+        $work->name = $name;
+        $work->content = $content;
+        $work->info = $infos;
+        $work->start = $start;
+        $work->end = $end;
 
-        array_push($array, $course);
+        array_push($array, $work);
       }
       return ($array);
       $stmt->close();
 
   }
+
+  function getSentCourses($id) {
+    $stmt = $this->connection->prepare("SELECT ntb_courses.id, trainer, course, duration, info, year FROM ntb_courses
+                                        INNER JOIN ntb_resumes ON ntb_resumes.id = ntb_courses.resume_id
+                                        INNER JOIN got_cv ON got_cv.cv_id = ntb_resumes.id
+                                        WHERE got_cv.id = ? ORDER BY ntb_courses.year");
+    $stmt->bind_param("i", $id);
+    $stmt->bind_result($id, $trainer, $course_name, $duration, $info, $year);
+    $stmt->execute();
+
+    $array = array();
+
+    while ($stmt->fetch()) {
+      $course = new StdClass();
+      $course->id = $id;
+      $course->trainer = $trainer;
+      $course->course = $course_name;
+      $course->duration = $duration;
+      $course->info = $info;
+      $course->year = $year;
+
+      array_push($array, $course);
+    }
+    return ($array);
+    $stmt->close();
+
+  }
+
+  function getSentLanguages($id) {
+    $stmt = $this->connection->prepare("SELECT ntb_languages.id, language, writing, speaking, reading, info FROM ntb_languages
+                                        INNER JOIN ntb_resumes ON ntb_resumes.id = ntb_languages.resume_id
+                                        INNER JOIN got_cv ON got_cv.cv_id = ntb_resumes.id
+                                        WHERE got_cv.id = ? ORDER BY ntb_languages.language");
+    $stmt->bind_param("i", $id);
+    $stmt->bind_result($id, $language, $writing, $speaking, $reading, $info);
+    $stmt->execute();
+
+    $array = array();
+
+    while ($stmt->fetch()) {
+      $languages = new StdClass();
+      $languages->id = $id;
+      $languages->language = $language;
+      $languages->writing = $writing;
+      $languages->speaking = $speaking;
+      $languages->reading = $reading;
+      $languages->info = $info;
+
+      array_push($array, $languages);
+    }
+    return ($array);
+    $stmt->close();
+
+  }
+
+  function getSentOther($id) {
+    $stmt = $this->connection->prepare("SELECT ntb_resumes.id, positives, additional FROM ntb_resumes
+                                        INNER JOIN got_cv ON got_cv.cv_id = ntb_resumes.id
+                                        WHERE got_cv.id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->bind_result($id, $positives, $additional);
+    $stmt->execute();
+
+    $array = array();
+
+    while ($stmt->fetch()) {
+      $other = new StdClass();
+      $other->id = $id;
+      $other->positives = $positives;
+      $other->additional = $additional;
+
+
+      array_push($array, $other);
+    }
+    return ($array);
+    $stmt->close();
+
+  }
+
 
     ########################
     ### Employee resumes ###
@@ -109,12 +190,15 @@
 
       $array = array();
       while($stmt->fetch()) {
+        $oDate = new DateTime($sent_time);
+        $sDate = $oDate->format("d.m.Y H:i:s");
+
         $job = new StdClass();
         $job->id = $id;
         $job->job = $job_name;
         $job->first = $send_first;
         $job->last = $send_last;
-        $job->time = $sent_time;
+        $job->time = $sDate;
         array_push($array, $job);
       }
       return $array;
@@ -122,18 +206,21 @@
     }
 
     function getAnsweredResumes($user) {
-      $stmt = $this->connection->prepare("SELECT got_cv.id, answer_types.answer, got_cv.answer, got_cv.sent_time, job_offers.name, ntb_personal.firstname, ntb_personal.lastname FROM got_cv
+      $stmt = $this->connection->prepare("SELECT got_cv.id, answer_types.answer, got_cv.answer, got_cv.sent_time, answer_time, job_offers.name, ntb_personal.firstname, ntb_personal.lastname FROM got_cv
                                           INNER JOIN job_offers ON job_offers.id = got_cv.job_id
                                           INNER JOIN ntb_users ON ntb_users.id = got_cv.sender_id
                                           INNER JOIN ntb_personal ON ntb_personal.user_id = ntb_users.id
                                           INNER JOIN answer_types ON answer_types.id = got_cv.answer_type
-                                          WHERE job_offers.user_id = ? AND got_cv.answer_type IS NOT NULL ORDER BY got_cv.sent_time DESC");
+                                          WHERE job_offers.user_id = ? AND got_cv.answer_type IS NOT NULL ORDER BY got_cv.answer_time DESC");
       $stmt->bind_param("i", $user);
-      $stmt->bind_result($id, $answer_type, $answer, $sent_time, $job_name, $send_first, $send_last);
+      $stmt->bind_result($id, $answer_type, $answer, $sent_time, $answer_time, $job_name, $send_first, $send_last);
       $stmt->execute();
 
       $array = array();
       while($stmt->fetch()) {
+        $oDate = new DateTime($answer_time);
+        $sDate = $oDate->format("d.m.Y H:i:s");
+
         $job = new StdClass();
         $job->id = $id;
         $job->job = $job_name;
@@ -142,6 +229,7 @@
         $job->answer_type = $answer_type;
         $job->answer = $answer;
         $job->time = $sent_time;
+        $job->answer_time = $sDate;
         array_push($array, $job);
       }
       return $array;

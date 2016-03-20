@@ -16,6 +16,7 @@
 	$answer_error = $answer_type_error = "";
 	$answers = $answers_type = "";
 	$answers_error = $answers_type_error = "";
+	$longAnswer = array();
 
 	if(isset($_SESSION['logged_in_user_id'])) {
 		if($_SESSION['logged_in_user_group'] == 2) {
@@ -128,7 +129,7 @@
 
 						<div class="dropdown">
 						  <button class="btn btn-xs only-caret" data-toggle="dropdown">
-						    <span class="caret"></span>
+						    <span class="glyphicon glyphicon-option-horizontal"></span>
 						  </button>
 
 						  <ul class="dropdown-menu dropdown-menu-left pull-left disable-width">
@@ -150,7 +151,7 @@
 </ul>
 
 
-<h4 style="margin-bottom: 10px;">Vastatud <span style="font-size: 8pt">(Uuemad on eespool)</span></h4>
+<h4 style="margin-bottom: 10px;">Vastatud <span style="font-size: 8pt">(Viimati vastatud on eespool)</span></h4>
 
 <ul class="list-group">
 <?php
@@ -162,6 +163,7 @@
 		} else {
 			echo '<li class="list-group-item">';
 		}
+
 		echo '
 					<table style="width: 100%">
 						<td class="table-20">
@@ -170,15 +172,16 @@
 						<td class="table-20">
 							<span class="">'.$answered_cv[$i]->first.' '.$answered_cv[$i]->last.'</span>
 						<td class="table-20">
-							<span class="">'.$answered_cv[$i]->time.'</span>
+							<span class="">'.$answered_cv[$i]->answer_time.'</span>
 						</td>';
 		echo '<td class="table-20">';
 					if (strlen($answered_cv[$i]->answer) > 30) {
 						$str = $answered_cv[$i]->answer;
 						$str = explode( "\n", wordwrap( $answered_cv[$i]->answer, 30));
-						$str = $str[0] . ' <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>';
-						echo '
-									<a id="popover-'.$answered_cv[$i]->id.'" onclick="showPop('.$answered_cv[$i]->id.')" data-placement="top" data-content="'.$answered_cv[$i]->answer.'">' . $str . '</a>';
+						$str = $str[0] . '...<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>';
+						echo '<a id="popover-'.$answered_cv[$i]->id.'" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="'.$answered_cv[$i]->answer.'">' . $str . '</a>';
+						array_push($longAnswer, $answered_cv[$i]->id);
+
 					} else {
 						echo $answered_cv[$i]->answer;
 					}
@@ -189,7 +192,7 @@
 
 						<div class="dropdown">
 						  <button class="btn btn-xs only-caret" data-toggle="dropdown">
-						    <span class="caret"></span>
+						    <span class="glyphicon glyphicon-option-horizontal"></span>
 						  </button>
 
 						  <ul class="dropdown-menu dropdown-menu-left pull-left disable-width">
@@ -272,39 +275,12 @@
 ?>
 
 <script>
-	var opened = [];
-	var active = false;
-	var count = 0;
 
-	document.body.addEventListener("click", function() {
-
-		if(!active) {
-
-			for(var i = 0; i < opened.length; i++) {
-				$("#popover-" + opened[i]).popover("hide")
-		}
-
-		opened = [];
-
-		}
-
-	});
-
-	if(!active) {
-		function showPop(id) {
-			$("#popover-" + id).popover("show")
-			count++
-			active = true;
-
-			setTimeout(function() {
-				active = false;
-			}, 50);
-
-			opened.push(id);
-		}
-
-	}
-
+		<?php for($i = 0; $i < count($longAnswer); $i++): ?>
+			document.getElementById("popover-<?=$longAnswer[$i]?>").addEventListener("click", function() {
+				$('#popover-<?=$longAnswer[$i]?>').popover('toggle');
+			});
+		<?php endfor; ?>
 
 </script>
 

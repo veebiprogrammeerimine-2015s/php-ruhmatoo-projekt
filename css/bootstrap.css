@@ -7044,10 +7044,12 @@ button.close {
 }
 
 .only-caret {
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0);
+  color: #333;
+  /*background-color: #fff;
   border: 1px solid #ddd;
   font-size: 12px;
-  color: #333;
+  color: #333;*/
 }
 
 .disable-width {
@@ -7060,5 +7062,8 @@ button.close {
   width: 200px;
 }
 
+.height-70 {
+  max-height: 70px;
+}
 
 /*# sourceMappingURL=bootstrap.css.map */
